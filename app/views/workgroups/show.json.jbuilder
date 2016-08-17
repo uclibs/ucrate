@@ -1,0 +1,1 @@
+json.partial! "workgroups/workgroup", workgroup: @workgroup

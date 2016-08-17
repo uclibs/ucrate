@@ -1,0 +1,17 @@
+<%= form_for(@workgroup) do |f| %>
+  <% if @workgroup.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@workgroup.errors.count, "error") %> prohibited this workgroup from being saved:</h2>
+
+      <ul>
+      <% @workgroup.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
