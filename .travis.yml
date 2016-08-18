@@ -1,0 +1,15 @@
+language: ruby
+sudo: false
+rvm:
+    - 2.3.1
+
+notifications:
+  email:
+    recipients:
+      - vanmiljf@ucmail.uc.edu
+      - hortongn@ucmail.uc.edu
+      - lawhorkl@mail.uc.edu
+  on_success: "change"
+  on_failure: "always"
+  slack: uc-libraries-digital:fH6nUkaxSxsJMU2sNpkZvso3
+
