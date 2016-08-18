@@ -1,4 +1,5 @@
 class WorkgroupsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_workgroup, only: [:show, :edit, :update, :destroy]
 
   # GET /workgroups
@@ -48,16 +49,6 @@ class WorkgroupsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @workgroup.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /workgroups/1
-  # DELETE /workgroups/1.json
-  def destroy
-    @workgroup.destroy
-    respond_to do |format|
-      format.html { redirect_to workgroups_url, notice: 'Workgroup was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
