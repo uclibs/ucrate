@@ -41,6 +41,7 @@ GEM
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    brakeman (3.3.5)
     builder (3.2.2)
     byebug (9.0.5)
     capybara (2.7.1)
@@ -191,6 +192,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  brakeman
   byebug
   capybara
   coffee-rails (~> 4.1.0)
