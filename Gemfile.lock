@@ -162,6 +162,8 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise-guests (0.5.0)
+      devise
     diff-lcs (1.2.5)
     dropbox-sdk (1.6.5)
       json
@@ -178,6 +180,8 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    fcrepo_wrapper (0.5.2)
+      ruby-progressbar
     font-awesome-rails (4.6.3.1)
       railties (>= 3.2, < 5.1)
     globalid (0.3.7)
@@ -397,6 +401,8 @@ GEM
       json
       multipart-post
       oauth2
+    ruby-progressbar (1.8.1)
+    rubyzip (1.2.0)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -421,6 +427,10 @@ GEM
       httparty (>= 0.11.0)
       oauth2 (>= 0.9.2)
     slop (4.4.0)
+    solr_wrapper (0.15.0)
+      faraday
+      ruby-progressbar
+      rubyzip
     solrizer (3.4.0)
       activesupport
       daemons
@@ -478,13 +488,17 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   curation_concerns
   devise
+  devise-guests (~> 0.5)
   factory_girl_rails
+  fcrepo_wrapper
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.6)
+  rsolr (~> 1.0)
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  solr_wrapper (>= 0.3)
   spring
   sqlite3
   turbolinks
