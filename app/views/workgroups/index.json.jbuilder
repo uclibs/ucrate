@@ -1,0 +1,1 @@
+json.array! @workgroups, partial: 'workgroups/workgroup', as: :workgroup
