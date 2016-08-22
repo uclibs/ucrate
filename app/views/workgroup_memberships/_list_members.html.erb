@@ -1,0 +1,17 @@
+<h3>Members:</h3>
+<ul id="member-list">
+  <% @workgroup.users.each do |member| %>
+    <li>
+      <%= member.email %>
+     (<%= link_to member.workgroup_memberships.where(workgroup_id: @workgroup.id).first.workgroup_role.name, 
+        edit_workgroup_membership_path(id: member.workgroup_memberships.where(workgroup_id: @workgroup.id).first.id) %>)  
+      <%= link_to 'remove', { 
+          action: :destroy, 
+          controller: :workgroup_memberships, 
+          id: member.workgroup_memberships.where(workgroup_id: @workgroup.id).first.id,
+          workgroup_id: @workgroup.id }, 
+          method: :delete, 
+          data: { confirm: "Remove this user from this workgroup?" } %></li>
+  <% end %>
+</ul>
+
