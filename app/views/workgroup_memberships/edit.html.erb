@@ -1,0 +1,31 @@
+<h2>Edit <%= User.find(@workgroup_membership.user_id).email %>'s Workgroup Role</h2>
+
+<%= form_for(@workgroup_membership) do |f| %>
+
+  <% if @workgroup_membership.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@workgroup_membership.errors.count, "error") %> prohibited this workgroup membership from being saved:</h2>
+
+      <ul>
+      <% @workgroup_membership.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <% WorkgroupRole.all.each do |role| %>
+    <%= f.radio_button :workgroup_role_id, role.id %>
+    <%= f.label :workgroup_role_id, role.name, value: role.id %><br />
+  <% end %>
+
+  <%= f.hidden_field :workgroup_id, value: @workgroup_membership.workgroup_id %>
+  <%= f.hidden_field :user_id, value: @workgroup_membership.user_id %>
+  <%= f.hidden_field :id, value: @workgroup_membership.id %>
+
+  <div class="actions">
+    <p><%= f.submit "Update user's workgroup role" %></p>
+  </div>
+
+<% end %>
+
