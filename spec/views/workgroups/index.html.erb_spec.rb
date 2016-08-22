@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "workgroups/index", type: :view do
   before(:each) do
     assign(:workgroups, [
-      Workgroup.create!(),
-      Workgroup.create!()
+      Workgroup.create!({title: "My title", description: "My description"}),
+      Workgroup.create!({title: "My title", description: "My description"})
     ])
   end
 

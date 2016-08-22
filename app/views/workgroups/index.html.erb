@@ -5,13 +5,19 @@
 <table>
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date Created:</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @workgroups.each do |workgroup| %>
       <tr>
+        <td><%= workgroup.title %></td>
+        <td><%= workgroup.description %></td>
+        <td><%= workgroup.created_at %></td>
         <td><%= link_to 'Show', workgroup %></td>
         <td><%= link_to 'Edit', edit_workgroup_path(workgroup) %></td>
       </tr>

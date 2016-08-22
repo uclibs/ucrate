@@ -30,12 +30,16 @@ RSpec.feature "End to end", type: :feature do
     visit "/workgroups"
     click_link "New Workgroup"
     expect(page).to have_content("New Workgroup")
+    fill_in "Title", with: "end to end workgroup"
+    fill_in "Description", with: "workgroup created by the end to end spec"
     click_button "Create Workgroup"
     expect(page).to have_content("Workgroup was successfully created.")
 
     ## Edit Workgroup
     click_link "Edit"
     expect(page).to have_content("Editing Workgroup")
+    fill_in "Title", with: "end to end workgroup edited"
+    fill_in "Description", with: "workgroup edited by the end to end spec"
     click_button "Update Workgroup"
     expect(page).to have_content("Workgroup was successfully updated.")
   end

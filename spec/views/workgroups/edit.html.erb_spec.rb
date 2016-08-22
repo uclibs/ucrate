@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "workgroups/edit", type: :view do
   before(:each) do
-    @workgroup = assign(:workgroup, Workgroup.create!())
+    @workgroup = assign(:workgroup, Workgroup.create!({title: "My title", description: "My description"}))
   end
 
   it "renders the edit workgroup form" do
