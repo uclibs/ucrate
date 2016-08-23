@@ -33,6 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'curation_concerns'
 
 #Brakeman for security scanning
 gem 'brakeman'
@@ -53,3 +54,12 @@ group :development do
   gem 'spring'
 end
 
+
+group :development, :test do
+  gem 'poltergeist'
+  gem 'solr_wrapper', '>= 0.3'
+  gem 'fcrepo_wrapper'
+end
+
+gem 'rsolr', '~> 1.0'
+gem 'devise-guests', '~> 0.5'
