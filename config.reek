@@ -1,0 +1,6 @@
+#exclude everything in spec, everything in app that's not ruby code (i.e. views, assets)
+exclude_paths:
+ - spec
+ - app/assets
+ - app/views	
+ - db/migrate
