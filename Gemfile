@@ -56,11 +56,10 @@ end
 
 
 group :development, :test do
+  gem 'poltergeist'
   gem 'solr_wrapper', '>= 0.3'
+  gem 'fcrepo_wrapper'
 end
 
 gem 'rsolr', '~> 1.0'
 gem 'devise-guests', '~> 0.5'
-group :development, :test do
-  gem 'fcrepo_wrapper'
-end

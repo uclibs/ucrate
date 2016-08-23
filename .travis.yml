@@ -13,3 +13,9 @@ notifications:
   on_failure: "always"
   slack: uc-libraries-digital:fH6nUkaxSxsJMU2sNpkZvso3
 
+script:
+  - bundle exec rake ci
+services:
+  - redis-server
+before_script:
+  - jdk_switcher use oraclejdk8
