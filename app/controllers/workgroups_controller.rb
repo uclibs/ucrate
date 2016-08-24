@@ -26,7 +26,6 @@ class WorkgroupsController < ApplicationController
   # POST /workgroups.json
   def create
     @workgroup = Workgroup.new(workgroup_params)
-
     respond_to do |format|
       if @workgroup.save
         format.html { redirect_to @workgroup, notice: 'Workgroup was successfully created.' }
@@ -60,6 +59,6 @@ class WorkgroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workgroup_params
-      params.fetch(:workgroup, {})
+      params.require(:workgroup).permit(:title, :description)
     end
 end
