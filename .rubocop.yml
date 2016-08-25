@@ -9,13 +9,11 @@ AllCops:
   Exclude:
     - 'db/**/*'
     - 'script/**/*'
-    - 'spec/internal/**/*'
-    - 'spec/test_app_templates/**/*'
     - 'vendor/**/*'
 
 Lint/ImplicitStringConcatenation:
   Exclude:
-    - 'lib/generators/sufia/**/*'
+  #everything here was sufia-specific
 
 Metrics/LineLength:
   Max: 400
@@ -23,10 +21,7 @@ Metrics/LineLength:
 Metrics/AbcSize:
   Max: 30
   Exclude:
-    - 'app/controllers/concerns/sufia/admin/depositor_stats.rb'
-    - 'app/controllers/concerns/sufia/my_controller_behavior.rb'
-    - 'app/services/sufia/user_stat_importer.rb'
-    - 'lib/sufia/arkivo/metadata_munger.rb'
+  #everything here was sufia-specific
 
 Metrics/MethodLength:
   Max: 15
@@ -41,7 +36,7 @@ Style/BlockEndNewline:
 
 Style/SymbolProc: # https://github.com/bbatsov/rubocop/issues/3071
   Exclude:
-    - 'app/models/sufia/uploaded_file.rb'
+  #everything here was sufia-specific
 
 Style/MultilineBlockLayout:
   Exclude:
@@ -81,20 +76,11 @@ Rails:
 
 Rails/OutputSafety:
   Exclude:
-    - 'spec/views/my/_list_works.html.erb_spec.rb'
-    - 'app/helpers/sufia/sufia_helper_behavior.rb'
-    - 'app/helpers/sufia/content_block_helper_behavior.rb'
-    - 'app/builders/sufia/form_builder.rb'
-    - 'app/helpers/sufia/citations_behaviors/formatters/apa_formatter.rb'
-    - 'app/helpers/sufia/citations_behaviors/formatters/chicago_formatter.rb'
-    - 'app/helpers/sufia/citations_behaviors/formatters/mla_formatter.rb'
+  #everything here was sufia-specific
 
 RSpec/DescribeClass:
   Exclude:
-    - 'spec/tasks/rake_spec.rb'
-    - 'spec/javascripts/jasmine_spec.rb'
     - 'spec/features/**/*'
-    - 'spec/config/sufia_events_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
