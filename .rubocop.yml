@@ -15,6 +15,11 @@ Lint/ImplicitStringConcatenation:
   Exclude:
   #everything here was sufia-specific
 
+#debugger calls are expected within specs in normal operation
+Lint/Debugger:
+  Exclude:
+    - 'spec/**/*'
+
 Metrics/LineLength:
   Max: 400
 
@@ -71,6 +76,18 @@ Style/Documentation:
 Style/SingleLineBlockParams:
   Enabled: false
 
+Style/BracesAroundHashParameters:
+  Exclude:
+    - 'spec/controllers/workgroups_controller_spec.rb'
+    - 'spec/views/workgroups/edit.html.erb_spec.rb'
+    - 'spec/views/workgroups/index.html.erb_spec.rb'
+    - 'spec/views/workgroups/new.html.erb_spec.rb'
+    - 'spec/views/workgroups/show.html.erb_spec.rb'
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
 Rails:
   Enabled: true
 
@@ -80,7 +97,7 @@ Rails/OutputSafety:
 
 RSpec/DescribeClass:
   Exclude:
-    - 'spec/features/**/*'
+    - 'spec/views/**/*'
 
 RSpec/ExpectActual:
   Enabled: false
