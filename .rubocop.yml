@@ -1,0 +1,115 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.1
+  DisplayCopNames: true
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'spec/internal/**/*'
+    - 'spec/test_app_templates/**/*'
+    - 'vendor/**/*'
+
+Lint/ImplicitStringConcatenation:
+  Exclude:
+    - 'lib/generators/sufia/**/*'
+
+Metrics/LineLength:
+  Max: 400
+
+Metrics/AbcSize:
+  Max: 30
+  Exclude:
+    - 'app/controllers/concerns/sufia/admin/depositor_stats.rb'
+    - 'app/controllers/concerns/sufia/my_controller_behavior.rb'
+    - 'app/services/sufia/user_stat_importer.rb'
+    - 'lib/sufia/arkivo/metadata_munger.rb'
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
+Style/BlockEndNewline:
+  Exclude:
+    - 'spec/**/*'
+
+Style/SymbolProc: # https://github.com/bbatsov/rubocop/issues/3071
+  Exclude:
+    - 'app/models/sufia/uploaded_file.rb'
+
+Style/MultilineBlockLayout:
+  Exclude:
+    - 'spec/**/*'
+
+Style/IndentationConsistency:
+  EnforcedStyle: rails
+
+Style/CollectionMethods:
+  PreferredMethods:
+    collect: 'map'
+    collect!: 'map!'
+    inject: 'reduce'
+    detect: 'find'
+    find_all: 'select'
+
+Style/WordArray:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Rails/OutputSafety:
+  Exclude:
+    - 'spec/views/my/_list_works.html.erb_spec.rb'
+    - 'app/helpers/sufia/sufia_helper_behavior.rb'
+    - 'app/helpers/sufia/content_block_helper_behavior.rb'
+    - 'app/builders/sufia/form_builder.rb'
+    - 'app/helpers/sufia/citations_behaviors/formatters/apa_formatter.rb'
+    - 'app/helpers/sufia/citations_behaviors/formatters/chicago_formatter.rb'
+    - 'app/helpers/sufia/citations_behaviors/formatters/mla_formatter.rb'
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/tasks/rake_spec.rb'
+    - 'spec/javascripts/jasmine_spec.rb'
+    - 'spec/features/**/*'
+    - 'spec/config/sufia_events_spec.rb'
+
+RSpec/ExpectActual:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/MessageExpectation:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/LeadingSubject:
+  Enabled: false
