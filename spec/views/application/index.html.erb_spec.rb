@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'application/index' do
-
   context 'when user is not logged in' do
     it 'displays a log in link' do
       render
@@ -26,6 +25,4 @@ describe 'application/index' do
       expect(rendered).to have_link('Log out', destroy_user_session_path)
     end
   end
-
 end
-

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'layouts/application' do
-
   it 'has a UCRATE page title' do
     render
     expect(rendered).to have_title 'UCRATE'
@@ -29,6 +28,4 @@ describe 'layouts/application' do
       expect(rendered).to have_selector('p.alert-success', text: 'danger notice')
     end
   end
-
 end
-
