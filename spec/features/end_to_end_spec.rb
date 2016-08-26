@@ -26,6 +26,16 @@ RSpec.feature "End to end", type: :feature do
     expect(page).to have_content("Signed in successfully.")
     expect(page).to have_content("Logged in as test1@example.com")
 
+    ## Set first name and last name
+    visit edit_user_registration_path
+    within '#edit_user' do
+      fill_in 'First name', with: 'John'
+      fill_in 'Last name', with: 'Doe'
+      fill_in 'Current password', with: 'password'
+      click_button 'Update'
+    end
+    expect(page).to have_content("Your account has been updated successfully.")
+    
     ## Create a Workgroup
     visit "/workgroups"
     click_link "New Workgroup"
