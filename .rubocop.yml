@@ -1,0 +1,118 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.1
+  DisplayCopNames: true
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+
+Lint/ImplicitStringConcatenation:
+  Exclude:
+  #everything here was sufia-specific
+
+#debugger calls are expected within specs in normal operation
+Lint/Debugger:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/LineLength:
+  Max: 400
+
+Metrics/AbcSize:
+  Max: 30
+  Exclude:
+  #everything here was sufia-specific
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
+Style/BlockEndNewline:
+  Exclude:
+    - 'spec/**/*'
+
+Style/SymbolProc: # https://github.com/bbatsov/rubocop/issues/3071
+  Exclude:
+  #everything here was sufia-specific
+
+Style/MultilineBlockLayout:
+  Exclude:
+    - 'spec/**/*'
+
+Style/IndentationConsistency:
+  EnforcedStyle: rails
+
+Style/CollectionMethods:
+  PreferredMethods:
+    collect: 'map'
+    collect!: 'map!'
+    inject: 'reduce'
+    detect: 'find'
+    find_all: 'select'
+
+Style/WordArray:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/BracesAroundHashParameters:
+  Exclude:
+    - 'spec/controllers/workgroups_controller_spec.rb'
+    - 'spec/views/workgroups/edit.html.erb_spec.rb'
+    - 'spec/views/workgroups/index.html.erb_spec.rb'
+    - 'spec/views/workgroups/new.html.erb_spec.rb'
+    - 'spec/views/workgroups/show.html.erb_spec.rb'
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Rails:
+  Enabled: true
+
+Rails/OutputSafety:
+  Exclude:
+  #everything here was sufia-specific
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/views/**/*'
+
+RSpec/ExpectActual:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/MessageExpectation:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/LeadingSubject:
+  Enabled: false

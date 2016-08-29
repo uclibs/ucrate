@@ -46,6 +46,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara'
   gem 'factory_girl_rails'
+  # Rubocop for enforcing Hydra community styles. pinning as per their recommendations.
+  gem 'rubocop', '~> 0.41.0', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development do

@@ -1,0 +1,53 @@
+require: rubocop-rspec
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+  #everything here was sufia-specific
+
+Metrics/ClassLength:
+  Exclude:
+  #everything here was sufia-specific
+
+Metrics/ParameterLists:
+  Exclude:
+  #everything here was sufia-specific
+
+Metrics/ModuleLength:
+  Exclude:
+  #everything here was sufia-specific
+
+Metrics/MethodLength:
+  Exclude:
+  #everything here was sufia-specific
+
+Style/LineEndConcatenation:
+  Exclude:
+  #everything here was sufia-specific
+
+Style/PredicateName:
+  Exclude:
+  #everything here was sufia-specific
+
+Rails/Output:
+  Exclude:
+  #keeping this as we may use generators in the future
+    - 'lib/generators/**/*'
+
+Rails/HasAndBelongsToMany:
+  Exclude:
+  #everything here was sufia-specific
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 7 
+  Exclude:
+  #everything here was sufia-specific
+
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Exclude:
+  #everything here was sufia-specific
