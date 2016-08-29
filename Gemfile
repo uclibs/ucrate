@@ -42,6 +42,7 @@ gem 'reek'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'simplecov', :require => false
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara'
   gem 'factory_girl_rails'
