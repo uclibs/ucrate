@@ -1,0 +1,2 @@
+module WorkgroupMembershipsHelper
+end

@@ -1,0 +1,30 @@
+<h2>Add User to Workgroup</h2>
+<%= form_for(@workgroup_membership) do |f| %>
+
+  <% if @workgroup_membership.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@workgroup_membership.errors.count, "error") %> prohibited this workgroup membership from being saved:</h2>
+
+      <ul>
+      <% @workgroup_membership.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% User.all.each do |u| %>
+    <% unless WorkgroupMembership.where(workgroup_id: params[:id]).all.where(user_id: u.id).any? %>
+      <%= f.radio_button :user_id, u.id %>
+      <%= f.label :user_id, u.email, value: u.id %><br />
+    <% end %>
+  <% end %>
+  
+  <%= f.hidden_field :workgroup_id, value: params[:id] %>
+  <%= f.hidden_field :workgroup_role_id, value: '3' %>
+    
+  <div class="actions">
+    <p><%= f.submit 'Add user to workgroup' %></p>
+  </div>
+
+<% end %>

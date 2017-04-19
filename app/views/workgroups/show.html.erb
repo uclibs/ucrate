@@ -3,4 +3,7 @@
 
 
 <%= link_to 'Edit', edit_workgroup_path(@workgroup) %> |
-<%= link_to 'Back', workgroups_path %>
+<%= link_to 'Back', workgroups_path %> |
+<%= link_to 'Add Member', new_workgroup_membership_path(id: @workgroup.id) %>
+
+<%= render partial: 'workgroup_memberships/list_members' %>
