@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/samvera/hyrax.git
-  revision: 1f903daeca2793bb45f3e7c3fc76b0c95660c1f5
-  ref: 1f903daeca2793bb45f3e7c3fc76b0c95660c1f5
+  revision: 184d47cd3cb222973f065be927b1d455a81deaf6
+  ref: 184d47cd3cb222973f065be927b1d455a81deaf6
   specs:
     hyrax (2.1.0.alpha)
       active-fedora (~> 11.5, >= 11.5.2)
@@ -103,7 +103,7 @@ GEM
       activemodel (= 5.0.6)
       activesupport (= 5.0.6)
       arel (~> 7.0)
-    activerecord-import (0.21.0)
+    activerecord-import (0.22.0)
       activerecord (>= 3.2)
     activesupport (5.0.6)
       concurrent-ruby (~> 1.0, >= 1.0.2)
@@ -119,7 +119,7 @@ GEM
       execjs
     awesome_nested_set (3.1.3)
       activerecord (>= 4.0.0, < 5.2)
-    aws-partitions (1.56.0)
+    aws-partitions (1.57.0)
     aws-sdk-core (3.14.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
@@ -265,7 +265,7 @@ GEM
       railties (>= 3.2, < 5.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    google-api-client (0.19.4)
+    google-api-client (0.19.5)
       addressable (~> 2.5, >= 2.5.1)
       googleauth (>= 0.5, < 0.7.0)
       httpclient (>= 2.8.1, < 3.0)
@@ -305,7 +305,7 @@ GEM
     hydra-core (10.5.0)
       hydra-access-controls (= 10.5.0)
       railties (>= 4.0.0, < 6)
-    hydra-derivatives (3.4.0)
+    hydra-derivatives (3.4.1)
       active-fedora (>= 11.3.1, < 13)
       active_encode (~> 0.1)
       activesupport (>= 4.0, < 6)
@@ -702,7 +702,7 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    tinymce-rails (4.7.4)
+    tinymce-rails (4.7.5)
       railties (>= 3.1.1)
     turbolinks (5.1.0)
       turbolinks-source (~> 5.1)
