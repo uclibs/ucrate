@@ -10,6 +10,8 @@ cache:
 before_install:
   - gem update --system
   - gem install bundler
+  - gem install rubocop -v '0.51.0'
+  - gem install rubocop-rspec -v '1.20.1'
   - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost &
 
 rvm:
@@ -31,3 +33,4 @@ services:
   - redis-server
 before_script:
   - jdk_switcher use oraclejdk8
+  - rubocop
