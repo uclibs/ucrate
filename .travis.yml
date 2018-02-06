@@ -29,6 +29,9 @@ env:
   #  - "RAILS_VERSION=5.1.4"
     - "RAILS_VERSION=5.0.6"
 
+script:
+  - bundle exec rake ci
+
 services:
   - redis-server
 before_script:
