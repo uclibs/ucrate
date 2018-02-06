@@ -1,24 +1,43 @@
-# README
+# UCrate
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installing the UCrate application
 
-Things you may want to cover:
+Install system dependencies
 
-* Ruby version
+***Our Hyrax 2.x based app requires the following software to work:
 
-* System dependencies
+* Solr version >= 5.x (tested up to 6.2.0)
+* Fedora Commons digital repository version >= 4.5.1 (tested up to 4.6.0)
+* A SQL RDBMS (MySQL, PostgreSQL), though note that SQLite will be used by default if you're looking to get up and running quickly
+  * libmysqlclient-dev (if running MySQL as RDBMS)
+  * libsqlite3-dev (if running SQLite as RDBMS)
+* Redis, a key-value store
+* ImageMagick with JPEG-2000 support
+* FITS version 0.8.x (0.8.5 is known to be good)
+* LibreOffice
 
-* Configuration
+1. Clone this repository: `git clone https://github.com/uclibs/ucrate.git ./path/to/local`
+    * **Note:** Solr will not run properly if there are spaces in any of the directory names above it <br />(e.g. /user/my apps/ucrate/)
+1. Change to the application's directory: e.g. `cd ./path/to/local`  
+1. Make sure you are on the develop branch: `git checkout develop`
+1. Install bundler (if needed): `gem install bundler`
+1. Run bundler: `bundle install`
+1. Start fedora: ```fcrepo_wrapper -p 8984```
+1. Start solr: ```solr_wrapper -d solr/config/ --collection_name ucrate-hydra```
+1. Start redis: ```redis-server```
+1. Run the database migrations: `bundle exec rake db:migrate`
+1. Start the rails server: `rails server`
+1. Visit the site at [http://localhost:3000] (http://localhost:3000)
 
-* Database creation
+## Running the Tests
+`bundle exec rake spec`
 
-* Database initialization
+## Application Status
 
-* How to run the test suite
+[![Build Status](https://travis-ci.org/uclibs/ucrate.svg?branch=sandbox)](https://travis-ci.org/uclibs/ucrate)
 
-* Services (job queues, cache servers, search engines, etc.)
+# Project Samvera
+This software has been developed by and is brought to you by the Samvera community. Learn more at the
+[Samvera website](http://projecthydra.org)
 
-* Deployment instructions
-
-* ...
+![Samvera Logo](https://wiki.duraspace.org/download/thumbnails/87459292/samvera-fall-font2-200w.png?version=1&modificationDate=1498550535816&api=v2)
