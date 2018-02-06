@@ -21,3 +21,6 @@
 .byebug_history
 
 coverage/*
+
+##Mac OS
+.DS_Store
