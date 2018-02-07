@@ -7,6 +7,30 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+require 'factory_bot'
+require 'devise'
+require 'devise/version'
+require 'capybara/rspec'
+require 'capybara/rails'
+require 'selenium-webdriver'
+require 'database_cleaner'
+
+# @note In January 2018, TravisCI disabled Chrome sandboxing in its Linux
+#       container build environments to mitigate Meltdown/Spectre
+#       vulnerabilities, at which point Hyrax could no longer use the
+#       Capybara-provided :selenium_chrome_headless driver (which does not
+#       include the `--no-sandbox` argument).
+Capybara.register_driver :selenium_chrome_headless_sandboxless do |app|
+  browser_options = ::Selenium::WebDriver::Chrome::Options.new
+  browser_options.args << '--headless'
+  browser_options.args << '--disable-gpu'
+  browser_options.args << '--no-sandbox'
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
+end
+
+Capybara.default_driver = :rack_test # This is a faster driver
+Capybara.javascript_driver = :selenium_chrome_headless_sandboxless # This is slower
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -26,6 +50,7 @@ require 'rspec/rails'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+require 'active_fedora/cleaner'
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -33,7 +58,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -54,4 +79,41 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include FactoryBot::Syntax::Methods
+
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+
+  config.before :suite do
+    DatabaseCleaner.clean_with(:truncation)
+    # Noid minting causes extra LDP requests which slow the test suite.
+    Hyrax.config.enable_noids = false
+  end
+
+  config.before do |example|
+    if example.metadata[:type] == :feature && Capybara.current_driver != :rack_test
+      DatabaseCleaner.strategy = :truncation
+    else
+      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.start
+    end
+
+    if example.metadata[:clean_repo]
+      ActiveFedora::Cleaner.clean!
+      # The JS is executed in a different thread, so that other thread
+      # may think the root path has already been created:
+      ActiveFedora.fedora.connection.send(:init_base_path) if example.metadata[:js]
+    end
+    Hyrax.config.nested_relationship_reindexer = if example.metadata[:with_nested_reindexing]
+                                                   # Use the default relationship reindexer (and the cascading reindexing of child documents)
+                                                   Hyrax.config.default_nested_relationship_reindexer
+                                                 else
+                                                   # Don't use the nested relationship reindexer. This slows everything down quite a bit.
+                                                   ->(id:) {}
+                                                 end
+  end
+
+  config.after do
+    DatabaseCleaner.clean
+  end
 end
