@@ -156,4 +156,4 @@ RSpec/LeadingSubject:
 
 RSpec/ExampleLength:
   Exclude:
-    - 'spec/features/create_generic_work_spec.rb'
+    - 'spec/features/create_work_spec.rb'
