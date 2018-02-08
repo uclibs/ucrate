@@ -68,6 +68,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'fcrepo_wrapper'
+  gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
 end
