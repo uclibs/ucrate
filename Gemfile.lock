@@ -189,6 +189,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
+    capybara-maleficent (0.2.0)
+      activesupport (>= 4.2.0)
+      capybara (~> 2.13)
     carrierwave (1.2.2)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -808,6 +811,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara
+  capybara-maleficent (~> 0.2)
   chromedriver-helper
   coffee-rails (~> 4.2)
   coveralls
