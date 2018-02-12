@@ -156,4 +156,10 @@ RSpec/LeadingSubject:
 
 RSpec/ExampleLength:
   Exclude:
+    - 'spec/features/admin_spec.rb'
+    - 'spec/features/batch_create_spec.rb'
+    - 'spec/features/browse_dashboard_works_spec.rb'
+    - 'spec/features/browse_catalog_spec.rb'
+    - 'spec/features/collection_spec.rb'
     - 'spec/features/create_work_spec.rb'
+    - 'spec/features/edit_work_spec.rb'
