@@ -64,6 +64,7 @@ gem 'devise-guests', '~> 0.6'
 gem 'rsolr', '>= 1.0'
 group :development, :test do
   gem 'capybara'
+  gem 'capybara-maleficent', '~> 0.2'
   gem "chromedriver-helper"
   gem 'database_cleaner'
   gem 'factory_bot_rails'

@@ -15,6 +15,19 @@ require 'capybara/rails'
 require 'selenium-webdriver'
 require 'database_cleaner'
 
+unless ENV['SKIP_MALEFICENT']
+  # See https://github.com/jeremyf/capybara-maleficent
+  # Wrap Capybara matchers with sleep intervals to reduce fragility of specs.
+  require 'capybara/maleficent/spindle'
+
+  Capybara::Maleficent.config do |c|
+    # Quieting down maleficent's logging
+    logger = Logger.new(STDOUT)
+    logger.level = Logger::INFO
+    c.logger = logger
+  end
+end
+
 # @note In January 2018, TravisCI disabled Chrome sandboxing in its Linux
 #       container build environments to mitigate Meltdown/Spectre
 #       vulnerabilities, at which point Hyrax could no longer use the
@@ -43,8 +56,8 @@ Capybara.javascript_driver = :selenium_chrome_headless_sandboxless # This is slo
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
-#
-# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
