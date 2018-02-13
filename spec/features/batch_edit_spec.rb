@@ -24,7 +24,6 @@ RSpec.describe 'batch', type: :feature, clean_repo: true, js: true do
 
       # Reload the form and verify
       visit '/dashboard/my/works'
-      page.save_screenshot('screenshot.png')
       check 'check_all'
       find('#batch-edit').click
       expect(page).to have_content('Batch Edit Descriptions')
