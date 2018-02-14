@@ -71,6 +71,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
     end
 
     it "allows on-behalf-of deposit" do
+      sleep 3
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       within('span#addfiles') do

@@ -129,4 +129,13 @@ RSpec.configure do |config|
   config.after do
     DatabaseCleaner.clean
   end
+
+  config.after(:each, type: :feature) do
+    Warden.test_reset!
+    Capybara.reset_sessions!
+    page.driver.reset!
+  end
+
+  config.order = :random
+  Kernel.srand config.seed
 end
