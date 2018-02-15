@@ -41,6 +41,7 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'app/controllers/catalog_controller.rb'
     - 'config/initializers/simple_form_bootstrap.rb'
+    - 'config/routes.rb'
 
 Metrics/ClassLength:
   Exclude:

@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
   mount Blacklight::Engine => '/'
@@ -5,6 +6,10 @@ Rails.application.routes.draw do
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
+  end
+
+  authenticate :user, ->(u) { u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   devise_for :users

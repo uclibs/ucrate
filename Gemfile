@@ -43,6 +43,7 @@ gem 'hydra-role-management'
 gem 'hyrax', git: 'https://github.com/samvera/hyrax.git', ref: '51b45cc2dc35eb8101f3eec5bde28922b63a0872'
 gem 'riiif', '~> 1.1'
 gem 'rsolr', '>= 1.0'
+gem 'sidekiq'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
