@@ -541,6 +541,8 @@ GEM
       rails (~> 5.0)
       rdf
     rack (2.0.4)
+    rack-protection (2.0.0)
+      rack
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
     rails (5.1.4)
@@ -715,6 +717,11 @@ GEM
       rdf-xsd (>= 2.2, < 4.0)
       sparql (>= 2.2, < 4.0)
       sxp (~> 1.0)
+    sidekiq (5.1.1)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
     signet (0.8.1)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -840,6 +847,7 @@ DEPENDENCIES
   rubocop-rspec (~> 1.20.1)
   sass-rails (~> 5.0)
   selenium-webdriver
+  sidekiq
   solr_wrapper (>= 0.3)
   spring
   spring-watcher-listen (~> 2.0.0)
