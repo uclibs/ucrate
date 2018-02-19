@@ -33,6 +33,9 @@ RSpec.describe "Workflow state changes", type: :feature do
   let(:permission_template) { create(:permission_template, source_id: admin_set.id) }
 
   before do
+    admin = Role.find_or_create_by(name: "admin")
+    admin.users << approving_user
+    admin.save
     allow(::User.group_service).to receive(:byname).and_return(depositing_user.user_key => ['admin'], approving_user.user_key => ['admin'])
     Hyrax::Workflow::WorkflowImporter.generate_from_hash(data: one_step_workflow, permission_template: permission_template)
     permission_template.available_workflows.first.update!(active: true)
