@@ -47,4 +47,13 @@ RSpec.describe "User Profile", type: :feature do
       expect(page).to have_xpath("//td/a[@href='#{dewey_path}']")
     end
   end
+
+  context 'when editing user' do
+    it 'renders identity and contact fields' do
+      visit profile_path
+      click_link('Edit Profile', match: :first)
+      expect(page).to have_field('First Name', with: user.first_name)
+      expect(page).to have_field('Last Name', with: user.last_name)
+    end
+  end
 end

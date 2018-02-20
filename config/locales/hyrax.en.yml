@@ -55,3 +55,6 @@ en:
     institution_name_full:  "The Institution Name"
     product_name:           "UCrate"
     product_twitter_handle: "@SamveraRepo"
+    user_profile:
+      first_name: "First Name"
+      last_name: "Last Name"
