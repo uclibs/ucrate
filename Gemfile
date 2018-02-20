@@ -44,6 +44,8 @@ gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'hydra-role-management'
 gem 'hyrax', git: 'https://github.com/samvera/hyrax.git', ref: '5edc4f1d676cb73a347127623a242e621493b192'
+gem 'omniauth-openid'
+gem 'omniauth-shibboleth'
 gem 'riiif', '~> 1.1'
 gem 'rsolr', '>= 1.0'
 gem 'sidekiq'
@@ -52,8 +54,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'fcrepo_wrapper'
+  gem 'rails-controller-testing'
   gem 'rspec-its'
   gem 'rspec-rails'
+  gem 'show_me_the_cookies'
   gem 'solr_wrapper', '>= 0.3'
 end
 

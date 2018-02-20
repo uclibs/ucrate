@@ -47,6 +47,21 @@ FactoryBot.define do
     end
   end
 
+  factory :shibboleth_user, class: 'User' do
+    ignore do
+      count 1
+      person_pid nil
+    end
+    email 'sixplus2@test.com'
+    password '12345678'
+    first_name 'Fake'
+    last_name 'User'
+    password_confirmation '12345678'
+    sign_in_count { count.to_s }
+    provider 'shibboleth'
+    uid 'sixplus2@test.com'
+  end
+
   trait :guest do
     guest true
   end
