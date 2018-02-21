@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/samvera/hyrax.git
-  revision: 51b45cc2dc35eb8101f3eec5bde28922b63a0872
-  ref: 51b45cc2dc35eb8101f3eec5bde28922b63a0872
+  revision: 5edc4f1d676cb73a347127623a242e621493b192
+  ref: 5edc4f1d676cb73a347127623a242e621493b192
   specs:
     hyrax (2.1.0.alpha)
       active-fedora (~> 11.5, >= 11.5.2)
@@ -48,6 +48,7 @@ GIT
       samvera-nesting_indexer (~> 1.0, >= 1.0.1)
       select2-rails (~> 3.5)
       signet
+      simple_form (= 3.5.0)
       tinymce-rails (~> 4.1)
 
 GIT
@@ -376,7 +377,7 @@ GEM
       blacklight
       bootstrap_form
       cancancan
-    hydra-works (0.16.0)
+    hydra-works (0.17.0)
       hydra-derivatives (~> 3.0)
       hydra-file_characterization (~> 0.3, >= 0.3.3)
       hydra-pcdm (>= 0.9)
@@ -795,7 +796,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.8)
     tins (1.16.3)
-    tinymce-rails (4.7.6)
+    tinymce-rails (4.7.7)
       railties (>= 3.1.1)
     turbolinks (5.1.0)
       turbolinks-source (~> 5.1)
