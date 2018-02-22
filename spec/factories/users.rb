@@ -2,6 +2,8 @@ FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }
     password 'password'
+    first_name 'Sample'
+    last_name 'User'
 
     transient do
       # Allow for custom groups when a user is instantiated.
