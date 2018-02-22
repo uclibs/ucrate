@@ -24,3 +24,6 @@ coverage/*
 
 ##Mac OS
 .DS_Store
+
+# Application files to ingore
+fits.log
