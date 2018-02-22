@@ -20,7 +20,7 @@ RSpec.describe 'proxy', type: :feature do
       find("div.select2-result-label").click
       # END create_proxy_using_partial
 
-      expect(page).to have_css('td.depositor-name', text: second_user.user_key)
+      expect(page).to have_css('td.depositor-name', text: second_user.name)
     end
   end
 end

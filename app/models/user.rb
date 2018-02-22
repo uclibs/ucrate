@@ -24,4 +24,9 @@ class User < ApplicationRecord
   def to_s
     email
   end
+
+  def name
+    return "#{first_name} #{last_name}" unless first_name.blank? || last_name.blank?
+    user_key
+  end
 end
