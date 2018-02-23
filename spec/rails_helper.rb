@@ -14,6 +14,7 @@ require 'capybara/rspec'
 require 'capybara/rails'
 require 'selenium-webdriver'
 require 'database_cleaner'
+require 'rspec/its'
 
 unless ENV['SKIP_MALEFICENT']
   # See https://github.com/jeremyf/capybara-maleficent
@@ -96,6 +97,8 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.include Devise::Test::IntegrationHelpers, type: :feature
+
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.before :suite do
     DatabaseCleaner.clean_with(:truncation)

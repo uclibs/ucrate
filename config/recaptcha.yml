@@ -1,0 +1,11 @@
+# stores ReCaptcha image server url
+
+development:
+  site_key: ENV["UCRATE_RECAPTCHA_PUB_KEY"]
+  secret_key: ENV["UCRATE_RECAPTCHA_PRI_KEY"]
+test:
+  site_key: ENV["UCRATE_RECAPTCHA_PUB_KEY"]
+  secret_key: ENV["UCRATE_RECAPTCHA_PRI_KEY"]
+production:
+  site_key: ENV["UCRATE_RECAPTCHA_PUB_KEY"]
+  secret_key: ENV["UCRATE_RECAPTCHA_PRI_KEY"]

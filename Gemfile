@@ -52,6 +52,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'fcrepo_wrapper'
+  gem 'rspec-its'
   gem 'rspec-rails'
   gem 'solr_wrapper', '>= 0.3'
 end
