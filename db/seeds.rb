@@ -11,7 +11,8 @@ class AddSeedObjects < ActiveRecord::Migration[5.1]
     first_name: 'Many',
     last_name: 'Deposits',
     password: password,
-    password_confirmation: password)
+    password_confirmation: password,
+    ucdepartment: 'CCM Music')
   puts "Account created: #{many_deposits.email}"
 
   User.find_by_email('nodeposits@example.com').try(:destroy)
@@ -20,7 +21,8 @@ class AddSeedObjects < ActiveRecord::Migration[5.1]
     first_name: 'No',
     last_name: 'Deposits',
     password: password,
-    password_confirmation: password)
+    password_confirmation: password,
+    ucdepartment: 'UCL Rsearch')
   puts "Account created: #{no_deposits.email}"
 
   User.find_by_email('delegate@example.com').try(:destroy)
@@ -29,7 +31,8 @@ class AddSeedObjects < ActiveRecord::Migration[5.1]
     first_name: 'Student',
     last_name: 'Delegate',
     password: password,
-    password_confirmation: password)
+    password_confirmation: password,
+    ucdepartment: 'CEAS Computer Science')
   puts "Account created: #{student_delegate.email}"
 
   User.find_by_email('admin@example.com').try(:destroy)
@@ -39,7 +42,7 @@ class AddSeedObjects < ActiveRecord::Migration[5.1]
     last_name: 'User',
     password: password,
     password_confirmation: password)
-  admin = Role.create(name: 'admin')
+  admin = Role.find_or_create_by(name: 'admin')
   admin.users << admin_user
   admin.save
   puts "Account created: #{admin_user.email}\n\n"
