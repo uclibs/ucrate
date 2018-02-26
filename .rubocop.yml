@@ -116,6 +116,10 @@ Rails/FilePath:
 Rails/OutputSafety:
   Exclude:
 
+RSpec/AnyInstance:
+  Exclude:
+    - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
+
 RSpec/DescribeClass:
   Exclude:
     - 'spec/abilities/**/*'
@@ -185,3 +189,4 @@ RSpec/ExpectInHook:
 RSpec/VerifiedDoubles:
   Exclude:
     - 'spec/features/create_child_work_spec.rb'
+    - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
