@@ -125,6 +125,10 @@ RSpec/DescribeClass:
     - 'spec/tasks/rake_spec.rb'
     - 'spec/views/**/*'
 
+Rails/TimeZone:
+  Exclude: 
+    - 'spec/service/collection_metadata_csv_factory_spec.rb'
+
 RSpec/ContextWording:
   Enabled: false
 
