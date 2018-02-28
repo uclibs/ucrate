@@ -13,8 +13,10 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'callbacks' }
   mount Hydra::RoleManagement::Engine => '/'
+
+  get 'login' => 'static#login'
 
   mount Qa::Engine => '/authorities'
   mount Hyrax::Engine, at: '/'

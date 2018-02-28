@@ -1,0 +1,12 @@
+<h2>Log In</h2>
+
+<div id="central-login">
+  <p>If you have a <a href="https://www.uc.edu/distance/Student_Orientation/One_Stop_Student_Resources/central-log-in-.html">UC Central Login username</a>, you can use it to log in to UCrate.</p>
+  <p><%= link_to 'Log in using your UC Central Login', '/users/auth/shibboleth', class: 'btn btn-primary', style: 'font-size: larger' %></p>
+</div>
+
+<div id="local-login">
+  &nbsp;<br />
+  <h3>Other Users</h3>
+  <p>If you're not affiliated with UC, but have been given an account for UCrate, you can <strong><%= link_to 'log in using a local account', new_user_session_path %></strong>.  To request an account, <a href="/contact">use the contact page</a>.</p>
+</div>

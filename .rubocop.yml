@@ -41,6 +41,7 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'app/controllers/catalog_controller.rb'
     - 'config/initializers/simple_form_bootstrap.rb'
+    - 'config/initializers/devise.rb'
     - 'config/routes.rb'
 
 Metrics/ClassLength:
@@ -56,6 +57,11 @@ Naming/FileName: # https://github.com/bbatsov/rubocop/issues/2973
 
 Style/AsciiComments:
   Enabled: false
+
+Style/BracesAroundHashParameters:
+  Exclude:
+    - 'config/initializers/devise.rb'
+
 
 Style/CollectionMethods:
   PreferredMethods:
@@ -181,6 +187,7 @@ RSpec/ExampleLength:
     - 'spec/features/work_show_spec.rb'
     - 'spec/features/workflow_state_changes_spec.rb'
     - 'spec/features/users_spec.rb'
+    - 'spec/features/uc_shibboleth_spec.rb'
 
 RSpec/ExpectInHook:
   Exclude:
@@ -190,3 +197,7 @@ RSpec/VerifiedDoubles:
   Exclude:
     - 'spec/features/create_child_work_spec.rb'
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
+
+RSpec/InstanceVariable:
+  Exclude:
+    - 'spec/controllers/callbacks_controller_spec.rb'
