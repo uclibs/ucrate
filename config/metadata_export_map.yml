@@ -1,0 +1,5 @@
+GenericWork:
+  - id
+  - title
+  - creator
+  - description
