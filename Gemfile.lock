@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/samvera/hyrax.git
-  revision: 5edc4f1d676cb73a347127623a242e621493b192
-  ref: 5edc4f1d676cb73a347127623a242e621493b192
+  revision: e88981a04ef63fa38bf9fabc3ed9e269e562471b
+  tag: v2.1.0.beta1
   specs:
-    hyrax (2.1.0.alpha)
+    hyrax (2.1.0.beta1)
       active-fedora (~> 11.5, >= 11.5.2)
       almond-rails (~> 0.1)
       awesome_nested_set (~> 3.1)
@@ -552,7 +552,7 @@ GEM
     public_suffix (3.0.1)
     pul_uv_rails (2.0.1)
     puma (3.11.0)
-    qa (2.0.0)
+    qa (2.0.1)
       activerecord-import
       deprecation
       faraday
