@@ -71,10 +71,10 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
+  gem 'capybara', '~> 2.4', '< 2.18.0'
   gem 'capybara-maleficent', '~> 0.2'
   gem "chromedriver-helper"
-  gem 'coveralls', require: false
+  gem 'coveralls', '~> 0.7.1', require: false
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rspec-activemodel-mocks'
