@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     def after_sign_in_path_for(_resource)
       cookies[:login_type] = "local"
       return root_path unless parameter_set?
-      dashboard_works_path
+      Hyrax::Engine.routes.url_helpers.dashboard_works_path
     end
 
     def after_sign_out_path_for(_resource_or_scope)
