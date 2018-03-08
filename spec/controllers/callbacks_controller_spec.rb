@@ -51,6 +51,17 @@ describe CallbacksController do
       it_behaves_like 'Shibboleth login'
     end
 
+    context "when the parameter is set" do
+      before do
+        allow(controller).to receive(:parameter_set?).and_return(true)
+        get provider
+      end
+
+      it 'redirects to the dashboard work page' do
+        response.should redirect_to(Hyrax::Engine.routes.url_helpers.dashboard_works_path)
+      end
+    end
+
     context 'with a brand new user when Shibboleth email is not defined' do
       before do
         omniauth_hash = { provider: 'shibboleth',

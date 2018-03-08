@@ -79,12 +79,25 @@ describe 'UC account workflow', type: :feature do
   end
 
   describe 'shibboleth login page' do
-    it 'shows a shibboleth login link and local login link if shibboleth is enabled' do
-      visit login_path
-      if yaml['test']['shibboleth_enabled'] == true
+    context 'when shibboleth is enabled' do
+      before do
+        AUTH_CONFIG['shibboleth_enabled'] = true
+        visit login_path
+      end
+
+      it 'shows a shibboleth login link and local login link' do
         expect(page).to have_link('UC Central Login username', href: 'https://www.uc.edu/distance/Student_Orientation/One_Stop_Student_Resources/central-log-in-.html')
         expect(page).to have_link('log in using a local account', new_user_session_path)
-      else
+      end
+    end
+
+    context 'when shibboleth is not enabled' do
+      before do
+        AUTH_CONFIG['shibboleth_enabled'] = false
+        visit login_path
+      end
+
+      it 'shows the local log in page' do
         page.should have_field('user[email]')
       end
     end
