@@ -48,7 +48,7 @@ FactoryBot.define do
   end
 
   factory :shibboleth_user, class: 'User' do
-    ignore do
+    transient do
       count 1
       person_pid nil
     end
