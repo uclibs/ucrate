@@ -54,6 +54,7 @@ en:
     institution_name:       "Institution"
     institution_name_full:  "The Institution Name"
     product_name:           "UCrate"
+    description:            "University of Cincinnati's library collections"
     product_twitter_handle: "@SamveraRepo"
     user_profile:
       first_name: "First Name"

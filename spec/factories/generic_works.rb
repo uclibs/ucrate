@@ -20,6 +20,7 @@ FactoryBot.define do
 
     after(:create) do |work, _evaluator|
       work.save! if work.member_of_collections.present?
+      sleep 1
     end
 
     title ["Test title"]
