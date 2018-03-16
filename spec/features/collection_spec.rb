@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'collection', type: :feature, with_nested_reindexing: true do
+RSpec.describe 'collection', type: :feature, clean_repo: true do
   let(:user) { create(:user) }
 
   let(:collection1) { create(:public_collection, user: user) }

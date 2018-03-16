@@ -183,6 +183,7 @@ RSpec/ExampleLength:
     - 'spec/features/contact_form_spec.rb'
     - 'spec/features/create_child_work_spec.rb'
     - 'spec/features/create_work_spec.rb'
+    - 'spec/features/create_work_admin_spec.rb'
     - 'spec/features/dashboard/collection_spec.rb'
     - 'spec/features/dashboard/display_dashboard_spec.rb'
     - 'spec/features/edit_work_spec.rb'

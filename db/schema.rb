@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220183258) do
+ActiveRecord::Schema.define(version: 20180312130601) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20180220183258) do
     t.boolean "assigns_workflow", default: false, null: false
     t.boolean "assigns_visibility", default: false, null: false
     t.boolean "share_applies_to_new_works", default: true, null: false
+    t.boolean "brandable", default: true, null: false
     t.index ["machine_id"], name: "index_hyrax_collection_types_on_machine_id", unique: true
   end
 
