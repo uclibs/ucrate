@@ -71,9 +71,9 @@ describe 'UC account workflow', type: :feature do
     it 'shows a signup link if signups are enabled' do
       visit new_user_session_path
       if yaml['test']['signups_enabled'] == true
-        page.should have_link('Sign up', new_user_registration_path)
+        page.should have_link('Sign up', href: new_user_registration_path)
       else
-        page.should_not have_link('Sign up', new_user_registration_path)
+        page.should_not have_link('Sign up', href: new_user_registration_path)
       end
     end
   end
@@ -87,7 +87,7 @@ describe 'UC account workflow', type: :feature do
 
       it 'shows a shibboleth login link and local login link' do
         expect(page).to have_link('UC Central Login username', href: 'https://www.uc.edu/distance/Student_Orientation/One_Stop_Student_Resources/central-log-in-.html')
-        expect(page).to have_link('log in using a local account', new_user_session_path)
+        expect(page).to have_link('log in using a local account', href: new_user_session_path + '?locale=en')
       end
     end
 
@@ -117,9 +117,9 @@ describe 'UC account workflow', type: :feature do
     it 'shows the correct login link for users' do
       visit root_path
       if yaml['test']['shibboleth_enabled'] == true
-        expect(page).to have_link('Login', login_path)
+        expect(page).to have_link('Login', href: login_path + '?locale=en')
       else
-        expect(page).to have_link('Login', new_user_session_path)
+        expect(page).to have_link('Login', href: new_user_session_path + '?locale=en')
       end
     end
   end
