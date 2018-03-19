@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'hyrax/my/_collection_action_menu.html.erb' do
   let(:id) { '123' }
   let(:collection) { create(:collection, id: id) }
@@ -23,9 +25,10 @@ RSpec.describe 'hyrax/my/_collection_action_menu.html.erb' do
       render 'hyrax/my/collection_action_menu', collection: collection_doc
     end
 
-    it "shows view, edit, and delete" do
+    it "shows view, edit, export, and delete" do
       expect(rendered).to have_link 'View collection', href: hyrax.dashboard_collection_path(id)
       expect(rendered).to have_link 'Edit collection', href: hyrax.edit_dashboard_collection_path(id)
+      expect(rendered).to have_link 'Export collection', href: main_app.collection_exports_path(collection_id: id)
       expect(rendered).to have_link 'Delete collection'
     end
   end
@@ -36,9 +39,10 @@ RSpec.describe 'hyrax/my/_collection_action_menu.html.erb' do
       render 'hyrax/my/collection_action_menu', collection: collection_doc
     end
 
-    it "shows view, delete and hide edit" do
+    it "shows view, delete, and export; hide edit" do
       expect(rendered).to have_link 'View collection', href: hyrax.dashboard_collection_path(id)
       expect(rendered).not_to have_link 'Edit collection', href: hyrax.edit_dashboard_collection_path(id)
+      expect(rendered).to have_link 'Export collection', href: main_app.collection_exports_path(collection_id: id)
       expect(rendered).to have_link 'Delete collection'
     end
   end

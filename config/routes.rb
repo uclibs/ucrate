@@ -1,5 +1,8 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  resources :collection_exports, only: [:index, :create, :destroy]
+  get '/collection_exports/:id/download', to: 'collection_exports#download', as: 'collection_export_download'
+
   mount BrowseEverything::Engine => '/browse'
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
   mount Blacklight::Engine => '/'

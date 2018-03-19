@@ -17,6 +17,25 @@ class Ability
     #   can [:create], ActiveFedora::Base
     # end
 
+    can :show, CollectionExport do |collection_export|
+      collection_export.user == current_user.email ||
+        (current_user.can? :show, look_for_collection(collection_export))
+    end
+
+    can :destroy, CollectionExport do |collection_export|
+      collection_export.user == current_user.email ||
+        (current_user.can? :destroy, look_for_collection(collection_export))
+    end
+
+    can [:show, :destroy], CollectionExport if current_user.admin?
     can [:create, :show, :add_user, :remove_user, :index, :edit, :update, :destroy], Role if current_user.admin?
   end
+
+  private
+
+    def look_for_collection(collection_export)
+      Collection.find(collection_export.collection_id)
+    rescue Ldp::Gone
+      nil
+    end
 end

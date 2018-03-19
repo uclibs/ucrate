@@ -13,6 +13,7 @@ AllCops:
     - 'spec/test_app_templates/**/*'
     - 'vendor/**/*'
     - 'lib/hyrax/specs/**/*'
+    - 'spec/views/hyrax/dashboard/collections/*'
 
 Bundler/DuplicatedGem:  # This doesn't work with engine_cart
   Enabled: false
@@ -71,6 +72,10 @@ Style/CollectionMethods:
     detect: 'find'
     find_all: 'select'
 
+Style/DoubleNegation:
+  Exclude:
+    - 'spec/features/collection_export_spec.rb'
+
 Style/MethodMissing:
   Exclude:
 
@@ -125,6 +130,7 @@ Rails/OutputSafety:
 RSpec/AnyInstance:
   Exclude:
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
+    - 'spec/controllers/collection_exports_controller_spec.rb'
 
 RSpec/DescribeClass:
   Exclude:
@@ -177,6 +183,7 @@ RSpec/ExampleLength:
     - 'spec/features/browse_dashboard_works_spec.rb'
     - 'spec/features/browse_catalog_spec.rb'
     - 'spec/features/catalog_search_spec.rb'
+    - 'spec/features/collection_export_spec.rb'
     - 'spec/features/collection_multi_membership_spec.rb'
     - 'spec/features/collection_spec.rb'
     - 'spec/features/collection_type_spec.rb'
@@ -210,3 +217,4 @@ RSpec/VerifiedDoubles:
 RSpec/InstanceVariable:
   Exclude:
     - 'spec/controllers/callbacks_controller_spec.rb'
+    - 'spec/controllers/collection_exports_controller_spec.rb'

@@ -1,5 +1,11 @@
+require 'rails_helper'
+
 RSpec.describe 'hyrax/dashboard/collections/_show_actions.html.erb', type: :view do
-  let(:presenter) { double('Hyrax::CollectionPresenter', collection_type_is_nestable?: false, solr_document: solr_document, id: '123') }
+  let(:presenter) do
+    double('Hyrax::CollectionPresenter', collection_type_is_nestable?: false,
+                                         solr_document: solr_document,
+                                         id: '123')
+  end
   let(:solr_document) { double('Solr Document') }
   let(:can_destroy) { true }
   let(:can_edit) { true }
@@ -21,6 +27,11 @@ RSpec.describe 'hyrax/dashboard/collections/_show_actions.html.erb', type: :view
       render
       expect(rendered).to have_link('Edit this collection', href: '/path/to/edit')
     end
+
+    it 'renders export collection link' do
+      render
+      expect(rendered).to have_link('Export Collection')
+    end
   end
   describe 'when user cannot edit the document' do
     let(:can_edit) { false }
@@ -28,6 +39,11 @@ RSpec.describe 'hyrax/dashboard/collections/_show_actions.html.erb', type: :view
     it 'does not render edit collection link' do
       render
       expect(rendered).not_to have_link('Edit this collection', href: '/path/to/edit')
+    end
+
+    it 'renders export collection link' do
+      render
+      expect(rendered).to have_link('Export Collection')
     end
   end
 
