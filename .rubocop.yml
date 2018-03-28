@@ -137,7 +137,7 @@ RSpec/DescribeClass:
 
 Rails/TimeZone:
   Exclude: 
-    - 'spec/service/collection_metadata_csv_factory_spec.rb'
+    - 'spec/services/collection_metadata_csv_factory_spec.rb'
 
 RSpec/ContextWording:
   Enabled: false
