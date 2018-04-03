@@ -1,3 +1,15 @@
+0.3.0 3/27/2018
+* Updated to Hyrax gem reference 01d8ad5ecdf5b5658e6800d23d570c5d7b2c9cdc
+* Added an RSS feed of recently added works (/feed.rss)
+* The /users page now hides admins and users without content (Admin users can still see all users)
+* Removed several deprecations
+* Removed the option for users to set a lease on works
+* Renamed app/service to app/services
+* Added task to seed test users and works (rails db:seed)
+* Copied new and modified feature specs from Hyrax
+* Added the ability for users to change their account password
+* Removed the ability for Shibboleth users to change their password
+
 0.2.0 3/2/2018
 * Updated to Hyrax gem version 2.1.0.beta1
 * Created services to export a collection's work metadata to a CSV file
