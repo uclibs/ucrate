@@ -1,18 +1,14 @@
-# Copied from hyrax 366d146 
+require Hyrax::Engine.root.join('app/controllers/hyrax/uploads_controller.rb')
 
 module Hyrax
   class UploadsController < ApplicationController
-    load_and_authorize_resource class: Hyrax::UploadedFile
-
+    # method override to catch virus validation failure and return message via json
     def create
       @upload.attributes = { file: params[:files].first,
                              user: current_user }
       @upload.save!
-    end
-
-    def destroy
-      @upload.destroy
-      head :no_content
+    rescue ActiveRecord::RecordInvalid
+      render json: { files: [{ name: @upload.file.filename, size: @upload.file.size, error: @upload.errors[:base].first }] }
     end
   end
 end
