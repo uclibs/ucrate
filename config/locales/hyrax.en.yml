@@ -59,3 +59,10 @@ en:
     user_profile:
       first_name: "First Name"
       last_name: "Last Name"
+    collection:
+      actions:
+        export_collection: "Export Collection"
+    dashboard:
+      my:
+        action:
+          export_collection: "Export collection"

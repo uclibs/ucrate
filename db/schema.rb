@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312130601) do
+ActiveRecord::Schema.define(version: 20180319152850) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 20180312130601) do
     t.string "target_url"
     t.integer "height"
     t.integer "width"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "collection_exports", force: :cascade do |t|
+    t.string "collection_id"
+    t.string "user"
+    t.binary "export_file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -208,6 +216,14 @@ ActiveRecord::Schema.define(version: 20180312130601) do
     t.string "message_id"
     t.index ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
+  end
+
+  create_table "metadata_exports", force: :cascade do |t|
+    t.string "collection_title"
+    t.string "collection_pid"
+    t.integer "number_of_works"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "minter_states", force: :cascade do |t|
@@ -543,10 +559,10 @@ ActiveRecord::Schema.define(version: 20180312130601) do
     t.binary "zotero_token"
     t.string "zotero_userid"
     t.string "preferred_locale"
-    t.string "first_name"
-    t.string "last_name"
     t.string "provider"
     t.string "uid"
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

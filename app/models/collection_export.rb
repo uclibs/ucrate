@@ -1,0 +1,2 @@
+class CollectionExport < ApplicationRecord
+end
