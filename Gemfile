@@ -40,6 +40,7 @@ gem 'jbuilder', '~> 2.5'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# gem 'clamav'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'hydra-role-management'
