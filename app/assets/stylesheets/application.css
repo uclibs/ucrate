@@ -14,3 +14,27 @@
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
  */
+ .blue-footer {
+   padding: 10px;
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   background-color: #3c3c3c;
+   border-color: #090909;
+   color: #fff;
+   font-size:12px;
+ }
+
+ a.footer-link {
+     color: white;
+ }
+
+ .version {
+     padding-left: 20px;
+ }
+
+ #copyright {
+     color: #ffffff;
+ //    line-height: 150%;
+ //    margin-top: 3.5%;
+ }

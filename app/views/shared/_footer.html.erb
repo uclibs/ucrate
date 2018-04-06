@@ -1,0 +1,19 @@
+<div class="blue-footer container">
+  <div class="row">
+
+    <div class="col-md-6 version">
+      QA Testing for Hyrax - branch: <%= Hyrax::VERSION %>
+    </div>
+
+    <div class="pull-right col-md-4" id="copyright">
+      <span> &copy; <%= Date.today.year %> Samvera-Hyrax </span>
+      <br> Ucrate Version
+      <div class="version">
+        ENV: <%= Rails.env %>
+        <br> SHA: <%= GIT_SHA %>
+        <br>  Branch: <%= BRANCH %>
+        <br>  Updated: <%= LAST_DEPLOYED %></span>
+      </div>
+    </div>
+  </div>
+</div>
