@@ -60,6 +60,7 @@ describe 'UC account workflow', type: :feature do
 
   describe 'overridden devise sign-in page' do
     it 'shows a shibboleth login link if shibboleth is enabled' do
+      AUTH_CONFIG['shibboleth_enabled'] = true
       visit new_user_session_path
       if yaml['test']['shibboleth_enabled'] == true
         expect(page).to have_link('Central Login form', href: '/users/auth/shibboleth')
