@@ -16,3 +16,7 @@
       <span class="fa fa-flag"></span> <span class="sidebar-action-text"><%= t('hyrax.embargoes.index.manage_embargoes') %></span>
     <% end %>
   <% end %>
+
+  <%= menu.nav_link(main_app.collection_exports_path) do %>
+    <span class="fa fa-flag"></span> <span class="sidebar-action-text"><%= t('hyrax.collection.actions.manage_exports') %></span>
+  <% end %>
