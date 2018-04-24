@@ -12,7 +12,7 @@ RSpec.describe "collection export", type: :feature do
     let(:user) { create(:user) }
     let(:other_user) { create(:user) }
 
-    let(:user_collection) do
+    let!(:user_collection) do
       create(:public_collection,
              user: user,
              description: ['collection description'],
@@ -34,6 +34,7 @@ RSpec.describe "collection export", type: :feature do
         click_link "Export collection"
         expect(page).to have_content("Collection export was successfully created")
         expect(page).to have_content(user_collection.id)
+        expect(page).to have_content(user_collection.title.first)
 
         # can export a collection from the dashboard collection index
         # visit "dashboard/my/collections"
