@@ -35,4 +35,9 @@ RSpec.describe 'hyrax/dashboard/_sidebar.html.erb', type: :view do
     it { is_expected.to have_link t('hyrax.embargoes.index.manage_embargoes') }
     it { is_expected.not_to have_link t('hyrax.leases.index.manage_leases') }
   end
+
+  it "shows Manage Exports link" do
+    render
+    expect(rendered).to have_link t('hyrax.collection.actions.manage_exports')
+  end
 end

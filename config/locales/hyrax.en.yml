@@ -62,6 +62,7 @@ en:
     collection:
       actions:
         export_collection: "Export Collection"
+        manage_exports: "Manage Exports"
     dashboard:
       my:
         action:
