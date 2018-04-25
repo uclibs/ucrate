@@ -10,9 +10,29 @@ RSpec.describe 'hyrax/dashboard/profiles/edit.html.erb', type: :view do
     assign(:trophies, [])
   end
 
-  it "shows a first name and last name field" do
+  it "shows the user's name fields" do
     render
     expect(rendered).to match(/First Name/)
     expect(rendered).to match(/Last Name/)
+  end
+
+  it "shows the user's identity fields" do
+    render
+    expect(rendered).to match(/Job title/)
+    expect(rendered).to match(/Department/)
+    expect(rendered).to match(/UC affiliation/)
+  end
+
+  it "shows the user's contact fields" do
+    render
+    expect(rendered).to match(/Alternate email/)
+    expect(rendered).to match(/Campus phone number/)
+    expect(rendered).to match(/Alternate phone number/)
+  end
+
+  it "shows the user's web fields" do
+    render
+    expect(rendered).to match(/Personal webpage/)
+    expect(rendered).to match(/Blog/)
   end
 end

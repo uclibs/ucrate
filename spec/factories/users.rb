@@ -4,6 +4,14 @@ FactoryBot.define do
     password 'password'
     first_name 'Sample'
     last_name 'User'
+    title 'job title'
+    ucdepartment 'Department'
+    uc_affiliation 'UC affiliation'
+    alternate_email 'Alternate email'
+    telephone 'Campus phone number'
+    alternate_phone_number 'Alternate phone number'
+    website 'Personal webpage'
+    blog 'Blog'
 
     transient do
       # Allow for custom groups when a user is instantiated.
