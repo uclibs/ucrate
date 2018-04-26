@@ -109,6 +109,11 @@ Style/ZeroLengthPredicate:
 Rails:
   Enabled: true
 
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'app/models/user.rb'
+    - 'app/jobs/user_edit_profile_event_job.rb'
+
 Rails/ApplicationJob:
   Enabled: false
 
@@ -142,7 +147,7 @@ RSpec/DescribeClass:
     - 'spec/views/**/*'
 
 Rails/TimeZone:
-  Exclude: 
+  Exclude:
     - 'spec/services/collection_metadata_csv_factory_spec.rb'
 
 RSpec/ContextWording:

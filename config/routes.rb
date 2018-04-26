@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  devise_for :users, controllers: { omniauth_callbacks: 'callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'callbacks', registrations: "registrations" }
   mount Hydra::RoleManagement::Engine => '/'
 
   get 'login' => 'static#login'
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   mount Qa::Engine => '/authorities'
   mount Hyrax::Engine, at: '/'
   resources :welcome, only: 'index'
+  resources :welcome_page, only: [:index, :create]
   root 'hyrax/homepage#index'
   curation_concerns_basic_routes
   concern :exportable, Blacklight::Routes::Exportable.new
