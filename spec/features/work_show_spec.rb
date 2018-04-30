@@ -11,7 +11,7 @@ RSpec.describe "display a work as its owner" do
     let(:work) do
       create(:work,
              with_admin_set: true,
-             title: ["Magnificent splendor"],
+             title: ["Magnificent splendor", "Happy little trees"],
              source: ["The Internet"],
              based_near: ["USA"],
              user: user,
@@ -21,6 +21,8 @@ RSpec.describe "display a work as its owner" do
     let(:user) { create(:user) }
     let(:file_set) { create(:file_set, user: user, title: ['A Contained FileSet'], content: file) }
     let(:file) { File.open(fixture_path + '/world.png') }
+    let(:multi_membership_type_1) { create(:collection_type, :allow_multiple_membership, title: 'Multi-membership 1') }
+    let!(:collection) { create(:collection_lw, user: user, collection_type_gid: multi_membership_type_1.gid) }
 
     before do
       sign_in user
@@ -29,9 +31,11 @@ RSpec.describe "display a work as its owner" do
 
     it "shows a work" do
       expect(page).to have_selector 'h2', text: 'Magnificent splendor'
+      expect(page).to have_selector 'h2', text: 'Happy little trees'
       expect(page).to have_selector 'li', text: 'The Internet'
-      expect(page).to have_selector 'th', text: 'Location'
-      expect(page).not_to have_selector 'th', text: 'Based near'
+      expect(page).to have_selector 'dt', text: 'Location'
+      expect(page).not_to have_selector 'dt', text: 'Based near'
+      expect(page).to have_selector 'button', text: 'Attach Child', count: 1
 
       # Displays FileSets already attached to this work
       within '.related-files' do
@@ -40,6 +44,20 @@ RSpec.describe "display a work as its owner" do
 
       # IIIF manifest does not include locale query param
       expect(find('div.viewer:first')['data-uri']).to eq "/concern/generic_works/#{work.id}/manifest"
+    end
+
+    it "add work to a collection", js: true do
+      click_button "Add to collection" # opens the modal
+      # since there is only one collection, it's not necessary to choose a radio button
+      within('div#collection-list-container') do
+        choose collection.title.first # selects the collection
+        click_button 'Save changes'
+      end
+
+      # forwards to collection show page
+      expect(page).to have_content collection.title.first
+      expect(page).to have_content work.title.first
+      expect(page).to have_selector '.alert-success', text: 'Collection was successfully updated.'
     end
   end
 
@@ -54,8 +72,8 @@ RSpec.describe "display a work as its owner" do
     it "shows a work" do
       expect(page).to have_selector 'h2', text: 'Magnificent splendor'
       expect(page).to have_selector 'li', text: 'The Internet'
-      expect(page).to have_selector 'th', text: 'Location'
-      expect(page).not_to have_selector 'th', text: 'Based near'
+      expect(page).to have_selector 'dt', text: 'Location'
+      expect(page).not_to have_selector 'dt', text: 'Based near'
 
       # Doesn't have the upload form for uploading more files
       expect(page).not_to have_selector "form#fileupload"
