@@ -44,6 +44,7 @@ Metrics/BlockLength:
     - 'config/initializers/simple_form_bootstrap.rb'
     - 'config/initializers/devise.rb'
     - 'config/routes.rb'
+    - 'app/views/sitemaps/index.xml.builder'
 
 Metrics/ClassLength:
   Exclude:
@@ -142,7 +143,7 @@ RSpec/DescribeClass:
     - 'spec/views/**/*'
 
 Rails/TimeZone:
-  Exclude: 
+  Exclude:
     - 'spec/services/collection_metadata_csv_factory_spec.rb'
 
 RSpec/ContextWording:

@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   end
 
   resources :feed, only: 'index'
+  get 'sitemap.xml' => 'sitemaps#index', format: 'xml', as: :sitemap
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
