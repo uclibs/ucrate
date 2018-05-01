@@ -37,11 +37,8 @@ class CallbacksController < Devise::OmniauthCallbacksController
       # If user has no email address use their sixplus2@uc.edu instead
       # Some test accounts on QA/dev don't have email addresses
       @email = if defined?(@omni.extra.raw_info.mail)
-                 if @omni.extra.raw_info.mail.presence || @omni.uid
-                   @omni.uid
-                 else
-                   @omni.extra.raw_info.mail
-                 end
+                 return @omni.uid if @omni.extra.raw_info.mail.presence || @omni.uid
+                 raise 'User does not have an email address or uid'
                else
                  @omni.uid
                end
