@@ -59,6 +59,14 @@ en:
     user_profile:
       first_name: "First Name"
       last_name: "Last Name"
+      title: "Job title"
+      ucdepartment: "Department"
+      uc_affiliation: "UC affiliation"
+      alternate_email: "Alternate email"
+      telephone: "Campus phone number"
+      alternate_phone_number: "Alternate phone number"
+      website: "Personal webpage"
+      blog: "Blog"
     collection:
       actions:
         export_collection: "Export Collection"

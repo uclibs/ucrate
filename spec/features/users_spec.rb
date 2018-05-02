@@ -56,6 +56,14 @@ RSpec.describe "User Profile", type: :feature, clean_repo: true do
       click_link('Edit Profile', match: :first)
       expect(page).to have_field('First Name', with: user.first_name)
       expect(page).to have_field('Last Name', with: user.last_name)
+      expect(page).to have_field('Job title', with: user.title)
+      expect(page).to have_field('Department', with: user.ucdepartment)
+      expect(page).to have_field('UC affiliation', with: user.uc_affiliation)
+      expect(page).to have_field('Alternate email', with: user.alternate_email)
+      expect(page).to have_field('Campus phone number', with: user.telephone)
+      expect(page).to have_field('Alternate phone number', with: user.alternate_phone_number)
+      expect(page).to have_field('Personal webpage', with: user.website)
+      expect(page).to have_field('Blog', with: user.blog)
     end
   end
 

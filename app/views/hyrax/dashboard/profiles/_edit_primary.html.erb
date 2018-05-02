@@ -37,6 +37,78 @@
     </div>
   </div><!-- .form-group -->
 
+  <div class="form-group">
+    <%= f.label :title, class: 'col-xs-4 control-label' do %>
+      <%= t('hyrax.user_profile.title') %>
+    <% end %>
+    <div class="col-xs-8">
+       <%= f.text_field :title, class: "form-control" %>
+    </div>
+  </div><!-- .form-group -->
+
+  <div class="form-group">
+    <%= f.label :ucdepartment, class: 'col-xs-4 control-label' do %>
+      <%= t('hyrax.user_profile.ucdepartment') %>
+    <% end %>
+    <div class="col-xs-8">
+       <%= f.text_field :ucdepartment, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :uc_affiliation, class: 'col-xs-4 control-label' do %>
+      <%= t('hyrax.user_profile.uc_affiliation') %>
+    <% end %>
+    <div class="col-xs-8">
+       <%= f.text_field :uc_affiliation, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :alternate_email, class: 'col-xs-4 control-label' do %>
+      <%= t('hyrax.user_profile.alternate_email') %>
+    <% end %>
+    <div class="col-xs-8">
+       <%= f.text_field :alternate_email, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :telephone, class: 'col-xs-4 control-label' do %>
+      <%= t('hyrax.user_profile.telephone') %>
+    <% end %>
+    <div class="col-xs-8">
+       <%= f.text_field :telephone, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :alternate_phone_number, class: 'col-xs-4 control-label' do %>
+      <%= t('hyrax.user_profile.alternate_phone_number') %>
+    <% end %>
+    <div class="col-xs-8">
+       <%= f.text_field :alternate_phone_number, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website, class: 'col-xs-4 control-label' do %>
+      <%= t('hyrax.user_profile.website') %>
+    <% end %>
+    <div class="col-xs-8">
+       <%= f.text_field :website, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :blog, class: 'col-xs-4 control-label' do %>
+      <%= t('hyrax.user_profile.blog') %>
+    <% end %>
+    <div class="col-xs-8">
+       <%= f.text_field :blog, class: "form-control" %>
+    </div>
+  </div>
+
   <% if Hyrax.config.arkivo_api? %>
     <%= render partial: 'zotero', locals: { f: f, user: @user } %>
   <% end %>
