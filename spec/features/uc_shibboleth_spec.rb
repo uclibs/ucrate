@@ -28,6 +28,16 @@ describe 'UC account workflow', type: :feature do
         page.should have_content('You will receive an email with instructions on how to reset your password in a few minutes.')
       end
     end
+
+    context 'with an invalid email address' do
+      email_address = 'fake.user@mail.edu'
+      it 'allows a password reset' do
+        visit new_user_password_path
+        fill_in('user[email]', with: email_address)
+        click_on('Send me reset password instructions')
+        page.should have_content('Email not found')
+      end
+    end
   end
 
   describe 'overridden devise password reset page' do
