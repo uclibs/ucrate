@@ -220,6 +220,7 @@ RSpec/ExampleLength:
     - 'spec/features/users_spec.rb'
     - 'spec/features/uc_shibboleth_spec.rb'
     - 'spec/helpers/hyrax_helper_spec.rb'
+    - 'spec/views/static/help.html.erb_spec.rb'
 
 RSpec/ExpectInHook:
   Exclude:

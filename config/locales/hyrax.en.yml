@@ -45,6 +45,7 @@ en:
           subject_tesim: Subject
           title_tesim: Title
   hyrax:
+    deposit_agreement: "Distribution License"
     account_name:           "My Institution Account Id"
     directory:
       suffix:               "@example.org"

@@ -9,7 +9,7 @@ describe ShowWelcomeHelper, type: :helper do
   before { sign_in current_user }
   context 'when the user is not a student' do
     it 'renders the welcome page' do
-      expect(helper.show_welcome_page).to include('what-types-of-content-should-i-submit-to-scholaruc')
+      expect(helper.show_welcome_page).to include('what-types-of-content-should-i-submit-to-Ucrate')
     end
   end
 
@@ -19,7 +19,7 @@ describe ShowWelcomeHelper, type: :helper do
       current_user.save
     end
     it 'renders the student welcome page' do
-      expect(helper.show_welcome_page).to include('how-can-students-use-scholaruc')
+      expect(helper.show_welcome_page).to include('how-can-students-use-UCrate')
     end
   end
 end
