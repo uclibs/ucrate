@@ -147,3 +147,18 @@
 
   <%= f.button '<i class="glyphicon glyphicon-save"></i> Save Profile'.html_safe, type: 'submit', class: "btn btn-primary" %>
 <% end %>
+
+<% if Flipflop.proxy_deposit? %>
+  <%= render 'hyrax/dashboard/_index_partials/proxy_rights', user: @user %>
+<% end %>
+
+<div class="orcid-section">
+  <div class="well">
+    <% defined?(status_processor) || status_processor = Orcid::ProfileStatus.method(:for) %>
+      <% status_processor.call(current_user) do |on| %>
+          <% on.authenticated_connection do |profile| %>
+          <% end %>
+    <% end %>
+    <%= render partial: 'orcid/profile_connections/orcid_connector', locals: {default_search_text: current_user.name } %>
+  </div>
+</div>

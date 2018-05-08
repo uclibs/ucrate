@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  mount Orcid::Engine => "/orcid"
   resources :collection_exports, only: [:index, :create, :destroy]
   get '/collection_exports/:id/download', to: 'collection_exports#download', as: 'collection_export_download'
 
