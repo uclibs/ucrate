@@ -51,6 +51,12 @@ Metrics/ClassLength:
 
 Metrics/MethodLength:
   Max: 13
+  Exclude:
+    - 'app/helpers/hyrax/hyrax_helper_behavior.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'app/helpers/hyrax/hyrax_helper_behavior.rb'
 
 Naming/FileName: # https://github.com/bbatsov/rubocop/issues/2973
   Exclude:
@@ -142,7 +148,7 @@ RSpec/DescribeClass:
     - 'spec/views/**/*'
 
 Rails/TimeZone:
-  Exclude: 
+  Exclude:
     - 'spec/services/collection_metadata_csv_factory_spec.rb'
 
 RSpec/ContextWording:
@@ -204,6 +210,7 @@ RSpec/ExampleLength:
     - 'spec/features/workflow_state_changes_spec.rb'
     - 'spec/features/users_spec.rb'
     - 'spec/features/uc_shibboleth_spec.rb'
+    - 'spec/helpers/hyrax_helper_spec.rb'
 
 RSpec/ExpectInHook:
   Exclude:
