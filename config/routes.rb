@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   end
 
   resources :feed, only: 'index'
+  get 'sitemap.xml' => 'sitemaps#index', format: 'xml', as: :sitemap
 
   match 'show/:id' => 'common_objects#show', via: :get, as: 'common_object'
 
