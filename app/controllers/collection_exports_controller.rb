@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CollectionExportsController < ApplicationController
   before_action :set_collection_export, only: [:show, :destroy]
   before_action :authenticate_user!

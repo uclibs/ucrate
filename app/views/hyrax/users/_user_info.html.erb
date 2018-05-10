@@ -1,9 +1,5 @@
 <dl id="user_info">
 
-<% if user.orcid.present? %>
-  <dt><%= orcid_label('profile') %></dt>
-  <dd><%= link_to user.orcid, user.orcid, { target: '_blank' } %></dd>
-=======
 <% defined?(status_processor) || status_processor = Orcid::ProfileStatus.method(:for)
                                    status_processor.call(current_user) do |on|
                                    on.authenticated_connection do |profile| %>
@@ -45,20 +41,12 @@
     <dd><%= user.chat_id %></dd>
   <% end %>
 
-<<<<<<< HEAD
   <% if user.website.present? %>
-=======
-  <% if user.website %>
->>>>>>> Integrate Orcid gem
     <dt><i class="glyphicon glyphicon-globe"></i> Website(s)</dt>
     <dd><%= iconify_auto_link(user.website) %></dd>
   <% end %>
 
-<<<<<<< HEAD
   <% if user.title.present? %>
-=======
-  <% if user.title %>
->>>>>>> Integrate Orcid gem
     <dt>Title</dt>
     <dd><%= user.title %></dd>
   <% end %>
@@ -68,15 +56,9 @@
     <dd><%= user.admin_area %></dd>
   <% end %>
 
-<<<<<<< HEAD
   <% if user.ucdepartment.present? %>
     <dt>Department</dt>
     <dd><%= user.ucdepartment %></dd>
-=======
-  <% if user.department %>
-    <dt>Department</dt>
-    <dd><%= user.department %></dd>
->>>>>>> Integrate Orcid gem
   <% end %>
 
   <% if user.office %>
@@ -89,27 +71,14 @@
     <dd><%= user.address %></dd>
   <% end %>
 
-<<<<<<< HEAD
   <% if user.uc_affiliation %>
     <dt>Affiliation</dt>
     <dd><%= user.uc_affiliation %></dd>
   <% end %>
 
   <% if user.telephone.present? %>
-=======
-  <% if user.affiliation %>
-    <dt>Affiliation</dt>
-    <dd><%= user.affiliation %></dd>
-  <% end %>
-
-  <% if user.telephone %>
->>>>>>> Integrate Orcid gem
     <dt><i class="glyphicon glyphicon-earphone"></i> Telephone</dt>
     <dd><%= link_to_telephone(user) %></dd>
   <% end %>
 
 </dl>
-<<<<<<< HEAD
-=======
-
->>>>>>> Integrate Orcid gem

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copied from hyrax 366d146
 
 module Hyrax
