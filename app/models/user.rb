@@ -26,6 +26,14 @@ class User < ApplicationRecord
     email
   end
 
+  def name_for_people_page
+    if first_name.blank? || last_name.blank?
+      email
+    else
+      last_name + ", " + first_name
+    end
+  end
+
   def name
     return "#{first_name} #{last_name}" unless first_name.blank? || last_name.blank?
     user_key

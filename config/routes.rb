@@ -40,6 +40,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:index], constraints: { format: :html }, controller: 'display_users'
+
   resources :feed, only: 'index'
   get 'sitemap.xml' => 'sitemaps#index', format: 'xml', as: :sitemap
 
