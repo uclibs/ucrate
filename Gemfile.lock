@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/samvera/hyrax.git
-  revision: 01d8ad5ecdf5b5658e6800d23d570c5d7b2c9cdc
-  ref: 01d8ad5ecdf5b5658e6800d23d570c5d7b2c9cdc
+  revision: 401fcff9c7e1899e67c28137a88a017b0f263673
+  ref: 401fcff9c7e1899e67c28137a88a017b0f263673
   specs:
-    hyrax (2.1.0.beta1)
+    hyrax (2.1.0.rc1)
       active-fedora (~> 11.5, >= 11.5.2)
       almond-rails (~> 0.1)
       awesome_nested_set (~> 3.1)
@@ -45,7 +45,7 @@ GIT
       redis-namespace (~> 1.5)
       redlock (>= 0.1.2)
       retriable (>= 2.9, < 4.0)
-      samvera-nesting_indexer (~> 1.0, >= 1.0.1)
+      samvera-nesting_indexer (~> 2.0)
       select2-rails (~> 3.5)
       signet
       simple_form (~> 3.2, <= 3.5.0)
@@ -717,7 +717,7 @@ GEM
     ruby-openid (2.7.0)
     ruby-progressbar (1.9.0)
     rubyzip (1.2.1)
-    samvera-nesting_indexer (1.0.1)
+    samvera-nesting_indexer (2.0.0)
       dry-equalizer
     sass (3.5.6)
       sass-listen (~> 4.0.0)

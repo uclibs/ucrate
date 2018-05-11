@@ -51,6 +51,7 @@ RSpec.describe 'hyrax/dashboard/collections/_show_actions.html.erb', type: :view
     context 'with nestable collection' do
       it 'renders add parent collection link' do
         allow(presenter).to receive(:collection_type_is_nestable?).and_return true
+        allow(presenter).to receive(:user_can_nest_collection?).and_return true
         render
         expect(rendered).to have_button('Add existing collections to this collection')
       end

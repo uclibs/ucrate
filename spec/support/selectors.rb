@@ -5,6 +5,36 @@ module Selectors
         find '.dropdown-toggle'
       end
     end
+
+    # For use with javascript user selector that allows for searching for an existing user
+    # and granting them permission to an object.
+    # @param [User] user to select
+    # @param [String] role granting the user permission (e.g. 'Manager' | 'Depositor' | 'Viewer')
+    def select_user(user, role = 'Depositor')
+      first('a.select2-choice').click
+      find('.select2-input').set(user.user_key)
+      sleep 1
+      first('div.select2-result-label').click
+      within('div.add-users') do
+        select(role)
+        find('input.edit-collection-add-sharing-button').click
+      end
+    end
+
+    # For use with javascript collection selector that allows for searching for an existing collection.
+    # @param [Collection] collection to select
+    def select_collection(collection)
+      first('a.select2-choice').click
+      find('.select2-input').set(collection.title.first)
+      expect(page).to have_css('div.select2-result-label')
+      first('div.select2-result-label').click
+      first('[data-behavior~=add-relationship]').click
+      within('[data-behavior~=collection-relationships]') do
+        within('table.table.table-striped') do
+          expect(page).to have_content(collection.title.first)
+        end
+      end
+    end
   end
 
   module NewTransfers

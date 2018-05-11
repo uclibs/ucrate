@@ -18,7 +18,7 @@ def fill_in_batch_edit_fields_and_verify!
       # the `have_content` check was ignoring the `within` scoping and finding
       # "Changes Saved" for other field areas
       sleep 2
-      find('.status', text: 'Changes Saved')
+      find('.status', text: 'Changes Saved', wait: 5)
     end
   end
 end
