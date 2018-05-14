@@ -110,6 +110,11 @@ Style/ZeroLengthPredicate:
 Rails:
   Enabled: true
 
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'app/models/user.rb'
+    - 'app/jobs/user_edit_profile_event_job.rb'
+
 Rails/ApplicationJob:
   Enabled: false
 

@@ -27,4 +27,29 @@ RSpec.describe User, type: :model do
       end
     end
   end
+  subject(:user) { described_class.new(email: 'test@example.com', password: 'test1234') }
+
+  context 'when a user is not a student' do
+    before do
+      user.uc_affiliation = ''
+    end
+    it "returns false for .student?" do
+      expect(user.student?).to be false
+    end
+  end
+
+  context 'when a user is a student' do
+    before do
+      user.uc_affiliation = 'student'
+    end
+    it "returns true for .student?" do
+      expect(user.student?).to be true
+    end
+  end
+
+  it "sets waived_welcome_page to true" do
+    user.save!
+    user.waive_welcome_page!
+    expect(user.waived_welcome_page).to be true
+  end
 end

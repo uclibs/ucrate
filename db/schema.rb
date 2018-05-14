@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180425183258) do
+ActiveRecord::Schema.define(version: 20180426130926) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -561,6 +561,8 @@ ActiveRecord::Schema.define(version: 20180425183258) do
     t.string "alternate_email"
     t.string "alternate_phone_number"
     t.string "blog"
+    t.boolean "waived_welcome_page"
+    t.boolean "profile_update_not_required"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
