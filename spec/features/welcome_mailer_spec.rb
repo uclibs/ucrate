@@ -19,6 +19,7 @@ describe WelcomeMailer do
   after do
     ActionMailer::Base.deliveries = []
     User.find_by_email(user_email).delete
+    AUTH_CONFIG['signups_enabled'] = false
   end
   it 'sends welcome email to user upon registration' do
     email.to.should eq([user_email])
