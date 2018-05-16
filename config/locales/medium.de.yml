@@ -1,0 +1,8 @@
+de:
+  hyrax:
+    icons:
+      medium:     'fa fa-file-text-o'
+    select_type:
+      medium:
+        description:        "Medium Werke"
+        name:               "Medium"

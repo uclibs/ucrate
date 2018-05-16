@@ -648,6 +648,8 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         click_link 'Deposit new work through this collection'
 
         # verify the collection is pre-selected
+        choose "payload_concern", option: "GenericWork"
+        click_button 'Create work'
         click_link "Relationships" # switch tab
         expect(page).to have_selector("table tr", text: collection1.title.first)
         expect(page).not_to have_selector("table tr", text: collection2.title.first)

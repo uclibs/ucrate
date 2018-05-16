@@ -16,8 +16,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:shibboleth]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:orcid, :shibboleth]
 
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
@@ -29,5 +28,13 @@ class User < ApplicationRecord
   def name
     return "#{first_name} #{last_name}" unless first_name.blank? || last_name.blank?
     user_key
+  end
+
+  def waive_welcome_page!
+    update_column(:waived_welcome_page, true)
+  end
+
+  def student?
+    uc_affiliation == 'student'
   end
 end

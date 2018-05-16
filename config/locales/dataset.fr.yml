@@ -1,0 +1,8 @@
+fr:
+  hyrax:
+    icons:
+      dataset:     'fa fa-file-text-o'
+    select_type:
+      dataset:
+        description:        "Dataset œuvres"
+        name:               "Dataset"

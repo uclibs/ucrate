@@ -75,3 +75,5 @@ en:
       my:
         action:
           export_collection: "Export collection"
+    welcome:
+      waive_page: "Click here to hide this welcome page from displaying when you log in"

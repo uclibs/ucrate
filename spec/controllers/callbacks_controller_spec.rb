@@ -57,8 +57,8 @@ describe CallbacksController do
         get provider
       end
 
-      it 'redirects to the dashboard work page' do
-        response.should redirect_to(Hyrax::Engine.routes.url_helpers.dashboard_works_path)
+      it 'redirects to the welcome page' do
+        response.should redirect_to(Rails.application.routes.url_helpers.welcome_page_index_path)
       end
     end
 
