@@ -2,6 +2,13 @@ require Hyrax::Engine.root.join('app/controllers/hyrax/dashboard/profiles_contro
 module Hyrax
   module Dashboard
     class ProfilesController < Hyrax::UsersController
+      def show
+        user = ::User.from_url_component(params[:id])
+        return redirect_to root_path, alert: "User '#{params[:id]}' does not exist" if user.nil?
+        @presenter = Hyrax::UserProfilePresenter.new(user, current_ability)
+        @permalinks_presenter = PermalinksPresenter.new(hyrax.dashboard_profile_path(locale: nil))
+      end
+
       private
 
         def user_params

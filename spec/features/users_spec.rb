@@ -65,6 +65,13 @@ RSpec.describe "User Profile", type: :feature, clean_repo: true do
       expect(page).to have_field('Personal webpage', with: user.website)
       expect(page).to have_field('Blog', with: user.blog)
     end
+
+    it 'shows permalinks after editing' do
+      visit profile_path
+      click_link('Edit Profile', match: :first)
+      click_on('Save Profile')
+      expect(page).to have_content("Link to this page: ")
+    end
   end
 
   context 'when the user is an admin' do

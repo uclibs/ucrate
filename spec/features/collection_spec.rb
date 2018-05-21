@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'collection', type: :feature, clean_repo: true do
+RSpec.describe 'collection', type: :feature, js: true, clean_repo: true do
   let(:user) { create(:user) }
 
   let(:collection1) { create(:public_collection, user: user) }
@@ -18,6 +18,10 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
     before do
       sign_in user
       visit "/collections/#{collection.id}"
+    end
+
+    it "shows permalinks" do
+      expect(page).to have_content("Link to this page")
     end
 
     it "shows a collection with a listing of Descriptive Metadata and catalog-style search results" do

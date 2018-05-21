@@ -50,6 +50,7 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Exclude:
     - 'app/controllers/catalog_controller.rb'
+    - 'app/controllers/hyrax/file_sets_controller.rb'
 
 Metrics/MethodLength:
   Max: 13
@@ -229,6 +230,7 @@ RSpec/ExampleLength:
     - 'spec/features/create_dataset_spec.rb'
     - 'spec/features/create_article_spec.rb'
     - 'spec/views/static/help.html.erb_spec.rb'
+    - 'spec/controllers/hyrax/file_sets_controller_spec.rb'
 
 RSpec/ExpectInHook:
   Exclude:
