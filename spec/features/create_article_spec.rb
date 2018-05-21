@@ -28,6 +28,7 @@ RSpec.describe 'Create a Article', js: true do
         access: 'deposit'
       )
       login_as user
+      allow(CharacterizeJob).to receive(:perform_later)
     end
 
     it do
