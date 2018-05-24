@@ -1,0 +1,25 @@
+<% content_for :page_title, "Advisor Guidelines // #{application_name}" %>
+
+<h2>Student Self Submissions to <%=t('hyrax.product_name') %></h2>
+<h2>Guidelines for Faculty Advisors</h2>
+
+<p>
+  Works that are deposited in <%=t('hyrax.product_name') %> should be related to scholarship and research and be consistent with the <%=t('hyrax.product_name') %> <%= link_to "Mission and Collection Policy", coll_policy_path %>. Students should work with a faculty advisor to share scholarly output and creative works, such a capstone projects. <b>All official theses and dissertations must be submitted directly to the Graduate School and not <%=t('hyrax.product_name') %></b>. If you are a faculty advisor for a student submitting a work to <%=t('hyrax.product_name') %>, these guidelines are for you.
+
+  Student and faculty advisors log-on to <%=t('hyrax.product_name') %> using their central log-on credentials (6+2). If logging on the first time, you will see a Welcome page.
+</p>
+
+<ol>
+  <li>Students are required to choose a faculty advisor or sponsor for their work. (See <b><%= link_to "Instructions for Student Self Submissions", student_instructions_path %></b>.) Advisors should be made a content editor on the work. Additionally, students should notify their advisor that the work has been submitted.</li></br>
+  <li>Please provide instructions to students that cover topics such as the name of the degree program, so that the submissions will be consistent. Please see the <b><%= link_to "Instructions for Student Self Submissions", student_instructions_path %></b> to review the required fields and provide advice and instructions to student submitters about the input form.</li></br>
+  <li>It is useful for the access rights (Open Access, Open Access with Embargo, University of Cincinnati only) and license (Creative Commons or All Rights Reserved) to be discussed and agreed upon by the student and their advisor.
+    <ul></br>
+      <li>You may want to request that students set the access rights to private so that you can review it before it is made public. In that case, change the status to public once the review is complete. This is not mandatory, but may be a recommended workflow for any student work required for course completion.</li>
+      <li>Students should use the license wizard to select a license for their work. This license is a legal statement about how others may use their work.</li>
+      <li>Students will have to agree to a <%= link_to t('hyrax.deposit_agreement'), '/distribution_license_request' %> which grants University of Cincinnati the right to preserve, backup, and add metadata to their work. It also attests that the student has the necessary legal authority to submit the work and make it available. Students will retain full copyright of their work.</li>
+      <li>As a content editor, you can make changes to the work and to the attached content, including replacing a file with a different version or removing the work – but in this case the student submitter should be informed. Once you have reviewed the submission, make any necessary changes to the access rights, such as changing from private to open access.</li>
+    </ul></br>
+  </li>
+  <li>You can add a Digital Object Identifier (DOI) to the work if the student author has not already done so, but inform the student when you do. A DOI is intended to reference stable content and is a permanent URL that you may share and use in publications.</li></br>
+  <li>For some works, once a review is complete, you may wish to remove a student submitter's editing rights, so that they cannot make changes to the work or delete the work. (This may be the case with capstone projects or other degree requirements.) For other works, it may be fine to leave the student as the editor of the work. Contact <%= link_to t('hyrax.product_name'), hyrax.contact_path %> if a change to editing rights is required as a last step in project workflow. Once the student graduates or is no longer associated with UC, they will lose access to the work record. If the work's access rights have been set to open access, they will still be able to view the work. If the faculty advisor has been made a content editor, they can still edit the work. If both the student and advisor are no longer associated with UC and edits are necessary, please contact <%= link_to t('hyrax.product_name'), hyrax.contact_path %>.</li>
+</ol>

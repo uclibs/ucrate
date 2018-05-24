@@ -228,7 +228,7 @@ RSpec/ExampleLength:
     - 'spec/features/create_etd_spec.rb'
     - 'spec/features/create_dataset_spec.rb'
     - 'spec/features/create_article_spec.rb'
-
+    - 'spec/views/static/help.html.erb_spec.rb'
 
 RSpec/ExpectInHook:
   Exclude:

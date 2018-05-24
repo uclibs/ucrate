@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/samvera/hyrax.git
-  revision: 401fcff9c7e1899e67c28137a88a017b0f263673
-  ref: 401fcff9c7e1899e67c28137a88a017b0f263673
+  revision: 0ce6a4554c5a73999a5e8dec59b5932445b5ceee
+  ref: 0ce6a4554c5a73999a5e8dec59b5932445b5ceee
   specs:
-    hyrax (2.1.0.rc1)
+    hyrax (2.1.0.rc2)
       active-fedora (~> 11.5, >= 11.5.2)
       almond-rails (~> 0.1)
       awesome_nested_set (~> 3.1)
@@ -20,7 +20,7 @@ GIT
       flot-rails (~> 0.0.6)
       font-awesome-rails (~> 4.2)
       hydra-derivatives (~> 3.3)
-      hydra-editor (~> 3.3)
+      hydra-editor (>= 3.3, < 5.0)
       hydra-head (>= 10.5.0)
       hydra-works (~> 0.16)
       iiif_manifest (>= 0.3, < 0.5)
@@ -360,12 +360,12 @@ GEM
       deprecation
       mime-types (> 2.0, < 4.0)
       mini_magick (>= 3.2, < 5)
-    hydra-editor (3.4.0)
+    hydra-editor (4.0.1)
       active-fedora (>= 9.0.0)
       almond-rails (~> 0.1)
       cancancan (~> 1.8)
       rails (>= 4.2.0, < 6)
-      simple_form (~> 3.2, <= 3.5.0)
+      simple_form (~> 3.2)
       sprockets-es6
     hydra-file_characterization (0.3.3)
       activesupport (>= 3.0.0)

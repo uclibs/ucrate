@@ -20,6 +20,18 @@ Rails.application.routes.draw do
   mount Hydra::RoleManagement::Engine => '/'
 
   get 'login' => 'static#login'
+  get 'about' => 'static#about'
+  get 'help' => 'static#help'
+  get 'coll_policy' => 'static#coll_policy'
+  get 'format_advice' => 'static#format_advice'
+  get 'faq' => 'static#faq'
+  get 'documenting_data' => 'static#documenting_data'
+  get 'creators_rights' => 'static#creators_rights'
+  get 'student_work_help' => 'static#student_work_help'
+  get 'advisor_guidelines' => 'static#advisor_guidelines'
+  get 'student_instructions' => 'static#student_instructions'
+  get 'doi_help' => 'static#doi_help'
+  get 'distribution_license_request' => 'hyrax/static#agreement'
 
   mount Qa::Engine => '/authorities'
   mount Hyrax::Engine, at: '/'

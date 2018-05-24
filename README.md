@@ -28,6 +28,14 @@ Install system dependencies
 1. Run the database migrations: `bundle exec rake db:migrate`
 1. Start the rails server: `rails server`
 1. Visit the site at [http://localhost:3000] (http://localhost:3000)
+1. Create default admin set: ```bin/rails hyrax:default_admin_set:create```
+1. Load workflows: ```bin/rails hyrax:workflow:load```
+    * Creating default admin set should also load the default workflow. You can load, any additional workflows defined, using this command.
+1. Assigning admin role to user from `rails console`:
+    * ```admin = Role.create(name: "admin")```
+    * ```admin.users << User.find_by_user_key( "your_admin_users_email@fake.email.org" )```
+    * ```admin.save```
+    * Read [more](https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax).
 
 ## Running the Tests
 `bundle exec rake spec`

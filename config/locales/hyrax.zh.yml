@@ -5,7 +5,7 @@ zh:
       fields:
         facet:
           based_near_label_sim: 位置
-          creator_sim: 创造者
+          creator_sim: 创建者
           file_format_sim: 文件格式
           generic_type_sim: 类型
           keyword_sim: 关键词
@@ -14,11 +14,11 @@ zh:
           subject_sim: 学科
         index:
           based_near_tesim: 位置
-          contributor_tesim: 贡献者
+          contributor_tesim: 投稿者
           creator_tesim: 创造者
           date_created_tesim: 创建日期
           date_modified_dtsi: 修改日期
-          date_uploaded_dtsi: 日期上传
+          date_uploaded_dtsi: 上传日期
           description_tesim: 描述
           file_format_tesim: 文件格式
           identifier_tesim: 识别码
@@ -30,7 +30,7 @@ zh:
           subject_tesim: 学科
         show:
           based_near_tesim: 位置
-          contributor_tesim: 贡献者
+          contributor_tesim: 投稿者
           creator_tesim: 创造者
           date_created_tesim: 创建日期
           date_modified_dtsi: 修改日期
@@ -46,13 +46,33 @@ zh:
           subject_tesim: 学科
           title_tesim: 标题
   hyrax:
-    account_name: 我的机构帐户标识符
+    account_name: 账户ID
     directory:
       suffix: "@example.org"
     footer:
       copyright_html: "<strong>版权所有 &copy; 2017 Samvera</strong> 根据Apache许可证2.0版许可"
       service_html: 的服务<a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
-    institution_name: 机构
-    institution_name_full: 机构名称
+    institution_name: 机构名称
+    institution_name_full: 机构全称
     product_name: 蹄兔
+    description:            "辛辛那提大学图书馆收藏"
     product_twitter_handle: "@SamveraRepo"
+    user_profile:
+      first_name: "名"
+      last_name: "姓"
+      title: "职称"
+      ucdepartment: "系"
+      uc_affiliation: "在校身份"
+      alternate_email: "备用邮箱"
+      telephone: "在校电话号码"
+      alternate_phone_number: "备用电话号码"
+      website: "个人网站"
+      blog: "博客"
+    collection:
+      actions:
+        export_collection: "导出集合"
+        manage_exports: "导出管理"
+    dashboard:
+      my:
+        action:
+          export_collection: "收藏管理"
