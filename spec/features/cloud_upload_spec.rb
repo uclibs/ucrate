@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe "Selecting files to import from cloud providers", type: :feature do
+describe "Selecting files to import from cloud providers", js: true, type: :feature do
   let(:user) { create(:user) }
 
   before do
@@ -17,6 +17,8 @@ describe "Selecting files to import from cloud providers", type: :feature do
     visit '/dashboard'
     click_link 'Works'
     click_link "Add new work"
+    choose "payload_concern", option: "GenericWork"
+    click_button 'Create work'
   end
 
   it "has a Cloud file picker using browse-everything" do

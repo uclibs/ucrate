@@ -1,0 +1,8 @@
+it:
+  hyrax:
+    icons:
+      dataset:     'fa fa-file-text-o'
+    select_type:
+      dataset:
+        description:        "Dataset opere"
+        name:               "Dataset"
