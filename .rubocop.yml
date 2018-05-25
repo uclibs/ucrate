@@ -43,6 +43,7 @@ Metrics/BlockLength:
     - 'app/controllers/catalog_controller.rb'
     - 'config/initializers/simple_form_bootstrap.rb'
     - 'config/initializers/devise.rb'
+    - 'config/initializers/hyrax.rb'
     - 'config/routes.rb'
     - 'app/views/sitemaps/index.xml.builder'
 
@@ -221,6 +222,14 @@ RSpec/ExampleLength:
     - 'spec/features/uc_shibboleth_spec.rb'
     - 'spec/helpers/hyrax_helper_spec.rb'
     - 'spec/services/expiration_service_spec.rb'
+    - 'spec/features/create_document_spec.rb'
+    - 'spec/features/create_student_work_spec.rb'
+    - 'spec/features/create_medium_spec.rb'
+    - 'spec/features/create_image_spec.rb'
+    - 'spec/features/create_etd_spec.rb'
+    - 'spec/features/create_dataset_spec.rb'
+    - 'spec/features/create_article_spec.rb'
+    - 'spec/views/static/help.html.erb_spec.rb'
 
 RSpec/ExpectInHook:
   Exclude:

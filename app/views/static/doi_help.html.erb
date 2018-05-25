@@ -1,0 +1,26 @@
+<% content_for :page_title, "DOI Help // #{application_name}" %>
+
+<h2>DOI Help</h2>
+
+<h3>I am getting an "Invalid DOI detected" error:</h3>
+
+<p>
+  At times you may want to attach a pre-existing DOI to a work in <%=t('hyrax.product_name') %>. If you are having trouble adding
+  an existing DOI to a work in <%=t('hyrax.product_name') %>, it is most likely because of the "http://dx.doi.org/" added to your DOI
+  when copy and pasted from a web browser.
+</p>
+
+<p>
+  If you are trying to create a work with an existing DOI and you try to enter
+  "http://dx.doi.org<b>/doi:10.5072/FK2WD3X38W</b>". You will receive the following error:
+</p>
+
+<%= image_tag('doi-help-1.png', class: 'center-block') %>
+
+<p>
+  However, if you were to remove the first part of the DOI URL, of the form:
+  <span class="doi-strike"><strike>http://dx.doi.org/</strike></span><span class="doi-needed"><b>doi:10.5072/FK2WD3X38W</b></span>,
+  You will see that <%=t('hyrax.product_name') %> now recognizes the DOI and work creation can proceed as normal:
+</p>
+
+<%= image_tag('doi-help-2.png', class: 'center-block') %>

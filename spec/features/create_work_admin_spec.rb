@@ -39,6 +39,8 @@ RSpec.describe 'Creating a new Work as admin', :js, :workflow do
       visit '/dashboard'
       click_link 'Works'
       click_link "Add new work"
+      choose "payload_concern", option: "GenericWork"
+      click_button 'Create work'
       click_link "Relationship" # switch tab
       expect(page).to have_content('Administrative Set')
       expect(page).to have_content('Another Admin Set')
