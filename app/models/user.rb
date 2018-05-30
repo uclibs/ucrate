@@ -30,6 +30,10 @@ class User < ApplicationRecord
     user_key
   end
 
+  def name_for_works
+    last_name + ", " + first_name unless first_name.blank? || last_name.blank?
+  end
+
   def waive_welcome_page!
     update_column(:waived_welcome_page, true)
   end
