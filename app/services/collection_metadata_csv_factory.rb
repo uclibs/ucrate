@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CollectionMetadataCsvFactory
   attr_reader :collection_id
 

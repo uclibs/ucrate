@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :student_work, class: 'StudentWork' do
     transient do

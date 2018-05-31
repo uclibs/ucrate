@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -43,10 +45,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gem 'clamav'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
+gem 'devise-multi_auth', git: 'https://github.com/uclibs/devise-multi_auth', branch: 'rails-5-1'
 gem 'hydra-role-management'
 gem 'hyrax', git: 'https://github.com/samvera/hyrax.git', ref: '25154c5d05baff45daab737a9d08e69293cb0814' # v2.1.0.rc3
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
+gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5-1'
 gem 'riiif', '~> 1.1'
 gem 'rsolr', '>= 1.0'
 gem 'sidekiq'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180426130926) do
+ActiveRecord::Schema.define(version: 20180508153244) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -94,6 +94,20 @@ ActiveRecord::Schema.define(version: 20180426130926) do
     t.index ["parent_id"], name: "index_curation_concerns_operations_on_parent_id"
     t.index ["rgt"], name: "index_curation_concerns_operations_on_rgt"
     t.index ["user_id"], name: "index_curation_concerns_operations_on_user_id"
+  end
+
+  create_table "devise_multi_auth_authentications", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.string "access_token"
+    t.string "refresh_token"
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expires_at"], name: "index_devise_multi_auth_authentications_on_expires_at"
+    t.index ["provider", "uid"], name: "index_devise_multi_auth_authentications_on_provider_and_uid", unique: true
+    t.index ["user_id"], name: "index_devise_multi_auth_authentications_on_user_id"
   end
 
   create_table "featured_works", force: :cascade do |t|
@@ -228,6 +242,20 @@ ActiveRecord::Schema.define(version: 20180426130926) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["namespace"], name: "index_minter_states_on_namespace", unique: true
+  end
+
+  create_table "orcid_profile_requests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "given_names", null: false
+    t.string "family_name", null: false
+    t.string "primary_email", null: false
+    t.string "orcid_profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "response_text"
+    t.string "response_status"
+    t.index ["orcid_profile_id"], name: "index_orcid_profile_requests_on_orcid_profile_id"
+    t.index ["user_id"], name: "index_orcid_profile_requests_on_user_id"
   end
 
   create_table "permission_template_accesses", force: :cascade do |t|
@@ -552,10 +580,10 @@ ActiveRecord::Schema.define(version: 20180426130926) do
     t.binary "zotero_token"
     t.string "zotero_userid"
     t.string "preferred_locale"
-    t.string "first_name"
-    t.string "last_name"
     t.string "provider"
     t.string "uid"
+    t.string "first_name"
+    t.string "last_name"
     t.string "ucdepartment"
     t.string "uc_affiliation"
     t.string "alternate_email"
