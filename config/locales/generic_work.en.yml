@@ -4,5 +4,42 @@ en:
       generic_work:     'fa fa-file-text-o'
     select_type:
       generic_work:
-        description:        "Generic work works"
         name:               "Generic Work"
+        description:        "Deposit any non-text-based document ."
+  simple_form:
+    labels:
+      generic_work:
+        geo_subject:      "Geographic Subject"
+        description:      "Description"
+        date_created:     "Date Created"
+        related_url:      "External Link"
+        files:            "Upload a new version of this file from your computer"
+        collection_ids:   "Add as member of collection"
+        admin_set_id:     "Administrative Set"
+        alternate_title:  "Alternate Title"
+        time_period:      "Time Period"
+        required_software: "Required Software"
+        note:             "Note"
+        publisher:        "Publisher (Require for DOI registration)"
+        college:          "College"
+        department:       "Program or Department"
+    hints:
+      generic_work:
+        resource: "Pre-defined categories to describe the type of content being uploaded, such as &quot;article&quot; or &quot;dataset.&quot;  More than one type may be selected."
+        title: "Enter the title of your Generic Work. If the Generic Work doesn't have a title, please enter a brief descriptive label."
+        subject: "Enter terms or keywords that describe your Generic Work.</br>Examples:</br><ul><li>Biology</li><li>Art History</li><li>Economics</li></ul>"
+        creator: "Enter the names of creators of the Generic Work, in<i> LastName, FirstName</i> format. These could include important authors, co-authors, or other significant contributors."
+        related_url: "A link to a website or other specific content (audio, video, PDF document) related to the work. An example is the URL of a research project from which the work was derived."
+        geo_subject: "Enter the geographic subject of your Generic Work.</br>Examples:</br><ul><li>Cincinnati, Ohio</li><li>Vancouver, British Columbia</li><li>Sahara Desert</li></ul>"
+        date_created: "Date when the contents of the Generic Work were created. Enter date formatted as: YYYY or YYYY-MM or YYYY-MM-DD. Example:</br>January 30, 1950 should be entered 1950-01-30"
+        description: "Enter a summary of your Generic Work. There is no character limit for this field."
+        identifier: "A unique handle identifying the work. An example would be a DOI for a journal article, or an ISBN or OCLC number for a book."
+        language: "Enter the language of your Generic Work.</br>Examples:</br><ul><li>English</li><li>Spanish</li><li>Arabic</li></ul>"
+        publisher: "Enter the publisher of your Generic Work. If this has not been previously published, <i> University of Cincinnati </i> is an appropriate publisher."
+        rights: "Licensing and distribution information governing access to the work. Select from the provided drop-down list."
+        alternate_title: "Enter an alternate title for your Generic Work. An alternate title could include acronyms, abbreviations, or a series title."
+        time_period: "Enter the period or date associated with the subject of your Generic Work.</br>Examples:</br><ul><li>19th century</li><li>Middle Ages</li><li>Jurassic Period</li></ul>"
+        required_software: "Special software needed to open the Generic Work."
+        note: "Enter any additional information about your Generic Work."
+        college: "Select the college associated with the submitter of this work."
+        department: "Enter the department associated with the submitter of this work."
