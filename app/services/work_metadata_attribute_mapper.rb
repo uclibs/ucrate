@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WorkMetadataAttributeMapper
   attr_reader :object_attributes
 

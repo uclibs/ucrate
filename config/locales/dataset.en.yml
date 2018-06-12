@@ -4,5 +4,43 @@ en:
       dataset:     'fa fa-file-text-o'
     select_type:
       dataset:
-        description:        "Dataset works"
         name:               "Dataset"
+        description:        "Files containing collections of data, including: raw data, spreadsheets, logs, etc."
+  simple_form:
+    labels:
+      dataset:
+        geo_subject:       "Geographic Subject"
+        description:      "Description"
+        keyword:          "Keyword"
+        date_created:     "Date Created"
+        related_url:      "External Link"
+        files:            "Upload a new version of this file from your computer"
+        collection_ids:   "Add as member of collection"
+        admin_set_id:     "Administrative Set"
+        required_software: "Required Software"
+        note:             "Note"
+        publisher:        "Publisher (Required for DOI registration)"   
+        college:          "College"
+        department:       "Program or Department"
+    hints:
+      dataset:
+        resource: "Pre-defined categories to describe the type of content being uploaded, such as &quot;article&quot; or &quot;dataset.&quot;  More than one type may be selected."
+        title: "Enter the title of your Dataset. If the Dataset does not have a title, please enter a brief descriptive label."
+        keyword: "Words or phrases you select to describe what the work is about. These are used to search for content."
+        subject: "Enter terms or keywords that describe your Dataset.</br>Examples:</br><ul><li>Biology</li><li>Art History</li><li>Economics</li></ul>"
+        creator: "Enter the names of creators of the Dataset, in <i>LastName, FirstName</i> format. These could include important authors, co-authors, or other significant contributors."
+        related_url: "A link to a website or other specific content (audio, video, PDF document) related to the work. An example is the URL of a research project from which the work was derived."
+        geo_subject: "Enter the geographic subject of your Dataset.</br>Examples:</br><ul><li>Cincinnati, Ohio</li><li>Vancouver, British Columbia</li><li>Sahara Desert</li></ul>"
+        contributor: "A person or group you want to recognize for playing a role in the creation of the work, but not the primary role."
+        date_created: "Date when the contents of the Dataset were created. Enter date formatted as: YYYY or YYYY-MM or YYYY-MM-DD.  Example:</br>January 30, 1950 should be entered 1950-01-30"
+        description: "Enter a summary of your Dataset. There is no character limit for this field."
+        identifier: "A unique handle identifying the work. An example would be a DOI for a journal article, or an ISBN or OCLC number for a book."
+        language: "Enter the language of your Dataset.</br>Examples:</br><ul><li>English</li><li>Spanish</li><liArabic</li></ul>"
+        publisher: "Enter the publisher of your Generic Work. If this has not been previously published,<i> University of Cincinnati</i> is an appropriate publisher."
+        rights: "Licensing and distribution information governing access to the work. Select from the provided drop-down list."
+        required_software: "Special software needed to open the Dataset."
+        alternate_title: "Enter an alternate title for your Dataset. An alternate title could include acronyms, abbreviations, or a series title."
+        time_period: "Enter the period or date associated with the subject of your Dataset.</br>Examples:</br><ul><li>19th century</li><li>Middle Ages</li><li>Jurassic Period</li></ul>"
+        note: "Enter any additional information about your Dataset."
+        college: "Select the college associated with the submitter of this work."
+        department: "Enter the department associated with the submitter of this work."

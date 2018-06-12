@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe "User Profile", type: :feature, clean_repo: true do
@@ -64,6 +66,7 @@ RSpec.describe "User Profile", type: :feature, clean_repo: true do
       expect(page).to have_field('Alternate phone number', with: user.alternate_phone_number)
       expect(page).to have_field('Personal webpage', with: user.website)
       expect(page).to have_field('Blog', with: user.blog)
+      expect(page).to have_content('Create or Connect your ORCID iD')
     end
 
     it 'shows permalinks after editing' do

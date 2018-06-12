@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CollectionExportHelper
   def collection_title(id)
     Collection.find(id).title.first
