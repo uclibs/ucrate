@@ -48,6 +48,11 @@ module Hyrax
 
     def date_created
       super.first || ""
+
+    self.terms += [:resource_type]
+
+    def primary_terms
+      [:title, :creator, :keyword, :rights_statement, :license]
     end
   end
 end

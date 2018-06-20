@@ -63,6 +63,9 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
 
       fill_in('Program or Department', with: 'University Department')
       fill_in('Description', with: 'This is a description.')
+      fill_in('Keyword', with: 'testing')
+      select('In Copyright', from: 'Rights statement')
+      select('Creative Commons BY Attribution 4.0 International', from: 'License')
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find
       # its element
@@ -112,6 +115,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
 
       expect(page).to have_field("Creator", with: user.name_for_works)
       fill_in('Creator', with: 'Doe, Jane')
+<<<<<<< HEAD
 
       college_element = find_by_id("generic_work_college")
       college_element.select("Business")
@@ -119,6 +123,11 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       fill_in('Program or Department', with: 'University Department')
       fill_in('Description', with: 'This is a description.')
 
+=======
+      fill_in('Keyword', with: 'testing')
+      select('In Copyright', from: 'Rights statement')
+      select('Creative Commons BY Attribution 4.0 International', from: 'License')
+>>>>>>> Port over license wizard from Scholar 3
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find
       # its element

@@ -67,6 +67,9 @@ RSpec.describe 'Create a Dataset', js: true do
       fill_in('Program or Department', with: 'University Department')
       fill_in('Description', with: 'This is a description')
       fill_in('Required Software', with: 'Software')
+      fill_in('Keyword', with: 'testing')
+      select('In Copyright', from: 'Rights statement')
+      select('Creative Commons BY Attribution 4.0 International', from: 'License')
 
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find

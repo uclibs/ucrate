@@ -65,6 +65,9 @@ RSpec.describe 'Create a Image', js: true do
 
       select 'In Copyright', from: "image_rights_statement"
       select 'Attribution-ShareAlike 4.0 International', from: "image_license"
+      fill_in('Keyword', with: 'testing')
+      select('In Copyright', from: 'Rights statement')
+      select('Creative Commons BY Attribution 4.0 International', from: 'License')
 
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find
