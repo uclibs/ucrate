@@ -41,4 +41,39 @@ class User < ApplicationRecord
   def student?
     uc_affiliation == 'student'
   end
+
+  def college
+    return "Other" if ucdepartment.blank?
+    user_colleges.each_key do |key|
+      return user_colleges[key]["label"] if ucdepartment.downcase.start_with?(key + " ")
+    end
+    "Other"
+  end
+
+  def department
+    return "Unknown" if ucdepartment.blank?
+    user_colleges.each_key do |key|
+      return ucdepartment[/(?<=\s).*/] if ucdepartment.downcase.start_with?(key + " ")
+    end
+    ucdepartment
+  end
+
+  def full_department
+    return college if department == "Unknown"
+    "#{college}: #{department}"
+  end
+
+  def name_for_people_page
+    if first_name.blank? || last_name.blank?
+      email
+    else
+      last_name + ", " + first_name
+    end
+  end
+
+  private
+
+    def user_colleges
+      COLLEGE_AND_DEPARTMENT["current_colleges_for_degrees"].merge(COLLEGE_AND_DEPARTMENT["additional_current_colleges_library"])
+    end
 end
