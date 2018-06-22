@@ -11,9 +11,7 @@ FactoryBot.define do
     end
 
     after(:create) do |file, evaluator|
-      if evaluator.content
-        Hydra::Works::UploadFileToFileSet.call(file, evaluator.content)
-      end
+      Hydra::Works::UploadFileToFileSet.call(file, evaluator.content) if evaluator.content
     end
 
     trait :public do
@@ -35,9 +33,7 @@ FactoryBot.define do
         file.title = ['testfile']
       end
       after(:create) do |file, evaluator|
-        if evaluator.content
-          Hydra::Works::UploadFileToFileSet.call(file, evaluator.content)
-        end
+        Hydra::Works::UploadFileToFileSet.call(file, evaluator.content) if evaluator.content
         create(:work, user: evaluator.user).members << file
       end
     end

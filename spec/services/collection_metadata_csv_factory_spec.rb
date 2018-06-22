@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CollectionMetadataCsvFactory do
+  subject(:csv_factory) { described_class.new(collection.id) }
   let(:user) { create(:user, email: "test_email@example.com") }
 
   let(:collection) do
@@ -42,8 +43,6 @@ RSpec.describe CollectionMetadataCsvFactory do
            member_of_collections: [collection],
            user: user)
   end
-
-  subject(:csv_factory) { described_class.new(collection.id) }
 
   it "instantiates the #{described_class}" do
     expect(csv_factory).to be_an_instance_of(described_class)

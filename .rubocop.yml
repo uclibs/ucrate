@@ -1,126 +1,18 @@
-require: rubocop-rspec
-
+inherit_gem:
+  bixby: bixby_default.yml
 
 AllCops:
   TargetRubyVersion: 2.4
-  DisplayCopNames: true
-  Include:
-    - '**/Rakefile'
-    - '**/config.ru'
-  Exclude:
-    - 'db/**/*'
-    - 'script/**/*'
-    - 'spec/test_app_templates/**/*'
-    - 'vendor/**/*'
-    - 'lib/hyrax/specs/**/*'
-    - 'spec/views/hyrax/dashboard/collections/*'
-
-Bundler/DuplicatedGem:  # This doesn't work with engine_cart
-  Enabled: false
-
-Layout/IndentationConsistency:
-  EnforcedStyle: rails
-
-Lint/ImplicitStringConcatenation:
-  Exclude:
-    - 'lib/generators/hyrax/**/*'
-
-Lint/AmbiguousBlockAssociation:
-  Enabled: false
-
-Metrics/LineLength:
-  Max: 200
-
-Metrics/AbcSize:
-  Max: 26
 
 Metrics/BlockLength:
   ExcludedMethods: ['included']
   Exclude:
-    - 'hyrax.gemspec'
+    - 'app/controllers/catalog_controller.rb'
+    - 'app/views/sitemaps/index.xml.builder'
+    - 'config/**/*'
+    - 'config/routes.rb'
     - 'lib/tasks/*.rake'
     - 'spec/**/*.rb'
-    - 'app/controllers/catalog_controller.rb'
-    - 'config/initializers/simple_form_bootstrap.rb'
-    - 'config/initializers/devise.rb'
-    - 'config/initializers/hyrax.rb'
-    - 'config/routes.rb'
-    - 'app/views/sitemaps/index.xml.builder'
-
-Metrics/ClassLength:
-  Exclude:
-    - 'app/controllers/catalog_controller.rb'
-
-Metrics/MethodLength:
-  Max: 13
-  Exclude:
-    - 'app/helpers/hyrax/hyrax_helper_behavior.rb'
-
-Metrics/ModuleLength:
-  Exclude:
-    - 'app/helpers/hyrax/hyrax_helper_behavior.rb'
-
-Naming/FileName: # https://github.com/bbatsov/rubocop/issues/2973
-  Exclude:
-    - 'Gemfile'
-
-Style/AsciiComments:
-  Enabled: false
-
-Style/BracesAroundHashParameters:
-  Exclude:
-    - 'config/initializers/devise.rb'
-
-
-Style/CollectionMethods:
-  PreferredMethods:
-    collect: 'map'
-    collect!: 'map!'
-    inject: 'reduce'
-    detect: 'find'
-    find_all: 'select'
-
-Style/DoubleNegation:
-  Exclude:
-    - 'spec/features/collection_export_spec.rb'
-
-Style/MethodMissing:
-  Exclude:
-
-Style/NumericPredicate:
-  Exclude:
-
-Style/SymbolArray:
-  Enabled: false
-
-Style/WordArray:
-  Enabled: false
-
-Style/RegexpLiteral:
-  Enabled: false
-
-Style/StringLiterals:
-  Enabled: false
-
-Style/ClassAndModuleChildren:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
-
-Style/SingleLineBlockParams:
-  Enabled: false
-
-Style/ZeroLengthPredicate:
-  Exclude:
-
-Rails:
-  Enabled: true
-
-Rails/SkipsModelValidations:
-  Exclude:
-    - 'app/models/user.rb'
-    - 'app/jobs/user_edit_profile_event_job.rb'
 
 Rails/ApplicationJob:
   Enabled: false
@@ -133,12 +25,14 @@ Rails/ApplicationRecord:
 Rails/DynamicFindBy:
   Enabled: false
 
-Rails/FilePath:
+Rails/SkipsModelValidations:
   Exclude:
-    - 'spec/abilities/**/*'
+    - 'app/models/user.rb'
+    - 'app/jobs/user_edit_profile_event_job.rb'
 
-Rails/OutputSafety:
+Rails/TimeZone:
   Exclude:
+    - 'spec/services/collection_metadata_csv_factory_spec.rb'
 
 RSpec/AnyInstance:
   Exclude:
@@ -147,46 +41,8 @@ RSpec/AnyInstance:
 
 RSpec/DescribeClass:
   Exclude:
-    - 'spec/abilities/**/*'
-    - 'spec/conversions/**/*'
     - 'spec/features/**/*'
-    - 'spec/inputs/**/*'
-    - 'spec/tasks/rake_spec.rb'
     - 'spec/views/**/*'
-
-Rails/TimeZone:
-  Exclude:
-    - 'spec/services/collection_metadata_csv_factory_spec.rb'
-
-RSpec/ContextWording:
-  Enabled: false
-
-# By default RSpec/MessageSpies has the following:
-#   Prefer have_received for setting message expectations. Setup form as a spy using allow or instance_spy.
-# The default assumes EnforcedStyle is 'have_received'. Most of our specs are 'receive'
-RSpec/MessageSpies:
-  Enabled: false
-
-RSpec/InstanceVariable:
-  Exclude:
-
-RSpec/ExpectActual:
-  Enabled: false
-
-RSpec/LetSetup:
-  Enabled: false
-
-RSpec/MessageExpectation:
-  Enabled: false
-
-RSpec/MultipleExpectations:
-  Enabled: false
-
-RSpec/NestedGroups:
-  Enabled: false
-
-RSpec/LeadingSubject:
-  Enabled: false
 
 RSpec/ExampleLength:
   Exclude:
@@ -231,16 +87,47 @@ RSpec/ExampleLength:
     - 'spec/features/create_article_spec.rb'
     - 'spec/views/static/help.html.erb_spec.rb'
 
-RSpec/ExpectInHook:
-  Exclude:
-    - 'spec/features/ownership_transfer_spec.rb'
-
-RSpec/VerifiedDoubles:
-  Exclude:
-    - 'spec/features/create_child_work_spec.rb'
-    - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
+RSpec/ExpectActual:
+  Enabled: false
 
 RSpec/InstanceVariable:
   Exclude:
     - 'spec/controllers/callbacks_controller_spec.rb'
     - 'spec/controllers/collection_exports_controller_spec.rb'
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/MessageExpectation:
+  Enabled: false
+
+# # By default RSpec/MessageSpies has the following:
+# #   Prefer have_received for setting message expectations. Setup form as a spy using allow or instance_spy.
+# # The default assumes EnforcedStyle is 'have_received'. Most of our specs are 'receive'
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/LeadingSubject:
+  Enabled: false
+
+RSpec/VerifiedDoubles:
+  Exclude:
+    - 'spec/features/create_child_work_spec.rb'
+    - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
+    - 'spec/views/hyrax/dashboard/collections/_show_actions.html.erb_spec.rb'
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/DoubleNegation:
+  Exclude:
+    - 'spec/features/collection_export_spec.rb'
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
