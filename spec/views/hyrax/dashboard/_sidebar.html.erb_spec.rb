@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'hyrax/dashboard/_sidebar.html.erb', type: :view do
@@ -26,10 +28,10 @@ RSpec.describe 'hyrax/dashboard/_sidebar.html.erb', type: :view do
   end
 
   context 'with a user who can read the admin dash' do
+    subject { rendered }
     let(:read_admin_dashboard) { true }
 
     before { render }
-    subject { rendered }
 
     it { is_expected.to have_link t('hyrax.admin.sidebar.statistics') }
     it { is_expected.to have_link t('hyrax.embargoes.index.manage_embargoes') }

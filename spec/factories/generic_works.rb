@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :work, aliases: [:generic_work, :private_generic_work], class: GenericWork do
     transient do
@@ -179,9 +181,21 @@ FactoryBot.define do
         after(:create) { |work, evaluator| 2.times { work.ordered_members << create(:file_set, user: evaluator.user) } }
       end
     end
+
+    factory :embargoed_generic_work do
+      visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
+      visibility_after_embargo Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
+    end
+
+    trait :with_public_embargo do
+      after(:build) do |work, evaluator|
+        work.embargo = FactoryBot.create(:public_embargo, embargo_release_date: evaluator.embargo_release_date)
+      end
+    end
   end
 
   # Doesn't set up any edit_users
+
   factory :work_without_access, class: GenericWork do
     title ['Test title']
     depositor { create(:user).user_key }

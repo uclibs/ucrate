@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require Hyrax::Engine.root.join('app/controllers/hyrax/dashboard/profiles_controller.rb')
 module Hyrax
   module Dashboard

@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Hyrax
   class ContactFormController < ApplicationController
     extend ActiveSupport::Concern

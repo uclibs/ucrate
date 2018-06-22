@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'cancan/matchers'
 
@@ -7,12 +9,11 @@ RSpec.describe Ability, type: :model do
   end
 
   describe "CollectionExport" do
+    subject(:ability) { Ability.new(user) }
     let(:user) { create(:user) }
 
     let(:user_collection) { create(:collection, user: user) }
     let(:other_collection) { create(:collection) }
-
-    subject(:ability) { Ability.new(user) }
 
     context "if the user created the collection export, but the collection has been deleted" do
       let(:collection_export) { CollectionExport.create(user: user.email, collection_id: user_collection.id) }
