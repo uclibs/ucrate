@@ -51,7 +51,7 @@ RSpec.describe "display a work as its owner" do
     end
 
     it "add work to a collection", clean_repo: true, js: true do
-      optional 'ability to get capybara to find css select2-result (see Issue #3038)' if ENV['TRAVIS']
+      optional 'ability to get capybara to find css select2-result (see Hyrax issue #3038)'
       click_button "Add to collection" # opens the modal
       select_member_of_collection(collection)
       click_button 'Save changes'
