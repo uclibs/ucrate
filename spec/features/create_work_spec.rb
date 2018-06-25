@@ -58,7 +58,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       # puts "Agreement : #{page.evaluate_script(%{$('#form-progress').data('save_work_control').depositAgreement.isAccepted})}"
       click_on('Save')
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content "Your files are being processed by UCrate in the background."
+      expect(page).to have_content "Your files are being processed by Scholar@UC in the background."
     end
   end
 
@@ -104,7 +104,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       # puts "Agreement : #{page.evaluate_script(%{$('#form-progress').data('save_work_control').depositAgreement.isAccepted})}"
       click_on('Save')
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content "Your files are being processed by UCrate in the background."
+      expect(page).to have_content "Your files are being processed by Scholar@UC in the background."
       expect(page).to have_content("Permanent link to this page")
 
       click_on('image.jp2')
