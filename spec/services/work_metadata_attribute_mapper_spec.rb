@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe WorkMetadataAttributeMapper do
+  subject(:mapper) { described_class.new(work) }
   let(:work) do
     create(:work,
            title: ["A very short work"],
@@ -10,8 +11,6 @@ RSpec.describe WorkMetadataAttributeMapper do
            subject: ["This subject"],
            description: ["Much shorter than most works"])
   end
-
-  subject(:mapper) { described_class.new(work) }
 
   it "instantiates the #{described_class}" do
     expect(mapper).to be_an_instance_of(described_class)

@@ -57,6 +57,7 @@ gem 'sidekiq'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'bixby', '>= 1.0.0'
   gem 'byebug', platform: :mri
   gem 'fcrepo_wrapper'
   gem 'rails-controller-testing'
@@ -83,7 +84,5 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rspec-activemodel-mocks'
-  gem 'rubocop', '~> 0.51.0'
-  gem 'rubocop-rspec', '~> 1.20.1'
   gem 'selenium-webdriver'
 end

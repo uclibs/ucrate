@@ -10,8 +10,6 @@ cache:
 before_install:
   - gem update --system
   - gem install bundler
-  - gem install rubocop -v '0.51.0'
-  - gem install rubocop-rspec -v '1.20.1'
   - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost &
 
 rvm:
@@ -25,7 +23,7 @@ env:
   # rails does not follow sem-ver conventions, see http://guides.rubyonrails.org/maintenance_policy.html
   # It should be sufficient to test only the latest of the patch versions for a minor version, they
   # should be compatible across patch versions (only bug fixes are released in patch versions).
-  
+
 
 script:
   - bundle exec rake ci
@@ -34,4 +32,4 @@ services:
   - redis-server
 before_script:
   - jdk_switcher use oraclejdk8
-  - rubocop
+  - bundle exec rubocop

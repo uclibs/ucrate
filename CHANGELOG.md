@@ -1,3 +1,23 @@
+0.4.0 05/30/2018
+* Update to ruby 2.5.1
+* Updated to Hyrax v2.1.0.rc3
+* Added /show/ path for works, files, and collections
+* Removed the lease choice for work visibility options
+* Enable support for virus scanning with ClamAV
+* Added deploy status to the footer
+* Removed all language translations expect for Mandarin and Spanish
+* Added ability for users to export metadata for all works in a collection
+* Ported over Scholar features
+    * Show same fields as Scholar on user profile page
+    * Show welcome page and send welcome email to new users
+    * Added /sitemap.xml
+    * Generated Scholar work types
+    * Added all Scholar help and about pages
+    * Boosted collections to top of search results
+    * Allowed works to be created without files attached
+    * The creator field is now set to the current users when creating works
+    * Integrated ORCID support into user profiles
+
 0.3.0 3/27/2018
 * Updated to Hyrax gem reference 01d8ad5ecdf5b5658e6800d23d570c5d7b2c9cdc
 * Added an RSS feed of recently added works (/feed.rss)
