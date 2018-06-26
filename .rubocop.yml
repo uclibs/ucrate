@@ -132,3 +132,11 @@ Style/SingleLineBlockParams:
 
 Style/SymbolArray:
   Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - 'app/models/ability.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'app/models/ability.rb'

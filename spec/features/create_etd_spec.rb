@@ -29,6 +29,11 @@ RSpec.describe 'Create a Etd', js: true do
         agent_id: user.user_key,
         access: 'deposit'
       )
+
+      etd_manager = Role.find_or_create_by(name: "etd_manager")
+      etd_manager.users << user
+      etd_manager.save
+
       login_as user
       allow(CharacterizeJob).to receive(:perform_later)
     end

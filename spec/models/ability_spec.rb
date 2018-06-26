@@ -59,4 +59,16 @@ RSpec.describe Ability, type: :model do
       end
     end
   end
+
+  describe "a user in the ETD manager group" do
+    let(:ability) { Ability.new(user) }
+    subject { ability }
+    let(:user) { create(:user) }
+    before { allow(user).to receive_messages(groups: ['etd_manager', 'registered']) }
+    it { is_expected.to be_able_to(:create, Etd) }
+    it { is_expected.to be_able_to(:edit, Etd) }
+    it { is_expected.to be_able_to(:delete, Etd) }
+    it { is_expected.to be_able_to(:read, Etd) }
+    it { is_expected.to be_able_to(:manage, Etd) }
+  end
 end
