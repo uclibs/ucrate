@@ -31,6 +31,10 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       click_button 'Create work'
     end
 
+    it 'defaults to public visibility' do
+      expect(page).to have_checked_field('generic_work_visibility_open')
+    end
+
     it 'creates the work' do
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
