@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Hyrax
   class CollectionPresenter
     include ModelProxy
@@ -180,6 +181,24 @@ module Hyrax
       return true if current_ability.can?(:edit, solr_document)
       false
     end
+
+    def display_feature_link?
+      user_can_feature_collections? && solr_document.public? && FeaturedCollection.can_create_another? && !featured? # && !CollectionAvatar.find_by(collection_id: id).nil?
+    end
+
+    def display_unfeature_link?
+      user_can_feature_collections? && solr_document.public? && featured?
+    end
+
+    private
+
+      def featured?
+        @featured = FeaturedCollection.where(collection_id: solr_document.id).exists? if @featured.nil?
+        @featured
+      end
+
+      def user_can_feature_collections?
+        current_ability.can?(:create, FeaturedCollection)
+      end
   end
 end
-

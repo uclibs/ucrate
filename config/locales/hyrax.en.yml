@@ -45,6 +45,17 @@ en:
           subject_tesim: Subject
           title_tesim: Title
   hyrax:
+    homepage:
+      featured_works:
+        tab_label:          'Featured Works'
+        title:              'FEATURED WORK'
+        no_works:           'No works have been featured'
+      featured_researcher:
+        tab_label:          'Featured Researcher'
+        title:              'FEATURED RESEARCHER'
+      featured_collections:
+        title:              'FEATURED COLLECTION'
+        no_collections:     'No collections have been featured'
     deposit_agreement: "Distribution License"
     account_name:           "My Institution Account Id"
     directory:
