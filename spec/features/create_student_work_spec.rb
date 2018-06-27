@@ -67,6 +67,10 @@ RSpec.describe 'Create a StudentWork', js: true do
       click_on('Save')
       expect(page).to have_content('My Test Work')
       expect(page).to have_content "Your files are being processed by UCrate in the background."
+      expect(page).to have_content("Permanent link to this page")
+
+      click_on('image.jp2')
+      expect(page).to have_content("Permanent link to this page")
     end
   end
 end
