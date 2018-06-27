@@ -61,7 +61,7 @@ RSpec.describe 'Create a Medium', js: true do
       # its element
       find('body').click
       choose('medium_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
+      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')
 
       click_on('Save')

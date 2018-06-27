@@ -90,7 +90,7 @@ RSpec.describe "display a work as its owner" do
       expect(page).to have_content '%T Magnificent splendor'
       expect(page).to have_content '%R http://localhost/files/'
       expect(page).to have_content '%~ UCrate'
-      expect(page).to have_content '%W Institution'
+      expect(page).to have_content '%W University of Cicninnati'
     end
   end
 end
