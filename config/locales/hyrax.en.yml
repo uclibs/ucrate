@@ -54,7 +54,7 @@ en:
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
     institution_name:       "Institution"
     institution_name_full:  "The Institution Name"
-    product_name:           "UCrate"
+    product_name:           "Scholar@UC"
     description:            "University of Cincinnati's library collections"
     product_twitter_handle: "@SamveraRepo"
     user_profile:

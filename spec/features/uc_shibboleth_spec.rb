@@ -152,7 +152,7 @@ describe 'UC account workflow', type: :feature do
     it "redirects to the home page after logout" do
       create_cookie('login_type', 'local')
       visit('/users/sign_out')
-      page.should have_title("UCrate")
+      page.should have_title("Scholar@UC")
     end
   end
 end
