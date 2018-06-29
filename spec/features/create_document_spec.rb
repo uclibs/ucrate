@@ -52,10 +52,18 @@ RSpec.describe 'Create a Document', js: true do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
       click_link "Descriptions" # switch tab
-      fill_in('Title', with: 'My Test Work')
+
+      title_element = find_by_id("document_title")
+      title_element.set("My Test Work  ") # Add whitespace to test it getting removed
+
+      select 'In Copyright', from: "document_rights_statement"
+      select 'Attribution-ShareAlike 4.0 International', from: 'document_license'
+
       fill_in('Creator', with: 'Doe, Jane')
-      fill_in('Keyword', with: 'testing')
-      select('In Copyright', from: 'Rights statement')
+      fill_in('Description', with: 'This is a description.')
+      fill_in('College', with: 'University Collge')
+      fill_in('Program or Department', with: 'University Department')
+
 
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find

@@ -259,7 +259,9 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         click_link('Additional fields')
         expect(page).to have_selector "input.collection_creator.multi_value"
 
-        fill_in('Title', with: title)
+        title_element = find_by_id("collection_title")
+        title_element.set("Test Collection") # Add whitespace to test it getting removed
+
         fill_in('Abstract or Summary', with: description)
         fill_in('Related URL', with: 'http://example.com/')
 
@@ -686,10 +688,23 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         end
         # set required metadata
         click_link "Descriptions" # switch tab
-        fill_in('Title', with: 'New Work for Collection')
+
+        title_element = find_by_id("generic_work_title")
+        title_element.set("New Work for Collection")
+
+        select 'In Copyright', from: "generic_work_rights_statement"
+        select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
+
         fill_in('Creator', with: 'Doe, Jane')
-        fill_in('Keyword', with: 'testing')
-        select('In Copyright', from: 'Rights statement')
+        fill_in('College', with: 'University Collge')
+        fill_in('Program or Department', with: 'University Department')
+        fill_in('Description', with: 'This is a description.')
+
+        # With selenium and the chrome driver, focus remains on the
+        # select box. Click outside the box so the next line can't find
+        # its element
+        find('body').click
+        choose('generic_work_visibility_open')
         # check required acceptance
         check('agreement')
 

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 # Generated via
-#  `rails generate hyrax:work Article`
+#  `rails generate hyrax:work Image`
 require 'rails_helper'
 
-RSpec.describe Hyrax::ArticleForm do
-  let(:work) { Article.new }
+RSpec.describe Hyrax::GenericWorkForm do
+  let(:work) { GenericWork.new }
   let(:form) { described_class.new(work, nil, nil) }
 
   describe "#required_fields" do
@@ -18,9 +18,9 @@ RSpec.describe Hyrax::ArticleForm do
     subject { form.primary_terms }
 
     it {
-      is_expected.to eq [:title, :creator, :college, :department, :description, :rights_statement, :license, :publisher, :date_created,
-                         :alternate_title,:journal_title, :issn, :subject, :geo_subject, :time_period,
-                         :language, :required_software, :note, :related_url]
+      is_expected.to eq [:title, :creator, :college, :department, :description, :rights_statement, :license,
+                         :publisher, :date_created, :alternate_title, :subject, :geo_subject,
+                         :time_period, :language, :required_software, :note, :related_url]
     }
   end
 
@@ -66,7 +66,7 @@ RSpec.describe Hyrax::ArticleForm do
 
     it 'permits parameters' do
       expect(attrib['title']).to eq ['foo']
-      expect(attrib['description']).to be_empty
+      expect(attrib['description']).to be_nil
       expect(attrib['visibility']).to eq 'open'
       expect(attrib['rights_statement']).to eq 'http://creativecommons.org/licenses/by/4.0/us/'
       expect(attrib['member_of_collection_ids']).to eq ['123456', 'abcdef']
@@ -87,7 +87,7 @@ RSpec.describe Hyrax::ArticleForm do
 
       it 'removes blank parameters' do
         expect(attrib['title']).to be_nil
-        expect(attrib['description']).to be_empty
+        expect(attrib['description']).to be_nil
         expect(attrib['rights_statement']).to be_nil
         expect(attrib['member_of_collection_ids']).to be_empty
         expect(attrib['on_behalf_of']).to eq 'Melissa'

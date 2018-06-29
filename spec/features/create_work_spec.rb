@@ -41,11 +41,20 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
       click_link "Descriptions" # switch tab
+
+      title_element = find_by_id("generic_work_title")
+      title_element.set("My Test Work  ") # Add whitespace to test it getting removed
+
+
+      select 'In Copyright', from: "generic_work_rights_statement"
+      select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
+
       expect(page).to have_field("Creator", with: user.name_for_works)
-      fill_in('Title', with: 'My Test Work')
       fill_in('Creator', with: 'Doe, Jane')
-      fill_in('Keyword', with: 'testing')
-      select('In Copyright', from: 'Rights statement')
+
+      fill_in('College', with: 'University College')
+      fill_in('Program or Department', with: 'University Department')
+      fill_in('Description', with: 'This is a description.')
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find
       # its element
@@ -86,10 +95,20 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       end
       click_link "Descriptions" # switch tab
       expect(page).to have_field("Creator", with: second_user.name_for_works)
-      fill_in('Title', with: 'My Test Work')
+
+      title_element = find_by_id("generic_work_title")
+      title_element.set("My Test Work  ") # Add whitespace to test it getting removed
+
+      select 'In Copyright', from: "generic_work_rights_statement"
+      select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
+
+      expect(page).to have_field("Creator", with: user.name_for_works)
       fill_in('Creator', with: 'Doe, Jane')
-      fill_in('Keyword', with: 'testing')
-      select('In Copyright', from: 'Rights statement')
+
+      fill_in('College', with: 'University College')
+      fill_in('Program or Department', with: 'University Department')
+      fill_in('Description', with: 'This is a description.')
+
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find
       # its element

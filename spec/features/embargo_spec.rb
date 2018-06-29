@@ -14,7 +14,12 @@ RSpec.describe 'embargo' do
 
     it 'can be created, displayed and updated', :clean_repo, :workflow do
       visit '/concern/generic_works/new'
-      fill_in 'Title', with: 'Embargo test'
+
+      title_element = find_by_id("generic_work_title")
+      title_element.set("Embargo test") # Add whitespace to test it getting removed
+
+      select 'In Copyright', from: "generic_work_rights_statement"
+
       choose 'Embargo'
       fill_in 'generic_work_embargo_release_date', with: future_date
       select 'Private', from: 'Restricted to'

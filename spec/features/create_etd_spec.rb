@@ -57,10 +57,18 @@ RSpec.describe 'Create a Etd', js: true do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
       click_link "Descriptions" # switch tab
-      fill_in('Title', with: 'My Test Work')
+
+      title_element = find_by_id("etd_title")
+      title_element.set("My Test Work  ") # Add whitespace to test it getting removed
+
+      select 'In Copyright', from: "etd_rights_statement"
+      select 'Attribution-ShareAlike 4.0 International', from: 'etd_license'
+
       fill_in('Creator', with: 'Doe, Jane')
-      fill_in('Keyword', with: 'testing')
-      select('In Copyright', from: 'Rights statement')
+      fill_in('Abstract', with: 'Description')
+      fill_in('Advisor', with: 'Ima Advisor')
+      fill_in('College', with: 'College')
+      fill_in('Degree Program', with: 'Test Department')
 
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find

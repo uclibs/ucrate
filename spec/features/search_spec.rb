@@ -8,7 +8,7 @@ RSpec.describe 'searching' do
   let!(:work) do
     create(:public_work,
            title: ["Toothbrush"],
-           keyword: [subject_value, 'taco'],
+           description: [subject_value],
            user: user)
   end
 
@@ -23,13 +23,13 @@ RSpec.describe 'searching' do
       click_button "search-submit-header"
       expect(page).to have_content "1 entry found"
       within "#search-results" do
-        expect(page).to have_content "Toothbrush"
+        expect(page).to have_content 'Toothbrush'
       end
 
       click_link "Gallery"
       expect(page).to have_content "Filtering by: Toothbrush"
       within "#documents" do
-        expect(page).to have_content "Toothbrush"
+        expect(page).to have_content 'Toothbrush'
       end
     end
 
@@ -59,9 +59,6 @@ RSpec.describe 'searching' do
       expect(page).to have_content "Toothbrush"
       expect(page).to have_content('collection title abc')
       expect(page).to have_css("span.collection-icon-search")
-
-      expect(page.body).to include "<span itemprop=\"keywords\"><a href=\"/catalog?f%5Bkeyword_sim%5D%5B%5D=taco&amp;locale=en\">taco</a></span>"
-      expect(page.body).to include "<span itemprop=\"keywords\"><a href=\"/catalog?f%5Bkeyword_sim%5D%5B%5D=mustache&amp;locale=en\">mustache</a></span>"
     end
 
     it "displays browse button" do

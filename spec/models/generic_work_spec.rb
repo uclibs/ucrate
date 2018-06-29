@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-# Generated via
-#  `rails generate hyrax:work Dataset`
 require 'rails_helper'
 
-RSpec.describe Dataset do
+describe GenericWork do
   describe ".properties" do
     subject { described_class.properties.keys }
 
@@ -23,7 +21,7 @@ RSpec.describe Dataset do
   end
 
   #  describe "created for someone (proxy)" do
-  #    TODO:  Determine if this is covered in Hyrax 2
+  #    TODO:  Examine these features in Hyrax 2
   #    let(:work) { described_class.new(title: ['demoname']) { |gw| gw.apply_depositor_metadata("user") } }
   #    let(:transfer_to) { create(:user) }
 
@@ -49,7 +47,7 @@ RSpec.describe Dataset do
   end
 
   #  describe "trophies" do
-  #    TODO: Is this covered in Hyrax 2
+  #   TODO:  Examine these features in Hyrax 2
   #    let(:user) { create(:user) }
   #    let(:w) { create(:work, user: user) }
   #    let!(:t) { Trophy.create(user_id: user.id, work_id: w.id) }
@@ -64,7 +62,8 @@ RSpec.describe Dataset do
   #  end
 
   #  describe "featured works" do
-  #    let(:work) { create(:public_work) }
+  #  TODO: Examine this feature in Hyrax 2
+  #   let(:work) { create(:public_work) }
 
   #    before { FeaturedWork.create(work_id: work.id) }
 
