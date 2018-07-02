@@ -3,7 +3,7 @@ zh:
     icons:
       medium:     'fa fa-file-text-o'
     select_type:
-      medium:
+      Medium:
         # TODO: translate `human_name` into Chinese
         description:        "Medium 作品"
         name:               "Medium"

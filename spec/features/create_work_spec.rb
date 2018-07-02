@@ -27,9 +27,9 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       visit '/dashboard'
       click_link 'Works'
       click_link "Add new work"
-      expect(page).to have_content "Select type of work"
-      choose "payload_concern", option: "GenericWork"
-      click_button 'Create work'
+
+      expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
+      click_link('Add New', href: '/concern/generic_works/new?locale=en')
     end
 
     it 'creates the work' do
@@ -73,8 +73,8 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       click_link 'Works'
       click_link "Add new work"
       # Needed if there are multiple work types
-      choose "payload_concern", option: "GenericWork"
-      click_button 'Create work'
+      expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
+      click_link('Add New', href: '/concern/generic_works/new?locale=en')
     end
 
     it "allows on-behalf-of deposit" do

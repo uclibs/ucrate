@@ -3,7 +3,7 @@ en:
     icons:
       dataset:     'fa fa-file-text-o'
     select_type:
-      dataset:
+      Dataset:
         name:               "Dataset"
         description:        "Files containing collections of data, including: raw data, spreadsheets, logs, etc."
   simple_form:
@@ -19,7 +19,7 @@ en:
         admin_set_id:     "Administrative Set"
         required_software: "Required Software"
         note:             "Note"
-        publisher:        "Publisher (Required for DOI registration)"   
+        publisher:        "Publisher (Required for DOI registration)"
         college:          "College"
         department:       "Program or Department"
     hints:

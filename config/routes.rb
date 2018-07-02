@@ -63,5 +63,7 @@ Rails.application.routes.draw do
 
   match 'show/:id' => 'common_objects#show', via: :get, as: 'common_object'
 
+  resources :classify_concerns, only: [:new, :create]
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

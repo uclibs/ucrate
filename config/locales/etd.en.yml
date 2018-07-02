@@ -3,7 +3,7 @@ en:
     icons:
       etd:     'fa fa-file-text-o'
     select_type:
-      etd:
+      Etd:
         name:               "Etd"
         description:        "Must be submitted by the UC Graduate School"
   simple_form:
@@ -24,10 +24,10 @@ en:
         required_software: "Required Software"
         advisor:          "Advisor"
         committee_member: "Committee Member"
-        degree:           "Degree" 
+        degree:           "Degree"
         degree_date:      "Degree Year"
-        genre:            "Type" 
-        etd_publisher:    "Publisher (Required for DOI registration)" 
+        genre:            "Type"
+        etd_publisher:    "Publisher (Required for DOI registration)"
         college:          "College"
         department:       "Degree Program"
     hints:

@@ -3,7 +3,7 @@ en:
     icons:
       article:     'fa fa-file-text-o'
     select_type:
-      article:
+      Article:
         name:               "Article"
         description:        "Published or unpublished articles"
   simple_form:
