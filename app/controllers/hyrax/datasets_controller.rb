@@ -18,5 +18,10 @@ module Hyrax
       permalink_message = "Permanent link to this page"
       @permalinks_presenter = PermalinksPresenter.new(main_app.common_object_path(locale: nil), permalink_message)
     end
+
+    def new
+      super
+      flash[:notice] = t(:"hyrax.dataset.help_text")
+    end
   end
 end
