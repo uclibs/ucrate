@@ -66,6 +66,8 @@ Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+ActiveJob::Base.queue_adapter = :test
+
 require 'active_fedora/cleaner'
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -147,4 +149,37 @@ RSpec.configure do |config|
 
   # Allow cookies to be set in feature tests (for UC Shibboleth testing)
   config.include ShowMeTheCookies, type: :feature
+
+  # Use this example metadata when you want to perform jobs inline during testing.
+  #
+  #   describe '#my_method`, :perform_enqueued do
+  #     ...
+  #   end
+  #
+  # If you pass an `Array` of job classes, they will be treated as the filter list.
+  #
+  #   describe '#my_method`, perform_enqueued: [MyJobClass] do
+  #     ...
+  #   end
+  #
+  # Limit to specific job classes with:
+  #
+  #   ActiveJob::Base.queue_adapter.filter = [JobClass]
+  #
+  config.before(:example, :perform_enqueued) do |example|
+    ActiveJob::Base.queue_adapter.filter =
+      example.metadata[:perform_enqueued].try(:to_a)
+
+    ActiveJob::Base.queue_adapter.perform_enqueued_jobs    = true
+    ActiveJob::Base.queue_adapter.perform_enqueued_at_jobs = true
+  end
+
+  config.after(:example, :perform_enqueued) do
+    ActiveJob::Base.queue_adapter.filter         = nil
+    ActiveJob::Base.queue_adapter.enqueued_jobs  = []
+    ActiveJob::Base.queue_adapter.performed_jobs = []
+
+    ActiveJob::Base.queue_adapter.perform_enqueued_jobs    = false
+    ActiveJob::Base.queue_adapter.perform_enqueued_at_jobs = false
+  end
 end
