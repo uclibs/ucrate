@@ -27,6 +27,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       visit '/dashboard'
       click_link 'Works'
       click_link "Add new work"
+      expect(page).to have_content "Select type of work"
       choose "payload_concern", option: "GenericWork"
       click_button 'Create work'
     end
