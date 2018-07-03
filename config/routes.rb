@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'callbacks', registrations: "registrations" }
   mount Hydra::RoleManagement::Engine => '/'
 
+  resources :users, only: [:index], constraints: { format: :html }, controller: 'display_users'
+
   get 'login' => 'static#login'
   get 'about' => 'static#about'
   get 'help' => 'static#help'
