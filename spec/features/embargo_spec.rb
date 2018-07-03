@@ -73,7 +73,7 @@ RSpec.describe 'embargo' do
 
       click_button 'Update Embargo'
       expect(page).to have_content(later_future_date.to_date.to_formatted_s(:standard))
-      expect(page).to have_content(my_admin_set.title.first)
+      expect(page).not_to have_content(my_admin_set.title.first)
     end
 
     it 'cannot be updated with an invalid date' do

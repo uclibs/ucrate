@@ -39,6 +39,8 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
+      click_link "Relationships"
+      expect(page).to have_css("div.generic_work_admin_set_id", visible: false)
       click_link "Descriptions" # switch tab
       expect(page).to have_field("Creator", with: user.name_for_works)
       fill_in('Title', with: 'My Test Work')
