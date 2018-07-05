@@ -66,7 +66,7 @@ RSpec.describe 'Create a Image', js: true do
 
       click_on('Save')
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content("Your files are being processed by UCrate in the background.")
+      expect(page).to have_content("Your files are being processed by Scholar@UC in the background.")
       expect(page).to have_content("Permanent link to this page")
 
       click_on('image.jp2')

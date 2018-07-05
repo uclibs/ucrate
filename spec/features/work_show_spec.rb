@@ -65,7 +65,7 @@ RSpec.describe "display a work as its owner" do
 
   context "as a user who is not logged in" do
     let(:work) { create(:public_generic_work, title: ["Magnificent splendor"], source: ["The Internet"], based_near: ["USA"]) }
-    let(:page_title) { { text: "Generic Work | Magnificent splendor | ID: #{work.id} | UCrate" }.to_param }
+    let(:page_title) { { text: "Generic Work | Magnificent splendor | ID: #{work.id} | Scholar@UC" }.to_param }
 
     before do
       visit work_path
@@ -89,8 +89,8 @@ RSpec.describe "display a work as its owner" do
       expect(page).to have_content '%0 Generic Work'
       expect(page).to have_content '%T Magnificent splendor'
       expect(page).to have_content '%R http://localhost/files/'
-      expect(page).to have_content '%~ UCrate'
       expect(page).to have_content '%W University of Cicninnati'
+      expect(page).to have_content '%~ Scholar@UC'
     end
   end
 end

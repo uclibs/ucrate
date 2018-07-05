@@ -3,6 +3,47 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe "#name_for_people_page" do
+    subject(:user) { described_class.new }
+
+    context "with first_name and last_name set" do
+      before do
+        user.first_name = "Lucy"
+        user.last_name = "Bearcat"
+      end
+
+      it "returns the name" do
+        expect(user.name_for_people_page).to eq("Bearcat, Lucy")
+      end
+    end
+
+    context "with first_name blank and last_name set" do
+      before do
+        user.last_name = "Bearcat"
+      end
+
+      it "returns the name" do
+        expect(user.name_for_people_page).to eq('')
+      end
+    end
+
+    context "with first_name set and last_name blank" do
+      before do
+        user.first_name = "Lucy"
+      end
+
+      it "returns the name" do
+        expect(user.name_for_people_page).to eq('')
+      end
+    end
+
+    context "with first_name and last_name blank set" do
+      it "returns the name" do
+        expect(user.name_for_people_page).to eq('')
+      end
+    end
+  end
+
   describe "#name_for_works" do
     subject(:user) { described_class.new }
 
