@@ -62,7 +62,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
       it "has collection type and visibility filters" do
         expect(page).to have_button 'Visibility'
-        expect(page).to have_link 'Public',
+        expect(page).to have_link 'Open Access',
                                   href: /visibility_ssi.+#{Regexp.escape(CGI.escape(collection3.visibility))}/
         expect(page).to have_button 'Collection Type'
         expect(page).to have_link collection_type.title,
@@ -114,7 +114,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
       it "has collection type and visibility filters" do
         expect(page).to have_button 'Visibility'
-        expect(page).to have_link 'Public',
+        expect(page).to have_link 'Open Access',
                                   href: /visibility_ssi.+#{Regexp.escape(CGI.escape(collection3.visibility))}/
         expect(page).to have_button 'Collection Type'
         expect(page).to have_link collection_type.title,
@@ -158,7 +158,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
       expect(page).to have_link 'All Collection'
       click_link 'All Collections'
       expect(page).to have_button 'Visibility'
-      expect(page).to have_link 'Public',
+      expect(page).to have_link 'Open Access',
                                 href: /visibility_ssi.+#{Regexp.escape(CGI.escape(collection1.visibility))}/
       expect(page).to have_button 'Collection Type'
       expect(page).to have_link collection_type.title,
@@ -219,7 +219,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
       expect(page).to have_link 'Managed Collections'
       click_link 'Managed Collections'
       expect(page).to have_button 'Visibility'
-      expect(page).to have_link 'Public',
+      expect(page).to have_link 'Open Access',
                                 href: /visibility_ssi.+#{Regexp.escape(CGI.escape(collection1.visibility))}/
       expect(page).to have_button 'Collection Type'
       expect(page).to have_link collection_type.title,
