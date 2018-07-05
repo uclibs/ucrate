@@ -14,6 +14,7 @@ module Hyrax
     self.show_presenter = Hyrax::ImagePresenter
 
     def show
+      super
       permalink_message = "Permanent link to this page"
       @permalinks_presenter = PermalinksPresenter.new(main_app.common_object_path(locale: nil), permalink_message)
     end
