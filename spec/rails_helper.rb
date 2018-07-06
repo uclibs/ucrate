@@ -17,6 +17,7 @@ require 'capybara/rails'
 require 'selenium-webdriver'
 require 'database_cleaner'
 require 'rspec/its'
+require 'equivalent-xml'
 
 unless ENV['SKIP_MALEFICENT']
   # See https://github.com/jeremyf/capybara-maleficent
