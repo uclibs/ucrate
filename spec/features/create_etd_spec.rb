@@ -29,6 +29,11 @@ RSpec.describe 'Create a Etd', js: true do
         agent_id: user.user_key,
         access: 'deposit'
       )
+
+      etd_manager = Role.find_or_create_by(name: "etd_manager")
+      etd_manager.users << user
+      etd_manager.save
+
       login_as user
       allow(CharacterizeJob).to receive(:perform_later)
     end
@@ -39,6 +44,7 @@ RSpec.describe 'Create a Etd', js: true do
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
+      expect(page).to have_content "Select type of work"
       choose "payload_concern", option: "Etd"
       click_button "Create work"
 
@@ -61,12 +67,16 @@ RSpec.describe 'Create a Etd', js: true do
       # its element
       find('body').click
       choose('etd_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
+      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')
 
       click_on('Save')
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content "Your files are being processed by UCrate in the background."
+      expect(page).to have_content "Your files are being processed by Scholar@UC in the background."
+      expect(page).to have_content("Permanent link to this page")
+
+      click_on('image.jp2')
+      expect(page).to have_content("Permanent link to this page")
     end
   end
 end

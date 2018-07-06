@@ -27,6 +27,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       visit '/dashboard'
       click_link 'Works'
       click_link "Add new work"
+      expect(page).to have_content "Select type of work"
       choose "payload_concern", option: "GenericWork"
       click_button 'Create work'
     end
@@ -50,7 +51,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       # its element
       find('body').click
       choose('generic_work_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
+      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')
       # These lines are for debugging, should this test fail
       # puts "Required metadata: #{page.evaluate_script(%{$('#form-progress').data('save_work_control').requiredFields.areComplete})}"
@@ -58,7 +59,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       # puts "Agreement : #{page.evaluate_script(%{$('#form-progress').data('save_work_control').depositAgreement.isAccepted})}"
       click_on('Save')
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content "Your files are being processed by UCrate in the background."
+      expect(page).to have_content "Your files are being processed by Scholar@UC in the background."
     end
   end
 
@@ -94,7 +95,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       # its element
       find('body').click
       choose('generic_work_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
+      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       select(second_user.user_key, from: 'On behalf of')
       sleep 1
       check('agreement')
@@ -104,7 +105,11 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       # puts "Agreement : #{page.evaluate_script(%{$('#form-progress').data('save_work_control').depositAgreement.isAccepted})}"
       click_on('Save')
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content "Your files are being processed by UCrate in the background."
+      expect(page).to have_content "Your files are being processed by Scholar@UC in the background."
+      expect(page).to have_content("Permanent link to this page")
+
+      click_on('image.jp2')
+      expect(page).to have_content("Permanent link to this page")
 
       sign_in second_user
       click_link 'Works'

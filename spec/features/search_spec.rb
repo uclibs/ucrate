@@ -63,5 +63,10 @@ RSpec.describe 'searching' do
       expect(page.body).to include "<span itemprop=\"keywords\"><a href=\"/catalog?f%5Bkeyword_sim%5D%5B%5D=taco&amp;locale=en\">taco</a></span>"
       expect(page.body).to include "<span itemprop=\"keywords\"><a href=\"/catalog?f%5Bkeyword_sim%5D%5B%5D=mustache&amp;locale=en\">mustache</a></span>"
     end
+
+    it "displays browse button" do
+      visit about_path
+      expect(page).to have_link("Browse", href: "#{main_app.search_catalog_path}?locale=en")
+    end
   end
 end

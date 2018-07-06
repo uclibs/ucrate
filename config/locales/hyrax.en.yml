@@ -52,9 +52,9 @@ en:
     footer:
       copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
-    institution_name:       "Institution"
+    institution_name:       "University of Cicninnati"
     institution_name_full:  "The Institution Name"
-    product_name:           "UCrate"
+    product_name:           "Scholar@UC"
     description:            "University of Cincinnati's library collections"
     product_twitter_handle: "@SamveraRepo"
     user_profile:
@@ -78,3 +78,11 @@ en:
           export_collection: "Export collection"
     welcome:
       waive_page: "Click here to hide this welcome page from displaying when you log in"
+    visibility:
+      open: 
+        text: "Open Access"
+        note_html: Make available to all<br />(see <a href="/creators_rights" target=\"_blank\">Creator's Rights</a> for more information)
+      authenticated:
+        note_html: Restrict access to logged-in users
+    controls:
+      users: "People"

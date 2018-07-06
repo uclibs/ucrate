@@ -37,7 +37,7 @@ RSpec.describe 'Editing a work', type: :feature do
       expect(page).not_to have_content "Powered by Hyrax"
       click_on("No. I'll update it manually.")
       within(".panel-heading") do
-        expect(page).to have_content('Public')
+        expect(page).to have_content('Open Access')
       end
     end
   end

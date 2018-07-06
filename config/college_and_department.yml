@@ -1,0 +1,42 @@
+current_colleges_for_degrees:
+  cahs:
+    label: 'Allied Health Sciences'
+  com:
+    label: 'Medicine'
+  a&s:
+    label: 'Arts and Sciences'
+  cob:
+    label: 'Business'
+  ccm:
+    label: 'College-Conservatory of Music'
+  daap:
+    label: 'Design, Architecture, Art and Planning'
+  cech:
+    label: 'Education, Criminal Justice, and Human Services'
+  ceas:
+    label: 'Engineering and Applied Science'
+  nursing:
+    label: 'Nursing'
+  pharm:
+    label: 'Pharmacy'
+additional_current_colleges:
+  clermont:
+    label: 'Clermont College'
+  law:
+    label: 'Law'
+  ucba:
+    label: 'Blue Ash College' 
+additional_current_colleges_library:
+  clermont:
+    label: 'Clermont College'
+  law:
+    label: 'Law'
+  ucba:
+    label: 'Blue Ash College' 
+  ucl:
+    label: 'Libraries'
+legacy_colleges:
+  - "Business Administration"
+  - "Education"
+  - "Engineering"
+  - "Interdisciplinary"
