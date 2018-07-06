@@ -17,6 +17,7 @@ describe "Selecting files to import from cloud providers", js: true, type: :feat
     visit '/dashboard'
     click_link 'Works'
     click_link "Add new work"
+    expect(page).to have_content "Select type of work"
     choose "payload_concern", option: "GenericWork"
     click_button 'Create work'
   end

@@ -672,6 +672,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         click_link 'Deposit new work through this collection'
 
         # verify the collection is pre-selected
+        expect(page).to have_content "Select type of work"
         choose "payload_concern", option: "GenericWork"
         click_button 'Create work'
         click_link "Relationships" # switch tab
