@@ -45,11 +45,11 @@ RSpec.describe 'Creating a new Work as admin', :js, :workflow do
       choose "payload_concern", option: "GenericWork"
       click_button 'Create work'
       click_link "Relationship" # switch tab
-      expect(page).to have_content('Administrative Set')
-      expect(page).to have_content('Another Admin Set')
-      expect(page).to have_content('Default Admin Set')
-      expect(page).to have_selector('select#generic_work_admin_set_id')
-      expect(page).to have_select('generic_work_admin_set_id', selected: 'Default Admin Set')
+      expect(page).not_to have_content('Administrative Set')
+      expect(page).not_to have_content('Another Admin Set')
+      expect(page).not_to have_content('Default Admin Set')
+      expect(page).not_to have_selector('select#generic_work_admin_set_id')
+      expect(page).not_to have_select('generic_work_admin_set_id', selected: 'Default Admin Set')
     end
   end
 end
