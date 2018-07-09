@@ -1,0 +1,425 @@
+.label-default {
+  background-color: #757575;
+}
+
+.label-info,
+.btn-info {
+  background-color: #20809d;
+}
+
+.label-success,
+.btn-success {
+  background-color: #388038;
+}
+
+.label-danger,
+.btn-danger {
+  background-color: #d33b36;
+}
+
+.label-warning,
+.btn-warning {
+  background-color: #a4660e;
+}
+
+.badge {
+  background-color: #757575;
+}
+
+.breadcrumb > .active {
+  color: #707070;
+}
+
+legend small {
+  color: #757575;
+}
+
+.select2-default {
+  color: #444 !important;
+}
+
+.doi-strike {
+  background-color: #f2dede;
+}
+
+.doi-needed {
+  background-color: #dff0d8;
+}
+
+div[class*="_admin_set_id"] {
+  display: none;
+}
+
+.collection-avatar-label {
+  font-weight: normal;
+}
+
+.site-title h1 {
+  color: #fff !important;
+}
+
+.jumbotron {
+  background-image: url('banner_image.jpg') !important;
+  color: #fff !important;
+  position: relative;
+}
+
+.jumbo-text {
+  text-shadow: 2px 2px 2px #000;
+}
+
+.powered_by {
+  max-width: 20% !important;
+  height: auto;
+}
+
+#masthead #dropdown a {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #6b6b6b;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #252525;
+}
+
+#top-navbar-collapse > div > ul > li.dropdown.open > ul > li > a {
+  color: #333;
+}
+
+.home-nav {
+  margin-bottom: 0;
+}
+
+.navbar-right {
+  margin-right: 0 !important;
+}
+
+#scholar-nav-logo {
+  height: 30px;
+  margin-top: 4px;
+  margin-left: 5px;
+}
+
+#content-wrapper {
+  padding-bottom: 30px !important;
+}
+
+.home-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.scholar-home-tag-desc {
+  padding-top: 20px;
+}
+
+.scholar-home-tag-line .line-thru {
+    background:#fff;
+    padding: 0 10px;
+}
+
+.scholar-home-tag, .home-content {
+  margin-top: 30px;
+}
+
+.ext-links {
+  font-size: 20px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.featured-thumb img {
+    width: 270px;
+    height: 270px;
+    object-fit: cover;
+}
+
+.partners-text {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.partner-branding img {
+  max-height: 80px;
+}
+
+.itatuc {
+  padding-top: 15px;
+}
+
+.scholar-footer {
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #222;
+  border-color: #090909;
+  color: #fff;
+  font-size:12px;
+}
+
+.scholar-footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.scholar-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.jumbo-controls {
+  background-color: rgba(0, 0, 0, 0.2);;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.clear-button, .clear-button:active, .clear-button:visited, .clear-button:focus {
+  border: 4px solid #fff;
+  border-radius: 5px;
+  outline-offset: 10px;
+  color: #fff;
+  font-size: 22px;
+  text-decoration: none;
+}
+
+.clear-button:hover {
+  background-color: #FFF;
+  color: #000;
+  text-decoration: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.catalog-collection-avatar, .catalog-collection-avatar:focus, .catalog-collection-avatar:active, .catalog-collection-avatar:hover, .catalog-collection-avatar:visited {
+   color: inherit;
+   text-decoration: none;
+}
+
+.dl-horizontal dd {                                                                                                                                                         
+  padding-bottom: 6px;
+}
+
+.people {
+  margin-top: 2em;
+}
+
+/* add padding between login form fields */
+label[for=user_password] {
+  padding-top: 20px;
+}
+
+.table-format-advice {
+    width: 100%;
+  td {
+    vertical-align: top;
+    width: 25%;
+  }
+  th {
+    width: 25%;
+    text-align: left;
+    padding-left: .5em;
+  }
+}
+
+.help-description {
+  dt {
+    margin-top: 1em;
+    font-weight: normal;
+  }
+  dd {
+    padding-left: 1em;
+    font-style: italic;
+  }
+}
+
+.catalog-collection-thumb, .catalog-collection-thumb:focus, .catalog-collection-thumb:active, .catalog-collection-thumb:hover, .catalog-collection-thumb:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+.collection-avatar {
+  width: 100%;
+}
+
+.featured-item {
+  .main {
+    padding: 0 !important;
+  }
+}
+
+.panel-user>.panel-heading>h3 {
+  font-size: 1.2em;
+}
+
+/* Medium devices */
+@media (min-width: 768px) and (max-width: 991px) {
+
+  .featured-thumb {
+    width: 210px;
+  }
+
+  .home-content img {
+    max-width: 100%;
+    height: 100%;
+  }
+
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .jumbotron {
+    background-size: 100%;
+    min-height: 400px;
+    background-position: right bottom;
+  }
+
+  .jumbo-controls .jumbo-nav a {
+    font-size: 20px !important;
+  }
+
+  .jumbo-controls ul li:not(:first-child) {
+    border-left: 1px solid #fff;
+    padding-left: 15px;
+  }
+
+  .jumbo-controls ul li {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 15px;
+    position: relative;
+    top: 5px;
+  }
+  .cc-text {
+    font-size: 10px !important;
+    position: relative;
+    top: 5px;
+  }
+  .jumbo-controls li {
+    list-style: none;
+    display: inline;
+  }
+
+  .jumbo-controls li a {
+    color: #fff;
+    font-size: 20px;
+  }
+
+  .scholar-home-tag-line {
+     width: 100%;
+     border-bottom: 1px solid #000;
+     line-height: 0.1em;
+     margin: 10px 0 20px;
+     font-size: 40px;
+  }
+
+  .jumbo-text, .desktop-right {
+    text-align: right;
+  }
+
+
+  #jumbo-scholar-logo {
+    height: 70px;
+    margin-top: 50px;
+  }
+
+  .desktop-center {
+    text-align: center;
+  }
+
+  .desktop-left {
+    text-align: left;
+  }
+
+  .clear-button-wrapper {
+    margin-top: 20px;
+    position: relative;
+  }
+
+  .clear-button {
+    display: inline-block;
+    width: 175px !important;
+    padding: 5px 30px;
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,1.5);
+  }
+
+  #contribute {
+    margin-right: 10px;
+  }
+}
+
+/* media devices: tablets, ipads, high res phones, etc */
+@media (max-width: 767px) {
+
+  .jumbotron {
+    background-position: center;
+    background-size: 150%
+  }
+
+  #jumbo-scholar-logo {
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .cc-text {
+    position: relative;
+    bottom: 5px;
+  }
+
+  .scholar-home-tag-line {
+     width: 100%;
+     border-bottom: 1px solid #000;
+     line-height: 0.1em;
+     margin: 10px 0 20px;
+     font-size: 30px;
+  }
+
+  .mobile-controls ul {
+    margin-top: 20px;
+  }
+
+  .mobile-controls li {
+    list-style: none;
+  }
+
+  .mobile-controls li a {
+    color: #fff;
+    font-size: 20px;
+    text-shadow: 2px 2px 2px #000;
+  }
+
+  .scholar-footer {
+    text-align: center !important;
+  }
+
+  .clear-button-wrapper {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .clear-button {
+    padding: 10px 20px 10px 20px;
+    box-shadow: 2px 2px 2px #000;
+    width: 100%;
+  }
+
+  .jumbo-nav {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .jumbo-nav li a{
+    position: relative;
+    left: 15px;
+  }
+
+  .jumbo-text h1 {
+    margin-bottom: 20px;
+  }
+}
+

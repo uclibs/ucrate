@@ -1,0 +1,46 @@
+<nav class="jumbo-controls hidden-xs" role="navigation">
+  <div class="container-fluid">
+    <div class="row">
+      <ul class="col-xs-12 col-sm-7 jumbo-nav spec-flag">
+        <li <%= 'class=active' if current_page?(hyrax.users_path) %>>
+          <%= link_to t(:'hyrax.controls.users'), hyrax.users_path %></li>
+        <li <%= 'class=active' if current_page?(hyrax.about_path) %>>
+          <%= link_to t(:'hyrax.controls.about'), hyrax.about_path, :'data-no-turbolink'=>"true" %></li>
+        <li <%= 'class=active' if current_page?(hyrax.contact_path) %>>
+          <%= link_to t(:'hyrax.controls.contact'), hyrax.contact_path %></li>
+        <li <%= 'class=active' if action_name == "help" %>>
+          <%= link_to t(:'hyrax.controls.help'), hyrax.help_path %></li>
+      </ul><!-- /.nav -->
+      <div class="col-xs-12 col-sm-5 text-right cc-text">
+        <%= link_to 'Photo', 'https://flic.kr/p/3kBWs4', target: '_blank' %> by fusion-of-horizons | <%= link_to 'CC-BY', 'https://creativecommons.org/licenses/by/2.0/', target: '_blank' %>
+      </div>
+    </div>
+
+  </div>
+</nav><!-- /.navbar -->
+
+<!-- nav for mobile -->
+<div class="mobile-controls">
+  <nav class="visible-xs" role="navigation">
+    <div class="container-fluid">
+      <div class="row">
+        <ul class="col-xs-12 jumbo-nav">
+        <li <%= 'class=active' if current_page?(hyrax.users_path) %>>
+          <%= link_to t(:'hyrax.controls.users'), hyrax.users_path %> </li>
+        <li <%= 'class=active' if current_page?(hyrax.about_path) %>>
+          <%= link_to t(:'hyrax.controls.about'), hyrax.about_path, :'data-no-turbolink'=>"true" %></li>
+        <li <%= 'class=active' if current_page?(hyrax.contact_path) %>>
+          <%= link_to t(:'hyrax.controls.contact'), hyrax.contact_path %></li>
+        <li <%= 'class=active' if action_name == "help" %>>
+          <%= link_to t(:'hyrax.controls.help'), hyrax.help_path %></li>
+        </ul><!-- /.nav -->
+        <div class="jumbo-controls">
+          <div class="col-xs-12 text-center cc-text">
+            <%= link_to 'Photo', 'https://flic.kr/p/3kBWs4', target: '_blank' %> by fusion-of-horizons | <%= link_to 'CC-BY', 'https://creativecommons.org/licenses/by/2.0/', target: '_blank' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
