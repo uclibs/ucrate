@@ -73,7 +73,8 @@ div[class*="_admin_set_id"] {
   height: auto;
 }
 
-#masthead #dropdown a {
+#masthead #dropdown a,
+#masthead a {
   color: #fff;
 }
 
@@ -422,4 +423,3 @@ label[for=user_password] {
     margin-bottom: 20px;
   }
 }
-

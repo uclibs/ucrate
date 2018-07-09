@@ -1,8 +1,16 @@
 <% provide :page_title, application_name %>
 
+<%= render '/flash_msg' %>
+
+<%= render 'layouts/scholar/scholar_headline' %>
+
 <div class="row home-content">
   <%= render 'home_content' %>
 </div>
 
 <%= render '/shared/select_work_type_modal', create_work_presenter: @presenter.create_work_presenter if @presenter.draw_select_work_modal? %>
 
+<%= render 'layouts/scholar/links' %>
+
+<%= render 'layouts/scholar/partner_headline' %>
+<%= render 'layouts/scholar/partner_branding' %>
