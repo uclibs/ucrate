@@ -50,7 +50,7 @@ RSpec.describe Hyrax::ImageForm do
     let(:params) do
       ActionController::Parameters.new(
         title: 'foo',
-        description: [''],
+        description: '',
         visibility: 'open',
         source_id: source_id,
         admin_set_id: '123',
@@ -66,7 +66,7 @@ RSpec.describe Hyrax::ImageForm do
 
     it 'permits parameters' do
       expect(attrib['title']).to eq ['foo']
-      expect(attrib['description']).to be_empty
+      expect(attrib['description']).to be_nil
       expect(attrib['visibility']).to eq 'open'
       expect(attrib['rights_statement']).to eq 'http://creativecommons.org/licenses/by/4.0/us/'
       expect(attrib['member_of_collection_ids']).to eq ['123456', 'abcdef']
@@ -76,7 +76,7 @@ RSpec.describe Hyrax::ImageForm do
       let(:params) do
         ActionController::Parameters.new(
           title: '',
-          description: [''],
+          description: '',
           rights_statement: '',
           member_of_collection_ids: [''],
           on_behalf_of: 'Melissa'
@@ -87,7 +87,7 @@ RSpec.describe Hyrax::ImageForm do
 
       it 'removes blank parameters' do
         expect(attrib['title']).to be_nil
-        expect(attrib['description']).to be_empty
+        expect(attrib['description']).to be_nil
         expect(attrib['rights_statement']).to be_nil
         expect(attrib['member_of_collection_ids']).to be_empty
         expect(attrib['on_behalf_of']).to eq 'Melissa'
@@ -98,7 +98,7 @@ RSpec.describe Hyrax::ImageForm do
   describe "#visibility" do
     subject { form.visibility }
 
-    it { is_expected.to eq 'restricted' }
+    it { is_expected.to eq 'open' }
   end
 
   subject { form }

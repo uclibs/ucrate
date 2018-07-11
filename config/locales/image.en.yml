@@ -3,7 +3,7 @@ en:
     icons:
       image:     'fa fa-file-text-o'
     select_type:
-      image:
+      Image:
         name:               "Image"
         description:        "Visual content: art, photographs, posters, graphics."
   simple_form:
@@ -23,7 +23,7 @@ en:
         genre:            "Genre"
         time_period:      "Time Period"
         note:             "Note"
-        required_software: "Required Software" 
+        required_software: "Required Software"
         college:          "College"
         department:       "Program or Department"
     hints:

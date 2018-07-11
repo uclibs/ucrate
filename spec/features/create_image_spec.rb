@@ -39,11 +39,11 @@ RSpec.describe 'Create a Image', js: true do
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
-      expect(page).to have_content "Select type of work"
-      choose "payload_concern", option: "Image"
-      click_button "Create work"
+      expect(page).to have_link('Add New', href: '/concern/images/new?locale=en')
+      click_link('Add New', href: '/concern/images/new?locale=en')
 
-      expect(page).to have_content "Add New Image"
+      sleep 5
+
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
@@ -55,9 +55,11 @@ RSpec.describe 'Create a Image', js: true do
       title_element = find_by_id("image_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
 
+      college_element = find_by_id("image_college")
+      college_element.select("Business")
+
       fill_in('Creator', with: 'Doe, Jane')
-      fill_in('Description', with: 'Description') 
-      fill_in('College', with: 'University Collge')
+      fill_in('Description', with: 'Description')
       fill_in('Program or Department', with: 'University Department')
       fill_in('Description', with: 'This is a description')
 

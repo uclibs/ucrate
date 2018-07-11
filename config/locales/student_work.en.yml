@@ -3,7 +3,7 @@ en:
     icons:
       student_work:     'fa fa-file-text-o'
     select_type:
-      student_work:
+      StudentWork:
         name:               "Student Work"
         description:        "Deposit any kind of student work (excluding Theses and Dissertations)."
   simple_form:

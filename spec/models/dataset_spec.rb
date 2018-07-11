@@ -108,5 +108,7 @@ RSpec.describe Dataset do
     it { is_expected.to respond_to(:note) }
     it { is_expected.to respond_to(:language) }
     it { is_expected.to respond_to(:identifier) }
+    it { is_expected.to respond_to(:college) }
+    it { is_expected.to respond_to(:department) }
   end
 end

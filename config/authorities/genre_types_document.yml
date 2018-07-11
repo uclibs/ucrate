@@ -1,0 +1,23 @@
+terms:
+  Book:
+    label: Book
+  Book Chapter:   
+    label: Book Chapter
+  Brochure:   
+    label: Brochure
+  Document:   
+    label: Document
+  Letter:   
+    label: Letter
+  Manuscript:   
+    label: Manuscript  
+  Newsletter:   
+    label: Newsletter
+  Pamphlet:   
+    label: Pamphlet
+  Press Release:   
+    label: Press Release
+  Report:   
+    label: Report
+  White Paper:   
+    label: White Paper

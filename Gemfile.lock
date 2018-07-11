@@ -140,6 +140,9 @@ GEM
       activesupport (>= 3.0.0)
       rdf (~> 2.0, >= 2.0.2)
       rdf-vocab (~> 2.0)
+    active_attr (0.11.0)
+      activemodel (>= 3.0.2, < 6.0)
+      activesupport (>= 3.0.2, < 6.0)
     active_encode (0.1.1)
       activesupport
     activejob (5.1.4)
@@ -907,6 +910,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_attr
   bixby (>= 1.0.0)
   browse-everything!
   byebug

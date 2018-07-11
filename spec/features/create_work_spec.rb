@@ -27,12 +27,17 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       visit '/dashboard'
       click_link 'Works'
       click_link "Add new work"
-      expect(page).to have_content "Select type of work"
-      choose "payload_concern", option: "GenericWork"
-      click_button 'Create work'
+
+      expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
+      click_link('Add New', href: '/concern/generic_works/new?locale=en')
+    end
+
+    it 'defaults to public visibility' do
+      expect(page).to have_checked_field('generic_work_visibility_open')
     end
 
     it 'creates the work' do
+      sleep 5
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
@@ -40,11 +45,15 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
+      click_link "Relationships"
+      expect(page).to have_css("div.generic_work_admin_set_id", visible: false)
       click_link "Descriptions" # switch tab
 
       title_element = find_by_id("generic_work_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
 
+      college_element = find_by_id("generic_work_college")
+      college_element.select("Business")
 
       select 'In Copyright', from: "generic_work_rights_statement"
       select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
@@ -52,7 +61,6 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       expect(page).to have_field("Creator", with: user.name_for_works)
       fill_in('Creator', with: 'Doe, Jane')
 
-      fill_in('College', with: 'University College')
       fill_in('Program or Department', with: 'University Department')
       fill_in('Description', with: 'This is a description.')
       # With selenium and the chrome driver, focus remains on the
@@ -82,8 +90,8 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       click_link 'Works'
       click_link "Add new work"
       # Needed if there are multiple work types
-      choose "payload_concern", option: "GenericWork"
-      click_button 'Create work'
+      expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
+      click_link('Add New', href: '/concern/generic_works/new?locale=en')
     end
 
     it "allows on-behalf-of deposit" do
@@ -105,7 +113,9 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       expect(page).to have_field("Creator", with: user.name_for_works)
       fill_in('Creator', with: 'Doe, Jane')
 
-      fill_in('College', with: 'University College')
+      college_element = find_by_id("generic_work_college")
+      college_element.select("Business")
+
       fill_in('Program or Department', with: 'University Department')
       fill_in('Description', with: 'This is a description.')
 

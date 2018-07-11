@@ -33,6 +33,7 @@ class Ability
     end
 
     can [:show, :destroy], CollectionExport if current_user.admin?
+    can [:create], ClassifyConcern unless current_user.new_record?
     can [:create, :show, :add_user, :remove_user, :index, :edit, :update, :destroy], Role if current_user.admin?
     can [:manage], Etd if current_user.admin?
   end

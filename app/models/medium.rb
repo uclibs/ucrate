@@ -6,6 +6,7 @@ class Medium < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
 
   self.indexer = MediumIndexer
+  self.human_readable_type = 'Media'
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your work must have a title.' }
@@ -51,7 +52,7 @@ class Medium < ActiveFedora::Base
   end
 
   def self.multiple?(field)
-    if %i[title rights_statement].include? field.to_sym
+    if %i[title rights_statement description date_created].include? field.to_sym
       false
     else
       super

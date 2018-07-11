@@ -4,6 +4,6 @@
 #  `rails generate hyrax:work Article`
 module Hyrax
   class ArticlePresenter < Hyrax::WorkShowPresenter
-    delegate :alternate_title, :journal_title, :issn, :time_period, :required_software, :note, :geo_subject, to: :solr_document
+    delegate :alternate_title, :college, :department, :journal_title, :issn, :time_period, :required_software, :note, :geo_subject, to: :solr_document
   end
 end

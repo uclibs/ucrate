@@ -14,6 +14,21 @@ Metrics/BlockLength:
     - 'lib/tasks/*.rake'
     - 'spec/**/*.rb'
 
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'app/models/ability.rb'
+
+Metrics/LineLength:
+  Max: 400
+
+Metrics/MethodLength:
+  Exclude:
+    - 'app/controllers/classify_concerns_controller.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'app/helpers/hyrax_helper.rb'
+
 Rails/ApplicationJob:
   Enabled: false
 

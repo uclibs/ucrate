@@ -39,11 +39,11 @@ RSpec.describe 'Create a Dataset', js: true do
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
-      expect(page).to have_content "Select type of work"
-      choose "payload_concern", option: "Dataset"
-      click_button "Create work"
+      expect(page).to have_link('Add New', href: '/concern/datasets/new?locale=en')
+      click_link('Add New', href: '/concern/datasets/new?locale=en')
 
-      expect(page).to have_content "Add New Dataset"
+      sleep 5
+
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
@@ -59,9 +59,11 @@ RSpec.describe 'Create a Dataset', js: true do
       select 'In Copyright', from: "dataset_rights_statement"
       select 'Attribution-ShareAlike 4.0 International', from: "dataset_license"
 
+      college_element = find_by_id("dataset_college")
+      college_element.select("Business")
+
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Description', with: 'This is a description.')
-      fill_in('College', with: 'University Collge')
       fill_in('Program or Department', with: 'University Department')
       fill_in('Description', with: 'This is a description')
       fill_in('Required Software', with: 'Software')
@@ -84,4 +86,3 @@ RSpec.describe 'Create a Dataset', js: true do
     end
   end
 end
-

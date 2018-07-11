@@ -696,7 +696,10 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
 
         fill_in('Creator', with: 'Doe, Jane')
-        fill_in('College', with: 'University Collge')
+
+        college_element = find_by_id("generic_work_college")
+        college_element.select("Business")
+
         fill_in('Program or Department', with: 'University Department')
         fill_in('Description', with: 'This is a description.')
 

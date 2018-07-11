@@ -39,10 +39,11 @@ RSpec.describe 'Create a Medium', js: true do
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
-      expect(page).to have_content "Select type of work"
-      choose "payload_concern", option: "Medium"
-      click_button "Create work"
-      expect(page).to have_content "Add New Medium"
+      expect(page).to have_link('Add New', href: '/concern/media/new?locale=en')
+      click_link('Add New', href: '/concern/media/new?locale=en')
+
+      sleep 5
+
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
@@ -55,12 +56,14 @@ RSpec.describe 'Create a Medium', js: true do
       title_element = find_by_id("medium_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
 
+      college_element = find_by_id("medium_college")
+      college_element.select("Business")
+
       select 'In Copyright', from: "medium_rights_statement"
       select 'Attribution-ShareAlike 4.0 International', from: 'medium_license'
 
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Description', with: 'Description')
-      fill_in('College', with: 'University Collge')
       fill_in('Program or Department', with: 'University Department')
 
       # With selenium and the chrome driver, focus remains on the

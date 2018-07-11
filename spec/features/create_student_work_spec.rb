@@ -39,12 +39,14 @@ RSpec.describe 'Create a StudentWork', js: true do
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
-      expect(page).to have_content "Select type of work"
-      choose "payload_concern", option: "StudentWork"
-      click_button "Create work"
+      expect(page).to have_link('Add New', href: '/concern/student_works/new?locale=en')
 
-      expect(page).to have_content "Add New Student Work"
+      click_link('Add New', href: '/concern/student_works/new?locale=en')
+
+      sleep 5
+
       click_link "Files" # switch tab
+
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
       within('span#addfiles') do
@@ -59,11 +61,13 @@ RSpec.describe 'Create a StudentWork', js: true do
       select 'In Copyright', from: "student_work_rights_statement"
       select 'Attribution-ShareAlike 4.0 International', from: 'student_work_license'
 
+      college_element = find_by_id("student_work_college")
+      college_element.select("Business")
+
       fill_in('student_work_title', with: 'My Test Work')
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Description', with: 'testing')
       fill_in('Advisor', with: 'Lamb, Mary')
-      fill_in('College', with: 'College')
       fill_in('Department', with: 'Department')
       fill_in('Degree', with: 'Degree')
 

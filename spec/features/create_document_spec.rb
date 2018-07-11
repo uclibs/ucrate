@@ -39,11 +39,11 @@ RSpec.describe 'Create a Document', js: true do
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
-      expect(page).to have_content "Select type of work"
-      choose "payload_concern", option: "Document"
-      click_button "Create work"
+      expect(page).to have_link('Add New', href: '/concern/documents/new?locale=en')
+      click_link('Add New', href: '/concern/documents/new?locale=en')
 
-      expect(page).to have_content "Add New Document"
+      sleep 5
+
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
@@ -56,14 +56,15 @@ RSpec.describe 'Create a Document', js: true do
       title_element = find_by_id("document_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
 
+      college_element = find_by_id("document_college")
+      college_element.select("Business")
+
       select 'In Copyright', from: "document_rights_statement"
       select 'Attribution-ShareAlike 4.0 International', from: 'document_license'
 
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Description', with: 'This is a description.')
-      fill_in('College', with: 'University Collge')
       fill_in('Program or Department', with: 'University Department')
-
 
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find

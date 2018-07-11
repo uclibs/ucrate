@@ -77,15 +77,15 @@ class SolrDocument
   #    self[Solrizer.solr_name('doi')]
   #  end
 
-  #  def college
-  #    self[Solrizer.solr_name('college')]
-  #  end
+  def college
+    self[Solrizer.solr_name('college')]
+  end
 
-  #  def department
-  #    self[Solrizer.solr_name('department')]
-  #  end
+  def department
+    self[Solrizer.solr_name('department')]
+  end
 
-  #  def etd_publisher
-  #    self[Solrizer.solr_name('etd_publisher')]
-  #  end
+  def etd_publisher
+    self[Solrizer.solr_name('etd_publisher')]
+  end
 end

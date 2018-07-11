@@ -6,6 +6,7 @@ class Etd < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
 
   self.indexer = EtdIndexer
+  self.human_readable_type = 'Etd'
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your work must have a title.' }
@@ -22,7 +23,7 @@ class Etd < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :degree, predicate: ::RDF::URI.new('http://purl.org/dc/terms/subject#degree') do |index|
+  property :degree, predicate: ::RDF::URI.new('http://purl.org/dc/terms/subject#degree'), multiple: false do |index|
     index.as :stored_searchable
   end
 
@@ -67,7 +68,7 @@ class Etd < ActiveFedora::Base
   end
 
   def self.multiple?(field)
-    if %i[title rights_statement].include? field.to_sym
+    if %i[title rights_statement description date_created].include? field.to_sym
       false
     else
       super
