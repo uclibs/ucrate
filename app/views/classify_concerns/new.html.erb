@@ -1,0 +1,32 @@
+<% provide :page_header do %>
+  <h2>What are you uploading?</h2>
+  <p>Before we can begin we need to know a little about what you're uploading.</p>
+<% end %>
+
+<div class="row">
+  <ul class="classify-work">
+    <% order = [Etd, Article, Document, Dataset, Image, Medium, StudentWork, GenericWork] %>
+    <% (order + classify_concern.all_curation_concern_classes).uniq.each do |klass| %>
+      <% if can? :create, klass %>
+        <li class="work-type">
+          <h3 class="title"><%= klass.human_readable_type %></h3>
+          <p class="short-description"><%= t("hyrax.select_type.#{klass}.description") %></p>
+          <% if params[:type] == 'batch' %>
+            <%= link_to 'Add Batch',
+              hyrax.new_batch_upload_path(payload_concern: klass),
+              class: "add-button btn btn-primary #{dom_class(klass, 'add_new')}"
+            %>
+          <% else %>
+            <%= link_to 'Add New',
+              main_app.new_polymorphic_path(klass),
+              class: "add-button btn btn-primary #{dom_class(klass, 'add_new')}"
+            %>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+    <li class="work-type placeholder" aria-hidden="true"></li>
+    <li class="work-type placeholder" aria-hidden="true"></li>
+    <li class="work-type placeholder" aria-hidden="true"></li>
+  </ul>
+</div>

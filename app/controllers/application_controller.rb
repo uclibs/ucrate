@@ -32,4 +32,8 @@ class ApplicationController < ActionController::Base
         root_path
       end
     end
+
+    def auth_shib_user!
+      redirect_to login_path unless user_signed_in?
+    end
 end
