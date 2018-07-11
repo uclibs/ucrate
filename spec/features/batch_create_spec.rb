@@ -29,6 +29,11 @@ RSpec.describe 'Batch creation of works', type: :feature do
     expect(page).to have_content("Each file will be uploaded to a separate new work resulting in one work per uploaded file.")
   end
 
+  it 'defaults to public visibility' do
+    visit hyrax.new_batch_upload_path
+    expect(page).to have_checked_field('batch_upload_item_visibility_open')
+  end
+
   context 'when the user is a proxy', :js, :workflow do
     let(:second_user) { create(:user) }
 
