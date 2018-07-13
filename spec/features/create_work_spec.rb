@@ -27,9 +27,13 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       visit '/dashboard'
       click_link 'Works'
       click_link "Add new work"
-      expect(page).to have_content "Select type of work"
-      choose "payload_concern", option: "GenericWork"
-      click_button 'Create work'
+
+      expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
+      click_link('Add New', href: '/concern/generic_works/new?locale=en')
+    end
+
+    it 'defaults to public visibility' do
+      expect(page).to have_checked_field('generic_work_visibility_open')
     end
 
     it 'creates the work' do
@@ -40,6 +44,8 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
+      click_link "Relationships"
+      expect(page).to have_css("div.generic_work_admin_set_id", visible: false)
       click_link "Descriptions" # switch tab
       expect(page).to have_field("Creator", with: user.name_for_works)
       fill_in('Title', with: 'My Test Work')
@@ -73,8 +79,8 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       click_link 'Works'
       click_link "Add new work"
       # Needed if there are multiple work types
-      choose "payload_concern", option: "GenericWork"
-      click_button 'Create work'
+      expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
+      click_link('Add New', href: '/concern/generic_works/new?locale=en')
     end
 
     it "allows on-behalf-of deposit" do

@@ -39,11 +39,9 @@ RSpec.describe 'Create a Document', js: true do
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
-      expect(page).to have_content "Select type of work"
-      choose "payload_concern", option: "Document"
-      click_button "Create work"
+      expect(page).to have_link('Add New', href: '/concern/documents/new?locale=en')
+      click_link('Add New', href: '/concern/documents/new?locale=en')
 
-      expect(page).to have_content "Add New Document"
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"

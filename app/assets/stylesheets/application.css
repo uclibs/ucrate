@@ -38,3 +38,7 @@
  //    line-height: 150%;
  //    margin-top: 3.5%;
  }
+
+ div[class*="_admin_set_id"] {
+  display: none;
+ }

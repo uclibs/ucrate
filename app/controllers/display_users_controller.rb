@@ -8,7 +8,7 @@ class DisplayUsersController < Hyrax::UsersController
   end
 
   def search(query)
-    clause = query.blank? ? nil : "%" + query.downcase + "%"
+    clause = query.blank? ? nil : "%" + query.downcase.strip + "%"
     base = ::User.where(*base_query)
     if clause.present?
       base = base.where("#{Devise.authentication_keys.first} like lower(?)
@@ -16,8 +16,7 @@ class DisplayUsersController < Hyrax::UsersController
                            OR first_name like lower(?)
                            OR last_name like lower(?)", clause, clause, clause, clause)
     end
-    base.where("#{Devise.authentication_keys.first} not in (?)",
-               [::User.batch_user_key, ::User.audit_user_key])
+    base.where("#{Devise.authentication_keys.first} not in (?)", [::User.batch_user_key, ::User.audit_user_key])
         .where(guest: false)
         .references(:trophies)
         .order(sort_value)

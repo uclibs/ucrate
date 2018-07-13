@@ -3,7 +3,7 @@ es:
     icons:
       etd:     'fa fa-file-text-o'
     select_type:
-      etd:
+      Etd:
         # TODO: translate `human_name` into Spanish
         description:        "Etd trabajos"
         name:               "Etd"

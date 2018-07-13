@@ -1,3 +1,15 @@
+0.5.0 7/6/2018
+* Updated to Hyrax version 2.1.0 (final)
+* Added the bixby gem (for rubocop inheritance)
+* Ported over Scholar features
+    * Added a "Browse" button to the main search bar
+    * Added permalinks to works, files, collections, and profiles
+    * Changed the product name to "Scholar@UC"
+    * Updated the navbar menu links to match Scholar's navbar
+    * Incorporated recent changes from Scholar's People page
+    * Updated the text in the Visibility pane to match Scholar
+    * Line breaks are now preserved for work description fields
+
 0.4.0 05/30/2018
 * Update to ruby 2.5.1
 * Updated to Hyrax v2.1.0.rc3
