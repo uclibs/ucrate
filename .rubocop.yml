@@ -22,6 +22,10 @@ Metrics/MethodLength:
   Exclude:
     - 'app/controllers/classify_concerns_controller.rb'
 
+Metrics/LineLength:
+  Exclude:
+    - 'app/controllers/catalog_controller.rb'
+
 Rails/ApplicationJob:
   Enabled: false
 
