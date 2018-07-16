@@ -6,6 +6,7 @@ namespace :embargo_manager do
     # Controls when reminder emails are sent out for expiring embargoed works.
     FOURTEEN_DAYS = 14
     THIRTY_DAYS = 30
+    ONE_DAY = 1
     ZERO_DAYS = 0
     results_cap = 1_000_000
 
@@ -17,8 +18,8 @@ namespace :embargo_manager do
       mail_contents = work['title_tesim'].first
 
       case days_until_release
-      when ZERO_DAYS
-        EmbargoMailer.notify(receiver, mail_contents, ZERO_DAYS).deliver
+      when ONE_DAY # notify at end of day (~midnight), one day prior to release
+        EmbargoMailer.notify(receiver, mail_contents, ZERO_DAYS).deliver # still pass zero day count to mailer for notification message
       when FOURTEEN_DAYS
         EmbargoMailer.notify(receiver, mail_contents, FOURTEEN_DAYS).deliver
       when THIRTY_DAYS
