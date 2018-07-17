@@ -16,6 +16,22 @@
 @import 'hyrax/hyrax';
 @import 'license-selector';
 
+.navbar-brand {
+  font-size: 30px;
+  padding: 0 15px;
+  height: 70px;
+  line-height: 70px;
+}
+
+#top-navbar-toggle {
+  margin-top: 20px;
+}
+
+.nav-hyrax-controls {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .g-recaptcha {
   margin-bottom: 20px;
 }
