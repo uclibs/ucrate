@@ -7,6 +7,15 @@
                 data: { turbolinks: false } %>
 <% end %>
 
+<% if presenter.display_feature_link? %>
+  <%= link_to "Feature", main_app.featured_collection_path(presenter, id: presenter.id, format: :json),
+      data: {behavior: 'feature'}, id: 'featureLink', name: 'featureLink', class: 'btn btn-default' %>
+<% end %>
+<% if presenter.display_unfeature_link? %>
+  <%= link_to "Unfeature", main_app.featured_collection_path(presenter, id: presenter.id, format: :json),
+      data: {behavior: 'unfeature'}, id: 'unfeatureLink', name: 'unfeatureLink', class: 'btn btn-default' %>
+<% end %>
+
 <% if presenter.collection_type_is_nestable? && presenter.user_can_nest_collection? %>
 <!-- The user should have deposit access to the parent and read access to the child (the collection we are already showing, so no test is necessary). -->
     <%= button_tag '',

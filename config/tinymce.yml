@@ -6,6 +6,8 @@ content_block:
   toolbar1: styleselect | bold italic | link image | undo redo
   toolbar2: table | fullscreen | uploadimage
   plugins:
+    - link
+    - image
     - table
     - fullscreen
 custom:

@@ -27,3 +27,16 @@ div.profile a.btn-primary {
 .orcid-section {
   padding-top: 20px;
 }
+
+.featured-thumb img {
+    width: 270px;
+    height: 270px;
+    object-fit: cover;
+}
+
+.featured-item {
+  border-top: 0;
+  .main {
+    padding: 0 !important;
+  }
+}

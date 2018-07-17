@@ -1,0 +1,15 @@
+<% if FeaturedCollection.count == 0 %>
+  <p><%= t('hyrax.homepage.featured_collections.no_collections') %></p>
+<% else %>
+
+  <% featured_collection = FeaturedCollection.first %>
+  <% collection = Collection.find(featured_collection.collection_id)%>
+  <p><%= link_to collection_path(featured_collection.collection_id) do %>
+  <%= image_tag collection.to_solr["thumbnail_path_ss"], 
+                class: "featured-item representative-media",
+                alt: "Thumbnail for featured collection: #{collection.title.first}",
+                role: "presentation" %>
+  <% end %>
+<% end %>
+<p><%= t('hyrax.homepage.featured_collections.title') %></p>
+

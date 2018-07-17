@@ -1,0 +1,6 @@
+<% presenter = featured.presenter %>
+<li class="featured-item" data-id="<%= presenter.id %>">
+  <div class="center-block main row featured-thumb">
+    <%= render_thumbnail_tag presenter, { alt: "Featured work thumbnail: #{ presenter.title.first }" } %>
+  </div>
+</li>
