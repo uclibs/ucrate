@@ -5,6 +5,10 @@ class StaticController < ApplicationController
     render "static/about"
   end
 
+  def terms
+    render "hyrax/static/terms"
+  end
+
   def coll_policy
     render "static/coll_policy"
   end
