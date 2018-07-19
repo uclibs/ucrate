@@ -18,7 +18,7 @@ RSpec.describe 'searching' do
 
   context "as a public user", :clean_repo do
     it "using the gallery view" do
-      visit '/'
+      visit '/catalog'
       fill_in "search-field-header", with: "Toothbrush"
       click_button "search-submit-header"
       expect(page).to have_content "1 entry found"
@@ -34,7 +34,7 @@ RSpec.describe 'searching' do
     end
 
     it "only searches all and does not display search options for dashboard files" do
-      visit '/'
+      visit '/catalog'
 
       # it "does not display search options for dashboard files" do
       # This section was tested on its own, and required a full setup.

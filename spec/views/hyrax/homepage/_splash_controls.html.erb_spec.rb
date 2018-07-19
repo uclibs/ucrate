@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-describe '/_controls.html.erb', type: :view do
+describe '/hyrax/homepage/_splash_controls.html.erb', type: :view do
   before do
     stub_template 'catalog/_search_form.html.erb' => 'search form'
     render

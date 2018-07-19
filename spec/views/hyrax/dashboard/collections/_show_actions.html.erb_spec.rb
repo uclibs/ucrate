@@ -5,6 +5,8 @@ RSpec.describe 'hyrax/dashboard/collections/_show_actions.html.erb', type: :view
   let(:presenter) do
     double('Hyrax::CollectionPresenter', collection_type_is_nestable?: false,
                                          solr_document: solr_document,
+                                         display_feature_link?: false,
+                                         display_unfeature_link?: false,
                                          id: '123')
   end
   let(:solr_document) { double('Solr Document') }

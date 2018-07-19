@@ -6,7 +6,7 @@ class Ability
   self.ability_logic += [:everyone_can_create_curation_concerns]
 
   # Define any customized permissions here.
-  def custom_permissions
+  def custom_permissions # rubocop:disable Metrics/MethodLength
     # Limits deleting objects to a the admin user
     #
     # if current_user.admin?
@@ -34,6 +34,7 @@ class Ability
 
     can [:show, :destroy], CollectionExport if current_user.admin?
     can [:create], ClassifyConcern unless current_user.new_record?
+    can [:create, :destroy], FeaturedCollection if current_user.admin?
     can [:create, :show, :add_user, :remove_user, :index, :edit, :update, :destroy], Role if current_user.admin?
     can [:manage], Etd if current_user.admin?
   end

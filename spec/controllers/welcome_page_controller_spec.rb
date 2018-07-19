@@ -11,6 +11,18 @@ describe WelcomePageController, type: :controller do
         expect(response).to render_template('index')
       end
     end
+
+    describe 'user_waived_welcome_page' do
+      it 'returns ture' do
+        expect(controller.user_waived_welcome_page?).to eq true
+      end
+    end
+
+    describe 'skip_new_user_help' do
+      it 'returns ture' do
+        expect(controller.skip_new_user_help?).to eq true
+      end
+    end
   end
 
   context 'with signed in user' do
