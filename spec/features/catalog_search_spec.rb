@@ -8,7 +8,7 @@ RSpec.describe 'catalog searching', type: :feature do
   before do
     allow(User).to receive(:find_by_user_key).and_return(stub_model(User, twitter_handle: 'bob'))
     sign_in user
-    visit '/'
+    visit '/catalog'
   end
 
   context 'with works and collections' do
@@ -62,7 +62,7 @@ RSpec.describe 'catalog searching', type: :feature do
         admin.users << admin_user
         admin.save
         sign_in admin_user
-        visit '/'
+        visit '/catalog'
       end
 
       it "shows collection facet values the user has access to view when performing a search" do

@@ -26,7 +26,7 @@ RSpec.describe "Browse catalog:", type: :feature, clean_repo: true do
   end
 
   before do
-    visit '/'
+    visit '/catalog'
   end
 
   describe 'when not logged in' do

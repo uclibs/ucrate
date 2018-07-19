@@ -8,7 +8,7 @@ RSpec.describe "Sending an email via the contact form", type: :feature do
   describe "with unauthenticated user" do
     it "shows recaptcha dialog" do
       visit '/'
-      click_link "Contact"
+      click_link "Contact", match: :first
       expect(page).to have_css('div.g-recaptcha')
     end
   end
@@ -18,7 +18,7 @@ RSpec.describe "Sending an email via the contact form", type: :feature do
 
     it "sends mail" do
       visit '/'
-      click_link "Contact"
+      click_link "Contact", match: :first
       expect(page).to have_content "Contact Form"
       fill_in "Your Name", with: "Test McPherson"
       fill_in "Your Email", with: "archivist1@example.com"
