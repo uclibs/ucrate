@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'catalog searching', type: :feature do
   let(:user) { create(:user) }
+  let!(:collection_type) { create(:collection_type, id: 1) }
 
   before do
     allow(User).to receive(:find_by_user_key).and_return(stub_model(User, twitter_handle: 'bob'))
@@ -20,7 +21,7 @@ RSpec.describe 'catalog searching', type: :feature do
       create(:public_work, title: ["Jack's Research"], keyword: ['jacks_keyword', 'shared_keyword'])
     end
 
-    let!(:collection) { create(:public_collection, keyword: ['collection_keyword', 'shared_keyword']) }
+    let!(:collection) { create(:public_collection, collection_type_gid: collection_type.gid, keyword: ['collection_keyword', 'shared_keyword']) }
 
     it 'performing a search' do
       within('#search-form-header') do
