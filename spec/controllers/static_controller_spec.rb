@@ -31,6 +31,13 @@ describe StaticController do
       expect(response).to render_template('static/faq')
     end
   end
+  describe '#terms' do
+    it 'renders the terms page' do
+      get :terms
+      expect(response.status).to be == 200
+      expect(response).to render_template('hyrax/static/terms')
+    end
+  end
   describe '#documenting_data' do
     it 'renders the documenting_data page' do
       get :documenting_data
