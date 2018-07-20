@@ -42,6 +42,8 @@ RSpec.describe 'Create a Medium', js: true do
       expect(page).to have_link('Add New', href: '/concern/media/new?locale=en')
       click_link('Add New', href: '/concern/media/new?locale=en')
 
+      sleep 5
+
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
@@ -50,10 +52,19 @@ RSpec.describe 'Create a Medium', js: true do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
       click_link "Descriptions" # switch tab
-      fill_in('Title', with: 'My Test Work')
+
+      title_element = find_by_id("medium_title")
+      title_element.set("My Test Work  ") # Add whitespace to test it getting removed
+
+      college_element = find_by_id("medium_college")
+      college_element.select("Business")
+
+      select 'In Copyright', from: "medium_rights_statement"
+      select 'Attribution-ShareAlike 4.0 International', from: 'medium_license'
+
       fill_in('Creator', with: 'Doe, Jane')
-      fill_in('Keyword', with: 'testing')
-      select('In Copyright', from: 'Rights statement')
+      fill_in('Description', with: 'Description')
+      fill_in('Program or Department', with: 'University Department')
 
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find

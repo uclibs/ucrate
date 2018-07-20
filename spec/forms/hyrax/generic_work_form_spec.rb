@@ -1,26 +1,25 @@
 # frozen_string_literal: true
 
 # Generated via
-#  `rails generate hyrax:work Etd`
+#  `rails generate hyrax:work Image`
 require 'rails_helper'
 
-RSpec.describe Hyrax::EtdForm do
-  let(:work) { Etd.new }
+RSpec.describe Hyrax::GenericWorkForm do
+  let(:work) { GenericWork.new }
   let(:form) { described_class.new(work, nil, nil) }
 
   describe "#required_fields" do
     subject { form.required_fields }
 
-    it { is_expected.to eq [:title, :creator, :college, :department, :description, :advisor, :rights_statement, :license] }
+    it { is_expected.to eq [:title, :creator, :college, :department, :description, :rights_statement, :license] }
   end
 
   describe "#primary_terms" do
     subject { form.primary_terms }
 
     it {
-      is_expected.to eq [:title, :creator, :college, :department, :description, :advisor,
-                         :rights_statement, :license, :committee_member, :degree, :date_created,
-                         :publisher, :etd_publisher, :alternate_title, :genre, :subject, :geo_subject,
+      is_expected.to eq [:title, :creator, :college, :department, :description, :rights_statement, :license,
+                         :publisher, :date_created, :alternate_title, :subject, :geo_subject,
                          :time_period, :language, :required_software, :note, :related_url]
     }
   end
@@ -48,15 +47,15 @@ RSpec.describe Hyrax::EtdForm do
     let!(:workflow) { create(:workflow, active: true, permission_template_id: permission_template.id) }
     let(:source_id) { '123' }
     let(:file_set) { create(:file_set) }
-
     let(:params) do
       ActionController::Parameters.new(
         title: 'foo',
-        description: '',
+        description: [''],
         visibility: 'open',
         source_id: source_id,
         admin_set_id: '123',
         representative_id: '456',
+        rendering_ids: [file_set.id],
         thumbnail_id: '789',
         rights_statement: 'http://creativecommons.org/licenses/by/4.0/us/',
         member_of_collection_ids: ['123456', 'abcdef']
@@ -77,7 +76,7 @@ RSpec.describe Hyrax::EtdForm do
       let(:params) do
         ActionController::Parameters.new(
           title: '',
-          description: '',
+          description: [''],
           rights_statement: '',
           member_of_collection_ids: [''],
           on_behalf_of: 'Melissa'

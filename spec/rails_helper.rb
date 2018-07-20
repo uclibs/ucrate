@@ -19,6 +19,14 @@ require 'database_cleaner'
 require 'rspec/its'
 require 'equivalent-xml'
 
+require 'shoulda/matchers'
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
 unless ENV['SKIP_MALEFICENT']
   # See https://github.com/jeremyf/capybara-maleficent
   # Wrap Capybara matchers with sleep intervals to reduce fragility of specs.
@@ -148,4 +156,6 @@ RSpec.configure do |config|
 
   # Allow cookies to be set in feature tests (for UC Shibboleth testing)
   config.include ShowMeTheCookies, type: :feature
+
+  config.include Shoulda::Matchers::Independent
 end
