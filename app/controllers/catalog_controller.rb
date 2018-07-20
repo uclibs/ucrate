@@ -47,8 +47,10 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
     config.add_facet_field solr_name("keyword", :facetable), limit: 5
     config.add_facet_field solr_name("subject", :facetable), limit: 5
+    config.add_facet_field solr_name("college", :facetable), label: "College", limit: 5
+    config.add_facet_field solr_name("department", :facetable), label: "Program or Dept.", limit: 5
     config.add_facet_field solr_name("language", :facetable), limit: 5
-    config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
+    config.add_facet_field solr_name("geo_subject", :facetable), label: "Geographic Subject", limit: 5
     config.add_facet_field solr_name("publisher", :facetable), limit: 5
     config.add_facet_field solr_name("file_format", :facetable), limit: 5
     config.add_facet_field solr_name('member_of_collection_ids', :symbol), limit: 5, label: 'Collections', helper_method: :collection_title_by_id
@@ -73,7 +75,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name("proxy_depositor", :symbol), label: "Depositor", helper_method: :link_to_profile
     config.add_index_field solr_name("depositor"), label: "Owner", helper_method: :link_to_profile
     config.add_index_field solr_name("publisher", :stored_searchable), itemprop: 'publisher', link_to_search: solr_name("publisher", :facetable)
-    config.add_index_field solr_name("based_near_label", :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name("based_near_label", :facetable)
+    config.add_index_field solr_name("geo_subject", :stored_searchable), label: "Geographic Subject", itemprop: 'contentLocation', link_to_search: solr_name("based_near", :facetable)
     config.add_index_field solr_name("language", :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name("language", :facetable)
     config.add_index_field solr_name("date_uploaded", :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name("date_modified", :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
@@ -93,6 +95,8 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name("keyword", :stored_searchable)
     config.add_show_field solr_name("subject", :stored_searchable)
     config.add_show_field solr_name("creator", :stored_searchable)
+    config.add_show_field solr_name("college", :stored_searchable), label: "College"
+    config.add_show_field solr_name("department", :stored_searchable), label: "Program or Department"
     config.add_show_field solr_name("contributor", :stored_searchable)
     config.add_show_field solr_name("publisher", :stored_searchable)
     config.add_show_field solr_name("based_near_label", :stored_searchable)
@@ -105,6 +109,16 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name("resource_type", :stored_searchable), label: "Resource Type"
     config.add_show_field solr_name("format", :stored_searchable)
     config.add_show_field solr_name("identifier", :stored_searchable)
+    config.add_show_field solr_name("alternate_title", :stored_searchable), label: "Alternate Title"
+    config.add_show_field solr_name("journal_title", :stored_searchable), label: "Journal Title"
+    config.add_show_field solr_name("issn", :stored_searchable), label: "ISSN"
+    config.add_show_field solr_name("time_period", :stored_searchable), label: "Time Period"
+    config.add_show_field solr_name("required_software", :stored_searchable), label: "Required Software"
+    config.add_show_field solr_name("note", :stored_searchable), label: "Note"
+    config.add_show_field solr_name("genre", :stored_searchable), label: "Genre"
+    config.add_show_field solr_name("bibliographic_citation", :stored_searchable), label: "Citation"
+    config.add_show_field solr_name("degree", :stored_searchable), label: "Degree"
+    config.add_show_field solr_name("advisor", :stored_searchable), label: "Advisor"
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

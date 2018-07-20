@@ -1,0 +1,13 @@
+terms:
+  Cartoon/Comic:
+    label: Cartoon/Comic
+  Map/Chart:
+    label: Map/Chart
+  Painting:
+    label: Painting
+  Photograph:
+    label: Photograph
+  Poster:
+    label: Poster
+  Visual Art:
+    label: Visual Art

@@ -34,7 +34,7 @@ describe CallbacksController do
         allow(controller).to receive(:current_user) { user }
       end
 
-      it 'redirects to catalog index path with success notice' do
+      it 'redirects to home path with success notice' do
         get provider
         expect(response).to redirect_to(root_path)
         expect(flash[:notice]).to match(/You have successfully connected with your ORCID record/)

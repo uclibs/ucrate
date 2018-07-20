@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
   end
+  resource :featured_collection, only: [:create, :destroy]
 
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
@@ -37,6 +38,8 @@ Rails.application.routes.draw do
   get 'student_instructions' => 'static#student_instructions'
   get 'doi_help' => 'static#doi_help'
   get 'distribution_license_request' => 'hyrax/static#agreement'
+  get 'terms' => 'static#terms'
+  get 'agreement' => 'hyrax/static#agreement'
 
   mount Qa::Engine => '/authorities'
   mount Hyrax::Engine, at: '/'

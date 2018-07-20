@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508153244) do
+ActiveRecord::Schema.define(version: 20180621165939) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -108,6 +108,13 @@ ActiveRecord::Schema.define(version: 20180508153244) do
     t.index ["expires_at"], name: "index_devise_multi_auth_authentications_on_expires_at"
     t.index ["provider", "uid"], name: "index_devise_multi_auth_authentications_on_provider_and_uid", unique: true
     t.index ["user_id"], name: "index_devise_multi_auth_authentications_on_user_id"
+  end
+
+  create_table "featured_collections", force: :cascade do |t|
+    t.integer "order", default: 1
+    t.string "collection_id"
+    t.index ["collection_id"], name: "index_featured_collections_on_collection_id"
+    t.index ["order"], name: "index_featured_collections_on_order"
   end
 
   create_table "featured_works", force: :cascade do |t|

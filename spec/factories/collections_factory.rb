@@ -5,7 +5,6 @@ FactoryBot.define do
     # DEPRECATION: This factory is being replaced by collection_lw defined in collections.rb.  New tests should use the
     # light weight collection factory.  DO NOT ADD tests using this factory.
     #
-    # rubocop:disable Metrics/LineLength
     # @example let(:collection) { build(:collection, collection_type_settings: [:not_nestable, :discoverable, :sharable, :allow_multiple_membership], with_nesting_attributes: {ancestors: [], parent_ids: [], pathnames: [], depth: 1}) }
     # rubocop:enable Metrics/LineLength
 

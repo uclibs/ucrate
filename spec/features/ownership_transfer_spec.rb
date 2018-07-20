@@ -14,6 +14,8 @@ RSpec.describe 'Transferring work ownership:', type: :feature do
            title: ['little_generic_work'],
            creator: ['little_generic_work.creator'],
            resource_type: ["stuff"],
+           description: ['This is the description.'],
+           publisher: ['This is the publisher.'],
            user: original_owner)
   end
 
