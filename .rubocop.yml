@@ -24,6 +24,7 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Exclude:
     - 'app/controllers/classify_concerns_controller.rb'
+    - 'app/services/works_report.rb'
 Metrics/ClassLength:
   Exclude:
     - 'app/presenters/hyrax/collection_presenter.rb'
