@@ -65,6 +65,9 @@ RSpec.describe 'Create a Article', js: true do
       fill_in('Author', with: 'Doe, Jane')
       fill_in('Abstract', with: 'Description')
       fill_in('Program or Department', with: 'University Department')
+      fill_in('Keyword', with: 'testing')
+      select('In Copyright', from: 'Rights statement')
+      select('Creative Commons BY Attribution 4.0 International', from: 'License')
 
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find

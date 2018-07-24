@@ -71,6 +71,9 @@ RSpec.describe 'Create a Etd', js: true do
       fill_in('Abstract', with: 'Description')
       fill_in('Advisor', with: 'Ima Advisor')
       fill_in('Degree Program', with: 'Test Department')
+      fill_in('Keyword', with: 'testing')
+      select('In Copyright', from: 'Rights statement')
+      select('Creative Commons BY Attribution 4.0 International', from: 'License')
 
       # With selenium and the chrome driver, focus remains on the
       # select box. Click outside the box so the next line can't find
