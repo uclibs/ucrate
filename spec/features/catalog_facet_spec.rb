@@ -28,20 +28,23 @@ RSpec.describe 'catalog searching', js: true, type: :feature do
         fill_in('search-field-header', with: 'shared_keyword')
         click_button('Go')
       end
-
-      expect(page).to have_selector('.facet-field-heading', text: 'Type of Work')
-      expect(page).to have_selector('.facet-field-heading', text: 'Creator/Author')
-      expect(page).to have_selector('.facet-field-heading', text: 'Subject')
-      expect(page).to have_selector('.facet-field-heading', text: 'College')
-      expect(page).to have_selector('.facet-field-heading', text: 'Language')
-      expect(page).to have_selector('.facet-field-heading', text: 'Publisher')
-
-      expect(page).to have_selector('.facet-field-heading', count: 6)
-
       expect(page).to have_content('Search Results')
       expect(page).to have_content(jills_work.title.first)
       expect(page).to have_content(jacks_work.title.first)
       expect(page).to have_content(collection.title.first)
+    end
+
+    it 'has the right facets' do
+      expect(page).to have_selector('.facet-field-heading', text: 'Type of Work')
+      expect(page).to have_selector('.facet-field-heading', text: 'Language')
+      expect(page).to have_selector('.facet-field-heading', text: 'Publisher')
+      expect(page).to have_selector('.facet-field-heading', text: 'College')
+      expect(page).to have_selector('.facet-field-heading', text: 'Creator/Author')
+      expect(page).to have_selector('.facet-field-heading', text: 'Subject')
+    end
+
+    it 'has the right number of facets' do
+      expect(page).to have_selector('.facet-field-heading', count: 6)
     end
   end
 
