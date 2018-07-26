@@ -68,7 +68,7 @@ class Etd < ActiveFedora::Base
   end
 
   def self.multiple?(field)
-    if %i[title rights_statement description date_created].include? field.to_sym
+    if %i[title rights_statement description date_created license].include? field.to_sym
       false
     else
       super
