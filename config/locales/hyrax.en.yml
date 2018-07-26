@@ -90,7 +90,7 @@ en:
     welcome:
       waive_page: "Click here to hide this welcome page from displaying when you log in"
     visibility:
-      open: 
+      open:
         text: "Open Access"
         note_html: Make available to all<br />(see <a href="/creators_rights" target=\"_blank\">Creator's Rights</a> for more information)
       authenticated:
@@ -102,3 +102,7 @@ en:
     file_set:
       show:
         adobe_reader_link: 'Download Adobe Acrobat Reader'
+    toolbar:
+      profile:
+        view: 'View Profile'
+        edit: 'Edit Profile'

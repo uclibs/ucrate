@@ -17,6 +17,8 @@ RSpec.describe '/_user_util_links.html.erb', type: :view do
     page = Capybara::Node::Simple.new(rendered)
     expect(page).to have_link 'userX', href: hyrax.dashboard_profile_path('userX')
     expect(rendered).to have_link 'Dashboard', href: hyrax.dashboard_path
+    expect(rendered).to have_link 'View Profile', href: hyrax.dashboard_profile_path('userX')
+    expect(rendered).to have_link 'Edit Profile', href: hyrax.edit_dashboard_profile_path('userX')
   end
 
   context 'when the user is using shibboleth' do
