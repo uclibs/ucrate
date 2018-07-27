@@ -99,3 +99,6 @@ en:
       users: "People"
     dataset:
       help_text: If you would like guidance on submitting a dataset, please read the <a href="/documenting_data" target="_blank">Documenting Data</a> help page.
+    file_set:
+      show:
+        adobe_reader_link: 'Download Adobe Acrobat Reader'
