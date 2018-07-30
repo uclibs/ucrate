@@ -756,6 +756,8 @@ GEM
       rspec-expectations (~> 3.7.0)
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
+    rspec-retry (0.6.1)
+      rspec-core (> 3.3)
     rspec-support (3.7.1)
     rubocop (0.52.1)
       parallel (~> 1.10)
@@ -945,6 +947,7 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-its
   rspec-rails
+  rspec-retry
   sass-rails (~> 5.0)
   selenium-webdriver (= 3.12.0)
   shoulda-matchers (~> 3.1)
