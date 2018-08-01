@@ -25,8 +25,16 @@ RSpec.describe 'hyrax/dashboard/profiles/edit.html.erb', type: :view do
     expect(rendered).to match(/UC affiliation/)
   end
 
+  it "shows select fields as readonly" do
+    render
+    expect(rendered).to have_selector('input[id="user_ucdepartment"][readonly="readonly"]')
+    expect(rendered).to have_selector('input[id="user_uc_affiliation"][readonly="readonly"]')
+    expect(rendered).to have_selector('input[id="user_email"][readonly="readonly"]')
+  end
+
   it "shows the user's contact fields" do
     render
+    expect(rendered).to match(/Email/)
     expect(rendered).to match(/Alternate email/)
     expect(rendered).to match(/Campus phone number/)
     expect(rendered).to match(/Alternate phone number/)
