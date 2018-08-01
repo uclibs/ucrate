@@ -63,10 +63,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
 
       fill_in('Program or Department', with: 'University Department')
       fill_in('Description', with: 'This is a description.')
-      # With selenium and the chrome driver, focus remains on the
-      # select box. Click outside the box so the next line can't find
-      # its element
-      find('body').click
+
       choose('generic_work_visibility_open')
       expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')
@@ -119,10 +116,6 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       fill_in('Program or Department', with: 'University Department')
       fill_in('Description', with: 'This is a description.')
 
-      # With selenium and the chrome driver, focus remains on the
-      # select box. Click outside the box so the next line can't find
-      # its element
-      find('body').click
       choose('generic_work_visibility_open')
       expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       select(second_user.user_key, from: 'On behalf of')

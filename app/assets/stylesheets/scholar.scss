@@ -73,8 +73,7 @@ div[class*="_admin_set_id"] {
   height: auto;
 }
 
-#masthead #dropdown a,
-#masthead a {
+#masthead #dropdown a {
   color: #fff;
 }
 
@@ -98,6 +97,14 @@ div[class*="_admin_set_id"] {
   margin-right: 0 !important;
 }
 
+#user_utility_links {
+  margin-top: 7px;
+}
+
+.navbar-toggle {
+  margin-top: 17px;
+}
+
 #scholar-nav-logo {
   height: 30px;
   margin-top: 4px;
@@ -106,6 +113,7 @@ div[class*="_admin_set_id"] {
 
 #content-wrapper {
   padding-bottom: 30px !important;
+  padding-top: 20px;
 }
 
 .home-content img {
@@ -276,6 +284,7 @@ label[for=user_password] {
   .jumbotron {
     background-size: 100%;
     min-height: 400px;
+    margin-top: -20px;
     background-position: right bottom;
   }
 
@@ -358,7 +367,8 @@ label[for=user_password] {
 
   .jumbotron {
     background-position: center;
-    background-size: 150%
+    background-size: 150%;
+    margin-top: -20px;
   }
 
   #jumbo-scholar-logo {

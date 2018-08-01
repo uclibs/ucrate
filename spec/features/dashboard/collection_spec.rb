@@ -704,10 +704,6 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         fill_in('Program or Department', with: 'University Department')
         fill_in('Description', with: 'This is a description.')
 
-        # With selenium and the chrome driver, focus remains on the
-        # select box. Click outside the box so the next line can't find
-        # its element
-        find('body').click
         choose('generic_work_visibility_open')
         # check required acceptance
         check('agreement')
