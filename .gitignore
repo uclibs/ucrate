@@ -27,3 +27,7 @@ coverage/*
 
 # Application files to ingore
 fits.log
+
+# Ignore uploaded avatars and banners
+public/branding/*
+public/system/avatars/*
