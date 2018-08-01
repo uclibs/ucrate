@@ -14,6 +14,26 @@ Metrics/BlockLength:
     - 'lib/tasks/*.rake'
     - 'spec/**/*.rb'
 
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'app/models/ability.rb'
+
+Metrics/LineLength:
+  Max: 400
+
+Metrics/MethodLength:
+  Exclude:
+    - 'app/controllers/classify_concerns_controller.rb'
+    - 'app/services/works_report.rb'
+Metrics/ClassLength:
+  Exclude:
+    - 'app/presenters/hyrax/collection_presenter.rb'
+    - 'app/controllers/catalog_controller.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'app/helpers/hyrax_helper.rb'
+
 Rails/ApplicationJob:
   Enabled: false
 
@@ -87,6 +107,7 @@ RSpec/ExampleLength:
     - 'spec/features/create_article_spec.rb'
     - 'spec/views/static/help.html.erb_spec.rb'
     - 'spec/controllers/hyrax/file_sets_controller_spec.rb'
+    - 'spec/views/_user_util_links.html.erb_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false

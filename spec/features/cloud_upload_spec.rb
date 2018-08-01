@@ -17,9 +17,8 @@ describe "Selecting files to import from cloud providers", js: true, type: :feat
     visit '/dashboard'
     click_link 'Works'
     click_link "Add new work"
-    expect(page).to have_content "Select type of work"
-    choose "payload_concern", option: "GenericWork"
-    click_button 'Create work'
+    expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
+    click_link('Add New', href: '/concern/generic_works/new?locale=en')
   end
 
   it "has a Cloud file picker using browse-everything" do

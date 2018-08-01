@@ -7,7 +7,7 @@ RSpec.describe "Browse catalog:", type: :feature, clean_repo: true do
     GenericWork.new do |work|
       work.title = ["Jill's Research"]
       (1..25).each do |i|
-        work.keyword << ["keyword#{format('%02d', i)}"]
+        work.subject << ["subject#{format('%02d', i)}"]
       end
       work.apply_depositor_metadata('jilluser')
       work.read_groups = ['public']
@@ -18,7 +18,7 @@ RSpec.describe "Browse catalog:", type: :feature, clean_repo: true do
   let!(:jacks_work) do
     GenericWork.new do |work|
       work.title = ["Jack's Research"]
-      work.keyword = ['jacks_keyword']
+      work.subject = ['jacks_subject']
       work.apply_depositor_metadata('jackuser')
       work.read_groups = ['public']
       work.save!
@@ -26,28 +26,28 @@ RSpec.describe "Browse catalog:", type: :feature, clean_repo: true do
   end
 
   before do
-    visit '/'
+    visit '/catalog'
   end
 
   describe 'when not logged in' do
-    it 'using facet pagination to browse by keywords' do
+    it 'using facet pagination to browse by subject' do
       click_button "search-submit-header"
 
       expect(page).to have_content 'Search Results'
       expect(page).to have_content jills_work.title.first
       expect(page).to have_content jacks_work.title.first
 
-      click_link "Keyword"
-      click_link "more Keywords »"
+      click_link "Subject"
+      click_link "more Subjects »"
       within('.bottom') do
         click_link 'Next »'
       end
 
       within(".modal-body") do
-        expect(page).not_to have_content 'keyword05'
-        expect(page).to have_content 'keyword21'
+        expect(page).not_to have_content 'subject05'
+        expect(page).to have_content 'subject21'
 
-        click_link 'keyword21'
+        click_link 'subject21'
       end
 
       expect(page).to have_content jills_work.title.first

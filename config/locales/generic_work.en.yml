@@ -3,7 +3,7 @@ en:
     icons:
       generic_work:     'fa fa-file-text-o'
     select_type:
-      generic_work:
+      GenericWork:
         name:               "Generic Work"
         description:        "Deposit any non-text-based document ."
   simple_form:

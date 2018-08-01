@@ -1,0 +1,35 @@
+terms:
+  Book:
+    label: Book
+  Book Chapter:
+    label: Book Chapter
+  Brochure:
+    label: Brochure
+  Cartoon/Comic:
+    label: Cartoon/Comic
+  Document:
+    label: Document
+  Letter:
+    label: Letter
+  Manuscript:
+    label: Manuscript
+  Map/Chart:
+    label: Map/Chart
+  Newsletter:
+    label: Newsletter
+  Painting:
+    label: Painting
+  Pamphlet:
+    label: Pamphlet
+  Photograph:
+    label: Photograph
+  Poster:
+    label: Poster 
+  Press Release:
+    label: Press Release
+  Report:
+    label: Report
+  Visual Art:
+    label: Visual Art
+  White Paper:
+    label: White Paper

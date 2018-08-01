@@ -3,7 +3,7 @@ es:
     icons:
       student_work:     'fa fa-file-text-o'
     select_type:
-      student_work:
+      StudentWork:
         # TODO: translate `human_name` into Spanish
         description:        "Student work trabajos"
         name:               "Student Work"

@@ -18,11 +18,13 @@ class WelcomePageController < ApplicationController
   end
 
   def user_waived_welcome_page?
+    return true unless current_user
     current_user.waived_welcome_page
   end
   helper_method :user_waived_welcome_page?
 
   def skip_new_user_help?
+    return true unless current_user
     current_user.profile_update_not_required
   end
   helper_method :skip_new_user_help?

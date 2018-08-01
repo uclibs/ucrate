@@ -3,7 +3,7 @@ en:
     icons:
       medium:     'fa fa-file-text-o'
     select_type:
-      medium:
+      Medium:
         name:               "Media"
         description:        "Works that include video, film, slide, or audio are referred to as time-based media."
   simple_form:

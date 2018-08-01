@@ -44,11 +44,11 @@ RSpec.describe 'Create a Etd', js: true do
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
-      expect(page).to have_content "Select type of work"
-      choose "payload_concern", option: "Etd"
-      click_button "Create work"
+      expect(page).to have_link('Add New', href: '/concern/etds/new?locale=en')
+      click_link('Add New', href: '/concern/etds/new?locale=en')
 
-      expect(page).to have_content "Add New Etd"
+      sleep 5
+
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
@@ -57,15 +57,21 @@ RSpec.describe 'Create a Etd', js: true do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
       click_link "Descriptions" # switch tab
-      fill_in('Title', with: 'My Test Work')
-      fill_in('Creator', with: 'Doe, Jane')
-      fill_in('Keyword', with: 'testing')
-      select('In Copyright', from: 'Rights statement')
 
-      # With selenium and the chrome driver, focus remains on the
-      # select box. Click outside the box so the next line can't find
-      # its element
-      find('body').click
+      title_element = find_by_id("etd_title")
+      title_element.set("My Test Work  ") # Add whitespace to test it getting removed
+
+      college_element = find_by_id("etd_college")
+      college_element.select("Business")
+
+      select 'In Copyright', from: "etd_rights_statement"
+      select 'Attribution-ShareAlike 4.0 International', from: 'etd_license'
+
+      fill_in('Creator', with: 'Doe, Jane')
+      fill_in('Abstract', with: 'Description')
+      fill_in('Advisor', with: 'Ima Advisor')
+      fill_in('Degree Program', with: 'Test Department')
+
       choose('etd_visibility_open')
       expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')

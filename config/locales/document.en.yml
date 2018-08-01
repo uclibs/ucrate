@@ -1,9 +1,10 @@
+
 en:
   hyrax:
     icons:
       document:     'fa fa-file-text-o'
     select_type:
-      document:
+      Document:
         name:               "Document"
         description:        "Text-based works other than articles: books, manuscripts, etc."
   simple_form:

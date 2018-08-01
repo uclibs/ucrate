@@ -45,6 +45,17 @@ en:
           subject_tesim: Subject
           title_tesim: Title
   hyrax:
+    homepage:
+      featured_works:
+        tab_label:          'Featured Works'
+        title:              'FEATURED WORK'
+        no_works:           'No works have been featured'
+      featured_researcher:
+        tab_label:          'Featured Researcher'
+        title:              'FEATURED RESEARCHER'
+      featured_collections:
+        title:              'FEATURED COLLECTION'
+        no_collections:     'No collections have been featured'
     deposit_agreement: "Distribution License"
     account_name:           "My Institution Account Id"
     directory:
@@ -79,10 +90,19 @@ en:
     welcome:
       waive_page: "Click here to hide this welcome page from displaying when you log in"
     visibility:
-      open: 
+      open:
         text: "Open Access"
         note_html: Make available to all<br />(see <a href="/creators_rights" target=\"_blank\">Creator's Rights</a> for more information)
       authenticated:
         note_html: Restrict access to logged-in users
     controls:
       users: "People"
+    dataset:
+      help_text: If you would like guidance on submitting a dataset, please read the <a href="/documenting_data" target="_blank">Documenting Data</a> help page.
+    file_set:
+      show:
+        adobe_reader_link: 'Download Adobe Acrobat Reader'
+    toolbar:
+      profile:
+        view: 'View Profile'
+        edit: 'Edit Profile'

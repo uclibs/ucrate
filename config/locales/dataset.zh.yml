@@ -3,7 +3,7 @@ zh:
     icons:
       dataset:     'fa fa-file-text-o'
     select_type:
-      dataset:
+      Dataset:
         # TODO: translate `human_name` into Chinese
         description:        "Dataset 作品"
         name:               "Dataset"

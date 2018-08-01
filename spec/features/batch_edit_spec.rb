@@ -82,7 +82,7 @@ RSpec.describe 'batch', type: :feature, clean_repo: true, js: true do
       end
     end
 
-    it 'updates permissions and roles' do
+    it 'updates permissions and roles', retry: 3, retry_wait: 10 do
       click_on 'batch-edit'
       find('#edit_permissions_link').click
       expect(page).to have_content('Batch Edit Descriptions')
@@ -98,29 +98,13 @@ RSpec.describe 'batch', type: :feature, clean_repo: true, js: true do
         find('.status', text: 'Changes Saved', wait: 5)
       end
 
-      within "#form_permissions" do
-        batch_edit_expand('permissions_sharing')
-        page.select('donor', from: 'new_group_name_skel')
-        page.select('View/Download', from: 'new_group_permission_skel')
-        page.find('#add_new_group_skel').click
-        find('#collapse_permissions_sharing table', text: 'View/Download')
-        find('#collapse_permissions_sharing table', text: 'donor')
-        find('#permissions_sharing_save').click
-        # This was `expect(page).to have_content 'Changes Saved'`, however in debugging,
-        # the `have_content` check was ignoring the `within` scoping and finding
-        # "Changes Saved" for other field areas
-        find('.status', text: 'Changes Saved', wait: 5)
-      end
-
       # Visit work permissions and verify
       visit "/concern/generic_works/#{work1.id}/edit#share"
       page.find('#generic_work_visibility_authenticated:checked')
-      page.find('#share table', text: 'donor')
 
       # Visit file permissions and verify
       visit "concern/file_sets/#{work1.file_sets.first.id}/edit#permissions_display"
       page.find('#file_set_visibility_authenticated:checked')
-      page.find('#permissions_display table', text: 'donor')
     end
   end
 

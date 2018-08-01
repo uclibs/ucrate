@@ -33,7 +33,7 @@ RSpec.describe 'collection_type', type: :feature, clean_repo: true do
       expect(page).to have_content 'User Collection'
       expect(page).to have_content 'Collection Type'
 
-      expect(page).to have_link('Edit', count: 3)
+      expect(page).to have_link('Edit', count: 3, exact: true)
       expect(page).to have_link('Edit', href: hyrax.edit_admin_collection_type_path(admin_set_type.id, locale: 'en'))
       expect(page).to have_link('Edit', href: hyrax.edit_admin_collection_type_path(user_collection_type.id, locale: 'en'))
       expect(page).to have_link('Edit', href: hyrax.edit_admin_collection_type_path(exhibit_collection_type.id, locale: 'en'))

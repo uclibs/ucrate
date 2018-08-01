@@ -1,0 +1,24 @@
+<div class="jumbotron">
+  <div class="container">
+    <div class="jumbo-text">
+      <div class="header-title">
+        <%= image_tag 'scholar-logo.png', id: 'jumbo-scholar-logo', alt: 'scholar@uc' %>
+      </div>
+      <div class="clear-button-wrapper">
+        <div class="row visible-xs">
+          <div class="col-xs-6">
+            <a class="clear-button text-center" href="<%= main_app.new_classify_concern_path %>">Contribute</a>
+          </div>
+          <div class="col-xs-6">
+            <a class="clear-button text-center" href="<%= main_app.search_catalog_path %>">Browse</a>
+         </div>
+        </div>
+        <div class="hidden-xs">
+          <a id="contribute" class="clear-button text-center" href="<%= main_app.new_classify_concern_path %>">Contribute</a>
+          <a id="discover" class="clear-button text-center" href="<%= main_app.search_catalog_path%>">Browse</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'splash_controls' %>
+</div>

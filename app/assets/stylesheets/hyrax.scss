@@ -14,6 +14,23 @@
 @import "blacklight_gallery/slideshow";
 @import "blacklight_gallery/osd_viewer";
 @import 'hyrax/hyrax';
+@import 'license-selector';
+
+.navbar-brand {
+  font-size: 30px;
+  padding: 0 15px;
+  height: 70px;
+  line-height: 70px;
+}
+
+#top-navbar-toggle {
+  margin-top: 20px;
+}
+
+.nav-hyrax-controls {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
 .g-recaptcha {
   margin-bottom: 20px;
@@ -26,4 +43,17 @@ div.profile a.btn-primary {
 
 .orcid-section {
   padding-top: 20px;
+}
+
+.featured-thumb img {
+    width: 270px;
+    height: 270px;
+    object-fit: cover;
+}
+
+.featured-item {
+  border-top: 0;
+  .main {
+    padding: 0 !important;
+  }
 }

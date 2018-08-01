@@ -14,6 +14,36 @@ RSpec.describe "The homepage" do
     expect(page).to have_link "Work 1"
   end
 
+  it 'renders the featured researcher partial' do
+    visit root_path
+    expect(page).to have_content 'FEATURED RESEARCHER'
+  end
+
+  it 'renders the featured collection partial' do
+    visit root_path
+    expect(page).to have_content 'FEATURED COLLECTION'
+  end
+
+  it 'renders the featured work partial' do
+    visit root_path
+    expect(page).to have_content 'FEATURED WORK'
+  end
+
+  it 'shows introduction text' do
+    visit root_path
+    expect(page).to have_css('div.scholar-home-tag.text-center')
+  end
+
+  it 'shows external links' do
+    visit root_path
+    expect(page).to have_css('div.ext-links.text-center')
+  end
+
+  it 'shows partners' do
+    visit root_path
+    expect(page).to have_css('div.partner-branding.row')
+  end
+
   context "as an admin" do
     let(:user) { create(:admin) }
 

@@ -11,15 +11,36 @@ shared_examples 'sitemap' do |work_class|
   before { visit sitemap_path }
 
   it "indexes public #{work_class}s" do
-    expect(xml).to have_content build_test_path(work_type, public_work.id)
+    expect(xml).to have_content("#{Rails.application.config.application_root_url}/concern/#{work_type.pluralize}/#{public_work.id}")
   end
 
   it "does not index private #{work_class}s" do
-    expect(xml).not_to have_content build_test_path(work_type, private_work.id)
+    expect(xml).not_to have_content("#{Rails.application.config.application_root_url}/concern/#{work_type.pluralize}/#{private_work.id}")
   end
 
   it "indexes the catalog facet for #{work_class}s" do
     expect(xml).to have_content build_facet_path(work_class)
+  end
+end
+
+shared_examples 'sitemap collection' do |collection_class|
+  let!(:collection_type) { collection_class.name.underscore }
+  let!(:private_collection) { FactoryBot.create(collection_type.to_sym) }
+  let!(:public_collection) { FactoryBot.create("public_#{collection_type}".to_sym) }
+  let(:xml) { Capybara.string(page.body) }
+
+  before { visit sitemap_path }
+
+  it "indexes public #{collection_class}s" do
+    expect(xml).to have_content("#{Rails.application.config.application_root_url}/#{collection_type.pluralize}/#{public_collection.id}")
+  end
+
+  it "does not index private #{collection_class}s" do
+    expect(xml).not_to have_content("#{Rails.application.config.application_root_url}/#{collection_type.pluralize}/#{private_collection.id}")
+  end
+
+  it "indexes the catalog facet for #{collection_class}s" do
+    expect(xml).to have_content build_facet_path(collection_class)
   end
 end
 
@@ -29,9 +50,11 @@ describe 'Viewing the sitemap', :js, :workflow do
 
   before { visit sitemap_path }
 
-  Hyrax.config.registered_curation_concern_types.append('Collection').each do |type|
+  Hyrax.config.registered_curation_concern_types.each do |type|
     it_behaves_like 'sitemap', type.constantize
   end
+
+  it_behaves_like 'sitemap collection', 'Collection'.constantize
 
   it 'displays the root URL' do
     expect(xml).to have_content(root_path)
@@ -50,8 +73,4 @@ private
 
 def build_facet_path(work_class)
   "/catalog?f[human_readable_type_sim][]=#{work_class}"
-end
-
-def build_test_path(work_type, work_id)
-  "/concern/#{work_type.pluralize}/#{work_id}"
 end

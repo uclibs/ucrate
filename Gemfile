@@ -43,6 +43,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # gem 'clamav'
+gem 'active_attr'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'devise-multi_auth', git: 'https://github.com/uclibs/devise-multi_auth', branch: 'rails-5-1'
@@ -84,5 +85,7 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rspec-activemodel-mocks'
-  gem 'selenium-webdriver'
+  gem 'rspec-retry'
+  gem 'selenium-webdriver', '3.12.0'
+  gem 'shoulda-matchers', '~> 3.1'
 end

@@ -14,7 +14,24 @@ RSpec.describe 'embargo' do
 
     it 'can be created, displayed and updated', :clean_repo, :workflow do
       visit '/concern/generic_works/new'
-      fill_in 'Title', with: 'Embargo test'
+
+      title_element = find_by_id("generic_work_title")
+      title_element.set("Embargo test") # Add whitespace to test it getting removed
+
+      college_element = find_by_id("generic_work_college")
+      college_element.select("Business")
+
+      select 'In Copyright', from: "generic_work_rights_statement"
+      select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
+
+      fill_in('Creator', with: 'Doe, Jane')
+      fill_in('Program or Department', with: 'University Department')
+      fill_in('Description', with: 'This is a description.')
+
+      # With selenium and the chrome driver, focus remains on the
+      # select box. Click outside the box so the next line can't find
+      # its element
+
       choose 'Embargo'
       fill_in 'generic_work_embargo_release_date', with: future_date
       select 'Private', from: 'Restricted to'
