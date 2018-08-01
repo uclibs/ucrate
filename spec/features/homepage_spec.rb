@@ -29,6 +29,21 @@ RSpec.describe "The homepage" do
     expect(page).to have_content 'FEATURED WORK'
   end
 
+  it 'shows introduction text' do
+    visit root_path
+    expect(page).to have_css('div.scholar-home-tag.text-center')
+  end
+
+  it 'shows external links' do
+    visit root_path
+    expect(page).to have_css('div.ext-links.text-center')
+  end
+
+  it 'shows partners' do
+    visit root_path
+    expect(page).to have_css('div.partner-branding.row')
+  end
+
   context "as an admin" do
     let(:user) { create(:admin) }
 

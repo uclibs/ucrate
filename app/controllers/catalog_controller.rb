@@ -116,7 +116,6 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name("required_software", :stored_searchable), label: "Required Software"
     config.add_show_field solr_name("note", :stored_searchable), label: "Note"
     config.add_show_field solr_name("genre", :stored_searchable), label: "Genre"
-    config.add_show_field solr_name("bibliographic_citation", :stored_searchable), label: "Citation"
     config.add_show_field solr_name("degree", :stored_searchable), label: "Degree"
     config.add_show_field solr_name("advisor", :stored_searchable), label: "Advisor"
 

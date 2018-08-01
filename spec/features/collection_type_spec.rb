@@ -33,7 +33,7 @@ RSpec.describe 'collection_type', type: :feature, clean_repo: true do
       expect(page).to have_content 'User Collection'
       expect(page).to have_content 'Collection Type'
 
-      expect(page).to have_link('Edit', count: 3)
+      expect(page).to have_link('Edit', count: 3, exact: true)
       expect(page).to have_link('Edit', href: hyrax.edit_admin_collection_type_path(admin_set_type.id, locale: 'en'))
       expect(page).to have_link('Edit', href: hyrax.edit_admin_collection_type_path(user_collection_type.id, locale: 'en'))
       expect(page).to have_link('Edit', href: hyrax.edit_admin_collection_type_path(exhibit_collection_type.id, locale: 'en'))
@@ -380,18 +380,10 @@ RSpec.describe 'collection_type', type: :feature, clean_repo: true do
 
         within('div#deleteDenyModal') do
           expect(page).to have_content(deny_delete_modal_text)
-
-          sleep 5
-
-          find(:xpath, "/html/body/div[2]/div[2]/div[2]/div[3]/div/div/div[2]/a", text: 'View collections of this type').click
-          find(:xpath, "//tr[td[contains(.,'#{not_empty_collection_type.title}')]]/td/button", text: 'Delete').click
+          click_link('View collections of this type')
         end
 
         # forwards to Dashboard -> Collections -> All Collections
-        # needs a sleep to finalize delete
-
-        sleep 5
-
         within('li.active') do
           expect(page).to have_link('All Collections')
         end

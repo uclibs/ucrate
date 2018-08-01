@@ -15,6 +15,13 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require jquery_ujs
+//= require jquery-ui-1.9.2/jquery.ui.widget
+//= require jquery-ui-1.9.2/jquery.ui.core
+//= require jquery-ui-1.9.2/jquery.ui.menu
+//= require jquery-ui-1.9.2/jquery.ui.position
+//= require jquery-ui-1.9.2/jquery.ui.autocomplete
+//= require jquery-ui-1.9.2/jquery.ui.effect
+//= require jquery-ui-1.9.2/jquery.ui.effect-highlight
 //= require turbolinks
 //
 // Required by Blacklight
@@ -22,4 +29,8 @@
 
 //= require_tree .
 //= require hyrax
+
+//= require lodash
+//= require license-selector
+//= require select-license
 

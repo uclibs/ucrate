@@ -64,10 +64,6 @@ RSpec.describe 'Batch creation of works', type: :feature do
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Keyword', with: 'testing')
       select('In Copyright', from: 'Rights statement')
-      # With selenium and the chrome driver, focus remains on the
-      # select box. Click outside the box so the next line can't find
-      # its element
-      find('body').click
 
       choose('batch_upload_item_visibility_open')
       expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')

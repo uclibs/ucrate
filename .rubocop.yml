@@ -24,6 +24,7 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Exclude:
     - 'app/controllers/classify_concerns_controller.rb'
+    - 'app/services/works_report.rb'
 Metrics/ClassLength:
   Exclude:
     - 'app/presenters/hyrax/collection_presenter.rb'
@@ -106,6 +107,7 @@ RSpec/ExampleLength:
     - 'spec/features/create_article_spec.rb'
     - 'spec/views/static/help.html.erb_spec.rb'
     - 'spec/controllers/hyrax/file_sets_controller_spec.rb'
+    - 'spec/views/_user_util_links.html.erb_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false

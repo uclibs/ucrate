@@ -264,6 +264,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
         fill_in('Abstract or Summary', with: description)
         fill_in('Related URL', with: 'http://example.com/')
+        select('Creative Commons BY Attribution 4.0 International', from: 'License')
 
         click_button("Save")
         expect(page).to have_content title
@@ -703,10 +704,6 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         fill_in('Program or Department', with: 'University Department')
         fill_in('Description', with: 'This is a description.')
 
-        # With selenium and the chrome driver, focus remains on the
-        # select box. Click outside the box so the next line can't find
-        # its element
-        find('body').click
         choose('generic_work_visibility_open')
         # check required acceptance
         check('agreement')
