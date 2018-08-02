@@ -37,4 +37,9 @@ RSpec.describe 'hyrax/dashboard/profiles/edit.html.erb', type: :view do
     expect(rendered).to match(/Personal webpage/)
     expect(rendered).to match(/Blog/)
   end
+
+  it "does not show hyrax orcid field" do
+    render
+    expect(rendered).not_to match(/ORCID Profile/)
+  end
 end
