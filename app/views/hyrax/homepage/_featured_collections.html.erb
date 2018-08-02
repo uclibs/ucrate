@@ -4,12 +4,12 @@
 
   <% featured_collection = FeaturedCollection.first %>
   <% collection = Collection.find(featured_collection.collection_id)%>
-  <p><%= link_to collection_path(featured_collection.collection_id) do %>
-  <%= image_tag collection.to_solr["thumbnail_path_ss"], 
-                class: "featured-item representative-media",
+  <div class="center-block main row featured-thumb featured-collection">
+    <%= link_to collection_path(featured_collection.collection_id) do %>
+    <%= image_tag collection.to_solr["thumbnail_path_ss"], 
                 alt: "Thumbnail for featured collection: #{collection.title.first}",
                 role: "presentation" %>
-  <% end %>
-<% end %>
+    <% end %>
+    <% end %>
+  </div>
 <p><%= t('hyrax.homepage.featured_collections.title') %></p>
-
