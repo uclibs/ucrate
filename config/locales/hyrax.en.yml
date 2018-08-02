@@ -12,21 +12,17 @@ en:
           publisher_sim: Publisher
           subject_sim: Subject
         index:
-          based_near_tesim: Location
-          contributor_tesim: Contributor
-          creator_tesim: Creator
+          title_tesim: Title
+          has_model_ssim: Type
+          description_tesim: Description/Abstract
+          creator_tesim: Creator/Author
+          depositor_tesim: Submitter
           date_created_tesim: Date Created
-          date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
-          description_tesim: Description
-          file_format_tesim: File Format
-          identifier_tesim: Identifier
-          keyword_tesim: Keyword
-          language_tesim: Language
+          date_modified_dtsi: Date Modified
+          date_modified_ssi: Date Modified
+          date_uploaded_ssi: Date Uploaded
           license_tesim: License
-          publisher_tesim: Publisher
-          rights_statement_tesim: Rights Statement
-          subject_tesim: Subject
         show:
           based_near_tesim: Location
           contributor_tesim: Contributor
