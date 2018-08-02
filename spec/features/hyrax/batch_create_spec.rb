@@ -46,7 +46,9 @@ RSpec.describe 'Batch creation of works', type: :feature do
       ProxyDepositRights.create!(grantor: second_user, grantee: user)
       sign_in user
       visit '/dashboard'
-      click_link 'Works'
+      within('.sidebar') do
+        click_link 'Works'
+      end
       click_link "Create batch of works"
     end
 
