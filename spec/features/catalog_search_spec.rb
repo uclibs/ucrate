@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'catalog searching', type: :feature do
   let(:user) { create(:user) }
   let!(:collection_type) { create(:collection_type, id: 1) }
+  let!(:collection_type_2) { create(:collection_type, id: 2) }
 
   before do
     allow(User).to receive(:find_by_user_key).and_return(stub_model(User, twitter_handle: 'bob'))
