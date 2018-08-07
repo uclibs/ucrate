@@ -31,7 +31,7 @@ describe ExpirationService do
     end
   end
 
-  context 'with an expired embargo in the past' do
+  context 'with an expired embargo in the past', :clean_repo do
     let(:embargo_date_in_past) { (Time.zone.today + 1.day) }
     let(:embargoed_work) { create(:private_generic_work, :with_public_embargo, title: ['Embargoed Work'], embargo_release_date: embargo_date_in_past) }
 
