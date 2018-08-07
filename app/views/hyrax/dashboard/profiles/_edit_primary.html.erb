@@ -51,7 +51,7 @@
       <%= t('hyrax.user_profile.ucdepartment') %>
     <% end %>
     <div class="col-xs-8">
-       <%= f.text_field :ucdepartment, class: "form-control" %>
+       <%= f.text_field :ucdepartment, class: "form-control", readonly: true %>
     </div>
   </div>
 
@@ -60,9 +60,16 @@
       <%= t('hyrax.user_profile.uc_affiliation') %>
     <% end %>
     <div class="col-xs-8">
-       <%= f.text_field :uc_affiliation, class: "form-control" %>
+       <%= f.text_field :uc_affiliation, class: "form-control", readonly: true %>
     </div>
   </div>
+ 
+   <div class="form-group">
+      <%= f.label :email, 'Email', class: 'col-xs-4 control-label' %>
+      <div class="col-xs-8">
+         <%= f.text_field :email, class: "form-control", readonly: true %>
+      </div>
+    </div><!-- .form-group -->
 
   <div class="form-group">
     <%= f.label :alternate_email, class: 'col-xs-4 control-label' do %>
@@ -112,15 +119,6 @@
   <% if Hyrax.config.arkivo_api? %>
     <%= render partial: 'zotero', locals: { f: f, user: @user } %>
   <% end %>
-
-  <div class="form-group">
-    <%= f.label :orcid, class: 'col-xs-4 control-label' do %>
-      <%= orcid_label %>
-    <% end %>
-    <div class="col-xs-8">
-       <%= f.text_field :orcid, class: "form-control" %>
-    </div>
-  </div><!-- .form-group -->
 
   <div class="form-group">
     <%= f.label :twitter_handle, '<i class="fa fa-twitter"></i> Twitter Handle'.html_safe, class: 'col-xs-4 control-label' %>
