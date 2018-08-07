@@ -19,14 +19,6 @@ class GenericWork < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
-  property :degree, predicate: ::RDF::URI.new('http://purl.org/dc/terms/subject#degree') do |index|
-    index.as :stored_searchable
-  end
-
-  property :advisor, predicate: ::RDF::URI.new('http://purl.org/dc/terms/contributor#advisor') do |index|
-    index.as :stored_searchable
-  end
-
   property :genre, predicate: ::RDF::URI.new('http://purl.org/dc/terms/type#genre') do |index|
     index.as :stored_searchable, :facetable
   end
