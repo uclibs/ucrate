@@ -3,14 +3,16 @@ en:
     search:
       fields:
         facet:
+          human_readable_type_sim: Type of Work
           based_near_label_sim: Location
-          creator_sim: Creator
+          creator_sim: Creator/Author
           file_format_sim: Format
           generic_type_sim: Type
           keyword_sim: Keyword
           language_sim: Language
           publisher_sim: Publisher
           subject_sim: Subject
+          member_of_collection_ids_ssim: Collection
         index:
           based_near_tesim: Location
           contributor_tesim: Contributor
