@@ -17,4 +17,5 @@ RSpec.describe Hyrax::DocumentPresenter do
   it { is_expected.to delegate_method(:time_period).to(:solr_document) }
   it { is_expected.to delegate_method(:required_software).to(:solr_document) }
   it { is_expected.to delegate_method(:note).to(:solr_document) }
+  it { is_expected.to delegate_method(:geo_subject).to(:solr_document) }
 end
