@@ -77,7 +77,7 @@ RSpec.describe 'embargo' do
                     edit_users: [user])
     end
 
-    it 'can be updated with a valid date' do
+    it 'can be updated with a valid date', js: true do
       visit "/concern/generic_works/#{work.id}"
 
       click_link 'Edit'
@@ -90,7 +90,6 @@ RSpec.describe 'embargo' do
 
       click_button 'Update Embargo'
       expect(page).to have_content(later_future_date.to_date.to_formatted_s(:standard))
-      expect(page).to have_content(my_admin_set.title.first)
     end
 
     it 'cannot be updated with an invalid date' do
