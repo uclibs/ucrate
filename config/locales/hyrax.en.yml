@@ -1,4 +1,14 @@
 en:
+  activefedora:
+    models:
+      article: 'Article'
+      dataset: 'Dataset'
+      document: 'Document'
+      etd: 'Etd'
+      generic_work: 'Generic Work'
+      image: 'Image'
+      medium: 'Media'
+      student_work: 'Student Work'
   blacklight:
     search:
       fields:
