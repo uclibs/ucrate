@@ -25,6 +25,8 @@ Metrics/MethodLength:
   Exclude:
     - 'app/controllers/classify_concerns_controller.rb'
     - 'app/services/works_report.rb'
+    - 'app/forms/hyrax/forms/batch_upload_form.rb'
+  
 Metrics/ClassLength:
   Exclude:
     - 'app/presenters/hyrax/collection_presenter.rb'
@@ -108,6 +110,8 @@ RSpec/ExampleLength:
     - 'spec/views/static/help.html.erb_spec.rb'
     - 'spec/controllers/hyrax/file_sets_controller_spec.rb'
     - 'spec/views/_user_util_links.html.erb_spec.rb'
+    - 'spec/jobs/batch_create_job_spec.rb'
+    - 'spec/controllers/hyrax/batch_uploads_controller_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
@@ -161,3 +165,4 @@ Metrics/AbcSize:
 Metrics/CyclomaticComplexity:
   Exclude:
     - 'app/models/ability.rb'
+    - 'app/forms/hyrax/forms/batch_upload_form.rb'
