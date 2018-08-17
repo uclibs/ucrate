@@ -1,3 +1,9 @@
+        <div class="form-instructions">
+          <%= t('hyrax.workform_help_html') %>
+        </div>
+        <div class="contextual-help">
+          <%= t('hyrax.workform_attach_file_html', href: link_to(t("hyrax.workform_attach_file_href"), '#files', 'aria-controls': 'files', 'data-toggle': 'tab')) %>
+        </div>
         <div class="base-terms">
           <% f.object.primary_terms.each do |term| %>
             <%= render_edit_field_partial(term, f: f) %>
