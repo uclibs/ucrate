@@ -48,6 +48,15 @@
       <div class="panel panel-default labels">
         <%= simple_form_for ContentBlock.for(:researcher), url: hyrax.content_block_path(ContentBlock.for(:researcher)), html: {class: 'nav-safety'} do |f| %>
           <div class="panel-body">
+            <div class="alert alert-warning">
+              <h4>Scholar featured researcher image upload instructions</h4>
+              <ul>
+                <li>Image upload only works with Firefox - last tested with 61.0.1 (64-bit).</li>
+                <li>Drag and drop image (270x270px) into form</li>
+                <li> See <%=link_to "https://github.com/uclibs/ucrate/issues/293", 'github' %></li>
+
+              </ul>
+            </div>
             <div class="field form-group">
                 <%= f.label :researcher %><br />
                 <%= f.text_area :researcher, value: f.object.value, class: 'form-control tinymce', rows: 20, cols: 120 %>
