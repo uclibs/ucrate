@@ -15,7 +15,9 @@ describe "Selecting files to import from cloud providers", js: true, type: :feat
 
     sign_in user
     visit '/dashboard'
-    click_link 'Works'
+    within(".sidebar") do
+      click_link 'Works'
+    end
     click_link "Add new work"
     expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
     click_link('Add New', href: '/concern/generic_works/new?locale=en')

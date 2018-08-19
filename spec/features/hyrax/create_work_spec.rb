@@ -25,9 +25,11 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
     before do
       sign_in user
       visit '/dashboard'
-      click_link 'Works'
-      click_link "Add new work"
 
+      within('.sidebar') do
+        click_link 'Works'
+      end
+      click_link "Add new work"
       expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
       click_link('Add New', href: '/concern/generic_works/new?locale=en')
     end
@@ -84,7 +86,11 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       ProxyDepositRights.create!(grantor: second_user, grantee: user)
       sign_in user
       visit '/dashboard'
-      click_link 'Works'
+
+      within('.sidebar') do
+        click_link 'Works'
+      end
+
       click_link "Add new work"
       # Needed if there are multiple work types
       expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
@@ -92,6 +98,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
     end
 
     it "allows on-behalf-of deposit" do
+      page.save_screenshot('virus.png')
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       within('span#addfiles') do
@@ -134,7 +141,10 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       expect(page).to have_content("Permanent link to this page")
 
       sign_in second_user
-      click_link 'Works'
+      visit '/dashboard'
+      within('.sidebar') do
+        click_link 'Works'
+      end
       expect(page).to have_content "My Test Work"
     end
   end

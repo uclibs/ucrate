@@ -103,6 +103,17 @@ en:
       show:
         adobe_reader_link: 'Download Adobe Acrobat Reader'
     toolbar:
+      dashboard: 
+        my: 'My Dashboard'
+      works:
+        batch: 'Batch Create'
+        menu: 'Works'
+        my: 'My Works'
+        new: 'New Work'
+      collections:
+        menu: 'Collections'
+        my: 'My Collections'
+        new: 'New Collection'
       profile:
         view: 'View Profile'
         edit: 'Edit Profile'
