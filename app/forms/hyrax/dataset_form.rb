@@ -20,11 +20,11 @@ module Hyrax
     self.terms -= %i[keyword source contributor based_near identifier resource_type]
 
     ## Setting custom required fields
-    self.required_fields = %i[title creator college department description required_software rights_statement license]
+    self.required_fields = %i[title creator college department description required_software license]
 
     ## Adding above the fold on the form without making this required
     def primary_terms
-      %i[title creator college department description required_software rights_statement license
+      %i[title creator college department description required_software license rights_statement
          publisher date_created alternate_title subject geo_subject time_period language
          note related_url]
     end
