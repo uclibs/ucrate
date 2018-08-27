@@ -110,6 +110,7 @@ RSpec/ExampleLength:
     - 'spec/views/static/help.html.erb_spec.rb'
     - 'spec/controllers/hyrax/file_sets_controller_spec.rb'
     - 'spec/views/_user_util_links.html.erb_spec.rb'
+    - 'spec/forms/hyrax/batch_edit_form_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
