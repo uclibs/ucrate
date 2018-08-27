@@ -1,4 +1,14 @@
 en:
+  activefedora:
+    models:
+      article: 'Article'
+      dataset: 'Dataset'
+      document: 'Document'
+      etd: 'Etd'
+      generic_work: 'Generic Work'
+      image: 'Image'
+      medium: 'Media'
+      student_work: 'Student Work'
   blacklight:
     search:
       fields:
@@ -103,6 +113,17 @@ en:
       show:
         adobe_reader_link: 'Download Adobe Acrobat Reader'
     toolbar:
+      dashboard: 
+        my: 'My Dashboard'
+      works:
+        batch: 'Batch Create'
+        menu: 'Works'
+        my: 'My Works'
+        new: 'New Work'
+      collections:
+        menu: 'Collections'
+        my: 'My Collections'
+        new: 'New Collection'
       profile:
         view: 'View Profile'
         edit: 'Edit Profile'

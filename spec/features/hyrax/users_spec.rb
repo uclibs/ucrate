@@ -58,6 +58,7 @@ RSpec.describe "User Spec", type: :feature do
         click_link('Edit Profile', match: :first)
         click_on('Save Profile')
         expect(page).to have_content("Link to this page: ")
+        expect(page).to have_content("/users/#{user.user_key.gsub('.', '-dot-')}")
       end
     end
   end

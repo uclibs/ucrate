@@ -40,7 +40,9 @@ RSpec.describe 'Create a Etd', js: true do
 
     it do
       visit '/dashboard'
-      click_link "Works"
+      within('.sidebar') do
+        click_link "Works"
+      end
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines

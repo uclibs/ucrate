@@ -6,7 +6,6 @@ class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
 
   self.indexer = ImageIndexer
-  self.human_readable_type = 'Image'
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your work must have a title.' }
@@ -17,14 +16,6 @@ class Image < ActiveFedora::Base
 
   property :geo_subject, predicate: ::RDF::URI.new('http://purl.org/dc/terms/coverage#spatial') do |index|
     index.as :stored_searchable, :facetable
-  end
-
-  property :degree, predicate: ::RDF::URI.new('http://purl.org/dc/terms/subject#degree') do |index|
-    index.as :stored_searchable
-  end
-
-  property :advisor, predicate: ::RDF::URI.new('http://purl.org/dc/terms/contributor#advisor') do |index|
-    index.as :stored_searchable
   end
 
   property :genre, predicate: ::RDF::URI.new('http://purl.org/dc/terms/type#genre'), multiple: false do |index|
