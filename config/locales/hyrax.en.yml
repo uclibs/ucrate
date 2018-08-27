@@ -66,6 +66,9 @@ en:
       featured_collections:
         title:              'FEATURED COLLECTION'
         no_collections:     'No collections have been featured'
+    workform_help_html: '<p>The more descriptive information you provide the better we can serve your needs.</p>'
+    workform_attach_file_html: '<p>%{href} is highly recommended but not required.</p>'
+    workform_attach_file_href: 'Attaching a file'
     deposit_agreement: "Distribution License"
     account_name:           "My Institution Account Id"
     directory:
