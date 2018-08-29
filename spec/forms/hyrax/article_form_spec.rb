@@ -11,14 +11,14 @@ RSpec.describe Hyrax::ArticleForm do
   describe "#required_fields" do
     subject { form.required_fields }
 
-    it { is_expected.to eq [:title, :creator, :college, :department, :description, :rights_statement, :license] }
+    it { is_expected.to eq [:title, :creator, :college, :department, :description, :license] }
   end
 
   describe "#primary_terms" do
     subject { form.primary_terms }
 
     it {
-      is_expected.to eq [:title, :creator, :college, :department, :description, :rights_statement, :license, :publisher, :date_created,
+      is_expected.to eq [:title, :creator, :college, :department, :description, :license, :rights_statement, :publisher, :date_created,
                          :alternate_title, :journal_title, :issn, :subject, :geo_subject, :time_period,
                          :language, :required_software, :note, :related_url]
     }

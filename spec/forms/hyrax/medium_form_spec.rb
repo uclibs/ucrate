@@ -11,7 +11,7 @@ RSpec.describe Hyrax::MediumForm do
   describe "#required_fields" do
     subject { form.required_fields }
 
-    it { is_expected.to eq [:title, :creator, :college, :department, :description, :rights_statement, :license] }
+    it { is_expected.to eq [:title, :creator, :college, :department, :description, :license] }
   end
 
   describe "#primary_terms" do
@@ -19,7 +19,7 @@ RSpec.describe Hyrax::MediumForm do
 
     it {
       is_expected.to eq [:title, :creator, :college, :department, :description,
-                         :rights_statement, :license, :publisher, :date_created, :alternate_title, :subject, :geo_subject,
+                         :license, :rights_statement, :publisher, :date_created, :alternate_title, :subject, :geo_subject,
                          :time_period, :language, :required_software, :note, :related_url]
     }
   end

@@ -11,7 +11,7 @@ RSpec.describe Hyrax::StudentWorkForm do
   describe "#required_fields" do
     subject { form.required_fields }
 
-    it { is_expected.to eq [:title, :creator, :college, :department, :description, :advisor, :rights_statement, :license] }
+    it { is_expected.to eq [:title, :creator, :college, :department, :description, :advisor, :license] }
   end
 
   describe "#primary_terms" do
@@ -19,7 +19,7 @@ RSpec.describe Hyrax::StudentWorkForm do
 
     it {
       is_expected.to eq [:title, :creator, :college, :department, :description,
-                         :advisor, :rights_statement, :license, :degree, :publisher,
+                         :advisor, :license, :rights_statement, :degree, :publisher,
                          :date_created, :alternate_title, :genre, :subject, :geo_subject,
                          :time_period, :language, :required_software, :note, :related_url]
     }

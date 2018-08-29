@@ -1,3 +1,20 @@
+0.6.0 7/20/2018
+* Ported over Scholar features
+    * Replicated home page content
+    * Replicated "jumbotron" home page image
+    * Replicated featured researcher/collection/work
+    * Migrated metadata profiles for all work types
+    * Updated content on static pages
+    * Updated the embargo notify task
+    * Updated the sitemap generator
+    * Applied bug fix to welcome page
+    * Removed the group sharing option from works
+    * Added help message to Dataset work type
+    * Fixed bug that broke user search with trailing white space
+    * New works now default to public visibility
+    * Replicated the "What are you uploading?" page
+    * Removed admin set controls from works
+
 0.5.0 7/6/2018
 * Updated to Hyrax version 2.1.0 (final)
 * Added the bixby gem (for rubocop inheritance)
