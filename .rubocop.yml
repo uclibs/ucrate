@@ -25,6 +25,9 @@ Metrics/MethodLength:
   Exclude:
     - 'app/controllers/classify_concerns_controller.rb'
     - 'app/services/works_report.rb'
+    - 'spec/support/hyrax/factory_helpers.rb'
+    - 'app/indexers/hyrax/file_set_indexer.rb'
+
 Metrics/ClassLength:
   Exclude:
     - 'app/presenters/hyrax/collection_presenter.rb'
@@ -146,6 +149,11 @@ RSpec/VerifiedDoubles:
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
     - 'spec/views/hyrax/dashboard/collections/_show_actions.html.erb_spec.rb'
 
+RSpec/NamedSubject:
+  Exclude:
+    - 'spec/indexers/hyrax/collection_indexer_spec.rb'
+    - 'spec/indexers/hyrax/file_set_indexer_spec.rb'
+
 Style/ClassAndModuleChildren:
   Enabled: false
 
@@ -159,9 +167,17 @@ Style/SingleLineBlockParams:
 Style/SymbolArray:
   Enabled: false
 
+Style/GuardClause:
+  Exclude:
+    - 'app/indexers/hyrax/collection_indexer.rb'
+    - 'app/indexers/hyrax/work_indexer.rb'
+
 Metrics/AbcSize:
   Exclude:
+    - 'app/indexers/hyrax/file_set_indexer.rb'
+    - 'app/indexers/hyrax/work_indexer.rb'
     - 'app/models/ability.rb'
+    - 'app/indexers/hyrax/collection_indexer.rb'
 
 Metrics/CyclomaticComplexity:
   Exclude:

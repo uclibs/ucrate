@@ -235,6 +235,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
   describe 'create collection' do
     let(:title) { "Test Collection" }
+    let(:creator) { "Test Creator" }
     let(:description) { "Description for collection we are testing." }
 
     context 'when user can create collections of multiple types' do
@@ -254,18 +255,14 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         click_on('Create collection')
 
         expect(page).to have_selector('h1', text: 'New User Collection')
-        expect(page).to have_selector "input.collection_title.multi_value"
+        expect(page).to have_selector "input#collection_title"
 
         click_link('Additional fields')
-        expect(page).to have_selector "input.collection_creator.multi_value"
 
-        title_element = find_by_id("collection_title")
-        title_element.set("Test Collection") # Add whitespace to test it getting removed
-
+        fill_in('Title', with: title)
         fill_in('Abstract or Summary', with: description)
-        fill_in('Related URL', with: 'http://example.com/')
-        select('Creative Commons BY Attribution 4.0 International', from: 'License')
-
+        fill_in('Creator', with: creator)
+        select('Creative Commons Public Domain Mark 1.0', from: 'License')
         click_button("Save")
         expect(page).to have_content title
         expect(page).to have_content description
@@ -290,14 +287,10 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
           click_link "New Collection"
         end
         expect(page).to have_selector('h1', text: 'New User Collection')
-        expect(page).to have_selector "input.collection_title.multi_value"
-
-        click_link('Additional fields')
-        expect(page).to have_selector "input.collection_creator.multi_value"
+        expect(page).to have_selector "input#collection_title"
 
         fill_in('Title', with: title)
         fill_in('Abstract or Summary', with: description)
-        fill_in('Related URL', with: 'http://example.com/')
 
         click_button("Save")
         expect(page).to have_content title
@@ -640,26 +633,42 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         collection1 # create collections by referencing them
         collection2
         sign_in user
+        # stub out characterization. Travis doesn't have fits installed, and it's not relevant to the test.
+        allow(CharacterizeJob).to receive(:perform_later)
       end
 
-      it "preselects the collection we are adding works to and adds the selected works" do
+      it "preselects the collection we are adding works to and adds the new work" do
         visit "/dashboard/collections/#{collection1.id}"
-        click_link 'Add existing works'
-        first('input#check_all').click
-        click_button "Add to collection"
-        expect(page).to have_selector "#member_of_collection_ids[value=\"#{collection1.id}\"]", visible: false
-        expect(page).to have_selector "#member_of_collection_label[value=\"#{collection1.title.first}\"]"
+        click_link 'Deposit new work through this collection'
+        choose "payload_concern", option: "GenericWork"
+        click_button 'Create work'
 
-        visit "/dashboard/collections/#{collection2.id}"
-        click_link 'Add existing works'
-        first('input#check_all').click
-        click_button "Add to collection"
-        expect(page).to have_selector "#member_of_collection_ids[value=\"#{collection2.id}\"]", visible: false
-        expect(page).to have_selector "#member_of_collection_label[value=\"#{collection2.title.first}\"]"
+        # verify the collection is pre-selected
+        click_link "Relationships" # switch tab
+        expect(page).to have_selector("table tr", text: collection1.title.first)
+        expect(page).not_to have_selector("table tr", text: collection2.title.first)
 
-        click_button "Save changes"
-        expect(page).to have_content(work1.title.first)
-        expect(page).to have_content(work2.title.first)
+        # add required file
+        click_link "Files" # switch tab
+        within('span#addfiles') do
+          attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
+        end
+        # set required metadata
+        click_link "Descriptions" # switch tab
+        fill_in('generic_work_title', with: 'New Work for Collection')
+        fill_in('Creator', with: 'Doe, Jane')
+        fill_in('Program or Department', with: 'Digital Collections and Repositories')
+        fill_in('Description', with: 'test')
+        select('Libraries', from: 'College')
+        select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
+        # check required acceptance
+        check('agreement')
+
+        click_on('Save')
+
+        # verify new work was added to collection1
+        visit "/dashboard/collections/#{collection1.id}"
+        expect(page).to have_content("New Work for Collection")
       end
     end
 
