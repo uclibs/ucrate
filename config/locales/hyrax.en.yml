@@ -102,6 +102,7 @@ en:
       open:
         text: "Open Access"
         note_html: Make available to all<br />(see <a href="/creators_rights" target=\"_blank\">Creator's Rights</a> for more information)
+        warning_html: ""
       authenticated:
         note_html: Restrict access to logged-in users
     controls:
@@ -112,7 +113,7 @@ en:
       show:
         adobe_reader_link: 'Download Adobe Acrobat Reader'
     toolbar:
-      dashboard: 
+      dashboard:
         my: 'My Dashboard'
       works:
         batch: 'Batch Create'

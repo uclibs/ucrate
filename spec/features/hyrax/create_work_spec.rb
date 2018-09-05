@@ -67,7 +67,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       fill_in('Description', with: 'This is a description.')
 
       choose('generic_work_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
+      expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')
       # These lines are for debugging, should this test fail
       # puts "Required metadata: #{page.evaluate_script(%{$('#form-progress').data('save_work_control').requiredFields.areComplete})}"
@@ -124,7 +124,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       fill_in('Description', with: 'This is a description.')
 
       choose('generic_work_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
+      expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       select(second_user.user_key, from: 'On behalf of')
       sleep 1
       check('agreement')

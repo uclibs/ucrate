@@ -69,7 +69,7 @@ RSpec.describe 'Create a Image', js: true do
       select 'Attribution-ShareAlike 4.0 International', from: "image_license"
 
       choose('image_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
+      expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')
 
       click_on('Save')
