@@ -48,9 +48,11 @@ gem 'change_manager', git: "https://github.com/uclibs/change_manager.git", ref: 
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'devise-multi_auth', git: 'https://github.com/uclibs/devise-multi_auth', branch: 'rails-5-1'
+gem 'dotenv-rails'
 gem 'equivalent-xml'
 gem 'hydra-role-management'
 gem 'hyrax', git: 'https://github.com/samvera/hyrax.git', tag: 'v2.3.3'
+gem 'mysql2', '~> 0.4.10'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
 gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5-1'
@@ -75,8 +77,9 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  # Disabling Spring because in interferes with loading environment variables
+  # gem 'spring'
+  # gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
