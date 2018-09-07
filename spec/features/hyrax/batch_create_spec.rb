@@ -62,7 +62,7 @@ RSpec.describe 'Batch creation of works', type: :feature do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/small_file.txt", visible: false)
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/png_fits.xml", visible: false)
       end
-      click_link "Descriptions" # switch tab
+      click_link "Metadata" # switch tab
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Keyword', with: 'testing')
       select('In Copyright', from: 'Rights statement')

@@ -53,7 +53,7 @@ RSpec.describe 'Create a Image', js: true do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
-      click_link "Descriptions" # switch tab
+      click_link "Metadata" # switch tab
       title_element = find_by_id("image_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
 

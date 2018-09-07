@@ -126,3 +126,7 @@ en:
       profile:
         view: 'View Profile'
         edit: 'Edit Profile'
+    works:
+      form:
+        tab:
+          metadata: "Metadata"

@@ -690,7 +690,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
           attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         end
         # set required metadata
-        click_link "Descriptions" # switch tab
+        click_link "Metadata" # switch tab
 
         title_element = find_by_id("generic_work_title")
         title_element.set("New Work for Collection")
