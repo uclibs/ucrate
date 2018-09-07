@@ -16,4 +16,5 @@ RSpec.describe Hyrax::ImagePresenter do
   it { is_expected.to delegate_method(:note).to(:solr_document) }
   it { is_expected.to delegate_method(:college).to(:solr_document) }
   it { is_expected.to delegate_method(:department).to(:solr_document) }
+  it { is_expected.to delegate_method(:geo_subject).to(:solr_document) }
 end

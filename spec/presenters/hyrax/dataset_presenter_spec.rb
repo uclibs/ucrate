@@ -17,4 +17,5 @@ RSpec.describe Hyrax::DatasetPresenter do
   it { is_expected.to delegate_method(:genre).to(:solr_document) }
   it { is_expected.to delegate_method(:college).to(:solr_document) }
   it { is_expected.to delegate_method(:department).to(:solr_document) }
+  it { is_expected.to delegate_method(:geo_subject).to(:solr_document) }
 end
