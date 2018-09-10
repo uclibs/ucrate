@@ -10,7 +10,7 @@ RSpec.describe 'search display fields', type: :feature, js: true do
   before do
     allow(User).to receive(:find_by_user_key).and_return(stub_model(User, twitter_handle: 'bob'))
     sign_in user
-    jills_work.license = ["https://creativecommons.org/licenses/by/4.0/"]
+    jills_work.license = ["http://creativecommons.org/licenses/by/4.0/"]
     jills_work.save
     visit '/catalog'
   end
@@ -45,7 +45,7 @@ RSpec.describe 'search display fields', type: :feature, js: true do
              contributor: [],
              description: ["Abstract."],
              keyword: [],
-             license: ["https://creativecommons.org/licenses/by/4.0/"],
+             license: ["http://creativecommons.org/licenses/by/4.0/"],
              rights_statement: ["http://rightsstatements.org/vocab/InC/1.0/"],
              publisher: ["0123456789"],
              date_created: ["2018-07-30"],
