@@ -47,6 +47,7 @@ en:
         language: "Enter the language of your work.</br>Example:</br><ul><li>English</li><li>Spanish</li><li>Arabic</li></ul>"
         note: "Enter any additional information about your work."
         publisher: "Enter the publisher of your work. If this has not been previously published, <i> University of Cincinnati </i> is an appropriate publisher."
+        etd_publisher: "Enter the publisher associated with the ETD, typically the University of Cincinnati."
         related_url: "A link to a website or other specific content (audio, video, PDF document) related to the work. An example is the URL of a research project from which the work was derived."
         required_software: "Special software needed to open the work."
         resource: "Pre-defined categories to describe the type of content being uploaded, such as &quot;article&quot; or &quot;dataset.&quot;  More than one type may be selected."

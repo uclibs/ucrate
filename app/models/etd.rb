@@ -18,10 +18,6 @@ class Etd < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
-  property :etd_publisher, predicate: ::RDF::URI.new('http://purl.org/dc/terms/publisher'), multiple: false do |index|
-    index.as :stored_searchable
-  end
-
   property :degree, predicate: ::RDF::URI.new('http://purl.org/dc/terms/subject#degree'), multiple: false do |index|
     index.as :stored_searchable
   end

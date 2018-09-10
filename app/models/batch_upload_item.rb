@@ -11,6 +11,10 @@ class BatchUploadItem < ActiveFedora::Base
     index.as :stored_searchable
   end
 
+  property :genre, predicate: ::RDF::URI.new('http://purl.org/dc/terms/type#genre') do |index|
+    index.as :stored_searchable, :facetable
+  end
+
   property :geo_subject, predicate: ::RDF::URI.new('http://purl.org/dc/terms/coverage#spatial') do |index|
     index.as :stored_searchable, :facetable
   end
@@ -24,10 +28,6 @@ class BatchUploadItem < ActiveFedora::Base
   end
 
   property :committee_member, predicate: ::RDF::URI.new('http://purl.org/dc/terms/contributor#committee_member') do |index|
-    index.as :stored_searchable
-  end
-
-  property :etd_publisher, predicate: ::RDF::URI.new('http://purl.org/dc/terms/publisher'), multiple: false do |index|
     index.as :stored_searchable
   end
 

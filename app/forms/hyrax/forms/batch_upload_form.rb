@@ -5,8 +5,8 @@ require Hyrax::Engine.root.join('app/forms/hyrax/forms/batch_upload_form.rb')
 module Hyrax
   module Forms
     class BatchUploadForm < Hyrax::Forms::WorkForm
-      self.terms = %i[creator description license rights_statement publisher date_created subject
-                      language identifier based_near related_url representative_id
+      self.terms = %i[creator description license rights_statement publisher
+                      date_created subject language identifier based_near related_url representative_id
                       thumbnail_id files visibility_during_embargo embargo_release_date
                       visibility_after_embargo visibility_during_lease
                       lease_expiration_date visibility_after_lease visibility
@@ -41,7 +41,7 @@ module Hyrax
         when "Etd"
           %i[creator college department description advisor
              license rights_statement committee_member degree date_created publisher
-             etd_publisher alternate_title genre subject geo_subject time_period
+             alternate_title genre subject geo_subject time_period
              language required_software note related_url]
         when "Article"
           %i[creator college department description license rights_statement publisher
