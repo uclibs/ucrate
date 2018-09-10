@@ -38,7 +38,11 @@ Install system dependencies
     * Read [more](https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax).
 
 ## Running the Tests
-`bundle exec rake spec`
+1. Start fedora: ```fcrepo_wrapper -p 8986```
+1. Start solr: ```solr_wrapper -d solr/config/ --collection_name hydra-test -p 8985```
+1. Start redis: ```redis-server```
+1. Run the database migrations: ```bundle exec rake db:migrate``` (Optional)
+1. Run the test suite: ```bundle exec rake spec```
 
 ## Application Status
 
