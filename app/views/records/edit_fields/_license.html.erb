@@ -5,17 +5,11 @@
   <span class="label label-info required-tag">required</span>
 <% end %>
 
-<div class="license-wrapper">
-  <div class="row">
-      <div class="col-sm-9">
         <%= f.input :license, as: :select,
           collection: license_service.select_active_options,
           include_blank: 'Use License Wizard or choose directly from the dropdown.',
           item_helper: license_service.method(:include_current_value),
-          input_html: { class: 'form-control' },
+          input_html: { class: 'rights-selector form-control' },
           label: false,
           required: true
         %>
-    </div>
-  </div>
-</div>
