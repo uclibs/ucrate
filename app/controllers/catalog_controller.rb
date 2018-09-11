@@ -90,6 +90,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name("contributor", :stored_searchable)
     config.add_show_field solr_name("publisher", :stored_searchable)
     config.add_show_field solr_name("based_near_label", :stored_searchable)
+    config.add_show_field solr_name("geo_subject", :stored_searchable)
     config.add_show_field solr_name("language", :stored_searchable)
     config.add_show_field solr_name("date_uploaded", :stored_searchable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_show_field solr_name("date_modified", :stored_searchable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
