@@ -51,6 +51,11 @@ en:
           subject_tesim: Subject
           title_tesim: Title
   hyrax:
+    active_consent_to_agreement: I have read and agree to the
+    base:
+      form_progress:
+        required_agreement: Check distribution license
+    passive_consent_to_agreement: I have read and agree to the
     homepage:
       featured_works:
         tab_label:          'Featured Works'
@@ -62,6 +67,9 @@ en:
       featured_collections:
         title:              'FEATURED COLLECTION'
         no_collections:     'No collections have been featured'
+    pages:
+      tabs:
+        agreement_page: 'Distribution License'
     workform_help_html: '<p>The more descriptive information you provide the better we can serve your needs.</p>'
     workform_attach_file_html: '<p>%{href} is highly recommended but not required.</p>'
     workform_attach_file_href: 'Attaching a file'
@@ -112,7 +120,7 @@ en:
       show:
         adobe_reader_link: 'Download Adobe Acrobat Reader'
     toolbar:
-      dashboard: 
+      dashboard:
         my: 'My Dashboard'
       works:
         batch: 'Batch Create'
