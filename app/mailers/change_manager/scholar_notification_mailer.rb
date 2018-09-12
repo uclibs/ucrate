@@ -12,9 +12,9 @@ module ChangeManager
     def notify_changes(changes)
       @changes = changes
       @change_types ||= YAML.load_file(Rails.root.join('path', 'to'))
-      subject = 'Changes to your ' + @change_types[changes.first.change_type]['print'] + ' status in UCrate.'
+      subject = 'Changes to your ' + @change_types[changes.first.change_type]['print'] + ' status in Scholar@UC.'
       mail(to: changes.first.target,
-           from: 'UCrate.edu',
+           from: 'scholar@uc.edu',
            subject: subject).deliver
     end
   end

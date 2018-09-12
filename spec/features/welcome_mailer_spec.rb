@@ -22,7 +22,7 @@ describe WelcomeMailer do
   end
   it 'sends welcome email to user upon registration' do
     email.to.should eq([user_email])
-    email.from.should == ["ucrate@uc.edu"]
+    email.from.should == ["scholar@uc.edu"]
   end
   context 'when user is a student' do
     let(:student_user) { FactoryBot.create(:user, uc_affiliation: 'student') }
