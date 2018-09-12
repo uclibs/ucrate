@@ -69,7 +69,7 @@ RSpec.describe 'Create a Article', js: true do
       fill_in('Program or Department', with: 'University Department')
 
       choose('article_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
+      expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')
 
       click_on('Save')
