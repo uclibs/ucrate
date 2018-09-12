@@ -56,3 +56,10 @@ es:
     institution_name_full: El nombre de la institución
     product_name: Hyrax
     product_twitter_handle: "@SamveraRepo"
+    workform_help_html: '<p>Mientras más información descriptiva pueda proporcionar, mejor podremos satisfacer sus necesidades.</p>'
+    workform_attach_file_html: '<p>Se recomienda encarecidamente %{href}, pero no es obligatorio.</p>'
+    workform_attach_file_href: 'adjuntar un archivo'
+    works:
+      form:
+        tab:
+          metadata: "Metadatos"
