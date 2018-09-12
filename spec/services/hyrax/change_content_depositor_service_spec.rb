@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+require 'rails_helper'
 RSpec.describe Hyrax::ChangeContentDepositorService do
   let!(:depositor) { create(:user) }
   let!(:receiver) { create(:user) }
@@ -40,11 +42,10 @@ RSpec.describe Hyrax::ChangeContentDepositorService do
       expect(work.edit_users).to contain_exactly(receiver.user_key)
     end
 
-    it "changes the depositor of the child file sets" do
+    it "excludes the depositor from the edit users of the child file sets" do
       file.reload
       expect(file.depositor).to eq receiver.user_key
-      expect(file.edit_users).to include(receiver.user_key, depositor.user_key)
+      expect(file.edit_users).to contain_exactly(receiver.user_key)
     end
   end
 end
-
