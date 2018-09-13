@@ -5,10 +5,10 @@ class WelcomeMailer < ActionMailer::Base
   def welcome_email(user)
     @user = user
     if @user.student?
-      @subject = 'Welcome to Scholar@UC, UC students!'
+      @subject = 'Welcome to ' + t('hyrax.product_name') + ', UC students!'
       @template = 'welcome_email_student.html.erb'
     else
-      @subject = 'Welcome to Scholar@UC!'
+      @subject = 'Welcome to ' + t('hyrax.product_name') + '!'
       @template = 'welcome_email.html.erb'
     end
     send_mail
