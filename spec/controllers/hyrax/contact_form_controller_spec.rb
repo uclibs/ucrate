@@ -49,12 +49,6 @@ RSpec.describe Hyrax::ContactFormController do
         its(:notice) { is_expected.to eq("Thank you for your message!") }
       end
 
-      context "without a category" do
-        let(:params)  { required_params.except(:category) }
-
-        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. You must complete the Captcha to confirm the form. Category can't be blank") }
-      end
-
       context "without a name" do
         let(:params)  { required_params.except(:name) }
 
