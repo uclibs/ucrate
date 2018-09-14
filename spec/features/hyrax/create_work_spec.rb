@@ -58,6 +58,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       college_element.select("Business")
 
       select 'In Copyright', from: "generic_work_rights_statement"
+      expect(page).to have_content("License Wizard")
       select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
 
       expect(page).to have_field("Creator", with: user.name_for_works)

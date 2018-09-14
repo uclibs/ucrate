@@ -66,6 +66,7 @@ RSpec.describe 'Create a Image', js: true do
       fill_in('Description', with: 'This is a description')
 
       select 'In Copyright', from: "image_rights_statement"
+      expect(page).to have_content("License Wizard")
       select 'Attribution-ShareAlike 4.0 International', from: "image_license"
 
       choose('image_visibility_open')

@@ -62,6 +62,7 @@ RSpec.describe 'Create a Medium', js: true do
       college_element.select("Business")
 
       select 'In Copyright', from: "medium_rights_statement"
+      expect(page).to have_content("License Wizard")
       select 'Attribution-ShareAlike 4.0 International', from: 'medium_license'
 
       fill_in('Creator', with: 'Doe, Jane')
