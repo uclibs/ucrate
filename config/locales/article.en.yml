@@ -3,9 +3,9 @@ en:
     icons:
       article:     'fa fa-file-text-o'
     select_type:
-      Article:
+      article:
         name:               "Article"
-        description:        "Published or unpublished articles"
+        description:        "Published or unpublished articles."
   simple_form:
     labels:
       article:
