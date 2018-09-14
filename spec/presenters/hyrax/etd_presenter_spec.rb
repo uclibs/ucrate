@@ -17,4 +17,6 @@ RSpec.describe Hyrax::EtdPresenter do
   it { is_expected.to delegate_method(:advisor).to(:solr_document) }
   it { is_expected.to delegate_method(:college).to(:solr_document) }
   it { is_expected.to delegate_method(:department).to(:solr_document) }
+  it { is_expected.to delegate_method(:degree).to(:solr_document) }
+  it { is_expected.to delegate_method(:etd_publisher).to(:solr_document) }
 end

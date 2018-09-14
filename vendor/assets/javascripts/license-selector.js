@@ -1120,7 +1120,7 @@
 	    priority: 1,
 	    available: true,
 	    url: 'http://creativecommons.org/licenses/by/4.0/',
-	    description: 'This is the standard creative commons license that gives others maximum freedom to do what they want with your work.',
+	    description: 'This is the standard creative commons license that gives others maximum freedom to do what they want with your work. ',
 	    categories: ['public', 'data', 'by'],
 	    labels: ['public', 'cc', 'by', 'opendata']
 	  },

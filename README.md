@@ -1,6 +1,6 @@
-# UCrate
+# Scholar@UC
 
-## Installing the UCrate application
+## Installing the Scholar application
 
 Install system dependencies
 
@@ -23,7 +23,7 @@ Install system dependencies
 1. Install bundler (if needed): `gem install bundler`
 1. Run bundler: `bundle install`
 1. Start fedora: ```fcrepo_wrapper -p 8984```
-1. Start solr: ```solr_wrapper -d solr/config/ --collection_name ucrate-hydra```
+1. Start solr: ```solr_wrapper -d solr/config/ --collection_name hydra-development```
 1. Start redis: ```redis-server```
 1. Run the database migrations: `bundle exec rake db:migrate`
 1. Start the rails server: `rails server`
@@ -38,7 +38,11 @@ Install system dependencies
     * Read [more](https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax).
 
 ## Running the Tests
-`bundle exec rake spec`
+1. Start fedora: ```fcrepo_wrapper -p 8986```
+1. Start solr: ```solr_wrapper -d solr/config/ --collection_name hydra-test -p 8985```
+1. Start redis: ```redis-server```
+1. Run the database migrations: ```bundle exec rake db:migrate``` (Optional)
+1. Run the test suite: ```bundle exec rake spec```
 
 ## Application Status
 

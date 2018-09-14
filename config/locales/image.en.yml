@@ -3,7 +3,7 @@ en:
     icons:
       image:     'fa fa-file-text-o'
     select_type:
-      Image:
+      image:
         name:               "Image"
         description:        "Visual content: art, photographs, posters, graphics."
   simple_form:

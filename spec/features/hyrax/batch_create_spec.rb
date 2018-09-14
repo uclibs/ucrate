@@ -21,7 +21,7 @@ RSpec.describe 'Batch creation of works', type: :feature do
   end
 
   it "renders the batch create form" do
-    visit hyrax.new_batch_upload_path
+    visit hyrax.new_batch_upload_path(payload_concern: 'Document')
     expect(page).to have_content "Add New Works by Batch"
     within("li.active") do
       expect(page).to have_content("Files")
@@ -30,7 +30,7 @@ RSpec.describe 'Batch creation of works', type: :feature do
   end
 
   it 'defaults to public visibility' do
-    visit hyrax.new_batch_upload_path
+    visit hyrax.new_batch_upload_path(payload_concern: 'Document')
     expect(page).to have_checked_field('batch_upload_item_visibility_open')
   end
 
@@ -62,7 +62,7 @@ RSpec.describe 'Batch creation of works', type: :feature do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/small_file.txt", visible: false)
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/png_fits.xml", visible: false)
       end
-      click_link "Descriptions" # switch tab
+      click_link "Metadata" # switch tab
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Keyword', with: 'testing')
       select('In Copyright', from: 'Rights statement')

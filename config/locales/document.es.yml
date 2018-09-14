@@ -3,7 +3,7 @@ es:
     icons:
       document:     'fa fa-file-text-o'
     select_type:
-      Document:
+      document:
         # TODO: translate `human_name` into Spanish
         description:        "Document trabajos"
         name:               "Document"

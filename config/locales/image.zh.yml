@@ -3,7 +3,7 @@ zh:
     icons:
       image:     'fa fa-file-text-o'
     select_type:
-      Image:
+      image:
         # TODO: translate `human_name` into Chinese
         description:        "Image 作品"
         name:               "Image"

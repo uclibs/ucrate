@@ -264,7 +264,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
         fill_in('Abstract or Summary', with: description)
         fill_in('Related URL', with: 'http://example.com/')
-        select('Creative Commons BY Attribution 4.0 International', from: 'License')
+        select('Attribution 4.0 International', from: 'License')
 
         click_button("Save")
         expect(page).to have_content title
@@ -690,7 +690,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
           attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         end
         # set required metadata
-        click_link "Descriptions" # switch tab
+        click_link "Metadata" # switch tab
 
         title_element = find_by_id("generic_work_title")
         title_element.set("New Work for Collection")

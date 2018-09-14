@@ -53,7 +53,7 @@ RSpec.describe 'Create a Image', js: true do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
-      click_link "Descriptions" # switch tab
+      click_link "Metadata" # switch tab
       title_element = find_by_id("image_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
 
@@ -66,10 +66,11 @@ RSpec.describe 'Create a Image', js: true do
       fill_in('Description', with: 'This is a description')
 
       select 'In Copyright', from: "image_rights_statement"
+      expect(page).to have_content("License Wizard")
       select 'Attribution-ShareAlike 4.0 International', from: "image_license"
 
       choose('image_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
+      expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')
 
       click_on('Save')

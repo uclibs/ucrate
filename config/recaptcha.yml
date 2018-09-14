@@ -1,11 +1,11 @@
 # stores ReCaptcha image server url
 
 development:
-  site_key: ENV["UCRATE_RECAPTCHA_PUB_KEY"]
-  secret_key: ENV["UCRATE_RECAPTCHA_PRI_KEY"]
+  site_key: bamboo_captcha_site_key
+  secret_key: bamboo_captcha_secret_key
 test:
-  site_key: ENV["UCRATE_RECAPTCHA_PUB_KEY"]
-  secret_key: ENV["UCRATE_RECAPTCHA_PRI_KEY"]
+  site_key: bamboo_captcha_site_key
+  secret_key: bamboo_captcha_secret_key
 production:
-  site_key: ENV["UCRATE_RECAPTCHA_PUB_KEY"]
-  secret_key: ENV["UCRATE_RECAPTCHA_PRI_KEY"]
+  site_key: bamboo_captcha_site_key
+secret_key: bamboo_captcha_secret_key
