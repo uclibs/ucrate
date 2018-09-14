@@ -10,7 +10,7 @@
       <% if can? :create, klass %>
         <li class="work-type">
           <h3 class="title"><%= klass.human_readable_type %></h3>
-          <p class="short-description"><%= t("hyrax.select_type.#{klass}.description") %></p>
+          <p class="short-description"><%= t("hyrax.select_type.#{klass.model_name.i18n_key}.description") %></p>
           <% if params[:type] == 'batch' %>
             <%= link_to 'Add Batch',
               hyrax.new_batch_upload_path(payload_concern: klass),
