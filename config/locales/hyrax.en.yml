@@ -55,6 +55,9 @@ en:
     base:
       form_progress:
         required_agreement: Check distribution license
+    batch_uploads:
+      files:
+        upload_type_instructions: 'Note: To create a single work for all the files, '
     passive_consent_to_agreement: I have read and agree to the
     homepage:
       featured_works:

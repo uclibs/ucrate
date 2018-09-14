@@ -21,7 +21,7 @@ RSpec.describe 'Batch creation of works', type: :feature do
   end
 
   it "renders the batch create form" do
-    visit hyrax.new_batch_upload_path
+    visit hyrax.new_batch_upload_path(payload_concern: 'Document')
     expect(page).to have_content "Add New Works by Batch"
     within("li.active") do
       expect(page).to have_content("Files")
@@ -30,7 +30,7 @@ RSpec.describe 'Batch creation of works', type: :feature do
   end
 
   it 'defaults to public visibility' do
-    visit hyrax.new_batch_upload_path
+    visit hyrax.new_batch_upload_path(payload_concern: 'Document')
     expect(page).to have_checked_field('batch_upload_item_visibility_open')
   end
 
