@@ -1,8 +1,8 @@
 <% if @days_left.zero? %>
-  <p>This email is to inform you that your UCrate item <%= @work_title %> has reached its embargo date and is now available to the public.</p>
+  <p>This email is to inform you that your Scholar item <%= @work_title %> has reached its embargo date and is now available to the public.</p>
 <% else %>
-  <p>This email is to notify you that your UCrate item, <%= @work_title %>, has <%= @days_left %> days left in embargo before it is made public.</p>
+  <p>This email is to notify you that your Scholar item, <%= @work_title %>, has <%= @days_left %> days left in embargo before it is made public.</p>
 <% end %>
 
 <p>Sincerely,</p>
-<p>The UCrate Team</p>
+<p>The Scholar Team</p>

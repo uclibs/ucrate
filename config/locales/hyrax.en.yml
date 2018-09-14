@@ -80,11 +80,12 @@ en:
     footer:
       copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
-    institution_name:       "University of Cicninnati"
-    institution_name_full:  "The Institution Name"
+    institution_name:       "University of Cincinnati"
+    institution_name_full:  "University of Cincinnati"
     product_name:           "Scholar@UC"
     description:            "University of Cincinnati's library collections"
     product_twitter_handle: "@SamveraRepo"
+    product_email:          "scholar@uc.edu"
     user_profile:
       first_name: "First Name"
       last_name: "Last Name"

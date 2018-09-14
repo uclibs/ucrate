@@ -42,8 +42,8 @@ describe EmbargoMailer do
     describe 'notify should' do
       it 'return a mail object with proper to and from' do
         expect(described_class.notify('user1@example.com', 'my test work', 5).to).to include('user1@example.com')
-        expect(described_class.notify('user1@example.com', 'my test work', 5).to).to include('UCrate.edu')
-        expect(described_class.notify('user1@example.com', 'my test work', 5).from).to include('UCrate.edu')
+        expect(described_class.notify('user1@example.com', 'my test work', 5).to).to include('scholar@uc.edu')
+        expect(described_class.notify('user1@example.com', 'my test work', 5).from).to include('scholar@uc.edu')
       end
     end
   end
