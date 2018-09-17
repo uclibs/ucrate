@@ -3,9 +3,9 @@ en:
     icons:
       generic_work:     'fa fa-file-text-o'
     select_type:
-      GenericWork:
+      generic_work:
         name:               "Generic Work"
-        description:        "Deposit any non-text-based document ."
+        description:        "Deposit any non-text-based document."
   simple_form:
     labels:
       generic_work:

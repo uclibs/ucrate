@@ -22,21 +22,17 @@ en:
           publisher_sim: Publisher
           subject_sim: Subject
         index:
-          based_near_tesim: Location
-          contributor_tesim: Contributor
-          creator_tesim: Creator
+          title_tesim: Title
+          has_model_ssim: Type
+          description_tesim: Description/Abstract
+          creator_tesim: Creator/Author
+          depositor_tesim: Submitter
           date_created_tesim: Date Created
-          date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
-          description_tesim: Description
-          file_format_tesim: File Format
-          identifier_tesim: Identifier
-          keyword_tesim: Keyword
-          language_tesim: Language
+          date_modified_dtsi: Date Modified
+          date_modified_ssi: Date Modified
+          date_uploaded_ssi: Date Uploaded
           license_tesim: License
-          publisher_tesim: Publisher
-          rights_statement_tesim: Rights Statement
-          subject_tesim: Subject
         show:
           based_near_tesim: Location
           contributor_tesim: Contributor
@@ -55,6 +51,18 @@ en:
           subject_tesim: Subject
           title_tesim: Title
   hyrax:
+    active_consent_to_agreement: I have read and agree to the
+    base:
+      form_progress:
+        required_agreement: Check distribution license
+    batch_uploads:
+      files:
+        upload_type_instructions: 'Note: To create a single work for all the files, '
+    contact_form:
+      header: Contact the Scholar@UC Team
+      notice_html: 'Please us this form to send questions, feedback, or report a problem to the Scholar@UC team. You can also check %{href} for more information'
+      help_resources_href: 'Help Resources'
+    passive_consent_to_agreement: I have read and agree to the
     homepage:
       featured_works:
         tab_label:          'Featured Works'
@@ -66,6 +74,12 @@ en:
       featured_collections:
         title:              'FEATURED COLLECTION'
         no_collections:     'No collections have been featured'
+    pages:
+      tabs:
+        agreement_page: 'Distribution License'
+    workform_help_html: '<p>The more descriptive information you provide the better we can serve your needs.</p>'
+    workform_attach_file_html: '<p>%{href} is highly recommended but not required.</p>'
+    workform_attach_file_href: 'Attaching a file'
     deposit_agreement: "Distribution License"
     account_name:           "My Institution Account Id"
     directory:
@@ -73,11 +87,12 @@ en:
     footer:
       copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
-    institution_name:       "University of Cicninnati"
-    institution_name_full:  "The Institution Name"
+    institution_name:       "University of Cincinnati"
+    institution_name_full:  "University of Cincinnati"
     product_name:           "Scholar@UC"
     description:            "University of Cincinnati's library collections"
     product_twitter_handle: "@SamveraRepo"
+    product_email:          "scholar@uc.edu"
     user_profile:
       first_name: "First Name"
       last_name: "Last Name"
@@ -103,6 +118,7 @@ en:
       open:
         text: "Open Access"
         note_html: Make available to all<br />(see <a href="/creators_rights" target=\"_blank\">Creator's Rights</a> for more information)
+        warning_html: ""
       authenticated:
         note_html: Restrict access to logged-in users
     controls:
@@ -113,7 +129,7 @@ en:
       show:
         adobe_reader_link: 'Download Adobe Acrobat Reader'
     toolbar:
-      dashboard: 
+      dashboard:
         my: 'My Dashboard'
       works:
         batch: 'Batch Create'
@@ -127,3 +143,7 @@ en:
       profile:
         view: 'View Profile'
         edit: 'Edit Profile'
+    works:
+      form:
+        tab:
+          metadata: "Metadata"

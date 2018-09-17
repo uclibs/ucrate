@@ -8,8 +8,7 @@ module Hyrax
 
     ## Adding custom descriptive metadata terms
     self.terms += %i[alternate_title genre time_period required_software note
-                     degree advisor committee_member geo_subject
-                     etd_publisher]
+                     degree advisor committee_member geo_subject]
 
     ## Adding terms needed for the special DOI form tab
     # self.terms += %i(doi doi_assignment_strategy existing_identifier)
@@ -18,15 +17,15 @@ module Hyrax
     self.terms += %i[college department]
 
     ## Removing terms that we don't use
-    self.terms -= %i[keyword source contributor publisher based_near identifier resource_type]
+    self.terms -= %i[keyword source contributor based_near identifier resource_type]
 
     ## Setting custom required fields
-    self.required_fields = %i[title creator college department description advisor rights_statement license]
+    self.required_fields = %i[title creator college department description advisor license]
 
     ## Adding above the fold on the form without making this required
     def primary_terms
-      required_fields + %i[committee_member degree
-                           date_created publisher etd_publisher alternate_title genre subject
+      required_fields + %i[rights_statement committee_member degree
+                           date_created publisher alternate_title genre subject
                            geo_subject time_period language
                            required_software note related_url]
     end

@@ -1,26 +1,12 @@
-.vertical-align {
-  display: flex;
-  align-items: center;
-}
-
 .selector, .selector:active {
   background-color: #fff !important;
   border-color: #ccc !important;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color: #000 !important;
 }
 
 .selector:hover {
   background-color: #ececec !important;
-}
-
-#license-wizard {
-  margin-bottom: 20px;
-}
-
-
-.license-wrapper {
-  max-width: 40em;
 }
 
 @media only screen and (max-width: 768px) {

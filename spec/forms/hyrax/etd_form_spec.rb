@@ -11,7 +11,7 @@ RSpec.describe Hyrax::EtdForm do
   describe "#required_fields" do
     subject { form.required_fields }
 
-    it { is_expected.to eq [:title, :creator, :college, :department, :description, :advisor, :rights_statement, :license] }
+    it { is_expected.to eq [:title, :creator, :college, :department, :description, :advisor, :license] }
   end
 
   describe "#primary_terms" do
@@ -19,8 +19,8 @@ RSpec.describe Hyrax::EtdForm do
 
     it {
       is_expected.to eq [:title, :creator, :college, :department, :description, :advisor,
-                         :rights_statement, :license, :committee_member, :degree, :date_created,
-                         :publisher, :etd_publisher, :alternate_title, :genre, :subject, :geo_subject,
+                         :license, :rights_statement, :committee_member, :degree, :date_created,
+                         :publisher, :alternate_title, :genre, :subject, :geo_subject,
                          :time_period, :language, :required_software, :note, :related_url]
     }
   end

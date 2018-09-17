@@ -3,7 +3,7 @@ es:
     icons:
       dataset:     'fa fa-file-text-o'
     select_type:
-      Dataset:
+      dataset:
         # TODO: translate `human_name` into Spanish
         description:        "Dataset trabajos"
         name:               "Dataset"

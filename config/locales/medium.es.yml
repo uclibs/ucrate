@@ -3,7 +3,7 @@ es:
     icons:
       medium:     'fa fa-file-text-o'
     select_type:
-      Medium:
+      medium:
         # TODO: translate `human_name` into Spanish
         description:        "Medium trabajos"
         name:               "Medium"

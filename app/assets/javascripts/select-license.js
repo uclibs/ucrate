@@ -13,7 +13,7 @@ var ls = function() {
             name: 'All rights reserved',
             priority: 1,
             available: true,
-            url: 'http://www.europeana.eu/portal/rights/rr-r.html',
+            url: 'http://rightsstatements.org/vocab/InC/1.0/',
             description: '\"All rights reserved\" is a phrase that originated in copyright law as a formal requirement for copyright notice. It indicates that the copyright holder reserves, or holds for their own use, all the rights provided by copyright law under one specific copyright treaty.',
             categories: ['reserved', 'by', 'nd', 'nc'],
             labels: ['reserved'],

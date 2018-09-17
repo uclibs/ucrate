@@ -61,5 +61,10 @@ RSpec.describe 'Editing a work', type: :feature do
       click_link "Relationships" # switch tab
       expect(page).to have_select('generic_work_admin_set_id', selected: another_admin_set.title)
     end
+
+    it 'shows license wizard on edit form' do
+      visit edit_hyrax_generic_work_path(work)
+      expect(page).to have_content("License Wizard")
+    end
   end
 end
