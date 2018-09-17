@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'sign in when user has waived welcome page, type', :feature do
+describe 'sign in and redirects user to what are you uploading page, type', :feature do
   let(:user) { FactoryBot.create(:user, waived_welcome_page: true) }
   let(:password) { FactoryBot.attributes_for(:user).fetch(:password) }
 
