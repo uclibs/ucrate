@@ -33,4 +33,5 @@
 //= require lodash
 //= require license-selector
 //= require select-license
+//= require form-tab-nav
 
