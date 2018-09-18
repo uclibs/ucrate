@@ -77,6 +77,8 @@ en:
     pages:
       tabs:
         agreement_page: 'Distribution License'
+    users:
+      search_placeholder: 'Search People'
     workform_help_html: '<p>The more descriptive information you provide the better we can serve your needs.</p>'
     workform_attach_file_html: '<p>%{href} is highly recommended but not required.</p>'
     workform_attach_file_href: 'Attaching a file'
