@@ -95,6 +95,17 @@ RSpec.describe Hyrax::ContactFormController do
       end
     end
 
+    describe "test configuration values" do
+      context "for the contact form" do
+        it "check contact email" do
+          expect(Hyrax.config.contact_email).to eq 'scholar@uc.edu'
+        end
+        it "check form name" do
+          expect(Hyrax.config.subject_prefix).to eq 'Scholar@UC Contact form:'
+        end
+      end
+    end
+
     context "when encoutering a RuntimeError" do
       let(:logger) { double(info?: true) }
 
