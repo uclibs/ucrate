@@ -1,5 +1,5 @@
 var ls = function() {
-      $('<a href="#" id="license-wizard" class="pull-right btn btn-success selector">License Wizard</a>')
+      $('<a href="#" id="license-wizard" class="pull-left btn btn-success selector">License Wizard</a>')
       .insertBefore('.rights-selector')
       .licenseSelector({
         // Options

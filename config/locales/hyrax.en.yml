@@ -50,6 +50,11 @@ en:
           rights_statement_tesim: Rights Statement
           subject_tesim: Subject
           title_tesim: Title
+  simple_form:
+    labels:
+      defaults:
+        description: Description
+        license: Rights
   hyrax:
     active_consent_to_agreement: I have read and agree to the
     base:
