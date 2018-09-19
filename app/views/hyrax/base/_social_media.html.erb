@@ -1,5 +1,5 @@
 <% page_title ||= content_for?(:page_title) ? content_for(:page_title) : default_page_title %>
-<% share_url ||= request.original_url %>
+<% share_url ||= request.original_url.sub(/\?locale=\S\S/, '') %>
 <div class="social-media">
   <!-- Sharingbutton Facebook -->
   <%= link_to "https://facebook.com/sharer/sharer.php?#{{u: share_url}.to_param}", class: 'resp-sharing-button__link', target: '_blank', rel: 'noopener noreferrer', title: t('hyrax.base.social_media.facebook') do %>
