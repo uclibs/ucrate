@@ -72,6 +72,12 @@ RSpec.describe "User Spec", type: :feature do
     let(:profile2_path) { Hyrax::Engine.routes.url_helpers.user_path(user2, locale: 'en') }
     let(:profiles_path) { Hyrax::Engine.routes.url_helpers.users_path }
 
+    it "has a Search People field label and placeholder text" do
+      visit profiles_path
+      expect(page).to have_css("label", text: "Search People")
+      expect(page).to have_field(id: 'user_search', placeholder: "Search People")
+    end
+
     context "when the user doesn't own works" do
       before do
         visit profiles_path
