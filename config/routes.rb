@@ -41,6 +41,11 @@ Rails.application.routes.draw do
   get 'terms' => 'static#terms'
   get 'agreement' => 'hyrax/static#agreement'
 
+  # route for custom error pages issue #1056
+  match '/404', to: 'errors#not_found', via: :all
+  match '/422', to: 'errors#unprocessable', via: :all
+  match '/500', to: 'errors#server_error', via: :all
+
   mount Qa::Engine => '/authorities'
   mount Hyrax::Engine, at: '/'
   resources :welcome, only: 'index'
