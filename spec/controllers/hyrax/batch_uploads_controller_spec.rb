@@ -82,5 +82,26 @@ describe Hyrax::BatchUploadsController do
         expect(response).to redirect_to Hyrax::Engine.routes.url_helpers.dashboard_works_path(locale: 'en')
       end
     end
+    context "with blank payload_concern param" do
+      let(:batch_upload_item) do
+        {}
+      end
+
+      it 'returns not found' do
+        allow(BatchCreateJob).to receive(:perform_later)
+        expect { get :new, params: post_params }.to raise_error(ActionController::RoutingError)
+      end
+    end
+
+    context "with bad payload_concern param" do
+      let(:batch_upload_item) do
+        { payload_concern: 'foo' }
+      end
+
+      it 'returns not found' do
+        allow(BatchCreateJob).to receive(:perform_later)
+        expect { get :new, params: post_params }.to raise_error(ActionController::RoutingError)
+      end
+    end
   end
 end

@@ -18,5 +18,16 @@ module Hyrax
                                      attributes_for_actor.to_h.merge!(model: klass),
                                      operation)
       end
+
+      # Hyrax override to check for presense and validity of payload_concern param
+      def build_form
+        super
+        raise ActionController::RoutingError, 'Not Found' unless work_type_specified?
+        @form.payload_concern = params[:payload_concern]
+      end
+
+      def work_type_specified?
+        Hyrax.config.registered_curation_concern_types.include? params[:payload_concern]
+      end
   end
 end
