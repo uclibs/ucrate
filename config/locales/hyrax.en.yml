@@ -58,6 +58,10 @@ en:
     batch_uploads:
       files:
         upload_type_instructions: 'Note: To create a single work for all the files, '
+    contact_form:
+      header: Contact the Scholar@UC Team
+      notice_html: 'Please us this form to send questions, feedback, or report a problem to the Scholar@UC team. You can also check %{href} for more information'
+      help_resources_href: 'Help Resources'
     passive_consent_to_agreement: I have read and agree to the
     homepage:
       featured_works:
@@ -73,6 +77,8 @@ en:
     pages:
       tabs:
         agreement_page: 'Distribution License'
+    users:
+      search_placeholder: 'Search People'
     workform_help_html: '<p>The more descriptive information you provide the better we can serve your needs.</p>'
     workform_attach_file_html: '<p>%{href} is highly recommended but not required.</p>'
     workform_attach_file_href: 'Attaching a file'
