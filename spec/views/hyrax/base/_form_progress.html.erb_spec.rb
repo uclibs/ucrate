@@ -109,8 +109,8 @@ RSpec.describe 'hyrax/base/_form_progress.html.erb', type: :view do
         allow(Flipflop).to receive(:active_deposit_agreement_acceptance?)
           .and_return(true)
       end
-      it "displays the deposit agreement in the requirements" do
-        expect(page).to have_selector("#required-agreement")
+      it "does not display the deposit agreement in the requirements" do
+        expect(page).not_to have_selector("#required-agreement")
       end
     end
   end
