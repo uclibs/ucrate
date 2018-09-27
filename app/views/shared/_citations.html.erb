@@ -1,3 +1,11 @@
+<% content_for(:mendeley_meta) do %> 
+  <meta name='DC.Title' content="<%= @presenter.title.first %>"/>
+  <% @presenter.creator.each do |creator| %>
+  <meta name='DC.Creator' content="<%= creator %>"/>
+  <% end %>
+  <meta name='DC.Description' content="<%= @presenter.description.first.truncate(200) rescue @presenter.title.first %>"/>
+<% end %>
+
 <% content_for(:twitter_meta) do %>
   <meta name="twitter:card" content="product">
   <meta name="twitter:site" content="<%= t('hyrax.product_twitter_handle') %>"/>
