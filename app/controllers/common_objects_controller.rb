@@ -9,7 +9,8 @@ class CommonObjectsController < ApplicationController
     else
       redirect_to polymorphic_path(curation_concern)
     end
+
   rescue ActiveFedora::ObjectNotFoundError, Ldp::Gone
-    render file: 'public/404.html', status: 404
+    render file: 'errors/not_found', status: 404
   end
 end
