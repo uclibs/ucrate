@@ -123,6 +123,7 @@ RSpec/ExampleLength:
     - 'spec/controllers/hyrax/batch_uploads_controller_spec.rb'
     - 'spec/features/create_collection_spec.rb'
     - 'spec/features/catalog_facet_spec.rb'
+    - 'spec/jobs/proxy_edit_removal_job_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false

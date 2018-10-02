@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Editing a work', type: :feature do
   let(:user) { create(:user) }
+  let(:second_user) { create(:user) }
   let(:work) { build(:work, user: user, admin_set: another_admin_set) }
   let(:default_admin_set) do
     create(:admin_set, id: AdminSet::DEFAULT_ID,
@@ -65,6 +66,53 @@ RSpec.describe 'Editing a work', type: :feature do
     it 'shows license wizard on edit form' do
       visit edit_hyrax_generic_work_path(work)
       expect(page).to have_content("License Wizard")
+    end
+  end
+
+  shared_examples 'proxy edit work' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:proxy) { FactoryBot.create(:user) }
+    let!(:role1) { Sipity::Role.create(name: 'depositing') }
+
+    let(:work_id) { GenericWork.where(title: 'My Proxy Submitted Work') }
+    let(:profile_path) { Hyrax::Engine.routes.url_helpers.user_path(user, locale: 'en') }
+
+    before do
+      sign_in user
+      visit '/dashboard'
+      within 'div#proxy_management' do
+        click_link "Manage Proxies"
+      end
+      sleep(1)
+      find('a.select2-choice').click
+      find(".select2-input").set(proxy.user_key)
+      expect(page).to have_css("div.select2-result-label")
+      find("div.select2-result-label").click
+      sleep(1)
+      logout
+
+      sign_in proxy
+      visit new_hyrax_generic_work_path
+      title_element = find_by_id("generic_work_title")
+      title_element.set("My proxy submitted work")
+      fill_in('Creator', with: 'Grantor')
+      fill_in('Description', with: 'A proxy deposited work')
+      select 'All rights reserved', from: "generic_work_license"
+      select(user.user_key, from: 'On behalf of')
+      check('agreement')
+      click_on('Save')
+    end
+
+    it "proxy user edits work" do
+      expect(page).to have_link 'Edit'
+      click_link 'Edit'
+      expect(current_path).to include('edit')
+      fill_in('Description', with: 'An edited proxy deposited work')
+      fill_in('Creator', with: 'Edited grantor')
+      click_on('Save')
+      expect(current_path).to include('/concern/generic_works/')
+      expect(page).to have_content('An edited proxy deposited work')
+      expect(page).to have_content('Edited grantor')
     end
   end
 end
