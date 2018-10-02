@@ -10,7 +10,7 @@ RSpec.describe 'collection', type: :feature, js: true, clean_repo: true do
 
   describe 'collection show page' do
     let(:collection) do
-      create(:public_collection, user: user, description: ['collection description'], collection_type_settings: :nestable)
+      create(:public_collection, user: user, license: 'http://creativecommons.org/licenses/by-nc-nd/4.0/', description: ['collection description'], collection_type_settings: :nestable)
     end
     let!(:work1) { create(:work, title: ["King Louie"], member_of_collections: [collection], user: user) }
     let!(:work2) { create(:work, title: ["King Kong"], member_of_collections: [collection], user: user) }
@@ -29,6 +29,7 @@ RSpec.describe 'collection', type: :feature, js: true, clean_repo: true do
     it "shows a collection with a listing of Descriptive Metadata and catalog-style search results" do
       expect(page).to have_content(collection.title.first)
       expect(page).to have_content(collection.description.first)
+      expect(page).to have_content(collection.license.first)
       expect(page).to have_content("Collection Details")
       # Should not show title and description a second time
       expect(page).not_to have_css('.metadata-collections', text: collection.title.first)
