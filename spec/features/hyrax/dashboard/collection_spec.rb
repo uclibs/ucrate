@@ -235,6 +235,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
   describe 'create collection' do
     let(:title) { "Test Collection" }
+    let(:creator) { "Test Creator" }
     let(:description) { "Description for collection we are testing." }
 
     context 'when user can create collections of multiple types' do
@@ -254,20 +255,21 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         click_on('Create collection')
 
         expect(page).to have_selector('h1', text: 'New User Collection')
-        expect(page).to have_selector "input.collection_title.multi_value"
-
-        click_link('Additional fields')
-        expect(page).to have_selector "input.collection_creator.multi_value"
+        expect(page).to have_selector "input#collection_title"
+        expect(page).to have_selector "input#collection_creator"
 
         title_element = find_by_id("collection_title")
         title_element.set("Test Collection") # Add whitespace to test it getting removed
 
-        fill_in('Abstract or Summary', with: description)
-        fill_in('Related URL', with: 'http://example.com/')
+        creator_element = find_by_id("collection_creator")
+        creator_element.set("Test Creator") # Add whitespace to test it getting removed
+
+        fill_in('Description', with: description)
         select('Attribution 4.0 International', from: 'License')
 
         click_button("Save")
         expect(page).to have_content title
+        find("input#collection_creator").should have_content(:creator)
         expect(page).to have_content description
       end
 
@@ -290,17 +292,16 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
           click_link "New Collection"
         end
         expect(page).to have_selector('h1', text: 'New User Collection')
-        expect(page).to have_selector "input.collection_title.multi_value"
-
-        click_link('Additional fields')
-        expect(page).to have_selector "input.collection_creator.multi_value"
+        expect(page).to have_selector "input#collection_title"
+        expect(page).to have_selector "input#collection_creator"
 
         fill_in('Title', with: title)
-        fill_in('Abstract or Summary', with: description)
-        fill_in('Related URL', with: 'http://example.com/')
+        fill_in('Creator', with: creator)
+        fill_in('Description', with: description)
 
         click_button("Save")
         expect(page).to have_content title
+        find("input#collection_creator").should have_content(:creator)
         expect(page).to have_content description
       end
     end
@@ -858,7 +859,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
           creators = ["Dorje Trollo", "Vajrayogini"]
 
           fill_in('Title', with: new_title)
-          fill_in('Abstract or Summary', with: new_description)
+          fill_in('Description', with: new_description)
           fill_in('Creator', with: creators.first)
           within('.panel-footer') do
             click_button('Save changes')
