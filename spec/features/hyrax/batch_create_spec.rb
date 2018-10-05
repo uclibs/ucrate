@@ -34,6 +34,11 @@ RSpec.describe 'Batch creation of works', type: :feature do
     expect(page).to have_checked_field('batch_upload_item_visibility_open')
   end
 
+  it 'hides cloud upload button' do
+    visit hyrax.new_batch_upload_path(payload_concern: 'Document')
+    expect(page).to have_no_content('Add cloud files')
+  end
+
   context 'when the user is a proxy', :js, :workflow do
     let(:second_user) { create(:user) }
 

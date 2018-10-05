@@ -7,4 +7,18 @@ class Collection < ActiveFedora::Base
   # You can replace these metadata if they're not suitable
   include Hyrax::BasicMetadata
   self.indexer = Hyrax::CollectionWithBasicMetadataIndexer
+
+  property :license, predicate: ::RDF::Vocab::DC.rights, multiple: false
+
+  def self.multiple?(field)
+    if [:title, :description, :license].include? field.to_sym
+      false
+    else
+      super
+    end
+  end
+
+  def multiple?(field)
+    CollectionForm.multiple? field
+  end
 end

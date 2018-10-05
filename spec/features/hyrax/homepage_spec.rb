@@ -2,8 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe "The homepage" do
-  let(:work1) { create(:work, :public, title: ['Work 1']) }
+RSpec.describe "The homepage", :clean_repo do
+  let(:work1) { create(:work, :public, title: ["Work 1"], date_uploaded: (DateTime.current - 1.day)) }
+  let(:work2) { create(:work, :public, title: ["Work 2"], date_uploaded: (DateTime.current - 1.year)) }
 
   before do
     create(:featured_work, work_id: work1.id)
@@ -11,7 +12,7 @@ RSpec.describe "The homepage" do
 
   it 'shows featured works' do
     visit root_path
-    expect(page).to have_link "Work 1"
+    expect(page).to have_link work1.title.first
   end
 
   it 'renders the featured researcher partial' do
@@ -54,7 +55,7 @@ RSpec.describe "The homepage" do
     it 'shows featured works that I can sort' do
       visit root_path
       within '.dd-item' do
-        expect(page).to have_link "Work 1"
+        expect(page).to have_link work1.title.first
       end
     end
   end

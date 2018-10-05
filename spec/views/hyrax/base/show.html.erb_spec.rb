@@ -73,6 +73,26 @@ RSpec.describe 'hyrax/base/show.html.erb', type: :view do
     render template: 'hyrax/base/show.html.erb', layout: 'layouts/hyrax/1_column'
   end
 
+  describe 'Mendeley' do
+    it 'appears in meta tags' do
+      mendeley_meta_tags = Nokogiri::HTML(rendered).xpath("//meta[contains(@name, 'DC.')]")
+      expect(mendeley_meta_tags.count).to be >= 3
+    end
+    it 'displays title' do
+      tag = Nokogiri::HTML(rendered).xpath("//meta[@name='DC.Title']")
+      expect(tag.attribute('content').value).to eq('My Title')
+    end
+    it 'displays authors' do
+      tags = Nokogiri::HTML(rendered).xpath("//meta[@name='DC.Creator']")
+      expect(tags.first.attribute('content').value).to eq('Doe, John')
+      expect(tags.last.attribute('content').value).to eq('Doe, Jane')
+    end
+    it 'displays description' do
+      tag = Nokogiri::HTML(rendered).xpath("//meta[@name='DC.Description']")
+      expect(tag.attribute('content').value).to eq('Lorem ipsum lorem ipsum.')
+    end
+  end
+
   it "displays download link for Adobe Acrobat" do
     expect(page).to have_text("Download Adobe Acrobat Reader")
   end
