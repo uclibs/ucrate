@@ -4,3 +4,4 @@ max_retries: 3
   - default
   - ingest
   - event
+  - change

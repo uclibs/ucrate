@@ -1,0 +1,24 @@
+added_as_proxy:
+  print: proxy
+  inverse: removed_as_proxy
+  human_readable: added
+removed_as_proxy:
+  print: proxy
+  inverse: added_as_proxy
+  human_readable: removed
+added_as_editor:
+  print: editor
+  inverse: removed_as_editor
+  human_readable: Added as an editor to
+removed_as_editor:
+  print: editor
+  inverse: added_as_editor
+  human_readable: Removed as an editor from
+embargo_set:
+  print: embargo
+  inverse: embargo_lifted
+  human_readable: An embargo has been set
+embargo_lifted:
+  print: Emboargo lifted
+  inverse: embargo
+  human_readable: An embargo has been lifted

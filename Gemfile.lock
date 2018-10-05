@@ -72,6 +72,15 @@ GIT
       signet
 
 GIT
+  remote: https://github.com/uclibs/change_manager.git
+  revision: 8d151d1123aa35658f061a63bc72435afdf0ec8a
+  ref: 8d151d1123aa35658f061a63bc72435afdf0ec8a
+  specs:
+    change_manager (1.0.0)
+      activejob
+      rails
+
+GIT
   remote: https://github.com/uclibs/devise-multi_auth
   revision: 49073374277f94c3bb2e1cc654c8732da37ec4ce
   branch: rails-5-1
@@ -921,6 +930,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.4, < 2.18.0)
   capybara-maleficent (~> 0.2)
+  change_manager!
   chromedriver-helper
   coffee-rails (~> 4.2)
   coveralls (~> 0.7.1)
