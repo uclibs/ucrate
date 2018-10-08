@@ -7,6 +7,7 @@ module Hyrax
   class MediaController < ApplicationController
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
+    include Scholar::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     self.curation_concern_type = ::Medium
     # Use this line if you want to use a custom presenter

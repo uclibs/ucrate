@@ -1,0 +1,14 @@
+<%= User.find_by_email(@changes.first.owner).name %> has added or removed you as an editor to the following works in Scholar@UC:
+
+<ul>
+<% @changes.each do |change| %>
+	<% work_title = ActiveFedora::Base.find(change.context).title.first %>
+	<% work_url = File.join(Rails.configuration.application_root_url, 'show', change.context) %>
+	<li>
+		<%= @change_types[change.change_type]['human_readable'] %>
+		<%= link_to work_title, work_url %>
+	</li>
+<% end %>
+</ul>
+
+An editor can modify all metadata for a work and upload/delete files for a work. If you feel that this was made in error, please contact the <a href="mailto:scholar@uc.edu">Scholar@UC</a> team.
