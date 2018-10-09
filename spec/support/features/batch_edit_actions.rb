@@ -3,7 +3,7 @@
 def batch_edit_fields
   # skipping based_near because it's a select2 field, which is hard to test via capybara
   [
-    "creator", "contributor", "description", "keyword", "publisher", "date_created",
+    "creator", "contributor", "description", "publisher", "date_created",
     "subject", "language", "identifier", "related_url"
   ]
 end
