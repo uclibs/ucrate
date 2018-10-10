@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180621165939) do
+ActiveRecord::Schema.define(version: 20181001000000) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20180621165939) do
     t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_bookmarks_on_document_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "change_manager_changes", force: :cascade do |t|
+    t.string "change_type"
+    t.boolean "cancelled"
+    t.datetime "notified"
+    t.string "owner"
+    t.string "target"
+    t.string "context"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "checksum_audit_logs", force: :cascade do |t|

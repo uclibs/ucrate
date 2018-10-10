@@ -49,7 +49,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       end
       click_link "Relationships"
       expect(page).to have_css("div.generic_work_admin_set_id", visible: false)
-      click_link "Descriptions" # switch tab
+      click_link "Metadata" # switch tab
 
       title_element = find_by_id("generic_work_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
@@ -58,6 +58,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       college_element.select("Business")
 
       select 'In Copyright', from: "generic_work_rights_statement"
+      expect(page).to have_content("License Wizard")
       select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
 
       expect(page).to have_field("Creator", with: user.name_for_works)
@@ -67,7 +68,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       fill_in('Description', with: 'This is a description.')
 
       choose('generic_work_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
+      expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')
       # These lines are for debugging, should this test fail
       # puts "Required metadata: #{page.evaluate_script(%{$('#form-progress').data('save_work_control').requiredFields.areComplete})}"
@@ -98,14 +99,13 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
     end
 
     it "allows on-behalf-of deposit" do
-      page.save_screenshot('virus.png')
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       within('span#addfiles') do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
-      click_link "Descriptions" # switch tab
+      click_link "Metadata" # switch tab
       expect(page).to have_field("Creator", with: second_user.name_for_works)
 
       title_element = find_by_id("generic_work_title")
@@ -124,7 +124,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       fill_in('Description', with: 'This is a description.')
 
       choose('generic_work_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
+      expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       select(second_user.user_key, from: 'On behalf of')
       sleep 1
       check('agreement')

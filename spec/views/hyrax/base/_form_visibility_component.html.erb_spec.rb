@@ -26,4 +26,8 @@ describe 'hyrax/base/_form_visibility_component.html.erb', type: :view do
   it 'does not have a Lease option for visibility' do
     expect(rendered).not_to have_selector('div#collapseLease')
   end
+
+  it 'does not show open access warning text' do
+    expect(rendered).not_to have_content("making something visible to the world")
+  end
 end

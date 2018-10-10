@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
       if !resource.waived_welcome_page
         Rails.application.routes.url_helpers.welcome_page_index_path
       else
-        Hyrax::Engine.routes.url_helpers.root_path
+        Rails.application.routes.url_helpers.new_classify_concern_path
       end
     end
 

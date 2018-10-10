@@ -256,15 +256,14 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
         expect(page).to have_selector('h1', text: 'New User Collection')
         expect(page).to have_selector "input#collection_title"
-
         click_link('Additional fields')
-
         fill_in('Title', with: title)
         fill_in('Abstract or Summary', with: description)
         fill_in('Creator', with: creator)
         select('Creative Commons Public Domain Mark 1.0', from: 'License')
         click_button("Save")
         expect(page).to have_content title
+        find("input#collection_creator").should have_content(:creator)
         expect(page).to have_content description
       end
 
@@ -288,12 +287,11 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         end
         expect(page).to have_selector('h1', text: 'New User Collection')
         expect(page).to have_selector "input#collection_title"
-
         fill_in('Title', with: title)
         fill_in('Abstract or Summary', with: description)
-
         click_button("Save")
         expect(page).to have_content title
+        find("input#collection_creator").should have_content(:creator)
         expect(page).to have_content description
       end
     end
@@ -663,7 +661,6 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
         # check required acceptance
         check('agreement')
-
         click_on('Save')
 
         # verify new work was added to collection1
@@ -699,7 +696,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
           attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         end
         # set required metadata
-        click_link "Descriptions" # switch tab
+        click_link "Metadata" # switch tab
 
         title_element = find_by_id("generic_work_title")
         title_element.set("New Work for Collection")
@@ -851,7 +848,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
           creators = ["Dorje Trollo", "Vajrayogini"]
 
           fill_in('Title', with: new_title)
-          fill_in('Abstract or Summary', with: new_description)
+          fill_in('Description', with: new_description)
           fill_in('Creator', with: creators.first)
           within('.panel-footer') do
             click_button('Save changes')

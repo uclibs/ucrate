@@ -3,7 +3,7 @@ en:
     icons:
       dataset:     'fa fa-file-text-o'
     select_type:
-      Dataset:
+      dataset:
         name:               "Dataset"
         description:        "Files containing collections of data, including: raw data, spreadsheets, logs, etc."
   simple_form:

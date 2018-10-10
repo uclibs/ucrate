@@ -50,7 +50,24 @@ en:
           rights_statement_tesim: Rights Statement
           subject_tesim: Subject
           title_tesim: Title
+  simple_form:
+    labels:
+      defaults:
+        description: Description
+        license: Rights
   hyrax:
+    active_consent_to_agreement: I have read and agree to the
+    base:
+      form_progress:
+        required_agreement: Check distribution license
+    batch_uploads:
+      files:
+        upload_type_instructions: 'Note: To create a single work for all the files, '
+    contact_form:
+      header: Contact the Scholar@UC Team
+      notice_html: 'Please us this form to send questions, feedback, or report a problem to the Scholar@UC team. You can also check %{href} for more information'
+      help_resources_href: 'Help Resources'
+    passive_consent_to_agreement: I have read and agree to the
     homepage:
       featured_works:
         tab_label:          'Featured Works'
@@ -62,6 +79,11 @@ en:
       featured_collections:
         title:              'FEATURED COLLECTION'
         no_collections:     'No collections have been featured'
+    pages:
+      tabs:
+        agreement_page: 'Distribution License'
+    users:
+      search_placeholder: 'Search People'
     workform_help_html: '<p>The more descriptive information you provide the better we can serve your needs.</p>'
     workform_attach_file_html: '<p>%{href} is highly recommended but not required.</p>'
     workform_attach_file_href: 'Attaching a file'
@@ -70,13 +92,21 @@ en:
     directory:
       suffix:               "@example.org"
     footer:
-      copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
-      service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
-    institution_name:       "University of Cicninnati"
-    institution_name_full:  "The Institution Name"
+      based_on_html: "Based on <a href=\"https://github.com/samvera/hyrax\">Hyrax</a>"
+      copyright_info_html: "<a href=\"https://commercialization.uc.edu/copyright-infringement\">Copyright Information</a>"
+      copyright_html: "&copy; %{year} <a href=\"https://www.uc.edu/\"><u>University of Cincinnati</u></a>"
+      clery_heoa_notice_html: "<a href=\"https://www.uc.edu/publicsafety/clery/annual-security-report.html\">Clery and HEOA Notice</a>"
+      eaccessibility_concern_html: "<a href=\"https://www.uc.edu/ucit/community/accessibility/eAccessibility-form.html\">eAccessibility Concern</a>"
+      made_possible_by_html: "Made possible by the <a href=\"https://www.samvera.org\">Samvera</a> project."
+      non_discrimination_notice_html: "<a href=\"http://uc.edu/about/policies/non-discrimination.html\">Notice of Non-Discrimination</a>"
+      terms_of_use_html: "<a class=\"a\" href=\"/terms\">Scholar@UC Terms of Use</a>"
+      uc_alerts_html: "<a href=\"https://www.uc.edu/alert.html\">UC Alerts</a>"
+    institution_name:       "University of Cincinnati"
+    institution_name_full:  "University of Cincinnati"
     product_name:           "Scholar@UC"
     description:            "University of Cincinnati's library collections"
     product_twitter_handle: "@SamveraRepo"
+    product_email:          "scholar@uc.edu"
     user_profile:
       first_name: "First Name"
       last_name: "Last Name"
@@ -102,6 +132,7 @@ en:
       open:
         text: "Open Access"
         note_html: Make available to all<br />(see <a href="/creators_rights" target=\"_blank\">Creator's Rights</a> for more information)
+        warning_html: ""
       authenticated:
         note_html: Restrict access to logged-in users
     controls:
@@ -112,7 +143,7 @@ en:
       show:
         adobe_reader_link: 'Download Adobe Acrobat Reader'
     toolbar:
-      dashboard: 
+      dashboard:
         my: 'My Dashboard'
       works:
         batch: 'Batch Create'
@@ -126,3 +157,7 @@ en:
       profile:
         view: 'View Profile'
         edit: 'Edit Profile'
+    works:
+      form:
+        tab:
+          metadata: "Metadata"

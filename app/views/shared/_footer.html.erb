@@ -1,19 +1,25 @@
-<div class="blue-footer container">
-  <div class="row">
+<footer class="scholar-footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4">
+        <p><%= t('hyrax.footer.terms_of_use_html') %></p>
+        <p>Deployed on <%= "#{Hyrax::BUILD_IDENTIFIER}" %></p>
+        <p><%= t('hyrax.footer.copyright_info_html') %> 
+        <%= t('hyrax.footer.copyright_html', year: Time.zone.today.year) %></p>
+      </div>
 
-    <div class="col-md-6 version">
-      QA Testing for Hyrax - branch: <%= Hyrax::VERSION %>
-    </div>
-
-    <div class="pull-right col-md-4" id="copyright">
-      <span> &copy; <%= Date.today.year %> Samvera-Hyrax </span>
-      <br> Ucrate Version
-      <div class="version">
-        ENV: <%= Rails.env %>
-        <br> SHA: <%= GIT_SHA %>
-        <br>  Branch: <%= BRANCH %>
-        <br>  Updated: <%= LAST_DEPLOYED %></span>
+      <div class="col-sm-4 text-center">
+        <p><%= t('hyrax.footer.eaccessibility_concern_html') %></p>
+        <p><%= t('hyrax.footer.clery_heoa_notice_html') %></p>
+        <p><%= t('hyrax.footer.non_discrimination_notice_html') %></p>
+      </div>
+      
+      <div class="col-sm-4 desktop-right">
+        <p><%= t('hyrax.footer.based_on_html') %></p> 
+        <p><%= t('hyrax.footer.made_possible_by_html') %></p>
+        <p><%= t('hyrax.footer.uc_alerts_html') %></p>
       </div>
     </div>
   </div>
-</div>
+</footer>
+

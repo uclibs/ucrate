@@ -47,7 +47,7 @@ RSpec.describe "display a work as its owner" do
     end
 
     it "add work to a collection", clean_repo: true, js: true do
-      optional 'ability to get capybara to find css select2-result (see Hyrax issue #3038)'
+      optional 'ability to get capybara to find css select2-result (see Hyrax issue #3038)' if ENV['TRAVIS']
       click_button "Add to collection" # opens the modal
       select_member_of_collection(collection)
       click_button 'Save changes'
@@ -82,7 +82,7 @@ RSpec.describe "display a work as its owner" do
       expect(page).to have_content '%0 Generic Work'
       expect(page).to have_content '%T Magnificent splendor'
       expect(page).to have_content '%R http://localhost/files/'
-      expect(page).to have_content '%W University of Cicninnati'
+      expect(page).to have_content '%W University of Cincinnati'
       expect(page).to have_content '%~ Scholar@UC'
     end
   end

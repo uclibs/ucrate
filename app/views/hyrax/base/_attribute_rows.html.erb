@@ -14,7 +14,7 @@
 <%= presenter.attribute_to_html(:issn, html_dl: true) %>
 <%= presenter.attribute_to_html(:time_period, html_dl: true) %>
 <%= presenter.attribute_to_html(:required_software, html_dl: true) %>
-<%= presenter.attribute_to_html(:note, html_dl: true) %>
+<%= presenter.attribute_to_html(:note, html_dl: true, render_as: :note) %>
 <%= presenter.attribute_to_html(:genre, html_dl: true) %>
 <%= presenter.attribute_to_html(:geo_subject, render_as: :faceted, label: "Geographic Subject", html_dl: true) %>
 <%= presenter.attribute_to_html(:degree, html_dl: true) %>

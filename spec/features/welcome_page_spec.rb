@@ -11,6 +11,6 @@ describe 'sign in when user has waived welcome page, type', :feature do
     fill_in('user[email]', with: user.email)
     fill_in('user[password]', with: user.password)
     click_on('Log in')
-    expect(page).to have_current_path(Hyrax::Engine.routes.url_helpers.root_path)
+    expect(page).to have_current_path(Rails.application.routes.url_helpers.new_classify_concern_path)
   end
 end

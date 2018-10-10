@@ -1,5 +1,7 @@
 ---
+max_retries: 3
 :queues:
   - default
   - ingest
   - event
+  - change

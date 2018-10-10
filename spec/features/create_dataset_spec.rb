@@ -53,12 +53,13 @@ RSpec.describe 'Create a Dataset', js: true do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
-      click_link "Descriptions" # switch tab
+      click_link "Metadata" # switch tab
 
       title_element = find_by_id("dataset_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
 
       select 'In Copyright', from: "dataset_rights_statement"
+      expect(page).to have_content("License Wizard")
       select 'Attribution-ShareAlike 4.0 International', from: "dataset_license"
 
       college_element = find_by_id("dataset_college")
@@ -71,7 +72,7 @@ RSpec.describe 'Create a Dataset', js: true do
       fill_in('Required Software', with: 'Software')
 
       choose('dataset_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
+      expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')
 
       click_on('Save')

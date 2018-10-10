@@ -49,12 +49,6 @@ RSpec.describe Hyrax::ContactFormController do
         its(:notice) { is_expected.to eq("Thank you for your message!") }
       end
 
-      context "without a category" do
-        let(:params)  { required_params.except(:category) }
-
-        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. You must complete the Captcha to confirm the form. Category can't be blank") }
-      end
-
       context "without a name" do
         let(:params)  { required_params.except(:name) }
 
@@ -97,6 +91,17 @@ RSpec.describe Hyrax::ContactFormController do
         it "does not call #after_deliver" do
           expect(controller).not_to receive(:after_deliver)
           post :create, params: { contact_form: required_params.except(:email) }
+        end
+      end
+    end
+
+    describe "test configuration values" do
+      context "for the contact form" do
+        it "check contact email" do
+          expect(Hyrax.config.contact_email).to eq 'scholar@uc.edu'
+        end
+        it "check form name" do
+          expect(Hyrax.config.subject_prefix).to eq 'Scholar@UC Contact form:'
         end
       end
     end
