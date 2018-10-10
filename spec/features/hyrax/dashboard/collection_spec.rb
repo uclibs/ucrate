@@ -256,17 +256,11 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
         expect(page).to have_selector('h1', text: 'New User Collection')
         expect(page).to have_selector "input#collection_title"
-        expect(page).to have_selector "input#collection_creator"
-
-        title_element = find_by_id("collection_title")
-        title_element.set("Test Collection") # Add whitespace to test it getting removed
-
-        creator_element = find_by_id("collection_creator")
-        creator_element.set("Test Creator") # Add whitespace to test it getting removed
-
-        fill_in('Description', with: description)
-        select('Attribution 4.0 International', from: 'License')
-
+        click_link('Additional fields')
+        fill_in('Title', with: title)
+        fill_in('Abstract or Summary', with: description)
+        fill_in('Creator', with: creator)
+        select('Creative Commons Public Domain Mark 1.0', from: 'License')
         click_button("Save")
         expect(page).to have_content title
         find("input#collection_creator").should have_content(:creator)
@@ -293,12 +287,8 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         end
         expect(page).to have_selector('h1', text: 'New User Collection')
         expect(page).to have_selector "input#collection_title"
-        expect(page).to have_selector "input#collection_creator"
-
         fill_in('Title', with: title)
-        fill_in('Creator', with: creator)
-        fill_in('Description', with: description)
-
+        fill_in('Abstract or Summary', with: description)
         click_button("Save")
         expect(page).to have_content title
         find("input#collection_creator").should have_content(:creator)
@@ -662,7 +652,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
           attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         end
         # set required metadata
-        click_link "Metadata" # switch tab
+        click_link "Descriptions" # switch tab
         fill_in('generic_work_title', with: 'New Work for Collection')
         fill_in('Creator', with: 'Doe, Jane')
         fill_in('Program or Department', with: 'Digital Collections and Repositories')
@@ -671,7 +661,6 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
         # check required acceptance
         check('agreement')
-
         click_on('Save')
 
         # verify new work was added to collection1
