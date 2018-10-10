@@ -384,9 +384,7 @@ RSpec.describe 'collection_type', type: :feature, clean_repo: true do
         end
 
         # forwards to Dashboard -> Collections -> All Collections
-        within('li.active') do
-          expect(page).to have_link('All Collections')
-        end
+        expect(page).to have_link('All Collections')
 
         # filter is applied
         within('div#appliedParams') do
