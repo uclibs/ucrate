@@ -18,6 +18,7 @@ module Hyrax
         # when a work in the collection matches the query.
         solr_doc['file_set_ids_ssim'] = solr_doc['member_ids_ssim']
         solr_doc['visibility_ssi'] = object.visibility
+        solr_doc[Solrizer.solr_name('date_created', :facetable)] = object.date_created
 
         admin_set_label = object.admin_set.to_s
         solr_doc['admin_set_sim']   = admin_set_label
