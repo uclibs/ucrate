@@ -1,0 +1,12 @@
+<p>Dear <%= User.find_by_email(@changes.first.target).name %>:</p>
+
+<% if @changes.first.proxy_change? %>
+	<%= render 'proxy_changes' %>
+<% elsif @changes.first.editor_change? %>
+	<%= render 'editor_changes' %>
+<% end %>
+
+<p>
+Thanks,
+Scholar@UC
+</p>

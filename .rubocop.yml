@@ -173,3 +173,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - 'app/models/ability.rb'
     - 'app/forms/hyrax/forms/batch_upload_form.rb'
+
+Lint/HandleExceptions:
+  Exclude:
+    - 'app/controllers/concerns/scholar/works_controller_behavior.rb'
