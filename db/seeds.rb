@@ -39,7 +39,7 @@ class AddSeedObjects < ActiveRecord::Migration[5.1]
     last_name: 'User',
     password: password,
     password_confirmation: password)
-  admin = Role.create(name: 'admin')
+  admin = Role.find_or_create_by(name: 'admin')
   admin.users << admin_user
   admin.save
   puts "Account created: #{admin_user.email}\n\n"
@@ -59,8 +59,8 @@ class AddSeedObjects < ActiveRecord::Migration[5.1]
         rights_statement: ["http://rightsstatements.org/vocab/InC/1.0/"],
         publisher: ['Penguin Publishing'],
         language: ['English'],
-        based_near: ['The world'],
-        date_created: [Time.zone.at(rand * Time.now.to_i).to_s.sub(/\s(.*)/, '')]
+        date_created: [Time.zone.at(rand * Time.now.to_i).to_s.sub(/\s(.*)/, '')],
+        admin_set: AdminSet.first
       )
       work.read_groups = [Hydra::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_PUBLIC]
       work.edit_users = [user.email]
