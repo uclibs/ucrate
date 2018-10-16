@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'collection', type: :feature, js: true, clean_repo: true do
+RSpec.describe 'collection', type: :feature, clean_repo: true do
   let(:user) { create(:user) }
 
   let(:collection1) { create(:public_collection, user: user) }
@@ -61,6 +61,14 @@ RSpec.describe 'collection', type: :feature, js: true, clean_repo: true do
       expect(page).to have_content("Search Results")
       expect(page).to have_content(work1.title.first)
       expect(page).not_to have_content(work2.title.first)
+    end
+
+    it "returns json results" do
+      visit "/collections/#{collection.id}.json"
+      expect(page).to have_http_status(:success)
+      json = JSON.parse(page.body)
+      expect(json['id']).to eq collection.id
+      expect(json['title']).to match_array collection.title
     end
 
     context "with a non-nestable collection type" do
