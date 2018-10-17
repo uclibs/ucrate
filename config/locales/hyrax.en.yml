@@ -17,7 +17,6 @@ en:
           creator_sim: Creator
           file_format_sim: Format
           generic_type_sim: Type
-          keyword_sim: Keyword
           language_sim: Language
           publisher_sim: Publisher
           subject_sim: Subject
@@ -43,7 +42,6 @@ en:
           description_tesim: Description
           file_format_tesim: File Format
           identifier_tesim: Identifier
-          keyword_tesim: Keyword
           language_tesim: Language
           license_tesim: License
           publisher_tesim: Publisher

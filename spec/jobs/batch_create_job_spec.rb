@@ -12,7 +12,7 @@ describe BatchCreateJob do
     let(:upload1) { Hyrax::UploadedFile.create(user: user, file: file1) }
     let(:upload2) { Hyrax::UploadedFile.create(user: user, file: file2) }
     let(:title) { { upload1.id.to_s => 'File One', upload2.id.to_s => 'File Two' } }
-    let(:metadata) { { keyword: [], model: 'GenericWork' } }
+    let(:metadata) { { subject: [], model: 'GenericWork' } }
     let(:uploaded_files) { [upload1.id.to_s, upload2.id.to_s] }
 
     subject(:test) do
@@ -33,7 +33,7 @@ describe BatchCreateJob do
       expect(CreateWorkJob).to receive(:perform_later).with(user,
                                                             "GenericWork",
                                                             {
-                                                              keyword: [],
+                                                              subject: [],
                                                               title: ['File One'],
                                                               uploaded_files: ['1']
                                                             },
@@ -41,7 +41,7 @@ describe BatchCreateJob do
       expect(CreateWorkJob).to receive(:perform_later).with(user,
                                                             "GenericWork",
                                                             {
-                                                              keyword: [],
+                                                              subject: [],
                                                               title: ['File Two'],
                                                               uploaded_files: ['2']
                                                             },
