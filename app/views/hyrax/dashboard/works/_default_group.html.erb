@@ -1,0 +1,19 @@
+<table class="table table-striped works-list">
+  <caption class="sr-only"><%= t("hyrax.dashboard.my.sr.listing") %> <%= application_name %></caption>
+  <thead>
+    <tr>
+      <th scope="col"><%= t("hyrax.dashboard.my.heading.title") %></th>
+      <th class="date"><%= t("hyrax.dashboard.my.heading.date_uploaded") %></th>
+      <th class="sorts-dash"><%= t("blacklight.search.fields.facet.suppressed_bsi") %></th>
+      <th scope="col"><%= t("hyrax.dashboard.my.heading.visibility") %></th>
+      <th scope="col"><%= t("hyrax.dashboard.my.heading.action") %></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% docs.each_with_index do |document, counter| %>
+    <%= render 'list_works', document: document,
+                             counter: counter,
+                             presenter: Hyrax::WorkShowPresenter.new(document, current_ability) %>
+  <% end %>
+  </tbody>
+</table>
