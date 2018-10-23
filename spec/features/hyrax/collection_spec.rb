@@ -120,4 +120,18 @@ RSpec.describe 'collection', type: :feature, js: true, clean_repo: true do
       expect(page).to have_css(".pagination")
     end
   end
+
+  describe 'check collection License hyperlink' do
+    let(:collection) do
+      create(:public_collection, user: user, license: 'http://creativecommons.org/publicdomain/zero/1.0/', description: ['collection description'], collection_type_settings: :nestable)
+    end
+
+    before do
+      visit "/collections/#{collection.id}"
+    end
+
+    it 'Verify correct link for license' do
+      expect(page).to have_link("CC0 1.0 Universal", href: "http://creativecommons.org/publicdomain/zero/1.0/")
+    end
+  end
 end
