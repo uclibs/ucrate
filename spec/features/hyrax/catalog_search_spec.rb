@@ -15,14 +15,14 @@ RSpec.describe 'catalog searching', type: :feature do
 
   context 'with works and collections' do
     let!(:jills_work) do
-      create(:public_work, title: ["Jill's Research"], keyword: ['jills_keyword', 'shared_keyword'])
+      create(:public_work, title: ["Jill's Research"], subject: ['jills_keyword', 'shared_keyword'])
     end
 
     let!(:jacks_work) do
-      create(:public_work, title: ["Jack's Research"], keyword: ['jacks_keyword', 'shared_keyword'])
+      create(:public_work, title: ["Jack's Research"], subject: ['jacks_keyword', 'shared_keyword'])
     end
 
-    let!(:collection) { create(:public_collection, collection_type_gid: collection_type.gid, keyword: ['collection_keyword', 'shared_keyword']) }
+    let!(:collection) { create(:public_collection, collection_type_gid: collection_type.gid, subject: ['collection_keyword', 'shared_keyword']) }
 
     it 'performing a search' do
       within('#search-form-header') do
@@ -41,7 +41,7 @@ RSpec.describe 'catalog searching', type: :feature do
     let!(:collection) { create(:private_collection) }
 
     let!(:jills_work) do
-      create(:public_work, title: ["Jill's Research"], keyword: ['jills_keyword'], member_of_collections: [collection])
+      create(:public_work, title: ["Jill's Research"], subject: ['jills_keyword'], member_of_collections: [collection])
     end
 
     it "hides collection facet values the user doesn't have access to view when performing a search" do

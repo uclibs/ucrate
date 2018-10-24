@@ -8,7 +8,6 @@ zh:
           creator_sim: 创建者
           file_format_sim: 文件格式
           generic_type_sim: 类型
-          keyword_sim: 关键词
           language_sim: 语言
           publisher_sim: 出版者
           subject_sim: 学科
@@ -22,7 +21,6 @@ zh:
           description_tesim: 描述
           file_format_tesim: 文件格式
           identifier_tesim: 识别码
-          keyword_tesim: 关键词
           language_tesim: 语言
           license_tesim: 执照
           publisher_tesim: 出版者
@@ -38,7 +36,6 @@ zh:
           description_tesim: 描述
           file_format_tesim: 文件格式
           identifier_tesim: 识别码
-          keyword_tesim: 关键词
           language_tesim: 语言
           license_tesim: 执照
           publisher_tesim: 出版者

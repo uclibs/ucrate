@@ -37,7 +37,6 @@ RSpec.describe 'search display fields', type: :feature, js: true do
              creator: ["Greenman, Charles"],
              contributor: [],
              description: ["Abstract."],
-             keyword: [],
              license: ["http://creativecommons.org/licenses/by/4.0/"],
              rights_statement: ["http://rightsstatements.org/vocab/InC/1.0/"],
              publisher: ["0123456789"],
