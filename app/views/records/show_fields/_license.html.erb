@@ -1,0 +1,6 @@
+<% record.license.each do |license| %>
+<span itemprop="rights" itemscope itemtype="http://schema.org/Person">
+  <%= link_to Hyrax.config.license_service_class.new.label(license), license %>
+</span>
+<br />
+<% end %>
