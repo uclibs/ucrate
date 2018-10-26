@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'collection', type: :feature, js: true, clean_repo: true do
+RSpec.describe 'collection', type: :feature, clean_repo: true do
   let(:user) { create(:user) }
 
   let(:collection1) { create(:public_collection, user: user) }
@@ -63,6 +63,14 @@ RSpec.describe 'collection', type: :feature, js: true, clean_repo: true do
       expect(page).not_to have_content(work2.title.first)
     end
 
+    it "returns json results" do
+      visit "/collections/#{collection.id}.json"
+      expect(page).to have_http_status(:success)
+      json = JSON.parse(page.body)
+      expect(json['id']).to eq collection.id
+      expect(json['title']).to match_array collection.title
+    end
+
     context "with a non-nestable collection type" do
       let(:collection) do
         build(:public_collection_lw, user: user, description: ['collection description'], collection_type_settings: :not_nestable, with_solr_document: true, with_permission_template: true)
@@ -118,6 +126,20 @@ RSpec.describe 'collection', type: :feature, js: true, clean_repo: true do
     it "shows a collection with a listing of Descriptive Metadata and catalog-style search results" do
       visit "/collections/#{collection.id}"
       expect(page).to have_css(".pagination")
+    end
+  end
+
+  describe 'check collection License hyperlink' do
+    let(:collection) do
+      create(:public_collection, user: user, license: 'http://creativecommons.org/publicdomain/zero/1.0/', description: ['collection description'], collection_type_settings: :nestable)
+    end
+
+    before do
+      visit "/collections/#{collection.id}"
+    end
+
+    it 'Verify correct link for license' do
+      expect(page).to have_link("CC0 1.0 Universal", href: "http://creativecommons.org/publicdomain/zero/1.0/")
     end
   end
 end

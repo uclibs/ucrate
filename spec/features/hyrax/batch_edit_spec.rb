@@ -50,10 +50,6 @@ RSpec.describe 'batch', type: :feature, clean_repo: true, js: true do
         sleep 1
         page.find("textarea#generic_work_description", text: 'NEW description')
       end
-      batch_edit_expand("keyword") do
-        sleep 1
-        page.find("input#generic_work_keyword[value='NEW keyword']")
-      end
       batch_edit_expand("publisher") do
         sleep 1
         page.find "input#generic_work_publisher[value='NEW publisher']"

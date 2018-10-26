@@ -69,7 +69,7 @@ RSpec.describe 'Batch creation of works', type: :feature do
       end
       click_link "Metadata" # switch tab
       fill_in('Creator', with: 'Doe, Jane')
-      fill_in('Keyword', with: 'testing')
+      fill_in('Subject', with: 'testing')
       select('In Copyright', from: 'Rights statement')
 
       choose('batch_upload_item_visibility_open')
