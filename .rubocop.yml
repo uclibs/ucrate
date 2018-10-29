@@ -118,6 +118,7 @@ RSpec/ExampleLength:
     - 'spec/forms/hyrax/batch_edit_form_spec.rb'
     - 'spec/jobs/batch_create_job_spec.rb'
     - 'spec/controllers/hyrax/batch_uploads_controller_spec.rb'
+    - 'spec/features/create_collection_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
