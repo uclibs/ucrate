@@ -42,3 +42,12 @@
  div[class*="_admin_set_id"] {
   display: none;
  }
+
+ .break-all  {
+    display: inline-block;
+    word-break: break-all;
+ }
+
+ .auto-width-overide  {
+    width: auto !important;
+ }
