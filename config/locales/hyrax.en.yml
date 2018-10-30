@@ -14,7 +14,7 @@ en:
       fields:
         facet:
           based_near_label_sim: Location
-          creator_sim: Creator
+          creator_sim: Creator/Author
           file_format_sim: Format
           generic_type_sim: Type
           language_sim: Language
