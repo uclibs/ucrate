@@ -57,7 +57,6 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       college_element = find_by_id("generic_work_college")
       college_element.select("Business")
 
-      select 'In Copyright', from: "generic_work_rights_statement"
       expect(page).to have_content("License Wizard")
       select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
 
@@ -111,7 +110,6 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       title_element = find_by_id("generic_work_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
 
-      select 'In Copyright', from: "generic_work_rights_statement"
       select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
 
       expect(page).to have_field("Creator", with: user.name_for_works)

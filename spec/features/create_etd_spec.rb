@@ -66,8 +66,8 @@ RSpec.describe 'Create a Etd', js: true do
       college_element = find_by_id("etd_college")
       college_element.select("Business")
 
-      select 'In Copyright', from: "etd_rights_statement"
       expect(page).to have_content("License Wizard")
+      expect(page).not_to have_content('Rights statement')
       select 'Attribution-ShareAlike 4.0 International', from: 'etd_license'
 
       fill_in('Creator', with: 'Doe, Jane')

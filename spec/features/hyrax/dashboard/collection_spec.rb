@@ -712,7 +712,6 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         title_element = find_by_id("generic_work_title")
         title_element.set("New Work for Collection")
 
-        select 'In Copyright', from: "generic_work_rights_statement"
         select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
 
         fill_in('Creator', with: 'Doe, Jane')

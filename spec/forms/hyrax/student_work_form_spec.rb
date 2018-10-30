@@ -19,7 +19,7 @@ RSpec.describe Hyrax::StudentWorkForm do
 
     it {
       is_expected.to eq [:title, :creator, :college, :department, :description,
-                         :advisor, :license, :rights_statement, :degree, :publisher,
+                         :advisor, :license, :degree, :publisher,
                          :date_created, :alternate_title, :genre, :subject, :geo_subject,
                          :time_period, :language, :required_software, :note, :related_url]
     }
@@ -69,7 +69,6 @@ RSpec.describe Hyrax::StudentWorkForm do
       expect(attrib['title']).to eq ['foo']
       expect(attrib['description']).to be_nil
       expect(attrib['visibility']).to eq 'open'
-      expect(attrib['rights_statement']).to eq 'http://creativecommons.org/licenses/by/4.0/us/'
       expect(attrib['member_of_collection_ids']).to eq ['123456', 'abcdef']
     end
 

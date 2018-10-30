@@ -60,8 +60,8 @@ RSpec.describe 'Create a StudentWork', js: true do
       title_element = find_by_id("student_work_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
 
-      select 'In Copyright', from: "student_work_rights_statement"
       expect(page).to have_content("License Wizard")
+      expect(page).not_to have_content('Rights statement')
       select 'Attribution-ShareAlike 4.0 International', from: 'student_work_license'
 
       college_element = find_by_id("student_work_college")
