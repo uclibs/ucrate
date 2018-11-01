@@ -12,6 +12,7 @@ module Hyrax
         attrs = super
         attrs[:title] = Array(attrs[:title]) if attrs[:title]
         attrs[:description] = Array(attrs[:description]) if attrs[:description]
+        attrs[:visibility] = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
         attrs
       end
 

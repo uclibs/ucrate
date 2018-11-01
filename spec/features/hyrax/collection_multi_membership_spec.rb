@@ -70,7 +70,7 @@ RSpec.describe 'Adding a work to multiple collections', type: :feature, clean_re
              member_of_collections: [old_collection],
              title: ['The highly valued work that everyone wants in their collection'],
              creator: ["Fred"],
-             keyword: ['test'], rights_statement: ['http://rightsstatements.org/vocab/InC/1.0/'])
+             subject: ['test'], rights_statement: ['http://rightsstatements.org/vocab/InC/1.0/'])
     end
 
     context 'and are of different types' do

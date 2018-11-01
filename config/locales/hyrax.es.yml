@@ -8,7 +8,6 @@ es:
           creator_sim: Creador
           file_format_sim: Formato
           generic_type_sim: Tipo
-          keyword_sim: Palabra clave
           language_sim: Idioma
           publisher_sim: Editor
           subject_sim: Tema
@@ -22,7 +21,6 @@ es:
           description_tesim: Descripción
           file_format_tesim: Formato de Archivo
           identifier_tesim: Identificador
-          keyword_tesim: Palabra clave
           language_tesim: Idioma
           license_tesim: Licencia
           publisher_tesim: Editor
@@ -38,7 +36,6 @@ es:
           description_tesim: Descripción
           file_format_tesim: Formato de Archivo
           identifier_tesim: Identificador
-          keyword_tesim: Palabra clave
           language_tesim: Idioma
           license_tesim: Licencia
           publisher_tesim: Editor

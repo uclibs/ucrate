@@ -11,6 +11,10 @@ class CatalogController < ApplicationController
     solr_name('system_create', :stored_sortable, type: :date)
   end
 
+  def self.title_field
+    solr_name('sort_title', :stored_sortable, type: :string)
+  end
+
   def self.modified_field
     solr_name('system_modified', :stored_sortable, type: :date)
   end
@@ -41,19 +45,14 @@ class CatalogController < ApplicationController
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
-    config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
-    config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
-    config.add_facet_field solr_name("creator", :facetable), limit: 5
-    config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
-    config.add_facet_field solr_name("keyword", :facetable), limit: 5
+    config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type of Work", limit: 5
+    config.add_facet_field solr_name("creator", :facetable), label: "Creator/Author", limit: 5
     config.add_facet_field solr_name("subject", :facetable), limit: 5
     config.add_facet_field solr_name("college", :facetable), label: "College", limit: 5
-    config.add_facet_field solr_name("department", :facetable), label: "Program or Dept.", limit: 5
+    config.add_facet_field solr_name("department", :facetable), label: "Department", limit: 5
     config.add_facet_field solr_name("language", :facetable), limit: 5
-    config.add_facet_field solr_name("geo_subject", :facetable), label: "Geographic Subject", limit: 5
     config.add_facet_field solr_name("publisher", :facetable), limit: 5
-    config.add_facet_field solr_name("file_format", :facetable), limit: 5
-    config.add_facet_field solr_name('member_of_collection_ids', :symbol), limit: 5, label: 'Collections', helper_method: :collection_title_by_id
+    config.add_facet_field solr_name("date_created", :facetable), label: "Date Created", limit: 5
 
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
@@ -81,7 +80,6 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field solr_name("title", :stored_searchable)
     config.add_show_field solr_name("description", :stored_searchable)
-    config.add_show_field solr_name("keyword", :stored_searchable)
     config.add_show_field solr_name("subject", :stored_searchable)
     config.add_show_field solr_name("creator", :stored_searchable)
     config.add_show_field solr_name("depositor"), label: "Submitter", helper_method: :link_to_profile
@@ -189,7 +187,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('date_created') do |field|
-      solr_name = solr_name("created", :stored_searchable)
+      solr_name = solr_name("date_created", :stored_searchable)
       field.solr_local_parameters = {
         qf: solr_name,
         pf: solr_name
@@ -245,14 +243,6 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('keyword') do |field|
-      solr_name = solr_name("keyword", :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
     config.add_search_field('depositor') do |field|
       solr_name = solr_name("depositor", :symbol)
       field.solr_local_parameters = {
@@ -287,6 +277,8 @@ class CatalogController < ApplicationController
     config.add_sort_field "#{uploaded_field} asc", label: "date uploaded \u25B2"
     config.add_sort_field "#{modified_field} desc", label: "date modified \u25BC"
     config.add_sort_field "#{modified_field} asc", label: "date modified \u25B2"
+    config.add_sort_field "#{title_field} asc", label: "title A-Z"
+    config.add_sort_field "#{title_field} desc", label: "title Z-A"
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.

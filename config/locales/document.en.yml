@@ -29,7 +29,6 @@ en:
       document:
         resource: "Pre-defined categories to describe the type of content being uploaded, such as &quot;article&quot; or &quot;dataset.&quot;  More than one type may be selected."
         title: "Enter the title of your Document. If the Document doesn't have a title, please enter a brief descriptive label."
-        keyword: "Words or phrases you select to describe what the work is about. These are used to search for content."
         subject: "Enter terms or keywords that describe your Document.</br>Examples:</br><ul><li>Biology</li><li>Art History</li><li>Economics</li></ul>"
         creator: "Enter the names of creators of the Document, in <i> LastName, FirstName </i> format. These could include important authors, co-authors, or other significant contributors."
         related_url: "A link to a website or other specific content (audio, video, PDF document) related to the work. An example is the URL of a research project from which the work was derived."

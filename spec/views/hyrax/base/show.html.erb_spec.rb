@@ -11,7 +11,6 @@ RSpec.describe 'hyrax/base/show.html.erb', type: :view do
                      has_model_ssim: ['GenericWork'],
                      depositor_tesim: depositor.user_key,
                      description_tesim: ['Lorem ipsum lorem ipsum.'],
-                     keyword_tesim: ['bacon', 'sausage', 'eggs'],
                      rights_statement_tesim: ['http://example.org/rs/1'],
                      date_created_tesim: ['1984-01-02'])
   end
