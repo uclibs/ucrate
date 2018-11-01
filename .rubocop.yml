@@ -151,6 +151,9 @@ RSpec/VerifiedDoubles:
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
     - 'spec/views/hyrax/dashboard/collections/_show_actions.html.erb_spec.rb'
     - 'spec/helpers/hyrax_helper_spec.rb'
+    - 'spec/views/catalog/_search_form.html.erb_spec.rb'
+    - 'spec/views/hyrax/my/collections/index.html.erb_spec.rb'
+    - 'spec/views/hyrax/my/_search_form.html.erb_spec.rb'
 
 Style/ClassAndModuleChildren:
   Enabled: false
