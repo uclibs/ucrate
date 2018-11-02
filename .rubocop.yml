@@ -121,6 +121,8 @@ RSpec/ExampleLength:
     - 'spec/forms/hyrax/batch_edit_form_spec.rb'
     - 'spec/jobs/batch_create_job_spec.rb'
     - 'spec/controllers/hyrax/batch_uploads_controller_spec.rb'
+    - 'spec/features/create_work_with_fields_spec.rb'
+    - 'spec/controllers/hyrax/generic_works_controller_spec.rb'
     - 'spec/features/create_collection_spec.rb'
     - 'spec/features/catalog_facet_spec.rb'
 
@@ -182,6 +184,7 @@ Style/GuardClause:
 Metrics/AbcSize:
   Exclude:
     - 'app/models/ability.rb'
+    - 'app/controllers/concerns/hyrax/works_controller_behavior.rb'
     - 'app/indexers/hyrax/file_set_indexer.rb'
     - 'app/indexers/hyrax/work_indexer.rb'
     - 'app/models/ability.rb'
