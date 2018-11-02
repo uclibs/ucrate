@@ -53,6 +53,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("language", :facetable), limit: 5
     config.add_facet_field solr_name("publisher", :facetable), limit: 5
     config.add_facet_field solr_name("date_created", :facetable), label: "Date Created", limit: 5
+    config.add_facet_field solr_name('member_of_collection_ids', :symbol), limit: 5, label: 'Collections', helper_method: :collection_title_by_id
 
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile

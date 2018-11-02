@@ -22,17 +22,18 @@ RSpec.describe 'catalog searching', type: :feature do
       create(:public_work, title: ["Jack's Research"], subject: ['jacks_subject', 'shared_subject'])
     end
 
-    let!(:collection) { create(:public_collection, collection_type_gid: collection_type.gid, keyword: ['collection_subject', 'shared_subject']) }
+    let!(:collection) { create(:public_collection, collection_type_gid: collection_type.gid, subject: ['collection_subject', 'shared_subject']) }
 
     it 'performing a search' do
       within('#search-form-header') do
-        fill_in('search-field-header', with: 'Research')
+        fill_in('search-field-header', with: 'shared_subject')
         click_button('Go')
       end
 
       expect(page).to have_content('Search Results')
       expect(page).to have_content(jills_work.title.first)
       expect(page).to have_content(jacks_work.title.first)
+      expect(page).to have_content(collection.title.first)
     end
   end
 
@@ -51,6 +52,7 @@ RSpec.describe 'catalog searching', type: :feature do
 
       expect(page).to have_content('Search Results')
       expect(page).to have_content(jills_work.title.first)
+      expect(page).not_to have_content(collection.title.first)
       expect(page).not_to have_css('.blacklight-member_of_collection_ids_ssim')
     end
 
@@ -73,6 +75,8 @@ RSpec.describe 'catalog searching', type: :feature do
 
         expect(page).to have_content('Search Results')
         expect(page).to have_content(jills_work.title.first)
+        find('.blacklight-member_of_collection_ids_ssim').click
+        expect(page).to have_content(collection.title.first)
       end
     end
   end
