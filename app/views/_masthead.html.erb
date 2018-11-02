@@ -1,4 +1,3 @@
-<%= render '/shared/select_work_type_modal' if create_work_presenter.many? %>
 <header>
   <nav id="masthead" class="navbar navbar-inverse navbar-static-top" role="navigation">
     <div class="container-fluid">
@@ -15,7 +14,6 @@
           <a class="navbar-brand" href ="/"><b> | <%= image_tag 'scholar-logo.png', id: 'scholar-nav-logo', alt: 'scholar@uc' %> </b></a>
         <% end %>
       </div>
-
       <div class="collapse navbar-collapse" id="top-navbar-collapse">
         <%= render '/user_util_links' %>
       </div>
