@@ -21,5 +21,13 @@ RSpec.describe "The dashboard as viewed by a regular user", type: :feature do
         expect(page).to have_link "Collections"
       end
     end
+
+    it "shows proxy information" do
+      expect(page).to have_content "Manage Proxies"
+      within 'div#proxy_management' do
+        click_link "Manage Proxies"
+      end
+      expect(page).to have_content "Please Note: Your proxies can do anything on your behalf in Scholar@UC."
+    end
   end
 end

@@ -36,7 +36,7 @@ RSpec.describe Hyrax::Forms::BatchUploadForm do
 
   describe "#terms" do
     let(:terms) do
-      %i[creator description license rights_statement publisher date_created subject
+      %i[creator description license publisher date_created subject
          language identifier based_near related_url representative_id
          thumbnail_id files visibility_during_embargo embargo_release_date
          visibility_after_embargo visibility_during_lease

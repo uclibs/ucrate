@@ -21,7 +21,6 @@ RSpec.describe 'embargo' do
       college_element = find_by_id("generic_work_college")
       college_element.select("Business")
 
-      select 'In Copyright', from: "generic_work_rights_statement"
       select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
 
       fill_in('Creator', with: 'Doe, Jane')

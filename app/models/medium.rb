@@ -4,6 +4,7 @@
 #  `rails generate hyrax:work Medium`
 class Medium < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include RemoveProxyEditors::RemoveUser
 
   self.indexer = MediumIndexer
   # Change this to restrict which works can be added as a child.

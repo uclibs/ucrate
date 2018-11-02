@@ -15,18 +15,18 @@ RSpec.describe 'catalog searching', type: :feature do
 
   context 'with works and collections' do
     let!(:jills_work) do
-      create(:public_work, title: ["Jill's Research"], subject: ['jills_keyword', 'shared_keyword'])
+      create(:public_work, title: ["Jill's Research"], subject: ['jills_subject', 'shared_subject'])
     end
 
     let!(:jacks_work) do
-      create(:public_work, title: ["Jack's Research"], subject: ['jacks_keyword', 'shared_keyword'])
+      create(:public_work, title: ["Jack's Research"], subject: ['jacks_subject', 'shared_subject'])
     end
 
-    let!(:collection) { create(:public_collection, collection_type_gid: collection_type.gid, subject: ['collection_keyword', 'shared_keyword']) }
+    let!(:collection) { create(:public_collection, collection_type_gid: collection_type.gid, subject: ['collection_subject', 'shared_subject']) }
 
     it 'performing a search' do
       within('#search-form-header') do
-        fill_in('search-field-header', with: 'shared_keyword')
+        fill_in('search-field-header', with: 'shared_subject')
         click_button('Go')
       end
 
@@ -41,12 +41,12 @@ RSpec.describe 'catalog searching', type: :feature do
     let!(:collection) { create(:private_collection) }
 
     let!(:jills_work) do
-      create(:public_work, title: ["Jill's Research"], subject: ['jills_keyword'], member_of_collections: [collection])
+      create(:public_work, title: ["Jill's Research"], subject: ['jills_subject'], member_of_collections: [collection])
     end
 
     it "hides collection facet values the user doesn't have access to view when performing a search" do
       within('#search-form-header') do
-        fill_in('search-field-header', with: 'jills_keyword')
+        fill_in('search-field-header', with: 'jills_subject')
         click_button('Go')
       end
 
@@ -69,7 +69,7 @@ RSpec.describe 'catalog searching', type: :feature do
 
       it "shows collection facet values the user has access to view when performing a search" do
         within('#search-form-header') do
-          fill_in('search-field-header', with: 'jills_keyword')
+          fill_in('search-field-header', with: 'jills_subject')
           click_button('Go')
         end
 

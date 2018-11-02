@@ -45,6 +45,7 @@ RSpec.describe 'Creating a new Work as admin', :js, :workflow do
       click_link "Add new work"
       expect(page).to have_link('Add New', href: '/concern/generic_works/new?locale=en')
       click_link('Add New', href: '/concern/generic_works/new?locale=en')
+      sleep 5
       click_link "Relationship" # switch tab
       expect(page).not_to have_content('Administrative Set')
       expect(page).not_to have_content('Another Admin Set')

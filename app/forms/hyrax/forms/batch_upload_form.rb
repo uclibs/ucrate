@@ -5,7 +5,7 @@ require Hyrax::Engine.root.join('app/forms/hyrax/forms/batch_upload_form.rb')
 module Hyrax
   module Forms
     class BatchUploadForm < Hyrax::Forms::WorkForm
-      self.terms = %i[creator description license rights_statement publisher
+      self.terms = %i[creator description license publisher
                       date_created subject language identifier based_near related_url representative_id
                       thumbnail_id files visibility_during_embargo embargo_release_date
                       visibility_after_embargo visibility_during_lease
@@ -31,36 +31,36 @@ module Hyrax
       def primary_terms
         case @payload_concern
         when "Dataset"
-          %i[creator college department description required_software license rights_statement
+          %i[creator college department description required_software license
              publisher date_created alternate_title subject geo_subject
              time_period language note related_url]
         when "StudentWork"
-          %i[creator college department description advisor license rights_statement
+          %i[creator college department description advisor license
              degree publisher date_created alternate_title genre subject geo_subject
              time_period language required_software note related_url]
         when "Etd"
           %i[creator college department description advisor
-             license rights_statement committee_member degree date_created publisher
+             license committee_member degree date_created publisher
              alternate_title genre subject geo_subject time_period
              language required_software note related_url]
         when "Article"
-          %i[creator college department description license rights_statement publisher
+          %i[creator college department description license publisher
              date_created alternate_title journal_title issn subject
              geo_subject time_period language required_software note related_url]
         when "Document"
-          %i[creator college department description license rights_statement publisher
+          %i[creator college department description license publisher
              date_created alternate_title genre subject geo_subject
              time_period language required_software note related_url]
         when "Image"
-          %i[creator college department description license rights_statement publisher
+          %i[creator college department description license publisher
              date_created alternate_title genre subject geo_subject
              time_period language required_software note related_url]
         when "Medium"
-          %i[creator college department description license rights_statement publisher
+          %i[creator college department description license publisher
              date_created alternate_title subject geo_subject
              time_period language required_software note related_url]
         else
-          %i[creator college department description license rights_statement publisher
+          %i[creator college department description license publisher
              date_created alternate_title subject geo_subject
              time_period language required_software note related_url]
         end

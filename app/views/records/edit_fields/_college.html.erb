@@ -1,5 +1,6 @@
 <%= f.input :college,
       collection: sorted_college_list_for_works(f.object),
       selected: (old_or_new_college(f.object)),
-      input_html: { class: 'college' },
+      input_html: { class: 'college',
+      autocomplete: 'on' },
       required: true %>

@@ -4,6 +4,7 @@
 #  `rails generate hyrax:work Etd`
 class Etd < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include RemoveProxyEditors::RemoveUser
 
   self.indexer = EtdIndexer
   # Change this to restrict which works can be added as a child.

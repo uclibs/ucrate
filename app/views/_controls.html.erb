@@ -11,7 +11,7 @@
         <li <%= 'class=active' if current_page?(hyrax.help_path) %>>
           <%= link_to t(:'hyrax.controls.help'), hyrax.help_path, aria: current_page?(hyrax.help_path) ? {current: 'page'} : nil %></li>
       </ul>
-      <div class="searchbar-right navbar-right col-sm-7">
+      <div class="searchbar-right navbar-right col-sm-7 col-md-6">
         <%= render partial: 'catalog/search_form' %>
       </div>
     </div>

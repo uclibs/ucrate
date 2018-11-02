@@ -66,14 +66,22 @@ RSpec.describe 'Create a Etd', js: true do
       college_element = find_by_id("etd_college")
       college_element.select("Business")
 
-      select 'In Copyright', from: "etd_rights_statement"
       expect(page).to have_content("License Wizard")
+      expect(page).not_to have_content('Rights statement')
       select 'Attribution-ShareAlike 4.0 International', from: 'etd_license'
 
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Abstract', with: 'Description')
       fill_in('Advisor', with: 'Ima Advisor')
       fill_in('Degree Program', with: 'Test Department')
+      expect(page).to have_selector("select[id='etd_college'][autocomplete='on']")
+      expect(page).to have_selector("input[id='etd_department'][autocomplete='on']")
+      expect(page).to have_selector("input[id='etd_advisor'][autocomplete='on']")
+      expect(page).to have_selector("input[id='etd_publisher'][autocomplete='on']")
+      expect(page).to have_selector("input[id='etd_subject'][autocomplete='on']")
+      expect(page).to have_selector("input[id='etd_geo_subject'][autocomplete='on']")
+      expect(page).to have_selector("input[id='etd_time_period'][autocomplete='on']")
+      expect(page).to have_selector("input[id='etd_language'][autocomplete='on']")
 
       choose('etd_visibility_open')
       expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')

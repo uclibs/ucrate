@@ -14,7 +14,7 @@ en:
       fields:
         facet:
           based_near_label_sim: Location
-          creator_sim: Creator
+          creator_sim: Creator/Author
           file_format_sim: Format
           generic_type_sim: Type
           language_sim: Language
@@ -124,6 +124,7 @@ en:
       my:
         action:
           export_collection: "Export collection"
+      proxy_help: "Please Note: Your proxies can do anything on your behalf in Scholar@UC. Be selective in who you give proxy access. If you authorize a proxy they can create and upload files on your behalf as well as edit, or delete those corresponding works and files. The proxy relationship can be revoked by the owner at any time. Use work-specific editors for more fine-grained access control."
     welcome:
       waive_page: "Click here to hide this welcome page from displaying when you log in"
     visibility:
