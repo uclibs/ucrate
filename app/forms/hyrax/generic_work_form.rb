@@ -17,14 +17,14 @@ module Hyrax
     self.terms += %i[college department]
 
     ## Removing terms that we don't use
-    self.terms -= %i[keyword source contributor description based_near identifier resource_type]
+    self.terms -= %i[rights_statement keyword source contributor description based_near identifier resource_type]
 
     ## Setting custom required fields
     self.required_fields = %i[title creator college department description license]
 
     ## Adding above the fold on the form without making this required
     def primary_terms
-      required_fields + %i[rights_statement publisher date_created alternate_title subject geo_subject time_period
+      required_fields + %i[publisher date_created alternate_title subject geo_subject time_period
                            language required_software note related_url]
     end
 

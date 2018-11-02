@@ -32,6 +32,10 @@ RSpec.describe 'hyrax/base/_form_metadata.html.erb', type: :view do
     expect(page).to have_content('The more descriptive information you provide')
   end
 
+  it "does not display rights" do
+    expect(page).not_to have_content('Rights statement')
+  end
+
   context 'with secondary terms' do
     let(:additional_fields) { true }
 

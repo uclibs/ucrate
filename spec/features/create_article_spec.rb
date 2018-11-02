@@ -61,8 +61,8 @@ RSpec.describe 'Create a Article', js: true do
       college_element = find_by_id("article_college")
       college_element.select("Business")
 
-      select 'In Copyright', from: "article_rights_statement"
       expect(page).to have_content("License Wizard")
+      expect(page).not_to have_content('Rights statement')
       select 'Attribution-ShareAlike 4.0 International', from: 'article_license'
 
       fill_in('Author', with: 'Doe, Jane')

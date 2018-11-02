@@ -58,8 +58,8 @@ RSpec.describe 'Create a Dataset', js: true do
       title_element = find_by_id("dataset_title")
       title_element.set("My Test Work  ") # Add whitespace to test it getting removed
 
-      select 'In Copyright', from: "dataset_rights_statement"
       expect(page).to have_content("License Wizard")
+      expect(page).not_to have_content('Rights statement')
       select 'Attribution-ShareAlike 4.0 International', from: "dataset_license"
 
       college_element = find_by_id("dataset_college")
