@@ -4,6 +4,7 @@
 #  `rails generate hyrax:work Dataset`
 class Dataset < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include RemoveProxyEditors::RemoveUser
 
   self.indexer = DatasetIndexer
   # Change this to restrict which works can be added as a child.

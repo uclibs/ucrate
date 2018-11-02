@@ -4,6 +4,7 @@
 #  `rails generate hyrax:work GenericWork`
 class GenericWork < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include RemoveProxyEditors::RemoveUser
 
   self.indexer = GenericWorkIndexer
   # Change this to restrict which works can be added as a child.

@@ -4,6 +4,7 @@
 #  `rails generate hyrax:work Article`
 class Article < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include RemoveProxyEditors::RemoveUser
 
   self.indexer = ArticleIndexer
   # Change this to restrict which works can be added as a child.
