@@ -65,7 +65,6 @@ RSpec.describe 'Create a work', js: true, clean_repo: true do
       fill_in('Description', with: "test\ntest\"")
       fill_in('Note', with: "test\ntest\"")
 
-      select 'In Copyright', from: "image_rights_statement"
       expect(page).to have_content("License Wizard")
       select 'Attribution-ShareAlike 4.0 International', from: "image_license"
 
