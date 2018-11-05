@@ -68,6 +68,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'show_me_the_cookies'
   gem 'solr_wrapper', '>= 0.3'
+  gem 'webmock'
 end
 
 group :development do
