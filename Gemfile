@@ -42,9 +42,9 @@ gem 'jbuilder', '~> 2.5'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# gem 'clamav'
 gem 'active_attr'
 gem 'change_manager', git: "https://github.com/uclibs/change_manager.git", ref: '8d151d1123aa35658f061a63bc72435afdf0ec8a'
+# gem 'clamav'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'devise-multi_auth', git: 'https://github.com/uclibs/devise-multi_auth', branch: 'rails-5-1'
