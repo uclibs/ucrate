@@ -60,6 +60,7 @@ RSpec/AnyInstance:
   Exclude:
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
     - 'spec/controllers/collection_exports_controller_spec.rb'
+    - 'spec/models/job_io_wrapper_spec.rb'
 
 RSpec/DescribeClass:
   Exclude:
@@ -139,6 +140,9 @@ RSpec/MessageExpectation:
 RSpec/MessageSpies:
   Enabled: false
 
+RSpec/NamedSubject:
+  Exclude: 
+    - 'spec/models/job_io_wrapper_spec.rb'
 RSpec/NestedGroups:
   Enabled: false
 
