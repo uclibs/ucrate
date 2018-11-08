@@ -270,12 +270,12 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.2)
-    coveralls (0.7.12)
-      multi_json (~> 1.10)
-      rest-client (>= 1.6.8, < 2)
-      simplecov (~> 0.9.1)
+    coveralls (0.8.22)
+      json (>= 1.8, < 3)
+      simplecov (~> 0.16.1)
       term-ansicolor (~> 1.3)
-      thor (~> 0.19.1)
+      thor (~> 0.19.4)
+      tins (~> 1.6)
     crass (1.0.4)
     daemons (1.2.6)
     database_cleaner (1.7.0)
@@ -294,9 +294,7 @@ GEM
     devise-guests (0.6.1)
       devise
     diff-lcs (1.3)
-    docile (1.1.5)
-    domain_name (0.5.20180417)
-      unf (>= 0.0.5, < 1.0.0)
+    docile (1.3.1)
     dropbox-sdk (1.6.5)
       json
     dry-configurable (0.7.0)
@@ -392,8 +390,6 @@ GEM
     hashie (3.5.7)
     hiredis (0.6.1)
     htmlentities (4.3.4)
-    http-cookie (1.0.3)
-      domain_name (~> 0.5)
     http_logger (0.5.1)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
@@ -556,7 +552,9 @@ GEM
       activesupport
     memoist (0.16.0)
     method_source (0.9.0)
-    mime-types (2.99.3)
+    mime-types (3.2.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2018.0812)
     mini_magick (4.9.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
@@ -568,7 +566,6 @@ GEM
       redic
     net-http-persistent (3.0.0)
       connection_pool (~> 2.2)
-    netrc (0.11.0)
     nio4r (2.3.1)
     noid (0.9.0)
     noid-rails (3.0.0)
@@ -733,10 +730,6 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    rest-client (1.8.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 3.0)
-      netrc (~> 0.7)
     retriable (3.1.2)
     riiif (1.7.1)
       deprecation (>= 1.0.0)
@@ -830,11 +823,11 @@ GEM
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
-    simplecov (0.9.2)
-      docile (~> 1.1.0)
-      multi_json (~> 1.0)
-      simplecov-html (~> 0.9.0)
-    simplecov-html (0.9.0)
+    simplecov (0.16.1)
+      docile (~> 1.1)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.2)
     slop (4.6.2)
     solr_wrapper (2.0.0)
       faraday
@@ -879,12 +872,12 @@ GEM
     sxp (1.0.1)
       rdf (>= 2.2, < 4.0)
     temple (0.8.0)
-    term-ansicolor (1.6.0)
+    term-ansicolor (1.7.0)
       tins (~> 1.0)
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    tins (1.16.3)
+    tins (1.18.0)
     tinymce-rails (4.8.3)
       railties (>= 3.1.1)
     turbolinks (5.1.1)
@@ -899,9 +892,6 @@ GEM
     uber (0.1.0)
     uglifier (4.1.15)
       execjs (>= 0.3.0, < 3)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.5)
     unicode-display_width (1.4.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -935,7 +925,7 @@ DEPENDENCIES
   change_manager!
   chromedriver-helper
   coffee-rails (~> 4.2)
-  coveralls (~> 0.7.1)
+  coveralls (~> 0.8.22)
   database_cleaner
   devise
   devise-guests (~> 0.6)
@@ -976,4 +966,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.4
+   1.17.1

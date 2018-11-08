@@ -70,7 +70,6 @@ RSpec.describe 'Batch creation of works', type: :feature do
       click_link "Metadata" # switch tab
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Subject', with: 'testing')
-      select('In Copyright', from: 'Rights statement')
 
       choose('batch_upload_item_visibility_open')
       expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')

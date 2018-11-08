@@ -28,9 +28,14 @@ describe '/_toolbar.html.erb', type: :view do
     expect(rendered).to have_link 'Dashboard', href: hyrax.dashboard_path
   end
 
-  describe "New Work link" do
+  describe "Work links" do
     before do
       allow(view.current_ability).to receive(:can_create_any_work?).and_return(true)
+    end
+
+    it 'has my works link' do
+      render
+      expect(rendered).to have_link 'My Works', href: hyrax.my_works_path
     end
 
     context "when the user can create multiple work types" do
@@ -62,16 +67,23 @@ describe '/_toolbar.html.erb', type: :view do
     end
   end
 
-  describe "New Collection link" do
+  describe "Collection links" do
     context "when the user can create collections" do
       let!(:user_collection_type) { create(:user_collection_type) }
-      it "has a link to upload" do
+      before do
         allow(view).to receive(:can?).with(:create_any, Collection).and_return(true)
+      end
+      it "has a link to upload" do
         # rubocop:disable RSpec/MessageChain RSpec/AnyInstance
         # rubocop:disable RSpec/AnyInstance
         allow_any_instance_of(Hyrax::SelectCollectionTypeListPresenter).to receive_message_chain(:new, :any?).and_return(true)
         render
         expect(rendered).to have_link('New Collection', href: hyrax.new_dashboard_collection_path)
+      end
+
+      it 'has my collections link' do
+        render
+        expect(rendered).to have_link 'My Collections', href: hyrax.my_collections_path
       end
     end
 
