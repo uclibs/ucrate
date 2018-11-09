@@ -1,0 +1,85 @@
+en:
+  hyrax:
+    base:
+      form_files.external_upload: "Add Files from Cloud Providers"
+      metadata.header: "Attributes"
+    brought_to_you_by_html: "Brought to you by the <a href=\"http://libraries.uc.edu/\">University of Cincinnati Libraries</a> and <a href=\"http://ucit.uc.edu/\">UC Information Technologies</a>."
+    user_profile.tab_highlighted: "Highlighted Works"
+    dashboard:
+      status:
+        file_views: "File View"
+        work_views: "Work View"
+      help_statement_html: "<strong>Please Note:</strong> Your proxies can do anything on your behalf in Scholar@UC. Be selective in who you give proxy access. If you authorize a proxy they can create and upload files on your behalf as well as edit, or delete those corresponding works and files. The proxy relationship can be revoked by the owner at any time. Use work-specific editors for more fine-grained access control."
+      view_collections: "View My Collections"
+      create_collection: "Create Collection"
+      view_files: "View My Files"
+      view_works: "View My Works"
+    directory.suffix: "@example.org"
+    file_set:
+      show:
+        downloadable_content:
+          audio_link: 'Download audio file'
+          video_link: 'Download video'
+        requestable_content:
+          action_link: 'Request this file'
+          default_link: 'Request a copy of this file'
+          image_link: 'Request a copy of this image'
+          office_link: 'Request a copy of this file'
+          pdf_link: 'Request a copy of this PDF'
+          audio_link: 'Request a copy of this audio file'
+          video_link: 'Request a copy of this video'
+    homepage.featured_works.drag: 'Drag'
+    institution.name: 'University of Cincinnati'
+    product_twitter_handle: "@Scholar@UC"
+    share_button: "Contribute"
+    upload.cloud_timeout_message_html: "If you have files on cloud storage sites such as Box, you can click the \"Browse cloud files\" button to select and upload those files directly to Scholar@UC.<br /><br />Please note that if you upload a large number of files within a short period of time, the cloud provider may not be able to accommodate your request. If you experience any errors uploading from the cloud, let us know via the %{contact_href}."
+    visibility:
+      authenticated.text: 'University of Cincinnati'
+      embargo.note_html: Set a date for future release
+      private.note_html: Keep to myself with option to share
+    works:
+      new.after_create_html: "Any uploaded files are being processed by %{application_name} in the background. The metadata and access controls you specified are being applied. Files will be marked <span class=\"label label-danger\" title=\"Private\">Private</span> until this process is complete (shouldn't take too long, hang in there!). You may need to refresh this page to see these updates."
+      edit.tab.doi: "DOI"
+    collection.actions.add_works:
+          desc: "Add existing works to this collection."
+          label: "Add existing works"
+    simple_form:
+      hints:
+        collection:
+          title: "A name to aid in identifying a collection."
+          creator: "The person or group responsible for the collection. Usually this is the author of the content. Personal names should be entered with the last name first, e.g. &quot;Smith, John.&quot;."
+          description: "Free-text notes about the collection. Examples include abstracts of a paper or citation information for a journal article."
+          rights: "Licensing and distribution information governing access to the collection. Select from the provided drop-down list."
+        defaults:
+          advisor: "The faculty advisor or sponsor for this work, in <i>LastName, FirstName</i> format."
+          alternate_title: "Enter an alternate title for your work. An alternate title could include acronyms, abbreviations, or a series title."
+          college: "Select the college associated with the submitter of this work."
+          committee_member: "Enter the committee member for this work."
+          creator: "Enter the names of creators of the work, in<i> LastName, FirstName</i> format. These could include important authors, co-authors, or other significant contributors."
+          alt_date_created: "Date when the contents of the work were created. Enter date formatted as: YYYY or YYYY-MM or YYYY-MM-DD.  Examples:  January 30, 1950 would be entered 1950-01-30"
+          genre: "Select a genre matching your work."
+          degree: "The degree associated with this work, if the work was completed as part of a thesis or capstone. Please enter the abbreviation for the degree, e.g., BA or MS."
+          department: "Enter the department associated with the submitter of this work."
+          alt_description: "Enter a summary of your work. There is no character limit for this field."
+          geo_subject: "Enter the geographic subject of your work.</br>Examples:</br><ul><li>Cincinnati, Ohio</li><li>Vancouver, British Columbia</li><li>Sahara Desert</li></ul>"
+          identifier: "A unique handle identifying the work. An example would be a DOI for a journal article, or an ISBN or OCLC number for a book."
+          issn: "ISSN of the Journal where the work was originally published, if applicable."
+          journal_title: "Title of the Journal where the work was originally published, if applicable."
+          language: "Enter the language of your work.</br>Example:</br><ul><li>English</li><li>Spanish</li><li>Arabic</li></ul>"
+          note: "Enter any additional information about your work."
+          publisher: "Enter the publisher of your work. If this has not been previously published, <i> University of Cincinnati </i> is an appropriate publisher."
+          related_url: "A link to a website or other specific content (audio, video, PDF document) related to the work. An example is the URL of a research project from which the work was derived."
+          required_software: "Special software needed to open the work."
+          resource: "Pre-defined categories to describe the type of content being uploaded, such as &quot;article&quot; or &quot;dataset.&quot;  More than one type may be selected."
+          rights: "Licensing and distribution information governing access to the work. Select from the provided drop-down list."
+          subject: "Enter terms or keywords that describe your work.</br>Examples:</br><ul><li>Biology</li><li>Art History</li><li>Economics</li></ul>"
+          time_period: "Enter the period or date associated with the subject of your work.</br>Examples:</br><ul><li>19th century</li><li>Middle Ages</li><li>Jurassic Period</li></ul>"
+          title: "Enter the title of your work. If the work doesn't have a title, please enter a brief descriptive label."
+      labels:
+        collection:
+          total_items:      "Total Items"
+          size:             "Size"
+          description:      "Description"
+          files:            "Upload a new version of this file from your computer"
+          collection_ids:   "Add as member of collection"
+          admin_set_id:     "Add as member of administrative set"
