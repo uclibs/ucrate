@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
     def after_sign_out_path_for(_resource_or_scope)
       if cookies[:login_type] == "shibboleth"
-        "/Shibboleth.sso/Logout?return=https%3A%2F%2Fbamboo_shibboleth_logout"
+        "/Shibboleth.sso/Logout?return=https%3A%2F%2F" + ENV['SCHOLAR_SHIBBOLETH_LOGOUT']
       else
         root_path
       end

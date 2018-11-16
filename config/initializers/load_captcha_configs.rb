@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-CAPTCHA_SERVER = YAML.load_file(Rails.root.join('config', 'recaptcha.yml'))[Rails.env]
+CAPTCHA_SERVER = YAML.safe_load(ERB.new(File.read(Rails.root.join('config', 'recaptcha.yml'))).result)[Rails.env]

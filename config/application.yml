@@ -1,8 +1,0 @@
-# Replace below with bamboo variables for production
-
-ORCID_APP_ID: bamboo_orcid_id
-ORCID_APP_SECRET: bamboo_orcid_secret
-ORCID_SITE_URL: bamboo_orcid_site_url
-ORCID_TOKEN_URL: bamboo_orcid_token_url
-ORCID_REMOTE_SIGNIN_URL: bamboo_orcid_remote_signin_url
-ORCID_AUTHORIZE_URL: bamboo_orcid_authorize_url
