@@ -2,7 +2,6 @@ development:
   user: fedoraAdmin
   password: <%= ENV["SCHOLAR_FEDORA_PASSWORD"] %>
   url: <%= ENV["SCHOLAR_FEDORA_URL"] %>
->>>>>>> develop
   base_path: /dev
 test:
   user: fedoraAdmin
