@@ -58,7 +58,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "scholar_uc_#{Rails.env}"
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: ENV['SCHOLAR_PRODUCTION_MAILER_URL'] }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -88,5 +88,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Use Sidekiq to process background jobs
-  config.active_job.queue_adapter = :sidekiq
+  config.active_job.queue_adapter = ENV['SCHOLAR_JOB_QUEUE_ADAPTER'].parameterize.underscore.to_sym
 end

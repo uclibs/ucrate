@@ -1,11 +1,11 @@
 # stores ReCaptcha image server url
 
 development:
-  site_key: bamboo_captcha_site_key
-  secret_key: bamboo_captcha_secret_key
+  site_key:   <%= ENV["SCHOLAR_CAPTCHA_SITE_KEY"] %>
+  secret_key: <%= ENV["SCHOLAR_CAPTCHA_SECRET_KEY"] %>
 test:
-  site_key: bamboo_captcha_site_key
-  secret_key: bamboo_captcha_secret_key
+  site_key:   <%= ENV["SCHOLAR_CAPTCHA_SITE_KEY"] %>
+  secret_key: <%= ENV["SCHOLAR_CAPTCHA_SECRET_KEY"] %>
 production:
-  site_key: bamboo_captcha_site_key
-secret_key: bamboo_captcha_secret_key
+  site_key:   <%= ENV["SCHOLAR_CAPTCHA_SITE_KEY"] %>
+  secret_key: <%= ENV["SCHOLAR_CAPTCHA_SECRET_KEY"] %>

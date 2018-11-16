@@ -7,8 +7,8 @@
 #   :app_key: YOUR_DROPBOX_APP_KEY
 #   :app_secret: YOUR_DROPBOX_APP_SECRET
 box:
-  :client_id: bamboo_browse_everything_box_id
-  :client_secret: bamboo_browse_everything_box_secret
+  :client_id:     <%= ENV["SCHOLAR_BROWSE_EVERYTHING_BOX_ID"] %>
+  :client_secret: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_BOX_SECRET"] %>
 # google_drive:
 #   :client_id: YOUR_GOOGLE_API_CLIENT_ID
 #   :client_secret: YOUR_GOOGLE_API_CLIENT_SECRET
@@ -19,7 +19,3 @@ box:
 #   :app_secret: YOUR_AWS_S3_SECRET # explicitly here, or left out to use system-configured
 #   :region: YOUR_AWS_S3_REGION     # defaults.
 #   See https://aws.amazon.com/blogs/security/a-new-and-standardized-way-to-manage-credentials-in-the-aws-sdks/
-kaltura:
-  :partner_id: bamboo_browse_everything_kaltura_id
-  :administrator_secret: bamboo_browse_everything_kaltura_secret
-  :service_url: 'https://www.kaltura.com'

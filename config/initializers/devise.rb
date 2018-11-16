@@ -6,7 +6,7 @@ Devise.setup do |config|
   config.omniauth(:orcid, Orcid.provider.id, Orcid.provider.secret,
                   scope: Orcid.provider.authentication_scope,
                   member: true,
-                  sandbox: true,
+                  sandbox: ENV['ORCID_SANDBOX_BOOLEAN'],
                   client_options: {
                     site: Orcid.provider.site_url,
                     authorize_url: Orcid.provider.authorize_url,
@@ -18,7 +18,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '0bb5cb0adea3d3fa222f0ab3eb8eabf546e0cfc2bc811e1bc7346cebf0f81a26654e8bc5d7d1d8acb400a7773b11f44e6d2997f6064ee5a99b1b036e2e654862'
+  config.secret_key = ENV['SCHOLAR_DEVISE_KEY']
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,

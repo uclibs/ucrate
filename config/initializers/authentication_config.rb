@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-AUTH_CONFIG = YAML.load_file(Rails.root.join('config', 'authentication.yml'))[Rails.env]
+AUTH_CONFIG = YAML.safe_load(ERB.new(File.read(Rails.root.join('config', 'authentication.yml'))).result)[Rails.env]

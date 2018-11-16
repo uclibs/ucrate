@@ -1,9 +1,9 @@
 development:
   adapter: solr
-  url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:#{ENV.fetch('SOLR_DEVELOPMENT_PORT', 8983)}/solr/ucrate-hydra" %>
+  url: <%= ENV['SCHOLAR_SOLR_URL'] %>
 test: &test
   adapter: solr
-  url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:#{ENV.fetch('SOLR_TEST_PORT', 8985)}/solr/hydra-test" %>
+  url: <%= ENV['SCHOLAR_SOLR_URL'] %>
 production:
   adapter: solr
-  url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/blacklight-core" %>
+  url: <%= ENV['SCHOLAR_SOLR_URL'] %>
