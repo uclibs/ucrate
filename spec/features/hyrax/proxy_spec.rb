@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'proxy', type: :feature do
-  let(:user) { create(:user) }
-  let(:second_user) { create(:user, display_name: 'Second User') }
+  let(:user) { create(:user, ucdepartment: 'COB Analytics') }
+  let(:second_user) { create(:user, display_name: 'Second User', ucdepartment: 'LAW Contracts') }
 
   describe 'add proxy in dashboard', :js do
     it "creates a proxy" do
@@ -74,9 +74,15 @@ RSpec.describe 'proxy', type: :feature do
       fill_in('Creator', with: 'Grantor')
       fill_in('Description', with: 'A proxy deposited work')
       select 'All rights reserved', from: "generic_work_license"
+      expect(page).to have_select('generic_work_college', selected: 'Law')
+      expect(page).to have_field('generic_work_department', with: 'Contracts')
       select(user.user_key, from: 'On behalf of')
+      expect(page).to have_select('generic_work_college', selected: 'Business')
+      expect(page).to have_field('generic_work_department', with: 'Analytics')
       check('agreement')
       click_on('Save')
+      expect(page).to have_link('Business')
+      expect(page).to have_link('Analytics')
 
       # Edit
       expect(page).to have_link 'Edit'
