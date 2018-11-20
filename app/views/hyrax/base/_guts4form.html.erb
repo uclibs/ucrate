@@ -1,8 +1,8 @@
 <% # data attributes for creator field auto-populate %>
 <% if params[:action] == "new" %>
-  <user id="current_user" data-name="<%= current_user.name_for_works %>"></user>
+  <user id="current_user" data-name="<%= current_user.name_for_works %>" data-college="<%= current_user.college %>" data-dept="<%= current_user.department %>"></user>
   <% current_user.can_make_deposits_for.each do |user| %>
-    <user id="<%= user.email %>" data-name="<%= user.name_for_works %>"></user>
+    <user id="<%= user.email %>" data-name="<%= user.name_for_works %>" data-college="<%= user.college %>" data-dept="<%= user.department %>"></user>
   <% end %>
 <% end %>
 
