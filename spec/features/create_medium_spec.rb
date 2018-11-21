@@ -6,8 +6,8 @@ require 'rails_helper'
 include Warden::Test::Helpers
 
 # NOTE: If you generated more than one work, you have to set "js: true"
-RSpec.describe 'Create a Medium', js: true do
-  context 'a logged in user' do
+RSpec.describe 'Create a Medium', :feature, js: true do
+  context 'a logged in user', :clean_repo do
     let(:user_attributes) do
       { email: 'test@example.com' }
     end
@@ -17,6 +17,24 @@ RSpec.describe 'Create a Medium', js: true do
     let(:admin_set_id) { AdminSet.find_or_create_default_admin_set_id }
     let(:permission_template) { Hyrax::PermissionTemplate.find_or_create_by!(source_id: admin_set_id) }
     let(:workflow) { Sipity::Workflow.create!(active: true, name: 'test-workflow', permission_template: permission_template) }
+
+    # Form values
+    let(:title) { 'My Test Work' }
+    let(:college) { 'Business' }
+    let(:creator) { 'Doe, Jane' }
+    let(:description) { 'Description' }
+    let(:program) { 'My University Department' }
+    let(:license) { 'Attribution-ShareAlike 4.0 International' }
+    let(:publisher) { 'Spy Magazine' }
+    let(:date_created) { '1969' }
+    let(:alternate_title) { 'Or, your test work' }
+    let(:subject_term) { 'Isnt everything about death in one way or another' }
+    let(:geographic_subject) { 'Cincinnati' }
+    let(:time_period) { 'Year of the whopper' }
+    let(:language) { 'American English' }
+    let(:required_software) { 'Corel draw' }
+    let(:note) { 'This is a note' }
+    let(:external_link) { 'http://www.chitterchat.com' }
 
     before do
       # Create a single action that can be taken
@@ -55,19 +73,34 @@ RSpec.describe 'Create a Medium', js: true do
       end
       click_link "Metadata" # switch tab
 
+      # Required fields
+
       title_element = find_by_id("medium_title")
-      title_element.set("My Test Work  ") # Add whitespace to test it getting removed
+      title_element.set(title) # Add whitespace to test it getting removed
 
       college_element = find_by_id("medium_college")
-      college_element.select("Business")
+      college_element.select(college)
 
       expect(page).to have_content("License Wizard")
       expect(page).not_to have_content('Rights statement')
-      select 'Attribution-ShareAlike 4.0 International', from: 'medium_license'
+      select license, from: 'medium_license'
 
-      fill_in('Creator', with: 'Doe, Jane')
-      fill_in('Description', with: 'Description')
-      fill_in('Program or Department', with: 'University Department')
+      fill_in('Creator', with: creator)
+      fill_in('Description', with: description)
+      fill_in('Program or Department', with: program)
+
+      # Non-required fields
+
+      fill_in('Publisher (Required for DOI registration)', with: publisher)
+      fill_in('Date Created', with: date_created)
+      fill_in('medium_alternate_title', with: alternate_title)
+      fill_in('Subject', with: subject_term)
+      fill_in('Geographic Subject', with: geographic_subject)
+      fill_in('Time Period', with: time_period)
+      fill_in('Language', with: language)
+      fill_in('Required Software', with: required_software)
+      fill_in('Note', with: note)
+      fill_in('External Link', with: external_link)
 
       choose('medium_visibility_open')
       expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
@@ -77,6 +110,29 @@ RSpec.describe 'Create a Medium', js: true do
       expect(page).to have_content('My Test Work')
       expect(page).to have_content "Your files are being processed by Scholar@UC in the background."
       expect(page).to have_content("Permanent link to this page")
+
+      # Edit the work to verify form values persist
+      click_on('Edit')
+
+      expect(page).to have_field('medium_title', with: 'My Test Work')
+      expect(page).to have_field('medium_creator', with: creator)
+      expect(page).to have_field('medium_college', with: college)
+      expect(page).to have_field('Program or Department', with: program)
+      expect(page).to have_field('Description', with: description)
+      expect(page).to have_select('medium_license', selected: license)
+      expect(page).to have_field('Publisher (Required for DOI registration)', with: publisher)
+      expect(page).to have_field('Date Created', with: date_created)
+      expect(page).to have_field('medium_alternate_title', with: alternate_title)
+      expect(page).to have_field('Subject', with: subject_term)
+      expect(page).to have_field('Geographic Subject', with: geographic_subject)
+      expect(page).to have_field('Time Period', with: time_period)
+      expect(page).to have_field('Language', with: language)
+      expect(page).to have_field('Required Software', with: required_software)
+      expect(page).to have_field('Note', with: note)
+      expect(page).to have_field('External Link', with: external_link)
+
+      check('agreement')
+      click_on('Save')
 
       click_on('image.jp2')
       expect(page).to have_content("Permanent link to this page")
