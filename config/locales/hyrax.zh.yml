@@ -1,5 +1,15 @@
 ---
 zh:
+  activefedora:
+    models:
+      article: '文章'
+      dataset: '数据集'
+      document: '文件'
+      etd: 'Etd'
+      generic_work: '普通文件'
+      image: '图像'
+      medium: '媒体'
+      student_work: '学生作品'
   blacklight:
     search:
       fields:
@@ -12,20 +22,17 @@ zh:
           publisher_sim: 出版者
           subject_sim: 学科
         index:
-          based_near_tesim: 位置
-          contributor_tesim: 投稿者
-          creator_tesim: 创造者
-          date_created_tesim: 创建日期
-          date_modified_dtsi: 修改日期
+          title_tesim: 标题
+          has_model_ssim: 类型
+          description_tesim: 摘抄
+          creator_tesim: 作者
+          depositor_tesim: 提交者
+          date_created_tesim: 创建
           date_uploaded_dtsi: 上传日期
-          description_tesim: 描述
-          file_format_tesim: 文件格式
-          identifier_tesim: 识别码
-          language_tesim: 语言
-          license_tesim: 执照
-          publisher_tesim: 出版者
-          rights_statement_tesim: 权
-          subject_tesim: 学科
+          date_modified_dtsi: 更改日期
+          date_modified_ssi: 更改日期
+          date_uploaded_ssi: 上传日期
+          license_tesim: 证书
         show:
           based_near_tesim: 位置
           contributor_tesim: 投稿者
@@ -42,24 +49,69 @@ zh:
           rights_statement_tesim: 权
           subject_tesim: 学科
           title_tesim: 标题
+  simple_form:
+    labels:
+      defaults:
+        description: 描述
+        license: 权利
   hyrax:
-    account_name: 账户ID
+    active_consent_to_agreement: 我已经阅读并同意
+    base:
+      form_progress:
+        required_agreement: 检查分配证件
+    batch_uploads:
+      files:
+        upload_type_instructions: '注意：为每一个文件创建单独的作品 '
+    contact_form:
+      header: 联系 Scholar@UC 团队
+      notice_html: ‘请使用这个表格发送问题，回复和报告给scholar团队’
+      help_resources_href: '帮助'
+    passive_consent_to_agreement: 我已经阅读并且同意
+    homepage:
+      featured_works:
+        tab_label:          '特色作品'
+        title:              '特色作品'
+        no_works:           '没有特色作品'
+      featured_researcher:
+        tab_label:          '特色研究'
+        title:              '特色研究'
+      featured_collections:
+        title:              '特色收藏'
+        no_collections:     '没有特色收藏'
+    pages:
+      tabs:
+        agreement_page: '分布证件'
+    users:
+      search_placeholder: '搜索人员'
+    workform_help_html: '<p>提供具体的描述帮助我们更好的服务你.</p>'
+    workform_attach_file_html: '<p>%{href} 是推荐的但不是必须 </p>'
+    workform_attach_file_href: '附带文件'
+    deposit_agreement: "分布证件"
+    account_name:           "我的机构ID"
     directory:
-      suffix: "@example.org"
+      suffix:               "@example.org"
     footer:
-      copyright_html: "<strong>版权所有 &copy; 2017 Samvera</strong> 根据Apache许可证2.0版许可"
-      service_html: 的服务<a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
-    institution_name: 机构名称
-    institution_name_full: 机构全称
-    product_name: 蹄兔
-    description:            "辛辛那提大学图书馆收藏"
+      based_on_html: "基于 <a href=\"https://github.com/samvera/hyrax\">Hyrax</a>"
+      copyright_info_html: "<a href=\"https://commercialization.uc.edu/copyright-infringement\">Copyright Information</a>"
+      copyright_html: "&copy; %{year} <a href=\"https://www.uc.edu/\"><u>辛辛那提大学</u></a>"
+      clery_heoa_notice_html: "<a href=\"https://www.uc.edu/publicsafety/clery/annual-security-report.html\">Clery and HEOA Notice</a>"
+      eaccessibility_concern_html: "<a href=\"https://www.uc.edu/ucit/community/accessibility/eAccessibility-form.html\">eAccessibility Concern</a>"
+      made_possible_by_html: "Made possible by the <a href=\"https://www.samvera.org\">Samvera</a> project."
+      non_discrimination_notice_html: "<a href=\"http://uc.edu/about/policies/non-discrimination.html\">Notice of Non-Discrimination</a>"
+      terms_of_use_html: "<a class=\"a\" href=\"/terms\">Scholar@UC Terms of Use</a>"
+      uc_alerts_html: "<a href=\"https://www.uc.edu/alert.html\">UC 警报</a>"
+    institution_name:       "辛辛那提大学"
+    institution_name_full:  "辛辛那提大学"
+    product_name:           "Scholar@UC"
+    description:            "辛辛那提大学图书挂收藏"
     product_twitter_handle: "@SamveraRepo"
+    product_email:          "scholar@uc.edu"
     user_profile:
       first_name: "名"
       last_name: "姓"
-      title: "职称"
-      ucdepartment: "系"
-      uc_affiliation: "在校身份"
+      title: "工作标签"
+      ucdepartment: "部门"
+      uc_affiliation: "UC 部门"
       alternate_email: "备用邮箱"
       telephone: "在校电话号码"
       alternate_phone_number: "备用电话号码"
@@ -67,9 +119,45 @@ zh:
       blog: "博客"
     collection:
       actions:
-        export_collection: "导出集合"
-        manage_exports: "导出管理"
+        export_collection: "探索收藏"
+        manage_exports: "管理输出"
     dashboard:
       my:
         action:
-          export_collection: "收藏管理"
+          export_collection: "探索收藏"
+      proxy_help: "请注意: 你所选择的代理人可以代表你更改作品。如果你受理一个代理人 他们可以创造上传编辑删除文件。代理关系可以被拥有者取消。 使用特定作品的编辑者可以有更加具体的存取权。"
+    welcome:
+      waive_page: "点击这里隐藏欢迎网页当你登陆后"
+    visibility:
+      open:
+        text: "开放存取"
+        note_html: Make available to all<br />(see <a href="/creators_rights" target=\"_blank\">Creator's Rights</a> for more information)
+        warning_html: ""
+      authenticated:
+        note_html: 限制登陆用户存取
+    controls:
+      users: "人员"
+    dataset:
+      help_text: 如果需要向导来上传数据集, 请阅读 <a href="/documenting_data" target="_blank">Documenting Data</a> 帮助页面.
+    file_set:
+      show:
+        adobe_reader_link: '下载 Adobe Acrobat Reader'
+    toolbar:
+      dashboard:
+        my: '我的主页'
+      works:
+        batch: '建立一批'
+        menu: '作品'
+        my: '我的作品'
+        new: '新的作品'
+      collections:
+        menu: '收藏'
+        my: '我的收藏'
+        new: '新的收藏'
+      profile:
+        view: '查看我的主页'
+        edit: '编辑我的主页'
+    works:
+      form:
+        tab:
+          metadata: "元数据"
