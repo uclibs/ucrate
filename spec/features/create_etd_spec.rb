@@ -138,7 +138,7 @@ RSpec.describe 'Create a Etd', :feature, js: true do
       expect(page).to have_select('etd_license', selected: license)
       expect(page).to have_field('Publisher (Required for DOI registration)', with: publisher)
       expect(page).to have_field('etd_alternate_title', with: alternate_title)
-      # expect(page).to have_select('etd_genre', selected: type) # This is broken see https://github.com/uclibs/ucrate/issues/514
+      expect(page).to have_select('etd_genre', selected: type)
       expect(page).to have_field('Subject', with: subject_term)
       expect(page).to have_field('Geographic Subject', with: geographic_subject)
       expect(page).to have_field('Time Period', with: time_period)
