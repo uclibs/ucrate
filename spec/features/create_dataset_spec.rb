@@ -100,6 +100,7 @@ RSpec.describe 'Create a Dataset', :feature, js: true do
       fill_in('Language', with: language)
       fill_in('Note', with: note)
       fill_in('External Link', with: external_link)
+      expect(page).to have_css("label.control-label.string.optional", text: "Required Software")
 
       choose('dataset_visibility_open')
       expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
