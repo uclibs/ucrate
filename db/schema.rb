@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181001000000) do
+ActiveRecord::Schema.define(version: 20181128154405) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -618,6 +618,15 @@ ActiveRecord::Schema.define(version: 20181001000000) do
     t.string "datastream_id"
     t.string "version_id"
     t.string "committer_login"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "work_and_file_indices", force: :cascade do |t|
+    t.string "object_id"
+    t.string "object_type"
+    t.string "user_email"
+    t.datetime "stats_last_gathered"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
