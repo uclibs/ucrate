@@ -20,6 +20,7 @@ RSpec.describe "User Spec", type: :feature do
 
       it 'page should be editable' do
         visit profile_path
+        expect(page).not_to have_content("Joined on")
         expect(page).to have_content(user.email)
 
         within '.highlighted-works' do
