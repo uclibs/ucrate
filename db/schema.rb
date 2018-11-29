@@ -520,9 +520,9 @@ ActiveRecord::Schema.define(version: 20181128154405) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "allows_access_grant"
     t.integer "permission_template_id"
     t.boolean "active"
-    t.boolean "allows_access_grant"
     t.index ["permission_template_id", "name"], name: "index_sipity_workflows_on_permission_template_and_name", unique: true
   end
 
@@ -597,18 +597,18 @@ ActiveRecord::Schema.define(version: 20181128154405) do
     t.string "arkivo_subscription"
     t.binary "zotero_token"
     t.string "zotero_userid"
-    t.string "preferred_locale"
-    t.string "provider"
-    t.string "uid"
     t.string "first_name"
     t.string "last_name"
-    t.string "ucdepartment"
-    t.string "uc_affiliation"
-    t.string "alternate_email"
     t.string "alternate_phone_number"
     t.string "blog"
+    t.string "uc_affiliation"
+    t.string "alternate_email"
     t.boolean "waived_welcome_page"
     t.boolean "profile_update_not_required"
+    t.string "ucdepartment"
+    t.string "provider"
+    t.string "uid"
+    t.string "preferred_locale"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
