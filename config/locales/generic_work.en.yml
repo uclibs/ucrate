@@ -20,7 +20,7 @@ en:
         time_period:      "Time Period"
         required_software: "Required Software"
         note:             "Note"
-        publisher:        "Publisher (Require for DOI registration)"
+        publisher:        "Publisher (Required for DOI registration)"
         college:          "College"
         department:       "Program or Department"
     hints:
