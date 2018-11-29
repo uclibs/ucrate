@@ -11,7 +11,7 @@ RSpec.describe Hyrax::DatasetForm do
   describe "#required_fields" do
     subject { form.required_fields }
 
-    it { is_expected.to eq [:title, :creator, :college, :department, :description, :required_software, :license] }
+    it { is_expected.to eq [:title, :creator, :college, :department, :description, :license] }
   end
 
   describe "#primary_terms" do

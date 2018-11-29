@@ -44,6 +44,7 @@ RSpec.describe 'Create a Collection', js: true do
       expect(page).to have_content('This is a description.')
       expect(page).to have_link("Attribution-ShareAlike 4.0 International", href: 'http://creativecommons.org/licenses/by-sa/4.0/')
       expect(page).to have_content('Open Access')
+      expect(page).to have_content('Items in this Collection')
     end
   end
 end

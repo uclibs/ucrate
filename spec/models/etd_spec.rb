@@ -54,6 +54,7 @@ RSpec.describe Etd do
     it { is_expected.to respond_to(:subject) }
     it { is_expected.to respond_to(:geo_subject) }
     it { is_expected.to respond_to(:required_software) }
+    it { is_expected.to respond_to(:genre) }
     it { is_expected.to respond_to(:note) }
     it { is_expected.to respond_to(:language) }
     it { is_expected.to respond_to(:identifier) }

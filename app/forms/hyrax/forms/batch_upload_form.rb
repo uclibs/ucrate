@@ -18,7 +18,7 @@ module Hyrax
       def required_fields
         case @payload_concern
         when "Dataset"
-          %i[title creator college department description required_software license]
+          %i[title creator college department description license]
         when "Etd"
           %i[title creator college department description advisor license]
         when "StudentWork"
