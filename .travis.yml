@@ -33,3 +33,4 @@ services:
 before_script:
   - jdk_switcher use oraclejdk8
   - bundle exec rubocop
+  - sudo mount -o remount,size=32G /run/shm
