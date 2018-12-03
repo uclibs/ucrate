@@ -256,7 +256,7 @@ GEM
       mime-types (>= 1.16)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
-    chromedriver-helper (2.1.0)
+    chromedriver-helper (1.2.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     clipboard-rails (1.7.1)
@@ -925,7 +925,7 @@ DEPENDENCIES
   capybara (~> 2.4, < 2.18.0)
   capybara-maleficent (~> 0.2)
   change_manager!
-  chromedriver-helper
+  chromedriver-helper (< 2.0)
   coffee-rails (~> 4.2)
   coveralls (~> 0.8.22)
   database_cleaner
