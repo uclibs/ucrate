@@ -23,7 +23,7 @@ fi
 $APP_DIRECTORY/script/kill_sidekiq.sh
 
 banner "starting Sidekiq"
-export PATH=$PATH:/srv/apps/.gem/ruby/2.4.0/bin
+export PATH=$PATH:/srv/apps/.gem/ruby/2.5.0/bin
 export FITS_HOME=/opt/fits/fits
 export PATH=$PATH:/opt/fits/fits
 cd $APP_DIRECTORY
