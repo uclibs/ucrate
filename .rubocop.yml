@@ -164,6 +164,7 @@ RSpec/VerifiedDoubles:
     - 'spec/views/catalog/_search_form.html.erb_spec.rb'
     - 'spec/views/hyrax/my/collections/index.html.erb_spec.rb'
     - 'spec/views/hyrax/my/_search_form.html.erb_spec.rb'
+    - 'spec/views/hyrax/base/_attributes.html.erb_spec.rb'
 
 RSpec/NamedSubject:
   Exclude:
