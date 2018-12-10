@@ -35,7 +35,7 @@ RSpec.describe 'Adding a work to multiple collections', type: :feature, clean_re
 
         # forwards to collection show page
         expect(page).to have_content new_collection.title.first
-        expect(page).to have_content 'Works (1)'
+        expect(page).to have_content 'Items in this Collection (1)'
         expect(page).to have_content work.title.first
         expect(page).to have_selector '.alert-success', text: 'Collection was successfully updated.'
       end
@@ -55,7 +55,7 @@ RSpec.describe 'Adding a work to multiple collections', type: :feature, clean_re
 
         # forwards to collection show page
         expect(page).to have_content new_collection.title.first
-        expect(page).to have_content 'Works (1)'
+        expect(page).to have_content 'Items in this Collection (1)'
         expect(page).to have_content work.title.first
         expect(page).to have_selector '.alert-success', text: 'Collection was successfully updated.'
       end
@@ -86,7 +86,7 @@ RSpec.describe 'Adding a work to multiple collections', type: :feature, clean_re
         click_button 'Save changes'
         # forwards to collection show page
         expect(page).to have_content new_collection.title.first
-        expect(page).to have_content 'Works (1)'
+        expect(page).to have_content 'Items in this Collection (1)'
         expect(page).to have_content work.title.first
         expect(page).to have_selector '.alert-success', text: 'Collection was successfully updated.'
       end
@@ -180,7 +180,7 @@ RSpec.describe 'Adding a work to multiple collections', type: :feature, clean_re
         click_button 'Save changes'
         # forwards to collection show page
         expect(page).to have_content new_collection.title.first
-        expect(page).to have_content 'Works (1)'
+        expect(page).to have_content 'Items in this Collection (1)'
         expect(page).to have_content work.title.first
         expect(page).to have_selector '.alert-success', text: 'Collection was successfully updated.'
       end
@@ -200,7 +200,7 @@ RSpec.describe 'Adding a work to multiple collections', type: :feature, clean_re
         click_button 'Save changes'
         # forwards to collection show page
         expect(page).to have_content new_collection.title.first
-        expect(page).to have_content 'Works (1)'
+        expect(page).to have_content 'Items in this Collection (1)'
         expect(page).to have_content work.title.first
         expect(page).to have_selector '.alert-success', text: 'Collection was successfully updated.'
       end
