@@ -622,15 +622,6 @@ ActiveRecord::Schema.define(version: 20181128154405) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "work_and_file_indices", force: :cascade do |t|
-    t.string "object_id"
-    t.string "object_type"
-    t.string "user_email"
-    t.datetime "stats_last_gathered"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "work_view_stats", force: :cascade do |t|
     t.datetime "date"
     t.integer "work_views"
