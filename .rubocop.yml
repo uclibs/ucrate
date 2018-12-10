@@ -29,6 +29,7 @@ Metrics/MethodLength:
     - 'spec/support/hyrax/factory_helpers.rb'
     - 'app/indexers/hyrax/file_set_indexer.rb'
     - 'spec/support/hyrax/helpers/factory_helpers.rb'
+    - 'app/services/hyrax/custom_stat_importer.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -49,6 +50,10 @@ Rails/ApplicationRecord:
 # `find_by_created_date`, etc
 Rails/DynamicFindBy:
   Enabled: false
+
+Rails/Output:
+  Exclude:
+    - 'app/services/hyrax/custom_stat_importer.rb'
 
 Rails/SkipsModelValidations:
   Exclude:
@@ -127,6 +132,8 @@ RSpec/ExampleLength:
     - 'spec/features/create_collection_spec.rb'
     - 'spec/features/catalog_facet_spec.rb'
     - 'spec/jobs/proxy_edit_removal_job_spec.rb'
+    - 'spec/models/work_and_file_index_spec.rb'
+    - 'spec/models/file_view_stat_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
@@ -171,6 +178,8 @@ RSpec/NamedSubject:
     - 'spec/indexers/hyrax/collection_indexer_spec.rb'
     - 'spec/indexers/hyrax/file_set_indexer_spec.rb'
     - 'spec/models/job_io_wrapper_spec.rb'
+    - 'spec/models/work_and_file_index_spec.rb'
+    - 'spec/services/hyrax/custom_stat_importer_spec.rb'
 
 Style/ClassAndModuleChildren:
   Enabled: false
@@ -197,6 +206,7 @@ Metrics/AbcSize:
     - 'app/indexers/hyrax/work_indexer.rb'
     - 'app/models/ability.rb'
     - 'app/indexers/hyrax/collection_indexer.rb'
+    - 'app/services/hyrax/custom_stat_importer.rb'
 
 Metrics/CyclomaticComplexity:
   Exclude:
@@ -206,3 +216,9 @@ Metrics/CyclomaticComplexity:
 Lint/HandleExceptions:
   Exclude:
     - 'app/controllers/concerns/scholar/works_controller_behavior.rb'
+
+Lint/RescueException:
+  Exclude:
+    - 'app/services/hyrax/custom_stat_importer.rb'
+
+
