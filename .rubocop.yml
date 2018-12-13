@@ -29,6 +29,7 @@ Metrics/MethodLength:
     - 'spec/support/hyrax/factory_helpers.rb'
     - 'app/indexers/hyrax/file_set_indexer.rb'
     - 'spec/support/hyrax/helpers/factory_helpers.rb'
+    - 'app/services/hyrax/actor_factory.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -127,6 +128,12 @@ RSpec/ExampleLength:
     - 'spec/features/create_collection_spec.rb'
     - 'spec/features/catalog_facet_spec.rb'
     - 'spec/jobs/proxy_edit_removal_job_spec.rb'
+    - 'spec/support/shared/*'
+    - 'spec/features/edit_work_spec.rb'
+    - 'spec/services/hyrax/actor_factory_spec.rb'
+    - 'spec/features/create_document_doi_spec.rb'
+    - 'spec/jobs/identifier_delete_job_spec.rb'
+    - 'spec/services/hyrax/default_middleware_stack_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
@@ -165,12 +172,21 @@ RSpec/VerifiedDoubles:
     - 'spec/views/hyrax/my/collections/index.html.erb_spec.rb'
     - 'spec/views/hyrax/my/_search_form.html.erb_spec.rb'
     - 'spec/views/hyrax/base/_attributes.html.erb_spec.rb'
-
+    - 'spec/support/shared/is_remotely_identifiable_by_doi.rb'
+    - 'spec/services/hyrax/actor_factory_spec.rb'
+    - 'spec/lib/scholar_spec.rb'
+    - 'spec/jobs/identifier_delete_job_spec.rb'
+    - 'spec/services/hyrax/default_middleware_stack_spec.rb'
+    
 RSpec/NamedSubject:
   Exclude:
     - 'spec/indexers/hyrax/collection_indexer_spec.rb'
     - 'spec/indexers/hyrax/file_set_indexer_spec.rb'
     - 'spec/models/job_io_wrapper_spec.rb'
+    - 'spec/support/shared/is_remotely_identifiable_by_doi.rb'
+    - 'spec/actors/hyrax/actors/mint_doi_actor_spec.rb'
+    - 'spec/services/hyrax/actor_factory_spec.rb'
+    - 'spec/services/hyrax/default_middleware_stack_spec.rb'
 
 Style/ClassAndModuleChildren:
   Enabled: false
@@ -189,6 +205,10 @@ Style/GuardClause:
   Exclude:
     - 'app/indexers/hyrax/work_indexer.rb'
 
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/support/shared/is_remotely_identifiable_by_doi.rb'
+
 Metrics/AbcSize:
   Exclude:
     - 'app/models/ability.rb'
@@ -206,3 +226,7 @@ Metrics/CyclomaticComplexity:
 Lint/HandleExceptions:
   Exclude:
     - 'app/controllers/concerns/scholar/works_controller_behavior.rb'
+    - 'spec/features/doi_validation_spec.rb'
+
+RSpec/SubjectStub:
+  Enabled: false    

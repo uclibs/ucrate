@@ -4,6 +4,7 @@
 #  `rails generate hyrax:work Medium`
 class Medium < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include RemotelyIdentifiedByDoi::Attributes
   include RemoveProxyEditors::RemoveUser
 
   self.indexer = MediumIndexer

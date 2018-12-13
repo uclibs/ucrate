@@ -85,6 +85,10 @@ class SolrDocument
     self[Solrizer.solr_name('department')]
   end
 
+  def doi
+    self[Solrizer.solr_name('doi')]
+  end
+
   def etd_publisher
     self[Solrizer.solr_name('etd_publisher')]
   end

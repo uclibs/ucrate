@@ -4,6 +4,7 @@
 #  `rails generate hyrax:work Dataset`
 class Dataset < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include RemotelyIdentifiedByDoi::Attributes
   include RemoveProxyEditors::RemoveUser
 
   self.indexer = DatasetIndexer

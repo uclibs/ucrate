@@ -1,0 +1,15 @@
+development: &development
+  username: <%= ENV["SCHOLAR_DOI_USERNAME"] %>
+  password: <%= ENV["SCHOLAR_DOI_PASSWORD"] %>
+  shoulder: <%= ENV["SCHOLAR_DOI_SHOULDER"] %>
+  url: <%= ENV["SCHOLAR_DOI_URL"] %>
+test: &TEST
+  username: <%= ENV["SCHOLAR_DOI_USERNAME"] %>
+  password: <%= ENV["SCHOLAR_DOI_PASSWORD"] %>
+  shoulder: <%= ENV["SCHOLAR_DOI_SHOULDER"] %>
+  url: <%= ENV["SCHOLAR_DOI_URL"] %>
+production:
+  username: <%= ENV["SCHOLAR_DOI_USERNAME"] %>
+  password: <%= ENV["SCHOLAR_DOI_PASSWORD"] %>
+  shoulder: <%= ENV["SCHOLAR_DOI_SHOULDER"] %>
+  url: <%= ENV["SCHOLAR_DOI_URL"] %>

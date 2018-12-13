@@ -51,6 +51,7 @@ RSpec.describe 'hyrax/base/show.html.erb', type: :view do
     allow(presenter).to receive(:workflow).and_return(workflow_presenter)
     allow(presenter).to receive(:representative_presenter).and_return(representative_presenter)
     allow(presenter).to receive(:representative_id).and_return('123')
+    allow(presenter).to receive(:doi).and_return("doi:12.3456/FK2")
     allow(presenter).to receive(:tweeter).and_return("@#{depositor.twitter_handle}")
     allow(presenter).to receive(:human_readable_type).and_return("Work")
     allow(controller).to receive(:current_user).and_return(depositor)

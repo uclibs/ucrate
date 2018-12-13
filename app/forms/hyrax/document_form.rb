@@ -10,7 +10,7 @@ module Hyrax
     self.terms += %i[alternate_title genre time_period required_software note geo_subject]
 
     ## Adding terms needed for the special DOI form tab
-    # self.terms += %i(doi doi_assignment_strategy existing_identifier)
+    self.terms += %i[doi doi_assignment_strategy existing_identifier]
 
     ## Adding terms college and department
     self.terms += %i[college department]
