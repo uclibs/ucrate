@@ -4,6 +4,7 @@
 #  `rails generate hyrax:work StudentWork`
 class StudentWork < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include RemotelyIdentifiedByDoi::Attributes
   include RemoveProxyEditors::RemoveUser
 
   self.indexer = StudentWorkIndexer

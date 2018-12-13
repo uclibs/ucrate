@@ -10,7 +10,7 @@ describe 'collection', type: :feature, js: true do
                        edit_users: [user.user_key])
   end
   let(:collection) { create(:public_collection, user: user) }
-  let!(:work) { create(:work_with_one_file, :public, member_of_collections: [collection]) }
+  let!(:work) { create(:generic_work_with_one_file, :public, member_of_collections: [collection]) }
   let(:title) { work.file_sets.first.title.first }
   let(:file_id) { work.file_sets.first.id }
 

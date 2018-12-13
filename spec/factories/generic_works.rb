@@ -47,7 +47,7 @@ FactoryBot.define do
       read_groups ["registered"]
     end
 
-    factory :work_with_one_file do
+    factory :generic_work_with_one_file do
       before(:create) do |work, evaluator|
         work.ordered_members << create(:file_set, user: evaluator.user, title: ['A Contained FileSet'], label: 'filename.pdf')
       end

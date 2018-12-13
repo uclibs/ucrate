@@ -8,6 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'browse-everything', github: 'uclibs/browse-everything', branch: 'master'
+gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'setting-status'
 gem 'kaltura', '0.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -70,6 +71,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'show_me_the_cookies'
   gem 'solr_wrapper', '>= 0.3'
+  gem 'vcr'
   gem 'webmock'
 end
 

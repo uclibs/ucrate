@@ -165,4 +165,6 @@ en:
     works:
       form:
         tab:
-          metadata: "Metadata"
+          doi: 'DOI'
+          doi_message: 'DOIs require a value in the in the Publisher field.  "University of Cincinnati" is the default publisher, but you can choose to change it on the Metadata tab before saving this work.'
+          metadata: 'Metadata'

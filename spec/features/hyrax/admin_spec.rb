@@ -17,7 +17,7 @@ RSpec.describe "The admin dashboard", :clean_repo do
 
   before do
     create(:work_with_files, title: ["Work A"], admin_set_id: admin_set_1.id, edit_users: [user])
-    create(:work_with_one_file, title: ["Work B"], admin_set_id: admin_set_2.id, edit_users: [user])
+    create(:generic_work_with_one_file, title: ["Work B"], admin_set_id: admin_set_2.id, edit_users: [user])
     create(:work_with_file_and_work, title: ["Work C"], admin_set_id: admin_set_2.id, edit_users: [user])
   end
 
