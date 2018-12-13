@@ -10,7 +10,7 @@ module Hyrax
         wants.json { presenter }
         additional_response_formats(wants)
       end
-      permalink_message = "Permanent link to this page"
+      permalink_message = I18n.t('permanent_link_label')
       @permalinks_presenter = PermalinksPresenter.new(main_app.common_object_path(locale: nil), permalink_message)
     end
   end

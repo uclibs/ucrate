@@ -2,10 +2,10 @@
 
 <p>
   <% remote_service = Hydra::RemoteIdentifier.remote_service(:doi) %>
-  Identifier: <strong><%= presenter.doi.first %></strong><br>
-  Link: <strong><%= link_to remote_service.remote_uri_for(presenter.doi.first).to_s, remote_service.remote_uri_for(presenter.doi.first).to_s %></strong>
+  <%= t('doi.identifier') %>: <strong><%= presenter.doi.first %></strong><br>
+  <%= t('doi.link') %>: <strong><%= link_to remote_service.remote_uri_for(presenter.doi.first).to_s, remote_service.remote_uri_for(presenter.doi.first).to_s %></strong>
 </p>
 
 <p>
-  This <abbr title="Digital Object Identifier" data-placement="right">DOI</abbr> link is the best way for others to cite your work.
+  <%= t('doi.best_way_to_cite_your_work').html_safe %>
 </p>

@@ -20,11 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  doi:
+    identifier: Identifier
+    link: Link
+    best_way_to_cite_your_work: "This <abbr title=\"Digital Object Identifier\" data-placement=\"right\">DOI</abbr> link is the best way for others to cite your work."
   hyku:
     toolbar:
       profile:
         edit_registration: 'Change password'
+  link_page_label: "Link to this page"
+  permanent_link_label: "Permanent link to this page"
   collection_export:
     title:
     header:
