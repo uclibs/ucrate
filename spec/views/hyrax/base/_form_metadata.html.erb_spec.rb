@@ -36,18 +36,10 @@ RSpec.describe 'hyrax/base/_form_metadata.html.erb', type: :view do
     expect(page).not_to have_content('Rights statement')
   end
 
-  context 'with secondary terms' do
+  context 'no additional fields button' do
     let(:additional_fields) { true }
 
-    it "renders the additional fields button" do
-      expect(page).to have_content('Additional fields')
-    end
-  end
-
-  context 'without secondary terms' do
-    let(:additional_fields) { false }
-
-    it 'does not render the addtional fields button' do
+    it "does not render the additional fields button" do
       expect(page).not_to have_content('Additional fields')
     end
   end

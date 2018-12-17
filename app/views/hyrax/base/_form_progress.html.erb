@@ -21,7 +21,8 @@
     <div class="set-access-controls list-group-item">
       <%= render 'form_visibility_component', f: f %>
     </div>
-    <% if Flipflop.proxy_deposit? && current_user.can_make_deposits_for.any? %>
+
+    <% if Flipflop.proxy_deposit? && current_user.can_make_deposits_for.any? && params[:action] != "edit" %>
         <div class="list-group-item">
           <%= f.input :on_behalf_of, collection: current_user.can_make_deposits_for.map(&:user_key), 
             prompt: "Yourself", onChange: 'setProxySelectionAsCreator(); setProxySelectionDeptAsDept(); setProxySelectionCollegeAsCollege()' %>

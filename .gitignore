@@ -17,6 +17,7 @@
 !/log/.keep
 !/tmp/.keep
 dump.rdb
+vendor/*.csv
 
 # Ignore Byebug command history file.
 .byebug_history

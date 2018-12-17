@@ -61,4 +61,6 @@ RSpec.describe Etd do
     it { is_expected.to respond_to(:college) }
     it { is_expected.to respond_to(:department) }
   end
+
+  it_behaves_like 'is remotely identifiable by doi'
 end

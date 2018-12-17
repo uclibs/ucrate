@@ -4,6 +4,7 @@
 #  `rails generate hyrax:work Etd`
 class Etd < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include RemotelyIdentifiedByDoi::Attributes
   include RemoveProxyEditors::RemoveUser
 
   self.indexer = EtdIndexer

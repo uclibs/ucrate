@@ -61,6 +61,9 @@ en:
     batch_uploads:
       files:
         upload_type_instructions: 'Note: To create a single work for all the files, '
+    collections:
+      show:
+        works_in_collection: Items in this Collection
     contact_form:
       header: Contact the Scholar@UC Team
       notice_html: 'Please us this form to send questions, feedback, or report a problem to the Scholar@UC team. You can also check %{href} for more information'
@@ -162,4 +165,6 @@ en:
     works:
       form:
         tab:
-          metadata: "Metadata"
+          doi: 'DOI'
+          doi_message: 'DOIs require a value in the in the Publisher field.  "University of Cincinnati" is the default publisher, but you can choose to change it on the Metadata tab before saving this work.'
+          metadata: 'Metadata'

@@ -11,6 +11,15 @@ RSpec.describe 'Create a Collection', js: true do
       User.new(user_attributes) { |u| u.save(validate: false) }
     end
     let!(:user_collection_type) { create(:user_collection_type) }
+    let!(:user_collection) do
+      create(:public_collection,
+             user: user,
+             description: ['collection description'],
+             collection_type_settings: :nestable)
+    end
+    let!(:user_work) do
+      create(:work, title: ["King Louie"], member_of_collections: [user_collection], user: user)
+    end
 
     before do
       login_as user
@@ -44,6 +53,9 @@ RSpec.describe 'Create a Collection', js: true do
       expect(page).to have_content('This is a description.')
       expect(page).to have_link("Attribution-ShareAlike 4.0 International", href: 'http://creativecommons.org/licenses/by-sa/4.0/')
       expect(page).to have_content('Open Access')
+      expect(page).to have_content('Items in this Collection')
+
+      visit "/collections/#{user_collection.id}"
       expect(page).to have_content('Items in this Collection')
     end
   end

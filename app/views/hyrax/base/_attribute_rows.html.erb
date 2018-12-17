@@ -1,5 +1,5 @@
 <%= presenter.attribute_to_html(:creator, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:submitter, render_as: :faceted, html_dl: true) %>
+<%= presenter.submitter_profile.html_safe%>
 <%= presenter.attribute_to_html(:contributor, html_dl: true) %>
 <%= presenter.attribute_to_html(:college, render_as: :faceted, html_dl: true) %>
 <%= presenter.attribute_to_html(:department, render_as: :faceted, html_dl: true) %>
