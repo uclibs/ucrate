@@ -124,6 +124,9 @@ en:
         export_collection: "Export Collection"
         manage_exports: "Manage Exports"
     dashboard:
+      stats:
+        file_views:             "File View"
+        work_views:             "Work View"
       my:
         action:
           export_collection: "Export collection"
