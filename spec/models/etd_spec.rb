@@ -62,5 +62,10 @@ RSpec.describe Etd do
     it { is_expected.to respond_to(:department) }
   end
 
+  it "has correct predicates" do
+    expect(described_class.properties["description"].predicate.to_s).to eq "http://purl.org/dc/terms/description"
+    expect(described_class.properties["date_created"].predicate.to_s).to eq "http://purl.org/dc/terms/date#created"
+  end
+
   it_behaves_like 'is remotely identifiable by doi'
 end
