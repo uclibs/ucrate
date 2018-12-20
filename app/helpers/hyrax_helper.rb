@@ -132,4 +132,22 @@ module HyraxHelper
       GENRE_TYPES_STUDENTWORK["terms"][k]["label"]
     end.sort
   end
+
+  # @param [User] user
+  def render_notifications(user:)
+    mailbox = UserMailbox.new(user)
+    unread_notifications = mailbox.unread_count
+    link_to(hyrax.notifications_path,
+            'aria-label' => mailbox.label(params[:locale]),
+            class: 'notify-number') do
+      capture do
+        concat content_tag(:span, '', class: 'fa fa-bell')
+        concat content_tag(:span, '&nbsp;Notifications'.html_safe, class: 'visible-xs-inline-block')
+        concat "\n"
+        concat content_tag(:span,
+                           unread_notifications,
+                           class: count_classes_for(unread_notifications))
+      end
+    end
+  end
 end

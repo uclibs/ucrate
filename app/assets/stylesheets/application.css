@@ -35,8 +35,8 @@
 
  #copyright {
      color: #ffffff;
- //    line-height: 150%;
- //    margin-top: 3.5%;
+     /* line-height: 150%;
+     margin-top: 3.5%; */
  }
 
  div[class*="_admin_set_id"] {
@@ -50,4 +50,11 @@
 
  .auto-width-overide  {
     width: auto !important;
+ }
+
+ .sidebar-fix   {
+     background: none !important;
+     color: #ffffff !important;
+     line-height: 50px !important;
+     right: 10px !important;
  }
