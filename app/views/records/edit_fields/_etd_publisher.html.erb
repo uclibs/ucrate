@@ -1,0 +1,5 @@
+<% if params[:action] == 'new' %>
+  <%= f.input :etd_publisher, input_html: { value: "University of Cincinnati", class: 'etd_publisher' } %>
+<% else %>
+  <%= f.input :etd_publisher, input_html: { class: 'etd_publisher' } %>
+<% end %>

@@ -26,7 +26,7 @@ en:
         degree:           "Degree"
         degree_date:      "Degree Year"
         genre:            "Type"
-        publisher:    "Publisher (Required for DOI registration)"
+        etd_publisher:    "Publisher (Required for DOI registration)"
         college:          "College"
         department:       "Degree Program"
     hints:
@@ -42,7 +42,7 @@ en:
         description: "Enter the abstract of the ETD. There is no character limit for this field.</p>"
         identifier: "A unique handle identifying the work. An example would be a DOI for a journal article, or an ISBN or OCLC number for a book."
         language: "Enter the language of your work.</br>Examples:</br><ul><li>English</li><li>Spanish</li><li>Arabic</li></ul>"
-        publisher: "Enter the publisher associated with the ETD, typically the University of Cincinnati."
+        etd_publisher: "Enter the publisher associated with the ETD, typically the University of Cincinnati."
         rights: "Licensing and distribution information governing access to the work. Select from the provided drop-down list."
         alternate_title: "<p>Enter an alternate title for ETD. An alternate title could include acronyms, abbreviations, or a series title.</p>"
         time_period: "Enter the period or date associated with the subject of your work.</br>Examples:</br><ul><li>19th century</li><li>Middle Ages</li><li>Jurassic Period</li></ul>"

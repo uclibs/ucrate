@@ -56,6 +56,10 @@ class Etd < ActiveFedora::Base
     index.as :stored_searchable
   end
 
+  property :etd_publisher, predicate: ::RDF::URI.new('http://purl.org/dc/terms/publisher'), multiple: false do |index|
+    index.as :stored_searchable
+  end
+
   def self.to_s_u
     'etd'
   end
@@ -75,4 +79,8 @@ class Etd < ActiveFedora::Base
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
+
+  def publisher
+    etd_publisher
+  end
 end

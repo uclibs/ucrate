@@ -40,7 +40,7 @@ module Hyrax
              time_period language required_software note related_url]
         when "Etd"
           %i[creator college department description advisor
-             license committee_member degree date_created publisher
+             license committee_member degree date_created etd_publisher
              alternate_title genre subject geo_subject time_period
              language required_software note related_url]
         when "Article"
