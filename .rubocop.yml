@@ -3,6 +3,20 @@ inherit_gem:
 
 AllCops:
   TargetRubyVersion: 2.4
+  Exclude:
+    - 'app/services/*_report.rb'
+    - 'app/services/collection_loader.rb'
+    - 'app/services/report.rb'
+    - 'app/services/work_loader.rb'
+    - 'app/services/hyrax/actor_factory.rb'
+    - 'app/services/hyrax/user_stat_importer.rb'
+    - 'app/services/hyrax/custom_stat_importer.rb'
+    - 'spec/services/hyrax/actor_factory_spec.rb'
+    - 'db/**/*'
+    - 'lib/tasks/batch.rake'
+    - 'script/**/*'
+    - 'spec/services/*_report_spec.rb'
+    - 'vendor/**/*'
 
 Metrics/BlockLength:
   ExcludedMethods: ['included']
