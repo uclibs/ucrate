@@ -45,6 +45,7 @@ en:
           language_tesim: Language
           license_tesim: License
           publisher_tesim: Publisher
+          etd_publisher: Publisher
           rights_statement_tesim: Rights Statement
           subject_tesim: Subject
           title_tesim: Title
