@@ -1,62 +1,207 @@
----
 es:
+  activefedora:
+    models:
+      article: 'Artículo'
+      dataset: 'Conjunto de datos'
+      document: 'Documento'
+      etd: 'Etd'
+      generic_work: 'Trabajo genérico'
+      image: 'Imagen'
+      medium: 'Medios de comunicación'
+      student_work: 'Trabajo de estudiante'
   blacklight:
     search:
+      collections: Colecciones
       fields:
         facet:
           based_near_label_sim: Ubicación
+          college_sim: Colegio
           creator_sim: Creador
+          date_created_sim: Fecha de creacion
+          department_sim: Departamento
           file_format_sim: Formato
           generic_type_sim: Tipo
+          human_readable_type_sim: Tipo de trabajo
           language_sim: Idioma
+          member_of_collection_ids_ssim: Colecciones
           publisher_sim: Editor
           subject_sim: Tema
         index:
-          based_near_tesim: Ubicación
-          contributor_tesim: Contribuidor
-          creator_tesim: Creador
-          date_created_tesim: Fecha de Creacion
-          date_modified_dtsi: Fecha Modificada
-          date_uploaded_dtsi: Fecha de Subida
-          description_tesim: Descripción
-          file_format_tesim: Formato de Archivo
-          identifier_tesim: Identificador
-          language_tesim: Idioma
-          license_tesim: Licencia
-          publisher_tesim: Editor
-          rights_statement_tesim: Derechos
-          subject_tesim: Tema
-        show:
-          based_near_tesim: Ubicación
-          contributor_tesim: Contribuidor
-          creator_tesim: Creador
-          date_created_tesim: Fecha de Creacion
-          date_modified_dtsi: Fecha Modificada
-          date_uploaded_dtsi: Fecha de Subida
-          description_tesim: Descripción
-          file_format_tesim: Formato de Archivo
-          identifier_tesim: Identificador
-          language_tesim: Idioma
-          license_tesim: Licencia
-          publisher_tesim: Editor
-          rights_statement_tesim: Derechos
-          subject_tesim: Tema
           title_tesim: Título
+          has_model_ssim: Tipo
+          description_tesim: Descripción/Resumen
+          creator_tesim: Creador/Autor
+          depositor_tesim: Peticionario
+          date_created_tesim: Fecha de creacion
+          date_uploaded_dtsi: Fecha modificada
+          date_modified_dtsi: Fecha modificada
+          date_modified_ssi: Fecha modificada
+          date_uploaded_ssi: Fecha de subida
+          license_tesim: Licencia
+        show:
+          advisor: Tutor
+          alternate_title: Título alternativo
+          college: Colegio
+          committee_member: Miembro del Comité
+          creator: Creador
+          date_created: Fecha de creacion
+          degree: Grado
+          department: Departamento
+          genre: Género
+          geo_subject: Asunto geográfico
+          identifier: Identificador
+          issn: Issn
+          journal_title: Título de la revista
+          language: Idioma
+          license: Licencia
+          note: Nota 
+          publisher: Editor
+          etd_publisher: Editor
+          related_url: URL relacionada
+          required_software: Software requerido
+          subject: Tema
+          submitter: Presentador
+          time_period: Periodo de tiempo
+      works: Obras
+  simple_form:
+    labels:
+      defaults:
+        description: Descripción
+        license: Derechos
   hyrax:
-    account_name: Mi identificador de cuenta institucional
+    active_consent_to_agreement: He leído y acepto el
+    base:
+      form_progress:
+        required_agreement: Compruebe la licencia de distribución
+    batch_uploads:
+      files:
+        upload_type_instructions: 'Nota: para crear un solo trabajo para todos los archivos'
+    collections:
+      show:
+        collection_details: Detalles de la colección
+        created_by: Creado por
+        item: ítem
+        last_updated: Última actualización
+        refresh: Refrescar
+        results_per_page: Resultados por página
+        sort_by: Ordenar por
+        works_in_collection: Articles en esta colección
+    contact_form:
+      header: Contacta con el equipo de Scholar@UC
+      notice_html: 'Envíe este formulario para enviar preguntas, comentarios o informar un problema al equipo de Scholar @ UC. También puedes consultar %{href} para más información '
+      help_resources_href: 'Recursos de Ayuda'
+    passive_consent_to_agreement: He leído y acepto el
+    homepage:
+      browse: Ramonear
+      contribute: Contribuir
+      featured_works:
+        tab_label: 'Trabajos Destacados'
+        title: 'TRABAJO DESTACADO'
+        no_works: 'No se han presentado trabajos'
+      featured_researcher:
+        tab_label: 'Investigador Destacado'
+        title: 'INVESTIGADOR DESTACADO'
+      featured_collections:
+        title: 'COLECCIÓN DESTACADA'
+        no_collections: 'No se han presentado colecciones'
+      headline: 'Scholar@UC permite a la comunidad de la UC compartir investigaciones y trabajos académicos con una audiencia mundial. Las bibliotecas de la University of Cincinnati e IT@UC, con el apoyo de la Oficina de Investigación, se están asociando para apoyar a Scholar@UC.'
+      learn_more: Aprende más sobre Scholar@UC
+      links:
+        digital_scholarship: Beca digital
+        manage_your_data: Gestiona tus datos
+        scholar_blog: Scholar Blog
+      partners: fogonadura
+      what_is: que es
+    pages:
+      tabs:
+        agreement_page: 'Licencia de Distribución'
+    search:
+      browse: Ramonear
+    users:
+      search_placeholder: 'Buscar Personas'
+    workform_help_html: '<p>Cuanto más información descriptiva proporcione, mejor podremos satisfacer sus necesidades.</p>'
+    workform_attach_file_html: '<p>%{href} es altamente recomendable pero no es obligatorio. </p>'
+    workform_attach_file_href: 'Adjuntar un archivo'
+    deposit_agreement: "Licencia de Distribución"
+    account_name: "ID de Cuenta de mi Institución"
     directory:
       suffix: "@example.org"
     footer:
-      copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> bajo licencia de Apache, Version 2.0"
-      service_html: Un servicio de <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera/a>.
-    institution_name: institución
-    institution_name_full: El nombre de la institución
-    product_name: Hyrax
+      based_on_html: "Basado en <a href=\"https://github.com/samvera/hyrax\">Hyrax</a>"
+      copyright_info_html: "<a href=\"https://commercialization.uc.edu/copyright-infringement\">Información de derechos de autor </a>"
+      copyright_html: "& copy; %{year} <a href=\"https://www.uc.edu/\"> <u>University of Cincinnati</u></a>"
+      clery_heoa_notice_html: "<a href=\"https://www.uc.edu/publicsafety/clery/annual-security-report.html\">Aviso de Clery y HEOA</a>"
+      eaccessibility_concern_html: "<a href=\"https://www.uc.edu/ucit/community/accessibility/eAccessibility-form.html\">Preocupación de la accesibilidad</a>"
+      made_possible_by_html: "Hecho posible por el proyecto <a href=\"https://www.samvera.org\">Samvera</a>"
+      non_discrimination_notice_html: "<a href=\"http://uc.edu/about/policies/non-discrimination.html\">Aviso de no discriminación</a>"
+      terms_of_use_html: "<a class=\"a\" href=\"/terms\">Scholar@UC Términos de uso</a>"
+      uc_alerts_html: "<a href=\"https://www.uc.edu/alert.html\">Alertas de UC</a>"
+    institution_name: "University of Cincinnati"
+    institution_name_full: "University of Cincinnati"
+    product_name: "Scholar@UC"
+    description: "Colecciones de la biblioteca de la Universidad de Cincinnati"
     product_twitter_handle: "@SamveraRepo"
-    workform_help_html: '<p>Mientras más información descriptiva pueda proporcionar, mejor podremos satisfacer sus necesidades.</p>'
-    workform_attach_file_html: '<p>Se recomienda encarecidamente %{href}, pero no es obligatorio.</p>'
-    workform_attach_file_href: 'adjuntar un archivo'
+    product_email: "scholar@uc.edu"
+    user_profile:
+      first_name: "Nombre de pila"
+      last_name: "Apellido"
+      title: "Título del trabajo"
+      ucdepartment: "Departamento"
+      uc_affiliation: "Afiliación a la UC"
+      alternate_email: "Email alternativo"
+      telephone: "Número de teléfono del campus"
+      alternate_phone_number: "Número de teléfono alternativo"
+      website: "Página web personal"
+      blog: "Blog"
+    collection:
+      actions:
+        export_collection: "Exportar colección"
+        manage_exports: "Administrar Exportaciones"
+    dashboard:
+      stats:
+        file_views: "Vista de archivo"
+        work_views: "Vista de trabajo"
+      my:
+        action:
+          export_collection: "Exportar colección"
+      collections:
+        show:
+          item_count: Articles en esta colección
+      proxy_help: "Por favor, tenga en cuenta: Sus proxies pueden hacer cualquier cosa en su nombre en Scholar @ UC. Sea selectivo a quién le da acceso al proxy. Si autoriza un proxy, pueden crear y cargar archivos en su nombre, así como editarlos o eliminarlos. archivos y trabajos correspondientes. La relación de proxy puede ser revocada por el propietario en cualquier momento. Utilice editores específicos del trabajo para un control de acceso más detallado. "
+    welcome:
+      waive_page: "Haga clic aquí para ocultar esta página de bienvenida que se mostrará cuando inicie sesión"
+    visibility:
+      open:
+        text: "Acceso Abierto"
+        note_html: Está disponible para todos <br /> (consulte <a href="/creators_rights" target=\"_blank\"> Derechos del creador </a> para obtener más información)
+        warning_html: ""
+      authenticated:
+        note_html: Restringir el acceso a los usuarios registrados
+    controls:
+      users: "Gente"
+    dataset:
+      help_text: Si desea recibir orientación sobre cómo enviar un dataset, lea la página de ayuda <a href="/documenting_data" target="_blank"> Documenting Data </a>.
+    file_set:
+      show:
+        adobe_reader_link: 'Descargar Adobe Acrobat Reader'
+    toolbar:
+      dashboard:
+        my: 'Mi tablero'
+      works:
+        batch: 'Crear lote'
+        menu: 'Obras'
+        my: 'Mis obras'
+        new: 'Nuevo trabajo'
+      collections:
+        menu: 'Colecciones'
+        my: 'Mis colecciones'
+        new: 'Nueva colección'
+      profile:
+        view: 'Ver perfil'
+        edit: 'Editar perfil'
     works:
       form:
         tab:
+          doi: 'DOI'
+          doi_message: 'Los DOI requieren un valor en el campo del Editor. "University of Cincinnati" es el editor predeterminado, pero puede elegir cambiarlo en la pestaña Metadatos antes de guardar este trabajo.'
           metadata: "Metadatos"

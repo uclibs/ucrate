@@ -5,7 +5,7 @@ module Hyrax
     def submitter_profile
       user = ::User.find_by_email(depositor)
       path = Hyrax::Engine.routes.url_helpers.dashboard_profile_path(user)
-      "<dt>Submitter</dt><dd><ul class=\"tabular\"><span class=\"attribute attribute-submitter\" itemprop=\"submitter\" itemscope itemtype=\"http://schema.org/Person\"><a href=\"#{path}\">#{user.name}</a></span></ul></dd>"
+      "<dt>#{I18n.t('blacklight.search.fields.show.submitter')}</dt><dd><ul class=\"tabular\"><span class=\"attribute attribute-submitter\" itemprop=\"submitter\" itemscope itemtype=\"http://schema.org/Person\"><a href=\"#{path}\">#{user.name}</a></span></ul></dd>"
     end
   end
 end
