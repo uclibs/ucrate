@@ -259,3 +259,7 @@ RSpec/SubjectStub:
 Lint/RescueException:
   Exclude:
     - 'app/services/hyrax/custom_stat_importer.rb'
+    
+Rails/OutputSafety:
+  Exclude:
+    - 'app/helpers/hyrax_helper.rb'
