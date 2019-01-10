@@ -49,7 +49,7 @@ Hyrax.config do |config|
   # Enable displaying usage statistics in the UI
   # Defaults to false
   # Requires a Google Analytics id and OAuth2 keyfile.  See README for more info
-   config.analytics = true
+  config.analytics = ENV["SCHOLAR_ANALYTICS_TOGGLE"]
 
   # Google Analytics tracking ID to gather usage statistics
   config.google_analytics_id = ENV["SCHOLAR_ANALYTICS_ID"]
@@ -57,7 +57,7 @@ Hyrax.config do |config|
   # Date you wish to start collecting Google Analytic statistics for
   # Leaving it blank will set the start date to when ever the file was uploaded by
   # NOTE: if you have always sent analytics to GA for downloads and page views leave this commented out
-  # config.analytic_start_date = DateTime.new(2014, 9, 10)
+  config.analytic_start_date = DateTime.new(2017, 10, 31)
 
   # Enables a link to the citations page for a work
   # Default is false

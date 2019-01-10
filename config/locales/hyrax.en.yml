@@ -45,6 +45,7 @@ en:
           language_tesim: Language
           license_tesim: License
           publisher_tesim: Publisher
+          etd_publisher: Publisher
           rights_statement_tesim: Rights Statement
           subject_tesim: Subject
           title_tesim: Title
@@ -124,6 +125,9 @@ en:
         export_collection: "Export Collection"
         manage_exports: "Manage Exports"
     dashboard:
+      stats:
+        file_views:             "File View"
+        work_views:             "Work View"
       my:
         action:
           export_collection: "Export collection"

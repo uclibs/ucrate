@@ -20,7 +20,7 @@ RSpec.describe Hyrax::EtdForm do
     it {
       is_expected.to eq [:title, :creator, :college, :department, :description, :advisor,
                          :license, :committee_member, :degree, :date_created,
-                         :publisher, :alternate_title, :genre, :subject, :geo_subject,
+                         :etd_publisher, :alternate_title, :genre, :subject, :geo_subject,
                          :time_period, :language, :required_software, :note, :related_url]
     }
   end

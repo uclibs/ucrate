@@ -3,6 +3,20 @@ inherit_gem:
 
 AllCops:
   TargetRubyVersion: 2.4
+  Exclude:
+    - 'app/services/*_report.rb'
+    - 'app/services/collection_loader.rb'
+    - 'app/services/report.rb'
+    - 'app/services/work_loader.rb'
+    - 'app/services/hyrax/actor_factory.rb'
+    - 'app/services/hyrax/user_stat_importer.rb'
+    - 'app/services/hyrax/custom_stat_importer.rb'
+    - 'spec/services/hyrax/actor_factory_spec.rb'
+    - 'db/**/*'
+    - 'lib/tasks/batch.rake'
+    - 'script/**/*'
+    - 'spec/services/*_report_spec.rb'
+    - 'vendor/**/*'
 
 Metrics/BlockLength:
   ExcludedMethods: ['included']
@@ -30,6 +44,7 @@ Metrics/MethodLength:
     - 'app/indexers/hyrax/file_set_indexer.rb'
     - 'spec/support/hyrax/helpers/factory_helpers.rb'
     - 'app/services/hyrax/actor_factory.rb'
+    - 'app/services/hyrax/custom_stat_importer.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -51,6 +66,10 @@ Rails/ApplicationRecord:
 Rails/DynamicFindBy:
   Enabled: false
 
+Rails/Output:
+  Exclude:
+    - 'app/services/hyrax/custom_stat_importer.rb'
+
 Rails/SkipsModelValidations:
   Exclude:
     - 'app/models/user.rb'
@@ -59,6 +78,7 @@ Rails/SkipsModelValidations:
 Rails/TimeZone:
   Exclude:
     - 'spec/services/collection_metadata_csv_factory_spec.rb'
+    - 'config/initializers/hyrax.rb'
 
 RSpec/AnyInstance:
   Exclude:
@@ -134,6 +154,8 @@ RSpec/ExampleLength:
     - 'spec/features/create_document_doi_spec.rb'
     - 'spec/jobs/identifier_delete_job_spec.rb'
     - 'spec/services/hyrax/default_middleware_stack_spec.rb'
+    - 'spec/models/work_and_file_index_spec.rb'
+    - 'spec/models/file_view_stat_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
@@ -187,6 +209,8 @@ RSpec/NamedSubject:
     - 'spec/actors/hyrax/actors/mint_doi_actor_spec.rb'
     - 'spec/services/hyrax/actor_factory_spec.rb'
     - 'spec/services/hyrax/default_middleware_stack_spec.rb'
+    - 'spec/models/work_and_file_index_spec.rb'
+    - 'spec/services/hyrax/custom_stat_importer_spec.rb'
 
 Style/ClassAndModuleChildren:
   Enabled: false
@@ -217,6 +241,7 @@ Metrics/AbcSize:
     - 'app/indexers/hyrax/work_indexer.rb'
     - 'app/models/ability.rb'
     - 'app/indexers/hyrax/collection_indexer.rb'
+    - 'app/services/hyrax/custom_stat_importer.rb'
 
 Metrics/CyclomaticComplexity:
   Exclude:
@@ -230,3 +255,11 @@ Lint/HandleExceptions:
 
 RSpec/SubjectStub:
   Enabled: false    
+
+Lint/RescueException:
+  Exclude:
+    - 'app/services/hyrax/custom_stat_importer.rb'
+    
+Rails/OutputSafety:
+  Exclude:
+    - 'app/helpers/hyrax_helper.rb'
