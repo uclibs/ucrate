@@ -43,3 +43,4 @@ en:
       confirm_destroy: "Click OK to delete this export or Cancel to cancel this operation."
     create_confirmation: "Collection export was successfully created."
     destroy_confirmation: "Collection export was successfully deleted."
+  whats_new: "What's New"
