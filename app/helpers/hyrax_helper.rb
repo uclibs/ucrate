@@ -85,16 +85,8 @@ module HyraxHelper
 
   def filtered_facet_field_names
     ## only show department if college is set in params
-    cache = facet_field_names
-    if params["f"].nil?
-      cache.delete("department_sim")
-      return cache
-    end
-    if params["f"]["college_sim"].nil?
-      cache.delete("department")
-      return cache
-    end
-    cache
+    facet_field_names.delete("department_sim") if params["f"].nil? || params["f"]["college_sim"].nil?
+    facet_field_names
   end
 
   def sorted_genre_list_for_works
