@@ -140,4 +140,36 @@ RSpec.describe HyraxHelper, type: :helper do
       expect(helper.collection_title_by_id("bad-id")).to eq nil
     end
   end
+
+  describe "#filtered_facet_field_names" do
+    before do
+      allow(helper).to receive(:facet_field_names).and_return(["college_sim", "department_sim", "other_sim"])
+    end
+
+    context "when no options are selected" do
+      it "does not return department facet" do
+        expect(helper.filtered_facet_field_names).to eq(["college_sim", "other_sim"])
+      end
+    end
+
+    context "when college is selected" do
+      before do
+        allow(helper).to receive(:params).and_return("f" => { "college_sim" => true })
+      end
+
+      it "returns department facet" do
+        expect(helper.filtered_facet_field_names).to eq(["college_sim", "department_sim", "other_sim"])
+      end
+    end
+
+    context "when facet other than college is selected" do
+      before do
+        allow(helper).to receive(:params).and_return("f" => { "other_sim" => true })
+      end
+
+      it "does not return department facet" do
+        expect(helper.filtered_facet_field_names).to eq(["college_sim", "other_sim"])
+      end
+    end
+  end
 end
