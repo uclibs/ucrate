@@ -45,6 +45,7 @@ Metrics/MethodLength:
     - 'spec/support/hyrax/helpers/factory_helpers.rb'
     - 'app/services/hyrax/actor_factory.rb'
     - 'app/services/hyrax/custom_stat_importer.rb'
+    - 'app/jobs/attach_files_to_work_job.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -156,6 +157,7 @@ RSpec/ExampleLength:
     - 'spec/services/hyrax/default_middleware_stack_spec.rb'
     - 'spec/models/work_and_file_index_spec.rb'
     - 'spec/models/file_view_stat_spec.rb'
+    - 'spec/jobs/attach_files_to_work_job_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
@@ -199,6 +201,7 @@ RSpec/VerifiedDoubles:
     - 'spec/lib/scholar_spec.rb'
     - 'spec/jobs/identifier_delete_job_spec.rb'
     - 'spec/services/hyrax/default_middleware_stack_spec.rb'
+    - 'spec/jobs/attach_files_to_work_job_spec.rb'
     
 RSpec/NamedSubject:
   Exclude:
