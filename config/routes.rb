@@ -4,8 +4,11 @@ require 'sidekiq/web'
 require 'sidekiq/api'
 Rails.application.routes.draw do
   mount Orcid::Engine => "/orcid"
-  resources :collection_exports, only: [:index, :create, :destroy]
-  get '/collection_exports/:id/download', to: 'collection_exports#download', as: 'collection_export_download'
+
+  scope :dashboard do
+    resources :collection_exports, only: [:index, :create, :destroy]
+    get '/collection_exports/:id/download', to: 'collection_exports#download', as: 'collection_export_download'
+  end
 
   mount BrowseEverything::Engine => '/browse'
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?

@@ -18,7 +18,7 @@ class WorkMetadataAttributeMapper
     end
 
     def attributes(object)
-      map = YAML.load_file Rails.root.join("config", "metadata_export_map.yml")
+      map = (YAML.load_stream Rails.root.join("config", "metadata_export_map.yml").read).first
       map[object.class.to_s]
     end
 end
