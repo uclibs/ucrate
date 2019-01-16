@@ -35,6 +35,10 @@ class SolrDocument
     self[Solrizer.solr_name('advisor')]
   end
 
+  def committee_member
+    self[Solrizer.solr_name('committee_member')]
+  end
+
   def required_software
     self[Solrizer.solr_name('required_software')]
   end
