@@ -60,6 +60,7 @@ RSpec.describe Etd do
     it { is_expected.to respond_to(:identifier) }
     it { is_expected.to respond_to(:college) }
     it { is_expected.to respond_to(:department) }
+    it { is_expected.to respond_to(:committee_member) }
   end
 
   it "has correct predicates" do
