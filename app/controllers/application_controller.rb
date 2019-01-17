@@ -17,7 +17,10 @@ class ApplicationController < ActionController::Base
 
     # override devise helper and route to CC.new when parameter is set
     def after_sign_in_path_for(resource)
-      cookies[:login_type] = "local"
+      cookies[:login_type] = {
+        value: "local",
+        secure: Rails.env.production?
+      }
       if !resource.waived_welcome_page
         Rails.application.routes.url_helpers.welcome_page_index_path
       else
