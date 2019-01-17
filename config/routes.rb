@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get 'distribution_license_request' => 'hyrax/static#agreement'
   get 'terms' => 'static#terms'
   get 'agreement' => 'hyrax/static#agreement'
+  get 'whats_new' => 'static#whats_new'
 
   # route for custom error pages issue #1056
   match '/404', to: 'errors#not_found', via: :all

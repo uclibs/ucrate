@@ -43,3 +43,4 @@ zh:
       confirm_destroy: "单击“确定”删除此导出，或单击“取消”取消此操作。"
     create_confirmation: "已成功创建集合导出。"
     destroy_confirmation: "集合导出已成功删除。"
+  whats_new: 什么是新的

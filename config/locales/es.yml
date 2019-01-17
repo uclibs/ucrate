@@ -43,3 +43,4 @@ es:
       confirm_destroy: "Haga clic en Aceptar para eliminar esta exportación o en Cancelar para cancelar esta operación."
     create_confirmation: "La exportación de la colección fue creada con éxito."
     destroy_confirmation: "La exportación de la colección se ha eliminado correctamente."
+  whats_new: Qué hay de nuevo
