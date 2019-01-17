@@ -1,0 +1,4 @@
+<h1 class="work-type-tag">
+  <span class="<%= Hyrax::ModelIcon.css_class_for(presenter.model) %>" aria-hidden="true"></span>
+  <%= t("activefedora.models.#{presenter.human_readable_type.to_s.parameterize.underscore}") %>
+</h1>

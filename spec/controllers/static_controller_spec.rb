@@ -100,4 +100,12 @@ describe StaticController do
       response.should redirect_to(Hyrax::Engine.routes.url_helpers.dashboard_path)
     end
   end
+
+  describe '#whats_new' do
+    it "renders the what's new page" do
+      get :whats_new
+      expect(response.status).to be == 200
+      expect(response).to render_template('static/whats_new')
+    end
+  end
 end

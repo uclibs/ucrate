@@ -11,13 +11,19 @@ en:
       student_work: 'Student Work'
   blacklight:
     search:
+      collections: Collections
       fields:
         facet:
           based_near_label_sim: Location
+          college_sim: College
           creator_sim: Creator/Author
+          date_created_sim: Date Created
+          department_sim: Department
           file_format_sim: Format
           generic_type_sim: Type
+          human_readable_type_sim: Type of Work
           language_sim: Language
+          member_of_collection_ids_ssim: Collections
           publisher_sim: Publisher
           subject_sim: Subject
         index:
@@ -33,22 +39,30 @@ en:
           date_uploaded_ssi: Date Uploaded
           license_tesim: License
         show:
-          based_near_tesim: Location
-          contributor_tesim: Contributor
-          creator_tesim: Creator
-          date_created_tesim: Date Created
-          date_modified_dtsi: Date Modified
-          date_uploaded_dtsi: Date Uploaded
-          description_tesim: Description
-          file_format_tesim: File Format
-          identifier_tesim: Identifier
-          language_tesim: Language
-          license_tesim: License
-          publisher_tesim: Publisher
+          advisor: Advisor
+          alternate_title: Alternate Title
+          college: College
+          committee_member: Committee Member
+          creator: Creator
+          date_created: Date Created
+          degree: Degree
+          department: Department
+          genre: Genre
+          geo_subject: Geographic Subject
+          identifier: Identifier
+          issn: Issn
+          journal_title: Journal Title
+          language: Language
+          license: License
+          note: Note
+          publisher: Publisher
           etd_publisher: Publisher
-          rights_statement_tesim: Rights Statement
-          subject_tesim: Subject
-          title_tesim: Title
+          related_url: Related URL
+          required_software: Required Software
+          subject: Subject
+          submitter: Submitter
+          time_period: Time Period
+      works: Works
   simple_form:
     labels:
       defaults:
@@ -59,11 +73,20 @@ en:
     base:
       form_progress:
         required_agreement: Check distribution license
+      items:
+        empty: 'This %{type} has no files associated with it. (If you just created this %{type}, it may take a few minutes for the files to display. Try refreshing the page again.) Otherwise, click edit to add more files.'
     batch_uploads:
       files:
         upload_type_instructions: 'Note: To create a single work for all the files, '
     collections:
       show:
+        collection_details: Collection Details
+        created_by: Created by
+        item: item
+        last_updated: Last Updated
+        refresh: Refresh
+        results_per_page: Results per page
+        sort_by: Sort by
         works_in_collection: Items in this Collection
     contact_form:
       header: Contact the Scholar@UC Team
@@ -71,6 +94,8 @@ en:
       help_resources_href: 'Help Resources'
     passive_consent_to_agreement: I have read and agree to the
     homepage:
+      browse: Browse
+      contribute: Contribute
       featured_works:
         tab_label:          'Featured Works'
         title:              'FEATURED WORK'
@@ -81,9 +106,19 @@ en:
       featured_collections:
         title:              'FEATURED COLLECTION'
         no_collections:     'No collections have been featured'
+      headline: 'Scholar@UC enables the UC community to share research and scholarly works with a worldwide audience. The University of Cincinnati Libraries and IT@UC, with support from the Office of Research, are partnering to support Scholar@UC.'
+      learn_more: Learn more about ScholarUC
+      links:
+        digital_scholarship: Digital Scholarship
+        manage_your_data: Manage Your Data
+        scholar_blog: Scholar Blog
+      partners: partners
+      what_is: what is
     pages:
       tabs:
         agreement_page: 'Distribution License'
+    search:
+      browse: Browse
     users:
       search_placeholder: 'Search People'
     workform_help_html: '<p>The more descriptive information you provide the better we can serve your needs.</p>'

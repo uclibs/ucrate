@@ -20,11 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  doi:
+    identifier: Identifier
+    link: Link
+    best_way_to_cite_your_work: "This <abbr title=\"Digital Object Identifier\" data-placement=\"right\">DOI</abbr> link is the best way for others to cite your work."
   hyku:
     toolbar:
       profile:
         edit_registration: 'Change password'
+  link_page_label: "Link to this page"
+  permanent_link_label: "Permanent link to this page"
   collection_export:
     title:
     header:
@@ -38,3 +43,4 @@ en:
       confirm_destroy: "Click OK to delete this export or Cancel to cancel this operation."
     create_confirmation: "Collection export was successfully created."
     destroy_confirmation: "Collection export was successfully deleted."
+  whats_new: "What's New"

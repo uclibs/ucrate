@@ -58,4 +58,8 @@ class StaticController < ApplicationController
       redirect_to new_user_session_path
     end
   end
+
+  def whats_new
+    render "static/whats_new"
+  end
 end

@@ -11,7 +11,7 @@ class PermalinksPresenter
   end
 
   def link_message
-    return "Link to this page" unless @message
+    return I18n.t('link_page_label') unless @message
     @message
   end
 
