@@ -35,7 +35,10 @@ class CallbacksController < Devise::OmniauthCallbacksController
 
     def sign_in_shibboleth_user
       sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
-      cookies[:login_type] = "shibboleth"
+      cookies[:login_type] = {
+        value: "shibboleth",
+        secure: Rails.env.production?
+      }
       flash[:notice] = "You are now signed in as #{@user.name} (#{@user.email})"
     end
 
