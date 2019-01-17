@@ -32,14 +32,14 @@
         <% end %>
       </li>
     <% end %>
-    <li role="menuitem" tabindex="-1">
-      <%= link_to main_app.collection_exports_path(collection_id: id),
+    <!-- <li role="menuitem" tabindex="-1"> -->
+      <%#= link_to main_app.collection_exports_path(collection_id: id),
                   method: 'post',
                   class: 'itemicon itemexport export-collection-button',
                   title: t("hyrax.dashboard.my.action.export_collection") do %>
-        <%= t("hyrax.dashboard.my.action.export_collection") %>
-      <% end %>
-    </li>
+        <%#= t("hyrax.dashboard.my.action.export_collection") %>
+      <%# end %>
+      <!-- </li> -->
     <li role="menuitem" tabindex="-1">
       <%= link_to "#",
                   class: 'itemicon itemtrash delete-collection-button',

@@ -30,6 +30,7 @@ RSpec.describe "collection export", type: :feature do
 
     context "collections that the user created" do
       it "do all the things we expect", :clean_repo do
+        skip
         sign_in user
         visit "dashboard/my/collections"
         # can export a collection from the dashboard collection index
