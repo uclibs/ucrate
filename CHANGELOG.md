@@ -1,3 +1,47 @@
+1.0.0 (Scholar 4.0) 1/24/2019
+* Updated to Hyrax version 2.3.3
+* Updated to Ruby version 2.5.3
+* Ported over from Scholar
+    * Proxy removal
+    * Facet configuration
+    * 404 error page instead of template
+    * Change Manager
+    * Sorting and reverse sorting alphabetically.
+    * Footer elements
+    * Toolbar links
+    * ETD committe members
+    * Flash message wording
+* Disabled Hyrax features
+    * Citation features
+    * BrowseEverything on batch create
+    * Rights on all forms
+    * Collection export
+    * Search label
+* Enhancements
+    * Updated collection form by removing unnecessary fields
+    * Updated license view in collections
+    * Set new collection default visibility to public
+    * Added contextual help for proxy management
+    * Implemented autocomplete on specific new work form fields
+    * Enabled the collection facet
+    * Added a What's New page
+    * Made session and login cookies secure on production
+    * Updated Spanish and Mandarin translations 
+    * Added batch upload
+    * Added noid initializer
+    * Restructured file uploader and added new CSS classes
+* Bug Fixes
+    * Added Mendely meta-tags
+    * Fixed collection license persistence
+    * Implemented accessibility violation fixes
+    * Fixed owner file permission problem with proxy deposit
+    * Got original filename for box files
+    * Deleted the double quote if the description or note ends in double quote
+    * Handled slashes in paths for riiif
+    * Fixed Etd type_field and publisher field
+    * Fixed managed works title wrapping in Dashboard
+    * Resolved bug that shows department field incorrectly
+
 0.6.0 7/20/2018
 * Ported over Scholar features
     * Replicated home page content
