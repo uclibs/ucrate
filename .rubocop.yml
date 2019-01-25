@@ -231,6 +231,15 @@ Style/SymbolArray:
 Style/GuardClause:
   Exclude:
     - 'app/indexers/hyrax/work_indexer.rb'
+    - 'lib/active_fedora/fedora.rb'
+
+Style/IfUnlessModifier:
+  Exclude:
+    - 'lib/active_fedora/fedora.rb'
+
+Style/RedundantFreeze:
+  Exclude:
+    - 'lib/active_fedora/fedora.rb'
 
 Style/BlockDelimiters:
   Exclude:
