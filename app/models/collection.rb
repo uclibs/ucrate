@@ -5,7 +5,7 @@ class Collection < ActiveFedora::Base
   include ::Hyrax::CollectionBehavior
   include ::Hyrax::Collections::Featured
   # You can replace these metadata if they're not suitable
-  include Hyrax::BasicMetadata
+  include BasicCollectionMetadata
   self.indexer = Hyrax::CollectionWithBasicMetadataIndexer
 
   property :license, predicate: ::RDF::Vocab::DC.rights, multiple: false
