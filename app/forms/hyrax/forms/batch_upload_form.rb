@@ -15,6 +15,26 @@ module Hyrax
                       committee_member note geo_subject doi doi_assignment_strategy
                       existing_identifier college department genre degree advisor]
 
+      def self.model_attributes(_)
+        attrs = super
+        attrs[:title] = Array(attrs[:title]) if attrs[:title]
+        attrs[:description] = Array(attrs[:description]) if attrs[:description]
+        attrs[:date_created] = Array(attrs[:date_created]) if attrs[:date_created]
+        attrs
+      end
+
+      def description
+        super.first || ""
+      end
+
+      def title
+        super.first || ""
+      end
+
+      def date_created
+        super.first || ""
+      end
+
       def required_fields
         case @payload_concern
         when "Dataset"
