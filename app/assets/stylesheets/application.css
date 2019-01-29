@@ -58,3 +58,7 @@
      line-height: 50px !important;
      right: 10px !important;
  }
+
+.featured-work-fix {
+  display: inline-block;
+}
