@@ -45,6 +45,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'active-fedora', '11.5.4'
 gem 'active_attr'
+gem 'bundler', '~> 1.17'
 gem 'change_manager', git: "https://github.com/uclibs/change_manager.git", ref: '8d151d1123aa35658f061a63bc72435afdf0ec8a'
 # gem 'clamav'
 gem 'devise'
