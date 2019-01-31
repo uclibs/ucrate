@@ -3,13 +3,16 @@ development:
   password: <%= ENV["SCHOLAR_FEDORA_PASSWORD"] %>
   url: <%= ENV["SCHOLAR_FEDORA_URL"] %>
   base_path: /dev
+  request: { timeout: 600, open_timeout: 60}
 test:
   user: fedoraAdmin
   password: <%= ENV["SCHOLAR_FEDORA_PASSWORD"] %>
   url: <%= ENV["SCHOLAR_FEDORA_URL"] %>
   base_path: /test
+  request: { timeout: 600, open_timeout: 60}
 production:
   user: fedoraAdmin
   password: <%= ENV["SCHOLAR_FEDORA_PASSWORD"] %>
   url: <%= ENV["SCHOLAR_FEDORA_URL"] %>
   base_path: /prod
+  request: { timeout: 600, open_timeout: 60}

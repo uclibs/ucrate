@@ -202,6 +202,7 @@ RSpec/VerifiedDoubles:
     - 'spec/jobs/identifier_delete_job_spec.rb'
     - 'spec/services/hyrax/default_middleware_stack_spec.rb'
     - 'spec/jobs/attach_files_to_work_job_spec.rb'
+    - 'spec/models/collection_spec.rb'
     
 RSpec/NamedSubject:
   Exclude:
@@ -214,6 +215,7 @@ RSpec/NamedSubject:
     - 'spec/services/hyrax/default_middleware_stack_spec.rb'
     - 'spec/models/work_and_file_index_spec.rb'
     - 'spec/services/hyrax/custom_stat_importer_spec.rb'
+    - 'spec/models/collection_spec.rb'
 
 Style/ClassAndModuleChildren:
   Enabled: false
@@ -231,6 +233,15 @@ Style/SymbolArray:
 Style/GuardClause:
   Exclude:
     - 'app/indexers/hyrax/work_indexer.rb'
+    - 'lib/active_fedora/fedora.rb'
+
+Style/IfUnlessModifier:
+  Exclude:
+    - 'lib/active_fedora/fedora.rb'
+
+Style/RedundantFreeze:
+  Exclude:
+    - 'lib/active_fedora/fedora.rb'
 
 Style/BlockDelimiters:
   Exclude:
