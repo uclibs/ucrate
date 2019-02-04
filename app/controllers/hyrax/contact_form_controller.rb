@@ -36,8 +36,8 @@ module Hyrax
     # response to the user.
     def after_deliver; end
 
-    def verify_google_recaptcha(_key, response)
-      status = `curl "https://www.google.com/recaptcha/api/siteverify?secret=#{CAPTCHA_SERVER['_key']}&response=#{response}"`
+    def verify_google_recaptcha(key, response)
+      status = `curl "https://www.google.com/recaptcha/api/siteverify?secret=#{key}&response=#{response}"`
       hash = JSON.parse(status)
       hash["success"] == true
     end
