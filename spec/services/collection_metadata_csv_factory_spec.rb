@@ -9,21 +9,11 @@ RSpec.describe CollectionMetadataCsvFactory do
   let!(:collection) do
     create(:public_collection,
            id: 1,
+           title: ["Parent Collection"],
            user: user,
            description: ['collection description'],
            collection_type_settings: :nestable)
   end
-
-  # let!(:nested_collection) do
-  #  create(:public_collection,
-  #         id: "1",
-  #         member_of_collections: [collection],
-  #         user: user,
-  #         title: ["Collection title"],
-  #         creator: ["Collection creator"],
-  #         description: ['collection description'],
-  #         collection_type_settings: :nestable)
-  # end
 
   let!(:article) do
     create(:article,
@@ -216,6 +206,41 @@ RSpec.describe CollectionMetadataCsvFactory do
            note: "Student Work Note",
            related_url: ["www.example.com/student_work"],
            member_of_collections: [collection],
+           user: user)
+  end
+
+  let!(:nested_collection) do
+    create(:public_collection,
+           id: "10",
+           member_of_collections: [collection],
+           user: user,
+           title: ["Nested Collection title"],
+           creator: ["Nested Collection creator"],
+           description: ['nested collection description'],
+           collection_type_settings: :nestable)
+  end
+
+  let!(:nested_document) do
+    create(:document,
+           id: 11,
+           title: ["Nested Document"],
+           creator: ["Putnam, Robert"],
+           description: ["Bowling Alone"],
+           college: "Arts and Letters",
+           department: "Social Science",
+           license: ["All Rights Reserved"],
+           publisher: ["Macmillan Reference"],
+           date_created: ["2000-01-01"],
+           alternate_title: ["Bowling Alone: The decline of American Social Capital"],
+           subject: ["United States Politics"],
+           geo_subject: ["United States"],
+           time_period: ["Early Aughts"],
+           language: ["English"],
+           required_software: "PDF",
+           note: "Document Note",
+           related_url: ["www.example.com/document"],
+           member_of_collections: [nested_collection],
+           genre: "Non Fiction",
            user: user)
   end
 

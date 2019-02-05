@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe WorkMetadataAttributeMapper do
-  subject(:mapper) { described_class.new(work) }
+  subject(:mapper) { described_class.new(work, nil) }
   let(:work) do
     create(:work,
            title: ["A very short work"],

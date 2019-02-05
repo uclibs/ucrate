@@ -77,6 +77,17 @@ Dataset:
   - language
   - note
   - related_url
+FileSet:
+  - id
+  - title
+  - creator
+  - depositor
+  - description
+  - license
+  - publisher
+  - date_created
+  - subject
+  - language
 Image:
   - id
   - title
@@ -166,3 +177,5 @@ Collection:
   - title
   - creator
   - depositor
+  - description
+  - license
