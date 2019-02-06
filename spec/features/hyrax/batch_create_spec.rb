@@ -27,6 +27,7 @@ RSpec.describe 'Batch creation of works', type: :feature do
       expect(page).to have_content("Files")
     end
     expect(page).to have_content("Each file will be uploaded to a separate new work resulting in one work per uploaded file.")
+    expect(page).to have_content("Add files")
   end
 
   it 'defaults to public visibility' do
