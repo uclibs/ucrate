@@ -27,6 +27,7 @@
             <% end %>
             <%= render 'citations', presenter: @presenter %>
             <%= render 'social_media' %>
+            <%= t('.last_modified') %>: <%= @presenter.date_modified %>
           </div>
           <div class="col-sm-9">
             <%= render 'work_description', presenter: @presenter %>
