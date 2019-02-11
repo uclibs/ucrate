@@ -46,8 +46,11 @@ class CallbacksController < Devise::OmniauthCallbacksController
       # If user has no email address use their sixplus2@uc.edu instead
       # Some test accounts on QA/dev don't have email addresses
       @email = if defined?(@omni.extra.raw_info.mail)
-                 return @omni.uid if @omni.extra.raw_info.mail.presence || @omni.uid
-                 raise 'User does not have an email address or uid'
+                 if @omni.extra.raw_info.mail.blank?
+                   @omni.uid
+                 else
+                   @omni.extra.raw_info.mail
+                 end
                else
                  @omni.uid
                end
@@ -74,17 +77,22 @@ class CallbacksController < Devise::OmniauthCallbacksController
       @user = User.create provider: @omni.provider,
                           uid: @omni.uid,
                           email: @email,
-                          password: Devise.friendly_token[0, 20]
+                          password: Devise.friendly_token[0, 20],
+                          profile_update_not_required: false
       update_user_shibboleth_attributes
     end
 
     def update_user_shibboleth_attributes
+      @user.title              = @omni.extra.raw_info.title
+      @user.telephone          = @omni.extra.raw_info.telephoneNumber
       @user.first_name         = @omni.extra.raw_info.givenName
       @user.last_name          = @omni.extra.raw_info.sn
+      @user.uc_affiliation     = @omni.extra.raw_info.uceduPrimaryAffiliation
+      @user.ucdepartment       = @omni.extra.raw_info.ou
       @user.save
     end
 
     def send_welcome_email
-      # WelcomeMailer.welcome_email(@user).deliver
+      WelcomeMailer.welcome_email(@user).deliver
     end
 end
