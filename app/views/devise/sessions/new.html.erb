@@ -1,7 +1,7 @@
 <h2>Local Account Log in</h2>
 
 <% if AUTH_CONFIG['shibboleth_enabled'] %>
-  <p>Note: If you are affiliated with UC, use the <a href="/users/auth/shibboleth">Central Login form</a> instead.</p>
+  <p>Note: If you are affiliated with UC, use the <%= link_to 'Central Login form', user_shibboleth_omniauth_authorize_path %> instead.</p>
 <% end %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -28,7 +28,8 @@
 <% end %>
 
 <% if AUTH_CONFIG['signups_enabled'] %>
-  <a href="/users/sign_up">Sign up</a><br />
+  <%= link_to 'Sign up', new_user_registration_path %>
+<br />
 <% end %>
 
-<p><a href="/users/password/new">Reset/Forgot your password?</a></p>
+<p><%= link_to 'Reset/Forgot your password?', new_user_password_path %></a></p>

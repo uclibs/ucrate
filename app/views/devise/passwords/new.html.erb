@@ -1,6 +1,6 @@
 <h2>Forgot your password?</h2>
 
-<p>Note: If you have a <strong>uc.edu</strong> email address, do <strong>not</strong> use this form to reset your password. Use the <a href="/users/auth/shibboleth">Central Login form</a> instead.</p>
+<p>Note: If you have a <strong>uc.edu</strong> email address, do <strong>not</strong> use this form to reset your password. Use the <%= link_to 'Central Login form', user_shibboleth_omniauth_authorize_path %> instead.</p>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
