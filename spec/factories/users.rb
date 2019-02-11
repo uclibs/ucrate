@@ -3,22 +3,22 @@
 FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }
-    password 'password'
-    first_name 'Sample'
-    last_name 'User'
-    title 'job title'
-    ucdepartment 'Department'
-    uc_affiliation 'UC affiliation'
-    alternate_email 'Alternate email'
-    telephone 'Campus phone number'
-    alternate_phone_number 'Alternate phone number'
-    website 'Personal webpage'
-    blog 'Blog'
+    password { 'password' }
+    first_name { 'Sample' }
+    last_name { 'User' }
+    title { 'job title' }
+    ucdepartment { 'Department' }
+    uc_affiliation { 'UC affiliation' }
+    alternate_email { 'Alternate email' }
+    telephone { 'Campus phone number' }
+    alternate_phone_number { 'Alternate phone number' }
+    website { 'Personal webpage' }
+    blog { 'Blog' }
 
     transient do
       # Allow for custom groups when a user is instantiated.
       # @example create(:user, groups: 'avacado')
-      groups []
+      groups { [] }
     end
 
     # TODO: Register the groups for the given user key such that we can remove the following from other specs:
@@ -34,7 +34,7 @@ FactoryBot.define do
     end
 
     factory :admin do
-      groups ['admin']
+      groups { ['admin'] }
     end
 
     factory :user_with_mail do
@@ -59,21 +59,21 @@ FactoryBot.define do
 
   factory :shibboleth_user, class: 'User' do
     transient do
-      count 1
-      person_pid nil
+      count { 1 }
+      person_pid { nil }
     end
-    email 'sixplus2@test.com'
-    password '12345678'
-    first_name 'Fake'
-    last_name 'User'
-    password_confirmation '12345678'
+    email { 'sixplus2@test.com' }
+    password { '12345678' }
+    first_name { 'Fake' }
+    last_name { 'User' }
+    password_confirmation { '12345678' }
     sign_in_count { count.to_s }
-    provider 'shibboleth'
-    uid 'sixplus2@test.com'
+    provider { 'shibboleth' }
+    uid { 'sixplus2@test.com' }
   end
 
   trait :guest do
-    guest true
+    guest { true }
   end
 end
 
