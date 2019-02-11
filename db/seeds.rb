@@ -5,47 +5,78 @@ class AddSeedObjects < ActiveRecord::Migration[5.1]
   password = Devise.friendly_token.first(8)
   puts "Password for all accounts: #{password}\n\n"
 
-  User.find_by_email('manydeposits@example.com').try(:destroy)
-  many_deposits = User.create(
-    email: 'manydeposits@example.com',
-    first_name: 'Many',
-    last_name: 'Deposits',
-    password: password,
-    password_confirmation: password,
-    ucdepartment: 'CCM Music')
-  puts "Account created: #{many_deposits.email}"
 
-  User.find_by_email('nodeposits@example.com').try(:destroy)
-  no_deposits = User.create(
-    email: 'nodeposits@example.com',
-    first_name: 'No',
-    last_name: 'Deposits',
-    password: password,
-    password_confirmation: password,
-    ucdepartment: 'UCL Rsearch')
-  puts "Account created: #{no_deposits.email}"
+  if many_deposits = User.find_by_email('manydeposits@example.com')
+    many_deposits.update(
+      password: password, 
+      password_confirmation: password)
+    puts "Account updated: #{many_deposits.email}"
+    many_deposits.save
+  else
+    many_deposits = User.create(
+      email: 'manydeposits@example.com',
+      first_name: 'Many',
+      last_name: 'Deposits',
+      password: password,
+      password_confirmation: password,
+      ucdepartment: 'CCM Music')
+    puts "Account created: #{many_deposits.email}"
+  end
 
-  User.find_by_email('delegate@example.com').try(:destroy)
-  student_delegate = User.create(
-    email: 'delegate@example.com',
-    first_name: 'Student',
-    last_name: 'Delegate',
-    password: password,
-    password_confirmation: password,
-    ucdepartment: 'CEAS Computer Science')
-  puts "Account created: #{student_delegate.email}"
+  if no_deposits = User.find_by_email('nodeposits@example.com')
+    no_deposits.update(
+      password: password,
+      password_confirmation: password)
+    puts "Account updated: #{no_deposits.email}"
+    no_deposits.save
+  else
+    no_deposits = User.create(
+      email: 'nodeposits@example.com',
+      first_name: 'No',
+      last_name: 'Deposits',
+      password: password,
+      password_confirmation: password,
+      ucdepartment: 'UCL Rsearch')
+    puts "Account created: #{no_deposits.email}"
+  end
 
-  User.find_by_email('admin@example.com').try(:destroy)
-  admin_user = User.create(
-    email: 'admin@example.com',
-    first_name: 'Admin',
-    last_name: 'User',
-    password: password,
-    password_confirmation: password)
-  admin = Role.find_or_create_by(name: 'admin')
-  admin.users << admin_user
-  admin.save
-  puts "Account created: #{admin_user.email}\n\n"
+  if student_delegate = User.find_by_email('delegate@example.com')
+    student_delegate.update(
+      password: password,
+      password_confirmation: password)
+    student_delegate.save
+    puts "Account updated: #{student_delegate.email}"
+  else
+    student_delegate = User.create(
+      email: 'delegate@example.com',
+      first_name: 'Student',
+      last_name: 'Delegate',
+      password: password,
+      password_confirmation: password,
+      ucdepartment: 'CEAS Computer Science')
+    puts "Account created: #{student_delegate.email}"
+  end
+
+  if admin_user = User.find_by_email('admin@example.com')
+    admin_user.update(
+      password: password,
+      password_confirmation: password)
+    admin = Role.find_or_create_by(name: 'admin')
+    admin.users << admin_user
+    admin.save
+    puts "Account updated: #{admin_user.email}"
+  else
+    admin_user = User.create(
+      email: 'admin@example.com',
+      first_name: 'Admin',
+      last_name: 'User',
+      password: password,
+      password_confirmation: password)
+    admin = Role.find_or_create_by(name: 'admin')
+    admin.users << admin_user
+    admin.save
+    puts "Account created: #{admin_user.email}\n\n"
+  end
 
   users_with_works = [many_deposits, student_delegate, admin_user]
   works_per_user = 10
