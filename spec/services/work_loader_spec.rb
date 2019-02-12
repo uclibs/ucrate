@@ -207,7 +207,8 @@ describe WorkLoader, :clean_repo do
   describe "Etd" do
     it_behaves_like "batch upload object" do
       let(:work_type) { "Etd" }
-      let(:attributes) { default_attributes.merge(work_type: 'etd', advisor: ["Some advisor"], committee_member: ["member 1", "member 2"]) }
+      # Use only 1 committee_member since fedora doesn't preserve the order
+      let(:attributes) { default_attributes.merge(work_type: 'etd', advisor: ["Some advisor"], committee_member: ["member 1"]) }
     end
   end
 
