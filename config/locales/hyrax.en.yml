@@ -13,6 +13,10 @@ en:
     search:
       collections: Collections
       fields:
+        etd:
+          show:
+            department: "Degree Program"
+            date_created: "Degree Date"
         facet:
           based_near_label_sim: Location
           college_sim: College
