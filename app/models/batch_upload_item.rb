@@ -57,4 +57,16 @@ class BatchUploadItem < ActiveFedora::Base
   def create_or_update
     raise "This is a read only record"
   end
+
+  def multiple?(field)
+    BatchUploadForm.multiple? field
+  end
+
+  def self.multiple?(field)
+    if %i[title rights_statement description date_created license].include? field.to_sym
+      false
+    else
+      super
+    end
+  end
 end

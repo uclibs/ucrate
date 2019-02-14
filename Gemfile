@@ -12,7 +12,7 @@ gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch:
 gem 'kaltura', '0.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.1.6.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
@@ -45,6 +45,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'active-fedora', '11.5.4'
 gem 'active_attr'
+gem 'bundler', '~> 1.17'
 gem 'change_manager', git: "https://github.com/uclibs/change_manager.git", ref: '8d151d1123aa35658f061a63bc72435afdf0ec8a'
 # gem 'clamav'
 gem 'devise'
@@ -57,7 +58,7 @@ gem 'hyrax', git: 'https://github.com/samvera/hyrax.git', tag: 'v2.3.3'
 gem 'mysql2', '~> 0.4.10'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
-gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5-1'
+gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5-1-6'
 gem 'riiif', '~> 1.1'
 gem 'rsolr', '>= 1.0'
 gem 'sidekiq'

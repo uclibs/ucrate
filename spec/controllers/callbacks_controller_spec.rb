@@ -53,6 +53,8 @@ describe CallbacksController do
                         extra: {
                           raw_info: {
                             mail: uid,
+                            title: 'title',
+                            telephoneNumber: '123-456-7890',
                             givenName: 'Fake',
                             sn: 'User',
                             uceduPrimaryAffiliation: 'staff',
@@ -88,17 +90,6 @@ describe CallbacksController do
       let(:email) { uid }
 
       it_behaves_like 'Shibboleth login'
-    end
-
-    context "when the parameter is set" do
-      before do
-        allow(controller).to receive(:parameter_set?).and_return(true)
-        get provider
-      end
-
-      it 'redirects to the welcome page' do
-        response.should redirect_to(Rails.application.routes.url_helpers.welcome_page_index_path)
-      end
     end
 
     context 'with a brand new user when Shibboleth email is not defined' do
@@ -158,31 +149,6 @@ describe CallbacksController do
       let(:email) { user.email }
 
       it_behaves_like 'Shibboleth login'
-    end
-
-    context 'with a brand new user when Shibboleth email is blank and uid is nil' do
-      before do
-        omniauth_hash = { provider: 'shibboleth',
-                          uid: nil,
-                          extra: {
-                            raw_info: {
-                              mail: '',
-                              title: 'title',
-                              telephoneNumber: '123-456-7890',
-                              givenName: 'Fake',
-                              sn: 'User',
-                              uceduPrimaryAffiliation: 'staff',
-                              ou: 'department'
-                            }
-                          } }
-        OmniAuth.config.add_mock(provider, omniauth_hash)
-        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[provider]
-      end
-      let(:email) { uid }
-
-      it 'raises an error' do
-        expect { get provider }.to raise_error('User does not have an email address or uid')
-      end
     end
   end
 end

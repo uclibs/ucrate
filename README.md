@@ -33,7 +33,7 @@ Install system dependencies
 1. Load workflows: ```bin/rails hyrax:workflow:load```
     * Creating default admin set should also load the default workflow. You can load, any additional workflows defined, using this command.
 1. Assigning admin role to user from `rails console`:
-    * ```admin = Role.create(name: "admin")```
+    * ```admin = Role.find_or_create_by(name: "admin")```
     * ```admin.users << User.find_by_user_key( "your_admin_users_email@fake.email.org" )```
     * ```admin.save```
     * Read [more](https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax).
