@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :file_set do
     transient do
       user { create(:user) }
-      content nil
+      content { nil }
     end
     after(:build) do |fs, evaluator|
       fs.apply_depositor_metadata evaluator.user.user_key
@@ -15,11 +15,11 @@ FactoryBot.define do
     end
 
     trait :public do
-      read_groups ["public"]
+      read_groups { ["public"] }
     end
 
     trait :registered do
-      read_groups ["registered"]
+      read_groups { ["registered"] }
     end
 
     trait :with_public_embargo do

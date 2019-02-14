@@ -5,7 +5,7 @@ FactoryBot.define do
     transient do
       user { create(:user) }
       # Set to true (or a hash) if you want to create an admin set
-      with_admin_set false
+      with_admin_set { false }
     end
 
     # It is reasonable to assume that a work has an admin set; However, we don't want to
@@ -25,8 +25,8 @@ FactoryBot.define do
       sleep 1
     end
 
-    title ["Test title"]
-    visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
+    title { ["Test title"] }
+    visibility { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE }
 
     after(:build) do |work, evaluator|
       work.apply_depositor_metadata(evaluator.user.user_key)
@@ -35,7 +35,7 @@ FactoryBot.define do
     factory :public_generic_work, aliases: [:public_work], traits: [:public]
 
     trait :public do
-      visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
+      visibility { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC }
     end
 
     factory :private_work do
@@ -44,7 +44,7 @@ FactoryBot.define do
     end
 
     factory :registered_generic_work do
-      read_groups ["registered"]
+      read_groups { ["registered"] }
     end
 
     factory :generic_work_with_one_file do
@@ -184,8 +184,8 @@ FactoryBot.define do
     end
 
     factory :embargoed_generic_work do
-      visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
-      visibility_after_embargo Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
+      visibility { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE }
+      visibility_after_embargo { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE }
     end
 
     trait :with_public_embargo do
@@ -198,7 +198,7 @@ FactoryBot.define do
   # Doesn't set up any edit_users
 
   factory :work_without_access, class: GenericWork do
-    title ['Test title']
+    title { ['Test title'] }
     depositor { create(:user).user_key }
   end
 end
