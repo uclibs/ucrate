@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get 'login' => 'static#login'
   get 'about' => 'static#about'
   get 'help' => 'static#help'
+  get 'contact' => 'hyrax/contact_form#new'
   get 'coll_policy' => 'static#coll_policy'
   get 'format_advice' => 'static#format_advice'
   get 'faq' => 'static#faq'

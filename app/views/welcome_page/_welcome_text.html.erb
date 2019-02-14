@@ -2,10 +2,10 @@
 <p>Welcome to <%= t('hyrax.product_name') %>! On this page, you will learn how to use <%= t('hyrax.product_name') %>.</p>
 
 <h3 id="what-is-Scholar">What is <%= t('hyrax.product_name') %>?</h3>
-<p><%= t('hyrax.product_name') %> is a digital repository that enables the University of Cincinnati community to share research and scholarly work with a worldwide audience and preserve it for the future. Read more about the mission of <%= t('hyrax.product_name') %> on the <a href="/about">About page</a>. Get the latest updates on development of <%= t('hyrax.product_name') %> on our <a href="http://libapps.libraries.uc.edu/scholarblog/">Scholarblog</a>. All users, including non-registered users, of <%= t('hyrax.product_name') %> are bound by the <a href="/terms">Terms of Use</a>.</p>
+<p><%= t('hyrax.product_name') %> is a digital repository that enables the University of Cincinnati community to share research and scholarly work with a worldwide audience and preserve it for the future. Read more about the mission of <%= t('hyrax.product_name') %> on the <%= link_to 'About page', about_path %>. Get the latest updates on development of <%= t('hyrax.product_name') %> on our <a href="http://libapps.libraries.uc.edu/scholarblog/">Scholarblog</a>. All users, including non-registered users, of <%= t('hyrax.product_name') %> are bound by the <%= link_to 'Terms of Use', terms_path %>.</p>
 
 <h3 id="what-types-of-content-should-i-submit-to-Scholar">What types of content should I submit to <%= t('hyrax.product_name') %>?</h3>
-<p><%= t('hyrax.product_name') %> stores and preserves the scholarly output and creative works of UC faculty, staff, and students. Examples of appropriate content include, but are not limited to: <a href="https://en.wikipedia.org/wiki/Grey_literature">grey literature</a>, <a href="https://en.wikipedia.org/wiki/Preprint">pre-</a>, <a href="https://en.wikipedia.org/wiki/Postprint">post-</a>, and published versions of academic papers, manuscripts, senior design projects, posters, datasets, presentations, and other creative works. Content may be text, image, video, audio, or mixed-media in nature. Learn more about types of content you can share on the <a href="/coll_policy">Collection Policy</a>.</p>
+<p><%= t('hyrax.product_name') %> stores and preserves the scholarly output and creative works of UC faculty, staff, and students. Examples of appropriate content include, but are not limited to: <a href="https://en.wikipedia.org/wiki/Grey_literature">grey literature</a>, <a href="https://en.wikipedia.org/wiki/Preprint">pre-</a>, <a href="https://en.wikipedia.org/wiki/Postprint">post-</a>, and published versions of academic papers, manuscripts, senior design projects, posters, datasets, presentations, and other creative works. Content may be text, image, video, audio, or mixed-media in nature. Learn more about types of content you can share on the <%= link_to 'Collection Policy', coll_policy_path %>.</p>
 <p>Students should work with a faculty member to share scholarly output and creative works, such a capstone projects.</p>
 
 <h3 id="how-do-i-get-started">How do I get started?</h3>
@@ -15,10 +15,10 @@
 <p>Under the Help button on the main <%= t('hyrax.product_name') %> menu, you will find the following help topics:</p>
 
 <ul>
-  <li><a href="/faq">FAQs</a> – Answers to a variety of commonly asked questions</li>
-  <li><a href="/format_advice">File Format Advice</a> – Help with finding the right file format for the content you submit to <%= t('hyrax.product_name') %></li>
-  <li><a href="/creators_rights">Creator’s Rights</a> – Information on Copyright and Intellectual Property</li>
+  <li><%= link_to 'FAQs', faq_path %> – Answers to a variety of commonly asked questions</li>
+  <li><%= link_to 'File Format Advice', format_advice_path %> – Help with finding the right file format for the content you submit to <%= t('hyrax.product_name') %></li>
+  <li><%= link_to 'Creator’s Rights', creators_rights_path %> – Information on Copyright and Intellectual Property</li>
 </ul>
 
 <h4 id="need-further-assistance">Need Further Assistance?</h4>
-<p><a href="/contact">Contact the <%= t('hyrax.product_name') %> Team</a>.</p>
+<p><%= link_to 'Contact the ' + t('hyrax.product_name') + 'Team', contact_path %>.</p>

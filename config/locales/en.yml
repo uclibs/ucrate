@@ -44,3 +44,7 @@ en:
     create_confirmation: "Collection export was successfully created."
     destroy_confirmation: "Collection export was successfully deleted."
   whats_new: "What's New"
+  devise:
+    sessions:
+      user:
+        signed_in: "Signed in successfully."
