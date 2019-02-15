@@ -46,6 +46,7 @@ Metrics/MethodLength:
     - 'app/services/hyrax/actor_factory.rb'
     - 'app/services/hyrax/custom_stat_importer.rb'
     - 'app/jobs/attach_files_to_work_job.rb'
+    - 'app/services/collection_metadata_csv_factory.rb'
 
 Metrics/ClassLength:
   Exclude:

@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe "collection export", type: :feature do
   context "not logged in" do
     it "cannot see the export page" do
-      visit "/collection_exports"
+      visit "/dashboard/collection_exports"
       expect(page).to have_content("You need to sign in or sign up before continuing.")
     end
   end
@@ -53,7 +53,7 @@ RSpec.describe "collection export", type: :feature do
         expect(!!(page.html =~ /King Kong/)).to be true
 
         # can delete a collection from the collection export index
-        visit "/collection_exports"
+        visit "/dashboard/collection_exports"
         click_link "Delete"
         expect(page).to have_content("Collection export was successfully deleted")
       end
@@ -76,7 +76,7 @@ RSpec.describe "collection export", type: :feature do
 
         it "do all the things we expect" do
           sign_in user
-          visit "/collection_exports"
+          visit "/dashboard/collection_exports"
 
           # can see a collection export I didn't create for a collection I can see
           expect(page).to have_link("Download")
@@ -102,7 +102,7 @@ RSpec.describe "collection export", type: :feature do
 
         it "do all the things we expect", :clean_repo do
           sign_in user
-          visit "/collection_exports"
+          visit "dashboard/collection_exports"
 
           # can not see a collection export I didn't create for a collection I can not see
           expect(page).not_to have_link("Download")
@@ -122,7 +122,7 @@ RSpec.describe "collection export", type: :feature do
 
       it "can still see the collection when logged in" do
         sign_in user
-        visit "/collection_exports"
+        visit "dashboard/collection_exports"
 
         expect(page).to have_link("Download")
         expect(page).to have_link("Delete")

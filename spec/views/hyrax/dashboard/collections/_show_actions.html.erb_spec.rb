@@ -33,7 +33,7 @@ RSpec.describe 'hyrax/dashboard/collections/_show_actions.html.erb', type: :view
 
     it 'renders export collection link' do
       render
-      expect(rendered).not_to have_link('Export Collection')
+      expect(rendered).to have_link('Export Collection')
     end
   end
   describe 'when user cannot edit the document' do
@@ -46,7 +46,7 @@ RSpec.describe 'hyrax/dashboard/collections/_show_actions.html.erb', type: :view
 
     it 'renders export collection link' do
       render
-      expect(rendered).not_to have_link('Export Collection')
+      expect(rendered).to have_link('Export Collection')
     end
   end
 

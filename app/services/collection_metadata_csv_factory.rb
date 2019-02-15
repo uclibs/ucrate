@@ -22,13 +22,30 @@ class CollectionMetadataCsvFactory
     csv_location
   end
 
+  def traverse_objects(obj, parent_id)
+    metadata = []
+    if obj.collection?
+      unless obj.member_objects.empty?
+        obj.member_objects.each do |member_object|
+          metadata.push traverse_objects(member_object, obj.id)
+        end
+      end
+    end
+    if obj.work?
+      unless obj.members.empty?
+        obj.members.each do |member_object|
+          metadata.push traverse_objects(member_object, obj.id)
+        end
+      end
+    end
+    [WorkMetadataAttributeMapper.new(obj, parent_id).object_attributes].push metadata
+  end
+
   private
 
     def member_objects_metadata
       collection = Collection.find collection_id
-      @member_objects_metadata ||= collection.member_objects.collect do |object|
-        WorkMetadataAttributeMapper.new(object).object_attributes
-      end
+      traverse_objects(collection, nil).flatten
     end
 
     def csv_location
@@ -38,7 +55,8 @@ class CollectionMetadataCsvFactory
     end
 
     def keys_for_member_objects_metadata
-      @keys_for_member_objects_metadata ||= member_objects_metadata.collect(&:keys).flatten.uniq
+      root_collection = Collection.find collection_id
+      @keys_for_member_objects_metadata ||= traverse_objects(root_collection, nil).flatten.collect(&:keys).flatten.uniq
     end
 
     def format_field_for(value)
