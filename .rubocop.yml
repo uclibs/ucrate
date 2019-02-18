@@ -218,6 +218,10 @@ RSpec/NamedSubject:
     - 'spec/services/hyrax/custom_stat_importer_spec.rb'
     - 'spec/models/collection_spec.rb'
 
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'app/renderers/hyrax/renderers/attribute_renderer.rb'
+
 Style/ClassAndModuleChildren:
   Enabled: false
 
@@ -278,3 +282,4 @@ Lint/RescueException:
 Rails/OutputSafety:
   Exclude:
     - 'app/helpers/hyrax_helper.rb'
+    - 'app/renderers/hyrax/renderers/attribute_renderer.rb'
