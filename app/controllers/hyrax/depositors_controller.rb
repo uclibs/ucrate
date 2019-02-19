@@ -2,6 +2,18 @@
 require Hyrax::Engine.root.join('app/controllers/hyrax/depositors_controller.rb')
 module Hyrax
   class DepositorsController < ApplicationController
+    def create
+      grantor = authorize_and_return_grantor
+      grantee = ::User.from_url_component(params[:grantee_id])
+      if grantor.can_receive_deposits_from.include?(grantee)
+        head :ok
+      else
+        grantor.can_receive_deposits_from << grantee
+        send_proxy_depositor_added_messages(grantor, grantee)
+        render json: { name: grantee.name, delete_path: sanitize_route_string(hyrax.user_depositor_path(grantor.user_key, grantee.user_key)) }
+      end
+    end
+
     def destroy
       grantor = authorize_and_return_grantor
       grantee = ::User.from_url_component(params[:id])
@@ -24,6 +36,10 @@ module Hyrax
     end
 
     private
+
+      def sanitize_route_string(route)
+        route.gsub("\.", "-dot-")
+      end
 
       def send_proxy_depositor_added_messages(grantor, grantee)
         message_to_grantee = "#{grantor.name} has assigned you as a proxy depositor"
