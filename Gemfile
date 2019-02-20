@@ -59,7 +59,7 @@ gem 'mysql2', '~> 0.4.10'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
 gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5-1-6'
-gem 'riiif', '~> 1.1'
+gem 'riiif', '~> 2.0'
 gem 'rsolr', '>= 1.0'
 gem 'sidekiq'
 
