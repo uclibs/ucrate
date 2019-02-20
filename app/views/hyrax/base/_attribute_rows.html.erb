@@ -6,9 +6,9 @@
 <%= presenter.attribute_to_html(:time_period, html_dl: true) %>
 <%= presenter.submitter_profile.html_safe%>
 <%= presenter.attribute_to_html(:college, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:department, render_as: :faceted, html_dl: true) %>
+<%= presenter.attribute_to_html(:department, render_as: :faceted, html_dl: true, work_type: dom_class(presenter)) %>
 <%= presenter.attribute_to_html(:degree, html_dl: true) %>
-<%= presenter.attribute_to_html(:date_created, render_as: :faceted, label: "Date Created", html_dl: true) %>
+<%= presenter.attribute_to_html(:date_created, render_as: :faceted, label: "Date Created", html_dl: true, work_type: dom_class(presenter)) %>
 <%= presenter.attribute_to_html(:advisor, html_dl: true) %>
 <%= presenter.attribute_to_html(:committee_member, html_dl: true) %>
 <%= presenter.attribute_to_html(:publisher, render_as: :faceted, html_dl: true) %>
