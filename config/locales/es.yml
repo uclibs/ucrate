@@ -31,7 +31,7 @@ es:
   link_page_label: "Enlace a esta página"
   permanent_link_label: "Enlace permanente a esta página"
   collection_export:
-    title:
+    title: "Gestionar colecciones de exportación"
     header:
       collection_id: "ID de colección"
       timestamp: "Marca de tiempo"

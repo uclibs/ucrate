@@ -13,6 +13,10 @@ zh:
     search:
       collections: 收藏
       fields:
+        etd:
+          show:
+            department: "学位课程"
+            date_created: "学位创建"
         facet:
           based_near_label_sim: 位置
           college_sim: 学
@@ -73,6 +77,8 @@ zh:
     base:
       form_progress:
         required_agreement: 检查分配证件
+      items:
+        empty: '此%{type}没有与之关联的文件。 （如果您刚刚创建了此%{type}，则可能需要几分钟才能显示文件。请尝试再次刷新页面。）否则，请单击“编辑”以添加更多文件。'
     batch_uploads:
       files:
         upload_type_instructions: '注意：为每一个文件创建单独的作品 '
