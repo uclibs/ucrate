@@ -113,11 +113,11 @@ class WorkLoader
                       end
     end
 
-#    attributes["doi_assignment_strategy"] = if attributes_hash[:doi] == "TRUE" && attributes_hash[:identifier].nil? && attributes_hash[:publisher].present?
-#                                              "mint_doi"
-#                                            else
-#                                              "not_now"
-#                                            end
+   attributes["doi_assignment_strategy"] = if attributes_hash[:doi] == "TRUE" && attributes_hash[:identifier].nil? && attributes_hash[:publisher].present?
+                                             "mint_doi"
+                                           else
+                                             "not_now"
+                                           end
 
     attributes["remote_files"] = []
     attributes["uploaded_files"] = []
