@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-describe 'locales' do
+describe 'locales', :clean_repo do
   before do
     Rails.application.config.application_root_url = 'http://localhost:3000'
   end
