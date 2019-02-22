@@ -31,7 +31,7 @@ en:
   link_page_label: "Link to this page"
   permanent_link_label: "Permanent link to this page"
   collection_export:
-    title:
+    title: "Manage Collection Exports"
     header:
       collection_id: "Collection id"
       timestamp: "Timestamp"
@@ -44,3 +44,7 @@ en:
     create_confirmation: "Collection export was successfully created."
     destroy_confirmation: "Collection export was successfully deleted."
   whats_new: "What's New"
+  devise:
+    sessions:
+      user:
+        signed_in: "Signed in successfully."

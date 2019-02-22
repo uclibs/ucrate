@@ -68,7 +68,7 @@ describe 'UC account workflow', type: :feature do
     it 'shows a request link of signups are disabled' do
       AUTH_CONFIG['signups_enabled'] = false
       visit new_user_registration_path
-      expect(page).to have_link('use the contact page', href: '/contact')
+      expect(page).to have_link('use the contact page', contact_path)
     end
   end
 
@@ -76,19 +76,19 @@ describe 'UC account workflow', type: :feature do
     it 'shows a shibboleth login link if shibboleth is enabled' do
       AUTH_CONFIG['shibboleth_enabled'] = true
       visit new_user_session_path
-      expect(page).to have_link('Central Login form', href: '/users/auth/shibboleth')
+      expect(page).to have_link('Central Login form', user_shibboleth_omniauth_authorize_path)
     end
 
     it 'does not show a shibboleth login link if shibboleth is disabled' do
       AUTH_CONFIG['shibboleth_enabled'] = false
       visit new_user_session_path
-      expect(page).not_to have_link('Central Login form', href: '/users/auth/shibboleth')
+      expect(page).not_to have_link('Central Login form', user_shibboleth_omniauth_authorize_path)
     end
 
     it 'shows a signup link if signups are enabled' do
       AUTH_CONFIG['signups_enabled'] = true
       visit new_user_session_path
-      page.should have_link('Sign up', href: new_user_registration_path)
+      page.should have_link('Sign up', new_user_registration_path)
     end
 
     it 'does not show signup link if signups are disabled' do

@@ -13,6 +13,10 @@ es:
     search:
       collections: Colecciones
       fields:
+        etd:
+          show:
+            department: "Programa de estudios"
+            date_created: "Grado creado"
         facet:
           based_near_label_sim: Ubicación
           college_sim: Colegio
@@ -73,6 +77,8 @@ es:
     base:
       form_progress:
         required_agreement: Compruebe la licencia de distribución
+      items:
+        empty: 'Este %{type} no tiene archivos asociados con él. (Si acaba de crear este %{type}, los archivos pueden tardar unos minutos en aparecer. Intente actualizar la página nuevamente). De lo contrario, haga clic en editar para agregar más archivos.'
     batch_uploads:
       files:
         upload_type_instructions: 'Nota: para crear un solo trabajo para todos los archivos'

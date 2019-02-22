@@ -46,6 +46,7 @@ Metrics/MethodLength:
     - 'app/services/hyrax/actor_factory.rb'
     - 'app/services/hyrax/custom_stat_importer.rb'
     - 'app/jobs/attach_files_to_work_job.rb'
+    - 'app/services/collection_metadata_csv_factory.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -217,6 +218,10 @@ RSpec/NamedSubject:
     - 'spec/services/hyrax/custom_stat_importer_spec.rb'
     - 'spec/models/collection_spec.rb'
 
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'app/renderers/hyrax/renderers/attribute_renderer.rb'
+
 Style/ClassAndModuleChildren:
   Enabled: false
 
@@ -277,3 +282,4 @@ Lint/RescueException:
 Rails/OutputSafety:
   Exclude:
     - 'app/helpers/hyrax_helper.rb'
+    - 'app/renderers/hyrax/renderers/attribute_renderer.rb'

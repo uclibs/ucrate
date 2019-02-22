@@ -6,41 +6,241 @@ RSpec.describe CollectionMetadataCsvFactory do
   subject(:csv_factory) { described_class.new(collection.id) }
   let(:user) { create(:user, email: "test_email@example.com") }
 
-  let(:collection) do
+  let!(:collection) do
     create(:public_collection,
+           id: 1,
+           title: ["Parent Collection"],
            user: user,
            description: ['collection description'],
            collection_type_settings: :nestable)
   end
 
-  let!(:nested_collection) do
-    create(:public_collection,
-           id: "1",
-           member_of_collections: [collection],
-           user: user,
-           title: ["Collection title"],
-           creator: ["Collection creator"],
-           description: ['collection description'],
-           collection_type_settings: :nestable)
-  end
-
-  let!(:work1) do
-    create(:work,
-           id: "2",
-           title: ["King Louie"],
-           creator: ["Test Creator"],
-           description: ["This is a description"],
+  let!(:article) do
+    create(:article,
+           id: 2,
+           title: ["Article"],
+           creator: ["Putnam, Robert"],
+           description: ["Bowling Alone Article"],
+           college: "Arts and Letters Article",
+           department: "Social Science",
+           license: ["All Rights Reserved"],
+           publisher: ["Macmillan Reference"],
+           date_created: ["2000-01-01"],
+           alternate_title: ["Bowling Alone: The decline of American Social Capital"],
+           journal_title: ["American Governance"],
+           issn: ["978-0-02-866249-7"],
+           subject: ["United States Politics"],
+           geo_subject: ["United States"],
+           time_period: ["Early Aughts"],
+           language: ["English"],
+           required_software: "PDF",
+           note: "Article Note",
+           related_url: ["www.example.com/article"],
            member_of_collections: [collection],
            user: user)
   end
 
-  let!(:work2) do
-    create(:work,
-           id: "3",
-           title: ["King Kong"],
-           creator: ["Test Creator 2"],
-           description: ["This is a description"],
+  let!(:dataset) do
+    create(:dataset,
+           id: 3,
+           title: ["Dataset"],
+           creator: ["Putnam, Robert"],
+           description: ["Bowling Alone"],
+           college: "Arts and Letters",
+           department: "Social Science",
+           license: ["All Rights Reserved"],
+           publisher: ["Macmillan Reference"],
+           date_created: ["2000-01-01"],
+           alternate_title: ["Bowling Alone: The decline of American Social Capital"],
+           subject: ["United States Politics"],
+           geo_subject: ["United States"],
+           time_period: ["Early Aughts"],
+           language: ["English"],
+           required_software: "PDF",
+           note: "Dataset Note",
+           related_url: ["www.example.com/dataset"],
            member_of_collections: [collection],
+           user: user)
+  end
+
+  let!(:document) do
+    create(:document,
+           id: 4,
+           title: ["Document"],
+           creator: ["Putnam, Robert"],
+           description: ["Bowling Alone"],
+           college: "Arts and Letters",
+           department: "Social Science",
+           license: ["All Rights Reserved"],
+           publisher: ["Macmillan Reference"],
+           date_created: ["2000-01-01"],
+           alternate_title: ["Bowling Alone: The decline of American Social Capital"],
+           subject: ["United States Politics"],
+           geo_subject: ["United States"],
+           time_period: ["Early Aughts"],
+           language: ["English"],
+           required_software: "PDF",
+           note: "Document Note",
+           related_url: ["www.example.com/document"],
+           member_of_collections: [collection],
+           genre: "Non Fiction",
+           user: user)
+  end
+
+  let!(:etd) do
+    create(:etd,
+           id: 5,
+           title: ["Etd"],
+           creator: ["Putnam, Robert"],
+           description: ["Bowling Alone"],
+           college: "Arts and Letters",
+           department: "Social Science",
+           advisor: ["Mulaney, John"],
+           committee_member: ["Kroll, Nick"],
+           degree: "Political Science",
+           license: ["All Rights Reserved"],
+           etd_publisher: "Macmillan Reference",
+           date_created: ["2000-01-01"],
+           alternate_title: ["Bowling Alone: The decline of American Social Capital"],
+           subject: ["United States Politics"],
+           geo_subject: ["United States"],
+           time_period: ["Early Aughts"],
+           language: ["English"],
+           required_software: "PDF",
+           note: "Etd Note",
+           related_url: ["www.example.com/etd"],
+           member_of_collections: [collection],
+           genre: "Non Fiction",
+           user: user)
+  end
+
+  let!(:work) do
+    create(:work,
+           id: 6,
+           title: ["Work"],
+           creator: ["Putnam, Robert"],
+           description: ["Bowling Alone"],
+           college: "Arts and Letters",
+           department: "Social Science",
+           license: ["All Rights Reserved"],
+           publisher: ["Macmillan Reference"],
+           date_created: ["2000-01-01"],
+           alternate_title: ["Bowling Alone: The decline of American Social Capital"],
+           subject: ["United States Politics"],
+           geo_subject: ["United States"],
+           time_period: ["Early Aughts"],
+           language: ["English"],
+           required_software: "PDF",
+           note: "Work Note",
+           related_url: ["www.example.com/work"],
+           member_of_collections: [collection],
+           user: user)
+  end
+
+  let!(:image) do
+    create(:image,
+           id: 7,
+           title: ["Image"],
+           creator: ["Putnam, Robert"],
+           description: ["Bowling Alone"],
+           college: "Arts and Letters",
+           department: "Social Science",
+           license: ["All Rights Reserved"],
+           publisher: ["Macmillan Reference"],
+           date_created: ["2000-01-01"],
+           alternate_title: ["Bowling Alone: The decline of American Social Capital"],
+           subject: ["United States Politics"],
+           geo_subject: ["United States"],
+           time_period: ["Early Aughts"],
+           language: ["English"],
+           required_software: "PDF",
+           note: "Image Note",
+           related_url: ["www.example.com/image"],
+           member_of_collections: [collection],
+           user: user)
+  end
+
+  let!(:medium) do
+    create(:medium,
+           id: 8,
+           title: ["Medium"],
+           creator: ["Putnam, Robert"],
+           description: ["Bowling Alone"],
+           college: "Arts and Letters",
+           department: "Social Science",
+           license: ["All Rights Reserved"],
+           publisher: ["Macmillan Reference"],
+           date_created: ["2000-01-01"],
+           alternate_title: ["Bowling Alone: The decline of American Social Capital"],
+           subject: ["United States Politics"],
+           geo_subject: ["United States"],
+           time_period: ["Early Aughts"],
+           language: ["English"],
+           required_software: "PDF",
+           note: "Medium Note",
+           related_url: ["www.example.com/medium"],
+           member_of_collections: [collection],
+           user: user)
+  end
+
+  let!(:student_work) do
+    create(:student_work,
+           id: 9,
+           title: ["Student Work"],
+           creator: ["Putnam, Robert"],
+           description: ["Bowling Alone"],
+           college: "Arts and Letters",
+           department: "Social Science",
+           advisor: ["Kroll, Nick"],
+           license: ["All Rights Reserved"],
+           degree: "Political Science",
+           publisher: ["Macmillan Reference"],
+           date_created: ["2000-01-01"],
+           alternate_title: ["Bowling Alone: The decline of American Social Capital"],
+           genre: "Non Fiction",
+           subject: ["United States Politics"],
+           geo_subject: ["United States"],
+           time_period: ["Early Aughts"],
+           language: ["English"],
+           required_software: "PDF",
+           note: "Student Work Note",
+           related_url: ["www.example.com/student_work"],
+           member_of_collections: [collection],
+           user: user)
+  end
+
+  let!(:nested_collection) do
+    create(:public_collection,
+           id: "10",
+           member_of_collections: [collection],
+           user: user,
+           title: ["Nested Collection title"],
+           creator: ["Nested Collection creator"],
+           description: ['nested collection description'],
+           collection_type_settings: :nestable)
+  end
+
+  let!(:nested_document) do
+    create(:document,
+           id: 11,
+           title: ["Nested Document"],
+           creator: ["Putnam, Robert"],
+           description: ["Bowling Alone"],
+           college: "Arts and Letters",
+           department: "Social Science",
+           license: ["All Rights Reserved"],
+           publisher: ["Macmillan Reference"],
+           date_created: ["2000-01-01"],
+           alternate_title: ["Bowling Alone: The decline of American Social Capital"],
+           subject: ["United States Politics"],
+           geo_subject: ["United States"],
+           time_period: ["Early Aughts"],
+           language: ["English"],
+           required_software: "PDF",
+           note: "Document Note",
+           related_url: ["www.example.com/document"],
+           member_of_collections: [nested_collection],
+           genre: "Non Fiction",
            user: user)
   end
 
@@ -60,7 +260,14 @@ RSpec.describe CollectionMetadataCsvFactory do
 
     let(:export_configuration) do
       {
-        "GenericWork" => ["id", "depositor", "description", "title", "creator"],
+        "GenericWork" => ["id", "title", "creator", "depositor", "description", "college", "department", "license", "publisher", "date_created", "alternate_title", "subject", "geo_subject", "time_period", "language", "required_software", "note", "related_url"],
+        "Article" => ["id", "title", "creator", "depositor", "description", "college", "department", "license", "publisher", "date_created", "alternate_title", "journal_title", "issn", "subject", "geo_subject", "time_period", "language", "required_software", "note", "related_url"],
+        "Document" => ["id", "title", "creator", "depositor", "description", "college", "department", "license", "publisher", "date_created", "alternate_title", "genre", "subject", "geo_subject", "time_period", "language", "required_software", "related_url"],
+        "Dataset" => ["id", "title", "creator", "depositor", "description", "college", "department", "required_software", "license", "publisher", "date_created", "alternate_title", "subject", "geo_subject", "time_period", "language", "note", "related_url"],
+        "Image" => ["id", "title", "creator", "depositor", "description", "college", "department", "license", "publisher", "date_created", "alternate_title", "genre", "subject", "geo_subject", "time_period", "language", "required_software", "note", "related_url"],
+        "Medium" => ["id", "title", "creator", "depositor", "description", "college", "department", "license", "publisher", "date_created", "alternate_title", "genre", "subject", "geo_subject", "time_period", "language", "required_software", "note", "related_url"],
+        "Etd" => ["id", "title", "creator", "depositor", "description", "college", "department", "advisor", "license", "committee_member", "degree", "etd_publisher", "date_created", "alternate_title", "genre", "subject", "geo_subject", "time_period", "language", "required_software", "note", "related_url"],
+        "StudentWork" => ["id", "title", "creator", "depositor", "description", "college", "department", "advisor", "license", "degree", "publisher", "date_created", "alternate_title", "genre", "subject", "geo_subject", "time_period", "language", "required_software", "note", "related_url"],
         "Collection" => ["id", "depositor", "title", "creator"]
       }
     end

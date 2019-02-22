@@ -11,7 +11,9 @@
         </button>
         <%= render '/logo' %>
         <% unless controller_name == 'homepage' %>
-          <a class="navbar-brand" href ="/"><b> | <%= image_tag 'scholar-logo.png', id: 'scholar-nav-logo', alt: 'scholar@uc' %> </b></a>
+          <%= link_to root_path, class: 'navbar-brand' do %> 
+            <b> | <%= image_tag 'scholar-logo.png', id: 'scholar-nav-logo', alt: 'scholar@uc' %> </b>
+          <% end %>
         <% end %>
       </div>
       <div class="collapse navbar-collapse" id="top-navbar-collapse">

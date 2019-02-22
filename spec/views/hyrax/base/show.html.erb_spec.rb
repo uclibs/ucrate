@@ -96,4 +96,8 @@ RSpec.describe 'hyrax/base/show.html.erb', type: :view do
   it "displays download link for Adobe Acrobat" do
     expect(page).to have_text("Download Adobe Acrobat Reader")
   end
+
+  it 'shows last saved' do
+    expect(page).to have_text '04/01/2011'
+  end
 end

@@ -31,7 +31,7 @@ zh:
   link_page_label: "链接到此页面"
   permanent_link_label: "永久链接到此页面"
   collection_export:
-    title:
+    title: "管理集合导出"
     header:
       collection_id: "收集ID"
       timestamp: "时间戳"
@@ -44,3 +44,7 @@ zh:
     create_confirmation: "已成功创建集合导出。"
     destroy_confirmation: "集合导出已成功删除。"
   whats_new: 什么是新的
+  devise:
+    sessions:
+      user:
+        signed_in: "成功签约。"

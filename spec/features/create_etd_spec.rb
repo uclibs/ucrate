@@ -124,6 +124,10 @@ RSpec.describe 'Create a Etd', :feature, js: true do
       expect(page).to have_content "Your files are being processed by Scholar@UC in the background."
       expect(page).to have_content("Permanent link to this page")
 
+      # Page should show etd fields correctly
+      expect(page).to have_content("Degree Program")
+      expect(page).to have_content("Degree Date")
+
       # Edit the work to verify form values persist
       click_on('Edit')
 
