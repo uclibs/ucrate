@@ -17,5 +17,6 @@ module ScholarUc
     config.eager_load_paths << Rails.root.join('lib')
     # REMOVE_ME: Temporarily remove strong params
     # config.action_controller.permit_all_parameters = true
+    config.time_zone = "Eastern Time (US & Canada)"
   end
 end
