@@ -39,7 +39,7 @@ en:
         publisher: "Enter the publisher of your Media. If this has not been previously published,<i> University of Cincinnati </i> is an appropriate publisher."
         rights: "Licensing and distribution information governing access to the work. Select from the provided drop-down list."
         alternate_title: "Enter an alternate title for your Media. An alternate title could include acronyms, abbreviations, or a series title."
-        time_period: "Enter the period or date associated with the subject of your Media.</br>Examples:</br><ul><li>19th century</li><li>Middle Ages</li><li>Jurassic Period</li></ul"
+        time_period: "Enter the period or date associated with the subject of your Media.</br>Examples:</br><ul><li>19th century</li><li>Middle Ages</li><li>Jurassic Period</li></ul>"
         required_software: "Special software needed to open the Media"
         note: "Enter any additional information about your Media."
         college: "Select the college associated with the submitter of this work."
