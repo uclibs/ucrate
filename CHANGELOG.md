@@ -1,3 +1,22 @@
+1.1.0 (Scholar 4.1.0) 2/27/2019
+* Collections can now be exported to .csv files
+* The order that fields are displayed on work pages has been updated
+* Work pages now display the last modified date
+* Bug fixes
+    * Solr reindexing no longer times out
+    * Collection descriptions are now displayed
+    * The featured work image on the home page is now properly aligned
+    * The CAPTCHA on the contact form now works properly
+    * The Department facet now only shows after the College facet has been selected
+    * User atrributes for UC Central Logins are now properly used
+    * Description and Date Created fields are now singular on batch create
+    * The user's language choice now persists in all parts of the application
+    * Field labels are not shown for empty metadata fields
+    * The password reset from address is now scholar@uc.edu
+    * Batch create now requires files to be uploaded to be saved
+    * Creating and then immediately deleting a proxy no longer errors
+    * The ETD work page now shows proper labels for Degree and Degree Program
+
 1.0.0 (Scholar 4.0) 1/24/2019
 * Updated to Hyrax version 2.3.3
 * Updated to Ruby version 2.5.3
