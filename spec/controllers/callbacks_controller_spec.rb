@@ -81,7 +81,11 @@ describe CallbacksController do
       it 'assigns the user and redirects' do
         get provider
         expect(flash[:notice]).to match(/You are now signed in as */)
+        expect(cookies[:login_type]).not_to eq(nil)
         expect(assigns(:user).email).to eq(email)
+        expect(assigns(:user).provider).to eq('shibboleth')
+        expect(assigns(:user).uid).to eq(request.env["omniauth.auth"]["uid"])
+        expect(assigns(:user).profile_update_not_required).to eq(false)
         expect(response).to be_redirect
       end
     end
@@ -90,6 +94,22 @@ describe CallbacksController do
       let(:email) { uid }
 
       it_behaves_like 'Shibboleth login'
+
+      it 'updates the shibboleth attributes' do
+        get provider
+        expect(assigns(:user).title).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["title"])
+        expect(assigns(:user).telephone).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["telephoneNumber"])
+        expect(assigns(:user).first_name).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["givenName"])
+        expect(assigns(:user).last_name).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["sn"])
+        expect(assigns(:user).uc_affiliation).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["uceduPrimaryAffiliation"])
+        expect(assigns(:user).ucdepartment).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["ou"])
+      end
+
+      it 'sends a welcome email' do
+        ActionMailer::Base.deliveries = []
+        get provider
+        expect(ActionMailer::Base.deliveries.count).to eq(1)
+      end
     end
 
     context 'with a brand new user when Shibboleth email is not defined' do
@@ -138,17 +158,27 @@ describe CallbacksController do
     end
 
     context 'with a registered user who has previously logged in' do
-      let!(:user) { FactoryBot.create(:shibboleth_user, count: 1) }
+      let!(:user) { FactoryBot.create(:shibboleth_user, count: 1, profile_update_not_required: false) }
       let(:email) { user.email }
 
       it_behaves_like 'Shibboleth login'
     end
 
     context 'with a registered user who has never logged in' do
-      let!(:user) { FactoryBot.create(:shibboleth_user, count: 0) }
+      let!(:user) { FactoryBot.create(:shibboleth_user, count: 0, profile_update_not_required: false) }
       let(:email) { user.email }
 
       it_behaves_like 'Shibboleth login'
+
+      it 'updates the shibboleth attributes' do
+        get provider
+        expect(assigns(:user).title).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["title"])
+        expect(assigns(:user).telephone).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["telephoneNumber"])
+        expect(assigns(:user).first_name).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["givenName"])
+        expect(assigns(:user).last_name).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["sn"])
+        expect(assigns(:user).uc_affiliation).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["uceduPrimaryAffiliation"])
+        expect(assigns(:user).ucdepartment).to eq(request.env["omniauth.auth"]["extra"]["raw_info"]["ou"])
+      end
     end
 
     context 'with a registered user who has previously logged in and has updated shibboleth data' do
@@ -165,7 +195,7 @@ describe CallbacksController do
         request.env["omniauth.auth"] = OmniAuth.config.mock_auth[provider]
       end
 
-      let!(:user) { FactoryBot.create(:shibboleth_user, count: 0, uc_affiliation: "First Affiliation", ucdepartment: "First Department") }
+      let!(:user) { FactoryBot.create(:shibboleth_user, count: 1, uc_affiliation: "First Affiliation", ucdepartment: "First Department") }
       let!(:email) { user.email }
 
       it 'has the correct metadata' do
