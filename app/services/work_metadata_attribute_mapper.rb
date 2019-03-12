@@ -12,7 +12,9 @@ class WorkMetadataAttributeMapper
     def gather_object_attributes(object, parent_id)
       metadata = {}
       metadata["parent_id"] = parent_id unless parent_id.nil?
+      metadata["type"] = object.class.to_s
       attributes(object).each do |attribute|
+        attribute = 'publisher' if attribute == 'etd_publisher'
         metadata[attribute] = object.send(attribute.to_sym)
       end
       metadata

@@ -17,6 +17,7 @@ GenericWork:
   - required_software
   - note
   - related_url
+  - doi
 Article:
   - id
   - title
@@ -38,6 +39,7 @@ Article:
   - required_software
   - note
   - related_url
+  - doi
 Document:
   - id
   - title
@@ -58,6 +60,7 @@ Document:
   - required_software
   - note
   - related_url
+  - doi
 Dataset:
   - id
   - title
@@ -77,6 +80,7 @@ Dataset:
   - language
   - note
   - related_url
+  - doi
 FileSet:
   - id
   - title
@@ -108,6 +112,7 @@ Image:
   - required_software
   - note
   - related_url
+  - doi
 Medium:
   - id
   - title
@@ -127,6 +132,7 @@ Medium:
   - required_software
   - note
   - related_url
+  - doi
 Etd:
   - id
   - title
@@ -150,6 +156,7 @@ Etd:
   - required_software
   - note
   - related_url
+  - doi
 StudentWork:
   - id
   - title
@@ -172,6 +179,7 @@ StudentWork:
   - required_software
   - note
   - related_url
+  - doi
 Collection:
   - id
   - title

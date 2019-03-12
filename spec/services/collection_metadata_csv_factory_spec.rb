@@ -37,6 +37,7 @@ RSpec.describe CollectionMetadataCsvFactory do
            note: "Article Note",
            related_url: ["www.example.com/article"],
            member_of_collections: [collection],
+           doi: "00001",
            user: user)
   end
 
@@ -60,6 +61,7 @@ RSpec.describe CollectionMetadataCsvFactory do
            note: "Dataset Note",
            related_url: ["www.example.com/dataset"],
            member_of_collections: [collection],
+           doi: "00002",
            user: user)
   end
 
@@ -84,6 +86,7 @@ RSpec.describe CollectionMetadataCsvFactory do
            related_url: ["www.example.com/document"],
            member_of_collections: [collection],
            genre: "Non Fiction",
+           doi: "00003",
            user: user)
   end
 
@@ -111,6 +114,7 @@ RSpec.describe CollectionMetadataCsvFactory do
            related_url: ["www.example.com/etd"],
            member_of_collections: [collection],
            genre: "Non Fiction",
+           doi: "00004",
            user: user)
   end
 
@@ -134,6 +138,7 @@ RSpec.describe CollectionMetadataCsvFactory do
            note: "Work Note",
            related_url: ["www.example.com/work"],
            member_of_collections: [collection],
+           doi: "00005",
            user: user)
   end
 
@@ -157,6 +162,7 @@ RSpec.describe CollectionMetadataCsvFactory do
            note: "Image Note",
            related_url: ["www.example.com/image"],
            member_of_collections: [collection],
+           doi: "00006",
            user: user)
   end
 
@@ -180,6 +186,7 @@ RSpec.describe CollectionMetadataCsvFactory do
            note: "Medium Note",
            related_url: ["www.example.com/medium"],
            member_of_collections: [collection],
+           doi: "00007",
            user: user)
   end
 
@@ -206,6 +213,7 @@ RSpec.describe CollectionMetadataCsvFactory do
            note: "Student Work Note",
            related_url: ["www.example.com/student_work"],
            member_of_collections: [collection],
+           doi: "00008",
            user: user)
   end
 
@@ -241,6 +249,7 @@ RSpec.describe CollectionMetadataCsvFactory do
            related_url: ["www.example.com/document"],
            member_of_collections: [nested_collection],
            genre: "Non Fiction",
+           doi: "00009",
            user: user)
   end
 
@@ -252,6 +261,8 @@ RSpec.describe CollectionMetadataCsvFactory do
     before do
       allow(Time).to receive(:now).and_return(Time.new(2018))
       allow(YAML).to receive(:load_file).and_return(export_configuration)
+
+      article.ordered_members << create(:file_set, id: 12, user: user, title: ['A Contained FileSet'], label: 'filename.pdf')
     end
 
     let(:expected_location) do
@@ -276,7 +287,12 @@ RSpec.describe CollectionMetadataCsvFactory do
       File.open(Rails.root.join('spec', 'fixtures', 'export.csv'))
     end
 
+    csv_variables = {}
     it "creates the csv" do
+      article.file_sets.each_with_index do |file_set, i|
+        csv_variables[:"id_#{i}"] = file_set.id
+        csv_variables[:"email_#{i}"] = file_set.depositor
+      end
       expect(File.open(csv_factory.create_csv).read).to eq(expected_csv.read)
     end
 

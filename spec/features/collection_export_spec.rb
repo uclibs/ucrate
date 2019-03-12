@@ -13,6 +13,7 @@ RSpec.describe "collection export", type: :feature do
   context "logged in" do
     let(:user) { create(:user) }
     let(:other_user) { create(:user) }
+    let(:cookies) {}
 
     let!(:user_collection) do
       create(:public_collection,
@@ -77,7 +78,6 @@ RSpec.describe "collection export", type: :feature do
         it "do all the things we expect" do
           sign_in user
           visit "/dashboard/collection_exports"
-
           # can see a collection export I didn't create for a collection I can see
           expect(page).to have_link("Download")
 
