@@ -14,6 +14,7 @@
           <% if Flipflop.show_deposit_agreement? && Flipflop.active_deposit_agreement_acceptance? %>
             <li class="incomplete" id="required-agreement"><%= t('.required_agreement') %></li>
           <% end %>
+          <li class="complete" id="required-safe"><%= t('.required_safe') %></li>
         </ul>
       </fieldset>
     </div>

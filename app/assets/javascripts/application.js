@@ -29,7 +29,8 @@
 
 //= require_tree .
 //= require hyrax
-
+//= require almond
+//= require scholar/scholar_save_work_control
 //= require lodash
 //= require license-selector
 //= require select-license

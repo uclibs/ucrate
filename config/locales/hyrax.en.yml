@@ -73,6 +73,7 @@ en:
     base:
       form_progress:
         required_agreement: Check distribution license
+        required_safe: Files are safe
       items:
         empty: 'This %{type} has no files associated with it. (If you just created this %{type}, it may take a few minutes for the files to display. Try refreshing the page again.) Otherwise, click edit to add more files.'
     batch_uploads:
