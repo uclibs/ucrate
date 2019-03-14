@@ -150,5 +150,30 @@ describe CallbacksController do
 
       it_behaves_like 'Shibboleth login'
     end
+
+    context 'with a registered user who has previously logged in and has updated shibboleth data' do
+      before do
+        omniauth_hash = { provider: 'shibboleth',
+                          uid: uid,
+                          extra: {
+                            raw_info: {
+                              uceduPrimaryAffiliation: 'Second Affiliation',
+                              ou: 'Second Department'
+                            }
+                          } }
+        OmniAuth.config.add_mock(provider, omniauth_hash)
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[provider]
+      end
+
+      let!(:user) { FactoryBot.create(:shibboleth_user, count: 0, uc_affiliation: "First Affiliation", ucdepartment: "First Department") }
+      let!(:email) { user.email }
+
+      it 'has the correct metadata' do
+        get provider
+        user = User.find(1)
+        expect(user["uc_affiliation"]).to eq "Second Affiliation"
+        expect(user["ucdepartment"]).to eq "Second Department"
+      end
+    end
   end
 end

@@ -35,3 +35,4 @@
 //= require select-license
 //= require form-tab-nav
 
+document.cookie = "timezone=" + Intl.DateTimeFormat().resolvedOptions().timeZone + "; path=/; secure";

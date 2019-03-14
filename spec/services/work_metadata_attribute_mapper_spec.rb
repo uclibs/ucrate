@@ -40,7 +40,7 @@ RSpec.describe WorkMetadataAttributeMapper do
     end
 
     it "includes all the attributes specified in the configuration" do
-      expect(mapper.object_attributes.keys).to eq(["id", "title", "creator", "depositor", "description", "college", "department", "license", "publisher", "date_created", "alternate_title", "subject", "geo_subject", "time_period", "language", "required_software", "note", "related_url"])
+      expect(mapper.object_attributes.keys).to eq(["type", "id", "title", "creator", "depositor", "description", "college", "department", "license", "publisher", "date_created", "alternate_title", "subject", "geo_subject", "time_period", "language", "required_software", "note", "related_url", "doi"])
     end
 
     it "includes the values for specified attributes" do

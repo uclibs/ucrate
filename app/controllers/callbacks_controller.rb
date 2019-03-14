@@ -34,6 +34,7 @@ class CallbacksController < Devise::OmniauthCallbacksController
     end
 
     def sign_in_shibboleth_user
+      update_user_shibboleth_perishable_attributes
       sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
       cookies[:login_type] = {
         value: "shibboleth",
@@ -87,6 +88,13 @@ class CallbacksController < Devise::OmniauthCallbacksController
       @user.telephone          = @omni.extra.raw_info.telephoneNumber
       @user.first_name         = @omni.extra.raw_info.givenName
       @user.last_name          = @omni.extra.raw_info.sn
+      @user.uc_affiliation     = @omni.extra.raw_info.uceduPrimaryAffiliation
+      @user.ucdepartment       = @omni.extra.raw_info.ou
+      @user.save
+    end
+
+    def update_user_shibboleth_perishable_attributes
+      retrieve_shibboleth_attributes
       @user.uc_affiliation     = @omni.extra.raw_info.uceduPrimaryAffiliation
       @user.ucdepartment       = @omni.extra.raw_info.ou
       @user.save

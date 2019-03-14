@@ -6,8 +6,16 @@ class CollectionExportsController < ApplicationController
   before_action :set_collection_export, only: [:show, :destroy]
   before_action :authenticate_user!
 
+  with_themed_layout 'dashboard'
+
   # GET /collection_exports
   def index
+    @tz = if cookies["timezone"]
+            TZInfo::Timezone.get(cookies["timezone"])
+          else
+            TZInfo::Timezone.get("America/New_York")
+          end
+
     @collection_exports = CollectionExport.all.order(created_at: :desc).select { |ce| can? :show, ce }
   end
 
