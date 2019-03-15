@@ -4,7 +4,7 @@ class WorkLoader
     visibility_during_embargo embargo_relase_date
     visibility_after_embargo visibility
     existing_identifier college department
-    degree
+    degree doi
   ].freeze
 
   REPEATABLE_ATTRIBUTES = %i[
@@ -13,7 +13,7 @@ class WorkLoader
     subject language related_url license
     member_of_collection_ids alternate_title
     journal_title issn time_period geo_subject
-    advisor committee_member description
+    advisor committee_member description collection_id
   ].freeze
 
   TEXT_ATTRIBUTES = %i[
@@ -70,6 +70,17 @@ class WorkLoader
       file.update(file_set_uri: file_set.uri)
       file_set.visibility = visibility
       file_set.save
+    end
+
+    if attributes_hash[:collection_id].present?
+      collection = Collection.find(attributes_hash[:collection_id])
+      collection.add_member_objects [curation_concern.id]
+    end
+
+    if attributes_hash[:parent_id].present?
+      parent_work = Hyrax::WorkRelation.new.find attributes_hash[:parent_id]
+      parent_work.ordered_members << curation_concern
+      parent_work.save
     end
   end
 

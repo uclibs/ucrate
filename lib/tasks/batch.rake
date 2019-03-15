@@ -13,11 +13,10 @@ end
 
 def work(keys, row)
   work = {}
-
   keys.each do |key|
     break if key == :files
     work[key] = row.delete_at(0)
-    work[key] = work[key].split("|") if work[key].match?(/\|/)
+    work[key] = work[key].split("|") if !work[key].nil? && work[key].match?(/\|/)
   end
 
   work[:files] = []
@@ -107,7 +106,6 @@ namespace :batch do
 
       works.each do |work|
         work[:files] = transfer_files(work[:files])
-
         wl = WorkLoader.new(work.dup)
         if wl.create
           puts "Created: #{wl.work_log}"
