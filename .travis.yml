@@ -10,6 +10,7 @@ cache:
 before_install:
   - gem update --system
   - gem install bundler
+  - gem install chromedriver-helper -v 1.2.0
   - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost &
 
 rvm:
@@ -34,3 +35,4 @@ before_script:
   - jdk_switcher use oraclejdk8
   - bundle exec rubocop
   - sudo mount -o remount,size=32G /run/shm
+  - chromedriver-update 73.0.3683.68
