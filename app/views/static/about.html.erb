@@ -1,9 +1,12 @@
 <% content_for :page_title, "About // #{application_name}" %>
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <h2>What is <%=t('hyrax.product_name') %>?</h2>
 
-<h2>What is <%=t('hyrax.product_name') %>?</h2>
+        <%= render :partial => 'about_text' %>
 
-<%= render :partial => 'about_text' %>
+        <p><%= link_to("Terms of Use", hyrax.terms_path) %></p>
 
-<p><%= link_to("Terms of Use", hyrax.terms_path) %></p>
-
-<p><%= link_to("Collection Policy", coll_policy_path) %></p>
+        <p><%= link_to("Collection Policy", coll_policy_path) %></p>
+    </div>
+</div>

@@ -1,106 +1,109 @@
 <% content_for :page_title, "Student Instructions // #{application_name}" %>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <h2>Student Self Submissions to <%=t('hyrax.product_name') %></h2>
+    <h2>Instructions for Students</h2>
 
-<h2>Student Self Submissions to <%=t('hyrax.product_name') %></h2>
-<h2>Instructions for Students</h2>
+    <p>
+      Works that are deposited in <%=t('hyrax.product_name') %> should be related to scholarship and research and be consistent with the <%=t('hyrax.product_name') %> <%= link_to "Mission and Collection Policy", coll_policy_path %>. Students should work with a faculty advisor to share scholarly output and creative works, such a capstone projects. <b>All official theses and dissertations must be submitted directly to the Graduate School and not <%=t('hyrax.product_name') %></b>. If you have any questions or problems with these instructions, please contact <%= link_to t('hyrax.product_name'), hyrax.contact_path %>.
+    </p>
 
-<p>
-  Works that are deposited in <%=t('hyrax.product_name') %> should be related to scholarship and research and be consistent with the <%=t('hyrax.product_name') %> <%= link_to "Mission and Collection Policy", coll_policy_path %>. Students should work with a faculty advisor to share scholarly output and creative works, such a capstone projects. <b>All official theses and dissertations must be submitted directly to the Graduate School and not <%=t('hyrax.product_name') %></b>. If you have any questions or problems with these instructions, please contact <%= link_to t('hyrax.product_name'), hyrax.contact_path %>.
-</p>
-
-<ol>
-  <li>
-  Log in to <%=t('hyrax.product_name') %> using the <a href="#" style="color:white;background-color:black;padding:3px;">
-            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span > Login
-          </a> &nbsp;link (upper right corner of <a href="http://curly.libraries.uc.edu:3002/">curly.libraries.uc.edu</a>).
-  </li></br>
-
-  <li>
-    Click on the <p class="btn make-me-not-blue btn-primary" style="font-size: larger">Log in using your UC Central Login</p> button. Use your 6+2 and password to login. Upon your first login, you will be prompted to edit your profile. Basic information will be pre-supplied through the UC Central Login system. You will also be shown a welcome page until you check the box "I don’t need to see this." After you complete this process you will be directed to the <%=t('hyrax.product_name') %> browse page.
-  </li></br>
-
-  <li>
-  Click on the <a role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;background-color:black;padding:3px;" href="#"><span class="fa fa-cube"></span> Works <span class="caret"></span></a> menu and select "<b>New Work</b>."
-  </li></br>
-
-  <li>
-  Click on the <a class="add-button btn btn-primary add_new_article" href="#">Add New</a> button for the <b>Student Work</b> type.
-  </li></br>
-
-  <li>
-    Please see the <%= link_to "File Format Advice instructions", format_advice_path %> for information about accessible, usable, and preservable formats. Add a file to your work by:
-    <ul>
+    <ol>
       <li>
-        Uploading a file. If your file exceeds 3.0 GB, do not upload and <%= link_to "contact "+t('hyrax.product_name'), hyrax.contact_path %>.
-      </li>
-      <li>
-        Adding an external link. Please use permanent links whenever possible. Permanent links are usually advertised as such – links that will not change as content moves.
-      </li>
-      <li>
-        Pulling in a cloud file. If your project files are saved in Box, you can retrieve the files without having to first download them to your local device.
-      </li>
-    </ul>
-  </li>
-  <p>
-    <%= image_tag 'scholar_screens/add_file_image.png', alt: 'Add File', title: 'Add File' %>
-  </p></br>
+      Log in to <%=t('hyrax.product_name') %> using the <a href="#" style="color:white;background-color:black;padding:3px;">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span > Login
+              </a> &nbsp;link (upper right corner of <a href="http://curly.libraries.uc.edu:3002/">curly.libraries.uc.edu</a>).
+      </li></br>
 
-  <li>
-    Describe your work using the Metadata section, some fields are required. Specific field notes below.
-    <ul>
       <li>
-        Type of Work – select the predominant format of your work.
-      </li>
+        Click on the <p class="btn make-me-not-blue btn-primary" style="font-size: larger">Log in using your UC Central Login</p> button. Use your 6+2 and password to login. Upon your first login, you will be prompted to edit your profile. Basic information will be pre-supplied through the UC Central Login system. You will also be shown a welcome page until you check the box "I don’t need to see this." After you complete this process you will be directed to the <%=t('hyrax.product_name') %> browse page.
+      </li></br>
+
       <li>
-        Creator – you will automatically be tagged as a creator, but you may add collaborators as needed.
-      </li>
+      Click on the <a role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;background-color:black;padding:3px;" href="#"><span class="fa fa-cube"></span> Works <span class="caret"></span></a> menu and select "<b>New Work</b>."
+      </li></br>
+
       <li>
-        Advisor – enter the name of your faculty advisor. (Last name first.)
-      </li>
+      Click on the <a class="add-button btn btn-primary add_new_article" href="#">Add New</a> button for the <b>Student Work</b> type.
+      </li></br>
+
       <li>
-        College and Program or Department – please select your degree granting College and enter the name of your degree program.
+        Please see the <%= link_to "File Format Advice instructions", format_advice_path %> for information about accessible, usable, and preservable formats. Add a file to your work by:
+        <ul>
+          <li>
+            Uploading a file. If your file exceeds 3.0 GB, do not upload and <%= link_to "contact "+t('hyrax.product_name'), hyrax.contact_path %>.
+          </li>
+          <li>
+            Adding an external link. Please use permanent links whenever possible. Permanent links are usually advertised as such – links that will not change as content moves.
+          </li>
+          <li>
+            Pulling in a cloud file. If your project files are saved in Box, you can retrieve the files without having to first download them to your local device.
+          </li>
+        </ul>
       </li>
+      <p>
+        <%= image_tag 'scholar_screens/add_file_image.png', alt: 'Add File', title: 'Add File' %>
+      </p></br>
+
       <li>
-        If this work is associated with a degree, please enter that information. For example, "BSIT" (for Bachelor of Science in Information Technology).
-      </li>
-    </ul>
-  </li></br>
+        Describe your work using the Metadata section, some fields are required. Specific field notes below.
+        <ul>
+          <li>
+            Type of Work – select the predominant format of your work.
+          </li>
+          <li>
+            Creator – you will automatically be tagged as a creator, but you may add collaborators as needed.
+          </li>
+          <li>
+            Advisor – enter the name of your faculty advisor. (Last name first.)
+          </li>
+          <li>
+            College and Program or Department – please select your degree granting College and enter the name of your degree program.
+          </li>
+          <li>
+            If this work is associated with a degree, please enter that information. For example, "BSIT" (for Bachelor of Science in Information Technology).
+          </li>
+        </ul>
+      </li></br>
 
-  <li>
-    You may assign a Digital Object Identifier to your work. A DOI is intended to reference stable content and is a permanent URL that you may share and use in publications.
-  </li></br>
-
-  <li>
-    Add your faculty advisor or sponsor as a user with Edit access under the Sharing tab. Search for them by name or by email address. If your advisor has not yet logged in to <%=t('hyrax.product_name') %>, you will not find them – contact them and ask them to login.
-  </li>
-  <p>
-    <%= image_tag 'scholar_screens/content_editors_image.png', alt: 'Content Editors', title: 'Content Editors' %>
-  </p></br>
-
-  <li>
-    Discuss with your advisor whether they will approve your submission before it is made public – in this case mark this work as "private" in the Access Rights section.
-    <ul>
       <li>
-        For various reasons, such as potential commercialization, you may wish the work to remain private, be accessible only to UC users, or to assign an embargo period so that your work would automatically become public after a certain time period. Please make sure your faculty advisor knows your wishes so that you work isn’t made public prematurely.
-      </li>
+        You may assign a Digital Object Identifier to your work. A DOI is intended to reference stable content and is a permanent URL that you may share and use in publications.
+      </li></br>
+
       <li>
-        If your advisor has given you permission to publish without their review, then do not mark the work as "private", but choose between Open Access, accessible only to UC users, or assign an embargo period. You may want to discuss this choice with your advisor.
+        Add your faculty advisor or sponsor as a user with Edit access under the Sharing tab. Search for them by name or by email address. If your advisor has not yet logged in to <%=t('hyrax.product_name') %>, you will not find them – contact them and ask them to login.
       </li>
-    </ul>
-  </li></br>
+      <p>
+        <%= image_tag 'scholar_screens/content_editors_image.png', alt: 'Content Editors', title: 'Content Editors' %>
+      </p></br>
 
-  <li>
-    You may choose to assign a Creative Commons license to your work or choose "All rights reserved." A Creative Commons license is an easy way to communicate how you would like people to use or share your work. You may find it useful to use the <p class="btn make-me-not-blue btn-success selector">License Wizard</p> button which will guide you through the selection process. We suggest discussing this choice with your advisor.
-  </li></br>
+      <li>
+        Discuss with your advisor whether they will approve your submission before it is made public – in this case mark this work as "private" in the Access Rights section.
+        <ul>
+          <li>
+            For various reasons, such as potential commercialization, you may wish the work to remain private, be accessible only to UC users, or to assign an embargo period so that your work would automatically become public after a certain time period. Please make sure your faculty advisor knows your wishes so that you work isn’t made public prematurely.
+          </li>
+          <li>
+            If your advisor has given you permission to publish without their review, then do not mark the work as "private", but choose between Open Access, accessible only to UC users, or assign an embargo period. You may want to discuss this choice with your advisor.
+          </li>
+        </ul>
+      </li></br>
 
-  <li>
-    You must agree to the <%= link_to t('hyrax.deposit_agreement'), '/distribution_license_request' %> which grants UC the right to preserve, provide access (under the licensing terms chosen), and enhance the work with additional metadata. The license also states that you have not violated the intellectual property of another and that your work contains no restricted data, as defined by UC. <b>Note: You will retain fully copyright for the work and you can share or submit the work with additional repositories and websites.</b>
-  </li></br>
+      <li>
+        You may choose to assign a Creative Commons license to your work or choose "All rights reserved." A Creative Commons license is an easy way to communicate how you would like people to use or share your work. You may find it useful to use the <p class="btn make-me-not-blue btn-success selector">License Wizard</p> button which will guide you through the selection process. We suggest discussing this choice with your advisor.
+      </li></br>
 
-  <li>
-    Click the <b>Save</b> button to submit your work. Send an email to your faculty advisor with a link to the permanent URL of the work. In your email, inform them that you have submitted the final version work for their review. The advisor will check to make sure the appropriate fields are completed and take the steps necessary to make the work available through the appropriate Creative Commons license which you have chosen.
-  </li></br>
-</ol>
+      <li>
+        You must agree to the <%= link_to t('hyrax.deposit_agreement'), '/distribution_license_request' %> which grants UC the right to preserve, provide access (under the licensing terms chosen), and enhance the work with additional metadata. The license also states that you have not violated the intellectual property of another and that your work contains no restricted data, as defined by UC. <b>Note: You will retain fully copyright for the work and you can share or submit the work with additional repositories and websites.</b>
+      </li></br>
 
-<p>
-  Particularly for capstone projects, where successful completion is part of a degree requirement, you may lose edit access to your work once it is submitted. Your faculty advisor will retain editing rights as a Content Editor. If you need to change metadata or files from your work, contact your faculty advisor first. If you are unsuccessful, please contact <%= link_to t('hyrax.product_name'), hyrax.contact_path %>.
-</p>
+      <li>
+        Click the <b>Save</b> button to submit your work. Send an email to your faculty advisor with a link to the permanent URL of the work. In your email, inform them that you have submitted the final version work for their review. The advisor will check to make sure the appropriate fields are completed and take the steps necessary to make the work available through the appropriate Creative Commons license which you have chosen.
+      </li></br>
+    </ol>
+
+    <p>
+      Particularly for capstone projects, where successful completion is part of a degree requirement, you may lose edit access to your work once it is submitted. Your faculty advisor will retain editing rights as a Content Editor. If you need to change metadata or files from your work, contact your faculty advisor first. If you are unsuccessful, please contact <%= link_to t('hyrax.product_name'), hyrax.contact_path %>.
+    </p>
+  </div>
+</div>

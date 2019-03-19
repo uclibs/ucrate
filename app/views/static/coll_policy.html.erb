@@ -1,35 +1,38 @@
 <% content_for :page_title, "Collection Policy // #{application_name}" %>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <h2>Collection Policy</h2>
 
-<h2>Collection Policy</h2>
 
+    <h3>Mission</h3>
+    <p>
+      The mission of <%=t('hyrax.product_name') %> is to preserve the intellectual output of UC, to advance discovery and innovation, to foster scholarship and learning through the transformation of data into knowledge, to collect a corpus of works that can be used for teaching and to inspire derivative works, and to enhance discoverability and access to these resources.
+    </p>
 
-<h3>Mission</h3>
-<p>
-  The mission of <%=t('hyrax.product_name') %> is to preserve the intellectual output of UC, to advance discovery and innovation, to foster scholarship and learning through the transformation of data into knowledge, to collect a corpus of works that can be used for teaching and to inspire derivative works, and to enhance discoverability and access to these resources.
-</p>
+    <h3>Content</h3>
+    <p>
+      <%=t('hyrax.product_name') %> was developed to store and share the scholarly output and creative works of UC faculty (current and emeritus), staff, and students. Original research outputs and creative works of the University community will be preserved and made available. Works that are deposited in <%=t('hyrax.product_name') %> should support the mission of the University of Cincinnati. Students should work with a faculty member to share scholarly output and creative works, such a capstone projects. Those interested in depositing UC records should contact <a href="http://www.libraries.uc.edu/arb/records-management.html">Records Management</a>.
+    </p>
 
-<h3>Content</h3>
-<p>
-  <%=t('hyrax.product_name') %> was developed to store and share the scholarly output and creative works of UC faculty (current and emeritus), staff, and students. Original research outputs and creative works of the University community will be preserved and made available. Works that are deposited in <%=t('hyrax.product_name') %> should support the mission of the University of Cincinnati. Students should work with a faculty member to share scholarly output and creative works, such a capstone projects. Those interested in depositing UC records should contact <a href="http://www.libraries.uc.edu/arb/records-management.html">Records Management</a>.
-</p>
+    <p>
+      Examples of appropriate content include, but are not limited to: <a href="https://en.wikipedia.org/wiki/Grey_literature">grey literature</a>; <a href="https://en.wikipedia.org/wiki/Preprint">pre-</a>, <a href="https://en.wikipedia.org/wiki/Postprint">post-</a>, and published versions of academic papers, manuscripts, senior design projects, theses and dissertations (mediated by the Graduate School), posters, datasets, presentations, and other creative works. Content may be text, image, video, audio, or mixed-media in nature.
+    </p>
 
-<p>
-  Examples of appropriate content include, but are not limited to: <a href="https://en.wikipedia.org/wiki/Grey_literature">grey literature</a>; <a href="https://en.wikipedia.org/wiki/Preprint">pre-</a>, <a href="https://en.wikipedia.org/wiki/Postprint">post-</a>, and published versions of academic papers, manuscripts, senior design projects, theses and dissertations (mediated by the Graduate School), posters, datasets, presentations, and other creative works. Content may be text, image, video, audio, or mixed-media in nature.
-</p>
+    <p>
+      <strong>Content classified as restricted by <a href="https://www.uc.edu/content/dam/uc/infosec/docs/policies/Data_Governance_and_Classification_Policy_9.1.1.pdf">University of Cincinnati Policy 9.1.1 (Data Protection Policy)</a> or by export control should never be deposited to <%=t('hyrax.product_name') %>.</strong>
+    </p>
 
-<p>
-  <strong>Content classified as restricted by <a href="https://www.uc.edu/content/dam/uc/infosec/docs/policies/Data_Governance_and_Classification_Policy_9.1.1.pdf">University of Cincinnati Policy 9.1.1 (Data Protection Policy)</a> or by export control should never be deposited to <%=t('hyrax.product_name') %>.</strong>
-</p>
+    <h3>Intellectual Property, Copyright, and Access</h3>
+    <p>
+      In order to submit content to <%=t('hyrax.product_name') %>, creators must agree to a <%= link_to t('hyrax.deposit_agreement'), '/distribution_license_request' %> that authorizes UC to preserve, to transform, to enhance metadata, and to make available their content. Creators may choose, though are not required, to issue their content with a <a href="https://creativecommons.org/about">Creative Commons license</a> that clearly indicates how their content may be reused. Creators may choose to issue content as public domain or all rights reserved.
+    </p>
 
-<h3>Intellectual Property, Copyright, and Access</h3>
-<p>
-  In order to submit content to <%=t('hyrax.product_name') %>, creators must agree to a <%= link_to t('hyrax.deposit_agreement'), '/distribution_license_request' %> that authorizes UC to preserve, to transform, to enhance metadata, and to make available their content. Creators may choose, though are not required, to issue their content with a <a href="https://creativecommons.org/about">Creative Commons license</a> that clearly indicates how their content may be reused. Creators may choose to issue content as public domain or all rights reserved.
-</p>
+    <p>
+      Creators are able to control access to their content. Creators may choose to make content visible to themselves only, to a group of predetermined individuals, to embargo content for a defined time period, or to make their content open access.
+    </p>
 
-<p>
-  Creators are able to control access to their content. Creators may choose to make content visible to themselves only, to a group of predetermined individuals, to embargo content for a defined time period, or to make their content open access.
-</p>
-
-<h3>Withdrawal</h3>
-  <p><%=t('hyrax.product_name') %> is intended to permanently preserve the intellectual output of UC. However, creators retain the right to delete their content at any time. If deleted content included a Digital Object Identifier (DOI), a record of the last known metadata (tombstone) may be displayed to users attempting to access the content through the DOI.
-</p>
+    <h3>Withdrawal</h3>
+      <p><%=t('hyrax.product_name') %> is intended to permanently preserve the intellectual output of UC. However, creators retain the right to delete their content at any time. If deleted content included a Digital Object Identifier (DOI), a record of the last known metadata (tombstone) may be displayed to users attempting to access the content through the DOI.
+    </p>
+  </div>
+</div>
