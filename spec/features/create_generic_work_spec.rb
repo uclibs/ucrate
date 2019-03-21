@@ -131,6 +131,9 @@ RSpec.describe 'Create a Generic Work', :feature, js: true do
       expect(page).to have_field('Note', with: note)
       expect(page).to have_field('External Link', with: external_link)
 
+      click_on('DOI')
+      expect(page).to have_text('Assign a Digital Object Identifier (DOI)')
+
       check('agreement')
       click_on('Save')
 
