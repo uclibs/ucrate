@@ -1,7 +1,7 @@
 <% remote_service = Hydra::RemoteIdentifier.remote_service(:doi) %>
     <% if curation_concern.identifier_url.present? %>
       <div class="form-group doi">
-        <h2>DOI</h2>
+        <h2>Digital Object Identifier (DOI)</h2>
 
         <p>
           This work has a <abbr title="Digital Object Identifier">DOI</abbr>.
@@ -20,7 +20,7 @@
     <% else %>
 
       <div class="form-group set-doi">
-        <h2>Assign a DOI</h2>
+        <h2>Assign a Digital Object Identifier (DOI)</h2>
 
         <p>
           A <abbr title="Digital Object Identifier" data-placement="right">DOI</abbr> is a permanent link to your work.

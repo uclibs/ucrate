@@ -100,4 +100,8 @@ RSpec.describe 'hyrax/base/show.html.erb', type: :view do
   it 'shows last saved' do
     expect(page).to have_text '04/01/2011'
   end
+
+  it "has the correct DOI header" do
+    expect(page).to have_text 'Digital Object Identifier (DOI)'
+  end
 end

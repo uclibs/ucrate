@@ -159,6 +159,7 @@ RSpec/ExampleLength:
     - 'spec/models/work_and_file_index_spec.rb'
     - 'spec/models/file_view_stat_spec.rb'
     - 'spec/jobs/attach_files_to_work_job_spec.rb'
+    - 'spec/controllers/callbacks_controller_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false

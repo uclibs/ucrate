@@ -1,20 +1,23 @@
 <% content_for :page_title, "Student Works Help // #{application_name}" %>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <h2>Student Works Help</h2>
 
-<h2>Student Works Help</h2>
+    <p>
+      <%=t('hyrax.product_name') %> was developed to store and share the scholarly output and creative works of UC faculty (current and emeritus), staff, and students. Works that are deposited in <%=t('hyrax.product_name') %> should support the mission of the University of Cincinnati. Students should work with a faculty member to share scholarly output and creative works, such a capstone projects. <b>All official theses and dissertations must be submitted directly to the Graduate School and not <%=t('hyrax.product_name') %>.</b>
 
-<p>
-  <%=t('hyrax.product_name') %> was developed to store and share the scholarly output and creative works of UC faculty (current and emeritus), staff, and students. Works that are deposited in <%=t('hyrax.product_name') %> should support the mission of the University of Cincinnati. Students should work with a faculty member to share scholarly output and creative works, such a capstone projects. <b>All official theses and dissertations must be submitted directly to the Graduate School and not <%=t('hyrax.product_name') %>.</b>
+      There are two main workflows for submitting student works to <%=t('hyrax.product_name') %>: Self-Submission and Indirect Submission.
 
-  There are two main workflows for submitting student works to <%=t('hyrax.product_name') %>: Self-Submission and Indirect Submission.
+      Self-Submission of Student Works is the preferred method of submitting student works.
+    </p>
 
-  Self-Submission of Student Works is the preferred method of submitting student works.
-</p>
+    <ul>
+      <li><%= link_to "Guidelines for Faculty", advisor_guidelines_path %></li>
+      <li><%= link_to "Instructions for Students", student_instructions_path %></li>
+    </ul>
 
-<ul>
-  <li><%= link_to "Guidelines for Faculty", advisor_guidelines_path %></li>
-  <li><%= link_to "Instructions for Students", student_instructions_path %></li>
-</ul>
-
-<p>
-  Indirect submissions are when students submit first to a system other than <%=t('hyrax.product_name') %>, such as <a href="https://canopy.uc.edu" target="_blank">Canopy</a>. Direct, self-submission is preferred as it allows students, in <%=t('hyrax.product_name') %>, to agree to the non-exclusive distribution license and to select their own licensing terms for reuse (Creative Commons). In some cases indirect submissions are necessary, and in that case please contact <%= link_to t('hyrax.product_name'), hyrax.contact_path %> for additional help.
-</p>
+    <p>
+      Indirect submissions are when students submit first to a system other than <%=t('hyrax.product_name') %>, such as <a href="https://canopy.uc.edu" target="_blank">Canopy</a>. Direct, self-submission is preferred as it allows students, in <%=t('hyrax.product_name') %>, to agree to the non-exclusive distribution license and to select their own licensing terms for reuse (Creative Commons). In some cases indirect submissions are necessary, and in that case please contact <%= link_to t('hyrax.product_name'), hyrax.contact_path %> for additional help.
+    </p>
+  </div>
+</div>
