@@ -56,6 +56,11 @@
     <dd><%= user.admin_area %></dd>
   <% end %>
 
+  <% if user.college != "Other" %>
+    <dt>College</dt>
+    <dd><%= user.college %></dd>
+  <% end %>
+
   <% if user.department.present? %>
     <dt>Department</dt>
     <dd><%= user.department %></dd>
