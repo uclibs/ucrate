@@ -52,31 +52,31 @@ RSpec.describe Hyrax::ContactFormController do
       context "without a name" do
         let(:params)  { required_params.except(:name) }
 
-        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. You must complete the Captcha to confirm the form. Name can't be blank") }
+        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. Name can't be blank") }
       end
 
       context "without an email" do
         let(:params)  { required_params.except(:email) }
 
-        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. You must complete the Captcha to confirm the form. Email can't be blank") }
+        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. Email can't be blank") }
       end
 
       context "without a subject" do
         let(:params)  { required_params.except(:subject) }
 
-        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. You must complete the Captcha to confirm the form. Subject can't be blank") }
+        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. Subject can't be blank") }
       end
 
       context "without a message" do
         let(:params)  { required_params.except(:message) }
 
-        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. You must complete the Captcha to confirm the form. Message can't be blank") }
+        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. Message can't be blank") }
       end
 
       context "with an invalid email" do
         let(:params)  { required_params.merge(email: "bad-wolf") }
 
-        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. You must complete the Captcha to confirm the form. Email is invalid") }
+        its([:error]) { is_expected.to eq("Sorry, this message was not sent successfully. Email is invalid") }
       end
     end
 
