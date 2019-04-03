@@ -1,47 +1,122 @@
 ---
 http_interactions:
 - request:
-    method: post
-    uri: https://ezid.cdlib.org/shoulder/doi:10.5072/FK2
+    method: get
+    uri: https://api.test.datacite.org/dois/random?prefix=10.23676
     body:
-      encoding: UTF-8
-      string: |-
-        _target: http://localhost/show/3t94g081v
-        datacite.creator: John Doe
-        datacite.title: A Title
-        datacite.publisher: An Interesting Chap!
-        datacite.publicationyear: 2013
+      encoding: US-ASCII
+      string: ''
     headers:
       Accept:
-      - '*/*; q=0.5, application/xml'
+      - "*/*"
       Accept-Encoding:
       - gzip, deflate
-      Content-Type:
-      - text/plain
-      Content-Length:
-      - '183'
       User-Agent:
-      - Ruby
+      - rest-client/2.0.2 (darwin18.0.0 x86_64) ruby/2.5.3p105
+      Host:
+      - api.test.datacite.org
+      Authorization:
+      - Basic Q0lOLlRFU1Q6b3g2aVFQWDJ0V2N2ZU5vVWZNM3FkZjgyYW9lUA==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 22 Apr 2019 19:48:27 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Vary:
+      - Accept-Encoding, Origin
+      Content-Encoding:
+      - gzip
+      X-Credential-Username:
+      - cin.test
+      X-Request-Id:
+      - 5db3bd25-6b90-4fff-9360-da03b6f2cba1
+      Etag:
+      - W/"908063ebc56ab2ae49d68e1e3c0c5651"
+      X-Runtime:
+      - '0.009518'
+      X-Powered-By:
+      - Phusion Passenger 6.0.2
+      Server:
+      - nginx/1.15.8 + Phusion Passenger 6.0.2
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAIsavlwAA6pWSsnPVLJSMjTQMzI2MzfTr8g1Tdc1LDQxUaoFAAAA//8DAAObuB8cAAAA
+    http_version: 
+  recorded_at: Mon, 22 Apr 2019 19:48:27 GMT
+- request:
+    method: post
+    uri: https://api.test.datacite.org/dois
+    body:
+      encoding: UTF-8
+      string: '{"data":{"type":"dois","attributes":{"doi":"10.23676/xm5g-1q44","event":"hide","creators":[],"titles":[{"title":"A
+        Title"}],"publisher":"An Interesting Chap!","publicationYear":2013,"url":"http://localhost:3000/show/3t94g081v","types":{"resourceTypeGeneral":"Other","resourceType":"GenericWork"}}}}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.0.0 x86_64) ruby/2.5.3p105
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '298'
+      Host:
+      - api.test.datacite.org
+      Authorization:
+      - Basic Q0lOLlRFU1Q6b3g2aVFQWDJ0V2N2ZU5vVWZNM3FkZjgyYW9lUA==
   response:
     status:
       code: 201
-      message: CREATED
+      message: Created
     headers:
       Date:
-      - Tue, 05 Nov 2013 21:27:49 GMT
-      Server:
-      - Apache/2.2.17 (Unix) DAV/2 mod_wsgi/3.3 Python/2.7 mod_ssl/2.2.17 OpenSSL/0.9.8o
-      Vary:
-      - Cookie
-      Set-Cookie:
-      - sessionid=c6a6f7211ad23050d4e16a195f43b201; Path=/ezid/
-      Content-Length:
-      - '53'
+      - Mon, 22 Apr 2019 19:48:28 GMT
       Content-Type:
-      - text/plain; charset=UTF-8
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 201 Created
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Vary:
+      - Accept-Encoding, Origin
+      Content-Encoding:
+      - gzip
+      X-Credential-Username:
+      - cin.test
+      X-Request-Id:
+      - 319283f3-3f7d-41e0-aa35-6950c05a4e8f
+      Location:
+      - https://api.test.datacite.org/dois/2370325
+      Etag:
+      - W/"6880ec8ac24f10ff9e73290099108926"
+      X-Runtime:
+      - '0.094134'
+      X-Powered-By:
+      - Phusion Passenger 6.0.2
+      Server:
+      - nginx/1.15.8 + Phusion Passenger 6.0.2
     body:
-      encoding: UTF-8
-      string: 'success: doi:10.5072/FK2HX1QVR | ark:/b5072/fk2hx1qvr'
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAIwavlwAA4RUW0/bMBT+K1keJ9qmTbk0T0MITUyMIVaYtooH13GSszl2Zh8XOpT/vuNcmsKYeEp87uf7PvspTBmyMHkKIQ2TcBqNZ/HR8dHksTzMR9Pf83l4EOK2EuRLNVg6MUQDa4fC+iwy/i+tMiKDxz0v2azLWtt+IKRCIWQgDJVUTsqDkBvBUPvz6p4GAJS+3eqp/aX802DZ/NXkrtxagi2E8XYVXCgURlgElQdnBaveUQuuFTJQPqRt0ORwhqDVd8HIPIumsZ9v/VNwHOagvGZbPcxGgIndQTKVO5aL/uyxaoChCbQzXCzJ8FFQZyZpvC/oxzx45iVzEwD8mza/wtp7JfVIL/7FxcKfoXemTcmGWTcUR+v0RwN5gfYSLO4GF5YbqPzOu6Rc6Evd4jDUdSol8G5ERjgqPjR8LGX/64xfp0CskslEUgVZaItJHEXRxBb6YRLjYp5HJ9NNhz6tcmt26aVA5oV3188c0W68EOVg6RZuYOpPYE85wobOGZNWkBsJKK9NwzJscGV2SCZy/CLXe/w0whJe6kT4YhTNR7PZcrpI5ifJ7GRM0/9oquQEGy2fPpMLSaxLjCnIVelblXoqPbgFVI0uuASCork6+xePgxqTrHC4bm2gDevaw5UCG3JW97W3guLSpX6E1ZtVXt5bxUrvvlXQyAa3gc6CM6oIStHAwSWsDTMgbDAKllQxOOVcO+Ur22251p79s4ur8fL865Js2/4OLbq7xvGq7fCJPja4Yyr4DDLcec9LBr4Gka4lMx8cH4vUhc9EutOtpmAvz/B92CnvdTLjhoKjZHqcxIuezJc8UdChD4oPk2ncBw3CQuNIVwWz18zaB23S1vQalZXRG3q7zGtkDgz0US2T7aPYvZ0tmS+e3v3MLrb2fN/XfwEAAP//AwCPm8KrrAUAAA==
     http_version: 
-  recorded_at: Tue, 05 Nov 2013 21:27:52 GMT
-recorded_with: VCR 2.8.0
+  recorded_at: Mon, 22 Apr 2019 19:48:28 GMT
+recorded_with: VCR 4.0.0

@@ -15,10 +15,10 @@ describe IdentifierDeleteJob do
 
   describe "#perform" do
     it "calls RestClient with the correct params" do
-      expect(RestClient).to receive(:post).with(
+      expect(RestClient).to receive(:put).with(
         expected_post_uri,
-        "_status: unavailable",
-        content_type: :text
+        "{\n  \"data\": {\n    \"type\": \"dois\",\n    \"attributes\": {\n      \"event\": \"hide\",\n   \"url\": \"https://datacite.org/invalid.html\"\n    }\n  }\n}",
+        content_type: :json
       )
 
       described_class.perform_now(identifier_uri)

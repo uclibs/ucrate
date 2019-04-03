@@ -103,7 +103,7 @@ shared_examples 'doi request' do |work_class|
       check('agreement')
       click_on('Save')
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content('doi:10.5072/FK2')
+      expect(page).to have_content('10.23676')
     end
   end
 
@@ -145,8 +145,9 @@ shared_examples 'doi request' do |work_class|
       choose("#{work_label}_visibility_restricted")
       check('agreement')
       click_on('Save')
+
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content('doi:10.5072/FK2')
+      expect(page).to have_content('doi:10.23676')
 
       click_link "Edit"
       title_element = find_by_id("#{work_label}_title")

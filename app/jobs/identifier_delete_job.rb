@@ -2,11 +2,7 @@
 
 class IdentifierDeleteJob < ActiveJob::Base
   def perform(identifier_uri)
-    RestClient.post(
-      post_uri(identifier_uri),
-      "_status: unavailable",
-      content_type: :text
-    )
+    RestClient.put(post_uri(identifier_uri), "{\n  \"data\": {\n    \"type\": \"dois\",\n    \"attributes\": {\n      \"event\": \"hide\",\n   \"url\": \"https://datacite.org/invalid.html\"\n    }\n  }\n}", content_type: :json)
   end
 
   private
