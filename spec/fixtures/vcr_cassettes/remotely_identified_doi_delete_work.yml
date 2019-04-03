@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.test.datacite.org/dois/10.23676/2j0v-ft05
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.7.0 x86_64) ruby/2.5.3p105
+      Host:
+      - api.test.datacite.org
+      Authorization:
+      - Basic YXBpdGVzdDphcGl0ZXN0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 24 May 2019 14:43:17 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Vary:
+      - Accept-Encoding, Origin
+      Content-Encoding:
+      - gzip
+      Etag:
+      - W/"44c72aac04160dec40342ecef3984f4f"
+      X-Runtime:
+      - '0.054299'
+      X-Credential-Username:
+      - cin.test
+      X-Request-Id:
+      - c26a946d-83ee-4dd9-9593-6186092000f9
+      X-Powered-By:
+      - Phusion Passenger 6.0.2
+      Server:
+      - nginx/1.15.8 + Phusion Passenger 6.0.2
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAUD6FwAA5RWW3OiSBT+KxaPm8Qghpng0xqToK4SRxGUqXlomhZam0tBg+KU/31Pg2iSzdbWViWV9Onv3E9/h9+ShziSer8l6kk9qSO3le6379/ula1c3G24rEq3Ei8TAndeTDM4Ic5T6uacZEILhP+mlqRkQw/vbkGW5Zta9h5IPRJxuqEkBZNRztithFOCeCzOP39LEQqFfz0lJApRdNsaBDneSadfEBrljNSo6l+AmQHNWvCDWhHZt/oppxjkApzkLqNZQFJALSNagD/Ky1a8aQ1ohGkUIU4hHBxHHNFIwOpgKj0Ml3G0JgjEitzRRC7ulmB+jRn0qsrE1zyguORyYCjyc+ST5izqWhUxJVmcp5iYdaGbmG8/XOgEQkJMZEgOXDqJWwbmvdE/y5fR49XtJk5DdA2zSjuOmmNK/YBnE5rxS8wkwylNRLoXJZ/Ek7guwdVuHnk08udkQ1IS4avDQyiinD1rD669973QKrHCCncr0+niYT+iT8wNjcLRWe4cZWpZc31i+nR2fPhrNhwzrGgdHBpsNAy4q6vHtyg4IlOmaDiX8XNcTLpe1yvV7rRUCxziYrrt76cLbW0uD+ZaCZhrv3Bkq0dPf83XypI2dmaLcewN5/s3+gi+X+W1bSSevszd7jiadI0t0i2+Xmipsxrnjr3nxmDkk6GRvEXnu+WhWCuvMrK1/P/berrgsWLEjt0JJuE8gBi3aDVnk1ArnVLjzmoeTBTOcKgydyDLE6XDALNbCznUwRmMbga07890tnNsFWJxEmc18pE9Z240T5yQMczmKtaX2mg3ny0Wo5up2c+n26liHNfFdBfvLdrRred+ZzbQEke3ck9nIbKtcubH/uj5sMWhBXFpJYZ+jAb9D7IKI2SD/uO6O2YQV4F3auDay5s5nCEmvrYfstGLEXu2kYKPi64ZvnLHbGzui4v+tpI9ThSjdOxXGWp4PMciQ20yZzWtchYYiFV29eWNpQcJLp/EbzDSVeaVT08Y8l8rBwY+az3zbLc7h94c2DmfRzy0qKuzI/SonDErRyuH4Qj6N9z5rrL2fygM5oblbgi9NvfFB3wd196zxxmyDcgL5poxyAPqvO0f3q74LeSWuIrqQE6NXumsjMJbjbeOVfXIh9oc3a5VrhVrSVZPbK5YOcxM4D7Du9CtBw/6/WM1hj4bkA/Y/oQ/21VA5yjmciLe0EC7+oEaAI3kqXiQAedJ1ru/F4SPKSftOPXvaVQgRr12wOHR1hwGbLIUCvVjDglHQsNqaEMGesEBCa+SM+dUTNWcaNbHHChW6m0Qywhcc+AqiCIlPnANMIZX8RvKrhaAHwWhzN5RZLUHiNhMgnPvZPVO6Zqd7z31sdfR2rIsO5WVi8kvcIrc4Br+b2CiMon3hX2t96D2VKXWa4hWUF9Ak4qwMaNQpWr/vd+esEPawPf8ujNrYCadTqKSHkVXnZ+/TkIKm4flngjh539a+bx8z4vx33ZZa0LdFKWUZK27lgkWW32M4zwSlrMydGMxFYOR0TZfFibIynfLrVqCmBu1hzH8yVoWilpT2owJ3L6EiAobMA8xQ+mfOW4TL5c+rJDLVokBLJaH9EczkV+3uHunKGbnWw+61720+HOfAKQKUFftdboN6DpzPM1h5AKUzVCW7ePUq0VftTJJ4wI+QNKvmnntQIOqO1l/2Zw/gOpmfvp+eq95xp5Ev3+d/gYAAP//AwDka2vZcQkAAA==
+    http_version: 
+  recorded_at: Fri, 24 May 2019 14:43:19 GMT
+recorded_with: VCR 4.0.0

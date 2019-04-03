@@ -6,7 +6,7 @@ describe 'DOI Validation', type: :feature, js: true do
   let(:invalid_doi) { 'http://dx.doi.org/doi:10.5072/FK29P3386P' }
   let(:valid_doi) { 'doi:10.5072/FK29P3386P' }
   let(:empty_value) { '' }
-  let(:error_message) { 'Invalid DOI detected.' }
+  let(:error_message) { 'DOIs are required to begin with "doi:"' }
   let(:success_message) { 'Congratulations, a valid DOI was detected!' }
 
   context 'when submitting a DOI' do
@@ -37,6 +37,7 @@ describe 'DOI Validation', type: :feature, js: true do
           within '.set-doi' do
             fill_in 'generic_work_existing_identifier', with: invalid_doi
           end
+
           expect(page).to have_content(error_message)
           expect(page).not_to have_content(success_message)
         end
@@ -47,6 +48,7 @@ describe 'DOI Validation', type: :feature, js: true do
           within '.set-doi' do
             fill_in 'generic_work_existing_identifier', with: valid_doi
           end
+
           expect(page).not_to have_content(error_message)
           expect(page).to have_content(success_message)
         end
