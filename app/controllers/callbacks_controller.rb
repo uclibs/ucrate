@@ -25,16 +25,15 @@ class CallbacksController < Devise::OmniauthCallbacksController
     end
 
     def create_or_update_user
-      if user_exists?
-        update_shibboleth_attributes if user_has_never_logged_in?
-      else
+      unless user_exists?
         create_user
         send_welcome_email
       end
+      update_user_shibboleth_attributes if user_has_never_logged_in?
+      update_user_shibboleth_perishable_attributes
     end
 
     def sign_in_shibboleth_user
-      update_user_shibboleth_perishable_attributes
       sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
       cookies[:login_type] = {
         value: "shibboleth",
@@ -46,28 +45,12 @@ class CallbacksController < Devise::OmniauthCallbacksController
     def use_uid_if_email_is_blank
       # If user has no email address use their sixplus2@uc.edu instead
       # Some test accounts on QA/dev don't have email addresses
-      @email = if defined?(@omni.extra.raw_info.mail)
-                 if @omni.extra.raw_info.mail.blank?
-                   @omni.uid
-                 else
-                   @omni.extra.raw_info.mail
-                 end
-               else
-                 @omni.uid
-               end
+      return @omni.extra.raw_info.mail if defined?(@omni.extra.raw_info.mail) && @omni.extra.raw_info.mail.present?
+      @omni.uid
     end
 
     def user_exists?
-      @user = find_by_provider_and_uid
-      return true unless @user.nil?
-    end
-
-    def find_by_provider_and_uid
-      User.where(provider: @omni['provider'], uid: @omni['uid']).first
-    end
-
-    def update_shibboleth_attributes
-      update_user_shibboleth_attributes
+      @user = User.where(provider: @omni['provider'], uid: @omni['uid']).first
     end
 
     def user_has_never_logged_in?
@@ -80,7 +63,6 @@ class CallbacksController < Devise::OmniauthCallbacksController
                           email: @email,
                           password: Devise.friendly_token[0, 20],
                           profile_update_not_required: false
-      update_user_shibboleth_attributes
     end
 
     def update_user_shibboleth_attributes
@@ -88,13 +70,10 @@ class CallbacksController < Devise::OmniauthCallbacksController
       @user.telephone          = @omni.extra.raw_info.telephoneNumber
       @user.first_name         = @omni.extra.raw_info.givenName
       @user.last_name          = @omni.extra.raw_info.sn
-      @user.uc_affiliation     = @omni.extra.raw_info.uceduPrimaryAffiliation
-      @user.ucdepartment       = @omni.extra.raw_info.ou
       @user.save
     end
 
     def update_user_shibboleth_perishable_attributes
-      retrieve_shibboleth_attributes
       @user.uc_affiliation     = @omni.extra.raw_info.uceduPrimaryAffiliation
       @user.ucdepartment       = @omni.extra.raw_info.ou
       @user.save

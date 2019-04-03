@@ -1,16 +1,20 @@
-<% if skip_new_user_help? && user_waived_welcome_page? %>
-  <%= raw show_welcome_page %>
-<% elsif skip_new_user_help? %>
-  <%= form_tag welcome_page_index_path, method: :post, id: "waive_welcome_page" do %>
-    <div class="form-actions centered">
-      <%= submit_tag t('hyrax.welcome.waive_page'), :class=> 'btn btn-primary' %>
-    </div>
-  <% end %>
-  <%= raw show_welcome_page %>
-<% else %>
-  <p>Next you’re going to edit your profile to make sure all your personal details are correct, but first please take a moment to review the help information below.</p>
-  <%= raw show_welcome_page %>
-  <div class="btn-group">
-    <%= link_to "Edit my Profile", Hyrax::Engine.routes.url_helpers.edit_dashboard_profile_path(current_user), class: 'btn btn-primary' %>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <% if skip_new_user_help? && user_waived_welcome_page? %>
+      <%= raw show_welcome_page %>
+    <% elsif skip_new_user_help? %>
+      <%= form_tag welcome_page_index_path, method: :post, id: "waive_welcome_page" do %>
+        <div class="form-actions centered">
+          <%= submit_tag t('hyrax.welcome.waive_page'), :class=> 'btn btn-primary' %>
+        </div>
+      <% end %>
+      <%= raw show_welcome_page %>
+    <% else %>
+      <p>Next you’re going to edit your profile to make sure all your personal details are correct, but first please take a moment to review the help information below.</p>
+      <%= raw show_welcome_page %>
+      <div class="btn-group">
+        <%= link_to "Edit my Profile", Hyrax::Engine.routes.url_helpers.edit_dashboard_profile_path(current_user), class: 'btn btn-primary' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

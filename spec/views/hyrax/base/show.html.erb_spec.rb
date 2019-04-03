@@ -8,6 +8,7 @@ RSpec.describe 'hyrax/base/show.html.erb', type: :view do
                      title_tesim: ['My Title'],
                      creator_tesim: ['Doe, John', 'Doe, Jane'],
                      date_modified_dtsi: '2011-04-01',
+                     date_uploaded_dtsi: '1999-12-31',
                      has_model_ssim: ['GenericWork'],
                      depositor_tesim: depositor.user_key,
                      description_tesim: ['Lorem ipsum lorem ipsum.'],
@@ -97,7 +98,12 @@ RSpec.describe 'hyrax/base/show.html.erb', type: :view do
     expect(page).to have_text("Download Adobe Acrobat Reader")
   end
 
-  it 'shows last saved' do
-    expect(page).to have_text '04/01/2011'
+  it 'shows last modified and date uploaded' do
+    expect(page).to have_text 'Date Uploaded: 12/31/1999'
+    expect(page).to have_text 'Date Modified: 04/01/2011'
+  end
+
+  it "has the correct DOI header" do
+    expect(page).to have_text 'Digital Object Identifier (DOI)'
   end
 end

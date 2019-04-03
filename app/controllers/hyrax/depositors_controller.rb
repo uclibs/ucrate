@@ -5,12 +5,15 @@ module Hyrax
     def create
       grantor = authorize_and_return_grantor
       grantee = ::User.from_url_component(params[:grantee_id])
+
       if grantor.can_receive_deposits_from.include?(grantee)
         head :ok
-      else
+      elsif grantee.email != grantor.email
         grantor.can_receive_deposits_from << grantee
         send_proxy_depositor_added_messages(grantor, grantee)
         render json: { name: grantee.name, delete_path: sanitize_route_string(hyrax.user_depositor_path(grantor.user_key, grantee.user_key)) }
+      else
+        render json: { error: "You can't be a proxy for yourself." }
       end
     end
 
@@ -33,6 +36,10 @@ module Hyrax
       ChangeManager::EmailManager.queue_change(grantor, 'removed_as_proxy', '', grantee)
     rescue NotImplementedError # needed for specs and development environments
       ChangeManager::EmailManager.skip_sidekiq_for_emails(grantor, 'removed_as_proxy', '', grantee)
+    end
+
+    def validate_users
+      nil
     end
 
     private

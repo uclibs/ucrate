@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-describe WorksReport do
+describe WorksReport, :clean_repo do
   describe '#report_location' do
     it 'is vendor/work_report.csv' do
       expect(described_class.report_location).to eq("#{Rails.root}/vendor/works_report.csv")

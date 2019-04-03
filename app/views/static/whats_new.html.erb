@@ -1,81 +1,84 @@
 <% content_for :page_title, "What's New in Scholar@UC 4.0 // #{application_name}" %>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <div class="whats-new">
 
-<div class="whats-new">
+    <h2>What's New in Scholar@UC 4.0</h2>
 
-<h2>What's New in Scholar@UC 4.0</h2>
+    <p>In addition to layout and styling enhancements, there are some important changes and new features available in version 4.0.
 
-<p>In addition to layout and styling enhancements, there are some important changes and new features available in version 4.0.
+    <h3>Collections can now contain other collections</h3>
 
-<h3>Collections can now contain other collections</h3>
+    <p>You can now create a multi-level hierarchy of sub-collections to organize your content.</p>
 
-<p>You can now create a multi-level hierarchy of sub-collections to organize your content.</p>
+    <p>To create a sub-collection, click on a collection in your dashboard and then click the "Add a subcollection" or "Create new collection as subcollection" button.  Existing collections can also added to a collection.</p>
 
-<p>To create a sub-collection, click on a collection in your dashboard and then click the "Add a subcollection" or "Create new collection as subcollection" button.  Existing collections can also added to a collection.</p>
+    <p>
+      <%= image_tag 'whats_new/whats-new-subcollections.png', width: "50%", alt: 'Sub-collections', title: 'Sub-collections' %>
+    </p>
 
-<p>
-  <%= image_tag 'whats_new/whats-new-subcollections.png', width: "50%", alt: 'Sub-collections', title: 'Sub-collections' %>
-</p>
+    <h3>Collections now support collaboration</h3>
 
-<h3>Collections now support collaboration</h3>
+    <p>You can now give other users the ability to manage, deposit into, or view your collections.</p>
 
-<p>You can now give other users the ability to manage, deposit into, or view your collections.</p>
+    <p>To collaborate on collections, click on the Edit button for your collection and then click on the Share tab.</p>
 
-<p>To collaborate on collections, click on the Edit button for your collection and then click on the Share tab.</p>
+    <p>
+      <%= image_tag 'whats_new/whats-new-collection-collaboration.png', width: "50%", alt: 'Collection Collaboration', title: 'Collection Collaboration' %>
+    </p>
 
-<p>
-  <%= image_tag 'whats_new/whats-new-collection-collaboration.png', width: "50%", alt: 'Collection Collaboration', title: 'Collection Collaboration' %>
-</p>
+    <h3>Collections have a new layout and branding options</h3>
 
-<h3>Collections have a new layout and branding options</h3>
+    <p>Each collection can be branded with a wide banner image.</p>
 
-<p>Each collection can be branded with a wide banner image.</p>
+    <p>To brand a collection, click on the Edit button for your collection and then click on the Branding tab.</p>
 
-<p>To brand a collection, click on the Edit button for your collection and then click on the Branding tab.</p>
+    <p>Note: collections no longer allow an avatar to be assigned.</p>
 
-<p>Note: collections no longer allow an avatar to be assigned.</p>
+    <p>
+      <%= image_tag 'whats_new/whats-new-collection-branding.png', width: "50%", alt: 'Collection Branding', title: 'Collection Branding' %>
+    </p>
 
-<p>
-  <%= image_tag 'whats_new/whats-new-collection-branding.png', width: "50%", alt: 'Collection Branding', title: 'Collection Branding' %>
-</p>
+    <h3>Faceting by collection</h3>
 
-<h3>Faceting by collection</h3>
+    <p>You can now facet (limit) your search results by collection.</p>
 
-<p>You can now facet (limit) your search results by collection.</p>
+    <p>
+      <%= image_tag 'whats_new/whats-new-collection-faceting.png', width: "30%", alt: 'Collection Faceting', title: 'Collection Faceting' %>
+    </p>
 
-<p>
-  <%= image_tag 'whats_new/whats-new-collection-faceting.png', width: "30%", alt: 'Collection Faceting', title: 'Collection Faceting' %>
-</p>
+    <!--
+    <h3>Collections can now be exported to .csv (experimental)</h3>
 
-<!--
-<h3>Collections can now be exported to .csv (experimental)</h3>
+    <p>you can now export a collection of content to a .csv file.  </p>
+    -->
 
-<p>you can now export a collection of content to a .csv file.  </p>
--->
+    <h3>Changes to the Dashboard</h3>
 
-<h3>Changes to the Dashboard</h3>
+    <p>Your dashboard has been reorganized with most of the links now displayed in a sidebar on the left-hand side of the page.
 
-<p>Your dashboard has been reorganized with most of the links now displayed in a sidebar on the left-hand side of the page.
+    <p>In the dashboard sidebar you will find links to your collections, works, profile, notifications, transferred works, and proxies.</p>
 
-<p>In the dashboard sidebar you will find links to your collections, works, profile, notifications, transferred works, and proxies.</p>
+    <p>
+      <%= image_tag 'whats_new/whats-new-sidebar.png', width: "25%", alt: 'Dashboard Sidebar', title: 'Dashboard Sidebar' %>
+    </p>
 
-<p>
-  <%= image_tag 'whats_new/whats-new-sidebar.png', width: "25%", alt: 'Dashboard Sidebar', title: 'Dashboard Sidebar' %>
-</p>
+    <h3>Support for Multiple Languages (experimental)</h3>
 
-<h3>Support for Multiple Languages (experimental)</h3>
+    <p>You can now change Scholar@UC's interface to Spanish or Chinese.</p>
 
-<p>You can now change Scholar@UC's interface to Spanish or Chinese.</p>
+    <p>Click on the "English" dropdown menu at the top of any page to immediately change languages.</p>
 
-<p>Click on the "English" dropdown menu at the top of any page to immediately change languages.</p>
+    <p>Note: This setting only affects Scholar@UC's interface.  The content stored in the repository will not be translated.</p>
 
-<p>Note: This setting only affects Scholar@UC's interface.  The content stored in the repository will not be translated.</p>
+    <p>
+      <%= image_tag 'whats_new/whats-new-translate.png', width: "30%", alt: 'Translation Option', title: 'Translation Option' %>
+    </p>
 
-<p>
-  <%= image_tag 'whats_new/whats-new-translate.png', width: "30%", alt: 'Translation Option', title: 'Translation Option' %>
-</p>
+    <h3>Behind the Scenes</h3>
+    
+    <p>Many enhancements have been made behind the scenes to make Scholar@UC more reliable and to prepare for additional upcoming features.</p>
 
-<h3>Behind the Scenes</h3>
- 
-<p>Many enhancements have been made behind the scenes to make Scholar@UC more reliable and to prepare for additional upcoming features.</p>
-
+    </div>
+  </div>
 </div>

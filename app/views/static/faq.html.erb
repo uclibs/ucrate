@@ -1,147 +1,150 @@
 <% content_for :page_title, "FAQ // #{application_name}" %>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <h2>Frequently Asked Questions</h2>
 
-<h2>Frequently Asked Questions</h2>
+    <ul>
+      <li><a href="#faq_1234">If I have a problem with the system, where do I go for assitance?</a></li>
+      <li><a href="#faq_951">How can I allow someone else to submit works on my behalf?</a></li>
+      <li><a href="#faq_5678">How can I group my works into collections of related works?</a></li>
+      <li><a href="#faq_4321">How can I share access to selected works with a group of collaborators?</a></li>
+      <li><a href="#faq_8765">How do I upload an access file? </a></li>
+      <li><a href="#faq_1346">How do I upload a preservation file? </a></li>
+      <li><a href="#faq_4679">I'm having trouble uploading a file over 200 MB; what should I do?</a></li>
+      <li><a href="#faq_7946">May I publish, contribute, or otherwise distribute my content elsewhere?</a></li>
+      <li><a href="#faq_1379">What file formats should I use when uploading to <%=t('hyrax.product_name') %>?</a></li>
+      <li><a href="#faq_7913">What happens to my works if I delete them?</a></li>
+      <li><a href="#faq_159">Where do I go if I want to consult with subject area specialists on content?</a></li>
+      <li><a href="#faq_3456">What's restricted data?</a></li>
+      <li><a href="#faq_6543">What’s the difference between delegates, editors, and groups?</a></li>
+      <li><a href="#faq_1010">How do work access rights impact my DOIs?</a></li>
 
-<ul>
-  <li><a href="#faq_1234">If I have a problem with the system, where do I go for assitance?</a></li>
-  <li><a href="#faq_951">How can I allow someone else to submit works on my behalf?</a></li>
-  <li><a href="#faq_5678">How can I group my works into collections of related works?</a></li>
-  <li><a href="#faq_4321">How can I share access to selected works with a group of collaborators?</a></li>
-  <li><a href="#faq_8765">How do I upload an access file? </a></li>
-  <li><a href="#faq_1346">How do I upload a preservation file? </a></li>
-  <li><a href="#faq_4679">I'm having trouble uploading a file over 200 MB; what should I do?</a></li>
-  <li><a href="#faq_7946">May I publish, contribute, or otherwise distribute my content elsewhere?</a></li>
-  <li><a href="#faq_1379">What file formats should I use when uploading to <%=t('hyrax.product_name') %>?</a></li>
-  <li><a href="#faq_7913">What happens to my works if I delete them?</a></li>
-  <li><a href="#faq_159">Where do I go if I want to consult with subject area specialists on content?</a></li>
-  <li><a href="#faq_3456">What's restricted data?</a></li>
-  <li><a href="#faq_6543">What’s the difference between delegates, editors, and groups?</a></li>
-  <li><a href="#faq_1010">How do work access rights impact my DOIs?</a></li>
+    </ul>
+    <p>
+      <a name="faq_1234" id="faq_1234"></a>If I have a problem with the system, where do I go for assistance? </p>
+    <blockquote>
+      Use the <%= link_to 'contact us', hyrax.contact_path %> to submit any inquiry about <%=t('hyrax.product_name') %>, including technical issues.
+    </blockquote>
+    <p><a name="faq_951" id="faq_951"></a>
+      How can I allow someone else to submit works on my behalf?
+    </p>
+    <blockquote>
+      <%=t('hyrax.product_name') %> allows you to assign delegates, who will be able to submit new works on your behalf. They will retain access to modify these works until you remove their access. If you're logged in, you can access this from the “My Delegates” link under your account name, above.
+    </blockquote>
 
-</ul>
-<p>
-  <a name="faq_1234" id="faq_1234"></a>If I have a problem with the system, where do I go for assistance? </p>
-<blockquote>
-  Use the <%= link_to 'contact us', hyrax.contact_path %> to submit any inquiry about <%=t('hyrax.product_name') %>, including technical issues.
-</blockquote>
-<p><a name="faq_951" id="faq_951"></a>
-  How can I allow someone else to submit works on my behalf?
-</p>
-<blockquote>
-  <%=t('hyrax.product_name') %> allows you to assign delegates, who will be able to submit new works on your behalf. They will retain access to modify these works until you remove their access. If you're logged in, you can access this from the “My Delegates” link under your account name, above.
-</blockquote>
+    <p><a name="faq_5678" id="faq_5678"></a>
+      How can I group my works into collections of related works?
+    </p>
+    <blockquote>
+      <%=t('hyrax.product_name') %> allows you to create collections, to which you can add any works that you or others have submitted to <%=t('hyrax.product_name') %>. You can set a custom title, description, and image for your collections.
+    </blockquote>
 
-<p><a name="faq_5678" id="faq_5678"></a>
-  How can I group my works into collections of related works?
-</p>
-<blockquote>
-  <%=t('hyrax.product_name') %> allows you to create collections, to which you can add any works that you or others have submitted to <%=t('hyrax.product_name') %>. You can set a custom title, description, and image for your collections.
-</blockquote>
-
-<p><a name="faq_4321" id="faq_4321"></a>
-  How can I share access to selected works with a group of collaborators?
-</p>
-<blockquote>
-  <%=t('hyrax.product_name') %> allows you to create groups of collaborators, which you can assign to individual works. This will give individuals in the group the ability to edit assigned works and to view restricted works of yours. You can also assign editing rights to individuals, without first placing them in groups, by designating them as editors of your work. If you're logged in, you can access this from the “My Groups” link under your account name, above.
-</blockquote>
-
-
-<p><a name="faq_8765" id="faq_8765"></a>
-  How do I upload an access file?
-</p>
-<blockquote>
-  When completing the submission form for <%=t('hyrax.product_name') %>, you may upload files. We recommend uploading your access file at the same time you are describing your work.
-  <br><br>
-  For more information, please see <%= link_to 'File Format Advice', format_advice_path %>.
-</blockquote>
-
-<p><a name="faq_1346" id="faq_1346"></a>
-  How do I upload a preservation file?
-</p>
-
-<blockquote>
-  After your work is uploaded and you are viewing the record, you will see a row of buttons towards the bottom of the page (if logged in). In the row of buttons, click <span class="fakebutton">Attach a File</span> to upload an additional file to your record. We recommend granting private access rights to preservation files. This will make it easier for users to know which they should download.
-  <br><br>
-  For more information, please see <%= link_to 'File Format Advice', format_advice_path %>.
-</blockquote>
-
-<p><a name="faq_4679" id="faq_4679"></a>
-  I'm having trouble uploading a file over 200 MB; what should I do?
-</p>
-
-<blockquote>
-  We recommend that you use the <%= link_to 'contact form', hyrax.contact_path %> for assistance with files larger than 200 MB, but if you have trouble uploading any file, please use the <%= link_to 'contact form', hyrax.contact_path %> for assistance.
-</blockquote>
+    <p><a name="faq_4321" id="faq_4321"></a>
+      How can I share access to selected works with a group of collaborators?
+    </p>
+    <blockquote>
+      <%=t('hyrax.product_name') %> allows you to create groups of collaborators, which you can assign to individual works. This will give individuals in the group the ability to edit assigned works and to view restricted works of yours. You can also assign editing rights to individuals, without first placing them in groups, by designating them as editors of your work. If you're logged in, you can access this from the “My Groups” link under your account name, above.
+    </blockquote>
 
 
-<p><a name="faq_7946" id="faq_7946"></a>
-  May I publish, contribute, or otherwise distribute my content elsewhere?
-</p>
-<blockquote>
-  Yes. When you submit content to <%=t('hyrax.product_name') %> you agree to a non-exclusive <%= link_to t('hyrax.deposit_agreement'), '/distribution_license_request' %> that grants UC the right to enhance metadata, to replicate the content for preservation, and to make the content available through computer interfaces. This license in no way prevents you from distributing your content through other channels.
-</blockquote>
+    <p><a name="faq_8765" id="faq_8765"></a>
+      How do I upload an access file?
+    </p>
+    <blockquote>
+      When completing the submission form for <%=t('hyrax.product_name') %>, you may upload files. We recommend uploading your access file at the same time you are describing your work.
+      <br><br>
+      For more information, please see <%= link_to 'File Format Advice', format_advice_path %>.
+    </blockquote>
 
-<p><a name="faq_1379" id="faq_1379"></a>
-  What file formats should I use when uploading to <%=t('hyrax.product_name') %>?
-</p>
+    <p><a name="faq_1346" id="faq_1346"></a>
+      How do I upload a preservation file?
+    </p>
 
-<blockquote>
-  File format is an important consideration when contributing your work to <%=t('hyrax.product_name') %>. The future usability of your content will depend on the file format you use. Because of this, we recommend uploading two files for each work: an access file and a preservation file.
-  <br><br>
-  An access file typically uses common formats that people are familiar with, usually compressed. It makes them easy to download and use. Examples of access formats are JPEG and MP3.
-  <br><br>
-  Preservation files should be the highest quality format available for your content, preferably uncompressed. They can be used to create new access files in the future, as formats change over time. Examples of preservation formats are TIFF and WAV. Uploading a preservation file will help guarantee your content will be easily used in the future.
-  <br><br>
-  For more information, please see <%= link_to 'File Format Advice', format_advice_path %>.
-</blockquote>
+    <blockquote>
+      After your work is uploaded and you are viewing the record, you will see a row of buttons towards the bottom of the page (if logged in). In the row of buttons, click <span class="fakebutton">Attach a File</span> to upload an additional file to your record. We recommend granting private access rights to preservation files. This will make it easier for users to know which they should download.
+      <br><br>
+      For more information, please see <%= link_to 'File Format Advice', format_advice_path %>.
+    </blockquote>
 
+    <p><a name="faq_4679" id="faq_4679"></a>
+      I'm having trouble uploading a file over 200 MB; what should I do?
+    </p>
 
-<p><a name="faq_7913" id="faq_7913"></a>
-  What happens to my works if I delete them?
-</p>
-<blockquote>
-  If you have not requested a Digital Object Identifier (DOI) for your work, you can withdraw any works you have submitted and they will be removed from <%=t('hyrax.product_name') %>. If you have requested a DOI, the work will be removed from <%=t('hyrax.product_name') %>, but a brief citation will be retained at our DOI provider's website that displays the work's citation information, and the reason for it's unavailability.
-</blockquote>
+    <blockquote>
+      We recommend that you use the <%= link_to 'contact form', hyrax.contact_path %> for assistance with files larger than 200 MB, but if you have trouble uploading any file, please use the <%= link_to 'contact form', hyrax.contact_path %> for assistance.
+    </blockquote>
 
 
+    <p><a name="faq_7946" id="faq_7946"></a>
+      May I publish, contribute, or otherwise distribute my content elsewhere?
+    </p>
+    <blockquote>
+      Yes. When you submit content to <%=t('hyrax.product_name') %> you agree to a non-exclusive <%= link_to t('hyrax.deposit_agreement'), '/distribution_license_request' %> that grants UC the right to enhance metadata, to replicate the content for preservation, and to make the content available through computer interfaces. This license in no way prevents you from distributing your content through other channels.
+    </blockquote>
 
-<p><a name="faq_159" id="faq_159"></a>
-  Where do I go if I want to consult with subject area specialists on content?
-</p>
-<blockquote>
-  Access the <a href="http://www.libraries.uc.edu/help/subject-librarians.html">Subject Librarians directory</a> to find contact info for subject area specialists.
-</blockquote>
+    <p><a name="faq_1379" id="faq_1379"></a>
+      What file formats should I use when uploading to <%=t('hyrax.product_name') %>?
+    </p>
+
+    <blockquote>
+      File format is an important consideration when contributing your work to <%=t('hyrax.product_name') %>. The future usability of your content will depend on the file format you use. Because of this, we recommend uploading two files for each work: an access file and a preservation file.
+      <br><br>
+      An access file typically uses common formats that people are familiar with, usually compressed. It makes them easy to download and use. Examples of access formats are JPEG and MP3.
+      <br><br>
+      Preservation files should be the highest quality format available for your content, preferably uncompressed. They can be used to create new access files in the future, as formats change over time. Examples of preservation formats are TIFF and WAV. Uploading a preservation file will help guarantee your content will be easily used in the future.
+      <br><br>
+      For more information, please see <%= link_to 'File Format Advice', format_advice_path %>.
+    </blockquote>
 
 
-<p><a name="faq_3456" id="faq_3456"></a>
-  What's restricted data?
-</p>
-<blockquote>
-  Restricted data is data that is private, confidential, classified as restricted by export control, or data that could be used to personally identify an individual. Some examples include social security numbers, financial account numbers, electronically stored bio-metric information, and data from research involving human subjects. Restricted Data is defined by <a href="https://www.uc.edu/content/dam/uc/infosec/docs/policies/Data_Governance_and_Classification_Policy_9.1.1.pdf">University of Cincinnati Policy 9.1.1 (Data Protection Policy)</a> and should be reviewed for additional information.
-</blockquote>
+    <p><a name="faq_7913" id="faq_7913"></a>
+      What happens to my works if I delete them?
+    </p>
+    <blockquote>
+      If you have not requested a Digital Object Identifier (DOI) for your work, you can withdraw any works you have submitted and they will be removed from <%=t('hyrax.product_name') %>. If you have requested a DOI, the work will be removed from <%=t('hyrax.product_name') %>, but a brief citation will be retained at our DOI provider's website that displays the work's citation information, and the reason for it's unavailability.
+    </blockquote>
 
 
-<p><a name="faq_6543" id="faq_6543"></a>
-  What’s the difference between delegates, editors, and groups?
-</p>
-<blockquote>
-  Delegates are people you authorize who can create, edit, and delete works on your behalf. They can do anything you can do, so please exercise discretion when authorizing another person as a delegate. Your delegates may be managed from the My Delegates page.
-  <br><br>
-  Editors are individuals to whom you have granted the ability to view and make changes to a specific work. If you would like to grant a group of individuals these rights, you can create a Group on the My Groups page. For example, if you work with a group of researchers on a single work, you can create a group of those researchers and grant that group viewing and editing privileges.
-  <br><br>
-  Editors (and groups) are like delegates, but whereas delegates have all the powers of the person they represent, editors (and groups) can only view and make changes to specific works.
-</blockquote>
 
-<p><a name="faq_1010" id="faq_1010"></a>
-  How do work access rights impact my DOIs?
-</p>
-<blockquote>
-  If you use <%=t('hyrax.product_name') %> to request a DOI, it will be either <i>public</i>, <i>reserved</i>, or <i>unavailable</i>.
-  <br><br>
-  <i>Public</i> DOIs are available for all <strong><%=t('hyrax.visibility.open.label_html') %></strong> works, and work normally.
-  <br><br>
-  <i>Reserved</i> DOIs are granted to any <strong><%=t('hyrax.visibility.open.label_html') %></strong>, <strong><%=t('hyrax.visibility.authenticated.label_html') %></strong>, or <strong><%=t('hyrax.visibility.private.label_html') %></strong> works for which you request a DOI. A <i>reserved</i> DOI will not yet redirect to your work, but it will be availble on the display page for your work for your reference. A <i>reserved</i> DOI will become <i>public</i> if you make your work <strong><%=t('hyrax.visibility.open.label_html') %></strong> or if your <strong><%=t('hyrax.visibility.embargo.label_html') %></strong> expires.
-  <br><br>
-  <i>Unavailable</i> DOIs are maintained for works for which you have requested a DOI where you have deleted the work or where you have changed the access rights from <strong><%=t('hyrax.visibility.open.label_html') %></strong> to <strong><%=t('hyrax.visibility.embargo.label_html') %></strong>, <strong><%=t('hyrax.visibility.authenticated.label_html') %></strong>, or <strong><%=t('hyrax.visibility.private.label_html') %></strong>. A tombstone page will indicate that the work is not available because it was withdrawn from the author. If you change your work back to <strong><%=t('hyrax.visibility.open.label_html') %></strong>, the DOI will change back to <i>public</i> status.
-  <br><br>
-</blockquote>
+    <p><a name="faq_159" id="faq_159"></a>
+      Where do I go if I want to consult with subject area specialists on content?
+    </p>
+    <blockquote>
+      Access the <a href="http://www.libraries.uc.edu/help/subject-librarians.html">Subject Librarians directory</a> to find contact info for subject area specialists.
+    </blockquote>
+
+
+    <p><a name="faq_3456" id="faq_3456"></a>
+      What's restricted data?
+    </p>
+    <blockquote>
+      Restricted data is data that is private, confidential, classified as restricted by export control, or data that could be used to personally identify an individual. Some examples include social security numbers, financial account numbers, electronically stored bio-metric information, and data from research involving human subjects. Restricted Data is defined by <a href="https://www.uc.edu/content/dam/uc/infosec/docs/policies/Data_Governance_and_Classification_Policy_9.1.1.pdf">University of Cincinnati Policy 9.1.1 (Data Protection Policy)</a> and should be reviewed for additional information.
+    </blockquote>
+
+
+    <p><a name="faq_6543" id="faq_6543"></a>
+      What’s the difference between delegates, editors, and groups?
+    </p>
+    <blockquote>
+      Delegates are people you authorize who can create, edit, and delete works on your behalf. They can do anything you can do, so please exercise discretion when authorizing another person as a delegate. Your delegates may be managed from the My Delegates page.
+      <br><br>
+      Editors are individuals to whom you have granted the ability to view and make changes to a specific work. If you would like to grant a group of individuals these rights, you can create a Group on the My Groups page. For example, if you work with a group of researchers on a single work, you can create a group of those researchers and grant that group viewing and editing privileges.
+      <br><br>
+      Editors (and groups) are like delegates, but whereas delegates have all the powers of the person they represent, editors (and groups) can only view and make changes to specific works.
+    </blockquote>
+
+    <p><a name="faq_1010" id="faq_1010"></a>
+      How do work access rights impact my DOIs?
+    </p>
+    <blockquote>
+      If you use <%=t('hyrax.product_name') %> to request a DOI, it will be either <i>public</i>, <i>reserved</i>, or <i>unavailable</i>.
+      <br><br>
+      <i>Public</i> DOIs are available for all <strong><%=t('hyrax.visibility.open.label_html') %></strong> works, and work normally.
+      <br><br>
+      <i>Reserved</i> DOIs are granted to any <strong><%=t('hyrax.visibility.open.label_html') %></strong>, <strong><%=t('hyrax.visibility.authenticated.label_html') %></strong>, or <strong><%=t('hyrax.visibility.private.label_html') %></strong> works for which you request a DOI. A <i>reserved</i> DOI will not yet redirect to your work, but it will be availble on the display page for your work for your reference. A <i>reserved</i> DOI will become <i>public</i> if you make your work <strong><%=t('hyrax.visibility.open.label_html') %></strong> or if your <strong><%=t('hyrax.visibility.embargo.label_html') %></strong> expires.
+      <br><br>
+      <i>Unavailable</i> DOIs are maintained for works for which you have requested a DOI where you have deleted the work or where you have changed the access rights from <strong><%=t('hyrax.visibility.open.label_html') %></strong> to <strong><%=t('hyrax.visibility.embargo.label_html') %></strong>, <strong><%=t('hyrax.visibility.authenticated.label_html') %></strong>, or <strong><%=t('hyrax.visibility.private.label_html') %></strong>. A tombstone page will indicate that the work is not available because it was withdrawn from the author. If you change your work back to <strong><%=t('hyrax.visibility.open.label_html') %></strong>, the DOI will change back to <i>public</i> status.
+      <br><br>
+    </blockquote>
+  </div>
+</div>
