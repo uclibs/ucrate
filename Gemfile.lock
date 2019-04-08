@@ -73,8 +73,8 @@ GIT
 
 GIT
   remote: https://github.com/uclibs/change_manager.git
-  revision: 8d151d1123aa35658f061a63bc72435afdf0ec8a
-  ref: 8d151d1123aa35658f061a63bc72435afdf0ec8a
+  revision: d8e1b552740df00922a0a40796999c4e2a0cb8b6
+  ref: d8e1b552740df00922a0a40796999c4e2a0cb8b6
   specs:
     change_manager (1.0.0)
       activejob
