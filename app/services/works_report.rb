@@ -30,40 +30,48 @@ class WorksReport < Report
   def self.all_attributes_list
     %i[
       abstract
+      admin_set_id
       advisor
+      alt_date_created
+      alt_description
       alternate_title
       bibliographic_citation
       college
-      contributor
       committee_member
-      geo_subject
-      time_period
-      degree
-      department
-      date_created
-      alt_date_created
-      date_digitized
+      contributor
       creator
       cultural_context
+      date_created
+      date_digitized
+      degree
+      department
       description
-      alt_description
+      embargo_release_date
+      etd_publisher
+      existing_identifier
       genre
+      geo_subject
       identifier
       inscription
       issn
       journal_title
       language
+      license
       location
       material
       measurement
       note
       publisher
+      related_url
       required_software
       source
       subject
+      time_period
       title
       type
       visibility
+      visibility_after_embargo
+      visibility_during_embargo
     ]
   end
 
