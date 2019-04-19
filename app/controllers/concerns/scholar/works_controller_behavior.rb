@@ -14,9 +14,9 @@ module Scholar
     end
 
     def update
+      # get editor name and add to params
+      editors = removed_user_name_and_id
       super
-      # the to_s_u method must be implemented for every model
-      editors = params.to_unsafe_hash[curation_concern.class.to_s_u][:permissions_attributes]
       queue_notifications_for_editors(editors) if editors
     end
   end

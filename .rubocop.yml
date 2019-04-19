@@ -147,6 +147,7 @@ RSpec/ExampleLength:
     - 'spec/jobs/batch_create_job_spec.rb'
     - 'spec/controllers/hyrax/batch_uploads_controller_spec.rb'
     - 'spec/controllers/hyrax/generic_works_controller_spec.rb'
+    - 'spec/controllers/concerns/scholar/work_controller_behavior_spec.rb'
     - 'spec/features/create_collection_spec.rb'
     - 'spec/features/catalog_facet_spec.rb'
     - 'spec/jobs/proxy_edit_removal_job_spec.rb'
@@ -192,6 +193,7 @@ RSpec/VerifiedDoubles:
   Exclude:
     - 'spec/features/hyrax/create_child_work_spec.rb'
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
+    - 'spec/controllers/concerns/scholar/work_controller_behavior_spec.rb'
     - 'spec/views/hyrax/dashboard/collections/_show_actions.html.erb_spec.rb'
     - 'spec/helpers/hyrax_helper_spec.rb'
     - 'spec/views/catalog/_search_form.html.erb_spec.rb'
