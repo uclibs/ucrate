@@ -92,7 +92,6 @@ end
 group :test do
   gem 'capybara', '~> 2.4', '< 2.18.0'
   gem 'capybara-maleficent', '~> 0.2'
-  gem "chromedriver-helper", '< 2.0'
   gem 'coveralls', '~> 0.8.22', require: false
   gem 'database_cleaner'
   gem 'factory_bot_rails'
@@ -100,4 +99,5 @@ group :test do
   gem 'rspec-retry'
   gem 'selenium-webdriver', '3.12.0'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'webdrivers', '~> 3.0'
 end
