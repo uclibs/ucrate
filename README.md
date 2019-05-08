@@ -1,8 +1,7 @@
 # Scholar@UC
+![Travis (.org) branch](https://img.shields.io/travis/uclibs/ucrate/develop.svg) ![Coveralls coverage](https://img.shields.io/coveralls/github/uclibs/ucrate/develop.svg)
 
-## Installing the Scholar application
-
-Install system dependencies
+## Dependencies
 
 ***Our Hyrax 2.x based app requires the following software to work:
 
@@ -13,11 +12,13 @@ Install system dependencies
   * libsqlite3-dev (if running SQLite as RDBMS)
 * Redis, a key-value store
 * ImageMagick with JPEG-2000 support
-* FITS version 0.8.x (0.8.5 is known to be good)
+* FITS version 1.0.x (1.0.5 is known to be good)
 * LibreOffice
 
+## Installing the Scholar application
+
 1. Clone this repository: `git clone https://github.com/uclibs/ucrate.git ./path/to/local`
-    * **Note:** Solr will not run properly if there are spaces in any of the directory names above it <br />(e.g. /user/my apps/ucrate/)
+    > **Note:** Solr will not run properly if there are spaces in any of the directory names above it <br />(e.g. /user/my apps/ucrate/)
 1. Change to the application's directory: e.g. `cd ./path/to/local`  
 1. Make sure you are on the develop branch: `git checkout develop`
 1. Install bundler (if needed): `gem install bundler`
@@ -45,11 +46,7 @@ Install system dependencies
 1. Run the database migrations: ```bundle exec rake db:migrate``` (Optional)
 1. Run the test suite: ```bundle exec rake spec```
 
-## Application Status
-
-[![Build Status](https://travis-ci.org/uclibs/ucrate.svg?branch=sandbox)](https://travis-ci.org/uclibs/ucrate)
-
-# Project Samvera
+## Project Samvera
 This software has been developed by and is brought to you by the Samvera community. Learn more at the
 [Samvera website](http://projecthydra.org)
 
