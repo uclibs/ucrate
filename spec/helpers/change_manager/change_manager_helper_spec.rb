@@ -5,7 +5,7 @@ describe ChangeManager::ChangeManagerHelper do
   let!(:editors) { { "0" => { 'type' => 'person', 'name' => 'new_editor@example.com', 'access' => 'edit' } } }
   let!(:old_editor) { { 'id' => 'someid' } }
   let!(:new_editor) { { 'type' => 'person', 'name' => 'new_editor@example.com', 'access' => 'edit' } }
-  let!(:removed_editor) { { 'id' => 'someid', 'access' => 'destroy' } }
+  let!(:removed_editor) { { 'id' => 'someid', '_destroy' => 'true', 'access' => 'destroy' } }
   let!(:curation_concern) { FactoryBot.create(:generic_work) }
 
   describe '#queue_notifications_for_editors should' do
@@ -38,12 +38,10 @@ describe ChangeManager::ChangeManagerHelper do
 
   describe '#removed_editor? should' do
     it 'return true is the editor is removed' do
-      skip 'implement removed_editor?'
       expect(removed_editor?(removed_editor)).to be true
     end
 
     it 'return false if the editor is not removed' do
-      skip 'implement removed_editor?'
       expect(removed_editor?(new_editor)).to be false
     end
   end
@@ -65,6 +63,27 @@ describe ChangeManager::ChangeManagerHelper do
 
     it 'return false if the editor does not have edit access' do
       expect(edit_access?(removed_editor)).to be false
+    end
+  end
+
+  describe '#action' do
+    it 'return corresponding change action value' do
+      expect(action(new_editor)).to eq 'added_as_editor'
+      expect(action(removed_editor)).to eq 'removed_as_editor'
+    end
+  end
+
+  describe '#changed? should' do
+    it 'return true when an editor is added' do
+      expect(changed?(new_editor)).to be true
+    end
+
+    it 'return true when and editor is removed' do
+      expect(changed?(removed_editor)).to be true
+    end
+
+    it 'return false with no changes' do
+      expect(changed?(editors)).to be false
     end
   end
 end
