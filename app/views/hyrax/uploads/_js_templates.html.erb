@@ -65,12 +65,14 @@
                     </button>
                 </div>
             </div>
+            {% if (document.location["href"].includes("<%= hyrax.new_batch_upload_path(locale: nil) %>"))  { %}
             <div class="row">
                 <label for="title_{%=file.id%}" class="col-sm-2 control-label">Display label</label>
                 <div class="col-sm-10 padding-bottom">
                     <input type="text" class="form-control" name="title[{%=file.id%}]" id="title_{%=file.id%}" value="{%=file.name%}">
                 </div>
             </div>
+            {% } %}
         </td>
     </tr>
 {% } %}
