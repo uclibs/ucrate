@@ -2,7 +2,7 @@
 
 <p>
   <% remote_service = Hydra::RemoteIdentifier.remote_service(:doi) %>
-  <%= t('doi.identifier') %>: <strong><%= presenter.doi.first %></strong><br>
+  <%= t('doi.identifier') %>: <strong>doi:<%= presenter.doi.first %></strong><br>
   <%= t('doi.link') %>: <strong><%= link_to remote_service.remote_uri_for(presenter.doi.first).to_s, remote_service.remote_uri_for(presenter.doi.first).to_s %></strong>
 </p>
 

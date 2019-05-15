@@ -92,7 +92,7 @@ GIT
 
 GIT
   remote: https://github.com/uclibs/hydra-remote_identifier.git
-  revision: 364d8d4c657383f04faa537d1b97bfcdb4be8a87
+  revision: 2f83a83fec0b48f2fd7f5f4b01188c46d5bccfd8
   branch: datacite-wip-no-vcr
   specs:
     hydra-remote_identifier (0.6.8)

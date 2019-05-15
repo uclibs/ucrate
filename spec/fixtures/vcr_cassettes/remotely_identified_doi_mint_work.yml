@@ -12,18 +12,16 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin18.0.0 x86_64) ruby/2.5.3p105
+      - rest-client/2.0.2 (darwin16.7.0 x86_64) ruby/2.5.3p105
       Host:
       - api.test.datacite.org
-      Authorization:
-      - Basic Q0lOLlRFU1Q6b3g2aVFQWDJ0V2N2ZU5vVWZNM3FkZjgyYW9lUA==
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Mon, 22 Apr 2019 19:48:27 GMT
+      - Wed, 15 May 2019 16:41:23 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -32,20 +30,20 @@ http_interactions:
       - keep-alive
       Status:
       - 200 OK
+      X-Anonymous-Consumer:
+      - 'true'
       Cache-Control:
       - max-age=0, private, must-revalidate
       Vary:
       - Accept-Encoding, Origin
       Content-Encoding:
       - gzip
-      X-Credential-Username:
-      - cin.test
       X-Request-Id:
-      - 5db3bd25-6b90-4fff-9360-da03b6f2cba1
+      - 8850a6a5-192a-43d2-92bc-922ffa431e48
       Etag:
-      - W/"908063ebc56ab2ae49d68e1e3c0c5651"
+      - W/"f4a37a976097a6837b381db1b801b735"
       X-Runtime:
-      - '0.009518'
+      - '0.004461'
       X-Powered-By:
       - Phusion Passenger 6.0.2
       Server:
@@ -53,15 +51,15 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAIsavlwAA6pWSsnPVLJSMjTQMzI2MzfTr8g1Tdc1LDQxUaoFAAAA//8DAAObuB8cAAAA
+        H4sIADNB3FwAA6pWSsnPVLJSMjTQMzI2MzfTT6pKM9JNNTIwVqoFAAAA//8DAGb068IcAAAA
     http_version: 
-  recorded_at: Mon, 22 Apr 2019 19:48:27 GMT
+  recorded_at: Wed, 15 May 2019 16:41:27 GMT
 - request:
     method: post
     uri: https://api.test.datacite.org/dois
     body:
       encoding: UTF-8
-      string: '{"data":{"type":"dois","attributes":{"doi":"10.23676/xm5g-1q44","event":"hide","creators":[],"titles":[{"title":"A
+      string: '{"data":{"type":"dois","attributes":{"doi":"10.23676/bzf2-e203","event":"hide","creators":[],"titles":[{"title":"A
         Title"}],"publisher":"An Interesting Chap!","publicationYear":2013,"url":"http://localhost:3000/show/3t94g081v","types":{"resourceTypeGeneral":"Other","resourceType":"GenericWork"}}}}'
     headers:
       Accept:
@@ -69,7 +67,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (darwin18.0.0 x86_64) ruby/2.5.3p105
+      - rest-client/2.0.2 (darwin16.7.0 x86_64) ruby/2.5.3p105
       Content-Type:
       - application/json
       Content-Length:
@@ -84,7 +82,7 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Mon, 22 Apr 2019 19:48:28 GMT
+      - Wed, 15 May 2019 16:45:36 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -102,13 +100,13 @@ http_interactions:
       X-Credential-Username:
       - cin.test
       X-Request-Id:
-      - 319283f3-3f7d-41e0-aa35-6950c05a4e8f
+      - feeae916-e7c2-4b79-a1f6-2c75cf640e8e
       Location:
-      - https://api.test.datacite.org/dois/2370325
+      - https://api.test.datacite.org/dois/2378085
       Etag:
-      - W/"6880ec8ac24f10ff9e73290099108926"
+      - W/"cd1a7fe408bf48557033b865b6e63c2d"
       X-Runtime:
-      - '0.094134'
+      - '0.095039'
       X-Powered-By:
       - Phusion Passenger 6.0.2
       Server:
@@ -116,7 +114,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAIwavlwAA4RUW0/bMBT+K1keJ9qmTbk0T0MITUyMIVaYtooH13GSszl2Zh8XOpT/vuNcmsKYeEp87uf7PvspTBmyMHkKIQ2TcBqNZ/HR8dHksTzMR9Pf83l4EOK2EuRLNVg6MUQDa4fC+iwy/i+tMiKDxz0v2azLWtt+IKRCIWQgDJVUTsqDkBvBUPvz6p4GAJS+3eqp/aX802DZ/NXkrtxagi2E8XYVXCgURlgElQdnBaveUQuuFTJQPqRt0ORwhqDVd8HIPIumsZ9v/VNwHOagvGZbPcxGgIndQTKVO5aL/uyxaoChCbQzXCzJ8FFQZyZpvC/oxzx45iVzEwD8mza/wtp7JfVIL/7FxcKfoXemTcmGWTcUR+v0RwN5gfYSLO4GF5YbqPzOu6Rc6Evd4jDUdSol8G5ERjgqPjR8LGX/64xfp0CskslEUgVZaItJHEXRxBb6YRLjYp5HJ9NNhz6tcmt26aVA5oV3188c0W68EOVg6RZuYOpPYE85wobOGZNWkBsJKK9NwzJscGV2SCZy/CLXe/w0whJe6kT4YhTNR7PZcrpI5ifJ7GRM0/9oquQEGy2fPpMLSaxLjCnIVelblXoqPbgFVI0uuASCork6+xePgxqTrHC4bm2gDevaw5UCG3JW97W3guLSpX6E1ZtVXt5bxUrvvlXQyAa3gc6CM6oIStHAwSWsDTMgbDAKllQxOOVcO+Ur22251p79s4ur8fL865Js2/4OLbq7xvGq7fCJPja4Yyr4DDLcec9LBr4Gka4lMx8cH4vUhc9EutOtpmAvz/B92CnvdTLjhoKjZHqcxIuezJc8UdChD4oPk2ncBw3CQuNIVwWz18zaB23S1vQalZXRG3q7zGtkDgz0US2T7aPYvZ0tmS+e3v3MLrb2fN/XfwEAAP//AwCPm8KrrAUAAA==
+        H4sIADBC3FwAA4RUXU/bMBT9K1keJ9omDS1rnoYQmpgYQ1th2ioeXMdJ7ubakX1dKCj/fdf5aApj4inx/b7nHPspzBiyMH0KIQvTMI7G02R+Mp+sH/PpSEyjJDwKcVcJ8mUaLJ0YooG1Q2F9Fhn/l1YZkcPDgZds1uWt7TAQMqEQchCGSion5VHIjWCo/Xl1RwMASt9u9dT+Uv5psGz+anJXbi3BlsJ4uwouFAojLIIqgrOSVe+oBdcKGSgf0jZocjhD0OqnYGSeRnHi51v/FhyHOSiv2VYPsxFgYn+QTBWOFaI/e6waYGgC7QwXSzJ8EtSZSRrvK/oxj555ydwEAP+hzZ+w9l5JPbKLf3Gx8Dj0zrXZsGHWLcXROv3RQFGivQSL+8GF5QYqv/M+qRD6Urc4DHWdygi8byInHBUfGj5sZP/rjF+nRKzSyURSBVlqi2kSRdHElvp+kuDiuIg+xNsOfVrlxuzTNwKZF95tP3NEu/FSbAZLt3ADU38Ce8oRtnTOmbSC3EhAeW0almODK7NDMpHjF7k+4KcRlvBSJ8IXo2g2imfLeJ4ez9JkPqbpfzVVCoKNls+eyYUk1iV61boqe6tST6UHt4Sq0QWXQFA0V+fw4nFQY5IVDtetDbRhXXu4MmBDzuqu9lZQXLrMj7B6s8rLe6vYxrtvFDSywV2g8+CMKoJSNHBwCWvDDAgbjIIlVQxOOddO+cp2t1lrz/7ZxdV4ef59SbZdf4cW3V3jeNV2+EwfG9wyFXwBGe695xsGvgaRriUzHx0fi8yFz0S6162mYC/P8H3YKe91MpPRdOopiE/SZNGT+ZInCmp4SmZpnPRBg7DQONJVyew1s/Zem6w1vUZlZfSW3i7zGpkDA31Uy2T7KHZvZ0vmi6f3MLOLrT3fd/VfAAAA//8DAG68WPusBQAA
     http_version: 
-  recorded_at: Mon, 22 Apr 2019 19:48:28 GMT
+  recorded_at: Wed, 15 May 2019 16:45:40 GMT
 recorded_with: VCR 4.0.0

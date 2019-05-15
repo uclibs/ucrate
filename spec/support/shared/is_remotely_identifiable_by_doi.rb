@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'byebug'
+
 shared_examples 'is remotely identifiable by doi' do
   describe '#locally_managed_remote_identifier?' do
     let(:work) { FactoryBot.build(described_class.to_s.underscore.to_sym) }
@@ -149,7 +151,7 @@ shared_examples 'is remotely identifiable by doi' do
       it 'mints!' do
         work = build(:work, attributes: attributes)
         work.stub(:save).and_return(true)
-        VCR.use_cassette "remotely_identified_doi_mint_work" do
+        VCR.use_cassette "remotely_identified_doi_mint_work", record: :new_episodes do
           expect {
             Hydra::RemoteIdentifier.mint(:doi, work)
           }.to change(work, :doi).from(nil)
