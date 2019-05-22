@@ -39,10 +39,6 @@ describe 'DOI Validation', type: :feature, js: true do
             fill_in 'generic_work_existing_identifier', with: invalid_doi
           end
 
-          page.current_window.resize_to(5000, 5000)
-          page.save_screenshot('screen.png')
-          byebug
-          
           expect(page).to have_content(error_message)
           expect(page).not_to have_content(success_message)
         end

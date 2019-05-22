@@ -41,13 +41,13 @@ $(document).on('turbolinks:load', function() {
   
   function validateDoiField(unvalidated_element) {
     value = unvalidated_element.val();
-    var regexPattern  = new RegExp(/^\d+\.?\d+\/[\w|-]+\.?[\w|-]+$/);
+    var regexPattern  = new RegExp(/^doi:\d+\.?\d+\/[\w|-]+\.?[\w|-]+$/);
     if (regexPattern.test(value)) {
       return true;
     } else return false;
   };
 
-  function startsWithLetters(unvailidated_element) {
+  function startsWithDOI(unvailidated_element) {
     value = unvailidated_element.val();
     var regexPattern = new RegExp(/^doi:/);
     if (regexPattern.test(value)) {
@@ -65,8 +65,8 @@ $(document).on('turbolinks:load', function() {
   };
   
   function appendErrorMessages(attaching_field, element = undefined) {
-    if (element != undefined && startsWithLetters(element)) {
-      var doiHint = 'Please omit "doi:"';
+    if (element != undefined && !startsWithDOI(element)) {
+      var doiHint = 'DOIs are required to begin with "doi:".';
       var doiHintHTML = '<div id="doi-error" class="alert alert-danger">' + doiHint + '</div>';
       if ($('#doi-error').length < 1) {
         attaching_field.append(doiHintHTML);
