@@ -12,7 +12,7 @@ class IdentifierDeleteJob < ActiveJob::Base
     end
   end
 
-  private 
+  private
 
     def datacite_resource(identifier_uri)
       RestClient::Resource.new identifier_uri, ENV["SCHOLAR_DOI_USERNAME"], ENV["SCHOLAR_DOI_PASSWORD"]
