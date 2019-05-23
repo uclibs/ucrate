@@ -64,7 +64,7 @@ $(document).on('turbolinks:load', function() {
     return $(':input[type="submit"]').prop('enabled', true);
   };
   
-  function appendErrorMessages(attaching_field, element = undefined) {
+  function appendErrorMessages(attaching_field, element) {
     if (element != undefined && !startsWithDOI(element)) {
       var doiHint = 'DOIs are required to begin with "doi:".';
       var doiHintHTML = '<div id="doi-error" class="alert alert-danger">' + doiHint + '</div>';
