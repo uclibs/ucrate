@@ -5,13 +5,14 @@ class IdentifierDeleteJob < ActiveJob::Base
     state = get_state(identifier_uri)
 
     if state == "draft"
-      datacite_resource(identifier_uri).delete
+      RestClient.delete post_uri(identifier_uri)
     else
-      datacite_resource(identifier_uri).put("{\n  \"data\": {\n    \"type\": \"dois\",\n    \"attributes\": {\n      \"event\": \"hide\",\n   \"url\": \"https://datacite.org/invalid.html\"\n    }\n  }\n}", content_type: :json)
+      RestClient.put(post_uri(identifier_uri), "{\n  \"data\": {\n    \"type\": \"dois\",\n    \"attributes\": {\n      \"event\": \"hide\",\n   \"url\": \"https://datacite.org/invalid.html\"\n    }\n  }\n}", content_type: :json)
+      # datacite_resource(identifier_uri).put("{\n  \"data\": {\n    \"type\": \"dois\",\n    \"attributes\": {\n      \"event\": \"hide\",\n   \"url\": \"https://datacite.org/invalid.html\"\n    }\n  }\n}", content_type: :json)
     end
   end
 
-  private
+  private 
 
     def datacite_resource(identifier_uri)
       RestClient::Resource.new identifier_uri, ENV["SCHOLAR_DOI_USERNAME"], ENV["SCHOLAR_DOI_PASSWORD"]
@@ -19,8 +20,8 @@ class IdentifierDeleteJob < ActiveJob::Base
 
     def post_uri(identifier_uri)
       u = URI.parse(identifier_uri)
-      u.user = doi_remote_service.username
-      u.password = doi_remote_service.password
+      u.user = ENV["SCHOLAR_DOI_USERNAME"]
+      u.password = ENV["SCHOLAR_DOI_PASSWORD"]
       u.to_s
     end
 

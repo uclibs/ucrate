@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 require 'rails_helper'
 
@@ -6,8 +7,8 @@ describe IdentifierDeleteJob do
     double("Doi Remote Service", username: "foo", password: "bar")
   end
 
-  let(:identifier_uri) { "https://www.example.com" }
-  let(:expected_post_uri) { "https://foo:bar@www.example.com" }
+  let(:identifier_uri) { "https://api.test.datacite.org/dois/10.23676/2j0v-ft05" }
+  let(:expected_post_uri) { "https://CIN.TEST:ox6iQPX2tWcveNoUfM3qdf82aoeP@api.test.datacite.org/dois/10.23676/2j0v-ft05" }
 
   before do
     allow(Hydra::RemoteIdentifier).to receive(:remote_service).and_return(doi_remote_service)

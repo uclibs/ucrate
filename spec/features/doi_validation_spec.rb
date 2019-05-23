@@ -5,9 +5,9 @@ require 'byebug'
 describe 'DOI Validation', type: :feature, js: true do
   let(:user) { FactoryBot.create(:user) }
   let(:invalid_doi) { 'http://dx.doi.org/doi:10.5072/FK29P3386P' }
-  let(:valid_doi) { '10.5072/FK29P3386P' }
+  let(:valid_doi) { 'doi:10.5072/FK29P3386P' }
   let(:empty_value) { '' }
-  let(:error_message) { 'Invalid DOI detected. Please see this page for tips on submitting an existing DOI.' }
+  let(:error_message) { 'DOIs are required to begin with "doi:"' }
   let(:success_message) { 'Congratulations, a valid DOI was detected!' }
 
   context 'when submitting a DOI' do
