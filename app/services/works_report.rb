@@ -46,6 +46,7 @@ class WorksReport < Report
       degree
       department
       description
+      doi
       embargo_release_date
       etd_publisher
       existing_identifier
