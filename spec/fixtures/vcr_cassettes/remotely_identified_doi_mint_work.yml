@@ -75,7 +75,7 @@ http_interactions:
       Host:
       - api.test.datacite.org
       Authorization:
-      - Basic Q0lOLlRFU1Q6b3g2aVFQWDJ0V2N2ZU5vVWZNM3FkZjgyYW9lUA==
+      - Basic YXBpdGVzdDphcGl0ZXN0
   response:
     status:
       code: 201
