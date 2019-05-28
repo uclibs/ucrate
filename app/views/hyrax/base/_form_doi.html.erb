@@ -37,39 +37,10 @@
           <%= link_to('this page', main_app.doi_help_path, target: '_blank') %> for more detailed instructions on properly entering your DOI into Scholar@UC.
         </p>
 
-        <div class="control-group">
+        <p class="alert alert-danger">
+          DOI creation has been temporarily disabled while we migrate to a new provider.  This feature will be available again after May 29.<br><br>
 
-          <% if remote_service.registered?(curation_concern) %>
-            <label class="radio fix-radio-btns">
-              <input type="radio" name="<%= f.object_name %>[doi_assignment_strategy]" id="mint-doi" value="<%= remote_service.accessor_name %>" <% if curation_concern.doi_assignment_strategy == remote_service.accessor_name.to_s %> checked="true"<% end %> />
-              <span class="label-text">
-                Yes, I would like to create a <abbr title="Digital Object Identifier">DOI</abbr> for this <%= curation_concern.human_readable_type %>.
-              </span>
-            </label>
-          <% end %>
-
-          <label class="radio fix-radio-btns">
-            <input type="radio" <%= "checked" if curation_concern.doi.present? %> name="<%= f.object_name %>[doi_assignment_strategy]" id="no-doi" value="<%= RemotelyIdentifiedByDoi::ALREADY_GOT_ONE %>" <% if curation_concern.doi_assignment_strategy == RemotelyIdentifiedByDoi::ALREADY_GOT_ONE %> checked="true"<% end %> />
-            <span class="label-text">
-              Yes, I already have one that I want to use: <%= render_edit_field_partial(:existing_identifier, f: f) %>
-            </span>
-          </label>
-
-          <div class="alert alert-info collapse" role="alert" id="setPublisher">
-            <%= I18n.t('hyrax.works.form.tab.doi_message') %>
-          </div>
-
-          <label class="radio fix-radio-btns">
-            <input type="radio" <%= "checked" unless curation_concern.doi.present? %> name="<%= f.object_name %>[doi_assignment_strategy]" id="not-now" value="<%= RemotelyIdentifiedByDoi::NOT_NOW %>" <% if curation_concern.doi_assignment_strategy == RemotelyIdentifiedByDoi::NOT_NOW %> checked="true"<% end %> />
-            <span class="label-text">
-              Not now&hellip;<em>but maybe later.</em>
-            </span>
-          </label>
-
-          <p>
-            The <em>Publisher</em> field must be set if you request a DOI.
-          </p>
-
-        </div>
+          You may still save your work now and come back later to create the DOI.  If you have any questions, please <%= link_to 'contact us', contact_path %>.
+        </p>
       </div>
     <% end %>
