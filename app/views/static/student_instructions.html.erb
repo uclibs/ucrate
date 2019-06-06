@@ -4,6 +4,7 @@
     <h2>Student Self Submissions to <%=t('hyrax.product_name') %></h2>
     <h2>Instructions for Students</h2>
 
+    
     <p>
       Works that are deposited in <%=t('hyrax.product_name') %> should be related to scholarship and research and be consistent with the <%=t('hyrax.product_name') %> <%= link_to "Mission and Collection Policy", coll_policy_path %>. Students should work with a faculty advisor to share scholarly output and creative works, such a capstone projects. <b>All official theses and dissertations must be submitted directly to the Graduate School and not <%=t('hyrax.product_name') %></b>. If you have any questions or problems with these instructions, please contact <%= link_to t('hyrax.product_name'), hyrax.contact_path %>.
     </p>
@@ -12,7 +13,7 @@
       <li>
       Log in to <%=t('hyrax.product_name') %> using the <a href="#" style="color:white;background-color:black;padding:3px;">
                 <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span > Login
-              </a> &nbsp;link (upper right corner of <a href="http://curly.libraries.uc.edu:3002/">curly.libraries.uc.edu</a>).
+              </a> &nbsp;link (upper right corner of <%= link_to Rails.application.config.application_root_url %>).
       </li></br>
 
       <li>
