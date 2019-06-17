@@ -101,6 +101,11 @@
 1. Delete the first file from the work
 1. Verify that the file is removed
 
+### Add child work to parent work
+1. Creates a child work (you can use the work already in the script as the parent)
+1. Adds the child work to a collection
+1. Visit the child work's show page and verify that In Collections and In Parent Work are displaying properly.
+
 ### View works
 1. View the Generic Work's show page
 1. Verify that the license being displayed is the same one you chose with the wizard
