@@ -84,6 +84,7 @@ Rails/TimeZone:
 
 RSpec/AnyInstance:
   Exclude:
+    - 'spec/support/shared/doi_request.rb'
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
     - 'spec/controllers/collection_exports_controller_spec.rb'
     - 'spec/models/job_io_wrapper_spec.rb'

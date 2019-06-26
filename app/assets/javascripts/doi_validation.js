@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function() {
           } else {
           //if the entered value is not a valid doi
             disableSubmitButton();
-            appendErrorMessages(element.parent());
+            appendErrorMessages(element.parent(), element);
             removeSuccessMessages(successMessage);
           }
         } else {
@@ -41,11 +41,20 @@ $(document).on('turbolinks:load', function() {
   
   function validateDoiField(unvalidated_element) {
     value = unvalidated_element.val();
-    var regexPattern  = new RegExp(/^doi:\d+\.?\d+\/\w+\.?\w+$/);
+    var regexPattern  = new RegExp(/^doi:\d+\.?\d+\/[\w|-]+\.?[\w|-]+$/);
     if (regexPattern.test(value)) {
       return true;
     } else return false;
   };
+
+  function startsWithDOI(unvailidated_element) {
+    value = unvailidated_element.val();
+    var regexPattern = new RegExp(/^doi:/);
+    if (regexPattern.test(value)) {
+      return true;
+    }
+    return false;
+  }
   
   function disableSubmitButton() {
     return $(':input[type="submit"]').prop('disabled', true);
@@ -55,7 +64,14 @@ $(document).on('turbolinks:load', function() {
     return $(':input[type="submit"]').prop('enabled', true);
   };
   
-  function appendErrorMessages(attaching_field) {
+  function appendErrorMessages(attaching_field, element) {
+    if (element != undefined && !startsWithDOI(element)) {
+      var doiHint = 'DOIs are required to begin with "doi:".';
+      var doiHintHTML = '<div id="doi-error" class="alert alert-danger">' + doiHint + '</div>';
+      if ($('#doi-error').length < 1) {
+        attaching_field.append(doiHintHTML);
+      }
+    }
     var helpLink ='<a href="/doi_help/" class="alert-link target="_blank"">this page</a>';
     var errorMessage = 'Invalid DOI detected. Please see ' + helpLink + ' for tips on submitting an existing DOI.';
     var errorMessageHTML = '<div id="doi-error" class="alert alert-danger">' + errorMessage + '</div>'; 

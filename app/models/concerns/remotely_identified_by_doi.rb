@@ -23,11 +23,13 @@ module RemotelyIdentifiedByDoi
 
       def doi_status
         if visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
-          "public"
-        elsif locally_managed_remote_identifier? && identifier_status != "reserved"
-          "unavailable"
+          "publish"
+
+        #       This was part of the EZID environment.  Not sure if it is still needed with Datacite DOIs
+        #       elsif locally_managed_remote_identifier? && identifier_status != "registered"
+        #         "register"
         else
-          "reserved"
+          "hide"
         end
       end
 

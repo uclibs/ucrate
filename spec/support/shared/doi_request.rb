@@ -49,6 +49,23 @@ shared_examples 'doi request' do |work_class|
            user: user)
   end
 
+  let(:mock_doi_remote_service) { Hydra::RemoteIdentifier::RemoteServices::Doi }
+
+  let(:work_after_doi_issued) do
+    create(work_class.to_s.underscore.to_sym,
+           title: ["My Test Work"],
+           creator: ["Test User"],
+           license: ["http://creativecommons.org/publicdomain/mark/1.0/"],
+           description: ["My description"],
+           source: ["The Internet"],
+           based_near: ["USA"],
+           doi: "doi:10.23676/ce13-6t93",
+           identifier_url: "https://api.test.datacite.org/dois/10.23676/ce13-6t93",
+           existing_identifier: "doi:1234foo",
+           visibility: "open",
+           user: user)
+  end
+
   before do
     # allow(Ability).to receive(:user_is_etd_manager).and_return(true)
     # page.driver.browser.js_errors = false
@@ -79,6 +96,7 @@ shared_examples 'doi request' do |work_class|
     end
 
     it 'mints a DOI for the work' do
+      allow_any_instance_of(Hydra::RemoteIdentifier::RemoteServices::Doi).to receive(:mint).and_return(true)
       page.current_window.resize_to(5000, 5000)
       click_link "DOI" # switch tab
       choose('mint-doi')
@@ -102,8 +120,9 @@ shared_examples 'doi request' do |work_class|
       choose("#{work_label}_visibility_open")
       check('agreement')
       click_on('Save')
+      visit polymorphic_path(work_after_doi_issued)
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content('doi:10.5072/FK2')
+      expect(page).to have_content('10.23676')
     end
   end
 
@@ -145,8 +164,9 @@ shared_examples 'doi request' do |work_class|
       choose("#{work_label}_visibility_restricted")
       check('agreement')
       click_on('Save')
+
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content('doi:10.5072/FK2')
+      expect(page).to have_content('doi:10.23676')
 
       click_link "Edit"
       title_element = find_by_id("#{work_label}_title")
