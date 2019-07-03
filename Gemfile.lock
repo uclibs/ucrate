@@ -82,18 +82,18 @@ GIT
 
 GIT
   remote: https://github.com/uclibs/devise-multi_auth
-  revision: 49073374277f94c3bb2e1cc654c8732da37ec4ce
-  branch: rails-5-1
+  revision: 00517c1f00d7ef16062134af1cafc82b5de584fe
+  branch: rails-5.1.6.2
   specs:
     devise-multi_auth (0.2.0)
-      devise (= 4.4.0)
+      devise (= 4.6.0)
       omniauth (~> 1.2)
       rails
 
 GIT
   remote: https://github.com/uclibs/hydra-remote_identifier.git
-  revision: 678d88cd0388f8cad416b9310fa1f9dbdab86c4c
-  branch: setting-status
+  revision: 215f36ac5c62c3b2b75631266a2147df8dee8dc0
+  branch: scholar-datacite
   specs:
     hydra-remote_identifier (0.6.8)
       activesupport (>= 3.2.13)
@@ -101,8 +101,8 @@ GIT
 
 GIT
   remote: https://github.com/uclibs/orcid
-  revision: 92b7d3eafe9f498b392f980f7e971ff1c7ad5825
-  branch: rails-5-1-6
+  revision: 65ddf113f14829b4b196d237e29b6b2dcb08866e
+  branch: rails-5.1.6.2
   specs:
     orcid (0.9.1)
       email_validator
@@ -112,32 +112,32 @@ GIT
       nokogiri
       omniauth-oauth2 (< 1.4)
       omniauth-orcid (= 0.6)
-      railties (= 5.1.6.1)
+      railties (= 5.1.6.2)
       simple_form
       virtus
 
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (5.1.6.1)
-      actionpack (= 5.1.6.1)
+    actioncable (5.1.6.2)
+      actionpack (= 5.1.6.2)
       nio4r (~> 2.0)
       websocket-driver (~> 0.6.1)
-    actionmailer (5.1.6.1)
-      actionpack (= 5.1.6.1)
-      actionview (= 5.1.6.1)
-      activejob (= 5.1.6.1)
+    actionmailer (5.1.6.2)
+      actionpack (= 5.1.6.2)
+      actionview (= 5.1.6.2)
+      activejob (= 5.1.6.2)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.1.6.1)
-      actionview (= 5.1.6.1)
-      activesupport (= 5.1.6.1)
+    actionpack (5.1.6.2)
+      actionview (= 5.1.6.2)
+      activesupport (= 5.1.6.2)
       rack (~> 2.0)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.1.6.1)
-      activesupport (= 5.1.6.1)
+    actionview (5.1.6.2)
+      activesupport (= 5.1.6.2)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
@@ -163,18 +163,18 @@ GEM
       activesupport (>= 3.0.2, < 6.0)
     active_encode (0.4.1)
       rails
-    activejob (5.1.6.1)
-      activesupport (= 5.1.6.1)
+    activejob (5.1.6.2)
+      activesupport (= 5.1.6.2)
       globalid (>= 0.3.6)
-    activemodel (5.1.6.1)
-      activesupport (= 5.1.6.1)
-    activerecord (5.1.6.1)
-      activemodel (= 5.1.6.1)
-      activesupport (= 5.1.6.1)
+    activemodel (5.1.6.2)
+      activesupport (= 5.1.6.2)
+    activerecord (5.1.6.2)
+      activemodel (= 5.1.6.2)
+      activesupport (= 5.1.6.2)
       arel (~> 8.0)
     activerecord-import (0.27.0)
       activerecord (>= 3.2)
-    activesupport (5.1.6.1)
+    activesupport (5.1.6.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -273,7 +273,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.4)
+    concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     coveralls (0.8.22)
       json (>= 1.8, < 3)
@@ -292,10 +292,10 @@ GEM
       activesupport
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.4.0)
+    devise (4.6.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 5.2)
+      railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
     devise-guests (0.6.1)
@@ -345,7 +345,7 @@ GEM
     ebnf (1.1.3)
       rdf (~> 3.0)
       sxp (~> 1.0)
-    email_validator (1.6.0)
+    email_validator (2.0.1)
       activemodel
     equalizer (0.0.11)
     equivalent-xml (0.6.0)
@@ -454,7 +454,7 @@ GEM
       hydra-file_characterization (~> 0.3, >= 0.3.3)
       hydra-pcdm (>= 0.9)
       om (~> 3.1)
-    i18n (1.5.3)
+    i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     iiif-image-api (0.1.0)
@@ -565,7 +565,7 @@ GEM
     method_source (0.9.2)
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2018.0812)
+    mime-types-data (3.2019.0331)
     mini_magick (4.9.2)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
@@ -584,7 +584,7 @@ GEM
     noid-rails (3.0.1)
       actionpack (>= 5.0.0, < 6)
       noid (~> 0.9)
-    nokogiri (1.10.1)
+    nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     nokogumbo (1.5.0)
       nokogiri
@@ -634,7 +634,7 @@ GEM
       nokogiri (~> 1.6)
       rails (~> 5.0)
       rdf
-    rack (2.0.6)
+    rack (2.0.7)
     rack-openid (1.3.1)
       rack (>= 1.1.0)
       ruby-openid (>= 2.1.8)
@@ -642,17 +642,17 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rails (5.1.6.1)
-      actioncable (= 5.1.6.1)
-      actionmailer (= 5.1.6.1)
-      actionpack (= 5.1.6.1)
-      actionview (= 5.1.6.1)
-      activejob (= 5.1.6.1)
-      activemodel (= 5.1.6.1)
-      activerecord (= 5.1.6.1)
-      activesupport (= 5.1.6.1)
+    rails (5.1.6.2)
+      actioncable (= 5.1.6.2)
+      actionmailer (= 5.1.6.2)
+      actionpack (= 5.1.6.2)
+      actionview (= 5.1.6.2)
+      activejob (= 5.1.6.2)
+      activemodel (= 5.1.6.2)
+      activerecord (= 5.1.6.2)
+      activesupport (= 5.1.6.2)
       bundler (>= 1.3.0)
-      railties (= 5.1.6.1)
+      railties (= 5.1.6.2)
       sprockets-rails (>= 2.0.0)
     rails-controller-testing (1.0.2)
       actionpack (~> 5.x, >= 5.0.1)
@@ -665,9 +665,9 @@ GEM
       loofah (~> 2.2, >= 2.2.2)
     rails_autolink (1.1.6)
       rails (> 3.1)
-    railties (5.1.6.1)
-      actionpack (= 5.1.6.1)
-      activesupport (= 5.1.6.1)
+    railties (5.1.6.2)
+      actionpack (= 5.1.6.2)
+      activesupport (= 5.1.6.2)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
@@ -740,9 +740,9 @@ GEM
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
-    responders (2.4.0)
-      actionpack (>= 4.2.0, < 5.3)
-      railties (>= 4.2.0, < 5.3)
+    responders (2.4.1)
+      actionpack (>= 4.2.0, < 6.0)
+      railties (>= 4.2.0, < 6.0)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -916,7 +916,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.5)
+    unf_ext (0.0.7.6)
     unicode-display_width (1.4.0)
     vcr (4.0.0)
     virtus (1.0.5)
@@ -963,7 +963,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   coveralls (~> 0.8.22)
   database_cleaner
-  devise
+  devise (~> 4.6.0)
   devise-guests (~> 0.6)
   devise-multi_auth!
   dotenv-rails
@@ -982,7 +982,7 @@ DEPENDENCIES
   omniauth-shibboleth
   orcid!
   puma (~> 3.0)
-  rails (~> 5.1.6.1)
+  rails (~> 5.1.6.2)
   rails-controller-testing
   riiif (~> 2.0)
   rsolr (>= 1.0)
@@ -997,7 +997,7 @@ DEPENDENCIES
   show_me_the_cookies
   sidekiq
   solr_wrapper (>= 0.3)
-  sqlite3
+  sqlite3 (= 1.3.13)
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)

@@ -74,7 +74,11 @@ es:
         license: Derechos
   hyrax:
     active_consent_to_agreement: He leído y acepto el
+    relationships_parent_row:
+      label: "En el trabajo de los padres:"
     base:
+      relationships_parent_row:
+        label: "En Colección:"
       form_progress:
         required_agreement: Compruebe la licencia de distribución
       items:

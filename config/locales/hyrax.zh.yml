@@ -74,7 +74,11 @@ zh:
         license: 权利
   hyrax:
     active_consent_to_agreement: 我已经阅读并同意
+    relationships_parent_row:
+      label: '在父母工作中：'
     base:
+      relationships_parent_row:
+        label: '在收集：'
       form_progress:
         required_agreement: 检查分配证件
       items:
