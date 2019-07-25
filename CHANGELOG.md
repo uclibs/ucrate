@@ -1,3 +1,33 @@
+1.2.0 (Scholar 4.2.0) 7/25/2019
+* Added seeds for each work type with all metadata filled out 
+* Upgraded riiif to version 2.0
+* Updated chromedriver version on Travis to match Chrome version
+* Added date uploaded and date modified to work show page
+* Updated DOI labels to use explicite name
+* Updated bootstrap-sass gem version
+* Updated change_manager gem version
+* Replaced chromedriver with webdrivers for capybara tests
+* Enabled notifications for editor removal
+* Added college field to user profile page
+* Updated the welcome page
+* Updated vulnerable gems
+* Limited description to 5 lines on catalog index page
+* Added support for DataCite JSON API
+* Added link to parent work when viewing child work
+* Updated Chinese and Spanish translations
+* Bug fixes
+    * Aligned time period field on Media work form                    
+    * Updated shibboleth attributes on every login
+    * Corrections to collections export 
+    * Re-enabled DOI in bulk ingest
+    * Implemented changes to static page line lengths
+    * Users are prevented from adding themselves as a proxy
+    * Fixed contact form error messages
+    * Added missing fields to works manifest
+    * Fixed file labels in create work
+    * Changed padding to margin to avoid visible text after ellipses
+    * Fixed broken links in static pages
+
 1.1.0 (Scholar 4.1.0) 2/27/2019
 * Collections can now be exported to .csv files
 * The order that fields are displayed on work pages has been updated
