@@ -6,7 +6,7 @@
 RECIPIENTS="scholar@uc.edu"
 HOSTNAME=$(hostname -s)
 ENVIRONMENT=$1
-APP_DIRECTORY="/srv/apps/curate_uc"
+APP_DIRECTORY="$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )"
 
 function banner {
   echo -e "$0 ↠ $1"
