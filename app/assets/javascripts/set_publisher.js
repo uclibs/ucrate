@@ -27,5 +27,6 @@ var setPublisher = function()   {
         }
     }
 }
-
-$(document).on('turbolinks:load', setPublisher)
+document.addEventListener("turbolinks:load", function() {
+    setPublisher();
+})
