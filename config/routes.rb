@@ -4,6 +4,7 @@ require 'sidekiq/web'
 require 'sidekiq/api'
 Rails.application.routes.draw do
   mount Orcid::Engine => "/orcid"
+  mount Scholar::API => '/'
 
   scope :dashboard do
     resources :collection_exports, only: [:index, :create, :destroy]
@@ -91,5 +92,6 @@ Rails.application.routes.draw do
      [Sidekiq::Queue.new.latency.to_s]]
   }, via: :get
 
+  resources :uploads, constraints: { format: :json }, controller: 'api_uploads_controller'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
