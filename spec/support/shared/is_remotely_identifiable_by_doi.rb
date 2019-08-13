@@ -27,14 +27,14 @@ shared_examples 'is remotely identifiable by doi' do
       context 'and a DOI has already been minted' do
         before { work.stub(:locally_managed_remote_identifier?).and_return(true) }
         it 'is "public"' do
-          expect(work.doi_status).to eq("public")
+          expect(work.doi_status).to eq("publish")
         end
       end
 
       context 'and a DOI has not already been minted' do
         before { work.stub(:locally_managed_remote_identifier?).and_return(false) }
         it 'is "public"' do
-          expect(work.doi_status).to eq("public")
+          expect(work.doi_status).to eq("publish")
         end
       end
     end
@@ -44,24 +44,24 @@ shared_examples 'is remotely identifiable by doi' do
       context 'and a DOI has already been minted' do
         before { work.stub(:locally_managed_remote_identifier?).and_return(true) }
 
-        context 'and the DOI is still reserved' do
-          before { work.stub(:identifier_status).and_return("reserved") }
-          it 'is "unavailable"' do
-            expect(work.doi_status).to eq("reserved")
+        context 'and the DOI is still registered' do
+          before { work.stub(:identifier_status).and_return("registered") }
+          it 'is "registered"' do
+            expect(work.doi_status).to eq("hide")
           end
         end
-        context 'and the DOI is not still reserved' do
-          before { work.stub(:identifier_status).and_return("public") }
-          it 'is "unavailable"' do
-            expect(work.doi_status).to eq("unavailable")
+        context 'and the DOI is not still registered' do
+          before { work.stub(:identifier_status).and_return("publish") }
+          it 'is "registered"' do
+            expect(work.doi_status).to eq("hide")
           end
         end
       end
 
       context 'and a DOI has not already been minted' do
         before { work.stub(:locally_managed_remote_identifier?).and_return(false) }
-        it 'is "reserved"' do
-          expect(work.doi_status).to eq("reserved")
+        it 'is "registered"' do
+          expect(work.doi_status).to eq("hide")
         end
       end
     end
@@ -71,24 +71,24 @@ shared_examples 'is remotely identifiable by doi' do
       context 'and a DOI has already been minted' do
         before { work.stub(:locally_managed_remote_identifier?).and_return(true) }
 
-        context 'and the DOI is still reserved' do
-          before { work.stub(:identifier_status).and_return("reserved") }
-          it 'is "unavailable"' do
-            expect(work.doi_status).to eq("reserved")
+        context 'and the DOI is still registered' do
+          before { work.stub(:identifier_status).and_return("register") }
+          it 'is "registered"' do
+            expect(work.doi_status).to eq("hide")
           end
         end
-        context 'and the DOI is not still reserved' do
-          before { work.stub(:identifier_status).and_return("public") }
-          it 'is "unavailable"' do
-            expect(work.doi_status).to eq("unavailable")
+        context 'and the DOI is not still registered' do
+          before { work.stub(:identifier_status).and_return("publish") }
+          it 'is "registered"' do
+            expect(work.doi_status).to eq("hide")
           end
         end
       end
 
       context 'and a DOI has not already been minted' do
         before { work.stub(:locally_managed_remote_identifier?).and_return(false) }
-        it 'is "reserved"' do
-          expect(work.doi_status).to eq("reserved")
+        it 'is "registered"' do
+          expect(work.doi_status).to eq("hide")
         end
       end
     end
@@ -98,24 +98,24 @@ shared_examples 'is remotely identifiable by doi' do
       context 'and a DOI has already been minted' do
         before { work.stub(:locally_managed_remote_identifier?).and_return(true) }
 
-        context 'and the DOI is still reserved' do
-          before { work.stub(:identifier_status).and_return("reserved") }
-          it 'is "unavailable"' do
-            expect(work.doi_status).to eq("reserved")
+        context 'and the DOI is still registered' do
+          before { work.stub(:identifier_status).and_return("register") }
+          it 'is "registered"' do
+            expect(work.doi_status).to eq("hide")
           end
         end
-        context 'and the DOI is not still reserved' do
-          before { work.stub(:identifier_status).and_return("public") }
+        context 'and the DOI is not still registered' do
+          before { work.stub(:identifier_status).and_return("publish") }
           it 'is "unavailable"' do
-            expect(work.doi_status).to eq("unavailable")
+            expect(work.doi_status).to eq("hide")
           end
         end
       end
 
       context 'and a DOI has not already been minted' do
         before { work.stub(:locally_managed_remote_identifier?).and_return(false) }
-        it 'is "reserved"' do
-          expect(work.doi_status).to eq("reserved")
+        it 'is "registered"' do
+          expect(work.doi_status).to eq("hide")
         end
       end
     end
@@ -149,7 +149,7 @@ shared_examples 'is remotely identifiable by doi' do
       it 'mints!' do
         work = build(:work, attributes: attributes)
         work.stub(:save).and_return(true)
-        VCR.use_cassette "remotely_identified_doi_mint_work" do
+        VCR.use_cassette "remotely_identified_doi_mint_work", record: :new_episodes do
           expect {
             Hydra::RemoteIdentifier.mint(:doi, work)
           }.to change(work, :doi).from(nil)

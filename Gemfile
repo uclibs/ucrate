@@ -8,13 +8,13 @@ git_source(:github) do |repo_name|
 end
 
 gem 'browse-everything', github: 'uclibs/browse-everything', branch: 'master'
-gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'setting-status'
+gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '1.3.13'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -48,8 +48,6 @@ gem 'active_attr'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'bundler', '~> 1.17'
 gem 'change_manager', git: "https://github.com/uclibs/change_manager.git", ref: 'd8e1b552740df00922a0a40796999c4e2a0cb8b6'
-gem 'sassc-rails', '>= 2.1.0'
-# gem 'clamav'
 gem 'devise', '~> 4.6.0'
 gem 'devise-guests', '~> 0.6'
 gem 'devise-multi_auth', git: 'https://github.com/uclibs/devise-multi_auth', branch: 'rails-5.1.6.2'
@@ -65,6 +63,7 @@ gem 'omniauth-shibboleth'
 gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5.1.6.2'
 gem 'riiif', '~> 2.0'
 gem 'rsolr', '>= 1.0'
+gem 'sassc-rails', '>= 2.1.0'
 gem 'sidekiq'
 
 group :development, :test do
@@ -89,6 +88,10 @@ group :development do
   # Disabling Spring because in interferes with loading environment variables
   # gem 'spring'
   # gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "capistrano", "~> 3.10", require: false
+  gem 'capistrano-bundler', '~> 1.6', require: false
+  gem "capistrano-rails", "~> 1.3", require: false
+  gem "capistrano-rvm", require: false
 end
 
 group :test do
@@ -103,4 +106,8 @@ group :test do
   gem 'selenium-webdriver', '3.12.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'webdrivers', '~> 3.0'
+end
+
+group :production do
+  gem 'clamav'
 end

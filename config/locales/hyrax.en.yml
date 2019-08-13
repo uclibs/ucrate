@@ -74,7 +74,11 @@ en:
         license: Rights
   hyrax:
     active_consent_to_agreement: I have read and agree to the
+    relationships_parent_row:
+      label: "In Parent Work:"
     base:
+      relationships_parent_row:
+        label: "In Collection:"
       form_progress:
         required_agreement: Check distribution license
       items:

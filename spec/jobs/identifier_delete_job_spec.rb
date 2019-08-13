@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 require 'rails_helper'
 
@@ -6,8 +7,8 @@ describe IdentifierDeleteJob do
     double("Doi Remote Service", username: "foo", password: "bar")
   end
 
-  let(:identifier_uri) { "https://www.example.com" }
-  let(:expected_post_uri) { "https://foo:bar@www.example.com" }
+  let(:identifier_uri) { "https://api.test.datacite.org/dois/10.23676/2j0v-ft05" }
+  let(:expected_post_uri) { "https://apitest:apitest@api.test.datacite.org/dois/10.23676/2j0v-ft05" }
 
   before do
     allow(Hydra::RemoteIdentifier).to receive(:remote_service).and_return(doi_remote_service)
@@ -15,13 +16,15 @@ describe IdentifierDeleteJob do
 
   describe "#perform" do
     it "calls RestClient with the correct params" do
-      expect(RestClient).to receive(:post).with(
-        expected_post_uri,
-        "_status: unavailable",
-        content_type: :text
-      )
+      VCR.use_cassette "remotely_identified_doi_delete_work", record: :new_episodes do
+        expect(RestClient).to receive(:put).with(
+          expected_post_uri,
+          "{\n  \"data\": {\n    \"type\": \"dois\",\n    \"attributes\": {\n      \"event\": \"hide\",\n   \"url\": \"https://datacite.org/invalid.html\"\n    }\n  }\n}",
+          content_type: :json
+        )
 
-      described_class.perform_now(identifier_uri)
+        described_class.perform_now(identifier_uri)
+      end
     end
   end
 end
