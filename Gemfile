@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'browse-everything', github: 'uclibs/browse-everything', branch: 'master'
-gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
+gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', ref: 'eb65b8e8bc9ebb8f42c77fc9ad65d32c0285730e'
 gem 'kaltura', '0.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
