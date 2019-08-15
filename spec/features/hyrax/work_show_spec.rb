@@ -43,17 +43,20 @@ RSpec.describe "display a work as its owner" do
       end
 
       # IIIF manifest does not include locale query param
-      expect(find('div.viewer:first')['data-uri']).to eq "/concern/generic_works/#{work.id}/manifest"
+      expect(find('div.viewer:first')['data-uri']).to eq "http://www.example.com/concern/generic_works/#{work.id}/manifest"
     end
 
-    it "add work to a collection", clean_repo: true, js: true do
-      optional 'ability to get capybara to find css select2-result (see Hyrax issue #3038)' if ENV['TRAVIS']
+    it "allows adding work to a collection", clean_repo: true, js: true do
       click_button "Add to collection" # opens the modal
-      select_member_of_collection(collection)
+      # Really ensure that this Collection model is persisted
+      Collection.all.map(&:destroy!)
+      persisted_collection = create(:collection_lw, user: user, collection_type_gid: multi_membership_type_1.gid)
+      select_member_of_collection(persisted_collection)
       click_button 'Save changes'
 
       # forwards to collection show page
-      expect(page).to have_content collection.title.first
+      sleep 5
+      expect(page).to have_content persisted_collection.title.first
       expect(page).to have_content work.title.first
       expect(page).to have_selector '.alert-success', text: 'Collection was successfully updated.'
     end

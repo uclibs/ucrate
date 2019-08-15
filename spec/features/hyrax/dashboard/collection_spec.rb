@@ -255,21 +255,27 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         click_on('Create collection')
 
         expect(page).to have_selector('h1', text: 'New User Collection')
-        expect(page).to have_selector "input#collection_title"
-        expect(page).to have_selector "input#collection_creator"
+        #        expect(page).to have_selector "input#collection_title"
+        #        expect(page).to have_selector "input#collection_creator"
 
-        title_element = find_by_id("collection_title")
-        title_element.set("Test Collection") # Add whitespace to test it getting removed
+        click_link('Additional fields')
+        expect(page).to have_selector "input.collection_creator.multi_value"
 
-        creator_element = find_by_id("collection_creator")
-        creator_element.set("Test Creator") # Add whitespace to test it getting removed
+        #        title_element = find_by_id("collection_title")
+        #        title_element.set("Test Collection") # Add whitespace to test it getting removed
 
+        #        creator_element = find_by_id("collection_creator")
+        #        creator_element.set("Test Creator") # Add whitespace to test it getting removed
+
+        fill_in('Title', with: title)
         fill_in('Description', with: description)
-        select('Attribution 4.0 International', from: 'License')
+        fill_in('Related URL', with: 'http://example.com/')
+
+        #        select('Attribution 4.0 International', from: 'License')
 
         click_button("Save")
         expect(page).to have_content title
-        find("input#collection_creator").should have_content(:creator)
+        #        find("input#collection_creator").should have_content(:creator)
         expect(page).to have_content description
       end
 

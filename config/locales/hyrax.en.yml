@@ -72,6 +72,7 @@ en:
       defaults:
         description: Description
         license: Rights
+
   hyrax:
     active_consent_to_agreement: I have read and agree to the
     relationships_parent_row:
@@ -86,6 +87,13 @@ en:
     batch_uploads:
       files:
         upload_type_instructions: 'Note: To create a single work for all the files, '
+    collection_type:
+      admin_set_title: Admin Set
+      default_title: User Collection
+    collection_types:
+      create_service:
+        admin_set_description: An aggregation of works that is intended to help with administrative control. Admin Sets provide a way of defining behaviors and policies around a set of works.
+        default_description: A User Collection can be created by any user to organize their works.
     collections:
       show:
         collection_details: Collection Details
