@@ -919,12 +919,12 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
         it 'to true, it shows Discovery tab' do
           visit "/dashboard/collections/#{discoverable_collection_id}/edit"
-          expect(page).to have_link('Discovery', href: '#discovery')
+          expect(page).to have_link('Visibility', href: '#discovery')
         end
 
         it 'to false, it hides Discovery tab' do
           visit "/dashboard/collections/#{not_discoverable_collection_id}/edit"
-          expect(page).not_to have_link('Discovery', href: '#discovery')
+          expect(page).not_to have_link('Visibility', href: '#discovery')
         end
       end
 
