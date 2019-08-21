@@ -262,6 +262,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         title_element.set("Test Collection") # Add whitespace to test it getting removed
 
         creator_element = find_by_id("collection_creator")
+        expect(creator_element.value).to eq("User, Sample")
         creator_element.set("Test Creator") # Add whitespace to test it getting removed
 
         fill_in('Description', with: description)

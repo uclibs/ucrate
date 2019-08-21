@@ -29,20 +29,22 @@ var setCurrentUserDeptAsDept = function() {
 }
 
 var setCurrentUserCollegeAsCollege = function() {
-
+  // if the college field is present...
+  if( $('select[id$=_college]').length ) {
       // read the current user's college from the data attribute
       var college = document.querySelector('#current_user').dataset.college;
 
       // set the current user's college
-      $('[id$=_college] option:selected').text(college)
-      $('[id$=_college] option:selected').val(college)
+      $('[id$=_college] option:selected').text(college);
+      $('[id$=_college] option:selected').val(college);
+  }
  }
 
 var setCurrentUserAsCreator = function() {
   // if the creator field is present...
   if( $('input[id$=_creator]').length ) {
     // and it's not collection_creator
-    if( $('input[id$=collection_creator]').length == 0 && $('input[id$=etd_creator]').length == 0) {
+    if( $('input[id$=etd_creator]').length == 0) {
       // read the current user's name from the data attribute
       var creator = document.querySelector('#current_user').dataset.name;
 
