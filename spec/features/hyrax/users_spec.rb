@@ -49,6 +49,7 @@ RSpec.describe "User Spec", type: :feature do
         expect(page).to have_field('Alternate email', with: user.alternate_email)
         expect(page).to have_field('Campus phone number', with: user.telephone)
         expect(page).to have_field('Alternate phone number', with: user.alternate_phone_number)
+        expect(page).to have_field('Research Directory webpage', with: user.rd_page)
         expect(page).to have_field('Personal webpage', with: user.website)
         expect(page).to have_field('Blog', with: user.blog)
         expect(page).to have_content('Create or Connect your ORCID iD')
@@ -60,6 +61,7 @@ RSpec.describe "User Spec", type: :feature do
         click_on('Save Profile')
         expect(page).to have_content("Link to this page: ")
         expect(page).to have_content("/users/#{user.user_key.gsub('.', '-dot-')}")
+        expect(page).to have_content("https://researchdirectory.uc.edu/p/user")
       end
     end
   end

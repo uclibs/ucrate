@@ -99,6 +99,15 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :rd_page, class: 'col-xs-4 control-label' do %>
+      <%= t('hyrax.user_profile.rd_page') %>
+    <% end %>
+    <div class="col-xs-8">
+       <%= f.text_field :rd_page, class: "form-control", pattern: "https:\/\/researchdirectory.uc.edu\/p\/[a-z]+" %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.label :website, class: 'col-xs-4 control-label' do %>
       <%= t('hyrax.user_profile.website') %>
     <% end %>
