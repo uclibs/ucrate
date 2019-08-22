@@ -1,5 +1,10 @@
 en:
   hyrax:
+    dashboard:
+      collections:
+        form:
+          tabs:
+            discovery: Visibility
     icons:
       article:     'fa fa-file-text-o'
     select_type:
