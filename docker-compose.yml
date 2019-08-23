@@ -1,0 +1,11 @@
+version: '3'
+services:
+  ucrate:
+    image: ucrate:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/dev/ucrate
+    entrypoint: /bin/bash
+    stdin_open: true
+    tty: true
