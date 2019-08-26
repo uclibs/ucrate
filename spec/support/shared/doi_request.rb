@@ -167,6 +167,7 @@ shared_examples 'doi request' do |work_class|
 
       expect(page).to have_content('My Test Work')
       expect(page).to have_content('doi:10.23676')
+      expect(page).to have_link('https://doi.org/10.23676')
 
       click_link "Edit"
       title_element = find_by_id("#{work_label}_title")
