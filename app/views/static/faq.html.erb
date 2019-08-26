@@ -16,34 +16,34 @@
       <li><a href="#faq_7913">What happens to my works if I delete them?</a></li>
       <li><a href="#faq_159">Where do I go if I want to consult with subject area specialists on content?</a></li>
       <li><a href="#faq_3456">What's restricted data?</a></li>
-      <li><a href="#faq_6543">What’s the difference between delegates, editors, and groups?</a></li>
+      <li><a href="#faq_6543">What’s the difference between proxies and editors?</a></li>
       <li><a href="#faq_1010">How do work access rights impact my DOIs?</a></li>
 
     </ul>
     <p>
       <a name="faq_1234" id="faq_1234"></a>If I have a problem with the system, where do I go for assistance? </p>
     <blockquote>
-      Use the <%= link_to 'contact us', hyrax.contact_path %> to submit any inquiry about <%=t('hyrax.product_name') %>, including technical issues.
+      Use the <%= link_to 'contact form', hyrax.contact_path %> to submit any inquiry about <%=t('hyrax.product_name') %>, including technical issues.
     </blockquote>
     <p><a name="faq_951" id="faq_951"></a>
       How can I allow someone else to submit works on my behalf?
     </p>
     <blockquote>
-      <%=t('hyrax.product_name') %> allows you to assign delegates, who will be able to submit new works on your behalf. They will retain access to modify these works until you remove their access. If you're logged in, you can access this from the “My Delegates” link under your account name, above.
+      <%=t('hyrax.product_name') %> allows you to assign proxies, who will be able to submit new works on your behalf. They will retain access to modify these works until you remove their access. If you're logged in, you can manage your proxies from the “Current Proxies” section in your Dashboard, accessible via the top navigation bar.
     </blockquote>
 
     <p><a name="faq_5678" id="faq_5678"></a>
       How can I group my works into collections of related works?
     </p>
     <blockquote>
-      <%=t('hyrax.product_name') %> allows you to create collections, to which you can add any works that you or others have submitted to <%=t('hyrax.product_name') %>. You can set a custom title, description, and image for your collections.
+      <%=t('hyrax.product_name') %> allows you to create collections, to which you can add any works that you or others have submitted to <%=t('hyrax.product_name') %>. You can set a custom title, description, image, and some branding for your collections.
     </blockquote>
 
     <p><a name="faq_4321" id="faq_4321"></a>
       How can I share access to selected works with a group of collaborators?
     </p>
     <blockquote>
-      <%=t('hyrax.product_name') %> allows you to create groups of collaborators, which you can assign to individual works. This will give individuals in the group the ability to edit assigned works and to view restricted works of yours. You can also assign editing rights to individuals, without first placing them in groups, by designating them as editors of your work. If you're logged in, you can access this from the “My Groups” link under your account name, above.
+      <%=t('hyrax.product_name') %> allows you to assign editing rights to individuals by designating them as editors of your work. If you're logged in, you can add individual collaborators with "Edit" or "View" access on the "Share" tab on the work edit or submission form..
     </blockquote>
 
 
@@ -51,7 +51,7 @@
       How do I upload an access file?
     </p>
     <blockquote>
-      When completing the submission form for <%=t('hyrax.product_name') %>, you may upload files. We recommend uploading your access file at the same time you are describing your work.
+      When completing the submission form for <%=t('hyrax.product_name') %>, you may upload files using the file tab of the submission form. We recommend uploading your access file at the same time you are describing your work.
       <br><br>
       For more information, please see <%= link_to 'File Format Advice', format_advice_path %>.
     </blockquote>
@@ -61,7 +61,7 @@
     </p>
 
     <blockquote>
-      After your work is uploaded and you are viewing the record, you will see a row of buttons towards the bottom of the page (if logged in). In the row of buttons, click <span class="fakebutton">Attach a File</span> to upload an additional file to your record. We recommend granting private access rights to preservation files. This will make it easier for users to know which they should download.
+      You may upload a preservation file for your work during work creation or at any time afterward. Use the "Files" tab on the upload form when creating your work, or, while editing your work after creation. We recommend setting private access rights to preservation files, this will make it easier for users to know which they should download.
       <br><br>
       For more information, please see <%= link_to 'File Format Advice', format_advice_path %>.
     </blockquote>
@@ -110,7 +110,7 @@
       Where do I go if I want to consult with subject area specialists on content?
     </p>
     <blockquote>
-      Access the <a href="http://www.libraries.uc.edu/help/subject-librarians.html">Subject Librarians directory</a> to find contact info for subject area specialists.
+      Access the <a href="https://libraries.uc.edu/research-teaching-support/subject-librarians.html">Subject Librarians directory</a> to find contact info for subject area specialists.
     </blockquote>
 
 
@@ -123,14 +123,14 @@
 
 
     <p><a name="faq_6543" id="faq_6543"></a>
-      What’s the difference between delegates, editors, and groups?
+      What’s the difference between proxies and editors?
     </p>
     <blockquote>
-      Delegates are people you authorize who can create, edit, and delete works on your behalf. They can do anything you can do, so please exercise discretion when authorizing another person as a delegate. Your delegates may be managed from the My Delegates page.
+      Proxies are people you authorize who can create, edit, and delete works on your behalf. They can do anything you can do, so please exercise discretion when authorizing another person as a proxy. Your proxies may be managed from the "Current Proxies" section of your Dashboard.
       <br><br>
-      Editors are individuals to whom you have granted the ability to view and make changes to a specific work. If you would like to grant a group of individuals these rights, you can create a Group on the My Groups page. For example, if you work with a group of researchers on a single work, you can create a group of those researchers and grant that group viewing and editing privileges.
+      Editors are individuals to whom you have granted the ability to view and make changes to a specific work. 
       <br><br>
-      Editors (and groups) are like delegates, but whereas delegates have all the powers of the person they represent, editors (and groups) can only view and make changes to specific works.
+      Editors are like proxies, but whereas proxies have all the powers of the person they represent, editors can only view and make changes to specific works.
     </blockquote>
 
     <p><a name="faq_1010" id="faq_1010"></a>
@@ -139,11 +139,11 @@
     <blockquote>
       If you use <%=t('hyrax.product_name') %> to request a DOI, it will be either <i>public</i>, <i>reserved</i>, or <i>unavailable</i>.
       <br><br>
-      <i>Public</i> DOIs are available for all <strong><%=t('hyrax.visibility.open.label_html') %></strong> works, and work normally.
+      <i>Public</i> DOIs are available for all <strong class="label label-success"><%=t('hyrax.visibility.open.text') %></strong> works, and work normally.
       <br><br>
-      <i>Reserved</i> DOIs are granted to any <strong><%=t('hyrax.visibility.open.label_html') %></strong>, <strong><%=t('hyrax.visibility.authenticated.label_html') %></strong>, or <strong><%=t('hyrax.visibility.private.label_html') %></strong> works for which you request a DOI. A <i>reserved</i> DOI will not yet redirect to your work, but it will be availble on the display page for your work for your reference. A <i>reserved</i> DOI will become <i>public</i> if you make your work <strong><%=t('hyrax.visibility.open.label_html') %></strong> or if your <strong><%=t('hyrax.visibility.embargo.label_html') %></strong> expires.
+      <i>Reserved</i> DOIs are granted to any <strong class="label label-success"><%=t('hyrax.visibility.open.text') %></strong>, <strong class="label label-info"><%=t('hyrax.visibility.authenticated.text', institution: institution_name) %></strong>, or <strong class="label label-danger"><%=t('hyrax.visibility.restricted.text') %></strong> works for which you request a DOI. A <i>reserved</i> DOI will not yet redirect to your work, but it will be available on the display page for your work for your reference. A <i>reserved</i> DOI will become <i>public</i> if you make your work <strong class="label label-success"><%=t('hyrax.visibility.open.text') %></strong> or if your <strong class="label label-warning"><%=t('hyrax.visibility.embargo.text') %></strong> expires.
       <br><br>
-      <i>Unavailable</i> DOIs are maintained for works for which you have requested a DOI where you have deleted the work or where you have changed the access rights from <strong><%=t('hyrax.visibility.open.label_html') %></strong> to <strong><%=t('hyrax.visibility.embargo.label_html') %></strong>, <strong><%=t('hyrax.visibility.authenticated.label_html') %></strong>, or <strong><%=t('hyrax.visibility.private.label_html') %></strong>. A tombstone page will indicate that the work is not available because it was withdrawn from the author. If you change your work back to <strong><%=t('hyrax.visibility.open.label_html') %></strong>, the DOI will change back to <i>public</i> status.
+      <i>Unavailable</i> DOIs are maintained for works for which you have requested a DOI where you have deleted the work or where you have changed the access rights from <strong class="label label-success"><%=t('hyrax.visibility.open.text') %></strong> to <strong class="label label-warning"><%=t('hyrax.visibility.embargo.text') %></strong>, <strong class="label label-info"><%=t('hyrax.visibility.authenticated.text', institution: institution_name) %></strong>, or <strong class="label label-danger"><%=t('hyrax.visibility.restricted.text') %></strong>. A tombstone page will indicate that the work is not available because it was withdrawn from the author. If you change your work back to <strong class="label label-success"><%=t('hyrax.visibility.open.text') %></strong>, the DOI will change back to <i>public</i> status.
       <br><br>
     </blockquote>
   </div>
