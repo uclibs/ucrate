@@ -126,6 +126,40 @@ shared_examples 'doi request' do |work_class|
     end
   end
 
+  context 'when the publisher is missing when minting DOI' do
+    before do
+      login_as user
+      visit new_polymorphic_path(work_class)
+      sleep(3)
+    end
+
+    it 'fails validation' do
+      click_link "DOI" # switch tab
+      choose('mint-doi')
+      click_link "Metadata" # switch tab
+      title_element = find_by_id("#{work_label}_title")
+      title_element.set("My Test Work")
+      creator_element = find(:css, "input.#{work_label}_creator")
+      creator_element.set("Test User")
+      description_element = find_by_id("#{work_label}_description")
+      description_element.set("Test description")
+      fill_in('Required Software', with: "database thingy") if work_class == Dataset
+      college_element = find_by_id("#{work_label}_college")
+      college_element.select("Business")
+      department_element = find_by_id("#{work_label}_department")
+      department_element.set("Marketing")
+      fill_in('Publisher', with: "")
+      fill_in('Advisor', with: "Advisor Name") if [Etd, StudentWork].include?(work_class)
+      select 'Attribution-ShareAlike 4.0 International', from: "#{work_label}_license"
+      choose("#{work_label}_visibility_restricted")
+      check('agreement')
+      click_on('Save')
+
+      expect(page).to have_content("'Publisher' is required to mint a DOI")
+      expect(page).to have_content('is required for remote DOI minting') unless work_class == Etd
+    end
+  end
+
   context 'creating a work with private visibility' do
     before do
       login_as user
