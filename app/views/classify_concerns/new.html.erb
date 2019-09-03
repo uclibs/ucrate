@@ -9,7 +9,7 @@
     <% (order + classify_concern.all_curation_concern_classes).uniq.each do |klass| %>
       <% if can? :create, klass %>
         <li class="work-type">
-          <h3 class="title"><%= klass.human_readable_type %></h3>
+          <h3 class="title"><%= t("hyrax.select_type.#{klass.model_name.i18n_key}.name") %></h3>
           <p class="short-description"><%= t("hyrax.select_type.#{klass.model_name.i18n_key}.description") %></p>
           <% if params[:type] == 'batch' %>
             <%= link_to 'Add Batch',

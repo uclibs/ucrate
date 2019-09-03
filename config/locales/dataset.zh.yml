@@ -6,5 +6,5 @@ zh:
       dataset:
         # TODO: translate `human_name` into Chinese
         description:        "Dataset 作品"
-        name:               "Dataset"
+        name:               "数据集"
         # TODO: translate `human_name` into Chinese

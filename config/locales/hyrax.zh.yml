@@ -1,14 +1,4 @@
 zh:
-  activefedora:
-    models:
-      article: '文章'
-      dataset: '数据集'
-      document: '文件'
-      etd: 'Etd'
-      generic_work: '普通文件'
-      image: '图像'
-      medium: '媒体'
-      student_work: '学生作品'
   blacklight:
     search:
       collections: 收藏

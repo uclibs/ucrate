@@ -6,5 +6,5 @@ es:
       dataset:
         # TODO: translate `human_name` into Spanish
         description:        "Dataset trabajos"
-        name:               "Dataset"
+        name:               "Conjunto de datos"
         # TODO: translate `human_name` into Spanish

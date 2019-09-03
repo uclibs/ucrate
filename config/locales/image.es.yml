@@ -6,5 +6,5 @@ es:
       image:
         # TODO: translate `human_name` into Spanish
         description:        "Image trabajos"
-        name:               "Image"
+        name:               "Imagen"
         # TODO: translate `human_name` into Spanish
