@@ -58,7 +58,7 @@ RSpec.describe 'searching' do
       expect(page).to have_content('Search Results')
       expect(page).to have_content "Toothbrush"
       expect(page).to have_content('collection title abc')
-      expect(page).to have_css("span.collection-icon-search")
+      expect(page).to have_selector("//img")
     end
 
     it "displays browse button" do

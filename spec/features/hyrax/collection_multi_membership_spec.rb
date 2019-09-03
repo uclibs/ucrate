@@ -30,6 +30,7 @@ RSpec.describe 'Adding a work to multiple collections', type: :feature, clean_re
         visit '/dashboard/my/works'
         check 'check_all'
         click_button 'Add to collection' # opens the modal
+        sleep 5
         select_member_of_collection(new_collection)
         click_button 'Save changes'
 
@@ -50,6 +51,7 @@ RSpec.describe 'Adding a work to multiple collections', type: :feature, clean_re
         visit '/dashboard/my/works'
         check 'check_all'
         click_button 'Add to collection' # opens the modal
+        sleep 5
         select_member_of_collection(new_collection)
         click_button 'Save changes'
 
@@ -82,6 +84,7 @@ RSpec.describe 'Adding a work to multiple collections', type: :feature, clean_re
         visit '/dashboard/my/works'
         check 'check_all'
         click_button 'Add to collection' # opens the modal
+        sleep 5
         select_member_of_collection(new_collection)
         click_button 'Save changes'
         # forwards to collection show page
@@ -102,6 +105,7 @@ RSpec.describe 'Adding a work to multiple collections', type: :feature, clean_re
           visit '/dashboard/my/works'
           check 'check_all'
           click_button 'Add to collection' # opens the modal
+          sleep 5
           select_member_of_collection(new_collection)
           click_button 'Save changes'
           # forwards to collections index page and shows flash message
