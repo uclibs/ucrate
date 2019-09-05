@@ -40,13 +40,16 @@ cd redis-4.0.3 && make && make install
 # RUN echo never > /sys/kernel/mm/transparent_hugepage/enabled
 
 # Install gems
-USER dev
-WORKDIR /home/dev
-RUN git clone https://github.com/uclibs/ucrate.git
+RUN mkdir /home/dev/ucrate
 WORKDIR /home/dev/ucrate
+ADD Gemfile /home/dev/ucrate
+ADD Gemfile.lock /home/dev/ucrate
+RUN chown -R dev /home/dev/ucrate
+USER dev
 RUN gem install bundler
 RUN bundle install
 USER root
 RUN chown -R dev /home/dev/ucrate
+
 USER dev
-CMD git pull && bundle install & clear && printf "**********************************\nEnter this command: source script/docker.sh migrate\nAfter the previous command has finished, simply go to localhost:3000 in any browser\nTo exit press Ctrl + D\n**********************************\n" && bash
+CMD git pull && bundle install && clear && printf "**********************************\nEnter this command: source script/docker.sh migrate\nAfter the previous command has finished, simply go to localhost:3000 in any browser\nTo exit press Ctrl + D\n**********************************\n" && bash

@@ -12,7 +12,6 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
-# --allow-unauthenticated needed for yarn package
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
   build-essential libpq-dev libreoffice imagemagick unzip ghostscript vim \
@@ -28,10 +27,13 @@ RUN mkdir -p /var/lib/clamav && \
   wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd && \
   chown clamav:clamav /var/lib/clamav/*.cvd
 
+RUN sudo freshclam
+
 # install FITS for file characterization
-RUN mkdir -p /opt/fits && \
-  curl -fSL -o /opt/fits-1.0.5.zip http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip && \
-  cd /opt && unzip fits-1.0.5.zip && chmod +X fits-1.0.5/fits.sh
+RUN curl -fSL -o /home/dev/fits-1.0.5.zip http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip && \
+  cd /home/dev && unzip fits-1.0.5.zip && chmod +X fits-1.0.5/fits.sh
+RUN touch /home/dev/.bashrc && echo 'export PATH=$PATH:~/fits-1.0.5' >> /home/dev/.bashrc
+
 
 # Install Redis
 RUN mkdir -p /opt/redis && cd /opt/redis && wget http://download.redis.io/releases/redis-4.0.3.tar.gz && \
@@ -40,11 +42,12 @@ cd redis-4.0.3 && make && make install
 # RUN echo never > /sys/kernel/mm/transparent_hugepage/enabled
 
 # Install gems
-USER dev
 RUN mkdir /home/dev/ucrate
 WORKDIR /home/dev/ucrate
 ADD Gemfile /home/dev/ucrate
 ADD Gemfile.lock /home/dev/ucrate
+RUN chown -R dev /home/dev/ucrate
+USER dev
 RUN gem install bundler
 RUN bundle install
 USER root

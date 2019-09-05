@@ -10,6 +10,8 @@ tmux split-window -v
 tmux send-keys -t 0 "bundle exec fcrepo_wrapper -p 8984" C-m
 tmux send-keys -t 1 "bundle exec solr_wrapper -d solr/config/ --collection_name hydra-development" C-m
 # If you are using Docker, you may need to delete your dump.rb file for redis to work
+tmux send-keys -t 2 "rm -f dump.rdb" C-m
+tmux send-keys -t 2 "clear" C-m
 tmux send-keys -t 2 "redis-server" C-m
 tmux send-keys -t 3 "bundle exec rails server" C-m
 if [[ $SIDEKIQ == "s" ]]; then
