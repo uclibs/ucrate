@@ -22,6 +22,12 @@ class ExpirationService
     embargo_expirations(object_types).each do |expiration|
       next unless expiration.embargo.active?
       expiration.visibility = expiration.embargo.visibility_after_embargo
+      if expiration.respond_to? :doi
+        if expiration.doi.present?
+          temp_doi = expiration.doi.at(4..-1)
+          IdentifierEmbargoUpdateJob.perform_now("https://api.test.datacite.org/dois/" + temp_doi)
+        end
+      end
       expiration.deactivate_embargo!
       expiration.embargo.save
       expiration.save

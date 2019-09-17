@@ -88,6 +88,7 @@ RSpec/AnyInstance:
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
     - 'spec/controllers/collection_exports_controller_spec.rb'
     - 'spec/models/job_io_wrapper_spec.rb'
+    - 'spec/services/expiration_service_spec.rb'
 
 RSpec/DescribeClass:
   Exclude:
@@ -162,6 +163,7 @@ RSpec/ExampleLength:
     - 'spec/models/file_view_stat_spec.rb'
     - 'spec/jobs/attach_files_to_work_job_spec.rb'
     - 'spec/controllers/callbacks_controller_spec.rb'
+    - 'spec/jobs/identifier_embargo_update_job_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
@@ -208,6 +210,7 @@ RSpec/VerifiedDoubles:
     - 'spec/services/hyrax/default_middleware_stack_spec.rb'
     - 'spec/jobs/attach_files_to_work_job_spec.rb'
     - 'spec/models/collection_spec.rb'
+    - 'spec/jobs/identifier_embargo_update_job_spec.rb'
     
 RSpec/NamedSubject:
   Exclude:
