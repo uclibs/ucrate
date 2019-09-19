@@ -6,5 +6,5 @@ es:
       document:
         # TODO: translate `human_name` into Spanish
         description:        "Document trabajos"
-        name:               "Document"
+        name:               "Documento"
         # TODO: translate `human_name` into Spanish

@@ -6,5 +6,5 @@ es:
       student_work:
         # TODO: translate `human_name` into Spanish
         description:        "Student work trabajos"
-        name:               "Student Work"
+        name:               "Trabajo de estudiante"
         # TODO: translate `human_name` into Spanish

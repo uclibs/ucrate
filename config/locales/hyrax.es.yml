@@ -1,14 +1,4 @@
 es:
-  activefedora:
-    models:
-      article: 'Artículo'
-      dataset: 'Conjunto de datos'
-      document: 'Documento'
-      etd: 'Etd'
-      generic_work: 'Trabajo genérico'
-      image: 'Imagen'
-      medium: 'Medios de comunicación'
-      student_work: 'Trabajo de estudiante'
   blacklight:
     search:
       collections: Colecciones
