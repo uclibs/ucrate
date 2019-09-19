@@ -4,8 +4,13 @@
 # script/restart_sidekiq.sh [production|development]
 
 ENVIRONMENT=$1
-APP_DIRECTORY="/srv/apps/curate_uc"
-
+THREADS=$2
+RVM=$3
+APP_DIRECTORY="$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )"
+if [[ $RVM == "yes" ]]; then
+    source "$HOME/.rvm/scripts/rvm"
+    export PATH=$PATH:"$(rvm gemdir)/bin"
+fi
 function banner {
     echo -e "$0 ↠ $1"
 }
@@ -19,12 +24,18 @@ if [ $ENVIRONMENT != "production" ] && [ $ENVIRONMENT != "development" ]; then
     echo -e "ERROR: environment argument must be either [production|development] most likely this will be development for local machines and production otherwise"
     exit 1
 fi
+# Check if threads were set
+re='^[0-9]+$'
+if ! [[ $THREADS =~ $re ]] ; then
+   THREADS=8
+fi
 
 $APP_DIRECTORY/script/kill_sidekiq.sh
 
 banner "starting Sidekiq"
-export PATH=$PATH:/srv/apps/.gem/ruby/2.5.0/bin
-export FITS_HOME=/opt/fits/fits
-export PATH=$PATH:/opt/fits/fits
+if [[ -z "${FITS_HOME}" ]]; then
+  export FITS_HOME=/opt/fits/fits
+  export PATH=$PATH:/opt/fits/fits
+fi
 cd $APP_DIRECTORY
-bundle exec sidekiq -d -c 8 -q ingest -q default -q event -q change -L log/sidekiq.log -C config/sidekiq.yml -e $ENVIRONMENT
+bundle exec sidekiq -d -c $THREADS -q ingest -q default -q event -q change -L log/sidekiq.log -C config/sidekiq.yml -e $ENVIRONMENT

@@ -30,11 +30,10 @@ coverage/*
 # Application files to ingore
 fits.log
 
-# Ignore uploaded avatars and banners
-public/branding/*
-public/system/avatars/*
-
-* Ignore dotenv config files
+# Ignore dotenv config files
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Ignore compiled assets
+public/**

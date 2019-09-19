@@ -13,7 +13,7 @@ then
 
   # Restart the app and generate a blank log file
   touch $file_name
-  touch /srv/apps/curate_uc/tmp/restart.txt
+  touch "$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )/tmp/restart.txt"
   
   # Compress the moved log file
   gzip $new_fileName

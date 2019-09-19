@@ -7,7 +7,7 @@
 # CAUTION - This script deletes files. Be careful where you point it!
 #
 
-LOG="/srv/apps/curate_uc/log/riiif_cache_clean.log"
+LOG="$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )/log/riiif_cache_clean.log"
 
 # Check that the cache directories...
 IMG_CACHE_DIR="/mnt/common/scholar-riiif-cache"
