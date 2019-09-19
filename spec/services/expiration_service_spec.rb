@@ -5,6 +5,7 @@ require 'rails_helper'
 describe ExpirationService do
   let(:embargo_date) { (Time.zone.today + 14.days) }
   let(:embargoed_work) { create(:private_generic_work, :with_public_embargo, title: ['Embargoed Work'], embargo_release_date: embargo_date) }
+  let(:embargoed_doi_work) { create(:private_generic_work, :with_public_embargo, title: ['Embargoed Work'], embargo_release_date: embargo_date, doi: "doi:test_doi") }
   let(:embargoed_file) { create(:file_set, :with_public_embargo, title: ['Embargoed File'], embargo_release_date: embargo_date) }
 
   after { ActiveFedora::Cleaner.clean! }
@@ -17,6 +18,16 @@ describe ExpirationService do
       embargoed_work.reload
       expect(embargoed_work.visibility).to eq('open')
       expect(embargoed_work.embargo.embargo_history.first).to start_with('An active embargo was deactivated')
+    end
+  end
+
+  context 'with an expired embargo and doi' do
+    it 'changes the visibility when it has expired' do
+      expect(embargoed_doi_work.visibility).to eq('restricted')
+      expect(VisibilityCopyJob).to receive(:perform_later).with(embargoed_doi_work)
+      allow_any_instance_of(IdentifierEmbargoUpdateJob).to receive(:perform).and_return(true)
+      described_class.call(embargo_date)
+      embargoed_doi_work.reload
     end
   end
 
