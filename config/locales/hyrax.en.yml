@@ -100,6 +100,9 @@ en:
       header: Contact the Scholar@UC Team
       notice_html: 'Please us this form to send questions, feedback, or report a problem to the Scholar@UC team. You can also check %{href} for more information'
       help_resources_href: 'Help Resources'
+    file_sets:
+      show_details:
+        fixity_check: Fixity Check  
     passive_consent_to_agreement: I have read and agree to the
     homepage:
       browse: Browse
@@ -122,6 +125,10 @@ en:
         scholar_blog: Scholar Blog
       partners: partners
       what_is: what is
+    notifications:
+      fixity_check_failure:
+        message: The fixity check run at %{log_date} for %{file_title} (%{uri}) failed.
+        subject: Failing Fixity Check
     pages:
       tabs:
         agreement_page: 'Distribution License'

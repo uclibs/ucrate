@@ -37,7 +37,7 @@ Hyrax.config do |config|
   # config.max_notifications_for_dashboard = 5
 
   # How frequently should a file be fixity checked
-  # config.max_days_between_fixity_checks = 7
+  config.max_days_between_fixity_checks = ENV["FIXITY_MAX_DAYS"].to_i
 
   # Options to control the file uploader
   # config.uploader = {
