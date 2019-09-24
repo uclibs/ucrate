@@ -27,13 +27,22 @@ Metrics/BlockLength:
     - 'config/routes.rb'
     - 'lib/tasks/*.rake'
     - 'spec/**/*.rb'
+    - 'app/api/*'
+    - 'app/api/**/*'
+    - 'spec/api/*'
 
 Metrics/PerceivedComplexity:
   Exclude:
     - 'app/models/ability.rb'
+    - 'app/api/*'
+    - 'app/api/**/*'
+    - 'spec/api/*'
+    - 'app/helpers/api_helper.rb'
 
 Metrics/LineLength:
-  Max: 400
+  Max: 450
+  Exclude:
+  - 'app/api/scholar/v1/collections.rb'
 
 Metrics/MethodLength:
   Exclude:
@@ -47,11 +56,19 @@ Metrics/MethodLength:
     - 'app/services/hyrax/custom_stat_importer.rb'
     - 'app/jobs/attach_files_to_work_job.rb'
     - 'app/services/collection_metadata_csv_factory.rb'
+    - 'app/api/*'
+    - 'app/api/**/*'
+    - 'spec/api/*'
+    - 'app/helpers/api_helper.rb'
 
 Metrics/ClassLength:
   Exclude:
     - 'app/presenters/hyrax/collection_presenter.rb'
     - 'app/controllers/catalog_controller.rb'
+    - 'app/api/*'
+    - 'app/api/**/*'
+    - 'spec/api/*'
+    - 'app/helpers/api_helper.rb'
 
 Metrics/ModuleLength:
   Exclude:
@@ -94,6 +111,9 @@ RSpec/DescribeClass:
   Exclude:
     - 'spec/features/**/*'
     - 'spec/views/**/*'
+    - 'app/api/*'
+    - 'app/api/**/*'
+    - 'spec/api/*'    
 
 RSpec/ExampleLength:
   Exclude:
@@ -164,6 +184,9 @@ RSpec/ExampleLength:
     - 'spec/jobs/attach_files_to_work_job_spec.rb'
     - 'spec/controllers/callbacks_controller_spec.rb'
     - 'spec/jobs/identifier_embargo_update_job_spec.rb'
+    - 'app/api/*'
+    - 'app/api/**/*'
+    - 'spec/api/*'
 
 RSpec/ExpectActual:
   Enabled: false
@@ -225,9 +248,19 @@ RSpec/NamedSubject:
     - 'spec/services/hyrax/custom_stat_importer_spec.rb'
     - 'spec/models/collection_spec.rb'
 
+# This allows us to have the keys in the .env files
+Security/Eval:
+  Exclude:
+    - 'app/api/*'
+    - 'app/api/**/*'
+    - 'spec/api/*'
+    - 'app/helpers/api_helper.rb'
+
 Style/FrozenStringLiteralComment:
   Exclude:
     - 'app/renderers/hyrax/renderers/attribute_renderer.rb'
+    - 'app/api/scholar/shared_params.rb'
+    - 'app/api/scholar/v1/concern.rb'
 
 Style/ClassAndModuleChildren:
   Enabled: false
@@ -268,11 +301,19 @@ Metrics/AbcSize:
     - 'app/models/ability.rb'
     - 'app/indexers/hyrax/collection_indexer.rb'
     - 'app/services/hyrax/custom_stat_importer.rb'
+    - 'app/api/*'
+    - 'app/api/**/*'
+    - 'spec/api/*'
+    - 'app/helpers/api_helper.rb'
 
 Metrics/CyclomaticComplexity:
   Exclude:
     - 'app/models/ability.rb'
     - 'app/forms/hyrax/forms/batch_upload_form.rb'
+    - 'app/api/*'
+    - 'app/api/**/*'
+    - 'spec/api/*'
+    - 'app/helpers/api_helper.rb'
 
 Lint/HandleExceptions:
   Exclude:
