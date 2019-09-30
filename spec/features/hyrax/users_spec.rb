@@ -52,6 +52,7 @@ RSpec.describe "User Spec", type: :feature do
         expect(page).to have_field('Personal webpage', with: user.website)
         expect(page).to have_field('Blog', with: user.blog)
         expect(page).to have_content('Create or Connect your ORCID iD')
+        expect(page).to have_link('What is ORCID?')
       end
 
       it 'shows permalinks after editing' do

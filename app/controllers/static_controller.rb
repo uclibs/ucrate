@@ -62,4 +62,8 @@ class StaticController < ApplicationController
   def whats_new
     render "static/whats_new"
   end
+
+  def orcid_about
+    render "static/orcid_about"
+  end
 end
