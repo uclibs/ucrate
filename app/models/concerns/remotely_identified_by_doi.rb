@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module RemotelyIdentifiedByDoi
   NOT_NOW = 'not_now'
   ALREADY_GOT_ONE = 'already_got_one'
@@ -16,10 +17,17 @@ module RemotelyIdentifiedByDoi
       property :identifier_status, predicate: ::RDF::URI.new('http://purl.org/dc/terms/identifier#doiStatus'), multiple: false
       property :existing_identifier, predicate: ::RDF::URI.new('http://purl.org/dc/terms/identifier#unmanagedDOI'), multiple: false
 
-      validates :publisher, presence: { message: 'is required for remote DOI minting', if: :remote_doi_assignment_strategy? }
+      validate :publisher_presence
 
       attr_accessor :doi_assignment_strategy
       attr_writer :doi_remote_service
+
+      def publisher_presence
+        return if publisher.present?
+        return unless remote_doi_assignment_strategy?
+        errors.add(:base, "'Publisher' is required to mint a DOI")
+        errors.add(:publisher, "is required for remote DOI minting")
+      end
 
       def doi_status
         if visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
