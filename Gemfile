@@ -12,7 +12,7 @@ gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', ref: 'e
 gem 'kaltura', '0.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.6.2'
+gem 'rails', '~> 5.1.7'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.13'
 # Use Puma as the app server
@@ -58,7 +58,7 @@ gem 'hyrax', git: 'https://github.com/samvera/hyrax.git', tag: 'v2.5.1'
 gem 'mysql2', '~> 0.4.10'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
-gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5.1.6.2'
+gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5.1.7'
 gem 'riiif', '~> 2.0'
 gem 'rsolr', '>= 1.0'
 gem 'sassc-rails', '>= 2.1.0'
@@ -97,7 +97,8 @@ group :test do
   gem 'capybara-maleficent', '~> 0.2'
   gem 'coveralls', '~> 0.8.22', require: false
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
+  # Keep factory_bot pinned, causes tests to fail if updated (10/2019)
+  gem 'factory_bot_rails', '~> 4.11.1'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-retry'
   gem 'selenium-webdriver', '3.12.0'
