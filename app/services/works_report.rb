@@ -35,10 +35,12 @@ class WorksReport < Report
       alt_date_created
       alt_description
       alternate_title
+      based_near
       bibliographic_citation
       college
       committee_member
       contributor
+      college
       creator
       cultural_context
       date_created
@@ -56,14 +58,22 @@ class WorksReport < Report
       inscription
       issn
       journal_title
+      label
       language
       license
       location
       material
       measurement
       note
+      on_behalf_of
+      owner
+      proxy_depositor
       publisher
       related_url
+      relative_path
+      resource_type
+      rights_statement
+      import_url
       required_software
       source
       subject
