@@ -16,7 +16,6 @@ module Hyrax
 
         # Attach files uploaded in the form to the UploadsController
         middleware.use Hyrax::Actors::CreateWithFilesActor
-
         # Add/remove the resource to/from a collection
         middleware.use Hyrax::Actors::CollectionsMembershipActor
 
