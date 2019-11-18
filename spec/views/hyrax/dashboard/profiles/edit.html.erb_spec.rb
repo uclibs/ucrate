@@ -42,6 +42,7 @@ RSpec.describe 'hyrax/dashboard/profiles/edit.html.erb', type: :view do
 
   it "shows the user's web fields" do
     render
+    expect(rendered).to match(/Research Directory webpage/)
     expect(rendered).to match(/Personal webpage/)
     expect(rendered).to match(/Blog/)
   end

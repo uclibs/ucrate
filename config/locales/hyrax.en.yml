@@ -158,6 +158,7 @@ en:
       title: "Job title"
       ucdepartment: "Department"
       uc_affiliation: "UC affiliation"
+      rd_page: "Research Directory webpage"
       alternate_email: "Alternate email"
       telephone: "Campus phone number"
       alternate_phone_number: "Alternate phone number"
