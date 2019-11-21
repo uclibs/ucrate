@@ -1,3 +1,21 @@
+1.3.0 (Scholar 4.3.0) 11/21/2019
+* Add Docker support
+* Update welcome email
+* Upgrade Hyrax gem to 2.5.1
+* update FAQ page
+* Add Capistrano support
+* Bug Fixes
+    * Fix auto-fill for the publisher field
+    * Change DOI link on work show page
+    * Change Discovery to Visibility
+    * Stop parameterizing worktype in work show view
+    * Fix auto-populate creator
+    * Resolve blacklight deprecation
+    * Set flash message for publisher/doi validation
+    * Always show english worktype in work show view
+    * Fix DOI emabrgo change
+    * Reinstate orcid about page
+
 1.2.0 (Scholar 4.2.0) 7/25/2019
 * Added seeds for each work type with all metadata filled out 
 * Upgraded riiif to version 2.0
