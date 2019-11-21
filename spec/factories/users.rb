@@ -13,6 +13,7 @@ FactoryBot.define do
     telephone { 'Campus phone number' }
     alternate_phone_number { 'Alternate phone number' }
     website { 'Personal webpage' }
+    rd_page { 'https://researchdirectory.uc.edu/p/user' }
     blog { 'Blog' }
 
     transient do
