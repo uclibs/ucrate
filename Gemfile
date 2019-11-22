@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'browse-everything', github: 'uclibs/browse-everything', branch: 'master'
+gem 'browse-everything'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
 
@@ -56,7 +56,7 @@ gem 'equivalent-xml'
 gem 'grape'
 gem 'grape_on_rails_routes'
 gem 'hydra-role-management'
-gem 'hyrax', git: 'https://github.com/samvera/hyrax.git', tag: 'v2.5.1'
+gem 'hyrax', '2.6.0'
 gem 'mysql2', '~> 0.4.10'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'

@@ -1,78 +1,4 @@
 GIT
-  remote: https://github.com/samvera/hyrax.git
-  revision: fcbd92da079d5b7c42201b15c48f6f2a6cf67b27
-  tag: v2.5.1
-  specs:
-    hyrax (2.5.1)
-      active-fedora (~> 11.5, >= 11.5.2)
-      almond-rails (~> 0.1)
-      awesome_nested_set (~> 3.1)
-      blacklight (~> 6.14)
-      blacklight-gallery (~> 0.7)
-      breadcrumbs_on_rails (~> 3.0)
-      browse-everything (< 0.16)
-      carrierwave (~> 1.0)
-      clipboard-rails (~> 1.5)
-      dry-equalizer (~> 0.2)
-      dry-struct (~> 0.1)
-      dry-transaction (~> 0.11)
-      dry-validation (~> 0.9)
-      flipflop (~> 2.3)
-      flot-rails (~> 0.0.6)
-      font-awesome-rails (~> 4.2)
-      hydra-derivatives (~> 3.3)
-      hydra-editor (>= 3.3, < 5.0)
-      hydra-head (>= 10.6.1)
-      hydra-works (>= 0.16, < 2.0)
-      iiif_manifest (>= 0.3, < 0.6)
-      jquery-datatables-rails (~> 3.4)
-      jquery-ui-rails (~> 6.0)
-      json-schema
-      kaminari_route_prefix (~> 0.1.1)
-      legato (~> 0.3)
-      linkeddata
-      mailboxer (~> 0.12)
-      nest (~> 3.1)
-      noid-rails (~> 3.0.0)
-      oauth
-      oauth2 (~> 1.2)
-      posix-spawn
-      power_converter (~> 0.1, >= 0.1.2)
-      pul_uv_rails (~> 2.0)
-      qa (~> 2.0)
-      rails (~> 5.0)
-      rails_autolink (~> 1.1)
-      rdf-rdfxml
-      redis-namespace (~> 1.5)
-      redlock (>= 0.1.2)
-      retriable (>= 2.9, < 4.0)
-      samvera-nesting_indexer (~> 2.0)
-      select2-rails (~> 3.5)
-      signet
-      simple_form (~> 3.2, <= 3.5.0)
-      tinymce-rails (~> 4.1)
-
-GIT
-  remote: https://github.com/uclibs/browse-everything.git
-  revision: 1e1e2db1522dcbab1233a30d959ce9564a294d23
-  branch: master
-  specs:
-    browse-everything (0.14.2)
-      addressable (~> 2.5)
-      aws-sdk-s3
-      bootstrap-sass (~> 3.2)
-      dropbox-sdk (>= 1.6.2)
-      font-awesome-rails
-      google-api-client (~> 0.9)
-      google_drive
-      httparty
-      kaltura
-      rails (>= 3.1)
-      ruby-box
-      sass-rails
-      signet
-
-GIT
   remote: https://github.com/uclibs/change_manager.git
   revision: d8e1b552740df00922a0a40796999c4e2a0cb8b6
   ref: d8e1b552740df00922a0a40796999c4e2a0cb8b6
@@ -253,6 +179,20 @@ GEM
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.4)
     byebug (11.0.1)
+    browse-everything (1.0.2)
+      addressable (~> 2.5)
+      aws-sdk-s3
+      dropbox_api (>= 0.1.10)
+      google-api-client (~> 0.23)
+      google_drive (~> 2.1)
+      googleauth (= 0.6.6)
+      puma (~> 3.11)
+      rails (>= 4.2, < 6.0)
+      ruby-box
+      signet (~> 0.8)
+      sprockets (~> 3.7)
+      thor (~> 0.19)
+      typhoeus
     cancancan (1.17.0)
     capistrano (3.11.2)
       airbrussh (>= 1.0.0)
@@ -330,6 +270,9 @@ GEM
       railties (>= 3.2, < 6.1)
     dropbox-sdk (1.6.5)
       json
+    dropbox_api (0.1.17)
+      faraday (>= 0.8, <= 0.15.4)
+      oauth2 (~> 1.1)
     dry-configurable (0.9.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.4, >= 0.4.7)
@@ -387,6 +330,8 @@ GEM
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
     erubi (1.9.0)
+    ethon (0.12.0)
+      ffi (>= 1.3.0)
     execjs (2.7.0)
     factory_bot (4.11.1)
       activesupport (>= 3.0.0)
@@ -425,7 +370,7 @@ GEM
     googleauth (0.10.0)
       faraday (~> 0.12)
       jwt (>= 1.4, < 3.0)
-      memoist (~> 0.16)
+      memoist (~> 0.12)
       multi_json (~> 1.11)
       os (>= 0.9, < 2.0)
       signet (~> 0.12)
@@ -500,6 +445,54 @@ GEM
       hydra-file_characterization (~> 1.0)
       hydra-pcdm (>= 0.9)
     i18n (1.7.0)
+    hyrax (2.6.0)
+      active-fedora (~> 11.5, >= 11.5.2)
+      almond-rails (~> 0.1)
+      awesome_nested_set (~> 3.1)
+      blacklight (~> 6.14)
+      blacklight-gallery (~> 0.7)
+      breadcrumbs_on_rails (~> 3.0)
+      browse-everything (>= 0.16)
+      carrierwave (~> 1.0)
+      clipboard-rails (~> 1.5)
+      dry-equalizer (~> 0.2)
+      dry-struct (~> 0.1)
+      dry-transaction (~> 0.11)
+      dry-validation (~> 0.9)
+      flipflop (~> 2.3)
+      flot-rails (~> 0.0.6)
+      font-awesome-rails (~> 4.2)
+      hydra-derivatives (~> 3.3)
+      hydra-editor (>= 3.3, < 6.0)
+      hydra-head (>= 10.6.1)
+      hydra-works (>= 0.16, < 2.0)
+      iiif_manifest (>= 0.3, < 0.6)
+      jquery-datatables-rails (~> 3.4)
+      jquery-ui-rails (~> 6.0)
+      json-schema
+      kaminari_route_prefix (~> 0.1.1)
+      legato (~> 0.3)
+      linkeddata
+      mailboxer (~> 0.12)
+      nest (~> 3.1)
+      noid-rails (~> 3.0.0)
+      oauth
+      oauth2 (~> 1.2)
+      posix-spawn
+      power_converter (~> 0.1, >= 0.1.2)
+      pul_uv_rails (~> 2.0)
+      qa (~> 2.0)
+      rails (~> 5.0)
+      rails_autolink (~> 1.1)
+      rdf-rdfxml
+      redis-namespace (~> 1.5)
+      redlock (>= 0.1.2)
+      retriable (>= 2.9, < 4.0)
+      samvera-nesting_indexer (~> 2.0)
+      sass-rails (~> 5.0)
+      select2-rails (~> 3.5)
+      signet
+      tinymce-rails (~> 4.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     iiif-image-api (0.1.0)
@@ -952,6 +945,7 @@ GEM
     sync (0.5.0)
     temple (0.8.2)
     term-ansicolor (1.7.1)
+    stomp (1.4.6)
       tins (~> 1.0)
     thor (0.20.3)
     thread_safe (0.3.6)
@@ -968,6 +962,8 @@ GEM
       jquery-rails
       railties (>= 3.1)
     tzinfo (1.2.6)
+    typhoeus (1.3.1)
+      ethon (>= 0.9.0)
       thread_safe (~> 0.1)
     uber (0.1.0)
     uglifier (4.2.0)
@@ -1012,7 +1008,7 @@ DEPENDENCIES
   active_attr
   bixby (>= 1.0.0)
   bootstrap-sass (~> 3.4.1)
-  browse-everything!
+  browse-everything
   bundler (~> 1.17)
   byebug
   capistrano (~> 3.10)
@@ -1037,7 +1033,7 @@ DEPENDENCIES
   grape_on_rails_routes
   hydra-remote_identifier!
   hydra-role-management
-  hyrax!
+  hyrax (= 2.6.0)
   jbuilder (~> 2.5)
   jquery-rails
   kaltura (= 0.1.1)
