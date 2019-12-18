@@ -675,7 +675,7 @@ GEM
       nokogiri (~> 1.6)
       rails (~> 5.0)
       rdf
-    rack (2.0.7)
+    rack (2.0.8)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-openid (1.3.1)
