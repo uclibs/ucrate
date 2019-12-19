@@ -8,7 +8,7 @@ cache:
   bundler: true
 
 before_install:
-  - gem update --system
+  - gem update --system 3.0.6
   - gem install bundler
   - gem install chromedriver-helper -v 1.2.0
   - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost &
