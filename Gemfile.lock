@@ -676,7 +676,8 @@ GEM
     powerpack (0.1.2)
     public_suffix (4.0.3)
     pul_uv_rails (2.0.1)
-    puma (3.12.2)
+    puma (4.3.1)
+      nio4r (~> 2.0)
     qa (2.2.0)
       activerecord-import
       deprecation
@@ -1045,7 +1046,7 @@ DEPENDENCIES
   omniauth-openid
   omniauth-shibboleth
   orcid!
-  puma (~> 3.0)
+  puma (~> 4.3)
   rails (~> 5.1.7)
   rails-controller-testing
   rest-client
