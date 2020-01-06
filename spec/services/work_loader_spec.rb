@@ -32,43 +32,43 @@ describe WorkLoader, :clean_repo do
   let(:files) do
     [
       {
-        path:         "#{fixture_path}/world.png",
-        title:        "World!",
-        visibility:   "restricted",
+        path: "#{fixture_path}/world.png",
+        title: "World!",
+        visibility: "restricted",
         embargo_date: "",
-        uri:          "",
-        pid:          file_pid1
+        uri: "",
+        pid: file_pid1
       },
       {
-        path:         "#{fixture_path}/test_file.txt",
-        title:        "Test file",
-        visibility:   "open",
+        path: "#{fixture_path}/test_file.txt",
+        title: "Test file",
+        visibility: "open",
         embargo_date: "",
-        uri:          "",
-        pid:          file_pid2
+        uri: "",
+        pid: file_pid2
       }
     ]
   end
 
   let(:default_attributes) do
     {
-      pid:                      work_pid,
-      work_type:                "generic_work",
-      submitter_email:          user.email,
-      files:                    files,
-      title:                    ["My title"],
-      creator:                  ["Creator"],
-      description:              ["My description"],
-      college:                  "Libraries",
-      department:               "Digital Collections",
-      license:                  ["http://creativecommons.org/licenses/by-nc/4.0/"],
-      rights_statement:         ["These are your rights, all three of them"],
-      geo_subject:              ["Dayton, Ohio"],
-      visibility:               "open",
-      edit_access:              editors,
-      read_access:              readers,
+      pid: work_pid,
+      work_type: "generic_work",
+      submitter_email: user.email,
+      files: files,
+      title: ["My title"],
+      creator: ["Creator"],
+      description: ["My description"],
+      college: "Libraries",
+      department: "Digital Collections",
+      license: ["http://creativecommons.org/licenses/by-nc/4.0/"],
+      rights_statement: ["These are your rights, all three of them"],
+      geo_subject: ["Dayton, Ohio"],
+      visibility: "open",
+      edit_access: editors,
+      read_access: readers,
       member_of_collection_ids: collection_ids,
-      member_work_ids:          member_work_ids
+      member_work_ids: member_work_ids
     }
   end
 

@@ -7,13 +7,13 @@ describe CollectionLoader, :clean_repo do
   let(:collection_type) { create(:collection_type, id: 1) }
   let(:attributes) do
     {
-      pid:                 collection_pid,
-      submitter_email:     user.email,
-      title:               ["A Large Collection"],
-      description:         "My description",
-      creator:             ["Ono, Santa"],
-      license:             "http://creativecommons.org/licenses/by-nc/4.0/",
-      visibility:          "open",
+      pid: collection_pid,
+      submitter_email: user.email,
+      title: ["A Large Collection"],
+      description: "My description",
+      creator: ["Ono, Santa"],
+      license: "http://creativecommons.org/licenses/by-nc/4.0/",
+      visibility: "open",
       collection_type_gid: collection_type.gid
     }
   end
