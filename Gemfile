@@ -62,7 +62,7 @@ gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5.1.6.2'
 gem 'riiif', '~> 2.0'
 gem 'rsolr', '>= 1.0'
 gem 'sassc-rails', '>= 2.1.0'
-gem 'sidekiq'
+gem 'sidekiq', '~> 5.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
