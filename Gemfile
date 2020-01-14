@@ -10,6 +10,7 @@ end
 gem 'browse-everything', github: 'uclibs/browse-everything', branch: 'master'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
+gem 'sidekiq-limit_fetch'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.7'
