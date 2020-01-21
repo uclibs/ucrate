@@ -130,7 +130,7 @@ zh:
       based_on_html: "基于 <a href=\"https://github.com/samvera/hyrax\">Hyrax</a>"
       copyright_info_html: "<a href=\"https://commercialization.uc.edu/copyright-infringement\">Copyright Information</a>"
       copyright_html: "&copy; %{year} <a href=\"https://www.uc.edu/\"><u>辛辛那提大学</u></a>"
-      clery_heoa_notice_html: "<a href=\"https://www.uc.edu/publicsafety/clery/annual-security-report.html\">Clery and HEOA Notice</a>"
+      clery_heoa_notice_html: "<a href=\"https://www.uc.edu/about/publicsafety/clery/annual-security-report.html\">Clery and HEOA Notice</a>"
       eaccessibility_concern_html: "<a href=\"https://www.uc.edu/ucit/community/accessibility/eAccessibility-form.html\">eAccessibility Concern</a>"
       made_possible_by_html: "Made possible by the <a href=\"https://www.samvera.org\">Samvera</a> project."
       non_discrimination_notice_html: "<a href=\"http://uc.edu/about/policies/non-discrimination.html\">Notice of Non-Discrimination</a>"
