@@ -5,3 +5,8 @@ max_retries: 3
   - ingest
   - event
   - change
+  - fixity_check
+
+:limits:
+  fixity_check: 1
+
