@@ -112,6 +112,10 @@ es:
         scholar_blog: Scholar Blog
       partners: fogonadura
       what_is: que es
+    notifications:
+      fixity_check_failure:
+        message: La comprobación de la corrección se ejecutó en% {log_date} para% {file_title} (% {uri}) falló.
+        subject: Comprobación de corrección de error
     pages:
       tabs:
         agreement_page: 'Licencia de Distribución'
