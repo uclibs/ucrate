@@ -112,6 +112,10 @@ zh:
         scholar_blog: Scholar博客
       partners: 伙伴
       what_is: 什么是
+    notifications:
+      fixity_check_failure:
+        message: 在％{log_date}进行％{file_title}（％{uri}）的固定性检查失败。
+        subject: 固定性检查失败
     pages:
       tabs:
         agreement_page: '分布证件'
