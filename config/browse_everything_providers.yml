@@ -3,15 +3,15 @@
 # The file_system provider can be a path to any directory on the server where your application is running.
 #
 ---
-# dropbox:
-#   :app_key: YOUR_DROPBOX_APP_KEY
-#   :app_secret: YOUR_DROPBOX_APP_SECRET
+dropbox:
+  :client_id: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_DROPBOX_ID"] %>
+  :client_secret: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_DROPBOX_SECRET"] %>
 box:
   :client_id:     <%= ENV["SCHOLAR_BROWSE_EVERYTHING_BOX_ID"] %>
   :client_secret: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_BOX_SECRET"] %>
-# google_drive:
-#   :client_id: YOUR_GOOGLE_API_CLIENT_ID
-#   :client_secret: YOUR_GOOGLE_API_CLIENT_SECRET
+google_drive:
+  :client_id: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_GOOGLE_ID"] %>
+  :client_secret: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_GOOGLE_SECRET"] %>
 # s3:
 #   :bucket: YOUR_AWS_S3_BUCKET
 #   :response_type: :signed_url # set to :public_url for public urls or :s3_uri for an s3://BUCKET/KEY uri
