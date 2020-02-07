@@ -1,3 +1,18 @@
+1.4.0 (Scholar 4.4.0) 2/7/2020
+* Added Research Directory to user profile
+* Built Rest API
+* Added support for Dropbox and Google Drive
+* Updated to Hyrax 2.6.0
+* Pinned sidekiq to version 5.2.7
+* Updated puma to version 4.3.1
+* Updated ruby to version 2.5.5
+* Updated nokogiri to version 1.10.5
+* Added fixity checking task
+* Added all of the fields to the works manifest
+* Bug Fixes
+   * Fixed broken links on home page
+   * Fixed travis bundler errors
+
 1.3.0 (Scholar 4.3.0) 11/21/2019
 * Add Docker support
 * Update welcome email
