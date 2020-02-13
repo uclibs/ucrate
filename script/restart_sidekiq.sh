@@ -30,6 +30,10 @@ if ! [[ $THREADS =~ $re ]] ; then
    THREADS=8
 fi
 
+if [[ $ENVIRONMENT == "production" ]]; then
+    export PATH=$PATH:/srv/apps/.gem/ruby/2.5.0/bin
+fi
+
 $APP_DIRECTORY/script/kill_sidekiq.sh
 
 banner "starting Sidekiq"
