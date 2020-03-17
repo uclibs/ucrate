@@ -107,4 +107,11 @@ RSpec.describe 'hyrax/base/show.html.erb', type: :view do
   it "has the correct DOI header" do
     expect(page).to have_text 'Digital Object Identifier (DOI)'
   end
+
+  context 'when work is not in a collection' do
+    it "doesn't show the _relationships partial" do
+      expect(page).to_not have_text 'Relationships'
+    end
+  end
+
 end
