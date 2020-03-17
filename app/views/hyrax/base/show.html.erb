@@ -36,7 +36,7 @@
           </div>
           <div class="col-sm-12">
             <%= render 'doi', presenter: @presenter unless @presenter.doi.nil? %>
-            <%= render 'relationships', presenter: @presenter unless @presenter.member_of_collection_presenters.empty?%>
+            <%= render 'relationships', presenter: presenter unless @presenter.member_of_collection_presenters.empty?%>
             <%= render 'parent_relationship_table', child_id: @presenter.solr_document.id %>
             <%= render 'items', presenter: @presenter %>
             <%# TODO: we may consider adding these partials in the future %>

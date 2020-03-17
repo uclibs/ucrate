@@ -22,7 +22,8 @@ RSpec.describe 'hyrax/base/show.html.erb', type: :view do
                      depositor_tesim: depositor.user_key)
   end
 
-  let(:ability) { double }
+  let(:user) { create(:user, groups: 'admin') }
+  let(:ability) { Ability.new(user) }
 
   let(:presenter) do
     Hyrax::WorkShowPresenter.new(work_solr_document, ability, request)
