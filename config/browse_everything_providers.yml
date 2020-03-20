@@ -12,6 +12,10 @@ box:
 google_drive:
   :client_id: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_GOOGLE_ID"] %>
   :client_secret: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_GOOGLE_SECRET"] %>
+one_drive:
+  :client_id: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_ONE_ID"] %>
+  :client_secret: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_ONE_SECRET"] %>
+  :client_scope:  <%= ENV["SCHOLAR_BROWSE_EVERYTHING_ONE_SCOPES"] %>
 # s3:
 #   :bucket: YOUR_AWS_S3_BUCKET
 #   :response_type: :signed_url # set to :public_url for public urls or :s3_uri for an s3://BUCKET/KEY uri
