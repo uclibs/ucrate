@@ -82,10 +82,10 @@ RSpec.describe 'batch', type: :feature, clean_repo: true, js: true do
       click_on 'batch-edit'
       find('#edit_permissions_link').click
       expect(page).to have_content('Batch Edit Descriptions')
-
       # Set visibility to private
       within "#form_permissions_visibility" do
         batch_edit_expand('permissions_visibility')
+        find('#expand_link_permissions_visibility').click
         find('#generic_work_visibility_authenticated').click
         find('#permissions_visibility_save').click
         # This was `expect(page).to have_content 'Changes Saved'`, however in debugging,
