@@ -1,0 +1,9 @@
+<% if presenter.representative_id.present? && presenter.representative_presenter.present? %>
+  <% if defined?(viewer) && viewer %>
+    <%= iiif_viewer_display presenter %>
+  <% else %>
+    <%= media_display presenter.representative_presenter %>
+  <% end %>
+<% else %>
+  <%= image_tag 'default.png', class: "canonical-image", :style => "max-width: 100%; max-height: 100%;" %>
+<% end %>
