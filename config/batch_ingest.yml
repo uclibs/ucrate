@@ -1,0 +1,22 @@
+ingest_types:
+  aapb_pbcore_zipped:
+    label: "AAPB PBCore - Zipped"
+    reader: "AAPB::BatchIngest::ZippedPBCoreReader"
+    ingester: "AAPB::BatchIngest::PBCoreXMLItemIngester"
+  aapb_csv_reader_1:
+    label: "AAPB CSV Ingester"
+    reader: "AAPB::BatchIngest::CSVReader"
+    ingester: "AAPB::BatchIngest::CSVItemIngester"
+    reader_options:
+      schema:
+      - object_class: Asset
+        ingest_type: new
+        children:
+        - object_class: Contribution
+          ingest_type: new
+        - object_class: PhysicalInstantiation
+          ingest_type: new
+  zipped_pbcore_digital_instantiation:
+    label: "AAPB Digital Instantiation PBCore - Zipped"
+    reader: "AAPB::BatchIngest::ZippedPBCoreDigitalInstantiationReader"
+    ingester: "AAPB::BatchIngest::PBCoreXMLItemIngester"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190822153117) do
+ActiveRecord::Schema.define(version: 20200326170140) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -157,6 +157,34 @@ ActiveRecord::Schema.define(version: 20190822153117) do
     t.integer "user_id"
     t.index ["file_id"], name: "index_file_view_stats_on_file_id"
     t.index ["user_id"], name: "index_file_view_stats_on_user_id"
+  end
+
+  create_table "hyrax_batch_ingest_batch_items", force: :cascade do |t|
+    t.integer "batch_id"
+    t.string "id_within_batch"
+    t.text "source_data"
+    t.string "source_location"
+    t.string "status"
+    t.text "error"
+    t.string "repo_object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "repo_object_class_name"
+    t.index ["batch_id"], name: "index_hyrax_batch_ingest_batch_items_on_batch_id"
+  end
+
+  create_table "hyrax_batch_ingest_batches", force: :cascade do |t|
+    t.string "status"
+    t.string "submitter_email"
+    t.string "source_location"
+    t.text "error"
+    t.string "admin_set_id"
+    t.string "ingest_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "uploaded_filename"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "hyrax_collection_types", force: :cascade do |t|

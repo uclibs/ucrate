@@ -3,6 +3,7 @@
 require 'sidekiq/web'
 require 'sidekiq/api'
 Rails.application.routes.draw do
+  mount Hyrax::BatchIngest::Engine => '/'
   mount Orcid::Engine => "/orcid"
   mount Scholar::API => '/'
 
@@ -55,6 +56,7 @@ Rails.application.routes.draw do
   match '/500', to: 'errors#server_error', via: :all
 
   mount Qa::Engine => '/authorities'
+
   mount Hyrax::Engine, at: '/'
   resources :welcome, only: 'index'
   resources :welcome_page, only: [:index, :create]
