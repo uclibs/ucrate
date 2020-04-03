@@ -1,0 +1,21 @@
+<div class="search-results-title-row">
+  <% vars = request.query_parameters["q"].to_s.downcase %>
+  <% values = vars.split(" ") %>
+  <h4 class="search-result-title">
+  	<% flag = false %>
+  	<% values.each do |eachvalue| %>
+  	  <% if(document.title_or_label.to_s.include?(eachvalue)) %>
+  	    <mark><%= link_to document.title_or_label, [hyrax, document] %></mark>
+  	    <% flag = true %>
+  	    <% break %>
+  	  <% else %>
+  	    <% flag = false %>
+  	    <% next %>
+  	  <% end %>
+  	<% end %>
+  	<% if(!flag) %>
+  	    <%= link_to document.title_or_label, [hyrax, document] %>
+  	<% end %>
+  </h4>
+  <%= Hyrax::CollectionPresenter.new(document, current_ability).collection_type_badge %>
+</div>

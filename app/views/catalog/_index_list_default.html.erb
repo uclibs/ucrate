@@ -2,10 +2,29 @@
   <div class="metadata">
     <dl class="dl-horizontal">
     <% doc_presenter = index_presenter(document) %>
+    <% vars = request.query_parameters["q"].to_s.downcase %>
+    <% values = vars.split(" ") %>
     <% index_fields(document).each do |field_name, field| -%>
       <% if should_render_index_field? document, field %>
           <dt class="field-label <%= field_name %>"><%= render_index_field_label document, field: field_name %></dt>
-          <dd class="field-text <%= field_name %>"><%= doc_presenter.field_value field %></dd>
+          <dd class="field-text <%= field_name %>">
+            <% fieldvalues = doc_presenter.field_value field %>
+            <% fieldvalues = fieldvalues.to_s %>
+            <% flag = false %>
+            <% values.each do |eachvalue| %>
+              <% if(fieldvalues.include?(eachvalue)) %>
+                <mark><%= doc_presenter.field_value field %></mark>
+                <% flag = true %>
+                <% break %>
+              <% else %>
+                <% flag = false %>
+                <% next %>
+              <% end %>
+            <% end %>
+            <% if(!flag) %>
+              <%= doc_presenter.field_value field %>
+            <% end %>
+          </dd>
       <% end %>
     <% end %>
     </dl>
