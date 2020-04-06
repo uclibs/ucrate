@@ -6,7 +6,8 @@ max_retries: 3
   - event
   - change
   - fixity_check
-
+  - import
+  - export
 :limits:
   fixity_check: 1
 

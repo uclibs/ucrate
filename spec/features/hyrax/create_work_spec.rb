@@ -38,7 +38,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       expect(page).to have_checked_field('generic_work_visibility_open')
     end
 
-    it 'creates the work' do
+    it 'creates the work', clean_repo: true, js: true do
       sleep 5
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
@@ -47,8 +47,6 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
       end
-      click_link "Relationships"
-      expect(page).to have_css("div.generic_work_admin_set_id", visible: false)
       click_link "Metadata" # switch tab
 
       title_element = find_by_id("generic_work_title")
@@ -97,7 +95,7 @@ RSpec.describe 'Creating a new Work', :js, :workflow do
       click_link('Add New', href: '/concern/generic_works/new?locale=en')
     end
 
-    it "allows on-behalf-of deposit" do
+    it "allows on-behalf-of deposit", clean_repo: true, js: true do
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       within('span#addfiles') do

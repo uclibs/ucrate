@@ -8,6 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'browse-everything'
+gem 'bulkrax', git: 'https://github.com/samvera-labs/bulkrax.git', ref: '0d73a83'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
 gem 'rack', '2.0.8'
