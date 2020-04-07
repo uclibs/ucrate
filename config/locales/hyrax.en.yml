@@ -77,6 +77,8 @@ en:
     relationships_parent_row:
       label: "In Parent Work:"
     base:
+      relationships:
+        label: "Relationships"
       relationships_parent_row:
         label: "In Collection:"
       form_progress:
