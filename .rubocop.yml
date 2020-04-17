@@ -209,6 +209,11 @@ RSpec/MessageExpectation:
 RSpec/MessageSpies:
   Enabled: false
 
+RSpec/MessageChain:
+  Exclude:
+    - 'spec/views/catalog/_index_list_default.html.erb_spec.rb'
+    - 'spec/views/catalog/_index_header_list_default.html.erb_spec.rb'  
+
 RSpec/NestedGroups:
   Enabled: false
 
@@ -329,5 +334,6 @@ Lint/RescueException:
     
 Rails/OutputSafety:
   Exclude:
+    - 'app/helpers/mark_helper.rb'
     - 'app/helpers/hyrax_helper.rb'
     - 'app/renderers/hyrax/renderers/attribute_renderer.rb'
