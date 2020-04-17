@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'spec_helper'
 
-RSpec.describe 'catalog/_index_list_default', type: :view do
+RSpec.describe 'catalog/_index_header_list_default', type: :view do
   let(:attributes) do
     { 'id' => '123',
       'title_tesim' => 'Test Work',
@@ -23,7 +23,8 @@ RSpec.describe 'catalog/_index_list_default', type: :view do
       'publisher_tesim' => ['Penguin Random House'],
       'based_near_label_tesim' => ['Pennsylvania'],
       'language_tesim' => ['English'],
-      'resource_type_tesim' => ['Capstone Project'] }
+      'resource_type_tesim' => ['Capstone Project'],
+      'has_model_ssim' => ['GenericWork'] }
   end
 
   let(:document) { SolrDocument.new(attributes) }
@@ -64,21 +65,14 @@ RSpec.describe 'catalog/_index_list_default', type: :view do
 
   describe 'catalog helper doesnt finds the text' do
     before do
-      view.stub_chain(:can_create_any_work?, :should_render_index_field?).and_return(true)
+      allow(view).to receive(:catalog).and_return('Test'.html_safe)
       allow(view).to receive(:current_ability).and_return(ability)
       allow(view).to receive(:document).and_return(document)
       allow(view).to receive(:blacklight_configuration_context).and_return(blacklight_configuration_context)
-      allow(view).to receive(:evaluate_if_unless_configuration).and_return(true)
       allow(view).to receive(:blacklight_config).and_return(Blacklight::Configuration.new)
       allow(User).to receive(:find_by_user_key).and_return(depositor.user_key)
-      allow(view).to receive(:index_presenter).and_return(presenter)
       allow(presenter).to receive(:field_value) { |field| "Test #{field}" }
-      allow(document).to receive(:collection?).and_return(true)
-      allow(view).to receive(:index_fields).and_return(blacklight_config.index_fields)
-      allow(view).to receive(:collection_presenter).and_return(presenter)
       allow(view).to receive(:can?).with(:edit, document).and_return(true)
-      allow(view).to receive(:catalog).and_return('Test'.html_safe)
-      allow(view).to receive(:should_render_index_field?).and_return(true)
       allow(view).to receive(:can?).with(:destroy, document).and_return(true)
       render 'catalog/index_header_list_default', document: document
     end
