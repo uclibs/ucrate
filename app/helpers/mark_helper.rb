@@ -4,7 +4,7 @@ module MarkHelper
   def catalog(input_text)
     value = input_text.to_s
     filter_chars = params[:q].to_s.split(' ')
-    if filter_chars.empty?
+    unless filter_chars.empty?
       value = value.to_s
     else
       filter_chars.each do |char|
