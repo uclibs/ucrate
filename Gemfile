@@ -111,5 +111,5 @@ group :test do
 end
 
 group :production do
-  gem 'clamav'
+  # gem 'clamav'
 end
