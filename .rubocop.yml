@@ -60,6 +60,7 @@ Metrics/MethodLength:
     - 'app/api/**/*'
     - 'spec/api/*'
     - 'app/helpers/api_helper.rb'
+    - 'app/helpers/mark_helper.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -305,6 +306,7 @@ Metrics/AbcSize:
     - 'app/api/**/*'
     - 'spec/api/*'
     - 'app/helpers/api_helper.rb'
+    - 'app/helpers/mark_helper.rb'
 
 Metrics/CyclomaticComplexity:
   Exclude:
