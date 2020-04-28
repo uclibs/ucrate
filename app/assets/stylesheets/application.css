@@ -62,3 +62,7 @@
 .featured-work-fix {
   display: inline-block;
 }
+
+mark {
+  background-color: #ffff00;
+}
