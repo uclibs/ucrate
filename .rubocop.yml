@@ -60,6 +60,7 @@ Metrics/MethodLength:
     - 'app/api/**/*'
     - 'spec/api/*'
     - 'app/helpers/api_helper.rb'
+    - 'app/helpers/mark_helper.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -305,6 +306,7 @@ Metrics/AbcSize:
     - 'app/api/**/*'
     - 'spec/api/*'
     - 'app/helpers/api_helper.rb'
+    - 'app/helpers/mark_helper.rb'
 
 Metrics/CyclomaticComplexity:
   Exclude:
@@ -321,7 +323,12 @@ Lint/HandleExceptions:
     - 'spec/features/doi_validation_spec.rb'
 
 RSpec/SubjectStub:
-  Enabled: false    
+  Enabled: false
+
+RSpec/MessageChain:
+  Exclude:
+    - 'spec/views/catalog/_index_list_default.html.erb_spec.rb'
+    - 'spec/views/catalog/_index_header_list_default.html.erb_spec.rb'  
 
 Lint/RescueException:
   Exclude:
@@ -330,4 +337,5 @@ Lint/RescueException:
 Rails/OutputSafety:
   Exclude:
     - 'app/helpers/hyrax_helper.rb'
+    - 'app/helpers/mark_helper.rb'
     - 'app/renderers/hyrax/renderers/attribute_renderer.rb'
