@@ -1,0 +1,86 @@
+version: 2.1
+
+orbs:
+  circleci-orb: samvera/circleci-orb@0.3.2
+
+jobs:
+  build_spec_test:
+    parameters:
+      gemfile:
+        description: "Gemfile to run"
+        default: "Gemfile"
+        type: "string"
+      ruby_version:
+        description: "Ruby version"
+        default: "2.6.5"
+        type: "string"
+      solr_port:
+        type: string
+        default: '8985'
+      fcrepo_port:
+        type: string
+        default: '8986'
+      fcrepo_version:
+        type: string
+        default: '4.6'
+      redis_version:
+        type: string
+        default: '4'
+      mysql_version:
+        type: string
+        default: '8.0.19'
+      rails_version:
+        type: string
+        default: '5.1.6'
+      solr_config_path:
+        type: string
+      solr_core:
+        type: string
+        default: 'hydra-test'
+      bundler_version:
+        type: string
+        default: '2.0.1'
+    docker:
+      - image: circleci/ruby:<< parameters.ruby_version >>-node-browsers-legacy
+      - image: ualbertalib/docker-fcrepo4:<< parameters.fcrepo_version>>
+        environment:
+          CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC"
+      - image: solr:7-alpine
+        command: bin/solr -cloud -noprompt -f -p <<parameters.solr_port>>
+      - image: circleci/redis:<<parameters.redis_version>>
+      - image: circleci/mysql:<<parameters.mysql_version>>
+    parallelism: 4
+    environment:
+      BUNDLE_GEMFILE: << parameters.gemfile >>
+      RAILS_VERSION: << parameters.rails_version >>
+      BUNDLE_PATH: vendor/bundle
+      COVERALLS_PARALLEL: true
+      BUNDLE_JOBS: 4
+      BUNDLE_RETRY: 3
+      RAILS_ENV: test
+      RACK_ENV: test
+      FCREPO_TEST_PORT: 8986/fcrepo
+      SPEC_OPTS: --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
+    steps:
+      - samvera/cached_checkout
+      - samvera/bundle:
+          ruby_version: << parameters.ruby_version >>
+          bundler_version: << parameters.bundler_version >>
+      - samvera/install_solr_core:
+          solr_config_path: << parameters.solr_config_path >>
+          core_name: << parameters.solr_core >>
+      - samvera/rubocop
+      - run: bundle exec rake db:create db:schema:load
+      - samvera/parallel_rspec
+      - store_artifacts:
+          path: coverage
+      - deploy:
+          command: |
+            curl -k https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN -d "payload[build_num]=$CIRCLE_BUILD_NUM&payload[status]=done"
+workflows:
+  ci:
+    jobs:
+      - bundle_spec_test:
+          ruby_version: "2.5.5"
+          name: "ruby2-5-5"
+          solr_config_path: 'solr/config'
