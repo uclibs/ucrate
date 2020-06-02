@@ -75,6 +75,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-its'
   gem 'rspec-rails'
+  gem 'rspec_junit_formatter'
   gem 'show_me_the_cookies'
   gem 'solr_wrapper', '>= 0.3'
   gem 'vcr'
@@ -111,5 +112,5 @@ group :test do
 end
 
 group :production do
-  gem 'clamav'
+  #  gem 'clamav'
 end
