@@ -1,0 +1,64 @@
+version: 2.1
+orbs:
+    samvera: samvera/circleci-orb@0.3.1
+jobs:
+    build:
+        parameters:
+            ruby_version:
+                type: string
+                default: 2.5.3
+            bundler_version:
+                type: string
+                default: 2.0.1
+        environment:
+          POSTGRES_DB: circle_test
+          POSTGRES_HOST: 127.0.0.1
+          POSTGRES_USER: postgres
+          WORKING_PATH: /tmp
+          UPLOAD_PATH: /tmp
+          CACHE_PATH: /tmp/cache
+        executor:
+            name: samvera/ruby_fcrepo_solr_redis_postgres
+            ruby_version: << parameters.ruby_version >>
+        working_directory: ~/project
+        parallelism: 4
+        steps:
+            - checkout
+
+            - samvera/bundle:
+                ruby_version: << parameters.ruby_version >>
+                bundler_version: << parameters.bundler_version >>
+
+            - samvera/rubocop
+
+            - run:
+                name: Get yarn version
+                command: echo $(yarn --version) >> "YARN_VERSION"
+
+            - restore_cache:
+                keys:
+                    - v1-yarn-{{ checksum "yarn.lock" }}-{{ checksum "YARN_VERSION" }}
+
+            - run: yarn
+
+            - save_cache:
+                key: v1-yarn-{{ checksum "yarn.lock" }}-{{ checksum "YARN_VERSION" }}
+                paths:
+                    - ~/project/node_modules
+
+            - samvera/install_solr_core
+
+            - samvera/parallel_rspec
+
+            - store_artifacts:
+                path: tmp/screenshots
+
+            - deploy:
+                command: curl -k https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN} -d "payload[build_num]=${CIRCLE_BUILD_NUM}&payload[status]=done"
+
+workflows:
+    version: 2
+    ci:
+        jobs:
+            - build:
+                name: ruby2-5-3

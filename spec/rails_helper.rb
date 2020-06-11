@@ -5,7 +5,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
 def ci_build?
-  ENV['TRAVIS'] || ENV['CIRCLE']
+  ENV['CIRCLE']
 end
 
 require File.expand_path('../../config/environment', __FILE__)
@@ -156,7 +156,11 @@ RSpec.configure do |config|
   end
 
   config.after do
-    DatabaseCleaner.clean
+    begin
+      DatabaseCleaner.clean
+    rescue NoMethodError
+      'This can happen which the database is gone, which depends on load order of tests'
+    end
   end
 
   config.after(:each, type: :feature) do

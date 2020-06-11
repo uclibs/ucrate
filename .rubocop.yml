@@ -317,7 +317,7 @@ Metrics/CyclomaticComplexity:
     - 'spec/api/*'
     - 'app/helpers/api_helper.rb'
 
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Exclude:
     - 'app/controllers/concerns/scholar/works_controller_behavior.rb'
     - 'spec/features/doi_validation_spec.rb'

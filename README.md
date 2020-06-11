@@ -1,5 +1,6 @@
 # Scholar@UC
-![Travis (.org) branch](https://img.shields.io/travis/uclibs/ucrate/develop.svg) ![Coveralls coverage](https://img.shields.io/coveralls/github/uclibs/ucrate/develop.svg)
+![Coveralls coverage](https://img.shields.io/coveralls/github/uclibs/ucrate/develop.svg)
+[![Build Status](https://circleci.com/gh/samvera/hyku.svg?style=svg)](https://circleci.com/gh/scholar/ucrate)
 
 ## Dependencies
 
