@@ -14,12 +14,12 @@ module Hyrax
 
       private
 
-        def user_params
-          params.require(:user).permit(:avatar, :facebook_handle, :twitter_handle,
-                                       :googleplus_handle, :linkedin_handle, :remove_avatar,
-                                       :orcid, :first_name, :last_name, :title, :ucdepartment, :uc_affiliation,
-                                       :alternate_email, :telephone, :alternate_phone_number, :website, :blog, :rd_page)
-        end
+      def user_params
+        params.require(:user).permit(:avatar, :facebook_handle, :twitter_handle,
+                                     :googleplus_handle, :linkedin_handle, :remove_avatar,
+                                     :orcid, :first_name, :last_name, :title, :ucdepartment, :uc_affiliation,
+                                     :alternate_email, :telephone, :alternate_phone_number, :website, :blog, :rd_page)
+      end
     end
   end
 end

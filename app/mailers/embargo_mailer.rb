@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EmbargoMailer < ActionMailer::Base
+class EmbargoMailer < ApplicationMailer
   def notify(email, doc_name, days_left)
     @work_title = doc_name
     @days_left = days_left

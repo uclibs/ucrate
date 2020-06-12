@@ -14,10 +14,10 @@ module Hyrax
 
       private
 
-        def apply_doi_assignment_strategy(work)
-          work.extend(RemotelyIdentifiedByDoi::MintingBehavior)
-          work.apply_doi_assignment_strategy { work.save }
-        end
+      def apply_doi_assignment_strategy(work)
+        work.extend(RemotelyIdentifiedByDoi::MintingBehavior)
+        work.apply_doi_assignment_strategy { work.save }
+      end
     end
   end
 end

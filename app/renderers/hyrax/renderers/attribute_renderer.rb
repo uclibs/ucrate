@@ -34,10 +34,10 @@ module Hyrax
 
       private
 
-        def array_of_empty_strings?(values)
-          return true if values.is_a?(Array) && values.all?(&:empty?)
-          false
-        end
+      def array_of_empty_strings?(values)
+        return true if values.is_a?(Array) && values.all?(&:empty?)
+        false
+      end
     end
   end
 end

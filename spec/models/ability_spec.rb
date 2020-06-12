@@ -9,7 +9,7 @@ RSpec.describe Ability, type: :model do
   end
 
   describe "CollectionExport" do
-    subject(:ability) { Ability.new(user) }
+    subject(:ability) { described_class.new(user) }
     let(:user) { create(:user) }
 
     let(:user_collection) { create(:collection, user: user) }
@@ -61,7 +61,7 @@ RSpec.describe Ability, type: :model do
   end
 
   describe "a user in the ETD manager group" do
-    let(:ability) { Ability.new(user) }
+    let(:ability) { described_class.new(user) }
     subject { ability }
     let(:user) { create(:user) }
     before { allow(user).to receive_messages(groups: ['etd_manager', 'registered']) }

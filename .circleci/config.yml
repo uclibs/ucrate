@@ -17,11 +17,14 @@ jobs:
           WORKING_PATH: /tmp
           UPLOAD_PATH: /tmp
           CACHE_PATH: /tmp/cache
+
         executor:
             name: samvera/ruby_fcrepo_solr_redis_postgres
             ruby_version: << parameters.ruby_version >>
-        working_directory: ~/project
+
+        working_directory: ~/ucrate
         parallelism: 4
+
         steps:
             - checkout
 

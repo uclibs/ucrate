@@ -15,28 +15,28 @@ class ApplicationController < ActionController::Base
 
   private
 
-    # override devise helper and route to CC.new when parameter is set
-    def after_sign_in_path_for(resource)
-      cookies[:login_type] = {
-        value: "local",
-        secure: Rails.env.production?
-      }
-      if !resource.waived_welcome_page
-        Rails.application.routes.url_helpers.welcome_page_index_path
-      else
-        Rails.application.routes.url_helpers.new_classify_concern_path
-      end
+  # override devise helper and route to CC.new when parameter is set
+  def after_sign_in_path_for(resource)
+    cookies[:login_type] = {
+      value: "local",
+      secure: Rails.env.production?
+    }
+    if !resource.waived_welcome_page
+      Rails.application.routes.url_helpers.welcome_page_index_path
+    else
+      Rails.application.routes.url_helpers.new_classify_concern_path
     end
+  end
 
-    def after_sign_out_path_for(_resource_or_scope)
-      if cookies[:login_type] == "shibboleth"
-        "/Shibboleth.sso/Logout?return=https%3A%2F%2F" + ENV['SCHOLAR_SHIBBOLETH_LOGOUT']
-      else
-        root_path
-      end
+  def after_sign_out_path_for(_resource_or_scope)
+    if cookies[:login_type] == "shibboleth"
+      "/Shibboleth.sso/Logout?return=https%3A%2F%2F" + ENV['SCHOLAR_SHIBBOLETH_LOGOUT']
+    else
+      root_path
     end
+  end
 
-    def auth_shib_user!
-      redirect_to login_path unless user_signed_in?
-    end
+  def auth_shib_user!
+    redirect_to login_path unless user_signed_in?
+  end
 end

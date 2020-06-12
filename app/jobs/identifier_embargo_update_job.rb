@@ -7,10 +7,10 @@ class IdentifierEmbargoUpdateJob < ActiveJob::Base
 
   private
 
-    def post_uri(identifier_uri)
-      u = URI.parse(identifier_uri)
-      u.user = ENV["SCHOLAR_DOI_USERNAME"]
-      u.password = ENV["SCHOLAR_DOI_PASSWORD"]
-      u.to_s
-    end
+  def post_uri(identifier_uri)
+    u = URI.parse(identifier_uri)
+    u.user = ENV["SCHOLAR_DOI_USERNAME"]
+    u.password = ENV["SCHOLAR_DOI_PASSWORD"]
+    u.to_s
+  end
 end

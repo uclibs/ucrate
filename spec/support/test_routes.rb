@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ShibbolethLogoutController < ActionController::Base
+class ShibbolethLogoutController < ApplicationController
   def show
     render plain: "You have been logged out of the University of Cincinnati's Login Service"
   end

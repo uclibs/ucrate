@@ -134,11 +134,10 @@ module HyraxHelper
             'aria-label' => mailbox.label(params[:locale]),
             class: 'notify-number') do
       capture do
-        concat content_tag(:span, '', class: 'fa fa-bell')
-        concat content_tag(:span, '&nbsp;Notifications'.html_safe, class: 'visible-xs-inline-block')
+        concat tag.span('', class: 'fa fa-bell')
+        concat tag.span('&nbsp;Notifications'.html_safe, class: 'visible-xs-inline-block')
         concat "\n"
-        concat content_tag(:span,
-                           unread_notifications,
+        concat tag.span(unread_notifications,
                            class: count_classes_for(unread_notifications))
       end
     end
