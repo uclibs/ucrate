@@ -1,5 +1,7 @@
 # Scholar@UC
 ![Travis (.org) branch](https://img.shields.io/travis/uclibs/ucrate/develop.svg) ![Coveralls coverage](https://img.shields.io/coveralls/github/uclibs/ucrate/develop.svg)
+[![CircleCI](https://circleci.com/gh/uclibs/ucrate.svg?style=svg)](https://circleci.com/gh/uclibs/ucrate)
+[![Coverage Status](https://coveralls.io/repos/github/uclibs/ucrate/badge.svg?branch=master)](https://coveralls.io/github/uclibs/ucrate?branch=master)
 
 ## Dependencies
 
@@ -40,7 +42,7 @@
     * Read [more](https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax).
 
 ## Running the Tests
-1. Start fedora: ```fcrepo_wrapper -p 8986```
+1. Start fedora: ```fcrepo_wrapper -p 8080```
 1. Start solr: ```solr_wrapper -d solr/config/ --collection_name hydra-test -p 8985```
 1. Start redis: ```redis-server```
 1. Run the database migrations: ```bundle exec rake db:migrate``` (Optional)
