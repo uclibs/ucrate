@@ -1,0 +1,92 @@
+version: 2.1
+orbs:
+    samvera: samvera/circleci-orb@0.3.2
+jobs:
+    build:
+        parameters:
+            ruby_version:
+                type: string
+                default: 2.5.3
+            bundler_version:
+                type: string
+                default: 2.0.1
+            fcrepo_version:
+                type: string
+                default: '4.7.5'
+            redis_version:
+                type: string
+                default: '4'
+            ruby_type:
+                type: string
+                default: 'ruby'
+            solr_port:
+                type: string
+                default: '8985'
+            solr_version:
+                type: string
+                default: '7-alpine'
+        docker:
+            - image: circleci/<< parameters.ruby_type >>:<< parameters.ruby_version >>-node-browsers-legacy
+            - image: 'samvera/fcrepo4:<< parameters.fcrepo_version >>'
+              environment:
+                CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC"
+            - image: solr:<< parameters.solr_version >>
+              command: bin/solr -cloud -noprompt -f -p << parameters.solr_port >>
+            - image: circleci/redis:<< parameters.redis_version >>     
+        environment:
+            BUNDLE_PATH: vendor/bundle
+            BUNDLE_JOBS: 4
+            BUNDLE_RETRY: 3
+            RAILS_ENV: test
+            RACK_ENV: test
+            SPEC_OPTS: --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
+            WORKING_PATH: /tmp
+            UPLOAD_PATH: /tmp
+            CACHE_PATH: /tmp/cache
+            COVERALLS_PARALLEL: true
+     
+        parallelism: 4
+        working_directory: ~/ucrate
+
+        steps:
+            - checkout
+
+            - samvera/bundle:
+                ruby_version: << parameters.ruby_version >>
+                bundler_version: << parameters.bundler_version >>
+
+            - samvera/rubocop
+
+            - run:
+                name: Get yarn version
+                command: echo $(yarn --version) >> "YARN_VERSION"
+
+            - run: yarn
+
+            - restore_cache:
+                keys: 
+                  - yarn-packages-{{ checksum "yarn.lock" }}
+                paths:
+                  - ~/.cache/yarn
+
+            - save_cache:
+                key: v1-yarn-{{ checksum "yarn.lock" }}-{{ checksum "YARN_VERSION" }}
+                paths:
+                    - ~/project/node_modules
+
+            - samvera/install_solr_core
+           
+            - samvera/parallel_rspec
+
+            - store_artifacts:
+                path: coverage
+
+            - deploy:
+                command: curl -k https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN} -d "payload[build_num]=${CIRCLE_BUILD_NUM}&payload[status]=done"
+
+workflows:
+    version: 2
+    ci:
+        jobs:
+            - build:
+                name: ruby2-5-3

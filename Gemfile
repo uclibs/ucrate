@@ -10,6 +10,7 @@ end
 gem 'browse-everything'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
+gem 'rack', '2.0.8'
 gem 'sidekiq-limit_fetch'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -17,7 +18,7 @@ gem 'rails', '~> 5.1.7'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.13'
 # Use Puma as the app server
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -105,11 +106,12 @@ group :test do
   gem 'rest-client'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-retry'
+  gem 'rspec_junit_formatter'
   gem 'selenium-webdriver', '3.12.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'webdrivers', '~> 3.0'
 end
 
 group :production do
-  gem 'clamav'
+  #  gem 'clamav'
 end
