@@ -3,6 +3,7 @@
 require 'sidekiq/web'
 require 'sidekiq/api'
 Rails.application.routes.draw do
+  mount Bulkrax::Engine, at: '/'
   mount Orcid::Engine => "/orcid"
   mount Scholar::API => '/'
 

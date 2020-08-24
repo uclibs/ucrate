@@ -40,7 +40,7 @@
  }
 
  div[class*="_admin_set_id"] {
-  display: none;
+  display: inline;
  }
 
  .break-all  {

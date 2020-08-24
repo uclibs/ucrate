@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190822153117) do
+ActiveRecord::Schema.define(version: 20200326235838) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -22,6 +22,85 @@ ActiveRecord::Schema.define(version: 20190822153117) do
     t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_bookmarks_on_document_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "bulkrax_entries", force: :cascade do |t|
+    t.string "identifier"
+    t.string "collection_ids"
+    t.string "type"
+    t.integer "importerexporter_id"
+    t.text "raw_metadata"
+    t.text "parsed_metadata"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "last_error"
+    t.datetime "last_error_at"
+    t.datetime "last_succeeded_at"
+    t.string "importerexporter_type", default: "Bulkrax::Importer"
+    t.index ["importerexporter_id"], name: "index_bulkrax_entries_on_importerexporter_id"
+  end
+
+  create_table "bulkrax_exporter_runs", force: :cascade do |t|
+    t.integer "exporter_id"
+    t.integer "total_work_entries", default: 0
+    t.integer "enqueued_records", default: 0
+    t.integer "processed_records", default: 0
+    t.integer "deleted_records", default: 0
+    t.integer "failed_records", default: 0
+    t.index ["exporter_id"], name: "index_bulkrax_exporter_runs_on_exporter_id"
+  end
+
+  create_table "bulkrax_exporters", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.string "parser_klass"
+    t.integer "limit"
+    t.text "parser_fields"
+    t.text "field_mapping"
+    t.string "export_source"
+    t.string "export_from"
+    t.string "export_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "last_error"
+    t.datetime "last_error_at"
+    t.datetime "last_succeeded_at"
+    t.index ["user_id"], name: "index_bulkrax_exporters_on_user_id"
+  end
+
+  create_table "bulkrax_importer_runs", force: :cascade do |t|
+    t.integer "importer_id"
+    t.integer "total_work_entries", default: 0
+    t.integer "enqueued_records", default: 0
+    t.integer "processed_records", default: 0
+    t.integer "deleted_records", default: 0
+    t.integer "failed_records", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "processed_collections", default: 0
+    t.integer "failed_collections", default: 0
+    t.integer "total_collection_entries", default: 0
+    t.integer "processed_children", default: 0
+    t.integer "failed_children", default: 0
+    t.index ["importer_id"], name: "index_bulkrax_importer_runs_on_importer_id"
+  end
+
+  create_table "bulkrax_importers", force: :cascade do |t|
+    t.string "name"
+    t.string "admin_set_id"
+    t.integer "user_id"
+    t.string "frequency"
+    t.string "parser_klass"
+    t.integer "limit"
+    t.text "parser_fields"
+    t.text "field_mapping"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "validate_only"
+    t.text "last_error"
+    t.datetime "last_error_at"
+    t.datetime "last_succeeded_at"
+    t.index ["user_id"], name: "index_bulkrax_importers_on_user_id"
   end
 
   create_table "change_manager_changes", force: :cascade do |t|
@@ -157,6 +236,34 @@ ActiveRecord::Schema.define(version: 20190822153117) do
     t.integer "user_id"
     t.index ["file_id"], name: "index_file_view_stats_on_file_id"
     t.index ["user_id"], name: "index_file_view_stats_on_user_id"
+  end
+
+  create_table "hyrax_batch_ingest_batch_items", force: :cascade do |t|
+    t.integer "batch_id"
+    t.string "id_within_batch"
+    t.text "source_data"
+    t.string "source_location"
+    t.string "status"
+    t.text "error"
+    t.string "repo_object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "repo_object_class_name"
+    t.index ["batch_id"], name: "index_hyrax_batch_ingest_batch_items_on_batch_id"
+  end
+
+  create_table "hyrax_batch_ingest_batches", force: :cascade do |t|
+    t.string "status"
+    t.string "submitter_email"
+    t.string "source_location"
+    t.text "error"
+    t.string "admin_set_id"
+    t.string "ingest_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "uploaded_filename"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "hyrax_collection_types", force: :cascade do |t|

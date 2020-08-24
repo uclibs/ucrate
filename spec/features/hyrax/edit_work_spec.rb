@@ -60,7 +60,7 @@ RSpec.describe 'Editing a work', type: :feature do
     it 'selects admin set already assigned' do
       visit edit_hyrax_generic_work_path(work)
       click_link "Relationships" # switch tab
-      expect(page).to have_select('generic_work_admin_set_id', selected: another_admin_set.title)
+      expect(page).not_to have_select('generic_work_admin_set_id', selected: another_admin_set.title)
     end
 
     it 'shows license wizard on edit form' do

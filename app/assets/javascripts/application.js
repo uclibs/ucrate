@@ -27,6 +27,7 @@
 // Required by Blacklight
 //= require blacklight/blacklight
 
+//= require bulkrax/application
 //= require_tree .
 //= require hyrax
 

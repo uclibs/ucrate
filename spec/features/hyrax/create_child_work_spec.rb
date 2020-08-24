@@ -28,14 +28,25 @@ RSpec.describe 'Creating a new child Work', :workflow do
     redlock_client_stub
   end
 
-  it 'creates the child work' do
-    skip
+  it 'creates the child work', clean_repo: true, js: true do
     visit "/concern/parent/#{parent.id}/generic_works/new"
     work_title = 'My Test Work'
-    within('form.new_generic_work') do
-      fill_in('Title', with: work_title)
-      click_on('Save')
-    end
+    fill_in('Title', with: work_title, match: :first)
+    college_element = find_by_id("generic_work_college")
+    college_element.select("Business")
+
+    expect(page).to have_content("License Wizard")
+    select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
+
+    expect(page).to have_field("Creator", with: user.name_for_works)
+    fill_in('Creator', with: 'Doe, Jane')
+
+    fill_in('Program or Department', with: 'University Department')
+    fill_in('Description', with: 'This is a description.')
+
+    choose('generic_work_visibility_open')
+    check('agreement')
+    click_on('Save')
     visit "/concern/generic_works/#{parent.id}"
     expect(page).to have_content work_title
   end
@@ -54,17 +65,39 @@ RSpec.describe 'Creating a new child Work', :workflow do
       parent.ordered_members << curation_concern
       parent.save!
     end
-    it 'can be updated' do
+    it 'can be updated', clean_repo: true, js: true do
       visit "/concern/parent/#{parent.id}/generic_works/#{curation_concern.id}/edit"
+      college_element = find_by_id("generic_work_college")
+      college_element.select("Business")
+
+      select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
+
+      fill_in('Creator', with: 'Doe, Jane')
+
+      fill_in('Program or Department', with: 'University Department')
+      fill_in('Description', with: 'This is a description.')
+
+      choose('generic_work_visibility_open')
       click_on "Save"
 
       expect(parent.reload.ordered_members.to_a.length).to eq 1
     end
-    it "doesn't lose other memberships" do
+    it "doesn't lose other memberships", clean_repo: true, js: true do
       new_parent.ordered_members << curation_concern
       new_parent.save!
 
       visit "/concern/parent/#{parent.id}/generic_works/#{curation_concern.id}/edit"
+      college_element = find_by_id("generic_work_college")
+      college_element.select("Business")
+
+      select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
+
+      fill_in('Creator', with: 'Doe, Jane')
+
+      fill_in('Program or Department', with: 'University Department')
+      fill_in('Description', with: 'This is a description.')
+
+      choose('generic_work_visibility_open')
       click_on "Save"
 
       expect(parent.reload.ordered_members.to_a.length).to eq 1
