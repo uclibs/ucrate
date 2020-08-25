@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.0"
+lock "~> 3.11"
 set :application, "Scholar"
 set :repo_url, "https://github.com/uclibs/ucrate.git"
 set :keep_releases, 2
