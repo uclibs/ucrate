@@ -1,7 +1,16 @@
 GIT
-  remote: https://github.com/samvera-labs/bulkrax.git
-  revision: 0d73a830d3c6b5411334a1d86fa40c70921babdf
-  ref: 0d73a83
+  remote: https://github.com/notch8/willow_sword.git
+  revision: 0a669d78617c6003e4aa1a46a10447be92be27d5
+  specs:
+    willow_sword (0.2.0)
+      bagit (~> 0.4.1)
+      rails (>= 5.1.6)
+      rubyzip (>= 1.0.0)
+
+GIT
+  remote: https://github.com/uclibs/bulkrax.git
+  revision: 4ad295999ff6c2f095ad3dc2fa67cd9a05f6b77f
+  ref: 4ad295999ff6c2f095ad3dc2fa67cd9a05f6b77f
   specs:
     bulkrax (0.1.0)
       bagit (~> 0.4)
@@ -1108,6 +1117,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webdrivers (~> 3.0)
   webmock
+  willow_sword!
 
 BUNDLED WITH
    1.17.3

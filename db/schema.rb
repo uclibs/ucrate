@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200326235838) do
+ActiveRecord::Schema.define(version: 20200819054016) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20200326235838) do
     t.string "identifier"
     t.string "collection_ids"
     t.string "type"
-    t.integer "importerexporter_id"
+    t.integer "importerexporter_id", null: false
     t.text "raw_metadata"
     t.text "parsed_metadata"
     t.datetime "created_at", null: false
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20200326235838) do
     t.integer "total_collection_entries", default: 0
     t.integer "processed_children", default: 0
     t.integer "failed_children", default: 0
+    t.text "invalid_records"
     t.index ["importer_id"], name: "index_bulkrax_importer_runs_on_importer_id"
   end
 
@@ -101,6 +102,19 @@ ActiveRecord::Schema.define(version: 20200326235838) do
     t.datetime "last_error_at"
     t.datetime "last_succeeded_at"
     t.index ["user_id"], name: "index_bulkrax_importers_on_user_id"
+  end
+
+  create_table "bulkrax_statuses", force: :cascade do |t|
+    t.string "status_message"
+    t.string "error_class"
+    t.string "error_message"
+    t.text "error_backtrace"
+    t.integer "statusable_id"
+    t.string "statusable_type"
+    t.integer "runnable_id"
+    t.string "runnable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "change_manager_changes", force: :cascade do |t|
@@ -236,34 +250,6 @@ ActiveRecord::Schema.define(version: 20200326235838) do
     t.integer "user_id"
     t.index ["file_id"], name: "index_file_view_stats_on_file_id"
     t.index ["user_id"], name: "index_file_view_stats_on_user_id"
-  end
-
-  create_table "hyrax_batch_ingest_batch_items", force: :cascade do |t|
-    t.integer "batch_id"
-    t.string "id_within_batch"
-    t.text "source_data"
-    t.string "source_location"
-    t.string "status"
-    t.text "error"
-    t.string "repo_object_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "repo_object_class_name"
-    t.index ["batch_id"], name: "index_hyrax_batch_ingest_batch_items_on_batch_id"
-  end
-
-  create_table "hyrax_batch_ingest_batches", force: :cascade do |t|
-    t.string "status"
-    t.string "submitter_email"
-    t.string "source_location"
-    t.text "error"
-    t.string "admin_set_id"
-    t.string "ingest_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "uploaded_filename"
-    t.datetime "start_time"
-    t.datetime "end_time"
   end
 
   create_table "hyrax_collection_types", force: :cascade do |t|
