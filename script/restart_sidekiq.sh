@@ -42,4 +42,4 @@ if [[ -z "${FITS_HOME}" ]]; then
   export PATH=$PATH:/opt/fits/fits
 fi
 cd $APP_DIRECTORY
-bundle exec sidekiq -d -c $THREADS -q ingest -q default -q event -q change -q fixity_check -L log/sidekiq.log -C config/sidekiq.yml -e $ENVIRONMENT
+bundle exec sidekiq -d -c $THREADS -q ingest -q default -q event -q change -q import -q export -q fixity_check -L log/sidekiq.log -C config/sidekiq.yml -e $ENVIRONMENT
