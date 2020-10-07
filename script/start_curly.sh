@@ -8,7 +8,7 @@ fi
 # Kill rails server if exists
 kill -9 $(lsof -i tcp:3002 -t) 2> /dev/null
 source "$HOME/.rvm/scripts/rvm" && bin/bundle exec rails server -p 3002 -b 0.0.0.0 -d
-source script/restart_sidekiq.sh development 1
+#source script/restart_sidekiq.sh development 1
 #bin/bundle exec rails hyrax:default_admin_set:create
 #bin/bundle exec rails hyrax:default_collection_types:create
 #bin/bundle exec rails hyrax:workflow:load
