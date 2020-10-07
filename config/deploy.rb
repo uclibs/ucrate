@@ -20,7 +20,7 @@ end
 
 task :start_curly do
   on roles(:all) do
-    execute "export PATH=$PATH:/usr/sbin/ && cd #{fetch(:deploy_to)}/current/script && chmod u+x * && source start_curly.sh"
+    execute "export PATH=$PATH:/usr/sbin/ && cd #{fetch(:deploy_to)}/current && chmod u+x script/* && source script/start_curly.sh"
   end
 end
 
