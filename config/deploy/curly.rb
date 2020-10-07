@@ -2,7 +2,7 @@
 
 set :rails_env, :development
 set :bundle_without, %w[production test].join(' ')
-set :branch, 'sandbox'
+set :branch, 'fix/my_sql'
 set :default_env, path: "$PATH:/usr/sbin/"
 append :linked_files, "db/development.sqlite3"
 # Note: Fedora and Solr are external
