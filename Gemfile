@@ -8,11 +8,12 @@ git_source(:github) do |repo_name|
 end
 
 gem 'browse-everything'
-gem 'bulkrax', git: 'https://github.com/samvera-labs/bulkrax.git', ref: '0d73a83'
+gem 'bulkrax', git: 'https://github.com/uclibs/bulkrax.git', ref: '4ad295999ff6c2f095ad3dc2fa67cd9a05f6b77f'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
 gem 'rack', '2.0.8'
 gem 'sidekiq-limit_fetch'
+gem 'willow_sword', github: 'notch8/willow_sword'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.7'
