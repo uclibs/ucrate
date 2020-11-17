@@ -3,9 +3,9 @@
 require 'sidekiq/web'
 require 'sidekiq/api'
 Rails.application.routes.draw do
-  mount Bulkrax::Engine, at: '/'
   mount Orcid::Engine => "/orcid"
   mount Scholar::API => '/'
+  mount Bulkrax::Engine, at: '/'
 
   scope :dashboard do
     resources :collection_exports, only: [:index, :create, :destroy]

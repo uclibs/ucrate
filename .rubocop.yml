@@ -38,6 +38,7 @@ Metrics/PerceivedComplexity:
     - 'app/api/**/*'
     - 'spec/api/*'
     - 'app/helpers/api_helper.rb'
+    - 'app/controllers/bulkrax/importers_controller.rb'
 
 Metrics/LineLength:
   Max: 450
@@ -62,6 +63,7 @@ Metrics/MethodLength:
     - 'app/helpers/api_helper.rb'
     - 'app/helpers/mark_helper.rb'
     - 'bin/importer'
+    - 'spec/controllers/bulkrax/importers_controller_spec.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -71,10 +73,12 @@ Metrics/ClassLength:
     - 'app/api/**/*'
     - 'spec/api/*'
     - 'app/helpers/api_helper.rb'
+    - 'app/controllers/bulkrax/importers_controller.rb'
 
 Metrics/ModuleLength:
   Exclude:
     - 'app/helpers/hyrax_helper.rb'
+    - 'spec/controllers/bulkrax/importers_controller_spec.rb'
 
 Rails/ApplicationJob:
   Enabled: false
@@ -309,6 +313,7 @@ Metrics/AbcSize:
     - 'app/helpers/api_helper.rb'
     - 'app/helpers/mark_helper.rb'
     - 'bin/importer'
+    - 'app/controllers/bulkrax/importers_controller.rb'
 
 Metrics/CyclomaticComplexity:
   Exclude:
@@ -318,6 +323,7 @@ Metrics/CyclomaticComplexity:
     - 'app/api/**/*'
     - 'spec/api/*'
     - 'app/helpers/api_helper.rb'
+    - 'app/controllers/bulkrax/importers_controller.rb'
 
 Lint/HandleExceptions:
   Exclude:
