@@ -12,6 +12,8 @@ box:
 google_drive:
   :client_id: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_GOOGLE_ID"] %>
   :client_secret: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_GOOGLE_SECRET"] %>
+file_system:
+  :home: <%= ENV["SCHOLAR_BROWSE_EVERYTHING_FILE_PATH"] %>
 # s3:
 #   :bucket: YOUR_AWS_S3_BUCKET
 #   :response_type: :signed_url # set to :public_url for public urls or :s3_uri for an s3://BUCKET/KEY uri
