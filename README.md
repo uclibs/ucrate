@@ -1,7 +1,7 @@
 # Scholar@UC
 ![Travis (.org) branch](https://img.shields.io/travis/uclibs/ucrate/develop.svg) ![Coveralls coverage](https://img.shields.io/coveralls/github/uclibs/ucrate/develop.svg)
 [![CircleCI](https://circleci.com/gh/uclibs/ucrate.svg?style=svg)](https://circleci.com/gh/uclibs/ucrate)
-[![Coverage Status](https://coveralls.io/repos/github/uclibs/ucrate/badge.svg?branch=master)](https://coveralls.io/github/uclibs/ucrate?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/uclibs/ucrate/badge.svg?branch=main)](https://coveralls.io/github/uclibs/ucrate?branch=main)
 
 ## Dependencies
 
