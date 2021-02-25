@@ -41,19 +41,19 @@ class Ability
 
   private
 
-    def look_for_collection(collection_export)
-      Collection.find(collection_export.collection_id)
-    rescue Ldp::Gone
-      nil
-    end
+  def look_for_collection(collection_export)
+    Collection.find(collection_export.collection_id)
+  rescue Ldp::Gone
+    nil
+  end
 
-    def curation_concerns_models
-      default_curation_concerns = Hyrax.config.curation_concerns
-      default_curation_concerns.delete(Etd)
-      [::FileSet, ::Collection] + default_curation_concerns
-    end
+  def curation_concerns_models
+    default_curation_concerns = Hyrax.config.curation_concerns
+    default_curation_concerns.delete(Etd)
+    [::FileSet, ::Collection] + default_curation_concerns
+  end
 
-    def user_is_etd_manager
-      user_groups.include? 'etd_manager'
-    end
+  def user_is_etd_manager
+    user_groups.include? 'etd_manager'
+  end
 end

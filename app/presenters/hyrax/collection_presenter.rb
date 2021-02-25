@@ -82,7 +82,7 @@ module Hyrax
     end
 
     def collection_type_badge
-      content_tag(:span, collection_type.title, class: "label", style: "background-color: " + collection_type.badge_color + ";")
+      tag.span(collection_type.title, class: "label", style: "background-color: " + collection_type.badge_color + ";")
     end
 
     # The total number of parents that this collection belongs to, visible or not.
@@ -192,13 +192,13 @@ module Hyrax
 
     private
 
-      def featured?
-        @featured = FeaturedCollection.where(collection_id: solr_document.id).exists? if @featured.nil?
-        @featured
-      end
+    def featured?
+      @featured = FeaturedCollection.where(collection_id: solr_document.id).exists? if @featured.nil?
+      @featured
+    end
 
-      def user_can_feature_collections?
-        current_ability.can?(:create, FeaturedCollection)
-      end
+    def user_can_feature_collections?
+      current_ability.can?(:create, FeaturedCollection)
+    end
   end
 end

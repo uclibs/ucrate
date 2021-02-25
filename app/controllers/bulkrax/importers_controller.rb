@@ -21,8 +21,8 @@ module Bulkrax
 
     private
 
-      def ensure_admin!
-        authorize! :read, :admin_dashboard
-      end
+    def ensure_admin!
+      authorize! :read, :admin_dashboard
+    end
   end
 end

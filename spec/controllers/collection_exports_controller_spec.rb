@@ -20,7 +20,7 @@ RSpec.describe CollectionExportsController, type: :controller do
     before do
       sign_in user
 
-      CollectionExportsController.any_instance.stub(
+      described_class.any_instance.stub(
         :new_collection_export_file
       ).and_return(File.open(Rails.root.join('spec', 'fixtures', 'export.csv')))
 

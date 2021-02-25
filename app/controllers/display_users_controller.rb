@@ -24,23 +24,23 @@ class DisplayUsersController < Hyrax::UsersController
 
   protected
 
-    def sort_value
-      sort = params[:sort].blank? ? "name" : params[:sort]
-      case sort
-      when 'name'
-        'last_name'
-      when 'name desc'
-        'last_name DESC'
-      end
+  def sort_value
+    sort = params[:sort].presence || "name"
+    case sort
+    when 'name'
+      'last_name'
+    when 'name desc'
+      'last_name DESC'
     end
+  end
 
-    def exclude_admins_and_non_owners(users)
-      users.to_a.delete_if do |user|
-        !(current_user && current_user&.admin?) && (user_work_count(user)&.zero? || user&.admin?)
-      end
+  def exclude_admins_and_non_owners(users)
+    users.to_a.delete_if do |user|
+      !(current_user && current_user&.admin?) && (user_work_count(user)&.zero? || user&.admin?)
     end
+  end
 
-    def get_current_page(users)
-      ::User.where(id: users.map(&:id)).order(sort_value).page(params[:page]).per(10)
-    end
+  def get_current_page(users)
+    ::User.where(id: users.map(&:id)).order(sort_value).page(params[:page]).per(10)
+  end
 end

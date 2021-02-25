@@ -23,7 +23,7 @@ module Hyrax
         admin_set_label = object.admin_set.to_s
         solr_doc['admin_set_sim']   = admin_set_label
         solr_doc['admin_set_tesim'] = admin_set_label
-        Solrizer.insert_field(solr_doc, 'sort_title', sortable_title(object.title.first), :stored_sortable) if object.title && !object.title.empty?
+        Solrizer.insert_field(solr_doc, 'sort_title', sortable_title(object.title.first), :stored_sortable) if object.title.present?
       end
     end
   end

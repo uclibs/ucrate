@@ -23,14 +23,14 @@ module Hyrax
 
     private
 
-      # add a space to the end of the field when the field ends in a double quote
-      # fileds that end in a double quote throw an error
-      def fix_field_that_ends_with_double_quote(field_name)
-        params[work_type][field_name] = params[work_type][field_name].gsub(/"$/, '" ')
-      end
+    # add a space to the end of the field when the field ends in a double quote
+    # fileds that end in a double quote throw an error
+    def fix_field_that_ends_with_double_quote(field_name)
+      params[work_type][field_name] = params[work_type][field_name].gsub(/"$/, '" ')
+    end
 
-      def work_type
-        curation_concern.class.to_s.underscore
-      end
+    def work_type
+      curation_concern.class.to_s.underscore
+    end
   end
 end

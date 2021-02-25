@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WelcomeMailer < ActionMailer::Base
+class WelcomeMailer < ApplicationMailer
   default from: 'scholar@uc.edu'
   def welcome_email(user)
     @user = user

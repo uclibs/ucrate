@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FixityMailer < ActionMailer::Base
+class FixityMailer < ApplicationMailer
   default from: 'scholar@uc.edu'
   def fixity_email(user, subject, message)
     @user = user

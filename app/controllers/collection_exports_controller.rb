@@ -61,23 +61,23 @@ class CollectionExportsController < ApplicationController
 
   private
 
-    def new_collection_export_file
-      factory = CollectionMetadataCsvFactory.new(collection_id)
-      factory.create_csv
-    end
+  def new_collection_export_file
+    factory = CollectionMetadataCsvFactory.new(collection_id)
+    factory.create_csv
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_collection_export
-      @collection_export = CollectionExport.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_collection_export
+    @collection_export = CollectionExport.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def collection_id
-      params.fetch(:collection_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def collection_id
+    params.fetch(:collection_id)
+  end
 
-    def return_export_file_object(_id, _data)
-      File
-        .entries = Dir.entries(Rails.root.join('tmp'))
-    end
+  def return_export_file_object(_id, _data)
+    File
+      .entries = Dir.entries(Rails.root.join('tmp'))
+  end
 end

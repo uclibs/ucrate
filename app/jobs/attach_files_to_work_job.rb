@@ -30,25 +30,25 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
 
   private
 
-    # The attributes used for visibility - sent as initial params to created FileSets.
-    def visibility_attributes(attributes)
-      attributes.slice(:visibility, :visibility_during_lease,
-                       :visibility_after_lease, :lease_expiration_date,
-                       :embargo_release_date, :visibility_during_embargo,
-                       :visibility_after_embargo)
-    end
+  # The attributes used for visibility - sent as initial params to created FileSets.
+  def visibility_attributes(attributes)
+    attributes.slice(:visibility, :visibility_during_lease,
+                     :visibility_after_lease, :lease_expiration_date,
+                     :embargo_release_date, :visibility_during_embargo,
+                     :visibility_after_embargo)
+  end
 
-    def validate_files!(uploaded_files)
-      uploaded_files.each do |uploaded_file|
-        next if uploaded_file.is_a? Hyrax::UploadedFile
-        raise ArgumentError, "Hyrax::UploadedFile required, but #{uploaded_file.class} received: #{uploaded_file.inspect}"
-      end
+  def validate_files!(uploaded_files)
+    uploaded_files.each do |uploaded_file|
+      next if uploaded_file.is_a? Hyrax::UploadedFile
+      raise ArgumentError, "Hyrax::UploadedFile required, but #{uploaded_file.class} received: #{uploaded_file.inspect}"
     end
+  end
 
-    ##
-    # A work with files attached by a proxy user will set the depositor as the intended user
-    # that the proxy was depositing on behalf of. See tickets #2764, #2902.
-    def proxy_or_depositor(work)
-      work.on_behalf_of.blank? ? work.depositor : work.on_behalf_of
-    end
+  ##
+  # A work with files attached by a proxy user will set the depositor as the intended user
+  # that the proxy was depositing on behalf of. See tickets #2764, #2902.
+  def proxy_or_depositor(work)
+    work.on_behalf_of.presence || work.depositor
+  end
 end

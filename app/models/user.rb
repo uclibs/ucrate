@@ -73,7 +73,7 @@ class User < ApplicationRecord
 
   private
 
-    def user_colleges
-      COLLEGE_AND_DEPARTMENT["current_colleges_for_degrees"].merge(COLLEGE_AND_DEPARTMENT["additional_current_colleges_library"])
-    end
+  def user_colleges
+    COLLEGE_AND_DEPARTMENT["current_colleges_for_degrees"].merge(COLLEGE_AND_DEPARTMENT["additional_current_colleges_library"])
+  end
 end

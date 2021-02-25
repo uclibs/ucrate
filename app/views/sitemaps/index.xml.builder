@@ -12,7 +12,6 @@ xml.tag! 'urlset', 'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
                    'xmlns:xhtml' => 'http://www.w3.org/1999/xhtml',
                    'xsi:schemaLocation' => 'http://www.sitemaps.org/schemas/sitemap/0.9 ' \
          'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd' do
-
   xml.url do
     xml.loc @root_url
     xml.changefreq "always"
