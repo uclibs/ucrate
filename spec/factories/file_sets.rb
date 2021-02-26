@@ -22,6 +22,10 @@ FactoryBot.define do
       read_groups { ["registered"] }
     end
 
+    trait :image do
+      content { File.open(Rails.root.join('spec', 'fixtures', 'world.png')) }
+    end
+
     trait :with_public_embargo do
       after(:build) do |file, evaluator|
         file.embargo = FactoryBot.create(:public_embargo, embargo_release_date: evaluator.embargo_release_date)

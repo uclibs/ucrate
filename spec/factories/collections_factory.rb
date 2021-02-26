@@ -6,7 +6,7 @@ FactoryBot.define do
     # light weight collection factory.  DO NOT ADD tests using this factory.
     #
     # @example let(:collection) { build(:collection, collection_type_settings: [:not_nestable, :discoverable, :sharable, :allow_multiple_membership], with_nesting_attributes: {ancestors: [], parent_ids: [], pathnames: [], depth: 1}) }
-    # rubocop:enable Metrics/LineLength
+    # rubocop:enable Layout/LineLength
 
     # Regarding testing nested collections:
     # To get the nested collection solr fields in the solr document for query purposes there are two options:
