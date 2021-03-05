@@ -2,7 +2,7 @@
 
 set :rails_env, :production
 set :bundle_without, %w[test].join(' ')
-set :branch, 'master'
+set :branch, 'main'
 set :default_env, path: "$PATH:/srv/apps/.gem/ruby/2.5.0/bin:/opt/fits/fits"
 set :bundle_path, -> { shared_path.join('vendor/bundle') }
 # No db/development.sqlite3 file
