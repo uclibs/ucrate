@@ -10,7 +10,6 @@ RSpec.describe "User Spec", type: :feature do
     let(:user) { create(:user) }
     let(:profile_path) { Hyrax::Engine.routes.url_helpers.user_path(user, locale: 'en') }
     let(:users_path) { Hyrax::Engine.routes.url_helpers.users_path }
-
     context 'when visiting user profile with highlighted works' do
       let(:work) { create(:work, user: user) }
 
@@ -132,6 +131,13 @@ RSpec.describe "User Spec", type: :feature do
 
           post_click_order = User.order(:last_name).map { |user| page.body.index(user.last_name) }
           expect(post_click_order).to eq(post_click_order.sort!)
+        end
+
+        it 'is searchable' do
+          fill_in 'user_search', with: user1.last_name
+          click_button "user_submit"
+          expect(page).not_to have_xpath("//td/a[@href='#{profile_path}']")
+          expect(page).to have_xpath("//td/a[@href='#{profile1_path}']")
         end
       end
     end

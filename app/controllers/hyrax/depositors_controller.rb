@@ -44,16 +44,16 @@ module Hyrax
 
     private
 
-      def sanitize_route_string(route)
-        route.gsub("\.", "-dot-")
-      end
+    def sanitize_route_string(route)
+      route.gsub("\.", "-dot-")
+    end
 
-      def send_proxy_depositor_added_messages(grantor, grantee)
-        message_to_grantee = "#{grantor.name} has assigned you as a proxy depositor"
-        message_to_grantor = "You have assigned #{grantee.name} as a proxy depositor"
-        ::User.batch_user.send_message(grantor, message_to_grantor, "Proxy Depositor Added")
-        ::User.batch_user.send_message(grantee, message_to_grantee, "Proxy Depositor Added")
-        send_granted_proxy_email(grantor, grantee)
-      end
+    def send_proxy_depositor_added_messages(grantor, grantee)
+      message_to_grantee = "#{grantor.name} has assigned you as a proxy depositor"
+      message_to_grantor = "You have assigned #{grantee.name} as a proxy depositor"
+      ::User.batch_user.send_message(grantor, message_to_grantor, "Proxy Depositor Added")
+      ::User.batch_user.send_message(grantee, message_to_grantee, "Proxy Depositor Added")
+      send_granted_proxy_email(grantor, grantee)
+    end
   end
 end

@@ -40,7 +40,7 @@ Metrics/PerceivedComplexity:
     - 'app/helpers/api_helper.rb'
     - 'app/controllers/bulkrax/importers_controller.rb'
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 450
   Exclude:
   - 'app/api/scholar/v1/collections.rb'
@@ -143,12 +143,14 @@ RSpec/ExampleLength:
     - 'spec/features/hyrax/create_work_admin_spec.rb'
     - 'spec/features/hyrax/dashboard/all_works.rb'
     - 'spec/features/hyrax/dashboard/collection_spec.rb'
+    - 'spec/features/hyrax/dashboard/display_admin_dashboard_spec.rb'
     - 'spec/features/hyrax/dashboard/display_dashboard_spec.rb'
     - 'spec/features/concern_show_spec.rb'
     - 'spec/features/display_admin_dashboard_spec.rb'
     - 'spec/features/hyrax/edit_content_block_admin_spec.rb'
     - 'spec/features/hyrax/edit_work_spec.rb'
     - 'spec/features/hyrax/embargo_spec.rb'
+    - 'spec/features/hyrax/iiif_manifest_spec.rb'
     - 'spec/features/lease_spec.rb'
     - 'spec/features/hyrax/notifications_spec.rb'
     - 'spec/features/hyrax/ownership_transfer_spec.rb'
@@ -325,7 +327,7 @@ Metrics/CyclomaticComplexity:
     - 'app/helpers/api_helper.rb'
     - 'app/controllers/bulkrax/importers_controller.rb'
 
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Exclude:
     - 'app/controllers/concerns/scholar/works_controller_behavior.rb'
     - 'spec/features/doi_validation_spec.rb'

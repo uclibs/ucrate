@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'spec_helper'
 
 RSpec.describe 'search display fields', type: :feature, js: true do
   let(:user) { create(:user) }

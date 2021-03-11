@@ -69,8 +69,8 @@ RSpec.describe 'Create a Image', :feature, js: true do
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
       within('span#addfiles') do
-        attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
-        attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
+        attach_file("files[]", "#{fixture_path}/image.jp2", visible: false)
+        attach_file("files[]", "#{fixture_path}/png_fits.xml", visible: false)
       end
       click_link "Metadata" # switch tab
 

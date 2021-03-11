@@ -35,7 +35,7 @@ module Bulkrax
           true
         end
       end
-      Bulkrax::ExportersController.prepend Bulkrax::Auth
+      described_class.prepend Bulkrax::Auth
       expect(controller).to receive(:authorize!).with(:read, :admin_dashboard).and_return(true)
     end
 

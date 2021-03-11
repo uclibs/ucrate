@@ -16,7 +16,7 @@ module Hyrax
         solr_doc[Solrizer.solr_name(:bytes, STORED_LONG)] = object.bytes
         solr_doc['thumbnail_path_ss'] = thumbnail_path
         solr_doc['visibility_ssi'] = object.visibility
-        Solrizer.insert_field(solr_doc, 'sort_title', sortable_title(object.title.first), :stored_sortable) if object.title && !object.title.empty?
+        Solrizer.insert_field(solr_doc, 'sort_title', sortable_title(object.title.first), :stored_sortable) if object.title.present?
 
         object.in_collections.each do |col|
           (solr_doc['member_of_collection_ids_ssim'] ||= []) << col.id
