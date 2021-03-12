@@ -3,12 +3,12 @@ source "$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && p
 yes | cp -rf "$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )"/public/assets/banner_image-*.jpg "$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )"/public/assets/banner_image.jpg
 
 # Create symlinks for log files
-touch /mnt/common/scholar-logs/libschpwl1_production.log
+touch /mnt/common/scholar-logs/`hostname`_production.log
 rm -f "$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )/log/production.log"
-ln -s /mnt/common/scholar-logs/libschpwl1_production.log "$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )/log/production.log"
-touch /mnt/common/scholar-logs/libschpwl1_sidekiq.log
+ln -s /mnt/common/scholar-logs/`hostname`_production.log "$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )/log/production.log"
+touch /mnt/common/scholar-logs/`hostname`_sidekiq.log
 rm -f "$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )/log/sidekiq.log"
-ln -s /mnt/common/scholar-logs/libschpwl1_sidekiq.log "$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )/log/sidekiq.log"
+ln -s /mnt/common/scholar-logs/`hostname`_sidekiq.log "$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )/log/sidekiq.log"
 
 # Create symlinks for system, avatar, upload, and branding directories
 ln -s /srv/apps/scholar_capistrano/current /srv/apps/curate_uc 2> /dev/null
