@@ -115,5 +115,5 @@ group :test do
 end
 
 group :production do
-  #  gem 'clamby'
+  gem 'clamby'
 end
