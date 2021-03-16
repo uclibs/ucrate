@@ -67,8 +67,8 @@ module Hyrax
 
     private
 
-      def warning(msg)
-        ActiveFedora::Base.logger&.warn(msg)
-      end
+    def warning(msg)
+      ActiveFedora::Base.logger&.warn(msg)
+    end
   end
 end
