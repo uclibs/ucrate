@@ -69,6 +69,8 @@ es:
     base:
       relationships_parent_row:
         label: "En Colección:"
+      relationships:	
+        label: "Relaciones"
       form_progress:
         required_agreement: Compruebe la licencia de distribución
       items:

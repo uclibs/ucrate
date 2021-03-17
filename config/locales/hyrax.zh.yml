@@ -69,6 +69,8 @@ zh:
     base:
       relationships_parent_row:
         label: '在收集：'
+      relationships:	
+        label: "关系"
       form_progress:
         required_agreement: 检查分配证件
       items:
