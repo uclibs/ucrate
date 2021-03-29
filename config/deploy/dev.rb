@@ -3,7 +3,7 @@
 set :rails_env, :development
 set :bundle_without, %w[production test].join(' ')
 set :branch, 'develop'
-set :default_env, path: "$PATH:/srv/apps/.gem/ruby/2.5.0/bin:/opt/fits/fits"
+set :default_env, path: "$PATH:/srv/apps/.gem/ruby/2.7.0/bin:/opt/fits/fits"
 set :bundle_path, -> { shared_path.join('vendor/bundle') }
 # No db/development.sqlite3 file
 # Note: Fedora and Solr are external

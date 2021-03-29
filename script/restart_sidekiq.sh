@@ -31,7 +31,7 @@ if ! [[ $THREADS =~ $re ]] ; then
 fi
 
 if [[ $ENVIRONMENT == "production" ]]; then
-    export PATH=$PATH:/srv/apps/.gem/ruby/2.5.0/bin
+    export PATH=$PATH:/srv/apps/.gem/ruby/2.7.0/bin
 fi
 
 $APP_DIRECTORY/script/kill_sidekiq.sh
