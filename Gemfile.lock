@@ -166,8 +166,14 @@ GEM
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
+    aws-sdk-xray (1.4.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
     aws-sigv4 (1.2.2)
       aws-eventstream (~> 1, >= 1.0.2)
+    aws-xray-sdk (0.11.5)
+      aws-sdk-xray (~> 1.4.0)
+      multi_json (~> 1)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -1114,6 +1120,7 @@ PLATFORMS
 DEPENDENCIES
   active-fedora (= 11.5.4)
   active_attr
+  aws-xray-sdk
   bixby (>= 1.0.0)
   bootstrap-sass (~> 3.4.1)
   browse-everything
