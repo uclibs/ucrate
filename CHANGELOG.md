@@ -1,3 +1,19 @@
+1.5.0 (Scholar 4.5.0) 4/3/2021
+* Removed link to What’s New
+* Movd collection information on show page
+* Hid relationship partial if empty
+* Highlight search terms in discovery
+* Installed and configured Bulkrax admin tool
+* Added filesystem to BrowseEverything
+* Updated the FAQ
+* Updated to Hyrax 2.9.4
+* Updatesd to Ruby 2.7.2
+* Installed clamby for virus protection.
+* Installed cloudwatch and x-ray for monitoring.
+* Bug Fixes
+	 * Attribute label overlap
+	 * Human readable video type in catalog
+
 1.4.0 (Scholar 4.4.0) 2/7/2020
 * Added Research Directory to user profile
 * Built Rest API
