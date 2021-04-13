@@ -6,5 +6,3 @@ Rails.application.config.xray = {
   active_record: true,
   context_missing: 'LOG_ERROR'
 }
-
-
