@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'aws-xray-sdk'
+
 class ApplicationController < ActionController::Base
   helper Openseadragon::OpenseadragonHelper
   # Adds a few additional behaviors into the application controller
@@ -39,4 +41,15 @@ class ApplicationController < ActionController::Base
   def auth_shib_user!
     redirect_to login_path unless user_signed_in?
   end
+
+  around_action :add_tracing_and_logging_metadata
+
+  def add_tracing_and_logging_metadata
+    XRay.recorder.current_segment.user = current_user.try(:id) || 0
+
+    logger.tagged("CU: #{current_user.try(:id) || 'UnauthenticatedUser'}") do
+      yield
+    end
+  end
+
 end
