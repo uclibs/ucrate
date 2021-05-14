@@ -7,3 +7,4 @@ collection:
   dir: solr/config/
   name: hydra-development
 version: 7.6.0
+mirror_url: https://archive.apache.org/dist/
