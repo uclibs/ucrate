@@ -51,9 +51,6 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
-  # Prepend all log lines with the following tags.
-  config.log_tags = [:request_id, :user_agent, :subdomain, :remote_ip, lambda { |request| request.headers["X-Forwarded-For"] }]
-
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 

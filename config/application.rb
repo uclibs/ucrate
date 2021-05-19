@@ -20,5 +20,10 @@ module ScholarUc
     config.time_zone = "Eastern Time (US & Canada)"
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+
+    # Logging Configuration
+    # Prepend all log lines with the following tags.
+    config.log_tags = [:request_id, :user_agent, :subdomain, :remote_ip, lambda { |request| request.headers["X-Forwarded-For"] || "No-X-Forwarded-For-Header" }]
+    config.log_level = :debug
   end
 end
