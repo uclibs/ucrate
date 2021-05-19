@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
   with_themed_layout '1_column'
   protect_from_forgery with: :exception
 
+  around_action :add_tracing_and_logging_metadata
+
   private
 
   # override devise helper and route to CC.new when parameter is set
@@ -42,9 +44,8 @@ class ApplicationController < ActionController::Base
     redirect_to login_path unless user_signed_in?
   end
 
-  around_action :add_tracing_and_logging_metadata
-
   def add_tracing_and_logging_metadata
+    XRay.recorder.annotations[:user_id] = current_user.try(:id) || 0
     XRay.recorder.current_segment.user = current_user.try(:id) || 0
 
     logger.tagged("CU: #{current_user.try(:id) || 'UnauthenticatedUser'}") do
