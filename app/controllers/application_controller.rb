@@ -47,6 +47,7 @@ class ApplicationController < ActionController::Base
   def add_tracing_and_logging_metadata
     XRay.recorder.annotations[:user_id] = current_user.try(:id) || 0
     XRay.recorder.current_segment.user = current_user.try(:id) || 0
+    XRay.recorder.metadata[:rails_request_id] = request.request_id || 0
 
     logger.tagged("CU: #{current_user.try(:id) || 'UnauthenticatedUser'}") do
       yield
