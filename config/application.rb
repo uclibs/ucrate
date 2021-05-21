@@ -23,7 +23,7 @@ module ScholarUc
 
     # Logging Configuration
     # Prepend all log lines with the following tags.
-    config.log_tags = [:request_id, :user_agent, :subdomain, :remote_ip, lambda { |request| request.headers["X-Forwarded-For"] || "No-X-Forwarded-For-Header" }]
+    config.log_tags = [:request_id, :user_agent, :subdomain, :remote_ip, lambda { |request| request.headers["X-Forwarded-For"] || "No-X-Forwarded-For-Header" }, lambda { |request| request.cookie_jar["_scholar_uc_session"] }]
     config.log_level = :debug
   end
 end
