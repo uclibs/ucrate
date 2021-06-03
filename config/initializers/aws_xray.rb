@@ -5,5 +5,6 @@ Rails.application.config.xray = {
   # record db transactions as subsegments
   active_record: true,
   context_missing: 'LOG_ERROR',
-  logger: Logger.new("log/#{Rails.env}-xray.log")
+  logger: Logger.new("log/#{Rails.env}-xray.log"),
+  stream_threshold: 1,
 }
