@@ -3,7 +3,6 @@
 require 'aws-xray-sdk'
 
 class ApplicationJob < ActiveJob::Base
-
   def serialize
     super.merge('parent_trace_id' => @parent_trace_id || XRay.recorder.current_segment.trace_id)
   end
@@ -27,13 +26,14 @@ class ApplicationJob < ActiveJob::Base
   around_perform do |job, block|
     Rails.logger.info "#{Time.current}: Beginning execution of the job: #{job.inspect}"
     # Create XRay Segment before perform
-    # subsegment = XRay.recorder.begin_segment("sidekiq::#{self.class.name}")
-    subsegment = XRay.recorder.begin_segment("sidekiq::#{self.class.name}", parent_id: @parent_trace_id || nil )
+    seg_name = ENV.fetch("AWS_XRAY_TRACING_NAME", "")
+    subsegment = XRay.recorder.begin_segment("#{seg_name}::sidekiq::#{self.class.name}")
     subsegment.annotations.update context: 'sidekiq'
+    subsegment.annotations.update job_class:"sidekiq::#{self.class.name}"
+    subsegment.annotations.update job_parent_id: @parent_trace_id.to_s
     subsegment.annotations.update job_id: job.job_id
     subsegment.annotations.update provider_job_id: job.provider_job_id
     subsegment.metadata.update job_info: job.inspect
-    # yield
     block.call
     # Destroy XRay Segment after perform
     XRay.recorder.end_segment
