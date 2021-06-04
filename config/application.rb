@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'aws-xray-sdk'
 
 require_relative 'boot'
 
@@ -23,7 +24,7 @@ module ScholarUc
 
     # Logging Configuration
     # Prepend all log lines with the following tags.
-    config.log_tags = [:request_id, :user_agent, :subdomain, :remote_ip, lambda { |request| request.headers["X-Forwarded-For"] || "No-X-Forwarded-For-Header" }, lambda { |request| request.cookie_jar["_scholar_uc_session"] }]
+    config.log_tags = [:request_id, proc { XRay.recorder.current_segment.trace_id || "No-XRay-Trace-ID" }, :user_agent, :subdomain, :remote_ip, ->(request) { request.headers["X-Forwarded-For"] || "No-X-Forwarded-For-Header" }]
     config.log_level = :debug
   end
 end
