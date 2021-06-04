@@ -29,7 +29,7 @@ class ApplicationJob < ActiveJob::Base
     seg_name = ENV.fetch("AWS_XRAY_TRACING_NAME", "")
     subsegment = XRay.recorder.begin_segment("#{seg_name}::sidekiq::#{self.class.name}")
     subsegment.annotations.update context: 'sidekiq'
-    subsegment.annotations.update job_class:"sidekiq::#{self.class.name}"
+    subsegment.annotations.update job_class: "sidekiq::#{self.class.name}"
     subsegment.annotations.update job_parent_id: @parent_trace_id.to_s
     subsegment.annotations.update job_id: job.job_id
     subsegment.annotations.update provider_job_id: job.provider_job_id
