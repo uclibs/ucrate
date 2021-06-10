@@ -8,5 +8,5 @@ Rails.application.config.xray = {
   # Makes sure the log file size does not go beyond a size, beyond which it is rotated.
   # Only the latest rotated log will be retained. That is, the max possible size on disk of log files
   # if `SCHOLAR_XRAY_MAX_LOG_SIZE` is set to 10 would be 10MB(for actual log) + 10MB(for the latest rotated log).
-  logger: Logger.new("log/#{Rails.env}-xray.log", 1, Integer(ENV.fetch("SCHOLAR_XRAY_MAX_LOG_SIZE", "10"), 10) * 1024 * 1024)
+  logger: Logger.new("log/#{Rails.env}-xray.log", 1, Integer(ENV.fetch("SCHOLAR_XRAY_MAX_LOG_SIZE", "10"), 10).megabytes)
 }
