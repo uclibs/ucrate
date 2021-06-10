@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'aws-xray-sdk'
 
 require_relative 'boot'
 
@@ -20,5 +21,10 @@ module ScholarUc
     config.time_zone = "Eastern Time (US & Canada)"
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+
+    # Logging Configuration
+    # Prepend all log lines with the following tags.
+    config.log_tags = [:request_id, proc { XRay.recorder.current_segment.trace_id || "No-XRay-Trace-ID" }, :user_agent, :subdomain, :remote_ip, ->(request) { request.headers["X-Forwarded-For"] || "No-X-Forwarded-For-Header" }]
+    config.log_level = :debug
   end
 end
