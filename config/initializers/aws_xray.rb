@@ -5,5 +5,8 @@ Rails.application.config.xray = {
   # record db transactions as subsegments
   active_record: true,
   context_missing: 'LOG_ERROR',
-  logger: Logger.new("log/#{Rails.env}-xray.log")
+  # Makes sure the log file size does not go beyond 10MB, beyond which it is rotated.
+  # Only the latest rotated log will be retained. That is, the max possible size on disk of log files
+  # in this case would be 10MB(for actual log) + 10MB(for the latest rotated log)
+  logger: Logger.new("log/#{Rails.env}-xray.log", 1, 10 * 1024 * 1024),
 }
