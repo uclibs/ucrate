@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # # frozen_string_literal: true
 # Rails.application.config.xray = {
 #   name: "Scholar-#{Rails.env}@uc",

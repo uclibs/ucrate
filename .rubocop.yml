@@ -105,6 +105,10 @@ Rails/TimeZone:
     - 'spec/services/collection_metadata_csv_factory_spec.rb'
     - 'config/initializers/hyrax.rb'
 
+Rails/HasManyOrHasOneDependent:
+  Exclude:
+    - 'app/models/hydra/access_controls/permission.rb'
+
 RSpec/AnyInstance:
   Exclude:
     - 'spec/support/shared/doi_request.rb'
@@ -195,6 +199,7 @@ RSpec/ExampleLength:
     - 'app/api/*'
     - 'app/api/**/*'
     - 'spec/api/*'
+    - 'spec/unit/permission_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
