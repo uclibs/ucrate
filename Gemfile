@@ -58,7 +58,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'active-fedora', '11.5.4'
 gem 'active_attr'
 gem 'bootstrap-sass', '~> 3.4.1'
+# Pinned at Release v5.1.1
+gem 'brakeman', git: "https://github.com/presidentbeef/brakeman.git", ref: '37570d3f1022d1449da675b19eee95045cc3aca3'
 gem 'bundler', '~> 1.17'
+gem 'bundler-audit'
 gem 'change_manager', git: "https://github.com/uclibs/change_manager.git", ref: 'd8e1b552740df00922a0a40796999c4e2a0cb8b6'
 gem 'devise', '~> 4.6.0'
 gem 'devise-guests', '~> 0.6'
