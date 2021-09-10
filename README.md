@@ -48,6 +48,10 @@
 1. Run the database migrations: ```bundle exec rake db:migrate``` (Optional)
 1. Run the test suite: ```bundle exec rake spec```
 
+## Check for vulnerabilities
+1. Run brakeman: ```bundle exec brakeman -q -w 2```
+1. Run bundler-audit: ```bundle-audit check --update```
+
 ## Project Samvera
 This software has been developed by and is brought to you by the Samvera community. Learn more at the
 [Samvera website](http://projecthydra.org)
