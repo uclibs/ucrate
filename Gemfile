@@ -7,7 +7,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'browse-everything'
+# This gem is a dependency of BE.
+gem 'bigdecimal', '1.3.5'
+
+# For BrowseEverything to work with Hyrax 2.x then we need to pin BE
+gem 'browse-everything', '1.0.2'
+
 gem 'bulkrax', git: 'https://github.com/uclibs/bulkrax.git', ref: '4ad295999ff6c2f095ad3dc2fa67cd9a05f6b77f'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
