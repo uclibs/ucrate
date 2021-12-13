@@ -45,7 +45,7 @@ jobs:
             CACHE_PATH: /tmp/cache
             COVERALLS_PARALLEL: true
      
-        parallelism: 4
+        parallelism: 6
         working_directory: ~/ucrate
 
         steps:

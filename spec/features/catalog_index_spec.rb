@@ -6,6 +6,7 @@ RSpec.describe 'search display fields', type: :feature, js: true do
   let(:user) { create(:user) }
   let!(:collection_type) { create(:collection_type, id: 1) }
   let!(:collection_type_2) { create(:collection_type, id: 2) }
+  let!(:xss_work) { create(:public_article, title: ['<img src=xx:x />']) }
 
   before do
     allow(User).to receive(:find_by_user_key).and_return(stub_model(User, twitter_handle: 'bob'))
@@ -71,7 +72,6 @@ RSpec.describe 'search display fields', type: :feature, js: true do
 
     it 'has the correct display facets' do
       page.current_window.resize_to(2000, 2000)
-      page.save_screenshot('screenshot.png')
       expect(page).to have_selector('.dl-horizontal', text: "Type:")
       expect(page).to have_selector('.dl-horizontal', text: "Description/Abstract:")
       expect(page).to have_selector('.dl-horizontal', text: "Creator/Author:")
@@ -84,6 +84,11 @@ RSpec.describe 'search display fields', type: :feature, js: true do
       skip "Dates aren't showing up in test environment."
       expect(page).to have_selector('.dl-horizontal', text: "Date Created:")
       expect(page).to have_selector('.dl-horizontal', text: "License:")
+    end
+
+    it 'displays escaped html code in title field' do
+      visit('/catalog')
+      expect(page).to have_content(xss_work.title.first)
     end
   end
 end

@@ -34,7 +34,6 @@ module MarkHelper
         value = value.to_s
       end
     end
-
-    value.html_safe
+    value
   end
 end
