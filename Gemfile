@@ -125,7 +125,7 @@ group :production do
   gem 'clamby'
 end
 
-group :xray do
+group :aws do
   # xray application monitoring through aws
   gem 'aws-xray-sdk', require: ['aws-xray-sdk/facets/rails/railtie']
 end
