@@ -11,7 +11,7 @@ end
 gem 'bigdecimal', '1.3.5'
 
 # For BrowseEverything to work with Hyrax 2.x then we need to pin BE
-gem 'browse-everything', '1.0.2'
+gem 'browse-everything', '1.1.0'
 
 gem 'bulkrax', git: 'https://github.com/uclibs/bulkrax.git', ref: '4ad295999ff6c2f095ad3dc2fa67cd9a05f6b77f'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
@@ -28,7 +28,7 @@ gem 'rails', '~> 5.1.7'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.13'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4.3.8'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
