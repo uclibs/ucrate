@@ -200,6 +200,7 @@ RSpec/ExampleLength:
     - 'app/api/**/*'
     - 'spec/api/*'
     - 'spec/unit/permission_spec.rb'
+    - 'spec/controllers/hyrax/resource_sync_controller_spec.rb'
 
 RSpec/ExpectActual:
   Enabled: false
