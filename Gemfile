@@ -24,7 +24,7 @@ gem 'willow_sword', github: 'notch8/willow_sword'
 # gem 'aws-xray-sdk', require: ['aws-xray-sdk/facets/rails/railtie']
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.7'
+gem 'rails', '~> 5.2.4.6'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.13'
 # Use Puma as the app server
@@ -55,7 +55,7 @@ gem 'jbuilder', '~> 2.5'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'active-fedora', '11.5.4'
+gem 'active-fedora', '12.2.3'
 gem 'active_attr'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'brakeman'
@@ -74,7 +74,7 @@ gem 'hyrax', '2.9.6'
 gem 'mysql2', '~> 0.4.10'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
-gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5.1.7'
+gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5.x'
 gem 'riiif', '~> 2.0'
 gem 'rsolr', '>= 1.0'
 gem 'sassc-rails', '>= 2.1.0'

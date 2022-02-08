@@ -88,11 +88,11 @@ module Hydra::AccessControls
       raise "Can't build access #{inspect}" unless access
       self.mode = case access
                   when 'read'
-                    Mode.new(::ACL.Read)
+                    [Mode.new(::ACL.Read)]
                   when 'edit'
-                    Mode.new(::ACL.Write)
+                    [Mode.new(::ACL.Write)]
                   when 'discover'
-                    Mode.new(Hydra::ACL.Discover)
+                    [Mode.new(Hydra::ACL.Discover)]
                   else
                     raise ArgumentError, "Unknown access #{access.inspect}"
                   end
