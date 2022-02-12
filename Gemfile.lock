@@ -763,7 +763,7 @@ GEM
     power_converter (0.1.2)
     public_suffix (4.0.6)
     pul_uv_rails (2.0.1)
-    puma (4.3.10)
+    puma (5.6.2)
       nio4r (~> 2.0)
     qa (5.7.0)
       activerecord-import
@@ -1167,7 +1167,7 @@ DEPENDENCIES
   omniauth-openid
   omniauth-shibboleth
   orcid!
-  puma (~> 4.3.8)
+  puma (~> 5.6.2)
   rack (= 2.2.3)
   rails (~> 5.1.7)
   rails-controller-testing
