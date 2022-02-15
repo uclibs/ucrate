@@ -131,4 +131,16 @@ RSpec.describe "work show view" do
       expect(page).to have_link '', href: "https://twitter.com/intent/tweet/?#{page_title}&url=http%3A%2F%2Fwww.example.com%2Fconcern%2Fgeneric_works%2F#{work.id}"
     end
   end
+
+  context "private work as a user who is not logged in" do
+    let(:work) { create(:private_generic_work, title: ["Magnificent splendor"], source: ["The Internet"], based_near: ["USA"]) }
+
+    before do
+      visit work_path
+    end
+
+    it "redirects to UC central login page" do
+      expect(current_path).to eq('/login')
+    end
+  end
 end
