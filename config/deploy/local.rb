@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 set :rails_env, :development
-set :bundle_without, %w[production test].join(' ')
+set :bundle_without, %w[production test aws].join(' ')
 set :branch, 'chore/#761-deployment-alternative'
 set :default_env, path: "$PATH:/usr/local/bin"
 append :linked_files, "db/development.sqlite3"

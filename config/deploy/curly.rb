@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 set :rails_env, :development
-set :bundle_without, %w[production test].join(' ')
+set :bundle_without, %w[production test aws].join(' ')
 set :branch, 'sandbox'
 set :default_env, path: "$PATH:/usr/sbin/"
 set :bundle_path, -> { shared_path.join('vendor/bundle') }
