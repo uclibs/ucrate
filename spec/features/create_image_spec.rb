@@ -104,6 +104,9 @@ RSpec.describe 'Create a Image', :feature, js: true do
       fill_in('Note', with: note)
       fill_in('External Link', with: external_link)
 
+      click_link('Sharing')
+      expect(page).to have_content("Regardless of the visibility settings for this work, you can also share it with other users and groups")
+
       choose('image_visibility_open')
       expect(page).not_to have_content('Please note, making something visible to the world (i.e. marking this as Open Access) may be viewed as publishing which could impact your ability to')
       check('agreement')

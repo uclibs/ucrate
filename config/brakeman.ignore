@@ -1,0 +1,26 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "c58372ffa9750e7506995301196bc155ae5e14f7b5f01d301b8232036c8b2ca3",
+      "check_name": "MassAssignment",
+      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
+      "file": "app/controllers/hyrax/batch_uploads_controller.rb",
+      "line": 16,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params[:title].permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Hyrax::BatchUploadsController",
+        "method": "create_update_job"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "note": ""
+    }
+  ],
+  "updated": "2022-01-26 16:34:01 -0500",
+  "brakeman_version": "5.1.1"
+}
