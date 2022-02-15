@@ -98,10 +98,6 @@ en:
         results_per_page: Results per page
         sort_by: Sort by
         works_in_collection: Items in this Collection
-    contact_form:
-      header: Contact the Scholar@UC Team
-      notice_html: 'Please us this form to send questions, feedback, or report a problem to the Scholar@UC team. You can also check %{href} for more information'
-      help_resources_href: 'Help Resources'
     file_sets:
       show_details:
         fixity_check: Fixity Check  

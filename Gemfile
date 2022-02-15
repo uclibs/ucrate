@@ -20,9 +20,6 @@ gem 'rack', '2.2.3'
 gem 'sidekiq-limit_fetch'
 gem 'willow_sword', github: 'notch8/willow_sword'
 
-# xray application monitoring through aws
-# gem 'aws-xray-sdk', require: ['aws-xray-sdk/facets/rails/railtie']
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4.6'
 # Use sqlite3 as the database for Active Record
@@ -126,4 +123,9 @@ end
 
 group :production do
   gem 'clamby'
+end
+
+group :aws do
+  # xray application monitoring through aws
+  gem 'aws-xray-sdk', require: ['aws-xray-sdk/facets/rails/railtie']
 end
