@@ -18,4 +18,8 @@ describe '/static/about.html.erb', type: :view do
   it 'has a link to the Collection Policy' do
     expect(rendered).to have_link(href: coll_policy_path)
   end
+
+  it 'renders without capatability list link' do
+    expect(rendered).not_to have_link(hyrax.capability_list_url)
+  end
 end

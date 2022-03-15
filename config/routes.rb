@@ -55,6 +55,9 @@ Rails.application.routes.draw do
   match '/422', to: 'errors#unprocessable', via: :all
   match '/500', to: 'errors#server_error', via: :all
 
+  # re-routes compatibility list to error page for security reasons
+  get '/capabilitylist' => 'errors#not_found', as: :capability_list
+
   mount Qa::Engine => '/authorities'
   mount Hyrax::Engine, at: '/'
   resources :welcome, only: 'index'
