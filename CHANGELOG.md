@@ -1,3 +1,19 @@
+1.6.0 (Scholar 4.6.0) 3/29/2022
+* Configured x-ray logs
+* Update gems (nokogiri, addressable, rexml, rack, puma, browse_everything
+* Sets custom URI parsers for access controls
+* Adds brakeman and bundler_audit
+* Upgrade to Ruby 2.7.5
+* Upgrade to Hyrax 2.9.6
+* New contact form created with jot form
+* Upgrade to Rails 5.2.4.6
+* Bug Fixes
+         * Escape output for mark_helper
+         * Fix catalog popup bug
+         * Unhide share tab
+         * Fix capatability list security vulnerability
+         * Redirect deny access users to uc central login
+
 1.5.0 (Scholar 4.5.0) 4/3/2021
 * Removed link to What’s New
 * Movd collection information on show page
