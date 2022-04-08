@@ -34,6 +34,6 @@ module MarkHelper
         value = value.to_s
       end
     end
-    value
+    sanitize value, tags: ['mark', 'span', 'a']
   end
 end

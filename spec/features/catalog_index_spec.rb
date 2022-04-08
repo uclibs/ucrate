@@ -6,7 +6,7 @@ RSpec.describe 'search display fields', type: :feature, js: true do
   let(:user) { create(:user) }
   let!(:collection_type) { create(:collection_type, id: 1) }
   let!(:collection_type_2) { create(:collection_type, id: 2) }
-  let!(:xss_work) { create(:public_article, title: ['<img src=xx:x />']) }
+  let!(:xss_work) { create(:public_article, title: ['<img src=xx:x />Some other text']) }
 
   before do
     allow(User).to receive(:find_by_user_key).and_return(stub_model(User, twitter_handle: 'bob'))
@@ -88,7 +88,8 @@ RSpec.describe 'search display fields', type: :feature, js: true do
 
     it 'displays escaped html code in title field' do
       visit('/catalog')
-      expect(page).to have_content(xss_work.title.first)
+      expect(page.body).not_to include(xss_work.title.first)
+      expect(page).to have_content('Some other text')
     end
   end
 end
