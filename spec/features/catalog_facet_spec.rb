@@ -26,8 +26,8 @@ RSpec.describe 'catalog searching', js: true, type: :feature do
         click_button('Go')
       end
       expect(page).to have_content('Search Results')
-      expect(page).to have_content("Jill's <mark>Research</mark>")
-      expect(page).to have_content("Jack's <mark>Research</mark>")
+      expect(page.body).to include("Jill's <mark>Research</mark>")
+      expect(page.body).to include("Jack's <mark>Research</mark>")
       expect(page).to have_selector('.facet-field-heading', text: 'Type of Work')
       expect(page).to have_selector('.facet-field-heading', text: 'Language')
       expect(page).to have_selector('.facet-field-heading', text: 'Publisher')
