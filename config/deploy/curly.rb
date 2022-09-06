@@ -6,7 +6,7 @@ set :branch, 'sandbox'
 set :default_env, path: "$PATH:/usr/sbin/"
 set :bundle_path, -> { shared_path.join('vendor/bundle') }
 append :linked_files, "db/development.sqlite3"
-# Note: Fedora and Solr are external
+# NOTE: Fedora and Solr are external
 append :linked_dirs, "tmp", "log", "public/system"
 ask(:username, nil)
 ask(:password, nil, echo: false)

@@ -55,9 +55,7 @@ module ActiveFedora
     end
 
     def connection
-      @connection ||= begin
-        build_connection
-      end
+      @connection ||= build_connection
     end
 
     def clean_connection

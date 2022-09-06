@@ -12,8 +12,7 @@ gem 'bigdecimal', '1.3.5'
 
 # For BrowseEverything to work with Hyrax 2.x then we need to pin BE
 gem 'browse-everything', '1.1.0'
-
-gem 'bulkrax', git: 'https://github.com/uclibs/bulkrax.git', ref: '4ad295999ff6c2f095ad3dc2fa67cd9a05f6b77f'
+gem 'bulkrax', '~> 4.3.0'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
 gem 'rack', '2.2.3'
@@ -52,8 +51,8 @@ gem 'jbuilder', '~> 2.5'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'active-fedora', '12.2.3'
 gem 'active_attr'
+gem 'active-fedora', '~>12.2.4'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'brakeman'
 gem 'bundler', '~> 1.17'
@@ -114,8 +113,8 @@ group :test do
   gem 'factory_bot_rails', '~> 4.11.1'
   gem 'rest-client'
   gem 'rspec-activemodel-mocks'
-  gem 'rspec-retry'
   gem 'rspec_junit_formatter'
+  gem 'rspec-retry'
   gem 'selenium-webdriver', '3.12.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'webdrivers', '~> 3.0'

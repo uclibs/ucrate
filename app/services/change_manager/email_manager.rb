@@ -9,7 +9,7 @@ module ChangeManager
     end
 
     def self.skip_sidekiq_for_emails(owner, change_type, context, target)
-      # Note: For some reason, it duplicates the items in the final email, but only when not using sidekiq
+      # NOTE: For some reason, it duplicates the items in the final email, but only when not using sidekiq
       change_id = Change.new_change(owner, change_type, context, target)
       process_change change_id
     end

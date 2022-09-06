@@ -17,7 +17,7 @@ module Scholar
       if type == 'images' || type == 'student_works' || type == 'documents'
         declared_params << ["genre", params[:genre]] if params.key?("genre")
       end
-      # Note: You must do it in this order to not fail optional fields
+      # NOTE: You must do it in this order to not fail optional fields
       diff = params.to_a - declared_params.to_a
       if diff.any?
         e_message = ""
