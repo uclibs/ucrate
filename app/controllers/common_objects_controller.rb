@@ -11,6 +11,6 @@ class CommonObjectsController < ApplicationController
     end
 
   rescue ActiveFedora::ObjectNotFoundError, Ldp::Gone
-    render file: 'errors/not_found', status: 404
+    render file: 'errors/not_found', status: :not_found
   end
 end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'hyrax/search_state'
+
 class ApplicationController < ActionController::Base
   helper Openseadragon::OpenseadragonHelper
   # Adds a few additional behaviors into the application controller

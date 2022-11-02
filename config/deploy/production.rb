@@ -11,7 +11,7 @@ set :bundle_path, -> { shared_path.join('vendor/bundle') }
 append :linked_dirs, "tmp", "public"
 ask(:username, nil)
 ask(:password, nil, echo: false)
-# Note: Removing :db from one of the servers makes the migrations run only once between thems
+# NOTE: Removing :db from one of the servers makes the migrations run only once between thems
 server "localhost", user: fetch(:username), password: fetch(:password), port: 2222, roles: [:web, :app, :db]
 server "localhost", user: fetch(:username), password: fetch(:password), port: 2223, roles: [:web, :app]
 set :deploy_to, '/srv/apps/scholar_capistrano'

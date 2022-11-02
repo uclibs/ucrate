@@ -2,7 +2,7 @@ inherit_gem:
   bixby: bixby_default.yml
 
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.7
   Exclude:
     - 'app/services/*_report.rb'
     - 'app/services/collection_loader.rb'
@@ -354,3 +354,7 @@ Rails/OutputSafety:
     - 'app/helpers/hyrax_helper.rb'
     - 'app/helpers/mark_helper.rb'
     - 'app/renderers/hyrax/renderers/attribute_renderer.rb'
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/models/hyrax/virus_scanner.rb'

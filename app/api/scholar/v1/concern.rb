@@ -152,7 +152,8 @@ module Scholar
             end
             if filtered_params["access"]
               e << "access " unless APIHelper.validate_access?(filtered_params["access"])
-            else filtered_params["access"] = "restricted"
+            else
+              filtered_params["access"] = "restricted"
             end
             if !APIHelper.find_user(filtered_params["email"]) && filtered_params["create_user"]
               APIHelper.create_user(filtered_params["email"], filtered_params["first_name"], filtered_params["last_name"])
@@ -196,12 +197,14 @@ module Scholar
             # Note: Look into the state field
             attributes_for_actor["department"] = if filtered_params["department"]
                                                    filtered_params["department"]
-                                                 else user["department"]
+                                                 else
+                                                   user["department"]
                                                  end
             attributes_for_actor["publisher"] = APIHelper.handle_multi(filtered_params["publisher"]) if filtered_params["publisher"]
             attributes_for_actor["college"] = if filtered_params["college"]
                                                 filtered_params["college"]
-                                              else user.college
+                                              else
+                                                user.college
                                               end
             attributes_for_actor["creator"] = APIHelper.handle_multi(filtered_params["creator"]) if filtered_params["creator"]
             attributes_for_actor["date_created"] = APIHelper.handle_multi(filtered_params["date_created"]) if filtered_params["date_created"]
@@ -225,7 +228,8 @@ module Scholar
             actor.create(actor_environment)
             if create_user
               present JSON.parse "{ \"created_user\": #{user.serializable_hash.to_json}, \"concern\": #{w.to_json} }"
-            else present w
+            else
+              present w
             end
           end
         end

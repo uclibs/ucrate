@@ -30,7 +30,7 @@ class CollectionExportsController < ApplicationController
 
       redirect_to collection_exports_url, notice: I18n.t("collection_export.create_confirmation")
     else
-      render file: 'public/403.html', status: 403
+      render file: 'public/403.html', status: :forbidden
     end
   end
 
@@ -42,7 +42,7 @@ class CollectionExportsController < ApplicationController
                 type: 'application/octet-stream',
                 disposition: 'attachment'
     else
-      render file: 'public/403.html', status: 403
+      render file: 'public/403.html', status: :forbidden
     end
   end
 
@@ -55,7 +55,7 @@ class CollectionExportsController < ApplicationController
         format.html { redirect_to collection_exports_url, notice: I18n.t("collection_export.destroy_confirmation") }
       end
     else
-      render file: 'public/403.html', status: 403
+      render file: 'public/403.html', status: :forbidden
     end
   end
 
