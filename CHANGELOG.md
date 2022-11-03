@@ -1,3 +1,11 @@
+1.7.0 (Scholar 4.7.0) 11/3/2022
+* Update BulkRAX gem to version 4.3.0
+* Add Monastic Badge to README
+* Bug Fixes
+    * Installed Monkey Patch to allow Re-indexing
+    * Remove Standard Filter Factory in preparation for SOLR upgrade
+    * Sanitize string outputs from mark helper to improve search
+
 1.6.0 (Scholar 4.6.0) 3/29/2022
 * Configured x-ray logs
 * Update gems (nokogiri, addressable, rexml, rack, puma, browse_everything
