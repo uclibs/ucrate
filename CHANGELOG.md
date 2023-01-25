@@ -1,3 +1,7 @@
+1.8.0 (Scholar 4.8.0) 11/3/2022
+* Update SOLR to version 8.11.1
+* Update FITS to version 1.5.5
+    
 1.7.0 (Scholar 4.7.0) 11/3/2022
 * Update BulkRAX gem to version 4.3.0
 * Add Monastic Badge to README
