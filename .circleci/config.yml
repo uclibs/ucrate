@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-    samvera: samvera/circleci-orb@0.3.2
+    samvera: samvera/circleci-orb@1
 jobs:
     build:
         parameters:
@@ -24,7 +24,7 @@ jobs:
                 default: '8985'
             solr_version:
                 type: string
-                default: '7-alpine'
+                default: '8-alpine'
         docker:
             - image: circleci/<< parameters.ruby_type >>:<< parameters.ruby_version >>-node-browsers-legacy
             - image: 'samvera/fcrepo4:<< parameters.fcrepo_version >>'
