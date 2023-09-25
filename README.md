@@ -27,10 +27,10 @@
 1. Install bundler (if needed): `gem install bundler`
 1. Run bundler: `bundle install`
 1. Start fedora: ```fcrepo_wrapper -p 8984```
-1. Start solr: ```solr_wrapper -d solr/config/ --collection_name hydra-development```
-1. Start redis: ```redis-server```
+1. Start solr in new tab: ```solr_wrapper -d solr/config/ --collection_name hydra-development```
+1. Start redis in new tab: ```redis-server```
 1. Run the database migrations: `bundle exec rake db:migrate`
-1. Start the rails server: `rails server`
+1. Start the rails server in new tab: `rails server`
 1. Visit the site at [http://localhost:3000] (http://localhost:3000)
 1. Create default admin set: ```bin/rails hyrax:default_admin_set:create```
 1. Create default collection: ```bundle exec rails hyrax:default_collection_types:create```
