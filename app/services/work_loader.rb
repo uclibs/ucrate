@@ -64,7 +64,7 @@ class WorkLoader
       actor = Hyrax::Actors::FileSetActor.new(file_set, user)
       actor.create_metadata(visibility: visibility)
       actor.create_content(file[:uploaded_file].file.file.to_file)
-      actor.attach_file_to_work(curation_concern)
+      actor.attach_to_work(curation_concern)
       actor.file_set.permissions_attributes = curation_concern.permissions.map(&:to_hash)
 
       file.update(file_set_uri: file_set.uri)
