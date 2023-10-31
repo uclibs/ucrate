@@ -6,7 +6,7 @@ jobs:
         parameters:
             ruby_version:
                 type: string
-                default: 2.7.5
+                default: 2.7.8
             bundler_version:
                 type: string
                 default: 2.0.1
@@ -26,7 +26,7 @@ jobs:
                 type: string
                 default: '8-alpine'
         docker:
-            - image: circleci/<< parameters.ruby_type >>:<< parameters.ruby_version >>-node-browsers-legacy
+            - image: cimg/<< parameters.ruby_type >>:<< parameters.ruby_version >>-browsers
             - image: 'samvera/fcrepo4:<< parameters.fcrepo_version >>'
               environment:
                 CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC"
@@ -90,4 +90,4 @@ workflows:
     ci:
         jobs:
             - build:
-                name: ruby2-7-5
+                name: ruby2-7-8
