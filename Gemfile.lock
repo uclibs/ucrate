@@ -763,8 +763,8 @@ GEM
       oauth-tty (~> 1.0, >= 1.0.1)
       snaky_hash (~> 2.0)
       version_gem (~> 1.1)
-    oauth-tty (1.0.3)
-      version_gem (~> 1.1)
+    oauth-tty (1.0.5)
+      version_gem (~> 1.1, >= 1.1.1)
     oauth2 (1.4.10)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
@@ -1057,9 +1057,9 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
     slop (4.9.2)
-    snaky_hash (2.0.0)
+    snaky_hash (2.0.1)
       hashie
-      version_gem (~> 1.1)
+      version_gem (~> 1.1, >= 1.1.1)
     solr_wrapper (4.0.2)
       http
       minitar
@@ -1135,7 +1135,7 @@ GEM
     unicode-types (1.7.0)
     validatable (1.6.7)
     vcr (6.1.0)
-    version_gem (1.1.0)
+    version_gem (1.1.3)
     virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
