@@ -15,7 +15,27 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+require 'simplecov'
+require 'simplecov-lcov'
 require 'coveralls'
+
+SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
+SimpleCov.start 'rails'
+
+SimpleCov.at_exit do
+  SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+  SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+    [
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::LcovFormatter,
+      Coveralls::SimpleCov::Formatter
+    ]
+  )
+  SimpleCov.result.format!
+end
+
 Coveralls.wear!('rails')
 
 RSpec.configure do |config|
