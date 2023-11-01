@@ -42,9 +42,21 @@ RSpec.describe 'catalog/_index_list_default', type: :view do
                twitter_handle: 'bot4lib')
   end
 
+  let(:fake_solr_response) do
+    {
+      'response' => {
+        'docs' => [attributes]
+      }
+    }
+  end
+
+  before do
+    allow_any_instance_of(RSolr::Client).to receive(:get).and_return(fake_solr_response)
+  end
+
   describe 'catalog helper finds the text' do
     before do
-      view.stub_chain(:can_create_any_work?, :should_render_index_field?).and_return(true)
+      stub_can_create_any_work_with_field(true)
       allow(view).to receive(:current_ability).and_return(ability)
       allow(view).to receive(:blacklight_configuration_context).and_return(blacklight_configuration_context)
       allow(view).to receive(:evaluate_if_unless_configuration).and_return(true)
@@ -61,6 +73,7 @@ RSpec.describe 'catalog/_index_list_default', type: :view do
       allow(view).to receive(:can?).with(:destroy, document).and_return(true)
       render 'catalog/index_list_default', document: document
     end
+
     it "displays mark tag" do
       include MarkHelper
       expect(rendered).to include('<mark>Test</mark>')
@@ -69,7 +82,7 @@ RSpec.describe 'catalog/_index_list_default', type: :view do
 
   describe 'catalog helper doesnt finds the text' do
     before do
-      view.stub_chain(:can_create_any_work?, :should_render_index_field?).and_return(true)
+      stub_can_create_any_work_with_field(true)
       allow(view).to receive(:current_ability).and_return(ability)
       allow(view).to receive(:blacklight_configuration_context).and_return(blacklight_configuration_context)
       allow(view).to receive(:evaluate_if_unless_configuration).and_return(true)
@@ -90,5 +103,13 @@ RSpec.describe 'catalog/_index_list_default', type: :view do
       include MarkHelper
       expect(rendered).not_to include('<mark>Test</mark>')
     end
+  end
+
+  private
+
+  def stub_can_create_any_work_with_field(return_value)
+    can_create_any_work_result = double('can_create_any_work_result')
+    allow(view).to receive(:can_create_any_work?).and_return(can_create_any_work_result)
+    allow(can_create_any_work_result).to receive(:should_render_index_field?).and_return(return_value)
   end
 end

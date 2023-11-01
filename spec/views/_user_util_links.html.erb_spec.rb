@@ -3,17 +3,25 @@
 require 'rails_helper'
 
 RSpec.describe '/_user_util_links.html.erb', type: :view do
+
   let(:join_date) { 5.days.ago }
   let(:can_create_file) { true }
   let(:can_create_collection) { true }
+  let(:current_user) { stub_model(User, user_key: 'userX') }
 
   before do
     allow(view).to receive(:user_signed_in?).and_return(true)
-    allow(view).to receive(:current_user).and_return(stub_model(User, user_key: 'userX'))
+    allow(view).to receive(:current_user).and_return(current_user)
     allow(view).to receive(:can?).with(:create, GenericWork).and_return(can_create_file)
     allow(view).to receive(:can?).with(:create_any, Collection).and_return(can_create_collection)
-    view.stub_chain(:current_ability, :can_create_any_work?).and_return(true) # rubocop:disable RSpec/MessageChain
-    view.stub_chain(:create_work_presenter, :many?).and_return(true) # rubocop:disable RSpec/MessageChain
+
+    current_ability = double('CurrentAbility')
+    allow(view).to receive(:current_ability).and_return(current_ability)
+    allow(current_ability).to receive(:can_create_any_work?).and_return(true)
+
+    create_work_presenter = double('CreateWorkPresenter')
+    allow(view).to receive(:create_work_presenter).and_return(create_work_presenter)
+    allow(create_work_presenter).to receive(:many?).and_return(true)
   end
 
   it 'has dropdown list of links' do
