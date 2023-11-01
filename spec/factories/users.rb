@@ -15,6 +15,7 @@ FactoryBot.define do
     website { 'Personal webpage' }
     rd_page { 'https://researchdirectory.uc.edu/p/user' }
     blog { 'Blog' }
+    orcid { '0000-0000-0000-0000' }
 
     transient do
       # Allow for custom groups when a user is instantiated.

@@ -40,6 +40,7 @@ RSpec.describe "User Spec", type: :feature do
       it 'renders identity and contact fields' do
         visit profile_path
         click_link('Edit Profile', match: :first)
+
         expect(page).to have_field('First Name', with: user.first_name)
         expect(page).to have_field('Last Name', with: user.last_name)
         expect(page).to have_field('Job title', with: user.title)
@@ -51,8 +52,16 @@ RSpec.describe "User Spec", type: :feature do
         expect(page).to have_field('Research Directory webpage', with: user.rd_page)
         expect(page).to have_field('Personal webpage', with: user.website)
         expect(page).to have_field('Blog', with: user.blog)
-        expect(page).to have_content('Create or Connect your ORCID iD')
-        expect(page).to have_link('What is ORCID?')
+        expect(page).to have_field('Orcid', with: user.orcid)
+      end
+
+      it 'persists orcid id after editing' do
+        visit profile_path
+        click_link('Edit Profile', match: :first)
+        expect(page).to have_field('Orcid', with: user.orcid)
+        fill_in('Orcid', with: '1234-1234-1234-1234')
+        click_on('Save Profile')
+        expect(page).to have_content('https://orcid.org/1234-1234-1234-1234')
       end
 
       it 'shows permalinks after editing' do
