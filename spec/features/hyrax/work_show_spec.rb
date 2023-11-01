@@ -111,6 +111,12 @@ RSpec.describe "work show view" do
       expect(page).to have_content work.title.first
       expect(page).to have_selector '.alert-success', text: 'Collection was successfully updated.'
     end
+
+    it "disables turbolinks on work analytics link" do
+      link = find('#stats')
+      # Check if the data-turbolinks attribute is set to "false"
+      expect(link['data-turbolinks']).to eq('false')
+    end
   end
 
   context "as a user who is not logged in" do
