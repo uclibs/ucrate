@@ -349,6 +349,16 @@ Lint/RescueException:
   Exclude:
     - 'app/services/hyrax/custom_stat_importer.rb'
     
+Rails/Exit:
+  Exclude:
+    - 'config/deploy.rb'
+    - 'config/deploy/production.rb'
+
+Rails/Output:
+  Exclude:
+    - 'config/deploy.rb'
+    - 'config/deploy/production.rb'
+
 Rails/OutputSafety:
   Exclude:
     - 'app/helpers/hyrax_helper.rb'
