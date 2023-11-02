@@ -107,8 +107,10 @@ end
 group :test do
   gem 'capybara', '~> 2.4', '< 2.18.0'
   gem 'capybara-maleficent', '~> 0.2'
-  gem 'coveralls', '~> 0.8.22', require: false
+  # gem 'coveralls', '~> 0.8.22', require: false
+  gem 'coveralls_reborn'
   gem 'database_cleaner'
+  gem 'simplecov-lcov', require: false
   # Keep factory_bot pinned, causes tests to fail if updated (10/2019)
   gem 'factory_bot_rails', '~> 4.11.1'
   gem 'rest-client'
