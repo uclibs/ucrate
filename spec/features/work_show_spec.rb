@@ -38,7 +38,7 @@ shared_examples 'submission form without form#fileupload' do |work_class|
   end
 
   it "has some social media buttons" do
-    page.should have_css('div.resp-sharing-button.resp-sharing-button--twitter.resp-sharing-button--small')
+    expect(page).to have_css('div.resp-sharing-button.resp-sharing-button--twitter.resp-sharing-button--small')
   end
 end
 

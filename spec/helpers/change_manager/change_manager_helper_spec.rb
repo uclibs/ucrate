@@ -21,8 +21,8 @@ describe ChangeManager::ChangeManagerHelper do
 
     it 'queues the change in change manager and sends the appropriate email' do
       queue_notifications_for_editors(editors)
-      change_email.to.should match([editors['0']['name']])
-      change_email.from.should match(['scholar@uc.edu'])
+      expect(change_email.to).to match_array([editors['0']['name']])
+      expect(change_email.from).to match_array(['scholar@uc.edu'])
     end
   end
 

@@ -97,7 +97,7 @@ describe StaticController do
     end
     it 'redirects to dashboard when already logged in' do
       get :login
-      response.should redirect_to(Hyrax::Engine.routes.url_helpers.dashboard_path)
+      expect(response).to redirect_to(Hyrax::Engine.routes.url_helpers.dashboard_path)
     end
   end
 

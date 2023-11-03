@@ -73,7 +73,7 @@ describe CallbacksController do
       end
       it 'redirects to the dashboard' do
         get provider
-        response.should redirect_to(Hyrax::Engine.routes.url_helpers.dashboard_path)
+        expect(response).to redirect_to(Hyrax::Engine.routes.url_helpers.dashboard_path)
       end
     end
 

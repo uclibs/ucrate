@@ -8,7 +8,7 @@ RSpec.describe "Sending an email via the contact form", type: :feature do
       visit '/'
       click_link "Contact", match: :first
       expect(page).to have_css('iframe')
-      page.html.should include('</iframe>')
+      expect(page.html).to include('</iframe>')
     end
   end
 end
