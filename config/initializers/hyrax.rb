@@ -91,7 +91,6 @@ Hyrax.config do |config|
   # Path to the file characterization tool
   config.fits_path = ENV.fetch('FITS_FILENAME', 'fits.sh')
 
-
   # Path to the file derivatives creation tool
   config.libreoffice_path = ENV["SCHOLAR_SOFFICE_PATH"]
 
