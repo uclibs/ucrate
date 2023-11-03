@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2022_06_09_001128) do
     t.string "identifier"
     t.string "collection_ids"
     t.string "type"
-    t.integer "importerexporter_id"
+    t.integer "importerexporter_id", null: false
     t.text "raw_metadata", limit: 16777215
     t.text "parsed_metadata", limit: 16777215
     t.datetime "created_at", null: false
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2022_06_09_001128) do
     t.datetime "last_succeeded_at"
     t.string "importerexporter_type", default: "Bulkrax::Importer"
     t.integer "import_attempts", default: 0
+    t.index ["importerexporter_id"], name: "index_bulkrax_entries_on_importerexporter_id"
   end
 
   create_table "bulkrax_exporter_runs", force: :cascade do |t|
@@ -366,7 +367,7 @@ ActiveRecord::Schema.define(version: 2022_06_09_001128) do
     t.string "namespace", default: "default", null: false
     t.string "template", null: false
     t.text "counters"
-    t.integer "seq", default: 0
+    t.integer "seq", limit: 8, default: 0
     t.binary "rand"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
