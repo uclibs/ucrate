@@ -41,7 +41,7 @@ RSpec.describe CollectionExportsController, type: :controller do
         it "returns a success response" do
           CollectionExport.create! collection_attributes
           get :index, params: {}
-          expect(response).to be_success
+          expect(response).to be_successful
         end
       end
 
@@ -49,7 +49,7 @@ RSpec.describe CollectionExportsController, type: :controller do
         it "returns a success response" do
           collection_export = CollectionExport.create! collection_attributes
           get :download, params: { id: collection_export.id }
-          expect(response).to be_success
+          expect(response).to be_successful
         end
       end
 
@@ -95,7 +95,7 @@ RSpec.describe CollectionExportsController, type: :controller do
         it "returns a success response" do
           CollectionExport.create! collection_attributes
           get :index, params: {}
-          expect(response).to be_success
+          expect(response).to be_successful
         end
       end
 
