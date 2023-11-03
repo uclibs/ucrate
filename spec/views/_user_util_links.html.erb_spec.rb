@@ -12,8 +12,9 @@ RSpec.describe '/_user_util_links.html.erb', type: :view do
     allow(view).to receive(:current_user).and_return(stub_model(User, user_key: 'userX'))
     allow(view).to receive(:can?).with(:create, GenericWork).and_return(can_create_file)
     allow(view).to receive(:can?).with(:create_any, Collection).and_return(can_create_collection)
-    view.stub_chain(:current_ability, :can_create_any_work?).and_return(true) # rubocop:disable RSpec/MessageChain
-    view.stub_chain(:create_work_presenter, :many?).and_return(true) # rubocop:disable RSpec/MessageChain
+
+    stub_current_ability(can_create: true)
+    stub_create_work_presenter(many_works: true)
   end
 
   it 'has dropdown list of links' do
@@ -72,5 +73,19 @@ RSpec.describe '/_user_util_links.html.erb', type: :view do
         expect(rendered).not_to have_link('English')
       end
     end
+  end
+
+  private
+
+  def stub_current_ability(can_create: true)
+    current_ability = instance_double('CurrentAbility')
+    allow(view).to receive(:current_ability).and_return(current_ability)
+    allow(current_ability).to receive(:can_create_any_work?).and_return(can_create)
+  end
+
+  def stub_create_work_presenter(many_works: true)
+    create_work_presenter = instance_double('CreateWorkPresenter')
+    allow(view).to receive(:create_work_presenter).and_return(create_work_presenter)
+    allow(create_work_presenter).to receive(:many?).and_return(many_works)
   end
 end
