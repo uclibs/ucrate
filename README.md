@@ -53,6 +53,9 @@
 1. Run brakeman: ```bundle exec brakeman -q -w 2```
 1. Run bundler-audit: ```bundle-audit check --update```
 
+## Notes for local development
+1. If you installed fits on a mac via homebrew, you may be getting an error saying that there is no fits.sh file.  If this happens, add the following to your .env.development.local: `FITS_FILENAME=fits`
+
 ## Project Samvera
 This software has been developed by and is brought to you by the Samvera community. Learn more at the
 [Samvera website](http://projecthydra.org)
