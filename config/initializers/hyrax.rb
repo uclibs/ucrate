@@ -89,7 +89,9 @@ Hyrax.config do |config|
   # config.redis_namespace = "hyrax"
 
   # Path to the file characterization tool
-  # config.fits_path = "fits.sh"
+  # Developers using Brew to install fits should put "fits" as the filename in
+  # their .env.development.local file.  Default is "fits.sh".
+  config.fits_path = ENV.fetch("FITS_FILENAME", "fits.sh")
 
   # Path to the file derivatives creation tool
   config.libreoffice_path = ENV["SCHOLAR_SOFFICE_PATH"]
