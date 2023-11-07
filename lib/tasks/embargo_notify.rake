@@ -3,10 +3,10 @@
 desc 'Starts EmbargoWorker to manage expired embargoes'
 task embargo_notify: :environment do
   # Controls when reminder emails are sent out for expiring embargoed works.
-  FOURTEEN_DAYS = 14
-  THIRTY_DAYS = 30
-  ONE_DAY = 1
-  ZERO_DAYS = 0
+  fourteen_days = 14
+  thirty_days = 30
+  one_day = 1
+  zero_days = 0
   results_cap = 1_000_000
   Time.zone = 'EST'
 
@@ -18,12 +18,12 @@ task embargo_notify: :environment do
     mail_contents = work['title_tesim'].first
 
     case days_until_release
-    when ONE_DAY # notify at end of day (~midnight), one day prior to release
-      EmbargoMailer.notify(receiver, mail_contents, ZERO_DAYS).deliver # still pass zero day count to mailer for notification message
-    when FOURTEEN_DAYS
-      EmbargoMailer.notify(receiver, mail_contents, FOURTEEN_DAYS).deliver
-    when THIRTY_DAYS
-      EmbargoMailer.notify(receiver, mail_contents, THIRTY_DAYS).deliver
+    when one_day # notify at end of day (~midnight), one day prior to release
+      EmbargoMailer.notify(receiver, mail_contents, zero_days).deliver # still pass zero day count to mailer for notification message
+    when fourteen_days
+      EmbargoMailer.notify(receiver, mail_contents, fourteen_days).deliver
+    when thirty_days
+      EmbargoMailer.notify(receiver, mail_contents, thirty_days).deliver
     end
   end
 end
