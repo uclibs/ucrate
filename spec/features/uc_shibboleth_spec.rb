@@ -5,6 +5,7 @@ require 'rails_helper'
 describe 'UC account workflow', type: :feature do
   let(:user) { FactoryBot.create(:user) }
   let(:password) { FactoryBot.attributes_for(:user).fetch(:password) }
+  let(:locale) { 'en' }
 
   describe 'overridden devise password reset page' do
     context 'with a uc.edu email address' do
@@ -68,7 +69,7 @@ describe 'UC account workflow', type: :feature do
     it 'shows a request link of signups are disabled' do
       AUTH_CONFIG['signups_enabled'] = false
       visit new_user_registration_path
-      expect(page).to have_link('use the contact page', contact_path)
+      expect(page).to have_link('use the contact page', href: contact_path(locale: locale))
     end
   end
 
@@ -76,13 +77,13 @@ describe 'UC account workflow', type: :feature do
     it 'shows a shibboleth login link if shibboleth is enabled' do
       AUTH_CONFIG['shibboleth_enabled'] = true
       visit new_user_session_path
-      expect(page).to have_link('Central Login form', user_shibboleth_omniauth_authorize_path)
+      expect(page).to have_link('Central Login form', href: user_shibboleth_omniauth_authorize_path(locale: locale))
     end
 
     it 'does not show a shibboleth login link if shibboleth is disabled' do
       AUTH_CONFIG['shibboleth_enabled'] = false
       visit new_user_session_path
-      expect(page).not_to have_link('Central Login form', user_shibboleth_omniauth_authorize_path)
+      expect(page).not_to have_link('Central Login form', href: user_shibboleth_omniauth_authorize_path(locale: locale))
     end
 
     it 'shows a signup link if signups are enabled' do
@@ -107,7 +108,7 @@ describe 'UC account workflow', type: :feature do
 
       it 'shows a shibboleth login link and local login link' do
         expect(page).to have_link('UC Central Login username', href: 'https://www.uc.edu/distance/Student_Orientation/One_Stop_Student_Resources/central-log-in-.html')
-        expect(page).to have_link('log in using a local account', href: new_user_session_path + '?locale=en')
+        expect(page).to have_link('log in using a local account', href: new_user_session_path(locale: locale))
       end
     end
 
@@ -136,7 +137,7 @@ describe 'UC account workflow', type: :feature do
   describe 'home page login button' do
     it 'shows the correct login link' do
       visit root_path
-      expect(page).to have_link('Login', href: login_path + '?locale=en')
+      expect(page).to have_link('Login', href: login_path(locale: locale))
     end
   end
 
