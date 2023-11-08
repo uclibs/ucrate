@@ -275,7 +275,7 @@ shared_examples 'is remotely identifiable by doi' do
             let(:doi_assignment_strategy) { accessor_name }
             context 'with valid save' do
               before do
-                doi_remote_service.should_receive(:mint).with(subject).and_return(true)
+                expect(doi_remote_service).to receive(:mint).with(subject).and_return(true)
               end
               it_behaves_like 'minting behavior returning value'
               let(:returning_value) { true }

@@ -275,7 +275,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
         click_button("Save")
         expect(page).to have_content title
-        find("input#collection_creator").should have_content(:creator)
+        expect(find("input#collection_creator")).to have_field('collection_creator', with: creator)
         expect(page).to have_content description
       end
 
@@ -311,7 +311,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
         click_button("Save")
         expect(page).to have_content title
-        find("input#collection_creator").should have_content(:creator)
+        expect(find("input#collection_creator").value).to eq('creator')
         expect(page).to have_content description
       end
     end

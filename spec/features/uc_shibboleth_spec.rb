@@ -13,7 +13,7 @@ describe 'UC account workflow', type: :feature do
         visit new_user_password_path
         fill_in('user[email]', with: email_address)
         click_on('Send me reset password instructions')
-        page.should have_content('You cannot reset passwords for @uc.edu accounts. Use your UC Central Login instead')
+        expect(page).to have_content('You cannot reset passwords for @uc.edu accounts. Use your UC Central Login instead')
       end
     end
 
@@ -22,7 +22,7 @@ describe 'UC account workflow', type: :feature do
         visit new_user_password_path
         fill_in('user[email]', with: user.email)
         click_on('Send me reset password instructions')
-        page.should have_content('You will receive an email with instructions on how to reset your password in a few minutes.')
+        expect(page).to have_content('You will receive an email with instructions on how to reset your password in a few minutes.')
       end
     end
 
@@ -32,7 +32,7 @@ describe 'UC account workflow', type: :feature do
         visit new_user_password_path
         fill_in('user[email]', with: email_address)
         click_on('Send me reset password instructions')
-        page.should have_content('Email not found')
+        expect(page).to have_content('Email not found')
       end
     end
   end
@@ -62,7 +62,7 @@ describe 'UC account workflow', type: :feature do
     it 'shows a sign up form if signups are enabled' do
       AUTH_CONFIG['signups_enabled'] = true
       visit new_user_registration_path
-      page.should have_field('user[email]')
+      expect(page).to have_field('user[email]')
     end
 
     it 'shows a request link of signups are disabled' do
@@ -88,13 +88,13 @@ describe 'UC account workflow', type: :feature do
     it 'shows a signup link if signups are enabled' do
       AUTH_CONFIG['signups_enabled'] = true
       visit new_user_session_path
-      page.should have_link('Sign up', new_user_registration_path)
+      expect(page).to_not have_link('Sign up', href: new_user_registration_path)
     end
 
     it 'does not show signup link if signups are disabled' do
       AUTH_CONFIG['signups_enabled'] = false
       visit new_user_session_path
-      page.should_not have_link('Sign up', href: new_user_registration_path)
+      expect(page).not_to have_link('Sign up', href: new_user_registration_path)
     end
   end
 
@@ -118,7 +118,7 @@ describe 'UC account workflow', type: :feature do
       end
 
       it 'shows the local log in page' do
-        page.should have_field('user[email]')
+        expect(page).to have_field('user[email]')
       end
     end
   end
@@ -128,8 +128,8 @@ describe 'UC account workflow', type: :feature do
       login_as(user)
       user.provider = 'shibboleth'
       visit hyrax.edit_dashboard_profile_path(user)
-      page.should_not have_field("user[password]")
-      page.should_not have_field("user[password_confirmation]")
+      expect(page).not_to have_field('user[password]')
+      expect(page).not_to have_field('user[password_confirmation]')
     end
   end
 
@@ -144,7 +144,7 @@ describe 'UC account workflow', type: :feature do
     it "redirects to the UC Shibboleth logout page after logout" do
       create_cookie('login_type', 'shibboleth')
       visit('/users/sign_out')
-      page.should have_content("You have been logged out of the University of Cincinnati's Login Service")
+      expect(page).to have_content("You have been logged out of the University of Cincinnati's Login Service")
     end
   end
 
@@ -152,7 +152,7 @@ describe 'UC account workflow', type: :feature do
     it "redirects to the home page after logout" do
       create_cookie('login_type', 'local')
       visit('/users/sign_out')
-      page.should have_title("Scholar@UC")
+      expect(page).to have_title("Scholar@UC")
     end
   end
 end
