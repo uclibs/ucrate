@@ -19,8 +19,42 @@
       "user_input": null,
       "confidence": "Medium",
       "note": ""
+    },
+    {
+      "warning_type": "Unmaintained Dependency",
+      "warning_code": 121,
+      "fingerprint": "9a3951031616a07c8e02c86652f537e92c08685da97f5ec2b12d5d3602b55bb8",
+      "check_name": "EOLRuby",
+      "message": "Support for Ruby 2.7.8 ended on 2023-03-31",
+      "file": "Gemfile.lock",
+      "line": 821,
+      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [1104],
+      "note": "Ruby EOL ignored due to pending upgrade of Ruby version along with upgrade of Hyrax in year-end 2023 sprint"
+    },
+    {
+      "warning_type": "Unmaintained Dependency",
+      "warning_code": 120,
+      "fingerprint": "d84924377155b41e094acae7404ec2e521629d86f97b0ff628e3d1b263f8101c",
+      "check_name": "EOLRails",
+      "message": "Support for Rails 5.2.4.6 ended on 2022-06-01",
+      "file": "Gemfile.lock",
+      "line": 821,
+      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [1104],
+      "note": "Rails EOL ignored due to pending upgrade of Rails version along with upgrade of Hyrax in year-end 2023 sprint"
     }
   ],
-  "updated": "2022-01-26 16:34:01 -0500",
-  "brakeman_version": "5.1.1"
+  "updated": "2023-11-03 14:42:01 -0400",
+  "brakeman_version": "5.3.1"
 }
