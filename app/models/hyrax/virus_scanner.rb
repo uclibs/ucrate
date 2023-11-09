@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 # The default virus scanner for Hydra::Works
-# If ClamAV is present, it will be used to check for the presence of a virus. If ClamAV is not
+# If Clamby is present, it will be used to check for the presence of a virus. If Clamby is not
 # installed or otherwise not available to your application, Hydra::Works does no virus checking
 # add assumes files have no viruses.
 #
-# To use a virus checker other than ClamAV:
+# To use a virus checker other than Clamby:
 #   class MyScanner < Hydra::Works::VirusScanner
 #     def infected?
 #       my_result = Scanner.check_for_viruses(file)
@@ -34,21 +34,9 @@ module Hyrax
     def infected?
       if defined?(Clamby)
         clamby_scanner
-      elsif defined?(ClamAV)
-        clam_av_scanner
       else
         null_scanner
       end
-    end
-
-    def clam_av_scanner
-      Deprecation.warn(self, "The ClamAV has been replaced by Clamby " \
-        "as the supported virus scanner for hydra-works. " \
-        "ClamAV support will be removed in hydra-works 2.0 ")
-      scan_result = ClamAV.instance.method(:scanfile).call(file)
-      return false if scan_result.zero?
-      warning "A virus was found in #{file}: #{scan_result}"
-      true
     end
 
     # @return [Boolean]
