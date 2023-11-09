@@ -61,7 +61,7 @@ end
 
 # pin chromedriver version so capybara tests pass
 
-Webdrivers::Chromedriver.version = '72.0.3626.69'
+Webdrivers::Chromedriver.required_version = '72.0.3626.69'
 
 unless ENV['SKIP_MALEFICENT']
   # See https://github.com/jeremyf/capybara-maleficent
