@@ -68,6 +68,7 @@ Metrics/MethodLength:
 Metrics/ClassLength:
   Exclude:
     - 'app/presenters/hyrax/collection_presenter.rb'
+    - 'app/services/hyrax/collection_types/permissions_service.rb'
     - 'app/controllers/catalog_controller.rb'
     - 'app/api/*'
     - 'app/api/**/*'

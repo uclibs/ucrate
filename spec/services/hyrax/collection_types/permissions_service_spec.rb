@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-# This test page lifted directly from the hyrax gem version 2.9.6 on 11/8/2023
+# This test page lifted directly from the hyrax gem version 2.9.6 on 11/9/2023
 # We overwrite only some of the functions, but these tests cover all the
-# functions of the class, both overwritten and not.  I thought it important
-# to include these in case the permission functions were interacting.
-#
+# functions of the class, both overwritten and not.
 RSpec.describe Hyrax::CollectionTypes::PermissionsService do
   let(:user_cg) { FactoryBot.create(:user, groups: 'create_group') }
   let(:user_mg) { FactoryBot.create(:user, groups: 'manage_group') }
@@ -203,112 +201,112 @@ RSpec.describe Hyrax::CollectionTypes::PermissionsService do
     end
   end
 
-  # describe '.can_create_admin_set?' do
-  #   it 'create user cannot create admin sets' do
-  #     expect(described_class.can_create_admin_set_collection_type?(user: user_cu)).to be false
-  #   end
-  #
-  #   it 'user in create group cannot create admin sets' do
-  #     expect(described_class.can_create_admin_set_collection_type?(user: user_cg)).to be false
-  #   end
-  #
-  #   it 'manage user cannot create admin sets' do
-  #     expect(described_class.can_create_admin_set_collection_type?(user: user_mu)).to be false
-  #   end
-  #
-  #   it 'user in manage group in cannot create admin sets' do
-  #     expect(described_class.can_create_admin_set_collection_type?(user: user_mg)).to be false
-  #   end
-  #
-  #   it 'admin user can create admin sets' do
-  #     user = FactoryBot.create(:user, groups: 'admin')
-  #     expect(described_class.can_create_admin_set_collection_type?(user: user)).to be true
-  #   end
-  #
-  #   it 'new user cannot create admin sets' do
-  #     user = FactoryBot.create(:user)
-  #     expect(described_class.can_create_admin_set_collection_type?(user: user)).to be false
-  #   end
-  # end
+  describe '.can_create_admin_set?' do
+    it 'create user cannot create admin sets' do
+      expect(described_class.can_create_admin_set_collection_type?(user: user_cu)).to be false
+    end
 
-  # describe '.can_create_collection_types' do
-  #   it 'lists collection types user can create collections for' do
-  #     expect(described_class.can_create_collection_types(user: user_cu))
-  #       .to contain_exactly(collection_type, user_collection_type)
-  #   end
-  #
-  #   it 'lists collection types user groups can create collections for' do
-  #     expect(described_class.can_create_collection_types(user: user_cg))
-  #       .to contain_exactly(collection_type, user_collection_type)
-  #   end
-  #
-  #   it 'includes collection types user can manage' do
-  #     expect(described_class.can_create_collection_types(user: user_mu))
-  #       .to contain_exactly(collection_type, user_collection_type)
-  #   end
-  #
-  #   it 'includes collection types user groups can manage' do
-  #     expect(described_class.can_create_collection_types(user: user_mg))
-  #       .to contain_exactly(collection_type, user_collection_type)
-  #   end
-  #
-  #   it 'includes all collection types for admin user' do
-  #     admin = FactoryBot.create(:user, groups: 'admin')
-  #
-  #     expect(described_class.can_create_collection_types(user: admin))
-  #       .to contain_exactly(collection_type, user_collection_type, admin_set_collection_type)
-  #   end
-  #
-  #   it 'includes only user collection type for new user' do
-  #     user = FactoryBot.create(:user)
-  #     expect(described_class.can_create_collection_types(user: user))
-  #       .to contain_exactly(user_collection_type)
-  #   end
-  # end
+    it 'user in create group cannot create admin sets' do
+      expect(described_class.can_create_admin_set_collection_type?(user: user_cg)).to be false
+    end
 
-  # describe '.can_create_collection_of_type?' do
-  #   let(:ability) { instance_double(Ability, admin?: false, current_user: user, user_groups: []) }
-  #   let(:user) { create(:user) }
-  #   let(:collection_type) { create(:collection_type) }
-  #
-  #   context 'when user has no privileges for the collection type' do
-  #     it 'returns false' do
-  #       expect(described_class.can_create_collection_of_type?(collection_type: collection_type, user: user)).to be false
-  #     end
-  #
-  #     context 'and identity is passed as an ability' do
-  #       it 'returns false' do
-  #         expect(described_class.can_create_collection_of_type?(collection_type: collection_type, ability: ability)).to be false
-  #       end
-  #     end
-  #   end
-  #
-  #   context 'when user is a manager for the collection type' do
-  #     let(:collection_type) { create(:collection_type, manager_user: user) }
-  #     it 'returns true' do
-  #       expect(described_class.can_create_collection_of_type?(collection_type: collection_type, user: user)).to be true
-  #     end
-  #
-  #     context 'and identity is passed as an ability' do
-  #       it 'returns true' do
-  #         expect(described_class.can_create_collection_of_type?(collection_type: collection_type, ability: ability)).to be true
-  #       end
-  #     end
-  #   end
-  #
-  #   context 'when user is a creator for the collection type' do
-  #     let(:collection_type) { create(:collection_type, creator_user: user) }
-  #     it 'returns true' do
-  #       expect(described_class.can_create_collection_of_type?(collection_type: collection_type, user: user)).to be true
-  #     end
-  #
-  #     context 'and identity is passed as an ability' do
-  #       it 'returns true' do
-  #         expect(described_class.can_create_collection_of_type?(collection_type: collection_type, ability: ability)).to be true
-  #       end
-  #     end
-  #   end
-  # end
+    it 'manage user cannot create admin sets' do
+      expect(described_class.can_create_admin_set_collection_type?(user: user_mu)).to be false
+    end
+
+    it 'user in manage group in cannot create admin sets' do
+      expect(described_class.can_create_admin_set_collection_type?(user: user_mg)).to be false
+    end
+
+    it 'admin user can create admin sets' do
+      user = FactoryBot.create(:user, groups: 'admin')
+      expect(described_class.can_create_admin_set_collection_type?(user: user)).to be true
+    end
+
+    it 'new user cannot create admin sets' do
+      user = FactoryBot.create(:user)
+      expect(described_class.can_create_admin_set_collection_type?(user: user)).to be false
+    end
+  end
+
+  describe '.can_create_collection_types' do
+    it 'lists collection types user can create collections for' do
+      expect(described_class.can_create_collection_types(user: user_cu))
+        .to contain_exactly(collection_type, user_collection_type)
+    end
+
+    it 'lists collection types user groups can create collections for' do
+      expect(described_class.can_create_collection_types(user: user_cg))
+        .to contain_exactly(collection_type, user_collection_type)
+    end
+
+    it 'includes collection types user can manage' do
+      expect(described_class.can_create_collection_types(user: user_mu))
+        .to contain_exactly(collection_type, user_collection_type)
+    end
+
+    it 'includes collection types user groups can manage' do
+      expect(described_class.can_create_collection_types(user: user_mg))
+        .to contain_exactly(collection_type, user_collection_type)
+    end
+
+    it 'includes all collection types for admin user' do
+      admin = FactoryBot.create(:user, groups: 'admin')
+
+      expect(described_class.can_create_collection_types(user: admin))
+        .to contain_exactly(collection_type, user_collection_type, admin_set_collection_type)
+    end
+
+    it 'includes only user collection type for new user' do
+      user = FactoryBot.create(:user)
+      expect(described_class.can_create_collection_types(user: user))
+        .to contain_exactly(user_collection_type)
+    end
+  end
+
+  describe '.can_create_collection_of_type?' do
+    let(:ability) { instance_double(Ability, admin?: false, current_user: user, user_groups: []) }
+    let(:user) { create(:user) }
+    let(:collection_type) { create(:collection_type) }
+
+    context 'when user has no priviledges for the collection type' do
+      it 'returns false' do
+        expect(described_class.can_create_collection_of_type?(collection_type: collection_type, user: user)).to be false
+      end
+
+      context 'and identity is passed as an ability' do
+        it 'returns false' do
+          expect(described_class.can_create_collection_of_type?(collection_type: collection_type, ability: ability)).to be false
+        end
+      end
+    end
+
+    context 'when user is a manager for the collection type' do
+      let(:collection_type) { create(:collection_type, manager_user: user) }
+      it 'returns true' do
+        expect(described_class.can_create_collection_of_type?(collection_type: collection_type, user: user)).to be true
+      end
+
+      context 'and identity is passed as an ability' do
+        it 'returns true' do
+          expect(described_class.can_create_collection_of_type?(collection_type: collection_type, ability: ability)).to be true
+        end
+      end
+    end
+
+    context 'when user is a creator for the collection type' do
+      let(:collection_type) { create(:collection_type, creator_user: user) }
+      it 'returns true' do
+        expect(described_class.can_create_collection_of_type?(collection_type: collection_type, user: user)).to be true
+      end
+
+      context 'and identity is passed as an ability' do
+        it 'returns true' do
+          expect(described_class.can_create_collection_of_type?(collection_type: collection_type, ability: ability)).to be true
+        end
+      end
+    end
+  end
 
   describe '.user_edit_grants_for_collection_of_type' do
     it 'is empty for user collection type' do
