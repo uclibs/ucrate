@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
     samvera: samvera/circleci-orb@1
-    coveralls: coveralls/coveralls@1.0.6
+    coveralls: coveralls/coveralls@2.2.1
 
 jobs:
     build:
@@ -45,52 +45,51 @@ jobs:
             WORKING_PATH: /tmp
             UPLOAD_PATH: /tmp
             CACHE_PATH: /tmp/cache
-            COVERALLS_PARALLEL: true
+            COVERALLS_PARALLEL: "true"
      
-        parallelism: 6
+        parallelism: 12
         working_directory: ~/ucrate
 
         steps:
-            - checkout
+          - checkout
 
-            - samvera/bundle:
-                ruby_version: << parameters.ruby_version >>
-                bundler_version: << parameters.bundler_version >>
+          - samvera/bundle:
+              ruby_version: << parameters.ruby_version >>
+              bundler_version: << parameters.bundler_version >>
 
-            - samvera/rubocop
+          - samvera/rubocop
 
-            - run:
-                name: Get yarn version
-                command: echo $(yarn --version) >> "YARN_VERSION"
+          - run:
+              name: Get yarn version
+              command: echo $(yarn --version) >> "YARN_VERSION"
 
-            - run: yarn
+          - run: yarn
 
-            - restore_cache:
-                keys: 
-                  - yarn-packages-{{ checksum "yarn.lock" }}
-                paths:
-                  - ~/.cache/yarn
+          - restore_cache:
+              keys: 
+                - yarn-packages-{{ checksum "yarn.lock" }}
+              paths:
+                - ~/.cache/yarn
 
-            - save_cache:
-                key: v1-yarn-{{ checksum "yarn.lock" }}-{{ checksum "YARN_VERSION" }}
-                paths:
-                    - ~/project/node_modules
+          - save_cache:
+              key: v1-yarn-{{ checksum "yarn.lock" }}-{{ checksum "YARN_VERSION" }}
+              paths:
+                  - ~/project/node_modules
 
-            - samvera/install_solr_core
-           
-            - samvera/parallel_rspec
+          - samvera/install_solr_core
+         
+          - samvera/parallel_rspec
+          - coveralls/upload:
+              parallel_finished: true
+              coverage_file: "/home/circleci/ucrate/coverage/lcov/ucrate.lcov"
+              coverage_format: "lcov"
+              flag_name: "split-group-$CIRCLE_SPLIT_GROUP"
 
-            - store_artifacts:
-                path: coverage
-
-            - coveralls/upload:
-                parallel_finished: true
-                path_to_lcov: /home/circleci/ucrate/coverage/lcov/ucrate.lcov
 
 
 workflows:
     version: 2
     ci:
-        jobs:
-            - build:
-                name: ruby2-7-8
+      jobs:
+        - build:
+            name: ruby2-7-8
