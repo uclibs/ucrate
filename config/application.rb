@@ -20,5 +20,6 @@ module ScholarUc
     config.time_zone = "Eastern Time (US & Canada)"
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+    config.active_record.sqlite3.represent_boolean_as_integer = true
   end
 end
