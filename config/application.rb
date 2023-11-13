@@ -20,6 +20,7 @@ module ScholarUc
     config.time_zone = "Eastern Time (US & Canada)"
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+    # This sqlite3 boolean_as_integer line can be removed upon migrating to Rails 6.0+
     config.active_record.sqlite3.represent_boolean_as_integer = true
   end
 end
