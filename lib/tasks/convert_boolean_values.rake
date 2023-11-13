@@ -18,10 +18,10 @@
 # in a development or staging environment before executing it in a production setting.
 #
 # To run it for your testing environment:
-# RAILS_ENV=test bundle exec rake db:convert_boolean_values
+# RAILS_ENV=test bundle exec rake convert_boolean_values
 #
 # To run it for your development environment:
-# bundle exec rake db:convert_boolean_values
+# bundle exec rake convert_boolean_values
 #
 # Important Notes:
 # - Ensure a database backup is taken before running this task in production.
@@ -33,6 +33,9 @@ task convert_boolean_values: :environment do
   ActiveRecord::Base.descendants.each do |model|
     # Wrap updates for each model in a transaction
     model.transaction do
+      # Skip models without a database table
+      next unless model.table_exists?
+
       puts "Updating boolean columns for #{model.name}"
 
       # Iterate over each column in the model
