@@ -2,7 +2,8 @@
 
 shared_examples 'concern calls' do |work_class|
   let!(:user) { create(:user) }
-  let(:work) { FactoryBot.build(work_class.classify.constantize, user: user, college: "ceas", department: "Test", creator: ["Test"], description: ["Test"], license: ["http://www.opendatacommons.org/licenses/by/1.0/"]) }
+  let(:work) { FactoryBot.build(work_class.singularize.to_sym, user: user, college: "ceas", department: "Test", creator: ["Test"], description: ["Test"], license: ["http://www.opendatacommons.org/licenses/by/1.0/"]) }
+
   let(:parameters) do
     {
       "access": "open",
