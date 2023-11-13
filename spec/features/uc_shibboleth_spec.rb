@@ -5,6 +5,7 @@ require 'rails_helper'
 describe 'UC account workflow', type: :feature do
   let(:user) { FactoryBot.create(:user) }
   let(:password) { FactoryBot.attributes_for(:user).fetch(:password) }
+  let(:locale) { 'en' }
 
   describe 'overridden devise password reset page' do
     context 'with a uc.edu email address' do
@@ -68,7 +69,7 @@ describe 'UC account workflow', type: :feature do
     it 'shows a request link of signups are disabled' do
       AUTH_CONFIG['signups_enabled'] = false
       visit new_user_registration_path
-      expect(page).to have_link('use the contact page', contact_path)
+      expect(page).to have_link('use the contact page', href: contact_path(locale: locale))
     end
   end
 
