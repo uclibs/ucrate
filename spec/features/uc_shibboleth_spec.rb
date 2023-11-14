@@ -77,13 +77,13 @@ describe 'UC account workflow', type: :feature do
     it 'shows a shibboleth login link if shibboleth is enabled' do
       AUTH_CONFIG['shibboleth_enabled'] = true
       visit new_user_session_path
-      expect(page).to have_link('Central Login form', user_shibboleth_omniauth_authorize_path)
+      expect(page).to have_link('Central Login form', href: user_shibboleth_omniauth_authorize_path(locale: locale))
     end
 
     it 'does not show a shibboleth login link if shibboleth is disabled' do
       AUTH_CONFIG['shibboleth_enabled'] = false
       visit new_user_session_path
-      expect(page).not_to have_link('Central Login form', user_shibboleth_omniauth_authorize_path)
+      expect(page).not_to have_link('Central Login form', href: user_shibboleth_omniauth_authorize_path(locale: locale))
     end
 
     it 'shows a signup link if signups are enabled' do
