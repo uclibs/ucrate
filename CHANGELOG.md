@@ -1,3 +1,30 @@
+1.9.0 (Scholar 4.9.0) 12/5/2023
+* Upgrade ruby to 2.7.8
+* Bundle Update
+* Remove remaining references to ClamAV Gem
+* Deprecation Warnings IIIF Viewer 
+* Deprecation Warnings attach_file_to_work
+* Deprecation Warnings success?predicate
+* Deprecation Warnings URI.escape in Active_Fedora
+* Deprecation Warnings stub_chain
+* Deprecation Warnings Removed outdated should syntax
+* Deprecation Warnings embargo_notify.rake
+* Deprecation Warnings Webdrivers
+* Deprecation Warnings DISTINCT
+* Deprecation Warnings FactoryBot
+* Unused Parameters: SelectorQuery
+* Unused Parameters: SelectorQuery - contact
+* Unused Parameters: Capybara Parameters
+* Unused Parameters: SelectorQuery - shibboleth
+* Unused Parameters: SelectorQuery - files
+* Capistrano prompts Confirmation Check
+* Refactor Coveralls to use Coveralls-Reborn and SimpleCov
+* User profile page: Added field for ORCID
+* Bug Fixes
+  * Stats graph showing on load
+  * Fixed Shibboleth Update with logout problems.
+  * Fixed Broken links footer
+
 1.8.0 (Scholar 4.8.0) 1/25/2023
 * Update SOLR to version 8.11.1
 * Update FITS to version 1.5.5
