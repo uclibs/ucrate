@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-RSpec.describe Hyrax::Analytics::Config do
+RSpec.describe Hyrax::Analytics::Google::Config do
   subject { described_class }
   let!(:response) { described_class.load_from_yaml }
   it 'defines analytics variables' do
