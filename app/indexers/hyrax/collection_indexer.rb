@@ -2,9 +2,9 @@
 module Hyrax
   class CollectionIndexer < Hydra::PCDM::CollectionIndexer
     include Hyrax::IndexesThumbnails
-#    include SortableTitleIndexer
+    #    include SortableTitleIndexer
 
-#    STORED_LONG = Solrizer::Descriptor.new(:long, :stored)
+    #    STORED_LONG = Solrizer::Descriptor.new(:long, :stored)
     STORED_LONG = ActiveFedora::Indexing::Descriptor.new(:long, :stored)
     self.thumbnail_path_service = Hyrax::CollectionThumbnailPathService
 
@@ -14,7 +14,7 @@ module Hyrax
         solr_doc['generic_type_sim'] = ["Collection"]
         solr_doc['visibility_ssi'] = object.visibility
         solr_doc['thumbnail_path_ss'] = thumbnail_path
- 
+
         # Solrizer.set_field(solr_doc, 'generic_type', 'Collection', :facetable)
         # Index the size of the collection in bytes
         solr_doc[Solrizer.solr_name(:bytes, STORED_LONG)] = object.bytes
