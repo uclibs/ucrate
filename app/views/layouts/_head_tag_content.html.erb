@@ -7,10 +7,9 @@ signed in %>
     <%= tag :meta, name: 'current-user', data: { user_key: current_user.user_key } %>
 <% end %>
 <!-- added for use on small devices like phones -->
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="resourcesync" href="<%= hyrax.capability_list_url %>" />
 
-<!-- Mendelay card metadata-->
-<%= yield :mendeley_meta %>
 <!-- Twitter card metadata -->
 <%= yield :twitter_meta %>
 <!-- Google Scholar metadata -->
@@ -23,7 +22,7 @@ signed in %>
 
 <!-- application js -->
 <%= javascript_include_tag 'application' %>
-<%= tinymce_assets if can? :update, ContentBlock %>
+
 <%= render 'shared/appearance_styles' %>
 
 <!-- Google Analytics -->
@@ -31,4 +30,3 @@ signed in %>
 
 <!-- for extras, e.g., a favicon -->
 <%= render partial: '/head_tag_extras', formats: [:html] %>
-

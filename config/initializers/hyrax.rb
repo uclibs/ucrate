@@ -48,6 +48,7 @@ Hyrax.config do |config|
 
   # Enable displaying usage statistics in the UI
   # Defaults to false
+
   # Requires a Google Analytics id and OAuth2 keyfile.  See README for more info
   config.analytics = ENV["SCHOLAR_ANALYTICS_TOGGLE"]
 
@@ -141,10 +142,9 @@ Hyrax.config do |config|
   #
   # Default is false
   config.iiif_image_server = true
-
   # Returns a URL that resolves to an image provided by a IIIF image server
-  config.iiif_image_url_builder = lambda do |file_id, base_url, size|
-    Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size)
+  config.iiif_image_url_builder = lambda do |file_id, base_url, size, format|
+    Riiif::Engine.routes.url_helpers.image_url(file_id, host: base_url, size: size, format: format)
   end
   # config.iiif_image_url_builder = lambda do |file_id, base_url, size|
   #   "#{base_url}/downloads/#{file_id.split('/').first}"
