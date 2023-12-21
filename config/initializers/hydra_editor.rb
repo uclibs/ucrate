@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Adds hydra-editor inputs to the load path
 hydra_editor_inputs_path = Gem.loaded_specs['hydra-editor'].full_gem_path + '/app/inputs'
 $LOAD_PATH.unshift(hydra_editor_inputs_path) unless $LOAD_PATH.include?(hydra_editor_inputs_path)
