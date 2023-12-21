@@ -21,11 +21,21 @@ require 'simplecov-lcov'
 require 'coveralls'
 
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
-SimpleCov.start 'rails'
+
+SimpleCov.start 'rails' do
+  # Directories to exclude from coverage
+  add_filter '/.github/'
+  add_filter '/bin'
+  add_filter '/coverage/'
+  add_filter '/db/'
+  add_filter '/public/'
+  add_filter '/solr/'
+  add_filter '/spec/'
+  add_filter '/tmp/'
+  add_filter '/vendor/'
+end
 
 SimpleCov.at_exit do
-  SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
-  SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
     [
       SimpleCov::Formatter::HTMLFormatter,

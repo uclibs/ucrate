@@ -8,28 +8,6 @@ def ci_build?
   ENV['TRAVIS'] || ENV['CIRCLE']
 end
 
-require 'simplecov'
-require 'coveralls'
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
-  [
-    SimpleCov::Formatter::HTMLFormatter,
-    Coveralls::SimpleCov::Formatter
-  ]
-)
-
-SimpleCov.start 'rails' do
-  # Directories to exclude from coverage
-  add_filter '/.github/'
-  add_filter '/bin'
-  add_filter '/coverage/'
-  add_filter '/db/'
-  add_filter '/public/'
-  add_filter '/solr/'
-  add_filter '/spec/'
-  add_filter '/tmp/'
-  add_filter '/vendor/'
-end
-
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
