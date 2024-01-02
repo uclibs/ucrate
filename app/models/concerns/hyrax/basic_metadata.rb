@@ -7,6 +7,8 @@ module Hyrax
     extend ActiveSupport::Concern
 
     included do
+    
+      property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
 
       property :relative_path, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#relativePath'), multiple: false
@@ -18,7 +20,7 @@ module Hyrax
 
       # override the predicate for description to match past versions of Scholar
       property :description, predicate: ::RDF::URI.new('http://purl.org/dc/terms/description')
-
+      property :abstract, predicate: ::RDF::Vocab::DC.abstract
       property :keyword, predicate: ::RDF::Vocab::DC11.relation
       # Used for a license
       property :license, predicate: ::RDF::Vocab::DC.rights

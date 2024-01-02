@@ -21,4 +21,6 @@ class Collection < ActiveFedora::Base
   def multiple?(field)
     CollectionForm.multiple? field
   end
+ 
+  include Hyrax::BasicMetadata
 end
