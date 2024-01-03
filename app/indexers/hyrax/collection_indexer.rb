@@ -16,7 +16,7 @@ module Hyrax
         solr_doc['bytes'] = object.bytes
         solr_doc['thumbnail_path_ss'] = thumbnail_path
         solr_doc['visibility_ssi'] = object.visibility
-        solr_doc['sort_title'] = sortable_title(object.title.first)  if object.title.present?
+        solr_doc['sort_title'] = sortable_title(object.title.first) if object.title.present?
 
         object.in_collections.each do |col|
           (solr_doc['member_of_collection_ids_ssim'] ||= []) << col.id
