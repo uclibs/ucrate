@@ -3,6 +3,7 @@
 <%= presenter.attribute_to_html(:abstract, html_dl: true) %>
 <%= presenter.attribute_to_html(:creator, render_as: :faceted, html_dl: true) %>
 <%= presenter.attribute_to_html(:license, render_as: :license, html_dl: true) %>
+<%= presenter.attribute_to_html(:rights_notes, html_dl: true) %>
 <%= presenter.attribute_to_html(:subject, render_as: :faceted, html_dl: true) %>
 <%= presenter.attribute_to_html(:geo_subject, render_as: :faceted, label: "Geographic Subject", html_dl: true) %>
 <%= presenter.attribute_to_html(:time_period, html_dl: true) %>

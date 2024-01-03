@@ -35,6 +35,10 @@ class SolrDocument
     self[ActiveFedora.index_field_mapper.solr_name('abstract')]
   end
 
+  def rights_notes
+    self[ActiveFedora.index_field_mapper.solr_name('rights_notes')]
+  end
+
   def advisor
     self[ActiveFedora.index_field_mapper.solr_name('advisor')]
   end
