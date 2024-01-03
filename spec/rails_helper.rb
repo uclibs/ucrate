@@ -176,6 +176,11 @@ RSpec.configure do |config|
                                                  end
   end
 
+  # Configure Capybara to use Selenium with Chrome in headless mode for JS-enabled feature tests
+  config.before(:each, type: :feature, js: true) do
+    Capybara.javascript_driver = :selenium_chrome_headless
+  end
+
   config.after do
     DatabaseCleaner.clean
   end
