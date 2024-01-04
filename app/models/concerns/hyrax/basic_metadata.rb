@@ -29,7 +29,7 @@ module Hyrax
       property :rights_statement, predicate: ::RDF::Vocab::EDM.rights
       property :publisher, predicate: ::RDF::Vocab::DC11.publisher
       property :rights_notes, predicate: ::RDF::URI.new('http://purl.org/dc/elements/1.1/rights'), multiple: true
-
+      property :access_right, predicate: ::RDF::Vocab::DC.accessRights
 
       # override the predicate for date_created to match past versions of Scholar
       property :date_created, predicate: ::RDF::URI.new('http://purl.org/dc/terms/date#created')

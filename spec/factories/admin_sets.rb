@@ -25,7 +25,7 @@ FactoryBot.define do
     end
 
     factory :complete_admin_set do
-      rights_notes { ['notes for rights']
+      rights_notes { ['notes for rights'] }
       alternative_title { ['alternative admin set title'] }
       creator           { ['moomin', 'snufkin'] }
       description       { ['Before a revolution happens', 'it is perceived as impossible'] }
