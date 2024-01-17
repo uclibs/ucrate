@@ -27,7 +27,7 @@ describe Hyrax::CollectionIndexer do
 
     it "has required fields" do
       expect(subject.fetch('generic_type_sim')).to eq ["Collection"]
-      expect(subject.fetch('bytes_lts')).to eq(1000)
+      expect(subject.fetch('bytes')).to eq(1000)
       expect(subject.fetch('thumbnail_path_ss')).to eq "/downloads/1234?file=thumbnail"
       expect(subject.fetch('member_of_collection_ids_ssim')).to eq [col1id, col2id]
       expect(subject.fetch('member_of_collections_ssim')).to eq [col1title, col2title]
@@ -35,32 +35,32 @@ describe Hyrax::CollectionIndexer do
 
     it "removes leading spaces" do
       collection.stub(:title).and_return ["  I start with a space"]
-      expect(subject.fetch('sort_title_ssi')).to eq("I START WITH A SPACE")
+      expect(subject.fetch('sort_title')).to eq("I START WITH A SPACE")
     end
 
     it "removes leading articles" do
       collection.stub(:title).and_return(["The the is first"])
-      expect(subject.fetch('sort_title_ssi')).to eq("THE IS FIRST")
+      expect(subject.fetch('sort_title')).to eq("THE IS FIRST")
     end
 
     it "removes non alphanumeric characters" do
       collection.stub(:title).and_return(["Title* 30! Sure& $has$ a &lot& of ^^^punctuation!!!!"])
-      expect(subject.fetch('sort_title_ssi')).to eq("TITLE 30 SURE HAS A LOT OF PUNCTUATION")
+      expect(subject.fetch('sort_title')).to eq("TITLE 30 SURE HAS A LOT OF PUNCTUATION")
     end
 
     it "removes double spaces" do
       collection.stub(:title).and_return(["This  title has      extra   spaces"])
-      expect(subject.fetch('sort_title_ssi')).to eq("THIS TITLE HAS EXTRA SPACES")
+      expect(subject.fetch('sort_title')).to eq("THIS TITLE HAS EXTRA SPACES")
     end
 
     it "upcases everything" do
       collection.stub(:title).and_return(["i should be uppercase"])
-      expect(subject.fetch('sort_title_ssi')).to eq("I SHOULD BE UPPERCASE")
+      expect(subject.fetch('sort_title')).to eq("I SHOULD BE UPPERCASE")
     end
 
     it "adds leading 0s as needed" do
       collection.stub(:title).and_return(["1) Is the first title"])
-      expect(subject.fetch('sort_title_ssi')).to eq("00000000000000000001 IS THE FIRST TITLE")
+      expect(subject.fetch('sort_title')).to eq("00000000000000000001 IS THE FIRST TITLE")
     end
   end
 end

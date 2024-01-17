@@ -62,7 +62,7 @@ module Hyrax
     end
 
     def size
-      number_to_human_size(@solr_document['bytes_lts'])
+      number_to_human_size(@solr_document['bytes'])
     end
 
     def total_items
