@@ -22,30 +22,12 @@ class Ability
     cannot [:edit, :update, :delete], Etd
     can [:manage], Etd if user_is_etd_manager
 
-    can :show, CollectionExport do |collection_export|
-      collection_export.user == current_user.email ||
-        (current_user.can? :show, look_for_collection(collection_export))
-    end
-
-    can :destroy, CollectionExport do |collection_export|
-      collection_export.user == current_user.email ||
-        (current_user.can? :destroy, look_for_collection(collection_export))
-    end
-
-    can [:show, :destroy], CollectionExport if current_user.admin?
     can [:create], ClassifyConcern unless current_user.new_record?
-    can [:create, :destroy], FeaturedCollection if current_user.admin?
     can [:create, :show, :add_user, :remove_user, :index, :edit, :update, :destroy], Role if current_user.admin?
     can [:manage], Etd if current_user.admin?
   end
 
   private
-
-  def look_for_collection(collection_export)
-    Collection.find(collection_export.collection_id)
-  rescue Ldp::Gone
-    nil
-  end
 
   def curation_concerns_models
     default_curation_concerns = Hyrax.config.curation_concerns

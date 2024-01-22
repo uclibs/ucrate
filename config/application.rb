@@ -20,5 +20,6 @@ module ScholarUc
     config.time_zone = "Eastern Time (US & Canada)"
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+    config.assets.css_compressor = nil
   end
 end

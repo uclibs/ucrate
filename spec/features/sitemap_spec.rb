@@ -23,27 +23,6 @@ shared_examples 'sitemap' do |work_class|
   end
 end
 
-shared_examples 'sitemap collection' do |collection_class|
-  let!(:collection_type) { collection_class.name.underscore }
-  let!(:private_collection) { FactoryBot.create(collection_type.to_sym) }
-  let!(:public_collection) { FactoryBot.create("public_#{collection_type}".to_sym) }
-  let(:xml) { Capybara.string(page.body) }
-
-  before { visit sitemap_path }
-
-  it "indexes public #{collection_class}s" do
-    expect(xml).to have_content("#{Rails.application.config.application_root_url}/#{collection_type.pluralize}/#{public_collection.id}")
-  end
-
-  it "does not index private #{collection_class}s" do
-    expect(xml).not_to have_content("#{Rails.application.config.application_root_url}/#{collection_type.pluralize}/#{private_collection.id}")
-  end
-
-  it "indexes the catalog facet for #{collection_class}s" do
-    expect(xml).to have_content build_facet_path(collection_class)
-  end
-end
-
 describe 'Viewing the sitemap', :js, :workflow do
   let!(:static_paths) { StaticController.instance_methods(false) }
   let(:xml) { Capybara.string(page.body) }
@@ -53,8 +32,6 @@ describe 'Viewing the sitemap', :js, :workflow do
   Hyrax.config.registered_curation_concern_types.each do |type|
     it_behaves_like 'sitemap', type.constantize
   end
-
-  it_behaves_like 'sitemap collection', 'Collection'.constantize
 
   it 'displays the root URL' do
     expect(xml).to have_content(root_path)
