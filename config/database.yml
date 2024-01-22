@@ -29,11 +29,19 @@ database_settings: &database_settings
   encoding:  utf8
   RECONNECT: FALSE
 
+default: &default
+  adapter: <%= ENV["SCHOLAR_DATABASE_ADAPTER"] %>
+  encoding: utf8
+  host: <%= ENV["SCHOLAR_DATABASE_HOST"] %>
+  username:  <%= ENV["SCHOLAR_DATABASE_USERNAME"] %>
+  password:  <%= ENV["SCHOLAR_DATABASE_PASSWORD"] %>
+  pool:      <%= ENV["SCHOLAR_DATABASE_POOL"] %>
+  timeout:   <%= ENV["SCHOLAR_DATABASE_TIMEOUT"] %>
+
+
 development:
   <<: *database_settings
-
 test:
   <<: *database_settings
-
 production:
   <<: *database_settings
