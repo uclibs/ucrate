@@ -8,6 +8,12 @@ module Hyrax
       Hyrax::WorkRelation.new.where(DepositSearchBuilder.depositor_field => user.user_key).count
     end
 
+    def create_work_presenter
+      Hyrax::SelectTypeListPresenter.new(current_user)
+    end
+
+
+
     def show
       user = ::User.from_url_component(params[:id])
       return redirect_to root_path, alert: "User '#{params[:id]}' does not exist" if user.nil?

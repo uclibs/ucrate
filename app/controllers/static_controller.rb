@@ -4,6 +4,10 @@ class StaticController < ApplicationController
   def about
     render "static/about"
   end
+ 
+  def create_work_presenter
+    Hyrax::SelectTypeListPresenter.new(current_user)
+  end
 
   def terms
     render "hyrax/static/terms"

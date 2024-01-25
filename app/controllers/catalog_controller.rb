@@ -19,6 +19,10 @@ class CatalogController < ApplicationController
     solr_name('system_modified', :stored_sortable, type: :date)
   end
 
+  def create_work_presenter
+    Hyrax::SelectTypeListPresenter.new(current_user)
+  end
+
   configure_blacklight do |config|
     config.view.gallery.partials = [:index_header, :index]
     config.view.masonry.partials = [:index]

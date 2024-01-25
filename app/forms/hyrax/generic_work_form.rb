@@ -30,24 +30,40 @@ module Hyrax
 
     ## Gymnastics to allow repeatble fields to behave as non-repeatable
 
-    def self.model_attributes(_)
-      attrs = super
-      attrs[:title] = Array(attrs[:title]) if attrs[:title]
-      attrs[:description] = Array(attrs[:description]) if attrs[:description]
-      attrs[:date_created] = Array(attrs[:date_created]) if attrs[:date_created]
-      attrs
-    end
+#    def self.model_attributes(_)
+#      attrs = super
+#      attrs[:title] = Array(attrs[:title]) if attrs[:title]
+#      attrs[:description] = Array(attrs[:description]) if attrs[:description]
+#      attrs[:date_created] = Array(attrs[:date_created]) if attrs[:date_created]
+#      attrs
+#    end
 
-    def title
-      super.first || ""
-    end
+#    def self.model_attributes(attributes)
+#        attrs = super
+#        return attrs unless attributes[:title]
 
-    def description
-      super.first || ""
-    end
+#          attrs[:title] = Array(attributes[:title])
+#            return attrs if attributes[:alt_title].nil?
+#          Array(attributes[:alternate_title]).each do |value|
+#            attrs["title"] << value if value != ""
+#        end
+#        attrs
+#     end
 
-    def date_created
-      super.first || ""
-    end
+
+
+
+
+#    def title
+#      super.first || ""
+#    end
+
+#    def description
+#      super.first || ""
+#    end
+
+#    def date_created
+#      super.first || ""
+#    end
   end
 end

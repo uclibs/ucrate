@@ -12,6 +12,10 @@ class ClassifyConcernsController < ApplicationController
 
   def new; end
 
+  def create_work_presenter
+    Hyrax::SelectTypeListPresenter.new(current_user)
+  end
+
   def create
     classify_concern.attributes = params[:classify_concern]
     if classify_concern.valid?
