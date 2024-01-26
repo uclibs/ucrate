@@ -35,35 +35,59 @@ module Hyrax
 #      attrs[:title] = Array(attrs[:title]) if attrs[:title]
 #      attrs[:description] = Array(attrs[:description]) if attrs[:description]
 #      attrs[:date_created] = Array(attrs[:date_created]) if attrs[:date_created]
+#      attrs[:alternative_title] = Array(attrs[:alternative_title]) if attrs[:alternative_title]
+#      attrs[:rights_notes] = Array(attrs[:rights_notes]) if attrs[:rights_notes]
+#      attrs[:access_rights] = Array(attrs[:access_rights]) if attrs[:access_rights]
+#      attrs[:creator] = Array(attrs[:access_rights]) if attrs[:creator]
+
+
 #      attrs
 #    end
 
-#    def self.model_attributes(attributes)
-#        attrs = super
-#        return attrs unless attributes[:title]
+    def self.model_attributes(attributes)
+        attrs = super
+        return attrs unless attributes[:title]
 
-#          attrs[:title] = Array(attributes[:title])
-#            return attrs if attributes[:alt_title].nil?
-#          Array(attributes[:alternate_title]).each do |value|
-#            attrs["title"] << value if value != ""
-#        end
-#        attrs
-#     end
-
-
+          attrs[:title] = Array(attributes[:title])
+            return attrs if attributes[:alternate_title].nil?
+          Array(attributes[:alternate_title]).each do |value|
+            attrs["title"] << value if value != ""
+        end
+        attrs
+     end
 
 
 
-#    def title
+
+
+    def title
+      super.first || ""
+    end
+
+#    def description
 #      super.first || ""
 #    end
 
-#    def description
+#    def creator
 #      super.first || ""
 #    end
 
 #    def date_created
 #      super.first || ""
 #    end
+
+#    def altervative_title
+#       super.first || ""
+#    end
+
+#    def rights_notes
+#       super.first || ""
+#    end
+
+#    def access_rights
+#       super.first || ""
+#    end
+
+
   end
 end
