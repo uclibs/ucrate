@@ -72,6 +72,7 @@ en:
       defaults:
         description: Description
         license: Rights
+        rights_notes: Rights notes
   hyrax:
     active_consent_to_agreement: I have read and agree to the
     relationships_parent_row:

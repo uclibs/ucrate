@@ -7,6 +7,8 @@ module Hyrax
     extend ActiveSupport::Concern
 
     included do
+    
+      property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
 
       property :relative_path, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#relativePath'), multiple: false
@@ -18,7 +20,7 @@ module Hyrax
 
       # override the predicate for description to match past versions of Scholar
       property :description, predicate: ::RDF::URI.new('http://purl.org/dc/terms/description')
-
+      property :abstract, predicate: ::RDF::Vocab::DC.abstract
       property :keyword, predicate: ::RDF::Vocab::DC11.relation
       # Used for a license
       property :license, predicate: ::RDF::Vocab::DC.rights
@@ -26,6 +28,8 @@ module Hyrax
       # This is for the rights statement
       property :rights_statement, predicate: ::RDF::Vocab::EDM.rights
       property :publisher, predicate: ::RDF::Vocab::DC11.publisher
+      property :rights_notes, predicate: ::RDF::URI.new('http://purl.org/dc/elements/1.1/rights'), multiple: true
+      property :access_right, predicate: ::RDF::Vocab::DC.accessRights
 
       # override the predicate for date_created to match past versions of Scholar
       property :date_created, predicate: ::RDF::URI.new('http://purl.org/dc/terms/date#created')
