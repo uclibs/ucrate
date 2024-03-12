@@ -18,6 +18,7 @@ gem 'kaltura', '0.1.1'
 gem 'rack', '2.2.3'
 gem 'sidekiq-limit_fetch'
 gem 'willow_sword', github: 'notch8/willow_sword'
+gem "okcomputer", "~> 1.18.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4.6'
@@ -33,6 +34,13 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
+# https://github.com/samvera/hyrax/pull/5612
+# "Version 6 of tinymce-rails causes uglifier to error during assets:precompile"
+# This seems to be a hyrax 3.4.1 problem, the next release will have this pin
+# in hyrax itself so can be removed
+# gem 'tinymce-rails', '~> 5.10'
+# gem 'uglifier', '~> 4.2'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -52,10 +60,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'active_attr'
-gem 'active-fedora', '~>12.2.4'
+gem 'active-fedora'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'brakeman'
-gem 'bundler', '~> 1.17'
+gem 'bundler'
 gem 'bundler-audit'
 gem 'change_manager', git: "https://github.com/uclibs/change_manager.git", ref: 'd8e1b552740df00922a0a40796999c4e2a0cb8b6'
 gem 'devise', '~> 4.6.0'
@@ -66,7 +74,7 @@ gem 'equivalent-xml'
 gem 'grape'
 gem 'grape_on_rails_routes'
 gem 'hydra-role-management'
-gem 'hyrax', '2.9.6'
+gem 'hyrax', '3.4.1'
 gem 'mysql2', '~> 0.4.10'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
