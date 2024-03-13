@@ -146,7 +146,7 @@ GEM
     aws-sdk-kms (1.77.0)
       aws-sdk-core (~> 3, >= 3.191.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.143.0)
+    aws-sdk-s3 (1.143.1)
       aws-sdk-core (~> 3, >= 3.191.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.8)
@@ -173,6 +173,7 @@ GEM
     bcp47 (0.3.3)
       i18n
     bcrypt (3.1.20)
+    bcrypt (3.1.20-java)
     bigdecimal (1.3.5)
     bindex (0.8.1)
     bixby (5.0.2)
@@ -300,6 +301,7 @@ GEM
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     date (3.3.4)
+    date (3.3.4-java)
     declarative (0.0.20)
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
@@ -425,6 +427,9 @@ GEM
     fcrepo_wrapper (0.9.0)
       ruby-progressbar
     ffi (1.16.3)
+    ffi (1.16.3-java)
+    ffi (1.16.3-x64-mingw32)
+    ffi (1.16.3-x86-mingw32)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -494,13 +499,13 @@ GEM
     hashdiff (1.1.0)
     hashie (5.0.0)
     hiredis (0.6.3)
+    hiredis (0.6.3-java)
     htmlentities (4.3.4)
-    http (5.2.0)
+    http (5.1.0)
       addressable (~> 2.8)
-      base64 (~> 0.1)
       http-cookie (~> 1.0)
       http-form_data (~> 2.2)
-      llhttp-ffi (~> 0.5.0)
+      llhttp-ffi (~> 0.4.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
     http-form_data (2.3.0)
@@ -620,6 +625,7 @@ GEM
     iiif_manifest (1.4.0)
       activesupport (>= 4)
     iso8601 (0.9.1)
+    jar-dependencies (0.4.1)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -636,6 +642,7 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.7.1)
+    json (2.7.1-java)
     json-canonicalization (0.4.0)
     json-ld (3.2.5)
       htmlentities (~> 4.3)
@@ -693,6 +700,7 @@ GEM
     legato (0.7.0)
       multi_json
     libxml-ruby (3.1.0)
+    libxml-ruby (3.1.0-x64-mingw32)
     link_header (0.0.8)
     linkeddata (3.2.2)
       json-ld (~> 3.2, >= 3.2.5)
@@ -725,7 +733,7 @@ GEM
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    llhttp-ffi (0.5.0)
+    llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
     logger (1.6.0)
@@ -767,6 +775,9 @@ GEM
       mustermann (>= 1.0.0)
     mutex_m (0.2.0)
     mysql2 (0.4.10)
+    mysql2 (0.4.10-x64-mingw32)
+    mysql2 (0.4.10-x86-mingw32)
+    mysql2 (0.4.10-x86-mswin32-60)
     nest (3.2.0)
       redic
     net-http-persistent (4.0.2)
@@ -787,12 +798,19 @@ GEM
     net-ssh (7.2.1)
     netrc (0.11.0)
     nio4r (2.7.0)
+    nio4r (2.7.0-java)
     noid (0.9.0)
     noid-rails (3.0.3)
       actionpack (>= 5.0.0, < 7)
       noid (~> 0.9)
     nokogiri (1.15.5)
       mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
+    nokogiri (1.15.5-java)
+      racc (~> 1.4)
+    nokogiri (1.15.5-x64-mingw32)
+      racc (~> 1.4)
+    nokogiri (1.15.5-x86-mingw32)
       racc (~> 1.4)
     oai (1.1.0)
       builder (>= 3.1.0)
@@ -837,8 +855,12 @@ GEM
     posix-spawn (0.3.15)
     power_converter (0.1.2)
     psych (3.3.4)
+    psych (3.3.4-java)
+      jar-dependencies (>= 0.1.7)
     public_suffix (5.0.4)
     puma (4.3.12)
+      nio4r (~> 2.0)
+    puma (4.3.12-java)
       nio4r (~> 2.0)
     qa (5.11.0)
       activerecord-import
@@ -850,6 +872,7 @@ GEM
       rails (>= 5.0, < 7.2)
       rdf
     racc (1.7.3)
+    racc (1.7.3-java)
     rack (2.2.3)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -992,6 +1015,21 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rest-client (2.0.2-x64-mingw32)
+      ffi (~> 1.9)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
+    rest-client (2.0.2-x86-mingw32)
+      ffi (~> 1.9)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
+    rest-client (2.0.2-x86-mswin32)
+      ffi (~> 1.9)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     retriable (3.1.2)
     rexml (3.2.6)
     riiif (2.5.0)
@@ -1072,6 +1110,8 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc (2.4.0-x64-mingw32)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
       railties (>= 4.0.0)
@@ -1157,6 +1197,9 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
+    sqlite3 (1.3.13-x64-mingw32)
+    sqlite3 (1.3.13-x86-mingw32)
+    sqlite3 (1.3.13-x86-mswin32-60)
     sshkit (1.22.0)
       mutex_m
       net-scp (>= 1.1.2)
@@ -1174,6 +1217,7 @@ GEM
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.3.1)
     thread_safe (0.3.6)
+    thread_safe (0.3.6-java)
     tilt (2.3.0)
     timeout (0.4.1)
     tins (1.32.1)
@@ -1191,6 +1235,8 @@ GEM
       ethon (>= 0.9.0)
     tzinfo (1.2.11)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2024.1)
+      tzinfo (>= 1.0.0)
     uber (0.1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
@@ -1235,6 +1281,8 @@ GEM
       hashdiff (>= 0.4.0, < 2.0.0)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
+    websocket-driver (0.7.6-java)
+      websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
@@ -1246,7 +1294,11 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
+  java
   ruby
+  x64-mingw32
+  x86-mingw32
+  x86-mswin32
 
 DEPENDENCIES
   active-fedora
@@ -1281,6 +1333,7 @@ DEPENDENCIES
   fcrepo_wrapper
   grape
   grape_on_rails_routes
+  http (= 5.1.0)
   hydra-remote_identifier!
   hydra-role-management
   hyrax (= 3.4.1)
@@ -1288,6 +1341,7 @@ DEPENDENCIES
   jquery-rails
   kaltura (= 0.1.1)
   listen (~> 3.0.5)
+  llhttp-ffi (= 0.4.0)
   mysql2 (~> 0.4.10)
   okcomputer (~> 1.18.4)
   omniauth-openid
