@@ -363,10 +363,9 @@ GEM
       zeitwerk (~> 2.6)
     dry-matcher (0.9.0)
       dry-core (~> 0.4, >= 0.4.8)
-    dry-monads (1.5.0)
+    dry-monads (1.4.0)
       concurrent-ruby (~> 1.0)
-      dry-core (~> 0.9, >= 0.9)
-      zeitwerk (~> 2.6)
+      dry-core (~> 0.7)
     dry-schema (1.11.3)
       concurrent-ruby (~> 1.0)
       dry-configurable (~> 0.16, >= 0.16)
@@ -1328,6 +1327,7 @@ DEPENDENCIES
   devise-guests (~> 0.6)
   devise-multi_auth!
   dotenv-rails
+  dry-monads (= 1.4.0)
   equivalent-xml
   factory_bot_rails (~> 4.11.1)
   fcrepo_wrapper

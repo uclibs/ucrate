@@ -10,6 +10,9 @@ end
 # This gem is a dependency of BE.
 gem 'bigdecimal', '1.3.5'
 
+# Needed for Hyrax 3.x
+gem 'dry-monads', '1.4.0'
+
 # Needed for solr_wrapper to run x86_darwin architecture
 gem 'http', '5.1.0'
 gem 'llhttp-ffi', '0.4.0' # 0.5.0 is broken for x86_darwin architecture
