@@ -4,16 +4,16 @@ module Hyrax
     include Hyrax::IndexesThumbnails
     include SortableTitleIndexer
 
-    STORED_LONG = Solrizer::Descriptor.new(:long, :stored)
+    STORED_LONG = ActiveFedora::Indexing::Descriptor.new(:long, :stored)
 
     self.thumbnail_path_service = Hyrax::CollectionThumbnailPathService
 
     def generate_solr_document
       super.tap do |solr_doc|
         # Makes Collections show under the "Collections" tab
-        Solrizer.set_field(solr_doc, 'generic_type', 'Collection', :facetable)
+        ActiveFedora.index_field_mapper.set_field(solr_doc, 'generic_type', 'Collection', :facetable)
         # Index the size of the collection in bytes
-        solr_doc[Solrizer.solr_name(:bytes, STORED_LONG)] = object.bytes
+        solr_doc[ActiveFedora.index_field_mapper.solr_name(:bytes, STORED_LONG)] = object.bytes
         solr_doc['thumbnail_path_ss'] = thumbnail_path
         solr_doc['visibility_ssi'] = object.visibility
         Solrizer.insert_field(solr_doc, 'sort_title', sortable_title(object.title.first), :stored_sortable) if object.title.present?
