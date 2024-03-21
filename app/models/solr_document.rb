@@ -25,75 +25,89 @@ class SolrDocument
 
   use_extension(Hydra::ContentNegotiation)
 
+  # Added for Hyrax 3
+
+  def alternative_title
+    self[ActiveFedora.index_field_mapper.solr_name('alternate_title')]
+  end
+
+  def abstract
+    self[ActiveFedora.index_field_mapper.solr_name('abstract')]
+  end
+
+  def rights_notes
+    self[ActiveFedora.index_field_mapper.solr_name('rights_notes')]
+  end
+
   # Added for All Work Types
 
   def alternate_title
-    self[Solrizer.solr_name('alternate_title')]
+    self[ActiveFedora.index_field_mapper.solr_name('alternate_title')]
   end
 
   def advisor
-    self[Solrizer.solr_name('advisor')]
+    self[ActiveFedora.index_field_mapper.solr_name('advisor')]
   end
 
   def committee_member
-    self[Solrizer.solr_name('committee_member')]
+    self[ActiveFedora.index_field_mapper.solr_name('committee_member')]
   end
 
   def required_software
-    self[Solrizer.solr_name('required_software')]
+    self[ActiveFedora.index_field_mapper.solr_name('required_software')]
   end
 
   def time_period
-    self[Solrizer.solr_name('time_period')]
+    self[ActiveFedora.index_field_mapper.solr_name('time_period')]
   end
 
   def note
-    self[Solrizer.solr_name('note')]
+    self[ActiveFedora.index_field_mapper.solr_name('note')]
   end
 
   # Added for Article Work Type
 
   def journal_title
-    self[Solrizer.solr_name('journal_title')]
+    self[ActiveFedora.index_field_mapper.solr_name('journal_title')]
   end
 
   def issn
-    self[Solrizer.solr_name('issn')]
+    self[ActiveFedora.index_field_mapper.solr_name('issn')]
   end
 
   # Added for StudentWork, Document, and Image work types
 
   def genre
-    self[Solrizer.solr_name('genre')]
+    self[ActiveFedora.index_field_mapper.solr_name('genre')]
   end
 
   def geo_subject
-    self[Solrizer.solr_name('geo_subject')]
+    self[ActiveFedora.index_field_mapper.solr_name('geo_subject')]
   end
 
   def degree
-    self[Solrizer.solr_name('degree')]
+    self[ActiveFedora.index_field_mapper.solr_name('degree')]
   end
 
   #  Complex metadata fields that we be implemented later.
 
   #  def doi
-  #    self[Solrizer.solr_name('doi')]
+  #    self[ActiveFedora.index_field_mapper.solr_name('doi')]
   #  end
 
   def college
-    self[Solrizer.solr_name('college')]
+    self[ActiveFedora.index_field_mapper.solr_name('college')]
   end
 
   def department
-    self[Solrizer.solr_name('department')]
+    self[ActiveFedora.index_field_mapper.solr_name('department')]
   end
 
   def doi
-    self[Solrizer.solr_name('doi')]
+    self[ActiveFedora.index_field_mapper.solr_name('doi')]
   end
 
   def etd_publisher
-    self[Solrizer.solr_name('etd_publisher')]
+    self[ActiveFedora.index_field_mapper.solr_name('etd_publisher')]
   end
 end

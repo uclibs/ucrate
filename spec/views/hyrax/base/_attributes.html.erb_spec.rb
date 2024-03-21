@@ -11,7 +11,7 @@ describe 'hyrax/base/_attributes.html.erb' do
   let(:solr_document) { SolrDocument.new(attributes) }
   let(:attributes) do
     {
-      Solrizer.solr_name('has_model', :symbol) => ["GenericWork"],
+      ActiveFedora.index_field_mapper.solr_name('has_model', :symbol) => ["GenericWork"],
       college_tesim: college,
       department_tesim: department,
       related_url_tesim: related_url,
