@@ -13,7 +13,7 @@
         <% end %>
         <ul class="dropdown-menu">
           <li><%= link_to t("hyrax.toolbar.works.my"), hyrax.my_works_path %></li>
-          <% if create_work_presenter.many? %>
+          <% if Hyrax::SelectTypeListPresenter.new(current_user).many? %> 
             <% # launch the type selector modal %>
             <li>
               <%= link_to(
