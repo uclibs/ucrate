@@ -13,6 +13,12 @@ module BasicCollectionMetadata
     property :creator, predicate: ::RDF::Vocab::DC11.creator
     property :contributor, predicate: ::RDF::Vocab::DC11.contributor
 
+    # added with hyrax 3.0
+    property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
+    property :abstract, predicate: ::RDF::Vocab::DC.abstract
+    property :rights_notes, predicate: ::RDF::URI.new('http://purl.org/dc/elements/1.1/rights'), multiple: true
+    property :access_right, predicate: ::RDF::Vocab::DC.accessRights
+
     # override the predicate for description to match past versions of Scholar
     property :description, predicate: ::RDF::Vocab::DC11.description
     property :publisher, predicate: ::RDF::Vocab::DC11.publisher

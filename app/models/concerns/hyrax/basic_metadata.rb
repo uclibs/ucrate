@@ -19,6 +19,12 @@ module Hyrax
       # override the predicate for description to match past versions of Scholar
       property :description, predicate: ::RDF::URI.new('http://purl.org/dc/terms/description')
 
+      # added with hyrax 3.0
+      property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
+      property :abstract, predicate: ::RDF::Vocab::DC.abstract
+      property :rights_notes, predicate: ::RDF::URI.new('http://purl.org/dc/elements/1.1/rights'), multiple: true
+      property :access_right, predicate: ::RDF::Vocab::DC.accessRights
+
       property :keyword, predicate: ::RDF::Vocab::DC11.relation
       # Used for a license
       property :license, predicate: ::RDF::Vocab::DC.rights

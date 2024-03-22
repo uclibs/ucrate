@@ -15,6 +15,8 @@ module Hyrax
                       committee_member note geo_subject doi doi_assignment_strategy
                       existing_identifier college department genre degree advisor]
 
+      self.terms -= %i[title resource_type alternative_title abstract access_right rights_notes]
+
       def self.model_attributes(_)
         attrs = super
         attrs[:title] = Array(attrs[:title]) if attrs[:title]
