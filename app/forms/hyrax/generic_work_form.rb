@@ -38,6 +38,18 @@ module Hyrax
       attrs
     end
 
+    def self.model_attributes(attributes)
+        attrs = super
+        return attrs unless attributes[:title]
+
+          attrs[:title] = Array(attributes[:title])
+            return attrs if attributes[:alternate_title].nil?
+          Array(attributes[:alternate_title]).each do |value|
+            attrs["title"] << value if value != ""
+        end
+        attrs
+     end
+
     def title
       super.first || ""
     end
