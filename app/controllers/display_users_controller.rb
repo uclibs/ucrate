@@ -9,7 +9,7 @@ class DisplayUsersController < Hyrax::UsersController
 
   def search(query)
     clause = query.blank? ? nil : "%" + query.downcase.strip + "%"
-    base = ::User.where(*base_query)
+    base = ::User.all
     if clause.present?
       base = base.where("#{Devise.authentication_keys.first} like lower(?)
                            OR display_name like lower(?)
