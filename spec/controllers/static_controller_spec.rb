@@ -89,17 +89,17 @@ describe StaticController do
       expect(response).to render_template('static/doi_help')
     end
   end
-  describe '#login' do
-    let(:user) { FactoryBot.create(:user) }
+    describe '#login' do
+      let(:user) { FactoryBot.create(:user) }
 
-    before do
-      controller.stub(:current_user).and_return(user)
+      before do
+        controller.stub(:current_user).and_return(user)
+      end
+      it 'redirects to dashboard when already logged in' do
+        get :login
+        expect(response).to redirect_to(Hyrax::Engine.routes.url_helpers.dashboard_path)
+      end
     end
-    it 'redirects to dashboard when already logged in' do
-      get :login
-      expect(response).to redirect_to(Hyrax::Engine.routes.url_helpers.dashboard_path)
-    end
-  end
 
   describe '#whats_new' do
     it "renders the what's new page" do

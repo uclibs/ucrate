@@ -49,15 +49,15 @@ class StaticController < ApplicationController
     render "static/doi_help"
   end
 
-  def login
-    if current_user
-      redirect_to Hyrax::Engine.routes.url_helpers.dashboard_path
-    elsif AUTH_CONFIG['shibboleth_enabled']
-      render "static/login"
-    else
-      redirect_to new_user_session_path
+    def login
+      if current_user
+        redirect_to Hyrax::Engine.routes.url_helpers.dashboard_path
+      elsif AUTH_CONFIG['shibboleth_enabled']
+        render "static/login"
+      else
+        redirect_to new_user_session_path
+      end
     end
-  end
 
   def whats_new
     render "static/whats_new"

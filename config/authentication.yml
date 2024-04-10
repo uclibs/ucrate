@@ -1,11 +1,11 @@
-development:
-  shibboleth_enabled: <%= ENV["SCHOLAR_SHIBBOLETH_ENABLED"] %>
-  signups_enabled:    <%= ENV["SCHOLAR_SIGNUPS_ENABLED"] %>
+  development:
+    shibboleth_enabled: <%= ENV["SCHOLAR_SHIBBOLETH_ENABLED"] %>
+    signups_enabled:    <%= ENV["SCHOLAR_SIGNUPS_ENABLED"] %>
 
-test:
-  shibboleth_enabled: <%= ENV["SCHOLAR_SHIBBOLETH_ENABLED"] %>
-  signups_enabled:    <%= ENV["SCHOLAR_SIGNUPS_ENABLED"] %>
+  test:
+    shibboleth_enabled: <%= ENV["SCHOLAR_SHIBBOLETH_ENABLED"] %>
+    signups_enabled:    <%= ENV["SCHOLAR_SIGNUPS_ENABLED"] %>
 
-production:
-  shibboleth_enabled: <%= ENV["SCHOLAR_SHIBBOLETH_ENABLED"] %>
-  signups_enabled:    <%= ENV["SCHOLAR_SIGNUPS_ENABLED"] %>
+  production:
+    shibboleth_enabled: <%= ENV["SCHOLAR_SHIBBOLETH_ENABLED"] %>
+    signups_enabled:    <%= ENV["SCHOLAR_SIGNUPS_ENABLED"] %>

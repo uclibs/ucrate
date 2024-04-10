@@ -26,27 +26,27 @@ RSpec.describe '/_user_util_links.html.erb', type: :view do
     expect(rendered).to have_link 'Edit Profile', href: hyrax.edit_dashboard_profile_path('userX')
   end
 
-  context 'when the user is using shibboleth' do
-    before do
-      allow(view).to receive(:current_user).and_return(stub_model(User, user_key: 'userX', provider: 'shibboleth'))
-      render
+    context 'when the user is using shibboleth' do
+      before do
+        allow(view).to receive(:current_user).and_return(stub_model(User, user_key: 'userX', provider: 'shibboleth'))
+        render
+      end
+
+      it 'does not show the change password manu option' do
+        expect(rendered).not_to have_link 'Change password'
+      end
     end
 
-    it 'does not show the change password manu option' do
-      expect(rendered).not_to have_link 'Change password'
-    end
-  end
+    context 'when the user is not using shibboleth' do
+      before do
+        allow(view).to receive(:current_user).and_return(stub_model(User, user_key: 'userX', provider: nil))
+        render
+      end
 
-  context 'when the user is not using shibboleth' do
-    before do
-      allow(view).to receive(:current_user).and_return(stub_model(User, user_key: 'userX', provider: nil))
-      render
+      it 'shows the change password manu option' do
+        expect(rendered).to have_link 'Change password', href: edit_user_registration_path
+      end
     end
-
-    it 'shows the change password manu option' do
-      expect(rendered).to have_link 'Change password', href: edit_user_registration_path
-    end
-  end
 
   it 'shows the number of outstanding messages' do
     render
