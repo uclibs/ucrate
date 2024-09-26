@@ -28,9 +28,9 @@ gem 'sidekiq-limit_fetch'
 gem 'willow_sword', github: 'notch8/willow_sword'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4.6'
+gem 'rails', '~> 5.2.8.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 5.6'
 # Use SCSS for stylesheets
@@ -81,7 +81,7 @@ gem 'equivalent-xml'
 gem 'grape'
 gem 'grape_on_rails_routes'
 gem 'hydra-role-management'
-gem 'hyrax', '3.4.1'
+gem 'hyrax', '3.6.0'
 gem 'mysql2', '~> 0.4.10'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
