@@ -10,10 +10,10 @@ describe CollectionsReport do
 
   describe '#create_report' do
     let(:fake_collections) { [
-      FakeCollection.new('pid', 'title', 'foo@bar.org', ['foo@bar.org'], ['pid', 'pid']),
-      FakeCollection.new('pid', 'title', 'foo@bar.org', ['foo@bar.org'], ['pid']),
-      FakeCollection.new('pid', 'title', 'foo@bar.org', ['foo@bar.org'], ['']),
-      FakeCollection.new('pid', 'title', 'foo@bar.org', ['foo@bar.org'], ['pid', 'pid'])
+      FakeCollection.new('pid', 'title', 'test description','Test, User', 'foo@bar.org', ['foo@bar.org'], ['pid', 'pid']),
+      FakeCollection.new('pid', 'title', 'test description','Test, User','foo@bar.org', ['foo@bar.org'], ['pid']),
+      FakeCollection.new('pid', 'title', 'test description','Test, User','foo@bar.org', ['foo@bar.org'], ['']),
+      FakeCollection.new('pid', 'title', 'test description','Test, User','foo@bar.org', ['foo@bar.org'], ['pid', 'pid'])
     ] }
 
     before do
@@ -34,7 +34,7 @@ describe CollectionsReport do
       ).to eq(fake_collections.length + 1)
     end
 
-    class FakeCollection < Struct.new(:id, :title, :depositor, :edit_users, :member_ids)
+    class FakeCollection < Struct.new(:id, :title, :description, :creator,  :depositor, :edit_users, :member_ids)
     end
   end
 end
