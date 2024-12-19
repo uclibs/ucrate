@@ -19,6 +19,9 @@ gem 'rack', '2.2.3'
 gem 'sidekiq-limit_fetch'
 gem 'willow_sword', github: 'notch8/willow_sword'
 
+# Hyrax improvements
+gem "okcomputer", "~> 1.18.4"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4.6'
 # Use sqlite3 as the database for Active Record

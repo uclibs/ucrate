@@ -26,6 +26,10 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  authenticate :user, ->(u) { u.admin? } do
+    mount OkComputer::Engine, at: "/health"
+  end
+
   devise_for :users, controllers: { omniauth_callbacks: 'callbacks', registrations: "registrations" }
   mount Hydra::RoleManagement::Engine => '/'
 
