@@ -1220,11 +1220,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.4.1)
   brakeman
   browse-everything (= 1.1.0)
-<<<<<<< HEAD
-  bulkrax (~> 4.3.0)
-=======
   bulkrax (= 5.3.0)
->>>>>>> 9580b67 (Updates BulkRAX to version 5.3.0)
   bundler (= 2.4.22)
   bundler-audit
   byebug
@@ -1264,6 +1260,8 @@ DEPENDENCIES
   rack (= 2.2.3)
   rails (~> 5.2.4.6)
   rails-controller-testing
+  redis (>= 4.0.0)
+  redis-namespace (~> 1.10)
   rest-client
   riiif (~> 2.0)
   rsolr (>= 1.0)

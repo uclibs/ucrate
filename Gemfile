@@ -16,6 +16,8 @@ gem 'bulkrax', '5.3.0'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
 gem 'rack', '2.2.3'
+gem 'redis', '>= 4.0.0'
+gem 'redis-namespace', '~> 1.10'
 gem 'sidekiq-limit_fetch'
 gem 'willow_sword', github: 'notch8/willow_sword'
 

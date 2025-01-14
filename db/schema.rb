@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_18_151346) do
+ActiveRecord::Schema.define(version: 2023_06_08_153601) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2024_03_18_151346) do
     t.string "identifier"
     t.string "collection_ids"
     t.string "type"
-    t.integer "importerexporter_id", null: false
+    t.integer "importerexporter_id"
     t.text "raw_metadata", limit: 16777215
     t.text "parsed_metadata", limit: 16777215
     t.datetime "created_at", null: false
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 2024_03_18_151346) do
     t.integer "import_attempts", default: 0
     t.index ["identifier"], name: "index_bulkrax_entries_on_identifier"
     t.index ["importerexporter_id", "importerexporter_type"], name: "bulkrax_entries_importerexporter_idx"
-    t.index ["importerexporter_id"], name: "index_bulkrax_entries_on_importerexporter_id"
     t.index ["type"], name: "index_bulkrax_entries_on_type"
   end
 
@@ -296,12 +295,6 @@ ActiveRecord::Schema.define(version: 2024_03_18_151346) do
     t.index ["machine_id"], name: "index_hyrax_collection_types_on_machine_id", unique: true
   end
 
-  create_table "hyrax_default_administrative_set", force: :cascade do |t|
-    t.string "default_admin_set_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "hyrax_features", force: :cascade do |t|
     t.string "key", null: false
     t.boolean "enabled", default: false, null: false
@@ -381,7 +374,7 @@ ActiveRecord::Schema.define(version: 2024_03_18_151346) do
     t.string "namespace", default: "default", null: false
     t.string "template", null: false
     t.text "counters"
-    t.integer "seq", limit: 8, default: 0
+    t.integer "seq", default: 0
     t.binary "rand"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -487,9 +480,9 @@ ActiveRecord::Schema.define(version: 2024_03_18_151346) do
   end
 
   create_table "single_use_links", force: :cascade do |t|
-    t.string "download_key"
+    t.string "downloadKey"
     t.string "path"
-    t.string "item_id"
+    t.string "itemId"
     t.datetime "expires"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -527,7 +520,7 @@ ActiveRecord::Schema.define(version: 2024_03_18_151346) do
 
   create_table "sipity_entity_specific_responsibilities", force: :cascade do |t|
     t.integer "workflow_role_id", null: false
-    t.integer "entity_id", null: false
+    t.string "entity_id", null: false
     t.integer "agent_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

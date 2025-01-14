@@ -1,7 +1,4 @@
 # frozen_string_literal: true
-
-require 'rails_helper'
-
 RSpec.describe 'collection', type: :feature, clean_repo: true do
   include Selectors::Dashboard
 
@@ -15,16 +12,10 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
   # Setting Title on admin sets to avoid false positive matches with collections.
   let(:admin_set_a) { create(:admin_set, creator: [admin_user.user_key], title: ['Set A'], with_permission_template: true) }
   let(:admin_set_b) { create(:admin_set, creator: [user.user_key], title: ['Set B'], edit_users: [user.user_key], with_permission_template: true) }
-  let(:collection1) { create(:public_collection, user: user, collection_type_gid: collection_type.gid, create_access: true) }
-  let(:collection2) { create(:public_collection, user: user, collection_type_gid: collection_type.gid, create_access: true) }
-  let(:collection3) { create(:public_collection, user: admin_user, collection_type_gid: collection_type.gid, create_access: true) }
-  let(:collection4) { create(:public_collection, user: admin_user, collection_type_gid: user_collection_type.gid, create_access: true) }
-
-  before do
-    admin = Role.find_or_create_by(name: "admin")
-    admin.users << admin_user
-    admin.save
-  end
+  let(:collection1) { create(:public_collection_lw, user: user, collection_type_gid: collection_type.gid, with_permission_template: true) }
+  let(:collection2) { create(:public_collection_lw, user: user, collection_type_gid: collection_type.gid, with_permission_template: true) }
+  let(:collection3) { create(:public_collection_lw, user: admin_user, collection_type_gid: collection_type.gid, with_permission_template: true) }
+  let(:collection4) { create(:public_collection_lw, user: admin_user, collection_type_gid: user_collection_type.gid, with_permission_template: true) }
 
   describe 'Your Collections tab' do
     context 'when non-admin user' do
@@ -62,7 +53,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
       it "has collection type and visibility filters" do
         expect(page).to have_button 'Visibility'
-        expect(page).to have_link 'Open Access',
+        expect(page).to have_link 'Public',
                                   href: /visibility_ssi.+#{Regexp.escape(CGI.escape(collection3.visibility))}/
         expect(page).to have_button 'Collection Type'
         expect(page).to have_link collection_type.title,
@@ -114,10 +105,8 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
       it "has collection type and visibility filters" do
         expect(page).to have_button 'Visibility'
-        skip 'problem encountered with :en locale prefix' do
-          expect(page).to have_link 'Open Access',
-                                    href: /visibility_ssi.+#{Regexp.escape(CGI.escape(collection3.visibility))}/
-        end
+        expect(page).to have_link 'Public',
+                                  href: /visibility_ssi.+#{Regexp.escape(CGI.escape(collection3.visibility))}/
         expect(page).to have_button 'Collection Type'
         expect(page).to have_link collection_type.title,
                                   href: /#{solr_gid_field}.+#{Regexp.escape(CGI.escape(collection_type.gid))}/
@@ -160,7 +149,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
       expect(page).to have_link 'All Collection'
       click_link 'All Collections'
       expect(page).to have_button 'Visibility'
-      expect(page).to have_link 'Open Access',
+      expect(page).to have_link 'Public',
                                 href: /visibility_ssi.+#{Regexp.escape(CGI.escape(collection1.visibility))}/
       expect(page).to have_button 'Collection Type'
       expect(page).to have_link collection_type.title,
@@ -221,7 +210,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
       expect(page).to have_link 'Managed Collections'
       click_link 'Managed Collections'
       expect(page).to have_button 'Visibility'
-      expect(page).to have_link 'Open Access',
+      expect(page).to have_link 'Public',
                                 href: /visibility_ssi.+#{Regexp.escape(CGI.escape(collection1.visibility))}/
       expect(page).to have_button 'Collection Type'
       expect(page).to have_link collection_type.title,
@@ -237,7 +226,6 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
   describe 'create collection' do
     let(:title) { "Test Collection" }
-    let(:creator) { "Test Creator" }
     let(:description) { "Description for collection we are testing." }
 
     context 'when user can create collections of multiple types' do
@@ -256,26 +244,18 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         choose('User Collection')
         click_on('Create collection')
 
-        skip 'problem encountered with :en locale prefix' do
-          expect(page).to have_selector('h1', text: 'New User Collection')
-        end
+        expect(page).to have_selector('h1', text: 'New User Collection')
+        expect(page).to have_selector "input.collection_title.multi_value"
 
-        expect(page).to have_selector "input#collection_title"
-        expect(page).to have_selector "input#collection_creator"
+        click_link('Additional fields')
+        expect(page).to have_selector "input.collection_creator.multi_value"
 
-        title_element = find_by_id("collection_title")
-        title_element.set("Test Collection") # Add whitespace to test it getting removed
-
-        creator_element = find_by_id("collection_creator")
-        expect(creator_element.value).to eq("User, Sample")
-        creator_element.set("Test Creator") # Add whitespace to test it getting removed
-
-        fill_in('Description', with: description)
-        select('Attribution 4.0 International', from: 'License')
+        fill_in('Title', with: title)
+        fill_in('Abstract or Summary', with: description)
+        fill_in('Related URL', with: 'http://example.com/')
 
         click_button("Save")
         expect(page).to have_content title
-        expect(find("input#collection_creator")).to have_field('collection_creator', with: creator)
         expect(page).to have_content description
       end
 
@@ -294,24 +274,19 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
       end
 
       it 'makes a new collection' do
-        within('.collections-wrapper') do
-          click_link "New Collection"
-        end
+        click_link "New Collection"
+        expect(page).to have_selector('h1', text: 'New User Collection')
+        expect(page).to have_selector "input.collection_title.multi_value"
 
-        skip 'problem encountered with :en locale prefix' do
-          expect(page).to have_selector('h1', text: 'New User Collection')
-        end
-
-        expect(page).to have_selector "input#collection_title"
-        expect(page).to have_selector "input#collection_creator"
+        click_link('Additional fields')
+        expect(page).to have_selector "input.collection_creator.multi_value"
 
         fill_in('Title', with: title)
-        fill_in('Creator', with: creator)
-        fill_in('Description', with: description)
+        fill_in('Abstract or Summary', with: description)
+        fill_in('Related URL', with: 'http://example.com/')
 
         click_button("Save")
         expect(page).to have_content title
-        expect(find("input#collection_creator").value).to eq('creator')
         expect(page).to have_content description
       end
     end
@@ -322,13 +297,14 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         visit '/dashboard/my/collections'
       end
 
-      it 'does not show New Collection button' do
+      it 'does show New Collection button' do
         expect(page).not_to have_link "New Collection"
         expect(page).not_to have_button "New Collection"
       end
     end
   end
 
+  # TODO: this section is still deactivated
   describe "adding works to a collection", skip: "we need to define a dashboard/works path" do
     let!(:collection) { create!(:collection, title: ["Barrel of monkeys"], user: user, with_permission_template: true) }
     let!(:work1) { create(:work, title: ["King Louie"], user: user) }
@@ -353,8 +329,8 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
   end
 
   describe 'delete collection' do
-    let!(:empty_collection) { create(:public_collection, title: ['Empty Collection'], user: user, create_access: true) }
-    let!(:collection) { create(:public_collection, title: ['Collection with Work'], user: user, create_access: true) }
+    let!(:empty_collection) { create(:public_collection_lw, title: ['Empty Collection'], user: user, with_permission_template: true) }
+    let!(:collection) { create(:public_collection_lw, title: ['Collection with Work'], user: user, with_permission_template: true) }
     let!(:admin_user) { create(:admin) }
     let!(:empty_adminset) { create(:admin_set, title: ['Empty Admin Set'], creator: [admin_user.user_key], with_permission_template: true) }
     let!(:adminset) { create(:admin_set, title: ['Admin Set with Work'], creator: [admin_user.user_key], with_permission_template: true) }
@@ -589,7 +565,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
   describe 'collection show page' do
     let(:collection) do
-      create(:public_collection, user: user, description: ['collection description'], create_access: true)
+      build(:public_collection_lw, user: user, description: ['collection description'], with_permission_template: true)
     end
     let!(:work1) { create(:work, title: ["King Louie"], member_of_collections: [collection], user: user) }
     let!(:work2) { create(:work, title: ["King Kong"], member_of_collections: [collection], user: user) }
@@ -651,42 +627,26 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         collection1 # create collections by referencing them
         collection2
         sign_in user
-        # stub out characterization. Travis doesn't have fits installed, and it's not relevant to the test.
-        allow(CharacterizeJob).to receive(:perform_later)
       end
 
-      it "preselects the collection we are adding works to and adds the new work" do
+      it "preselects the collection we are adding works to and adds the selected works" do
         visit "/dashboard/collections/#{collection1.id}"
-        click_link 'Deposit new work through this collection'
-        choose "payload_concern", option: "GenericWork"
-        click_button 'Create work'
+        click_link 'Add existing works'
+        find('input#check_all').click
+        click_button "Add to collection"
+        expect(page).to have_selector "#member_of_collection_ids[value=\"#{collection1.id}\"]", visible: false
+        expect(page).to have_selector "#member_of_collection_label[value=\"#{collection1.title.first}\"]"
 
-        # verify the collection is pre-selected
-        click_link "Relationships" # switch tab
-        expect(page).to have_selector("table tr", text: collection1.title.first)
-        expect(page).not_to have_selector("table tr", text: collection2.title.first)
+        visit "/dashboard/collections/#{collection2.id}"
+        click_link 'Add existing works'
+        find('input#check_all').click
+        click_button "Add to collection"
+        expect(page).to have_selector "#member_of_collection_ids[value=\"#{collection2.id}\"]", visible: false
+        expect(page).to have_selector "#member_of_collection_label[value=\"#{collection2.title.first}\"]"
 
-        # add required file
-        click_link "Files" # switch tab
-        within('span#addfiles') do
-          attach_file("files[]", "#{fixture_path}/image.jp2", visible: false)
-        end
-        # set required metadata
-        click_link "Metadata" # switch tab
-        fill_in('generic_work_title', with: 'New Work for Collection')
-        fill_in('Creator', with: 'Doe, Jane')
-        fill_in('Program or Department', with: 'Digital Collections and Repositories')
-        fill_in('Description', with: 'test')
-        select('Libraries', from: 'College')
-        select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
-        # check required acceptance
-        check('agreement')
-
-        click_on('Save')
-
-        # verify new work was added to collection1
-        visit "/dashboard/collections/#{collection1.id}"
-        expect(page).to have_content("New Work for Collection")
+        click_button "Save changes"
+        expect(page).to have_content(work1.title.first)
+        expect(page).to have_content(work2.title.first)
       end
     end
 
@@ -702,11 +662,10 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
       it "preselects the collection we are adding works to and adds the new work" do
         visit "/dashboard/collections/#{collection1.id}"
         click_link 'Deposit new work through this collection'
-
-        # verify the collection is pre-selected
-        expect(page).to have_content "Select type of work"
         choose "payload_concern", option: "GenericWork"
         click_button 'Create work'
+
+        # verify the collection is pre-selected
         click_link "Relationships" # switch tab
         expect(page).to have_selector("table tr", text: collection1.title.first)
         expect(page).not_to have_selector("table tr", text: collection2.title.first)
@@ -714,25 +673,14 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
         # add required file
         click_link "Files" # switch tab
         within('span#addfiles') do
-          attach_file("files[]", "#{fixture_path}/image.jp2", visible: false)
+          attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
         end
         # set required metadata
-        click_link "Metadata" # switch tab
-
-        title_element = find_by_id("generic_work_title")
-        title_element.set("New Work for Collection")
-
-        select 'Attribution-ShareAlike 4.0 International', from: 'generic_work_license'
-
+        click_link "Descriptions" # switch tab
+        fill_in('Title', with: 'New Work for Collection')
         fill_in('Creator', with: 'Doe, Jane')
-
-        college_element = find_by_id("generic_work_college")
-        college_element.select("Business")
-
-        fill_in('Program or Department', with: 'University Department')
-        fill_in('Description', with: 'This is a description.')
-
-        choose('generic_work_visibility_open')
+        fill_in('Keyword', with: 'testing')
+        select('In Copyright', from: 'Rights statement')
         # check required acceptance
         check('agreement')
 
@@ -760,7 +708,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
       sign_in user
     end
-    let(:collection) { create(:named_collection, user: user, create_access: true) }
+    let(:collection) { create(:named_collection_lw, user: user, with_permission_template: true) }
 
     it "shows a collection with a listing of Descriptive Metadata and catalog-style search results" do
       visit '/dashboard/my/collections'
@@ -815,7 +763,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
   end
 
   describe 'edit collection' do
-    let(:collection) { create(:named_collection, user: user, create_access: true) }
+    let(:collection) { build(:named_collection_lw, user: user, with_permission_template: true) }
     let!(:work1) { create(:work, title: ["King Louie"], member_of_collections: [collection], user: user) }
     let!(:work2) { create(:work, title: ["King Kong"], member_of_collections: [collection], user: user) }
 
@@ -858,10 +806,8 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
             click_link('Edit collection')
           end
           # URL: /dashboard/collections/collection-id/edit
+          expect(page).to have_selector('h1', text: "Edit User Collection: #{collection.title.first}")
 
-          skip 'problem encountered with :en locale prefix' do
-            expect(page).to have_selector('h1', text: "Edit User Collection: #{collection.title.first}")
-          end
           expect(page).to have_field('collection_title', with: collection.title.first)
           expect(page).to have_field('collection_description', with: collection.description.first)
 
@@ -870,7 +816,7 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
           creators = ["Dorje Trollo", "Vajrayogini"]
 
           fill_in('Title', with: new_title)
-          fill_in('Description', with: new_description)
+          fill_in('Abstract or Summary', with: new_description)
           fill_in('Creator', with: creators.first)
           within('.panel-footer') do
             click_button('Save changes')
@@ -911,8 +857,8 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
       end
 
       context 'with brandable set' do
-        let(:brandable_collection_id) { create(:collection, user: user, collection_type_settings: [:brandable], create_access: true).id }
-        let(:not_brandable_collection_id) { create(:collection, user: user, collection_type_settings: [:not_brandable], create_access: true).id }
+        let(:brandable_collection_id) { create(:collection_lw, user: user, collection_type_settings: [:brandable], with_permission_template: true).id }
+        let(:not_brandable_collection_id) { create(:collection_lw, user: user, collection_type_settings: [:not_brandable], with_permission_template: true).id }
 
         it 'to true, it shows Branding tab' do
           visit "/dashboard/collections/#{brandable_collection_id}/edit"
@@ -926,23 +872,23 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
       end
 
       context 'with discoverable set' do
-        let(:discoverable_collection_id) { create(:collection, user: user, collection_type_settings: [:discoverable], create_access: true).id }
-        let(:not_discoverable_collection_id) { create(:collection, user: user, collection_type_settings: [:not_discoverable], create_access: true).id }
+        let(:discoverable_collection_id) { create(:collection_lw, user: user, collection_type_settings: [:discoverable], with_permission_template: true).id }
+        let(:not_discoverable_collection_id) { create(:collection_lw, user: user, collection_type_settings: [:not_discoverable], with_permission_template: true).id }
 
         it 'to true, it shows Discovery tab' do
           visit "/dashboard/collections/#{discoverable_collection_id}/edit"
-          expect(page).to have_link('Visibility', href: '#discovery')
+          expect(page).to have_link('Discovery', href: '#discovery')
         end
 
         it 'to false, it hides Discovery tab' do
           visit "/dashboard/collections/#{not_discoverable_collection_id}/edit"
-          expect(page).not_to have_link('Visibility', href: '#discovery')
+          expect(page).not_to have_link('Discovery', href: '#discovery')
         end
       end
 
       context 'with sharable set' do
-        let(:sharable_collection_id) { create(:collection, user: user, collection_type_settings: [:sharable], create_access: true).id }
-        let(:not_sharable_collection_id) { create(:collection, user: user, collection_type_settings: [:not_sharable], create_access: true).id }
+        let(:sharable_collection_id) { create(:collection_lw, user: user, collection_type_settings: [:sharable], with_permission_template: true).id }
+        let(:not_sharable_collection_id) { create(:collection_lw, user: user, collection_type_settings: [:not_sharable], with_permission_template: true).id }
 
         it 'to true, it shows Sharable tab' do
           visit "/dashboard/collections/#{sharable_collection_id}/edit"
@@ -951,7 +897,6 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
 
         context "to true, limits available users", js: true do
           let(:user2) { create(:user) }
-
           it "to system users filted by select2" do
             visit "/dashboard/collections/#{sharable_collection_id}/edit"
             expect(page).to have_link('Sharing', href: '#sharing')

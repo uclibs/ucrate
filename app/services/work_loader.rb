@@ -59,18 +59,34 @@ class WorkLoader
       file_set = FileSet.new
       file_pid = file.delete(:pid)
       file_set.id = file_pid unless file_pid.nil?
+      work_attributes = attributes_hash
+      file_set_attributes = file_set_attrs(work_attributes, uploaded_file)
       visibility = file[:visibility] || curation_concern.visibility
-
+      metadata = visibility_attributes(work_attributes, file_set_attributes)
       actor = Hyrax::Actors::FileSetActor.new(file_set, user)
       actor.create_metadata(visibility: visibility)
       actor.create_content(file[:uploaded_file].file.file.to_file)
-      actor.attach_to_work(curation_concern)
+      attach_work(user, work, work_attributes, work_permissions, uploaded_file)
+      actor.attach_to_work(work, metadata)
       actor.file_set.permissions_attributes = curation_concern.permissions.map(&:to_hash)
 
       file.update(file_set_uri: file_set.uri)
       file_set.visibility = visibility
       file_set.save
     end
+  end
+
+  # The attributes used for visibility - sent as initial params to created FileSets.
+  def visibility_attributes(attributes, file_set_attributes)
+    attributes.merge(file_set_attributes).slice(:visibility, :visibility_during_lease,
+                     :visibility_after_lease, :lease_expiration_date,
+                     :embargo_release_date, :visibility_during_embargo,
+                     :visibility_after_embargo)
+  end
+
+  def file_set_attrs(attributes, uploaded_file)
+    attrs = Array(attributes[:file_set]).find { |fs| fs[:uploaded_file_id].present? && (fs[:uploaded_file_id].to_i == uploaded_file&.id) }
+    Hash(attrs).symbolize_keys
   end
 
   def work_log

@@ -80,6 +80,7 @@ Metrics/ModuleLength:
   Exclude:
     - 'app/helpers/hyrax_helper.rb'
     - 'spec/controllers/bulkrax/importers_controller_spec.rb'
+    - 'spec/controllers/bulkrax/exporters_controller_spec.rb'
 
 Rails/ApplicationJob:
   Enabled: false

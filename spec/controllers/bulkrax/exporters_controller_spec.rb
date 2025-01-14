@@ -32,11 +32,15 @@ module Bulkrax
     before do
       module Bulkrax::Auth
         def authenticate_user!
+          @current_user = User.first
           true
+        end
+
+        def current_user
+          @current_user
         end
       end
       described_class.prepend Bulkrax::Auth
-      expect(controller).to receive(:authorize!).with(:read, :admin_dashboard).and_return(true)
     end
 
     # This should return the minimal set of attributes required to create a valid
@@ -144,6 +148,21 @@ module Bulkrax
           put :update, params: { id: exporter.to_param, exporter: invalid_attributes }, session: valid_session
           expect(response).to be_successful
         end
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      it 'destroys the requested exporter' do
+        exporter = Exporter.create! valid_attributes
+        expect do
+          delete :destroy, params: { id: exporter.to_param }, session: valid_session
+        end.to change(Exporter, :count).by(-1)
+      end
+
+      it 'redirects to the exporters list' do
+        exporter = Exporter.create! valid_attributes
+        delete :destroy, params: { id: exporter.to_param }, session: valid_session
+        expect(response).to redirect_to(exporters_url)
       end
     end
   end
