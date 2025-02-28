@@ -77,7 +77,7 @@ jobs:
                     - ~/project/node_modules
 
             - samvera/install_solr_core
-           
+
             - samvera/parallel_rspec
 
             - store_artifacts:
