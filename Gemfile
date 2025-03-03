@@ -15,7 +15,7 @@ gem 'browse-everything', '1.1.0'
 gem 'bulkrax', '~> 4.3.0'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
-gem 'rack', '2.2.3'
+gem 'rack', '2.2.8.1'
 gem 'sidekiq-limit_fetch'
 gem 'willow_sword', github: 'notch8/willow_sword'
 
@@ -23,11 +23,11 @@ gem 'willow_sword', github: 'notch8/willow_sword'
 gem "okcomputer", "~> 1.18.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4.6'
+gem 'rails', '~> 5.2.8.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.13'
 # Use Puma as the app server
-gem 'puma', '~> 4.3.8'
+gem 'puma', '~> 5.6.9'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -77,7 +77,7 @@ gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5.x'
 gem 'riiif', '~> 2.0'
 gem 'rsolr', '>= 1.0'
 gem 'sassc-rails', '>= 2.1.0'
-gem 'sidekiq', '~> 5.2.7'
+gem 'sidekiq', '~> 6.5.10'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
