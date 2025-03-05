@@ -17,7 +17,6 @@ gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch:
 gem 'kaltura', '0.1.1'
 gem 'rack', '2.2.3'
 gem 'sidekiq-limit_fetch'
-gem 'willow_sword', github: 'notch8/willow_sword'
 
 # Hyrax improvements
 gem "okcomputer", "~> 1.18.4"

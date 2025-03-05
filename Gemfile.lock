@@ -1,13 +1,4 @@
 GIT
-  remote: https://github.com/notch8/willow_sword.git
-  revision: 74f7684ff9ca96251f341e50a3afc34b5bd312cc
-  specs:
-    willow_sword (0.2.0)
-      bagit (~> 0.4.1)
-      rails (>= 5.1.6)
-      rubyzip (>= 1.0.0)
-
-GIT
   remote: https://github.com/uclibs/change_manager.git
   revision: d8e1b552740df00922a0a40796999c4e2a0cb8b6
   ref: d8e1b552740df00922a0a40796999c4e2a0cb8b6
@@ -1243,7 +1234,6 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webdrivers (~> 3.0)
   webmock
-  willow_sword!
 
 BUNDLED WITH
    2.4.22
