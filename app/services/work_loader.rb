@@ -65,6 +65,7 @@ class WorkLoader
       metadata = visibility_attributes(work_attributes, file_set_attributes)
       actor = Hyrax::Actors::FileSetActor.new(file_set, user)
       actor.create_metadata(visibility: visibility)
+      next if file[:uploaded_file].nil?
       actor.create_content(file[:uploaded_file].file.file.to_file)
       attach_work(user, work, work_attributes, work_permissions, uploaded_file)
       actor.attach_to_work(work, metadata)
@@ -149,14 +150,18 @@ class WorkLoader
   end
 
   def create_uploaded_files(file_attributes)
-    file_attributes.map do |file|
-      file[:uploaded_file] = Hyrax::UploadedFile.create(
-        file:    File.open(file[:path]),
-        user_id: user.id
-      )
-      file
-    end
-  end
+  return [] if file_attributes.nil? || file_attributes.empty?
+
+  file_attributes.map do |file|
+    next file if file[:path].nil? || file[:path].empty? # Skip invalid entries
+
+    uploaded_file = Hyrax::UploadedFile.create(
+      file:    File.open(file[:path]),
+      user_id: user.id
+    )
+    file.merge(uploaded_file: uploaded_file) # Ensure file is updated correctly
+  end.compact # Remove any nil values
+end
 
   def new_curation_concern(type)
     case type
