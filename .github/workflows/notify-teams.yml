@@ -1,0 +1,66 @@
+name: Notify Teams on PR Creation
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send notification to Teams channel
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          # Remove markdown link formatting: convert [text](URL) to just text.
+          TRANSFORMED_BODY=$(echo "$PR_BODY" | sed -E 's/\[([^]]+)\]\([^)]*\)/\1/g')
+          JSON_PAYLOAD=$(jq -n \
+            --arg title "$PR_TITLE" \
+            --arg url "$PR_URL" \
+            --arg body "$TRANSFORMED_BODY" \
+            '{
+              attachments: [
+                {
+                  contentType: "application/vnd.microsoft.card.adaptive",
+                  content: {
+                    "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+                    type: "AdaptiveCard",
+                    version: "1.0",
+                    body: [
+                      {
+                        type: "TextBlock",
+                        size: "Large",
+                        weight: "Bolder",
+                        text: "New Pull Request Created",
+                        horizontalAlignment: "Center"
+                      },
+                      {
+                        type: "TextBlock",
+                        text: (["Title: ", $title] | join("")),
+                        wrap: true,
+                        separator: true
+                      },
+                      {
+                        type: "TextBlock",
+                        text: (["Description: ", $body] | join("")),
+                        wrap: true,
+                        separator: true
+                      },
+                      {
+                        type: "TextBlock",
+                        text: (["View PR: ", $url] | join("")),
+                        wrap: true,
+                        spacing: "Medium",
+                        isSubtle: true,
+                        separator: true
+                      }
+                    ]
+                  }
+                }
+              ]
+            }')
+          curl -H "Content-Type: application/json" -d "$JSON_PAYLOAD" "$TEAMS_WEBHOOK_URL"
