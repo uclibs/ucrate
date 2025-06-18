@@ -24,7 +24,7 @@
     > **Note:** Solr will not run properly if there are spaces in any of the directory names above it <br />(e.g. /user/my apps/ucrate/)
 1. Change to the application's directory: e.g. `cd ./path/to/local`  
 1. Make sure you are on the develop branch: `git checkout develop`
-1. Install bundler (if needed): `gem install bundler`
+1. Install bundler (if needed): `gem install bundler -v 2.4.22`
 1. Run bundler: `bundle install`
 1. Start fedora: ```fcrepo_wrapper -p 8984```
 1. Start solr in new tab: ```solr_wrapper -d solr/config/ --collection_name hydra-development```
