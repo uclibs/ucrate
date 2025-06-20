@@ -24,8 +24,16 @@
     > **Note:** Solr will not run properly if there are spaces in any of the directory names above it <br />(e.g. /user/my apps/ucrate/)
 1. Change to the application's directory: e.g. `cd ./path/to/local`  
 1. Make sure you are on the develop branch: `git checkout develop`
-1. Install bundler (if needed): `gem install bundler`
+1. Install bundler (if needed): `gem install bundler -v 2.4.22`
 1. Run bundler: `bundle install`
+   Apple Silicon (M1/M2) Users with MySQL 9: mysql2 Build Fix
+   If you're using MySQL 9+ on Apple Silicon, mysql2 needs to be compiled with additional flags due to missing default linker paths (e.g. for zstd).
+    ```
+    bundle config build.mysql2 \
+      "--with-ldflags='-L/opt/homebrew/opt/mysql/lib -L/opt/homebrew/opt/zstd/lib' \
+      --with-cppflags='-I/opt/homebrew/opt/mysql/include -I/opt/homebrew/opt/zstd/include'"
+    ```
+    Then run: `bundle install`
 1. Start fedora: ```fcrepo_wrapper -p 8984```
 1. Start solr in new tab: ```solr_wrapper -d solr/config/ --collection_name hydra-development```
 1. Start redis in new tab: ```redis-server```
