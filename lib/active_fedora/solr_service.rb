@@ -1,4 +1,30 @@
 # frozen_string_literal: true
+
+# NOTE: This is a monkey patch of ActiveFedora::SolrService.
+#
+# Purpose:
+#   Silence the following deprecation warning from rsolr 2.x:
+#     DEPRECATION: Rsolr.new/connect option read_timeout is deprecated and will be removed in Rsolr 3.
+#     timeout is currently a synonym, use that instead.
+#
+# Why we're patching:
+#   - active-fedora 12.2.4 hardcodes `read_timeout`, which triggers this warning.
+#   - rsolr 3.0+ removes `read_timeout` entirely and requires Ruby 3.1+, but our app is still on Ruby 2.x.
+#   - Upgrading active-fedora or Ruby is non-trivial at this time due to wider dependency constraints.
+#
+# What this does:
+#   - Overrides the default SolrService to replace `read_timeout` with the supported `timeout` option.
+#
+# When to remove:
+#   - This patch can be removed once:
+#       1. The app upgrades to Ruby 3.1 or higher
+#       2. rsolr 3.x is compatible
+#       3. active-fedora is upgraded to a version that no longer uses `read_timeout`
+#
+# See also:
+#   - https://github.com/rsolr/rsolr/issues/222
+#   - https://github.com/samvera/active_fedora
+
 require 'rsolr'
 
 module ActiveFedora
