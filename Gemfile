@@ -10,9 +10,13 @@ end
 # This gem is a dependency of BE.
 gem 'bigdecimal', '1.3.5'
 
+# dependencies for updating Bulkrax
+gem 'libxml-ruby', '~> 3.1.0'
+gem 'nio4r', '>= 2.6.0'
+
 # For BrowseEverything to work with Hyrax 2.x then we need to pin BE
 gem 'browse-everything', '1.1.0'
-gem 'bulkrax', '~> 4.3.0'
+gem 'bulkrax', '~> 5.0.0'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
 gem 'rack', '2.2.3'
