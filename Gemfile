@@ -8,15 +8,16 @@ git_source(:github) do |repo_name|
 end
 
 # This gem is a dependency of BE.
-gem 'bigdecimal', '1.3.5'
+# gem 'bigdecimal', '1.3.5'
 
 # dependencies for updating Bulkrax
-gem 'libxml-ruby', '~> 3.1.0'
+gem 'libxml-ruby'
 gem 'nio4r', '>= 2.6.0'
 
 # For BrowseEverything to work with Hyrax 2.x then we need to pin BE
-gem 'browse-everything', '1.1.0'
-gem 'bulkrax', '~> 5.0.0'
+gem 'browse-everything', '1.5.0'
+gem 'bulkrax', '5.0.0'
+#  keep fork hyrax-remote_identifier until we can update to the latest version
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
 gem 'rack', '2.2.3'
@@ -26,13 +27,15 @@ gem 'sidekiq-limit_fetch'
 gem "okcomputer", "~> 1.18.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4.6'
+gem 'rails', '~> 6.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '1.3.13'
+# Gemfile
+gem 'sqlite3', '~> 1.4'
+
 # Use Puma as the app server
 gem 'puma', '~> 4.3.8'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -47,7 +50,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 5.4'
+gem 'redis'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -59,25 +62,25 @@ gem 'redis', '~> 5.4'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'active_attr'
-gem 'active-fedora', '~>12.2.4'
+gem 'active-fedora'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'brakeman'
 gem 'bundler', '2.4.22'
 gem 'bundler-audit'
 gem 'change_manager', git: "https://github.com/uclibs/change_manager.git", ref: 'd8e1b552740df00922a0a40796999c4e2a0cb8b6'
-gem 'devise', '~> 4.6.0'
+gem 'devise'
 gem 'devise-guests', '~> 0.6'
-gem 'devise-multi_auth', git: 'https://github.com/uclibs/devise-multi_auth', branch: 'rails-5.1.6.2'
+# gem 'devise-multi_auth'
 gem 'dotenv-rails'
 gem 'equivalent-xml'
 gem 'grape'
 gem 'grape_on_rails_routes'
 gem 'hydra-role-management'
-gem 'hyrax', '2.9.6'
+gem 'hyrax'
 gem 'mysql2', '~> 0.5.3'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
-gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5.x'
+# gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5.x'
 gem 'riiif', '~> 2.0'
 gem 'rsolr', '>= 1.0'
 gem 'sassc-rails', '>= 2.1.0'
