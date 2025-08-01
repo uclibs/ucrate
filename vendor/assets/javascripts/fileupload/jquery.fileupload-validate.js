@@ -40,7 +40,7 @@
             always: true,
             // Options taken from the global options map:
             acceptFileTypes: '@',
-            maxFileSize: 3221225472, // Limit uploads to 3 GB per file
+            maxFileSize: 5368709120, // Limit uploads to 5 GB per file
             minFileSize: '@',
             maxNumberOfFiles: '@',
             disabled: '@disableValidation'
