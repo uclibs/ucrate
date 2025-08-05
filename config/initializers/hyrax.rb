@@ -43,7 +43,7 @@ Hyrax.config do |config|
   # config.uploader = {
   #   limitConcurrentUploads: 6,
   #   maxNumberOfFiles: 100,
-  #   maxFileSize: 500.megabytes
+  #   maxFileSize: 500.megabytes NOTE: Don't set here.  Set in vendor/assets/javascripts/fileupload/jquery.fileupload-validate.js
   # }
 
   # Enable displaying usage statistics in the UI
