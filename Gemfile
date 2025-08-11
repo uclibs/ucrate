@@ -16,7 +16,7 @@ gem 'nio4r', '>= 2.6.0'
 
 # For BrowseEverything to work with Hyrax 2.x then we need to pin BE
 gem 'browse-everything', '1.5.0'
-gem 'bulkrax', '5.0.0'
+gem 'bulkrax', '5.3.0'
 #  keep fork hyrax-remote_identifier until we can update to the latest version
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
@@ -27,7 +27,7 @@ gem 'sidekiq-limit_fetch'
 gem "okcomputer", "~> 1.18.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1'
+gem 'rails'
 # Use sqlite3 as the database for Active Record
 # Gemfile
 gem 'sqlite3', '~> 1.4'
@@ -35,7 +35,7 @@ gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.3.8'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 6.0'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -76,7 +76,7 @@ gem 'equivalent-xml'
 gem 'grape'
 gem 'grape_on_rails_routes'
 gem 'hydra-role-management'
-gem 'hyrax'
+gem 'hyrax', '~>3'
 gem 'mysql2', '~> 0.5.3'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
