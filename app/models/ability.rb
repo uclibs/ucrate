@@ -56,4 +56,6 @@ class Ability
   def user_is_etd_manager
     user_groups.include? 'etd_manager'
   end
-end
+  def can_import_works?
+    can_create_any_work?
+  endend

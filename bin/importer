@@ -2,145 +2,164 @@
 # frozen_string_literal: true
 
 require_relative '../config/environment'
-
 require 'slop'
+require 'faraday'
+require 'json'
 
-def main(opts = {})
-  check_required_params
+# -----------------------
+# Stable option interface
+# -----------------------
+# We avoid Bulkrax.api_definition to stay compatible across versions.
+# If your app requires different fields, add/remove them here.
 
-  update = opts[:importer_id].present?
-  port = opts[:port].presence
-  url = build_url(opts.delete(:importer_id), opts.delete(:url), port)
+REQUIRED_CREATE_KEYS = %i[
+  name
+  parser_klass
+  user_id
+  admin_set_id
+  import_file_path
+].freeze
 
-  headers = { 'Content-Type' => 'application/json' }
-  headers['Authorization'] = "Token: #{opts.delete(:auth_token)}"
-  params = build_params(opts)
+# parser_fields you support
+PARSER_FIELD_KEYS = %i[
+  metadata_file_name
+  metadata_format
+  rights_statement
+  override_rights_statement
+  import_file_path
+  metadata_prefix
+  set
+  collection_name
+].freeze
 
-  logger.info("POST to #{url} - PARAMS #{params}")
+def main(opts)
+  check_required_params(opts)
 
-  conn = Faraday.new(
-    url: url,
-    headers: headers
-  )
+  update = opts[:importer_id].to_s.strip != ''
+  url    = build_url(opts[:importer_id], opts[:url], opts[:port])
+  params = build_params(opts.dup)
+
+  headers = {
+    'Content-Type'  => 'application/json',
+    'Authorization' => "Token: #{opts[:auth_token]}"
+  }
+
+  Rails.logger.info("POST to #{url} (update=#{update}) - PARAMS #{params.inspect}")
+
+  conn = Faraday.new(url:, headers:)
 
   response = if update
-               conn.put do |request|
-                 request.body = params.to_json
-               end
+               conn.put { |r| r.body = params.to_json }
              else
-               conn.post do |request|
-                 request.body = params.to_json
-               end
+               conn.post { |r| r.body = params.to_json }
              end
 
-  puts "#{response.status} - #{response.body.truncate(200)}"
+  puts "#{response.status} - #{response.body&.to_s&.slice(0, 200)}"
 end
 
-def check_required_params
-  if opts[:importer_id].blank? && invalid?(opts)
-    puts 'Missing required parameters'
-    help
-  end
-
-  if opts[:auth_token].blank? # rubocop:disable Style/GuardClause
+def check_required_params(opts)
+  if opts[:auth_token].to_s.strip.empty?
     puts 'Missing Authentication Token --auth_token'
-    exit
+    exit(1)
   end
+
+  # For UPDATE, only importer_id + auth_token are required.
+  return if opts[:importer_id].to_s.strip != ''
+
+  missing = REQUIRED_CREATE_KEYS.select { |k| opts[k].to_s.strip.empty? }
+  return if missing.empty?
+
+  puts "Missing required parameters: #{missing.join(', ')}"
+  help_and_exit
 end
 
-def invalid?(opts)
-  required_params.each do |p|
-    return true if opts[p.to_sym].blank?
+def build_params(opts)
+  commit = opts.delete(:commit)
+  importer = {
+    name:          opts.delete(:name),
+    parser_klass:  opts.delete(:parser_klass),
+    user_id:       opts.delete(:user_id),
+    admin_set_id:  opts.delete(:admin_set_id),
+    parser_fields: {}
+  }
+
+  PARSER_FIELD_KEYS.each do |k|
+    v = opts.delete(k)
+    importer[:parser_fields][k] = v unless v.nil? || v.to_s.empty?
   end
-  false
-end
 
-def required_params
-  Bulkrax.api_definition['bulkrax']['importer'].map { |key, value| key if value['required'] == true }.compact
-end
-
-def build_params(opts = {})
-  params = {}
-  params[:commit] = opts.delete(:commit)
-  parser_fields = {
-    metadata_file_name: opts.delete(:metadata_file_name),
-    metadata_format: opts.delete(:metadata_format),
-    rights_statement: opts.delete(:rights_statement),
-    override_rights_statement: opts.delete(:override_rights_statement),
-    import_file_path: opts.delete(:import_file_path),
-    metadata_prefix: opts.delete(:metadata_prefix),
-    set: opts.delete(:set),
-    collection_name: opts.delete(:collection_name)
-  }.compact
-  params[:importer] = opts.compact
-  params[:importer][:user_id] = opts.delete(:user_id)
-  params[:importer][:admin_set_id] = opts.delete(:admin_set_id)
-  params[:importer][:parser_fields] = parser_fields || {}
-  params.compact
+  { commit:, importer: importer.compact }.compact
 end
 
 def build_url(importer_id, url, port = nil)
-  if url.nil?
-    protocol = Rails.application.config.force_ssl ? 'https://' : 'http://'
-    host = Rails.application.config.action_mailer.default_url_options[:host]
-    url = "#{protocol}#{host}"
-    url = "#{url}:#{port}" if port
-  end
-  path = Bulkrax::Engine.routes.url_helpers.polymorphic_path(Bulkrax::Importer)
-  url = File.join(url, path)
-  url = File.join(url, importer_id) if importer_id
-  url
-end
+  base =
+    if url.to_s.strip.empty?
+      protocol = Rails.application.config.force_ssl ? 'https://' : 'http://'
+      host     = Rails.application.config.action_mailer.default_url_options[:host]
+      b = "#{protocol}#{host}"
+      b = "#{b}:#{port}" if port
+      b
+    else
+      url
+    end
 
-def logger
-  Rails.logger
+  helpers = Bulkrax::Engine.routes.url_helpers
+  path    = importer_id ? helpers.importer_path(importer_id) : helpers.importers_path
+  File.join(base, path)
 end
 
 def version
   puts "Bulkrax #{Bulkrax::VERSION}"
-  puts "Slop #{Slop::VERSION}"
+  puts "Rails   #{Rails.version}"
 end
 
-# Format the help for the CLI
-def help
+def help_and_exit
   puts 'CREATE:'
   puts '  bin/importer --name "My Import" --parser_klass Bulkrax::CsvParser --commit "Create and Import" --import_file_path /data/tmp/import.csv --auth_token 12345'
   puts 'UPDATE:'
   puts '  bin/importer --importer_id 1 --commit "Update and Re-Import (update metadata only)" --import_file_path /data/tmp/import.csv --auth_token 12345'
-  puts 'PARAMETERS:'
-  Bulkrax.api_definition['bulkrax']['importer'].each_pair do |key, value|
-    next if key == 'parser_fields'
-    puts "  --#{key}"
-    value.each_pair do |k, v|
-      next if k == 'contained_in'
-      puts "    #{k}: #{v}"
-    end
-  end
-  puts '  --url'
-  puts "    Repository URL"
-  exit
+  puts 'COMMON PARAMS:'
+  puts "  --user_id --admin_set_id --rights_statement --override_rights_statement --metadata_format --metadata_prefix --set --collection_name --metadata_file_name --import_file_path --url --port"
+  exit(1)
 end
 
-# Setup the options
+# -----------------------
+# CLI
+# -----------------------
 options = Slop.parse do |o|
-  o.on '--version', 'Print the version' do
+  o.on '--version', 'Print versions' do
     version
     exit
   end
 
-  o.on '--help', 'Print help' do
-    help
-    exit
+  o.on '--help', 'Help' do
+    help_and_exit
   end
 
-  Bulkrax.api_definition['bulkrax']['importer'].each_pair do |key, value|
-    if value['required'].blank?
-      o.string "--#{key}", value['definition'], default: nil
-    else
-      o.string "--#{key}", value['definition']
-    end
-  end
-  o.string '--url', 'Repository URL'
+  # High-level importer attributes
+  o.string '--name',            'Importer name'
+  o.string '--parser_klass',    'Parser class, e.g. Bulkrax::CsvParser'
+  o.string '--user_id',         'User ID who owns the import'
+  o.string '--admin_set_id',    'AdminSet ID for created works'
+  o.string '--commit',          'Commit button label/action (engine uses this)'
+
+  # Parser fields
+  o.string '--metadata_file_name',       'Metadata file name (if needed)'
+  o.string '--metadata_format',          'Format, e.g. csv'
+  o.string '--rights_statement',         'Rights URI'
+  o.bool   '--override_rights_statement','Override existing rights?'
+  o.string '--import_file_path',         'Server-accessible path to CSV/Bag'
+  o.string '--metadata_prefix',          'OAI prefix (for OAI parsers)'
+  o.string '--set',                       'OAI set (for OAI parsers)'
+  o.string '--collection_name',          'Collection name to link to'
+
+  # Update target
+  o.string '--importer_id', 'Importer ID to update instead of create'
+
+  # Auth / endpoint
+  o.string '--auth_token', 'API token (Devise token auth)'
+  o.string '--url',        'Repository base URL (default: from config)'
+  o.integer '--port',      'Port to append to base URL'
 end
 
 main(options.to_hash)
