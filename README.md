@@ -37,6 +37,12 @@
 1. Start fedora: ```fcrepo_wrapper -p 8984```
 1. Start solr in new tab: ```solr_wrapper -d solr/config/ --collection_name hydra-development```
 1. Start redis in new tab: ```redis-server```
+1. Configure .env.development with required sidekiq variables: 
+   ```
+   SCHOLAR_JOB_QUEUE_ADAPTER=sidekiq
+   SCHOLAR_DATABASE_POOL=5   # must be >= Sidekiq concurrency set in config/sidekiq.yml
+   ```
+1. In a new tab. start sidekiq: `bundle exec sidekiq -C config/sidekiq.yml`
 1. Run the database migrations: `bundle exec rake db:migrate`
 1. Start the rails server in new tab: `rails server`
 1. Visit the site at [http://localhost:3000] (http://localhost:3000)

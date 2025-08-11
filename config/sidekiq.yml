@@ -1,13 +1,10 @@
----
-max_retries: 3
+:concurrency: 5        # number of worker threads
 :queues:
-  - default
-  - ingest
-  - event
-  - change
-  - fixity_check
-  - import
-  - export
-:limits:
-  fixity_check: 1
-
+  - [default, "5"]       # optional weights; higher number = more throughput
+  - [ingest, "3"]
+  - [event, "2"]
+  - [change, "2"]
+  - [fixity_check, "1"]
+  - [import, "2"]
+  - [export, "2"]
+:strict: false         # honor weights (round-robin by weight); omit if you want strict FIFO by queue order
