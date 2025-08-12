@@ -39,6 +39,24 @@ class Ability
     can [:manage], Etd if current_user.admin?
   end
 
+  # Allow importing if the user can create any work (or is admin)
+  def can_import_works?
+    return false if current_user.nil?
+    current_user.admin? || can_create_any_work?
+  end
+
+  # Allow exporting if the user can create any work (or is admin)
+  def can_export_works?
+    return false if current_user.nil?
+    current_user.admin? || can_create_any_work?
+  end
+
+  # Fallback helper in case your Hyrax doesn't already define this.
+  # (Hyrax::Ability often has it; this is safe to keep.)
+  def can_create_any_work?
+    Array(Hyrax.config.curation_concerns).any? { |klass| can?(:create, klass) }
+  end
+
   private
 
   def look_for_collection(collection_export)
@@ -56,6 +74,4 @@ class Ability
   def user_is_etd_manager
     user_groups.include? 'etd_manager'
   end
-  def can_import_works?
-    can_create_any_work?
-  endend
+end
