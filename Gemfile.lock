@@ -411,6 +411,7 @@ GEM
     fcrepo_wrapper (0.9.0)
       ruby-progressbar
     ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-darwin)
     ffi-compiler (1.3.2)
       ffi (>= 1.15.5)
       rake
@@ -773,6 +774,8 @@ GEM
       actionpack (>= 5.0.0, < 7)
       noid (~> 0.9)
     nokogiri (1.15.7-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.7-x86_64-darwin)
       racc (~> 1.4)
     nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)
@@ -1207,6 +1210,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  x86_64-darwin-22
 
 DEPENDENCIES
   active-fedora (~> 12.2.4)
