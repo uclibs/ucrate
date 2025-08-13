@@ -291,6 +291,4 @@ Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s if Bulkrax
 Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s if Bulkrax.default_work_type.blank?
 
 # set bulkrax default work type to first curation_concern if it isn't already set
-if Bulkrax.default_work_type.blank?
-  Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s
-end
+Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s if Bulkrax.default_work_type.blank?
