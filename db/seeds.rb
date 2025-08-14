@@ -104,15 +104,28 @@ class AddSeedObjects < ActiveRecord::Migration[5.1]
     puts "#{works_per_user} Generic Works created for #{user.email}"
   end
 
-  # Generate complete works
+  # Get (or create) the default "User Collection" type, then use its GID
+  default_ct =
+    if Hyrax::CollectionType.respond_to?(:find_or_create_default_collection_type)
+      Hyrax::CollectionType.find_or_create_default_collection_type
+    else
+      Hyrax::CollectionType.find_by(machine_id: Hyrax::CollectionType::USER_COLLECTION_MACHINE_ID) ||
+        Hyrax::CollectionType.create!(title: 'User Collection',
+                                      machine_id: Hyrax::CollectionType::USER_COLLECTION_MACHINE_ID,
+                                      nestable: true, discoverable: true, sharable: true,
+                                      share_applies_to_new_works: true, allow_multiple_membership: true,
+                                      require_membership: false, assigns_workflow: false, assigns_visibility: false)
+    end
+  default_ct_gid = default_ct.to_global_id.to_s
 
+  # Generate complete works
   complete_collection = Collection.create(
     title: ["Complete Works"],
     depositor: many_deposits.email,
     creator: ["Deposits, Many"],
     edit_users: [many_deposits.email],
     description: ["This is a collection of works with all their metadata filled in."],
-    collection_type_gid: "gid://scholar-uc/hyrax-collectiontype/1",
+    collection_type_gid:  default_ct_gid,
     visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
     )
 
