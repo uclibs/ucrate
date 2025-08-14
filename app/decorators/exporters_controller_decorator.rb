@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Ensures @exporter is loaded for the entry_table action.
 # In your routes, entry_table uses :exporter_id, while other member actions use :id.
 # Without this, @exporter is nil and the DataTables AJAX /entry_table.json 500s.

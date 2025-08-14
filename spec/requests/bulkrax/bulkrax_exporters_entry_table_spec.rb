@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # spec/requests/bulkrax/exporters_entry_table_spec.rb
 require 'rails_helper'
 

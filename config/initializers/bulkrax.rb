@@ -3,8 +3,11 @@
 Bulkrax.setup do |config|
   # ----- Paths & host -----
   # Prefer ENV, but fall back to tmp/* so dev/test still work
-  config.import_path = ENV.fetch("SCHOLAR_BULKRAX_IMPORT_PATH", Rails.root.join("tmp/bulkrax/imports").to_s)
-  config.export_path = ENV.fetch("SCHOLAR_BULKRAX_EXPORT_PATH", Rails.root.join("tmp/bulkrax/exports").to_s)
+  IMPORTS_DIR = Rails.root.join('tmp', 'bulkrax', 'imports').freeze
+  EXPORTS_DIR = Rails.root.join('tmp', 'bulkrax', 'exports').freeze
+
+  config.import_path = ENV.fetch('SCHOLAR_BULKRAX_IMPORT_PATH', IMPORTS_DIR.to_s)
+  config.export_path = ENV.fetch('SCHOLAR_BULKRAX_EXPORT_PATH', EXPORTS_DIR.to_s)
 
   # Needed for building absolute URLs in exports/downloads
   config.server_name = ENV.fetch("SCHOLAR_BULKRAX_SERVER_NAME", "localhost:3000")
