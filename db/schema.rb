@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2025_08_11_182757) do
     t.boolean "generated_metadata", default: false
     t.string "status_message", default: "Pending"
     t.string "error_class"
-    t.json "settings"
     t.index ["user_id"], name: "index_bulkrax_exporters_on_user_id"
   end
 
@@ -124,7 +123,6 @@ ActiveRecord::Schema.define(version: 2025_08_11_182757) do
     t.datetime "last_imported_at"
     t.datetime "next_import_at"
     t.string "error_class"
-    t.json "settings"
     t.index ["user_id"], name: "index_bulkrax_importers_on_user_id"
   end
 
