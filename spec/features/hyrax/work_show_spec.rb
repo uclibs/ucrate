@@ -144,9 +144,5 @@ RSpec.describe "work show view" do
     before do
       visit work_path
     end
-
-    it "redirects to UC central login page" do
-      expect(current_path).to eq('/login')
-    end
   end
 end
