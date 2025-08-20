@@ -17,7 +17,7 @@ ignore:
   - CVE-2022-23516
 
   # nokogiri
-  - GHSA-mrxw-mxhj-p664   # no CVE listed in your output
+  - GHSA-mrxw-mxhj-p664
   - CVE-2022-23476
 
   # omniauth
