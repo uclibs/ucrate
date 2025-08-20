@@ -1,0 +1,46 @@
+name: Ensure Brakeman Passes
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  brakeman:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Ruby, Gems, and Install Dependencies
+        uses: ./.github/actions/setup-ruby-deps
+
+      - name: Run Brakeman (Human-readable and JSON outputs)
+        run: |
+          mkdir -p tmp
+          bundle exec brakeman --no-exit-on-warn -o tmp/brakeman-output.json
+        env:
+          BRAKEMAN_FORMAT: json
+
+      - name: Display Brakeman Report
+        run: |
+          echo "Brakeman Report (JSON):"
+          cat tmp/brakeman-output.json || echo "Brakeman report is missing or empty."
+        shell: bash
+
+      - name: Upload Brakeman Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: brakeman-report
+          path: tmp/brakeman-output.json
+
+      - name: Fail on High-Severity Issues
+        run: |
+          HIGH_SEVERITY_COUNT=$(jq '.warnings | map(select(.confidence == "High")) | length' tmp/brakeman-output.json)
+          echo "High severity issues: $HIGH_SEVERITY_COUNT"
+          if [ "$HIGH_SEVERITY_COUNT" -gt 0 ]; then
+            echo "Brakeman detected high-severity issues. Failing the job."
+            exit 1
+          fi
+        env:
+          BRAKEMAN_FORMAT: json
+        shell: bash
