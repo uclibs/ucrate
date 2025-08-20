@@ -1,0 +1,46 @@
+name: Ensure Bundler-Audit Passes
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  bundler-audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Ruby and install gems
+        uses: ./.github/actions/setup-ruby-deps
+
+      - name: Run Bundler-Audit
+        run: |
+          mkdir -p tmp
+          # Allow bundler-audit to return 1 (vulnerabilities found) without failing the step
+          set +e
+          bundle exec bundler-audit check --update > tmp/bundler-audit-output.txt
+          AUDIT_EXIT=$?
+          set -e
+          if [ $AUDIT_EXIT -ne 0 ] && [ $AUDIT_EXIT -ne 1 ]; then
+            echo "bundler-audit failed unexpectedly (exit code $AUDIT_EXIT)"
+            exit $AUDIT_EXIT
+          fi
+        shell: bash
+
+      - name: Analyze Bundler-Audit Output
+        run: |
+          if grep -Eq '^Criticality:\s*(Critical|High)' tmp/bundler-audit-output.txt; then
+            echo "High or Critical vulnerabilities detected!"
+            cat tmp/bundler-audit-output.txt
+            exit 1
+          else
+            echo "No High or Critical vulnerabilities detected."
+          fi
+        shell: bash
+
+      - name: Upload Bundler-Audit Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundler-audit-report
+          path: tmp/bundler-audit-output.txt
