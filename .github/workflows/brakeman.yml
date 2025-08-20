@@ -21,17 +21,28 @@ jobs:
           echo "Bundler version:    $(bundle -v)"
           echo "Brakeman version:   $(bundle exec brakeman --version || echo 'not installed')"
 
+      - name: Check if Brakeman is up-to-date (warn only)
+        run: |
+          set +e
+          bundle exec brakeman -q --no-progress --ensure-latest >/dev/null
+          CODE=$?
+          set -e
+          if [ "$CODE" -eq 5 ]; then
+            echo "::warning title=Brakeman::Installed version is not the latest. Run 'bundle update brakeman' to update."
+          elif [ "$CODE" -ne 0 ]; then
+            echo "::error title=Brakeman::Version check failed::Exit code $CODE"
+            exit $CODE
+          fi
+
       - name: Run Brakeman (JSON)
         run: |
           mkdir -p tmp
-          # --ensure-latest fails if the installed gem isn't the newest
-          # --no-exit-on-warn lets us control failure based on jq filtering
-          bundle exec brakeman -q --no-progress --ensure-latest --no-exit-on-warn \
+          bundle exec brakeman -q --no-progress --no-exit-on-warn \
             -f json -o tmp/brakeman-output.json
 
       - name: Run Brakeman (plain text for humans)
         run: |
-          bundle exec brakeman -q --no-progress --ensure-latest --no-exit-on-warn \
+          bundle exec brakeman -q --no-progress --no-exit-on-warn \
             -f plain -o tmp/brakeman-output.txt || true
 
       - name: Show Brakeman JSON summary
@@ -47,7 +58,6 @@ jobs:
             tmp/brakeman-output.json
             tmp/brakeman-output.txt
 
-      # Fail the job based on High-confidence findings
       - name: Fail on High-confidence warnings
         run: |
           HIGH_CONF_COUNT=$(jq '[.warnings[] | select(.confidence == "High")] | length' tmp/brakeman-output.json)
