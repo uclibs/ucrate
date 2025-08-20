@@ -11,36 +11,48 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Ruby, Gems, and Install Dependencies
+      - name: Set up Ruby & install gems (cached)
         uses: ./.github/actions/setup-ruby-deps
 
-      - name: Run Brakeman (Human-readable and JSON outputs)
+      - name: Print tool versions
+        run: |
+          echo "Ruby version:       $(ruby -v)"
+          echo "Gem version:        $(gem -v)"
+          echo "Bundler version:    $(bundle -v)"
+          echo "Brakeman version:   $(bundle exec brakeman --version || echo 'not installed')"
+
+      - name: Run Brakeman (JSON)
         run: |
           mkdir -p tmp
-          bundle exec brakeman --no-exit-on-warn -o tmp/brakeman-output.json
-        env:
-          BRAKEMAN_FORMAT: json
+          # --ensure-latest fails if the installed gem isn't the newest
+          # --no-exit-on-warn lets us control failure based on jq filtering
+          bundle exec brakeman -q --no-progress --ensure-latest --no-exit-on-warn \
+            -f json -o tmp/brakeman-output.json
 
-      - name: Display Brakeman Report
+      - name: Run Brakeman (plain text for humans)
         run: |
-          echo "Brakeman Report (JSON):"
-          cat tmp/brakeman-output.json || echo "Brakeman report is missing or empty."
-        shell: bash
+          bundle exec brakeman -q --no-progress --ensure-latest --no-exit-on-warn \
+            -f plain -o tmp/brakeman-output.txt || true
 
-      - name: Upload Brakeman Report
+      - name: Show Brakeman JSON summary
+        run: |
+          echo "Warnings count: $(jq '.warnings | length' tmp/brakeman-output.json)"
+          echo "High-confidence count: $(jq '[.warnings[] | select(.confidence == "High")] | length' tmp/brakeman-output.json)"
+
+      - name: Upload Brakeman Reports
         uses: actions/upload-artifact@v4
         with:
           name: brakeman-report
-          path: tmp/brakeman-output.json
+          path: |
+            tmp/brakeman-output.json
+            tmp/brakeman-output.txt
 
-      - name: Fail on High-Severity Issues
+      # Fail the job based on High-confidence findings
+      - name: Fail on High-confidence warnings
         run: |
-          HIGH_SEVERITY_COUNT=$(jq '.warnings | map(select(.confidence == "High")) | length' tmp/brakeman-output.json)
-          echo "High severity issues: $HIGH_SEVERITY_COUNT"
-          if [ "$HIGH_SEVERITY_COUNT" -gt 0 ]; then
-            echo "Brakeman detected high-severity issues. Failing the job."
+          HIGH_CONF_COUNT=$(jq '[.warnings[] | select(.confidence == "High")] | length' tmp/brakeman-output.json)
+          echo "High-confidence warnings: $HIGH_CONF_COUNT"
+          if [ "$HIGH_CONF_COUNT" -gt 0 ]; then
+            echo "Brakeman detected high-confidence warnings. Failing the job."
             exit 1
           fi
-        env:
-          BRAKEMAN_FORMAT: json
-        shell: bash
