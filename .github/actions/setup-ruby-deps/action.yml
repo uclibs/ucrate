@@ -1,5 +1,5 @@
-name: "Setup Ruby & Node"
-description: "Sets up Ruby from .ruby-version with Bundler caching, and Node.js from .nvmrc with Yarn caching."
+name: "Setup Ruby"
+description: "Sets up Ruby from .ruby-version with Bundler caching"
 
 inputs: {}
 runs:
@@ -8,28 +8,5 @@ runs:
     - name: Set up Ruby from .ruby-version
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: .ruby-version
+        ruby-version: 'file:.ruby-version'
         bundler-cache: true
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version-file: '.nvmrc'
-        cache: 'yarn'
-
-    - name: Restore node_modules cache
-      uses: actions/cache@v3
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-node-modules-
-    - name: Install Dependencies
-      run: yarn install --frozen-lockfile
-      shell: bash
-
-    - name: Save node_modules cache
-      uses: actions/cache@v3
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}

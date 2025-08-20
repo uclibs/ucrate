@@ -14,16 +14,23 @@ jobs:
       - name: Set up Ruby and install gems
         uses: ./.github/actions/setup-ruby-deps
 
+      - name: Print tool versions
+        run: |
+          echo "Ruby version:       $(ruby -v)"
+          echo "Gem version:        $(gem -v)"
+          echo "Bundler version:    $(bundle -v)"
+          echo "Bundler-Audit version: $(bundle exec bundler-audit version || echo 'not installed')"
+
       - name: Run Bundler-Audit
         run: |
           mkdir -p tmp
-          # Allow bundler-audit to return 1 (vulnerabilities found) without failing the step
+          # Allow 'vulnerabilities found' (exit 1) without failing the step
           set +e
-          bundle exec bundler-audit check --update > tmp/bundler-audit-output.txt
+          bundle exec bundle audit check --update > tmp/bundler-audit-output.txt
           AUDIT_EXIT=$?
           set -e
           if [ $AUDIT_EXIT -ne 0 ] && [ $AUDIT_EXIT -ne 1 ]; then
-            echo "bundler-audit failed unexpectedly (exit code $AUDIT_EXIT)"
+            echo "bundle audit failed unexpectedly (exit code $AUDIT_EXIT)"
             exit $AUDIT_EXIT
           fi
         shell: bash
