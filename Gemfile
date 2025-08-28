@@ -79,6 +79,10 @@ gem 'rsolr', '>= 1.0'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'sidekiq', '>= 6.0'
 
+# Required for capistrano deploys
+gem 'bcrypt_pbkdf' # Password hashing library, required for ssh deployment
+gem 'ed25519' # Ed25519 elliptic curve public-key signature system
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'bixby', '>= 1.0.0'
