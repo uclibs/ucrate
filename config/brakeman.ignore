@@ -1,33 +1,13 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Mass Assignment",
-      "warning_code": 70,
-      "fingerprint": "c58372ffa9750e7506995301196bc155ae5e14f7b5f01d301b8232036c8b2ca3",
-      "check_name": "MassAssignment",
-      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
-      "file": "app/controllers/hyrax/batch_uploads_controller.rb",
-      "line": 16,
-      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params[:title].permit!",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Hyrax::BatchUploadsController",
-        "method": "create_update_job"
-      },
-      "user_input": null,
-      "confidence": "Medium",
-      "note": ""
-    },
-    {
       "warning_type": "Unmaintained Dependency",
       "warning_code": 121,
-      "fingerprint": "9a3951031616a07c8e02c86652f537e92c08685da97f5ec2b12d5d3602b55bb8",
+      "fingerprint": "edf687f759ec9765bd5db185dbc615c80af77d6e7e19386fc42934e7a80307af",
       "check_name": "EOLRuby",
       "message": "Support for Ruby 2.7.8 ended on 2023-03-31",
-      "file": "Gemfile.lock",
-      "line": 821,
+      "file": ".ruby-version",
+      "line": 1,
       "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
       "code": null,
       "render_path": null,
@@ -35,7 +15,7 @@
       "user_input": null,
       "confidence": "High",
       "cwe_id": [1104],
-      "note": "Ruby EOL ignored due to pending upgrade of Ruby version along with upgrade of Hyrax in year-end 2023 sprint"
+      "note": "Temporarily ignoring until Ruby upgrade is complete"
     },
     {
       "warning_type": "Unmaintained Dependency",
@@ -44,17 +24,18 @@
       "check_name": "EOLRails",
       "message": "Support for Rails 5.2.4.6 ended on 2022-06-01",
       "file": "Gemfile.lock",
-      "line": 821,
+      "line": 811,
       "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
       "code": null,
       "render_path": null,
       "location": null,
       "user_input": null,
       "confidence": "High",
-      "cwe_id": [1104],
-      "note": "Rails EOL ignored due to pending upgrade of Rails version along with upgrade of Hyrax in year-end 2023 sprint"
+      "cwe_id": [
+        1104
+      ]
     }
   ],
-  "updated": "2023-11-03 14:42:01 -0400",
-  "brakeman_version": "5.3.1"
+  "updated": "2025-08-20 20:35:33 +0000",
+  "brakeman_version": "5.4.1"
 }
