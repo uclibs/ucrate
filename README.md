@@ -34,7 +34,20 @@
       --with-cppflags='-I/opt/homebrew/opt/mysql/include -I/opt/homebrew/opt/zstd/include'"
     ```
     Then run: `bundle install`
+1. Apple Silicon (M3/M4) Fedora note:
+   * Install the Java 8 runtime once (Temurin ARM build):
+     ```
+     brew install --cask temurin@8
+     ```
 1. Start fedora: ```fcrepo_wrapper -p 8984```
+1. Apple Silicon (M3/M4) Fedora note:
+   * When starting Fedora, point that terminal tab at Java 8 before running the wrapper:
+     ```
+     export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home"
+     export PATH="$JAVA_HOME/bin:$PATH"
+     fcrepo_wrapper -p 8984
+     ```
+   * Only the Fedora tab needs these exports; other tabs can keep the default JDK.
 1. Start solr in new tab: ```solr_wrapper -d solr/config/ --collection_name hydra-development```
 1. Start redis in new tab: ```redis-server```
 1. Run the database migrations: `bundle exec rake db:migrate`
