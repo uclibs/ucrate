@@ -23,6 +23,14 @@ ignore:
   # omniauth
   - CVE-2015-9284
 
+  # rack
+  - CVE-2025-27610
+  - CVE-2022-44570
+  - CVE-2025-46727
+  - CVE-2022-30122
+  - CVE-2023-27530
+  - CVE-2022-30123
+
   # rails-html-sanitizer
   - CVE-2022-23517
 
