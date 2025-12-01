@@ -10,20 +10,18 @@ end
 
 require 'simplecov'
 require 'simplecov-lcov'
-require 'coveralls'
 
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 
-# Configure formatters before Coveralls.wear! starts SimpleCov
+# Configure formatters before SimpleCov.start
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
   [
     SimpleCov::Formatter::HTMLFormatter,
-    SimpleCov::Formatter::LcovFormatter,
-    Coveralls::SimpleCov::Formatter
+    SimpleCov::Formatter::LcovFormatter
   ]
 )
 
-Coveralls.wear!('rails') do
+SimpleCov.start 'rails' do
   # Directories to exclude from coverage
   add_filter '/.github/'
   add_filter '/bin'

@@ -84,9 +84,14 @@ jobs:
                 path: coverage
 
             - coveralls/upload:
-                parallel_finished: true
                 path_to_lcov: /home/circleci/ucrate/coverage/lcov/ucrate.lcov
 
+    coveralls-finish:
+        docker:
+            - image: cimg/ruby:2.7.8
+        steps:
+            - coveralls/upload:
+                parallel_finished: true
 
 workflows:
     version: 2
@@ -94,3 +99,6 @@ workflows:
         jobs:
             - build:
                 name: ruby2-7-8
+            - coveralls-finish:
+                requires:
+                    - ruby2-7-8
