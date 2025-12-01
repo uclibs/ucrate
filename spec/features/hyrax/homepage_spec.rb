@@ -35,11 +35,6 @@ RSpec.describe "The homepage", :clean_repo do
     expect(page).to have_css('div.scholar-home-tag.text-center')
   end
 
-  it 'shows external links' do
-    visit root_path
-    expect(page).to have_css('div.ext-links.text-center')
-  end
-
   it 'shows partners' do
     visit root_path
     expect(page).to have_css('div.partner-branding.row')

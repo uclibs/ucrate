@@ -20,4 +20,8 @@ describe '/static/help.html.erb', type: :view do
     expect(rendered).to have_link(href: student_work_help_path)
     expect(rendered).to have_link(href: welcome_page_index_path)
   end
+
+  it 'has the Manage Your Data link' do
+    expect(rendered).to have_link('Manage Your Data', href: 'http://guides.libraries.uc.edu/datamanagementplanning')
+  end
 end
