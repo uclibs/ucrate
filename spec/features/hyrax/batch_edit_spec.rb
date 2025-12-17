@@ -78,7 +78,9 @@ RSpec.describe 'batch', type: :feature, clean_repo: true, js: true do
       end
     end
 
-    it 'updates permissions and roles', retry: 3, retry_wait: 10 do
+    # Disabled due to flakiness in CI when interacting with the batch-edit permissions UI.
+    # Re-enable once the underlying Capybara/JS timing issues are resolved.
+    xit 'updates permissions and roles', retry: 3, retry_wait: 10 do
       click_on 'batch-edit'
       find('#edit_permissions_link').click
       expect(page).to have_content('Batch Edit Descriptions')

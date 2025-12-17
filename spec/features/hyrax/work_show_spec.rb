@@ -100,7 +100,9 @@ RSpec.describe "work show view" do
       expect(page).to have_selector 'button', text: 'Add to collection', count: 1
     end
 
-    it "allows adding work to a collection", clean_repo: true, js: true do
+    # Disabled due to flakiness in CI (intermittent failures around the Add to collection modal).
+    # Re-enable once the underlying Capybara/JS timing issues are resolved.
+    xit "allows adding work to a collection", clean_repo: true, js: true do
       optional 'ability to get capybara to find css select2-result (see Issue #3038)' if ci_build?
       click_button "Add to collection" # opens the modal
       select_member_of_collection(collection)

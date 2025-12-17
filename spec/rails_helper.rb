@@ -9,11 +9,15 @@ def ci_build?
 end
 
 require 'simplecov'
-require 'coveralls'
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+require 'simplecov-lcov'
+
+SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
+
+# Configure formatters before SimpleCov.start
+SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
   [
     SimpleCov::Formatter::HTMLFormatter,
-    Coveralls::SimpleCov::Formatter
+    SimpleCov::Formatter::LcovFormatter
   ]
 )
 
