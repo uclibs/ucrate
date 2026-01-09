@@ -440,3 +440,24 @@ label[for=user_password] {
 .whats-new h3 {
   margin-top: 50px;
 }
+
+/* Fixed masthead styles */
+#masthead.navbar-fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+}
+
+/* Prevent page content from being hidden behind the fixed masthead */
+body {
+  padding-top: 60px;
+}
+
+@media (max-width: 767px) {
+  /* On small screens the navbar collapses and should not overlap content */
+  body {
+    padding-top: 0;
+  }
+}
