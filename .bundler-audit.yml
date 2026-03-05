@@ -84,7 +84,7 @@ ignore:
   - CVE-2022-23516
   - GHSA-228g-948r-83gx
 
-  # nokogiri (1.13.8) — fix: >= 1.14.3 through >= 1.18.9 depending on CVE
+  # nokogiri (1.13.8) — fix: upgrade to '>= 1.19.1'
   - CVE-2022-23476
   - GHSA-mrxw-mxhj-p664
   - GHSA-2qc6-mcvw-92cw
@@ -94,6 +94,7 @@ ignore:
   - GHSA-vvfq-8hwr-qm4m
   - GHSA-5w6v-399v-w3cc
   - GHSA-pxvg-2qj5-37jq
+  - GHSA-wx95-c6cv-8532
 
   # omniauth
   - CVE-2015-9284
@@ -106,7 +107,7 @@ ignore:
   - GHSA-c2f4-cvqm-65w2
   - GHSA-9hf4-67fc-4vf4
 
-  # rack (2.2.3) — fix: ~> 2.2.20 or >= 3.x depending on CVE
+  # rack (2.2.3) — fix: upgrade to '~> 2.2.22', '~> 3.1.20', '>= 3.2.5'
   - CVE-2022-30122
   - CVE-2022-30123
   - CVE-2022-44570
@@ -138,6 +139,8 @@ ignore:
   - GHSA-8cgq-6mh2-7j6v
   - GHSA-vpfw-47h7-xj4g
   - GHSA-r657-rxjc-j557
+  - GHSA-whrj-4476-wvmp
+  - GHSA-mxw3-3hh2-x2mh
 
   # rails-html-sanitizer (1.4.3) — fix: >= 1.4.4
   - CVE-2022-23517
@@ -173,3 +176,6 @@ ignore:
   - CVE-2024-47220
   - CVE-2025-6442
   - GHSA-r995-q44h-hr64
+
+  # Faraday (1.10.0) — upgrade to '~> 1.10.5', '>= 2.14.1'
+  - GHSA-33mh-2634-fwr2
