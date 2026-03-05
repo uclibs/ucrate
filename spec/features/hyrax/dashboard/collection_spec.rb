@@ -432,8 +432,8 @@ RSpec.describe 'collection', type: :feature, clean_repo: true do
       end
 
       context 'and collection is not empty' do
-      # Disabled due to flakiness in CI (intermittent failures around the collection delete modal).
-      # Re-enable once the underlying Capybara/JS timing issues are resolved.
+        # Disabled due to flakiness in CI (intermittent failures around the collection delete modal).
+        # Re-enable once the underlying Capybara/JS timing issues are resolved.
         xit it 'and user confirms delete, deletes the collection', :js do
           within("table#collections-list-table") do
             expect(page).to have_content(collection.title.first)
