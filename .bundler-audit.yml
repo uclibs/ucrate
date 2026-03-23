@@ -54,9 +54,14 @@ ignore:
   - GHSA-gxhx-g4fq-49hj
   - GHSA-vfmv-jfc5-pjjw
 
-  # devise (4.6.0) — fix: >= 4.7.1
+  # devise (4.6.0) — fix: >= 4.7.1; confirmable change-email race: >= 5.0.3
   - CVE-2019-16109
   - GHSA-fcjw-8rhj-gwwc
+  - GHSA-57hq-95w6-v4fc
+
+  # faraday (0.17.5) — fix: ~> 1.10.5, >= 2.14.1
+  - CVE-2026-25765
+  - GHSA-33mh-2634-fwr2
 
   # globalid (1.0.0) — fix: >= 1.0.1
   - CVE-2023-22799
@@ -84,7 +89,7 @@ ignore:
   - CVE-2022-23516
   - GHSA-228g-948r-83gx
 
-  # nokogiri (1.13.8) — fix: upgrade to '>= 1.19.1'
+  # nokogiri (1.13.8) — fix: >= 1.14.3 through >= 1.19.1 depending on CVE
   - CVE-2022-23476
   - GHSA-mrxw-mxhj-p664
   - GHSA-2qc6-mcvw-92cw
@@ -107,7 +112,7 @@ ignore:
   - GHSA-c2f4-cvqm-65w2
   - GHSA-9hf4-67fc-4vf4
 
-  # rack (2.2.3) — fix: upgrade to '~> 2.2.22', '~> 3.1.20', '>= 3.2.5'
+  # rack (2.2.3) — fix: ~> 2.2.22 / ~> 3.1.20 / >= 3.2.5 (2026); other CVEs ~> 2.2.20 or >= 3.x
   - CVE-2022-30122
   - CVE-2022-30123
   - CVE-2022-44570
@@ -139,6 +144,8 @@ ignore:
   - GHSA-8cgq-6mh2-7j6v
   - GHSA-vpfw-47h7-xj4g
   - GHSA-r657-rxjc-j557
+  - CVE-2026-25500
+  - CVE-2026-22860
   - GHSA-whrj-4476-wvmp
   - GHSA-mxw3-3hh2-x2mh
 
