@@ -1,46 +1,175 @@
 ignore:
-  # actionpack
+  # actionmailer (5.2.4.6) — fix: ~> 6.1.7.9, ~> 7.0.8.5, ~> 7.1.4.1, >= 7.2.1.1
+  - CVE-2024-47889
+  - GHSA-h47h-mwp9-c6q6
+
+  # actionpack (5.2.4.6) — fix: various; see advisories for each CVE
   - CVE-2022-23633
+  - CVE-2022-22577
+  - CVE-2023-22792
+  - CVE-2023-22795
+  - CVE-2023-28362
+  - CVE-2024-41128
+  - CVE-2024-47887
+  - CVE-2024-54133
+  - GHSA-mm33-5vfq-3mm3
+  - GHSA-x76w-6vjr-8xgj
+  - GHSA-vfg9-r3fq-jvx4
+  - GHSA-vfm5-rmrh-j26v
+  - GHSA-8xww-x3g3-6jcv
+  - GHSA-p84v-45xj-wwqj
+  - GHSA-4g8v-vg43-wpgf
 
-  # actionview
+  # actionview (5.2.4.6) — fix: ~> 5.2.7.1, ~> 6.0.4.8, ~> 6.1.5.1, >= 7.0.2.4
+  - CVE-2022-27777
   - CVE-2023-23913
+  - GHSA-ch3h-j2vf-95pv
 
-  # activerecord
-  - CVE-2022-44566
+  # activerecord (5.2.4.6) — fix: ~> 7.1.5.2, ~> 7.2.2.2, >= 8.0.2.1
   - CVE-2022-32224
+  - CVE-2022-44566
+  - CVE-2025-55193
+  - GHSA-76r7-hhxj-r776
 
-  # activestorage
+  # activestorage (5.2.4.6) — fix: ~> 6.1.7.7, >= 7.0.8.1
   - CVE-2022-21831
+  - CVE-2024-26144
+  - GHSA-8h22-8cf7-hq6g
 
-  # loofah
+  # activesupport (5.2.4.6) — fix: ~> 5.2.8, ~> 6.1.7.x, >= 7.0.x
+  - CVE-2023-22796
+  - CVE-2023-28120
+  - CVE-2023-38037
+  - GHSA-j6gc-792m-qgm2
+  - GHSA-pj73-v5mw-pm9j
+  - GHSA-cr5q-6q9f-rq6q
+
+  # aws-sdk-s3 (1.114.0) — fix: >= 1.208.0
+  - CVE-2025-14762
+  - GHSA-2xgq-q749-89fq
+
+  # carrierwave (1.3.2) — fix: ~> 2.2.6, >= 3.0.7
+  - CVE-2023-49090
+  - CVE-2024-29034
+  - GHSA-gxhx-g4fq-49hj
+  - GHSA-vfmv-jfc5-pjjw
+
+  # devise (4.6.0) — fix: >= 4.7.1
+  - CVE-2019-16109
+  - GHSA-fcjw-8rhj-gwwc
+
+  # globalid (1.0.0) — fix: >= 1.0.1
+  - CVE-2023-22799
+  - GHSA-23c2-gwp5-pxw9
+
+  # httparty (0.20.0) — fix: >= 0.24.0 (SSRF); >= 0.21.0 (multipart)
+  - CVE-2024-22049
+  - CVE-2025-68696
+  - GHSA-5pq7-52mg-hr42
+  - GHSA-hm5p-x4rq-38w4
+
+  # jquery-ui-rails (6.0.1) — fix: >= 7.0.0 or >= 8.0.0 depending on CVE
+  - CVE-2021-41182
+  - CVE-2021-41183
+  - CVE-2021-41184
+  - CVE-2022-31160
+  - GHSA-9gj3-hwp5-pmwc
+  - GHSA-j7qv-pgf6-hvh4
+  - GHSA-gpqq-952q-5327
+  - GHSA-h6gj-6jjq-h8g9
+
+  # loofah (2.18.0) — fix: >= 2.19.1
   - CVE-2022-23514
+  - CVE-2022-23515
   - CVE-2022-23516
+  - GHSA-228g-948r-83gx
 
-  # nokogiri
-  - GHSA-mrxw-mxhj-p664
+  # nokogiri (1.13.8) — fix: >= 1.14.3 through >= 1.18.9 depending on CVE
   - CVE-2022-23476
+  - GHSA-mrxw-mxhj-p664
+  - GHSA-2qc6-mcvw-92cw
+  - GHSA-xc9x-jj77-9p9j
+  - GHSA-353f-x4gh-cqq8
+  - GHSA-r95h-9x8f-r3f7
+  - GHSA-vvfq-8hwr-qm4m
+  - GHSA-5w6v-399v-w3cc
+  - GHSA-pxvg-2qj5-37jq
 
   # omniauth
   - CVE-2015-9284
 
-  # rack
-  - CVE-2025-27610
-  - CVE-2022-44570
-  - CVE-2025-46727
+  # puma (4.3.12) — fix: ~> 5.6.9, >= 6.4.3
+  - CVE-2023-40175
+  - CVE-2024-21647
+  - CVE-2024-45614
+  - GHSA-68xg-gqqm-vgj8
+  - GHSA-c2f4-cvqm-65w2
+  - GHSA-9hf4-67fc-4vf4
+
+  # rack (2.2.3) — fix: ~> 2.2.20 or >= 3.x depending on CVE
   - CVE-2022-30122
-  - CVE-2023-27530
   - CVE-2022-30123
-  - CVE-2025-61919
+  - CVE-2022-44570
+  - CVE-2022-44571
+  - CVE-2022-44572
+  - CVE-2023-27530
+  - CVE-2023-27539
+  - CVE-2024-25126
+  - CVE-2024-26141
+  - CVE-2024-26146
+  - CVE-2025-25184
+  - CVE-2025-27111
+  - CVE-2025-27610
+  - CVE-2025-32441
+  - CVE-2025-46727
   - CVE-2025-59830
-  - CVE-2025-61772
   - CVE-2025-61770
   - CVE-2025-61771
+  - CVE-2025-61772
+  - CVE-2025-61780
+  - CVE-2025-61919
+  - GHSA-93pm-5p5f-3ghx
+  - GHSA-rqv2-275x-2jq5
+  - GHSA-c6qg-cjj8-47qp
+  - GHSA-22f2-v57c-j9cx
+  - GHSA-xj5v-6v4g-jfw6
+  - GHSA-54rr-7fvw-6x8f
+  - GHSA-7g2v-jj9q-g3rg
+  - GHSA-8cgq-6mh2-7j6v
+  - GHSA-vpfw-47h7-xj4g
+  - GHSA-r657-rxjc-j557
 
-  # rails-html-sanitizer
+  # rails-html-sanitizer (1.4.3) — fix: >= 1.4.4
   - CVE-2022-23517
+  - CVE-2022-23518
+  - CVE-2022-23519
+  - CVE-2022-23520
+  - GHSA-mcvf-2q2m-x72m
+  - GHSA-rrfc-7g8p-99q8
+  - GHSA-9h9g-93gc-623h
 
-  # rexml
+  # rexml (3.2.5) — fix: >= 3.3.6
+  - CVE-2024-35176
+  - CVE-2024-39908
+  - CVE-2024-41123
+  - CVE-2024-41946
+  - CVE-2024-43398
   - CVE-2024-49761
+  - GHSA-vg3r-rm7w-2xgh
+  - GHSA-4xqq-m2hx-25v8
+  - GHSA-r55c-59qm-vjw6
+  - GHSA-5866-49gr-22v4
+  - GHSA-vmwr-mc7x-5vc3
 
-  # webrick
+  # sidekiq (6.5.5) — fix: ~> 6.5.10, >= 7.1.3
+  - CVE-2023-26141
+  - GHSA-3qc2-v3hp-6cv8
+
+  # thor (1.2.1) — fix: >= 1.4.0
+  - CVE-2025-54314
+  - GHSA-mqcp-p2hv-vw6x
+
+  # webrick (1.7.0) — fix: >= 1.8.2
   - CVE-2024-47220
+  - CVE-2025-6442
+  - GHSA-r995-q44h-hr64
