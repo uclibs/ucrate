@@ -183,3 +183,6 @@ ignore:
   - CVE-2024-47220
   - CVE-2025-6442
   - GHSA-r995-q44h-hr64
+
+  # Faraday (1.10.0) — upgrade to '~> 1.10.5', '>= 2.14.1'
+  - GHSA-33mh-2634-fwr2
