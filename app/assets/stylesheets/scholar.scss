@@ -161,13 +161,12 @@ div[class*="_admin_set_id"] {
 
 .scholar-footer {
   padding: 10px;
-  position: absolute;
-  bottom: 0;
   width: 100%;
   background-color: #222;
   border-color: #090909;
   color: #fff;
   font-size:12px;
+  margin-top: auto;
 }
 
 .scholar-footer a {
@@ -439,4 +438,34 @@ label[for=user_password] {
  
 .whats-new h3 {
   margin-top: 50px;
+}
+
+:root {
+  --masthead-height: 70px;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  min-height: var(--masthead-height);
+}
+
+#masthead.navbar-fixed-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+}
+
+#content-wrapper {
+  flex: 1 0 auto;
 }
