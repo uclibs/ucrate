@@ -123,14 +123,7 @@ Start these services in separate terminal tabs (foreground; do not append `&`):
 
 ### Terminal 1: Fedora (port 8984)
 
-**macOS with Apple Silicon (M1-M4):**
-```bash
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-export PATH="$JAVA_HOME/bin:$PATH"
-bundle exec fcrepo_wrapper -p 8984
-```
-
-**macOS with Intel:**
+**All platforms:**
 ```bash
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export PATH="$JAVA_HOME/bin:$PATH"
@@ -141,7 +134,7 @@ bundle exec fcrepo_wrapper -p 8984
 
 **All platforms:**
 ```bash
-solr_wrapper -d solr/config/ --collection_name hydra-development
+bundle exec solr_wrapper -d solr/config/ --collection_name hydra-development
 ```
 
 ### Terminal 3: Redis (port 6379)
@@ -184,14 +177,7 @@ Start these services in separate terminal tabs (foreground; do not append `&`):
 
 ### Terminal 1: Fedora (port 8080)
 
-**macOS with Apple Silicon (M1-M4):**
-```bash
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-export PATH="$JAVA_HOME/bin:$PATH"
-bundle exec fcrepo_wrapper -p 8080
-```
-
-**macOS with Intel:**
+**All platforms:**
 ```bash
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export PATH="$JAVA_HOME/bin:$PATH"
@@ -202,7 +188,7 @@ bundle exec fcrepo_wrapper -p 8080
 
 **All platforms:**
 ```bash
-solr_wrapper -d solr/config/ --collection_name hydra-test -p 8985
+bundle exec solr_wrapper -d solr/config/ --collection_name hydra-test -p 8985
 ```
 
 ### Terminal 3: Redis
@@ -217,7 +203,7 @@ redis-server
 **All platforms:**
 ```bash
 cd /path/to/ucrate
-bundle exec rake db:migrate RAILS_ENV=test
+RAILS_ENV=test bundle exec rake db:migrate
 bundle exec rake spec
 ```
 
