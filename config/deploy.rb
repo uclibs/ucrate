@@ -27,7 +27,7 @@ end
 task :init_dev do
   on roles(:all) do
     execute "echo 'The deploy to Scholar@UC DEV has started' | mail -s 'Scholar@UC deploy started (scholar-dev)' scholar@uc.edu"
-    execute "gem install --user-install bundler"
+    execute "gem install --user-install bundler -v 2.4.22"
     execute "cp #{fetch(:deploy_to)}/static/scholar-dev.variables #{fetch(:release_path)}/.env.development.local 2> /dev/null"
   end
 end

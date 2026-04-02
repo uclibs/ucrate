@@ -15,9 +15,12 @@ gem 'browse-everything', '1.1.0'
 gem 'bulkrax', '~> 4.3.0'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
+gem 'nio4r', '~> 2.7', '>= 2.7.1'
 gem 'rack', '2.2.3'
 gem 'sidekiq-limit_fetch'
-gem 'willow_sword', github: 'notch8/willow_sword'
+
+# Hyrax improvements
+gem "okcomputer", "~> 1.18.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4.6'
@@ -41,6 +44,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
+gem 'redis', '~> 5.4'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -55,7 +59,7 @@ gem 'active_attr'
 gem 'active-fedora', '~>12.2.4'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'brakeman'
-gem 'bundler', '~> 1.17'
+gem 'bundler', '2.4.22'
 gem 'bundler-audit'
 gem 'change_manager', git: "https://github.com/uclibs/change_manager.git", ref: 'd8e1b552740df00922a0a40796999c4e2a0cb8b6'
 gem 'devise', '~> 4.6.0'
@@ -67,14 +71,18 @@ gem 'grape'
 gem 'grape_on_rails_routes'
 gem 'hydra-role-management'
 gem 'hyrax', '2.9.6'
-gem 'mysql2', '~> 0.4.10'
+gem 'mysql2', '~> 0.5.3'
 gem 'omniauth-openid'
 gem 'omniauth-shibboleth'
 gem 'orcid', git: 'https://github.com/uclibs/orcid', branch: 'rails-5.x'
 gem 'riiif', '~> 2.0'
 gem 'rsolr', '>= 1.0'
 gem 'sassc-rails', '>= 2.1.0'
-gem 'sidekiq', '~> 5.2.7'
+gem 'sidekiq', '>= 6.0'
+
+# Required for capistrano deploys
+gem 'bcrypt_pbkdf' # Password hashing library, required for ssh deployment
+gem 'ed25519' # Ed25519 elliptic curve public-key signature system
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

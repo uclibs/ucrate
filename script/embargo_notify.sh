@@ -1,12 +1,12 @@
 #!/bin/sh
 
-# Change and expired embargoed objects to open access
-# Runs as a cron job daily just after midnight
-# script/release_embargo.sh [production|development]
+# Notify editors that a work has been released
+# script/embargo_notify.sh [production|development]
 
 ENVIRONMENT=$1
 
 APP_DIRECTORY="$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" )"
+
 
 if [ $# -eq 0 ]; then
     echo -e "ERROR: no environment argument [production|development] provided"
@@ -22,6 +22,8 @@ if [[ $ENVIRONMENT == "production" ]]; then
     export PATH=$PATH:/srv/apps/.gem/ruby/2.7.0/bin
 fi
 
+banner "Notify Embargoe Editors"
+
 cd $APP_DIRECTORY
-export RELEASE_DATE=`date +\%Y-\%m-\%d -d "+1 day"`
-RAILS_ENV=$ENVIRONMENT bundle exec rake embargo_release["$RELEASE_DATE"]
+
+RAILS_ENV=$ENVIRONMENT bundle exec rake embargo_notify

@@ -8,6 +8,8 @@ class CollectionsReport < Report
     [
       { id: collection.id },
       { title: collection.title },
+      { description: collection.description },
+      { creator: collection.creator },
       { depositor: collection.depositor },
       { edit_users: collection.edit_users.join(" ") },
       { works: collection_members(collection).join(" ") }

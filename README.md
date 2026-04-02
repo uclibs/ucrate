@@ -4,54 +4,260 @@
 [![CircleCI](https://circleci.com/gh/uclibs/ucrate.svg?style=svg)](https://circleci.com/gh/uclibs/ucrate)
 [![Coverage Status](https://coveralls.io/repos/github/uclibs/ucrate/badge.svg?branch=main)](https://coveralls.io/github/uclibs/ucrate?branch=main)
 
-## Dependencies
+## System Requirements
 
-***Our Hyrax 2.x based app requires the following software to work:
+### macOS with Apple Silicon (M1–M4) — Recommended
 
-* Solr version >= 5.x (tested up to 6.2.0)
-* Fedora Commons digital repository version >= 4.5.1 (tested up to 4.6.0)
-* A SQL RDBMS (MySQL, PostgreSQL), though note that SQLite will be used by default if you're looking to get up and running quickly
-  * libmysqlclient-dev (if running MySQL as RDBMS)
-  * libsqlite3-dev (if running SQLite as RDBMS)
-* Redis, a key-value store
-* ImageMagick with JPEG-2000 support
-* FITS version 1.0.x (1.0.5 is known to be good)
+* Ruby 2.7.8 (built with OpenSSL 1.1.1)
+* Bundler 2.4.22
+* Solr 5.x–6.2.0
+* Fedora Commons 4.5.1+
+* MySQL 8.0+
+* Redis
+* ImageMagick
+* Java 8 (for Fedora)
 * LibreOffice
 
-## Installing the Scholar application
+### macOS with Intel Chip
 
-1. Clone this repository: `git clone https://github.com/uclibs/ucrate.git ./path/to/local`
-    > **Note:** Solr will not run properly if there are spaces in any of the directory names above it <br />(e.g. /user/my apps/ucrate/)
-1. Change to the application's directory: e.g. `cd ./path/to/local`  
-1. Make sure you are on the develop branch: `git checkout develop`
-1. Install bundler (if needed): `gem install bundler`
-1. Run bundler: `bundle install`
-1. Start fedora: ```fcrepo_wrapper -p 8984```
-1. Start solr in new tab: ```solr_wrapper -d solr/config/ --collection_name hydra-development```
-1. Start redis in new tab: ```redis-server```
-1. Run the database migrations: `bundle exec rake db:migrate`
-1. Start the rails server in new tab: `rails server`
-1. Visit the site at [http://localhost:3000] (http://localhost:3000)
-1. Create default admin set: ```bin/rails hyrax:default_admin_set:create```
-1. Create default collection: ```bundle exec rails hyrax:default_collection_types:create```
-1. Load workflows: ```bin/rails hyrax:workflow:load```
-    * Creating default admin set should also load the default workflow. You can load, any additional workflows defined, using this command.
-1. Assigning admin role to user from `rails console`:
-    * ```admin = Role.find_or_create_by(name: "admin")```
-    * ```admin.users << User.find_by_user_key( "your_admin_users_email@fake.email.org" )```
-    * ```admin.save```
-    * Read [more](https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax).
+* Ruby 2.7.8 (build instructions same as above, but runs natively on Intel)
+* All other dependencies same as Apple Silicon
+* No special compiler flags needed for native extensions
 
-## Running the Tests
-1. Start fedora: ```fcrepo_wrapper -p 8080```
-1. Start solr: ```solr_wrapper -d solr/config/ --collection_name hydra-test -p 8985```
-1. Start redis: ```redis-server```
-1. Run the database migrations: ```bundle exec rake db:migrate``` (Optional)
-1. Run the test suite: ```bundle exec rake spec```
+> **Note:** Solr will not run properly if there are spaces in any of the directory names in its path.
 
-## Check for vulnerabilities
-1. Run brakeman: ```bundle exec brakeman -q -w 2```
-1. Run bundler-audit: ```bundle-audit check --update```
+---
+
+## Installation
+
+### Step 1: Clone Repository
+
+```bash
+git clone https://github.com/uclibs/ucrate.git ./path/to/ucrate
+cd ./path/to/ucrate
+git checkout develop
+```
+
+### Step 2: Install Dependencies
+
+#### macOS with Apple Silicon (M1–M4)
+
+**Install Homebrew packages:**
+```bash
+brew install sqlite3 mysql-client redis solr@8 imagemagick@6 libreoffice libsodium zstd
+```
+
+**Install Java 8 (required for Fedora):**
+```bash
+brew install --cask temurin@8
+```
+
+**Verify Java 8 is available:**
+```bash
+/usr/libexec/java_home -v 1.8
+```
+
+**Build OpenSSL 1.1.1 (required by Ruby 2.7.8):**
+```bash
+cd /tmp
+curl -fL -o openssl-1.1.1w.tar.gz https://www.openssl.org/source/openssl-1.1.1w.tar.gz
+tar -xzf openssl-1.1.1w.tar.gz && cd openssl-1.1.1w
+./Configure darwin64-arm64-cc --prefix=/usr/local/opt/openssl@1.1 no-shared
+make -j$(sysctl -n hw.logicalcpu)
+sudo make install_sw
+```
+
+**Install Ruby 2.7.8 via rbenv:**
+```bash
+brew install rbenv ruby-build
+RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl@1.1" rbenv install 2.7.8
+rbenv local 2.7.8
+```
+
+**Install Bundler & gems:**
+```bash
+gem install bundler -v 2.4.22
+cd /path/to/ucrate
+export CFLAGS="-Wno-incompatible-function-pointer-types"
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib -L$(brew --prefix zstd)/lib"
+bundle _2.4.22_ config set build.mysql2 "--with-mysql-config=$(brew --prefix mysql-client)/bin/mysql_config"
+bundle _2.4.22_ install
+```
+
+#### macOS with Intel Chip
+
+**Install Homebrew packages:**
+```bash
+brew install sqlite3 mysql-client redis solr@8 imagemagick@6 libreoffice libsodium
+```
+
+**Install Java 8:**
+```bash
+brew install --cask temurin@8
+```
+
+**Verify Java 8 is available:**
+```bash
+/usr/libexec/java_home -v 1.8
+```
+
+**Install Ruby 2.7.8 via rbenv:**
+```bash
+brew install rbenv ruby-build
+rbenv install 2.7.8
+rbenv local 2.7.8
+```
+
+**Install Bundler & gems:**
+```bash
+gem install bundler -v 2.4.22
+cd /path/to/ucrate
+bundle install
+```
+
+---
+
+## Running the Application (All Platforms)
+
+Start these services in separate terminal tabs (foreground; do not append `&`):
+
+### Terminal 1: Fedora (port 8984)
+
+**All platforms:**
+```bash
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export PATH="$JAVA_HOME/bin:$PATH"
+bundle exec fcrepo_wrapper -p 8984
+```
+
+### Terminal 2: Solr (port 8983)
+
+**All platforms:**
+```bash
+bundle exec solr_wrapper -d solr/config/ --collection_name hydra-development
+```
+
+### Terminal 3: Redis (port 6379)
+
+**All platforms:**
+```bash
+redis-server
+```
+
+### Terminal 4: Rails Application
+
+**All platforms:**
+Make sure this terminal is in your `ucrate` project directory.
+
+```bash
+bundle exec rake db:migrate
+bundle exec rails hyrax:default_admin_set:create
+bundle exec rails hyrax:default_collection_types:create
+bundle exec rails hyrax:workflow:load
+rails server
+```
+
+Visit **http://localhost:3000**
+
+### Create Admin User
+
+In a new terminal:
+```bash
+bundle exec rails console
+```
+
+In the Rails console:
+```ruby
+admin = Role.find_or_create_by(name: "admin")
+admin.users << User.find_by_user_key("your_email@example.com")
+admin.save
+exit
+```
+
+---
+
+## Running Tests (All Platforms)
+
+Start these services in separate terminal tabs (foreground; do not append `&`):
+
+### Terminal 1: Fedora (port 8080)
+
+**All platforms:**
+```bash
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export PATH="$JAVA_HOME/bin:$PATH"
+bundle exec fcrepo_wrapper -p 8080
+```
+
+### Terminal 2: Solr (port 8985)
+
+**All platforms:**
+```bash
+bundle exec solr_wrapper -d solr/config/ --collection_name hydra-test -p 8985
+```
+
+### Terminal 3: Redis
+
+**All platforms:**
+```bash
+redis-server
+```
+
+### Terminal 4: Run Tests
+
+**All platforms:**
+Make sure this terminal is in your `ucrate` project directory.
+
+```bash
+RAILS_ENV=test bundle exec rake db:migrate
+bundle exec rake spec
+```
+
+---
+
+## Security Checks
+
+```bash
+bundle exec brakeman -q -w 2
+bundle-audit check --update
+```
+
+## Troubleshooting
+
+### `zsh: command not found: fcrepo_wrapper`
+
+Cause: `fcrepo_wrapper` is installed as a gem in this app, not as a global system command.
+
+Fix:
+```bash
+cd /path/to/ucrate
+bundle install
+bundle exec fcrepo_wrapper -p 8984
+```
+
+### `Unable to locate a Java Runtime`
+
+Cause: Java 8 is not installed or not active in the current terminal.
+
+Fix:
+```bash
+brew install --cask temurin@8
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export PATH="$JAVA_HOME/bin:$PATH"
+java -version
+bundle exec fcrepo_wrapper -p 8984
+```
+
+### `zsh: command not found: redis-server`
+
+Cause: Redis is not installed yet.
+
+Fix:
+```bash
+brew install redis
+redis-server --version
+redis-server
+```
 
 ## Project Samvera
 This software has been developed by and is brought to you by the Samvera community. Learn more at the

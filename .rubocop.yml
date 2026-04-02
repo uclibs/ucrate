@@ -64,6 +64,7 @@ Metrics/MethodLength:
     - 'app/helpers/mark_helper.rb'
     - 'bin/importer'
     - 'spec/controllers/bulkrax/importers_controller_spec.rb'
+    - 'lib/active_fedora/solr_service.rb'
 
 Metrics/ClassLength:
   Exclude:

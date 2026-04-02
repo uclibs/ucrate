@@ -27,6 +27,9 @@ coverage/*
 ##Mac OS
 .DS_Store
 
+# Cursor/VS Code settings
+.vscode/settings.json
+
 # Application files to ingore
 fits.log
 
