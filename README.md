@@ -259,6 +259,22 @@ redis-server --version
 redis-server
 ```
 
+### Unexpected warnings when starting Rails console
+
+Examples:
+
+* `Top level ::CompositeIO is deprecated...`
+* `rb_check_safe_obj will be removed in Ruby 3.0`
+* `Pattern matching is experimental...`
+* `irb: warn: can't alias context from irb_context`
+
+Cause: This app runs on an older Rails/Ruby dependency stack, and some gems emit warnings on startup.
+
+What to do:
+
+* If you see `Loading development environment` and get an `irb` prompt, you can continue.
+* Treat these as non-blocking warnings unless the console exits with an exception.
+
 ## Project Samvera
 This software has been developed by and is brought to you by the Samvera community. Learn more at the
 [Samvera website](http://projecthydra.org)
