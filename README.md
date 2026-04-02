@@ -28,9 +28,9 @@
 
 ---
 
-## Quick Start
+## Installation
 
-### Clone & Setup (all platforms)
+### Step 1: Clone Repository
 
 ```bash
 git clone https://github.com/uclibs/ucrate.git ./path/to/ucrate
@@ -38,7 +38,7 @@ cd ./path/to/ucrate
 git checkout develop
 ```
 
-### 1. Install Dependencies
+### Step 2: Install Dependencies
 
 #### macOS with Apple Silicon (M1–M4)
 
@@ -107,31 +107,43 @@ bundle install
 
 ---
 
-## Running the Application
+## Running the Application (All Platforms)
 
-### Start Background Services (in separate terminal tabs)
+Start these services in separate terminal tabs:
 
-**Terminal 1 — Fedora (port 8984):**
+### Terminal 1: Fedora (port 8984)
+
+**macOS with Apple Silicon (M1–M4):**
 ```bash
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home"
 export PATH="$JAVA_HOME/bin:$PATH"
 fcrepo_wrapper -p 8984
 ```
 
-**Terminal 2 — Solr (port 8983):**
+**macOS with Intel:**
+```bash
+fcrepo_wrapper -p 8984
+```
+
+### Terminal 2: Solr (port 8983)
+
+**All platforms:**
 ```bash
 solr_wrapper -d solr/config/ --collection_name hydra-development
 ```
 
-**Terminal 3 — Redis (port 6379):**
+### Terminal 3: Redis (port 6379)
+
+**All platforms:**
 ```bash
 redis-server
 ```
 
-### Setup Database & Start Rails
+### Terminal 4: Rails Application
 
-**In project directory:**
+**All platforms:**
 ```bash
+cd /path/to/ucrate
 bundle exec rake db:migrate
 bundle exec rails hyrax:default_admin_set:create
 bundle exec rails hyrax:default_collection_types:create
@@ -154,30 +166,43 @@ exit
 
 ---
 
-## Running Tests
+## Running Tests (All Platforms)
 
-### Start Test Services (in separate terminal tabs)
+Start these services in separate terminal tabs:
 
-**Terminal 1 — Fedora (port 8080):**
+### Terminal 1: Fedora (port 8080)
+
+**macOS with Apple Silicon (M1–M4):**
 ```bash
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home"
 export PATH="$JAVA_HOME/bin:$PATH"
 fcrepo_wrapper -p 8080
 ```
 
-**Terminal 2 — Solr (port 8985):**
+**macOS with Intel:**
+```bash
+fcrepo_wrapper -p 8080
+```
+
+### Terminal 2: Solr (port 8985)
+
+**All platforms:**
 ```bash
 solr_wrapper -d solr/config/ --collection_name hydra-test -p 8985
 ```
 
-**Terminal 3 — Redis:**
+### Terminal 3: Redis
+
+**All platforms:**
 ```bash
 redis-server
 ```
 
-### Run Tests
+### Terminal 4: Run Tests
 
+**All platforms:**
 ```bash
+cd /path/to/ucrate
 bundle exec rake db:migrate RAILS_ENV=test
 bundle exec rake spec
 ```
