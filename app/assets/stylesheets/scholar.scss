@@ -442,6 +442,10 @@ label[for=user_password] {
 }
 
 /* Fixed masthead styles */
+header {
+  min-height: 60px;
+}
+
 #masthead.navbar-fixed-top {
   position: fixed;
   top: 0;
@@ -450,14 +454,13 @@ label[for=user_password] {
   z-index: 1030;
 }
 
-/* Prevent page content from being hidden behind the fixed masthead */
-body {
-  padding-top: 60px;
-}
-
 @media (max-width: 767px) {
-  /* On small screens the navbar collapses and should not overlap content */
-  body {
-    padding-top: 0;
+  /* Let the masthead flow normally on small screens so expanded menus push content down */
+  header {
+    min-height: 0;
+  }
+
+  #masthead.navbar-fixed-top {
+    position: static;
   }
 }
