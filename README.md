@@ -147,8 +147,9 @@ redis-server
 ### Terminal 4: Rails Application
 
 **All platforms:**
+Make sure this terminal is in your `ucrate` project directory.
+
 ```bash
-cd /path/to/ucrate
 bundle exec rake db:migrate
 bundle exec rails hyrax:default_admin_set:create
 bundle exec rails hyrax:default_collection_types:create
@@ -163,6 +164,10 @@ Visit **http://localhost:3000**
 In a new terminal:
 ```bash
 bundle exec rails console
+```
+
+In the Rails console:
+```ruby
 admin = Role.find_or_create_by(name: "admin")
 admin.users << User.find_by_user_key("your_email@example.com")
 admin.save
@@ -201,8 +206,9 @@ redis-server
 ### Terminal 4: Run Tests
 
 **All platforms:**
+Make sure this terminal is in your `ucrate` project directory.
+
 ```bash
-cd /path/to/ucrate
 RAILS_ENV=test bundle exec rake db:migrate
 bundle exec rake spec
 ```
@@ -240,6 +246,17 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export PATH="$JAVA_HOME/bin:$PATH"
 java -version
 bundle exec fcrepo_wrapper -p 8984
+```
+
+### `zsh: command not found: redis-server`
+
+Cause: Redis is not installed yet.
+
+Fix:
+```bash
+brew install redis
+redis-server --version
+redis-server
 ```
 
 ## Project Samvera
