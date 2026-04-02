@@ -52,6 +52,11 @@ brew install sqlite3 mysql-client redis solr@8 imagemagick@6 libreoffice libsodi
 brew install --cask temurin@8
 ```
 
+**Verify Java 8 is available:**
+```bash
+/usr/libexec/java_home -v 1.8
+```
+
 **Build OpenSSL 1.1.1 (required by Ruby 2.7.8):**
 ```bash
 cd /tmp
@@ -91,6 +96,11 @@ brew install sqlite3 mysql-client redis solr@8 imagemagick@6 libreoffice libsodi
 brew install --cask temurin@8
 ```
 
+**Verify Java 8 is available:**
+```bash
+/usr/libexec/java_home -v 1.8
+```
+
 **Install Ruby 2.7.8 via rbenv:**
 ```bash
 brew install rbenv ruby-build
@@ -109,20 +119,22 @@ bundle install
 
 ## Running the Application (All Platforms)
 
-Start these services in separate terminal tabs:
+Start these services in separate terminal tabs (foreground; do not append `&`):
 
 ### Terminal 1: Fedora (port 8984)
 
-**macOS with Apple Silicon (M1–M4):**
+**macOS with Apple Silicon (M1-M4):**
 ```bash
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home"
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export PATH="$JAVA_HOME/bin:$PATH"
-fcrepo_wrapper -p 8984
+bundle exec fcrepo_wrapper -p 8984
 ```
 
 **macOS with Intel:**
 ```bash
-fcrepo_wrapper -p 8984
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export PATH="$JAVA_HOME/bin:$PATH"
+bundle exec fcrepo_wrapper -p 8984
 ```
 
 ### Terminal 2: Solr (port 8983)
@@ -168,20 +180,22 @@ exit
 
 ## Running Tests (All Platforms)
 
-Start these services in separate terminal tabs:
+Start these services in separate terminal tabs (foreground; do not append `&`):
 
 ### Terminal 1: Fedora (port 8080)
 
-**macOS with Apple Silicon (M1–M4):**
+**macOS with Apple Silicon (M1-M4):**
 ```bash
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home"
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export PATH="$JAVA_HOME/bin:$PATH"
-fcrepo_wrapper -p 8080
+bundle exec fcrepo_wrapper -p 8080
 ```
 
 **macOS with Intel:**
 ```bash
-fcrepo_wrapper -p 8080
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export PATH="$JAVA_HOME/bin:$PATH"
+bundle exec fcrepo_wrapper -p 8080
 ```
 
 ### Terminal 2: Solr (port 8985)
@@ -214,6 +228,32 @@ bundle exec rake spec
 ```bash
 bundle exec brakeman -q -w 2
 bundle-audit check --update
+```
+
+## Troubleshooting
+
+### `zsh: command not found: fcrepo_wrapper`
+
+Cause: `fcrepo_wrapper` is installed as a gem in this app, not as a global system command.
+
+Fix:
+```bash
+cd /path/to/ucrate
+bundle install
+bundle exec fcrepo_wrapper -p 8984
+```
+
+### `Unable to locate a Java Runtime`
+
+Cause: Java 8 is not installed or not active in the current terminal.
+
+Fix:
+```bash
+brew install --cask temurin@8
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export PATH="$JAVA_HOME/bin:$PATH"
+java -version
+bundle exec fcrepo_wrapper -p 8984
 ```
 
 ## Project Samvera
