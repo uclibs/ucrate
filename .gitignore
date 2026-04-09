@@ -39,4 +39,5 @@ fits.log
 .env.production.local
 
 # Ignore compiled assets
-public/**
+public/**.idea/
+.idea/
