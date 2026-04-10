@@ -40,3 +40,4 @@ fits.log
 
 # Ignore compiled assets
 public/**
+.idea/
