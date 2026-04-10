@@ -1,0 +1,19 @@
+<table class="table table-striped collections-list-table collection-works-table" aria-label="<%= t('hyrax.collection.document_list.accessible_table_name') %>">
+  <thead>
+  <tr>
+    <th scope="col" class="shared-deposit-indicator-col">
+      <span class="sr-only"><%= t('hyrax.collection.document_list.sr_shared_deposit_indicator') %></span>
+    </th>
+    <th scope="col" class="title-column">Title</th>
+    <th scope="col">Date added</th>
+    <th scope="col">Owner</th>
+    <th scope="col">Visibility</th>
+    <% if current_user %>
+      <th scope="col">Action</th>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'show_document_list_row', collection: documents, as: :document %>
+  </tbody>
+</table>

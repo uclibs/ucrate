@@ -245,6 +245,30 @@ label[for=user_password] {
   text-decoration: none;
 }
 
+// One link wraps thumbnail + title on collection work rows (avoids WAVE redundant-link)
+a.media.collection-work-row-link {
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  .media-heading strong {
+    text-decoration: underline;
+  }
+}
+
+// Collection masthead (.label is ~75% in Bootstrap; ensure readable size for WAVE). scholar.scss loads after hyrax in the asset tree.
+.hyc-header .hyc-title .label {
+  font-size: 14px;
+  line-height: 1.35;
+  padding: 0.3em 0.55em;
+  vertical-align: middle;
+}
+
 .featured-item {
   border-top: 0;
   padding: 0;

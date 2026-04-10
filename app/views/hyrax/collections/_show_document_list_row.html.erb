@@ -1,0 +1,30 @@
+<% id = document.id %>
+<tr id="document_<%= id %>">
+  <td>&nbsp;
+    <% if current_user and document.depositor != current_user.user_key %>
+      <i class="glyphicon glyphicon-share-alt" />
+    <% end %>
+  </td>
+  <td>
+    <div class="media">
+      <% doc_title_class = document.title_or_label == document.label ? 'document-title' : '' %>
+      <%= link_to [main_app, document],
+                  id: "src_copy_link#{id}",
+                  class: "media collection-work-row-link #{doc_title_class}" do %>
+        <div class="media-left">
+          <%= render_thumbnail_tag document, { class: "hidden-xs file_listing_thumbnail" }, { suppress_link: true } %>
+        </div>
+        <div class="media-body">
+          <p class="media-heading">
+            <strong><%= document.title_or_label %></strong>
+          </p>
+        </div>
+      <% end %>
+      <%= render_collection_links(document) %>
+    </div>
+  </td>
+  <td class="text-center"><%= document.date_uploaded %> </td>
+  <td class="text-center">
+    <%= render_visibility_link(document) %>
+  </td>
+</tr>

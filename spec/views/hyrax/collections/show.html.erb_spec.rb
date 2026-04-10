@@ -70,6 +70,19 @@ RSpec.describe 'hyrax/collections/show.html.erb', type: :view do
       expect(rendered).to have_text('Parent Collections (1)')
       expect(rendered).to have_text('Subcollections (1)')
     end
+
+    it 'uses h2 for blacklight section headings so heading levels are not skipped' do
+      render
+      expect(rendered).not_to have_css('.hyc-bl-title h4')
+      expect(rendered).to have_css(
+        '.hyc-bl-title h2',
+        text: "#{I18n.t('hyrax.collections.show.subcollection_count')} (1)"
+      )
+      expect(rendered).to have_css(
+        '.hyc-bl-title h2',
+        text: "#{I18n.t('hyrax.collections.show.works_in_collection')} (1)"
+      )
+    end
   end
 
   context 'when the rendered collection has a sub-collection' do
@@ -85,6 +98,19 @@ RSpec.describe 'hyrax/collections/show.html.erb', type: :view do
       expect(rendered).to match(/.*Search Results within this Collection.*Sub Collections.*/m)
       expect(rendered).not_to have_text('Parent Collections')
       expect(rendered).to have_text('Subcollections (1)')
+    end
+
+    it 'uses h2 for subcollection and works headings without skipped levels' do
+      render
+      expect(rendered).not_to have_css('.hyc-bl-title h4')
+      expect(rendered).to have_css(
+        '.hyc-bl-title h2',
+        text: "#{I18n.t('hyrax.collections.show.subcollection_count')} (1)"
+      )
+      expect(rendered).to have_css(
+        '.hyc-bl-title h2',
+        text: "#{I18n.t('hyrax.collections.show.works_in_collection')} (1)"
+      )
     end
   end
 end
