@@ -27,6 +27,7 @@ module ApplicationHelper
   end
 
   def normalized_thumbnail_label(value)
+    value = extract_first_label_value(value)
     label = value.to_s.strip
     return nil if label.blank? || label.casecmp('null').zero?
 
@@ -49,5 +50,11 @@ module ApplicationHelper
     return unless record.respond_to?(:to_s)
 
     record.to_s
+  end
+
+  def extract_first_label_value(value)
+    return value.first if value.respond_to?(:first) && !value.is_a?(String)
+
+    value
   end
 end
