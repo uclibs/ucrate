@@ -78,7 +78,7 @@ RSpec.describe 'hyrax/dashboard/collections/show.html.erb', type: :view do
     it 'renders parent followed by sub collections' do
       render
       # Making sure that we are verifying that the _show_actions.html.erb is rendering
-      expect(rendered).to match(/.*Search Results within this Collection.*Parent Collections .*Sub Collections.*/m)
+      expect(rendered).to match(/.*Parent Collections.*Sub Collections.*/m)
       expect(rendered).to have_text('Parent Collections (1)')
       expect(rendered).to have_text('Subcollections (1)')
     end
@@ -93,8 +93,8 @@ RSpec.describe 'hyrax/dashboard/collections/show.html.erb', type: :view do
     it 'renders only sub collections' do
       render
       # Making sure that we are verifying that the _show_actions.html.erb is rendering
-      expect(rendered).not_to match(/.*Search Results within this Collection.*Parent Collections .*Sub Collections.*/m)
-      expect(rendered).to match(/.*Search Results within this Collection.*Sub Collections.*/m)
+      expect(rendered).not_to match(/.*Parent Collections.*Sub Collections.*/m)
+      expect(rendered).to match(/.*Sub Collections.*/m)
       expect(rendered).not_to have_text('Parent Collections')
       expect(rendered).to have_text('Subcollections (1)')
     end

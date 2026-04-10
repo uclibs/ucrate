@@ -8,7 +8,7 @@
 
 <% if current_ability.can_create_any_work? %>
       <li class="dropdown">
-        <%= link_to hyrax.my_works_path, role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } do %>
+        <%= link_to '#', role: 'button', class: 'dropdown-toggle', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } do %>
           <span class="fa fa-cube"></span> <span>&nbsp;<%= t("hyrax.toolbar.works.menu") %></span> <span class="caret"></span>
         <% end %>
         <ul class="dropdown-menu">
@@ -51,7 +51,7 @@
 
     <% if can?(:create_any, Collection) && Hyrax::SelectCollectionTypeListPresenter.new(current_user).any? %>
       <li class="dropdown">
-        <%= link_to hyrax.my_collections_path, role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } do %>
+        <%= link_to '#', role: 'button', class: 'dropdown-toggle', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } do %>
           <span class="<%= Hyrax::ModelIcon.css_class_for(Collection) %>"></span> <span>&nbsp;<%= t("hyrax.toolbar.collections.menu") %></span> <span class="caret"></span>
         <% end %>
         <ul class="dropdown-menu">

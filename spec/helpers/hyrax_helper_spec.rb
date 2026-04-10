@@ -172,4 +172,23 @@ RSpec.describe HyraxHelper, type: :helper do
       end
     end
   end
+
+  describe '#notification_count_badge' do
+    it 'returns an empty span with aria-hidden and invisible label classes when count is zero' do
+      html = helper.send(:notification_count_badge, 0).to_s
+
+      expect(html).to include('aria-hidden="true"')
+      expect(html).to include('invisible')
+      expect(html).to include('label-default')
+      expect(html).not_to include('>0<')
+    end
+
+    it 'returns a span with the count and danger label when count is positive' do
+      html = helper.send(:notification_count_badge, 3).to_s
+
+      expect(html).to include('3')
+      expect(html).to include('label-danger')
+      expect(html).not_to include('aria-hidden')
+    end
+  end
 end

@@ -180,6 +180,8 @@ en:
       my:
         action:
           export_collection: "Export collection"
+          add_to_collection: "Add to collection"
+          include_work_in_collection_batch: "Include this work when adding to a collection"
       collections:
         show:
           item_count: Items in this Collection

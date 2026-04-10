@@ -12,7 +12,11 @@ RSpec.describe 'hyrax/my/_search_form.html.erb', type: :view do
     render
   end
 
-  it "does not have a search label" do
+  it "uses a screen-reader-only label for the search field" do
+    expect(rendered).to have_css('label.sr-only[for="search-field-header"]', text: /Search/)
+  end
+
+  it "does not use a visible Bootstrap control-label" do
     expect(rendered).not_to have_css('label.control-label')
   end
 end

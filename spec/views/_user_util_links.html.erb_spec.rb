@@ -26,6 +26,15 @@ RSpec.describe '/_user_util_links.html.erb', type: :view do
     expect(rendered).to have_link 'Edit Profile', href: hyrax.edit_dashboard_profile_path('userX')
   end
 
+  it 'wires the user menu for assistive technology' do
+    render
+    expect(rendered).to have_css(
+      'a#user-util-dropdown-toggle.dropdown-toggle[aria-controls="user-util-links"][aria-expanded="false"][aria-haspopup="menu"]'
+    )
+    expect(rendered).to have_css('ul#user-util-links[role="menu"][aria-labelledby="user-util-dropdown-toggle"]')
+    expect(rendered).to have_css('a[role="menuitem"][href="' + hyrax.dashboard_path + '"]', text: 'Dashboard')
+  end
+
   context 'when the user is using shibboleth' do
     before do
       allow(view).to receive(:current_user).and_return(stub_model(User, user_key: 'userX', provider: 'shibboleth'))
@@ -51,7 +60,32 @@ RSpec.describe '/_user_util_links.html.erb', type: :view do
   it 'shows the number of outstanding messages' do
     render
     expect(rendered).to have_selector "a[aria-label='You have no unread notifications'][href='#{hyrax.notifications_path}']"
-    expect(rendered).to have_selector 'a.notify-number span.label-default.invisible', text: '0'
+    doc = Nokogiri::HTML::DocumentFragment.parse(rendered)
+    badge = doc.at_css('a.notify-number span.label-default.invisible[aria-hidden="true"]')
+    expect(badge).to be_present
+    expect(badge.text.strip).to eq('')
+  end
+
+  context 'when the user has unread notifications' do
+    let(:mailbox) do
+      instance_double(UserMailbox, unread_count: 3, label: 'You have 3 unread notifications')
+    end
+
+    before do
+      allow(UserMailbox).to receive(:new).and_return(mailbox)
+    end
+
+    it 'shows the unread count in the badge without aria-hidden' do
+      render
+      expect(rendered).to have_selector(
+        "a.notify-number[aria-label='You have 3 unread notifications'][href='#{hyrax.notifications_path}']"
+      )
+      doc = Nokogiri::HTML::DocumentFragment.parse(rendered)
+      badge = doc.at_css('a.notify-number span.label-danger')
+      expect(badge).to be_present
+      expect(badge.text.strip).to eq('3')
+      expect(badge['aria-hidden']).to be_nil
+    end
   end
 
   describe 'translations' do

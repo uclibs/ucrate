@@ -137,9 +137,16 @@ module HyraxHelper
         concat tag.span('', class: 'fa fa-bell')
         concat tag.span('&nbsp;Notifications'.html_safe, class: 'visible-xs-inline-block')
         concat "\n"
-        concat tag.span(unread_notifications,
-                           class: count_classes_for(unread_notifications))
+        concat notification_count_badge(unread_notifications)
       end
     end
+  end
+
+  private
+
+  def notification_count_badge(unread_count)
+    attrs = { class: count_classes_for(unread_count) }
+    attrs[:aria] = { hidden: true } if unread_count.zero?
+    unread_count.zero? ? tag.span('', attrs) : tag.span(unread_count, attrs)
   end
 end

@@ -32,14 +32,9 @@
 
       <!-- Search results label -->
 
-      <% if @members_count > 0 || @presenter.subcollection_count > 0 %>
+      <% if (@members_count > 0 || @presenter.subcollection_count > 0) && has_collection_search_parameters? %>
           <div class="hyc-blacklight hyc-bl-title">
-            <h2>
-              <% if has_collection_search_parameters? %>
-                  <%= t('hyrax.dashboard.collections.show.search_results') %>
-              <% end %>
-              <p class="sr-only"><%= t('hyrax.dashboard.collections.show.search_results') %></p>
-            </h2>
+            <h2><%= t('hyrax.dashboard.collections.show.search_results') %></h2>
           </div>
       <% end %>
 
