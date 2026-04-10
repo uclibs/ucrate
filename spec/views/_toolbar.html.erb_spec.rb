@@ -36,6 +36,7 @@ describe '/_toolbar.html.erb', type: :view do
     it 'has my works link' do
       render
       expect(rendered).to have_link 'My Works', href: hyrax.my_works_path
+      expect(rendered.scan(%r{href="[^"]*#{Regexp.escape(hyrax.my_works_path)}[^"]*"}).size).to eq(1)
     end
 
     context "when the user can create multiple work types" do
@@ -84,6 +85,7 @@ describe '/_toolbar.html.erb', type: :view do
       it 'has my collections link' do
         render
         expect(rendered).to have_link 'My Collections', href: hyrax.my_collections_path
+        expect(rendered.scan(%r{href="[^"]*#{Regexp.escape(hyrax.my_collections_path)}[^"]*"}).size).to eq(1)
       end
     end
 

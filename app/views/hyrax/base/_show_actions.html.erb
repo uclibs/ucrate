@@ -25,9 +25,20 @@
       <% end %>
   <% end %>
   <% if presenter.show_deposit_for?(collections: @user_collections) %>
-      <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector" checked="checked" />
+      <% batch_input_id = "batch_document_#{presenter.id}" %>
+      <label class="sr-only" for="<%= batch_input_id %>"><%= t('hyrax.dashboard.my.action.include_work_in_collection_batch') %></label>
+      <input type="checkbox"
+             id="<%= batch_input_id %>"
+             class="batch_document_selector"
+             name="batch_document_ids[]"
+             value="<%= presenter.id %>"
+             checked="checked"
+             style="display: none;"
+             aria-label="<%= t('hyrax.dashboard.my.action.include_work_in_collection_batch') %>" />
       <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
+                     type: 'button',
                      class: 'btn btn-default submits-batches submits-batches-add',
+                     aria: { label: t('hyrax.dashboard.my.action.add_to_collection') },
                      data: { toggle: "modal", target: "#collection-list-container" } %>
   <% end %>
   <% if presenter.work_featurable? %>

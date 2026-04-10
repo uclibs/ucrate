@@ -4,6 +4,7 @@
   <div class="form-group">
 
     <div class="input-group">
+      <label for="search-field-header" class="sr-only"><%= t("hyrax.search.form.q.label", application_name: application_name) %></label>
       <%= text_field_tag :q, current_search_parameters , class: "q form-control", id: "search-field-header", placeholder: t("hyrax.search.form.q.placeholder") %>
 
       <div class="input-group-btn">
