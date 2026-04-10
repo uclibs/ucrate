@@ -4,40 +4,41 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config.
+# Bundler config
 /.bundle
 
-# Ignore the default SQLite database.
+# SQLite database files
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
-# Ignore all logfiles and tempfiles.
+# Logs and temp files
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-dump.rdb
-vendor/*.csv
 
-# Ignore Byebug command history file.
+# Byebug history
 .byebug_history
 
+# Test coverage output
 coverage/*
 
-##Mac OS
+# macOS files
 .DS_Store
 
-# Cursor/VS Code settings
+# Editor and IDE settings
 .vscode/settings.json
+.idea/
 
-# Application files to ingore
+# Application files to ignore
 fits.log
+vendor/*.csv
+dump.rdb
 
-# Ignore dotenv config files
+# Local dotenv config files
 .env.development.local
 .env.test.local
 .env.production.local
 
-# Ignore compiled assets
+# Compiled assets
 public/**
-.idea/

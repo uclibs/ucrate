@@ -15,14 +15,21 @@ module ApplicationHelper
   private
 
   def thumbnail_label_for(record)
-    return record.title_or_label.to_s.strip if record.respond_to?(:title_or_label) && record.title_or_label.present?
+    if record.respond_to?(:title_or_label) && record.title_or_label.present?
+      label = normalized_thumbnail_label(record.title_or_label)
+      return label if label.present?
+    end
 
     if record.respond_to?(:title) && record.title.present?
       value = record.title.is_a?(Array) ? record.title.first : record.title
-      return value.to_s.strip if value.present?
+      label = normalized_thumbnail_label(value)
+      return label if label.present?
     end
 
-    return record.to_s.strip if record.respond_to?(:to_s) && record.to_s.present?
+    if record.respond_to?(:to_s) && record.to_s.present?
+      label = normalized_thumbnail_label(record.to_s)
+      return label if label.present?
+    end
 
     nil
   end
@@ -31,5 +38,12 @@ module ApplicationHelper
     return record.human_readable_type.to_s.strip if record.respond_to?(:human_readable_type) && record.human_readable_type.present?
 
     nil
+  end
+
+  def normalized_thumbnail_label(value)
+    label = value.to_s.strip
+    return nil if label.blank? || label.casecmp('null').zero?
+
+    label
   end
 end

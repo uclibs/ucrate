@@ -44,7 +44,8 @@ describe 'collection', type: :feature, js: true do
       visit hyrax.dashboard_collection_path(collection)
       click_link("Feature")
       visit '/'
-      expect(page).to have_css("img[alt='Thumbnail for featured collection: #{collection.title.first}")
+      expected_alt = ApplicationController.helpers.thumbnail_alt_text_for(collection)
+      expect(page).to have_css("img[alt='#{expected_alt}']")
     end
   end
 end
