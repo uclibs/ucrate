@@ -3,7 +3,10 @@
   <span class="sr-only"><%= t('blacklight.search.view_title') %></span>
   <div class="view-type-group btn-group">
     <% document_index_views.each do |view, config| %>
-      <%= link_to collection_path(params[:id], view: view), class: "btn btn-default view-type-#{view.to_s.parameterize } #{"active" if document_index_view_type == view}" do %>
+      <% is_active_view = document_index_view_type == view %>
+      <% link_options = { class: "btn btn-default view-type-#{view.to_s.parameterize } #{'active' if is_active_view}" } %>
+      <% link_options['aria-current'] = 'page' if is_active_view %>
+      <%= link_to collection_path(params[:id], view: view), link_options do %>
         <%= render_view_type_group_icon view %>
         <span class="caption"><%= t("blacklight.search.view.#{view}") %></span>
       <% end %>

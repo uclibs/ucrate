@@ -253,6 +253,31 @@ label[for=user_password] {
   text-decoration: underline;
 }
 
+.hyc-blacklight .table a.visibility-link,
+.collections-list-table a.visibility-link,
+.collection-works-table a.visibility-link,
+.works-list a.visibility-link {
+  text-decoration: none;
+}
+
+.hyc-blacklight .table a.visibility-link:focus,
+.hyc-blacklight .table a.visibility-link:hover,
+.collections-list-table a.visibility-link:focus,
+.collections-list-table a.visibility-link:hover,
+.collection-works-table a.visibility-link:focus,
+.collection-works-table a.visibility-link:hover,
+.works-list a.visibility-link:focus,
+.works-list a.visibility-link:hover {
+  text-decoration: none;
+  outline: 2px solid #0b5fff;
+  outline-offset: 2px;
+}
+
+// Ensure textual links in dashboard My Works tables are visibly links.
+.works-list a:not(.btn):not(.dropdown-toggle):not(.visibility-link) {
+  text-decoration: underline;
+}
+
 // Ensure browse page result links (title and metadata facets/people links) are visibly links.
 #search-results .document .search-result-title a,
 #search-results .document .search-results-title-row h4 a,

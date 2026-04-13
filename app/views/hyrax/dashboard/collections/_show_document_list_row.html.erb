@@ -22,7 +22,12 @@
   <td class="text-center"><%= document.date_uploaded %> </td>
   <td class="text-center"></td>
   <td class="text-center">
-    <%= render_visibility_link(document) %>
+    <%= link_to visibility_badge(document.visibility),
+                edit_polymorphic_path([main_app, document], anchor: 'share'),
+                id: "permission_#{id}",
+                class: 'visibility-link',
+                title: "Edit visibility settings for #{document.title_or_label}",
+                'aria-label': "Edit visibility settings for #{document.title_or_label}" %>
   </td>
   <% if current_user and can? :edit, @collection %>
     <td class="text-center">
