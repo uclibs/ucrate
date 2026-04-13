@@ -171,7 +171,7 @@ div[class*="_admin_set_id"] {
 
 .scholar-footer a {
   color: #fff;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .scholar-footer a:hover {
@@ -242,21 +242,46 @@ label[for=user_password] {
 
 .catalog-collection-thumb, .catalog-collection-thumb:focus, .catalog-collection-thumb:active, .catalog-collection-thumb:hover, .catalog-collection-thumb:visited {
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
+}
+
+// Ensure links are visibly recognizable in collection pages and collection work tables.
+.hyc-container a,
+.hyc-blacklight .table a,
+.collections-list-table a,
+.collection-works-table a {
+  text-decoration: underline;
+}
+
+// Ensure browse page result links (title and metadata facets/people links) are visibly links.
+#search-results .document .search-result-title a,
+#search-results .document .search-results-title-row h4 a,
+#search-results .document .metadata a,
+#search-results .document .field-text a,
+#search-results .document .field-label a,
+ul.catalog .document .search-result-title a,
+ul.catalog .document .search-results-title-row h4 a,
+ul.catalog .document .metadata a,
+ul.catalog .document .field-text a,
+ul.catalog .document .field-label a {
+  text-decoration: underline;
+}
+
+// Ensure work show pages present content links as links while keeping button controls unchanged.
+#content-wrapper nav.breadcrumb a,
+#content-wrapper .work-type a:not(.btn):not(.resp-sharing-button__link),
+#content-wrapper p a[href*="/show/"] {
+  text-decoration: underline;
 }
 
 // One link wraps thumbnail + title on collection work rows (avoids WAVE redundant-link)
 a.media.collection-work-row-link {
   display: block;
   overflow: hidden;
-  text-decoration: none;
+  text-decoration: underline;
 
   &:hover,
   &:focus {
-    text-decoration: none;
-  }
-
-  .media-heading strong {
     text-decoration: underline;
   }
 }
@@ -455,6 +480,7 @@ a.media.collection-work-row-link {
 
 .btn-link {
   color: #e00122;
+  text-decoration: underline;
 }
 
 #savewidget a {
