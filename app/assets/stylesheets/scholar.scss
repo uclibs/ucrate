@@ -85,6 +85,27 @@ div[class*="_admin_set_id"] {
   color: #333;
 }
 
+// Default all true hyperlinks to underlined while excluding button-like controls.
+a:not(.btn):not(.clear-button):not(.dropdown-toggle):not(.navbar-brand):not(.resp-sharing-button__link):not(.visibility-link):not([role="button"]):not([role="tab"]),
+a:not(.btn):not(.clear-button):not(.dropdown-toggle):not(.navbar-brand):not(.resp-sharing-button__link):not(.visibility-link):not([role="button"]):not([role="tab"]):hover,
+a:not(.btn):not(.clear-button):not(.dropdown-toggle):not(.navbar-brand):not(.resp-sharing-button__link):not(.visibility-link):not([role="button"]):not([role="tab"]):focus,
+a:not(.btn):not(.clear-button):not(.dropdown-toggle):not(.navbar-brand):not(.resp-sharing-button__link):not(.visibility-link):not([role="button"]):not([role="tab"]):visited {
+  text-decoration: underline;
+}
+
+// Hyrax visibility badges are styled as label buttons; keep underline color aligned with label text.
+a.visibility-link,
+a.visibility-link:hover,
+a.visibility-link:focus,
+a.visibility-link:visited,
+a.visibility-link .label,
+a.visibility-link .label:hover,
+a.visibility-link .label:focus,
+a.visibility-link .label:visited {
+  text-decoration: none;
+  text-decoration-color: currentColor;
+}
+
 .home-nav {
   margin-bottom: 0;
 }
@@ -119,6 +140,13 @@ div[class*="_admin_set_id"] {
 
 .scholar-home-tag-desc {
   padding-top: 20px;
+}
+
+.scholar-home-tag-desc a,
+.scholar-home-tag-desc a:hover,
+.scholar-home-tag-desc a:focus,
+.scholar-home-tag-desc a:visited {
+  text-decoration: underline;
 }
 
 .scholar-home-tag-line .line-thru {
