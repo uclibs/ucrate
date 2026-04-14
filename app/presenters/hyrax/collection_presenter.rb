@@ -82,7 +82,11 @@ module Hyrax
     end
 
     def collection_type_badge
-      tag.span(collection_type.title, class: "label", style: "background-color: " + collection_type.badge_color + ";")
+      tag.span(
+        collection_type_badge_label,
+        class: "label collection-type-badge",
+        style: "background-color: #{collection_type.badge_color};"
+      )
     end
 
     # The total number of parents that this collection belongs to, visible or not.
@@ -191,6 +195,20 @@ module Hyrax
     end
 
     private
+
+    # DB title can be the literal "translation missing: …" if defaults were saved when i18n was unavailable.
+    def collection_type_badge_label
+      t = collection_type.title.to_s
+      return t if t.present? && !t.include?("translation missing")
+
+      if collection_type.user_collection?
+        I18n.t("hyrax.collection_type.default_title")
+      elsif collection_type.admin_set?
+        I18n.t("hyrax.collection_type.admin_set_title")
+      else
+        collection_type.machine_id.tr("_", " ").titleize
+      end
+    end
 
     def featured?
       @featured = FeaturedCollection.where(collection_id: solr_document.id).exists? if @featured.nil?

@@ -173,6 +173,12 @@ en:
       actions:
         export_collection: "Export Collection"
         manage_exports: "Manage Exports"
+      document_list:
+        accessible_table_name: List of items in this collection
+        sr_shared_deposit_indicator: Shared deposit indicator
+    collection_type:
+      admin_set_title: Admin Set
+      default_title: User Collection
     dashboard:
       stats:
         file_views:             "File View"

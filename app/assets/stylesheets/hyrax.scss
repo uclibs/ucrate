@@ -47,3 +47,9 @@ div.profile a.btn-primary {
 .fix-radio-btns {
   margin-left: 20px;
 }
+
+// Hyrax sets .hyc-description to justified text; use left alignment for readability (WAVE / WCAG)
+.hyc-description {
+  text-align: left;
+  text-justify: auto;
+}
