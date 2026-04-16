@@ -17,7 +17,7 @@ gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch:
 gem 'kaltura', '0.1.1'
 gem 'nio4r', '~> 2.7', '>= 2.7.1'
 gem 'rack', '2.2.3'
-gem 'sidekiq-limit_fetch'
+gem 'sidekiq-limit_fetch', '~> 4.0'
 
 # Hyrax improvements
 gem "okcomputer", "~> 1.18.4"
