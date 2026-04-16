@@ -41,7 +41,7 @@ end
 task :init_qa do
   on roles(:all) do
     execute 'echo "The deploy to `hostname` has started" | mail -s "Scholar@UC deploy started (`hostname`)" scholar@uc.edu'
-    execute "gem install --user-install bundler"
+    execute "gem install --user-install bundler -v 2.4.22"
     execute "cp #{fetch(:deploy_to)}/static/scholar-qa.variables #{fetch(:release_path)}/.env.production.local 2> /dev/null"
   end
 end
@@ -55,7 +55,7 @@ end
 task :init_prod do
   on roles(:all) do
     execute 'echo "The deploy to `hostname` has started" | mail -s "Scholar@UC deploy started (`hostname`)" scholar@uc.edu'
-    execute "gem install --user-install bundler"
+    execute "gem install --user-install bundler -v 2.4.22"
     execute "cp #{fetch(:deploy_to)}/static/scholar-production.variables #{fetch(:release_path)}/.env.production.local 2> /dev/null"
   end
 end
