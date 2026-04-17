@@ -1,3 +1,10 @@
+// Ensure facet menu and its children are not flex items
+.facet-values,
+.facet-values > *,
+.facet-label,
+.facet-count {
+  display: block;
+}
 @import 'morris.js/0.5.1/morris';
 @import 'bootstrap/variables';
 $tab-margin: 44px !default;
