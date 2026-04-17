@@ -37,31 +37,11 @@ $admin-panel-border-color: #dedede !default;
 
 body.dashboard {
   background-color: $body-background-color;
-  padding-top: 0;
-}
+  padding-top: $navbar-height;
 
-@media only screen and (max-width : 767px) {
-  /* Hyrax sidebar layout uses absolute positioning; restore normal flow on mobile. */
-  .dashboard .sidebar,
-  .dashboard .main-content {
-    position: static;
-    width: 100%;
+  @media only screen and (max-width : 767px) {
+    padding-top: 0;
   }
-
-  .dashboard .sidebar {
-    min-height: 0;
-  }
-
-  .dashboard .main-content {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
-body.dashboard #content-wrapper::after {
-  clear: both;
-  content: "";
-  display: table;
 }
 
 .dashboard {
@@ -90,9 +70,19 @@ body.dashboard #content-wrapper::after {
     border-top: 2px solid $tab-active-accent-color;
   }
 
-  /* Masthead positioning is managed globally in scholar.scss. */
+  /* The #masthead selector below could (and ideally, should) be removed if we can
+   * replace the "navbar-static-top" class with "navbar-fixed-top" for the Admin UI only
+   */
   #masthead {
     border: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+
+    @media only screen and (max-width : 767px) {
+      position: initial;
+    }
   }
 
   /* This is needed in Chrome for the admin/admin_sets edit view AND the collection

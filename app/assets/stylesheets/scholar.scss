@@ -189,12 +189,13 @@ a.visibility-link .label:visited {
 
 .scholar-footer {
   padding: 10px;
+  position: absolute;
+  bottom: 0;
   width: 100%;
   background-color: #222;
   border-color: #090909;
   color: #fff;
   font-size:12px;
-  margin-top: auto;
 }
 
 .scholar-footer a {
@@ -544,32 +545,26 @@ a.media.collection-work-row-link {
   margin-top: 50px;
 }
 
-:root {
-  --masthead-height: 70px;
-}
-
-html,
-body {
-  min-height: 100%;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
+/* Fixed masthead styles */
 header {
-  min-height: var(--masthead-height);
+  min-height: 60px;
 }
 
 #masthead.navbar-fixed-top {
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1030;
 }
 
-#content-wrapper {
-  flex: 1 0 auto;
+@media (max-width: 767px) {
+  /* Let the masthead flow normally on small screens so expanded menus push content down */
+  header {
+    min-height: 0;
+  }
+
+  #masthead.navbar-fixed-top {
+    position: static;
+  }
 }
