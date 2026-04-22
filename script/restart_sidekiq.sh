@@ -42,4 +42,4 @@ if [[ -z "${FITS_HOME}" ]]; then
   export PATH=$PATH:/opt/fits/fits
 fi
 cd $APP_DIRECTORY
-bundle exec sidekiq -c $THREADS -q ingest -q default -q event -q change -q import -q export -q fixity_check -C config/sidekiq.yml -e $ENVIRONMENT
+sudo systemctl start sidekiq-scholar.service
