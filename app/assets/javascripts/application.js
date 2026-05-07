@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require jquery_ujs
 //= require jquery-ui-1.9.2/jquery.ui.widget
 //= require jquery-ui-1.9.2/jquery.ui.core
 //= require jquery-ui-1.9.2/jquery.ui.menu
