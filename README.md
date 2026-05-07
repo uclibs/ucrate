@@ -14,14 +14,15 @@
 * Fedora Commons 4.5.1+
 * MySQL 8.0+
 * Redis
-* ImageMagick
+* Node.js 20+ (with Corepack enabled for Yarn 4)
+* ImageMagick 6 (`imagemagick@6`; provides `convert`, `identify`, `mogrify`)
 * Java 8 (for Fedora)
 * LibreOffice
 
 ### macOS with Intel Chip
 
 * Ruby 2.7.8 (build instructions same as above, but runs natively on Intel)
-* All other dependencies same as Apple Silicon
+* All other dependencies same as Apple Silicon (including `imagemagick@6`)
 * No special compiler flags needed for native extensions
 
 > **Note:** Solr will not run properly if there are spaces in any of the directory names in its path.
@@ -40,11 +41,23 @@ git checkout develop
 
 ### Step 2: Install Dependencies
 
+**Enable Yarn 4 (one-time machine setup):**
+```bash
+corepack enable
+corepack prepare yarn@4.0.2 --activate
+yarn --version
+```
+
+**Install JavaScript dependencies:**
+```bash
+yarn install
+```
+
 #### macOS with Apple Silicon (M1–M4)
 
 **Install Homebrew packages:**
 ```bash
-brew install sqlite3 mysql-client redis solr@8 imagemagick@6 libreoffice libsodium zstd
+brew install sqlite3 mysql-client redis solr@8 imagemagick@6 libreoffice libsodium zstd node@20
 ```
 
 **Install Java 8 (required for Fedora):**
@@ -55,6 +68,16 @@ brew install --cask temurin@8
 **Verify Java 8 is available:**
 ```bash
 /usr/libexec/java_home -v 1.8
+```
+
+**Install FITS (required for file upload characterization):**
+```bash
+mkdir -p "$HOME/.local/opt"
+cd "$HOME/.local/opt"
+curl -fL -o fits-1.6.0.zip https://github.com/harvard-lts/fits/releases/download/1.6.0/fits-1.6.0.zip
+unzip -qo fits-1.6.0.zip
+chmod +x "$HOME/.local/opt/fits.sh"
+"$HOME/.local/opt/fits.sh" -v
 ```
 
 **Build OpenSSL 1.1.1 (required by Ruby 2.7.8):**
@@ -84,11 +107,17 @@ bundle _2.4.22_ config set build.mysql2 "--with-mysql-config=$(brew --prefix mys
 bundle _2.4.22_ install
 ```
 
+**Set local FITS path for development and test:**
+```bash
+printf "SCHOLAR_FITS_PATH=%s\n" "$HOME/.local/opt/fits.sh" > .env.development.local
+printf "SCHOLAR_FITS_PATH=%s\n" "$HOME/.local/opt/fits.sh" > .env.test.local
+```
+
 #### macOS with Intel Chip
 
 **Install Homebrew packages:**
 ```bash
-brew install sqlite3 mysql-client redis solr@8 imagemagick@6 libreoffice libsodium
+brew install sqlite3 mysql-client redis solr@8 imagemagick@6 libreoffice libsodium node@20
 ```
 
 **Install Java 8:**
@@ -99,6 +128,16 @@ brew install --cask temurin@8
 **Verify Java 8 is available:**
 ```bash
 /usr/libexec/java_home -v 1.8
+```
+
+**Install FITS (required for file upload characterization):**
+```bash
+mkdir -p "$HOME/.local/opt"
+cd "$HOME/.local/opt"
+curl -fL -o fits-1.6.0.zip https://github.com/harvard-lts/fits/releases/download/1.6.0/fits-1.6.0.zip
+unzip -qo fits-1.6.0.zip
+chmod +x "$HOME/.local/opt/fits.sh"
+"$HOME/.local/opt/fits.sh" -v
 ```
 
 **Install Ruby 2.7.8 via rbenv:**
@@ -113,6 +152,12 @@ rbenv local 2.7.8
 gem install bundler -v 2.4.22
 cd /path/to/ucrate
 bundle install
+```
+
+**Set local FITS path for development and test:**
+```bash
+printf "SCHOLAR_FITS_PATH=%s\n" "$HOME/.local/opt/fits.sh" > .env.development.local
+printf "SCHOLAR_FITS_PATH=%s\n" "$HOME/.local/opt/fits.sh" > .env.test.local
 ```
 
 ---
@@ -257,6 +302,45 @@ Fix:
 brew install redis
 redis-server --version
 redis-server
+```
+
+### `Usage Error: This project is configured to use yarn@4.0.2` (or similar Yarn/Corepack errors)
+
+Cause: Corepack is not enabled on this machine, or Yarn 4 has not been activated yet.
+
+Fix:
+```bash
+corepack enable
+corepack prepare yarn@4.0.2 --activate
+yarn --version
+yarn install
+```
+
+### `Unable to execute command "fits.sh ...": command not found`
+
+Cause: FITS is not installed locally, or `SCHOLAR_FITS_PATH` is not set.
+
+Fix:
+```bash
+mkdir -p "$HOME/.local/opt"
+cd "$HOME/.local/opt"
+curl -fL -o fits-1.6.0.zip https://github.com/harvard-lts/fits/releases/download/1.6.0/fits-1.6.0.zip
+unzip -qo fits-1.6.0.zip
+chmod +x "$HOME/.local/opt/fits.sh"
+printf "SCHOLAR_FITS_PATH=%s\n" "$HOME/.local/opt/fits.sh" > /path/to/ucrate/.env.development.local
+printf "SCHOLAR_FITS_PATH=%s\n" "$HOME/.local/opt/fits.sh" > /path/to/ucrate/.env.test.local
+"$HOME/.local/opt/fits.sh" -v
+```
+
+### `MiniMagick::Invalid: You must have ImageMagick or GraphicsMagick installed`
+
+Cause: ImageMagick binaries are not installed or not on your shell `PATH`.
+
+Fix:
+```bash
+brew install imagemagick@6
+which convert
+convert -version
 ```
 
 ### Unexpected warnings when starting Rails console

@@ -89,7 +89,10 @@ Hyrax.config do |config|
   # config.redis_namespace = "hyrax"
 
   # Path to the file characterization tool
-  # config.fits_path = "fits.sh"
+  config.fits_path = ENV["SCHOLAR_FITS_PATH"].presence ||
+                     ["/opt/fits-1.0.5/fits.sh", "fits.sh"].find do |path|
+                       File.exist?(path) || path == "fits.sh"
+                     end
 
   # Path to the file derivatives creation tool
   config.libreoffice_path = ENV["SCHOLAR_SOFFICE_PATH"]
