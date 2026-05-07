@@ -42,3 +42,6 @@ dump.rdb
 
 # Compiled assets
 public/**
+
+# Node dependencies
+node_modules/
