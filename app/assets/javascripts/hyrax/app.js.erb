@@ -41,20 +41,26 @@ Hyrax = {
 
     // The AdminSet edit page
     adminSetEditor: function() {
+      var elem = $('#admin-set-controls');
+      if (elem.length === 0) return;
       var AdminSetControls = this.resolveModule(require('hyrax/admin/admin_set_controls'));
-      var controls = new AdminSetControls($('#admin-set-controls'));
+      var controls = new AdminSetControls(elem);
     },
 
     // The collectionType edit page
     collectionTypeEditor: function() {
+      var elem = $('#collection-types-controls');
+      if (elem.length === 0) return;
       var CollectionTypeControls = this.resolveModule(require('hyrax/admin/collection_type_controls'));
-      var controls = new CollectionTypeControls($('#collection-types-controls'));
+      var controls = new CollectionTypeControls(elem);
     },
 
     // The Collection edit page
     collectionEditor: function() {
+      var elem = $('#collection-edit-controls');
+      if (elem.length === 0) return;
       var CollectionControls = this.resolveModule(require('hyrax/collections/editor'));
-      var controls = new CollectionControls($('#collection-edit-controls'));
+      var controls = new CollectionControls(elem);
     },
 
     // Collections v2 - collections related js should (over time) be moved here
@@ -176,6 +182,7 @@ Hyrax = {
 
     // Add and reorder files attached to works
     fileManager: function () {
+        if ($('#sortable').length === 0) return;
         var FileManager = this.resolveModule(require('hyrax/file_manager'));
         new FileManager();
     },
