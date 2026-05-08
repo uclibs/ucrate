@@ -6,28 +6,36 @@ Hyrax = {
         return mod;
     },
 
+    // Any uncaught exception here aborts Blacklight.activate()'s queue, so callbacks
+    // registered after hyrax/initialize in the bundle (notably hyrax/tabs.js) never run —
+    // work form bootstrap tabs stay broken / content stays non-visible to Capybara.
     initialize: function () {
-        this.popovers();
-        this.permissions();
-        this.notifications();
-        this.transfers();
-        this.workEditor();
-        this.fileManager();
-        this.selectWorkType();
-        this.selectCollectionType();
-        this.datatable();
-        this.adminSetEditor();
-        this.collectionEditor();
-        this.collectionsV2();
-        this.collectionTypes();
-        this.collectionTypeEditor();
-        this.collectionUtilities();
-        this.adminStatisticsGraphs();
-        this.tinyMCE();
-        this.sortAndPerPage();
-        this.sidebar();
-        this.batchSelect();
-        this.internationalizationHelper();
+        try {
+            this.popovers();
+            this.permissions();
+            this.notifications();
+            this.transfers();
+            this.workEditor();
+            this.fileManager();
+            this.selectWorkType();
+            this.selectCollectionType();
+            this.datatable();
+            this.adminSetEditor();
+            this.collectionEditor();
+            this.collectionsV2();
+            this.collectionTypes();
+            this.collectionTypeEditor();
+            this.collectionUtilities();
+            this.adminStatisticsGraphs();
+            this.tinyMCE();
+            this.sortAndPerPage();
+            this.sidebar();
+            this.batchSelect();
+            this.internationalizationHelper();
+        } catch (e) {
+            if (typeof console !== 'undefined' && console.warn)
+                console.warn('[Hyrax.initialize]', e);
+        }
     },
 
     // Add WYSIWYG editor functionality to editable content blocks
@@ -180,11 +188,19 @@ Hyrax = {
         })
     },
 
-    // Add and reorder files attached to works
+    // Add and reorder files attached to works.
+    // Must not throw: an uncaught error in Hyrax.initialize aborts Blacklight.activate()
+    // before callbacks registered later in the bundle (including hyrax/tabs.js).
     fileManager: function () {
-        if ($('#sortable').length === 0) return;
-        var FileManager = this.resolveModule(require('hyrax/file_manager'));
-        new FileManager();
+        if ($('#sortable').length === 0)
+            return;
+        try {
+            var FileManager = this.resolveModule(require('hyrax/file_manager'));
+            new FileManager();
+        } catch (e) {
+            if (typeof console !== 'undefined' && console.warn)
+                console.warn('[Hyrax] fileManager init skipped:', e);
+        }
     },
 
     // Per Page select will submit its form to change records shown
