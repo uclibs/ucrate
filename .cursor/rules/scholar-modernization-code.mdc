@@ -1,0 +1,36 @@
+---
+description: Code standards for new Scholar modernization modules (not legacy Hyrax)
+globs: lib/scholar/**,app/models/scholar/**,app/controllers/scholar/**,app/services/scholar/**,spec/scholar/**,spec/lib/scholar/**,lib/tasks/scholar/**
+alwaysApply: false
+---
+
+# Scholar:: new code
+
+## Layout
+
+- Namespace: **`Scholar::`** (e.g. `Scholar::Record`, `Scholar::Export::Manifest`)
+- Paths: `lib/scholar/`, `app/models/scholar/`, `spec/lib/scholar/` or `spec/scholar/`
+- Do not add modernization logic to Hyrax overrides unless bridging legacy in Phase 1
+
+## Style (match legacy app, stay boring)
+
+- Ruby 2.7 / Rails 5.2 compatible until a planned Rails upgrade hop
+- Prefer plain objects and small service classes over new gems
+- Explicit over clever; minimal metaprogramming
+- No comments for obvious code; comment export/import invariants and DOI rules only
+
+## Dependencies
+
+- Avoid new gems unless STATUS/plan approves
+- Reuse existing stack: ActiveRecord, ActiveJob/Sidekiq (for now), Devise users
+
+## Tests
+
+- Add focused specs for export/import and `Scholar::DoiService` behavior
+- Do not duplicate full Hyrax feature specs for new paths
+- New specs should run under **`bin/rspec-fast`** (no Fedora/Solr); see `docs/modernization/TESTING.md`
+
+## Diffs
+
+- Smallest correct change for the current phase slice
+- Do not refactor unrelated legacy code or reformat Hyrax files

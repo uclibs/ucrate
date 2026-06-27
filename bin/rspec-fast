@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Fast local specs: no Fedora, Solr, Redis, or browser required.
+# Includes throwaway slop checks in spec/throwaway/ (mocked slow-tier smoke tests).
+# See docs/modernization/TESTING.md
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+export RAILS_ENV=test
+export SCHOLAR_FAST_SPECS=1
+export NO_COVERAGE=1
+
+exec bundle exec rspec --tag '~slow' "$@"

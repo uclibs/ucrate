@@ -4,6 +4,10 @@
 [![CircleCI](https://circleci.com/gh/uclibs/ucrate.svg?style=svg)](https://circleci.com/gh/uclibs/ucrate)
 [![Coverage Status](https://coveralls.io/repos/github/uclibs/ucrate/badge.svg?branch=main)](https://coveralls.io/github/uclibs/ucrate?branch=main)
 
+## Repository modernization
+
+Work on branch `scholar-modernization` follows the plan in [docs/modernization/README.md](docs/modernization/README.md). Update [docs/modernization/STATUS.md](docs/modernization/STATUS.md) at the end of each session.
+
 ## System Requirements
 
 ### macOS with Apple Silicon (M1–M4) — Recommended
@@ -177,6 +181,18 @@ exit
 ---
 
 ## Running Tests (All Platforms)
+
+### Fast local specs (no Fedora/Solr)
+
+For day-to-day development—especially on `scholar-modernization`:
+
+```bash
+bin/rspec-fast
+```
+
+See [docs/modernization/TESTING.md](docs/modernization/TESTING.md). CircleCI runs the **full** suite on push.
+
+### Full suite (Fedora + Solr required)
 
 Start these services in separate terminal tabs (foreground; do not append `&`):
 

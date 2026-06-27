@@ -8,30 +8,32 @@ def ci_build?
   ENV['TRAVIS'] || ENV['CIRCLE']
 end
 
-require 'simplecov'
-require 'simplecov-lcov'
+unless ENV['NO_COVERAGE'] == '1' || ENV['SCHOLAR_FAST_SPECS'] == '1'
+  require 'simplecov'
+  require 'simplecov-lcov'
 
-SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
+  SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 
-# Configure formatters before SimpleCov.start
-SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
-  [
-    SimpleCov::Formatter::HTMLFormatter,
-    SimpleCov::Formatter::LcovFormatter
-  ]
-)
+  # Configure formatters before SimpleCov.start
+  SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
+    [
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::LcovFormatter
+    ]
+  )
 
-SimpleCov.start 'rails' do
-  # Directories to exclude from coverage
-  add_filter '/.github/'
-  add_filter '/bin'
-  add_filter '/coverage/'
-  add_filter '/db/'
-  add_filter '/public/'
-  add_filter '/solr/'
-  add_filter '/spec/'
-  add_filter '/tmp/'
-  add_filter '/vendor/'
+  SimpleCov.start 'rails' do
+    # Directories to exclude from coverage
+    add_filter '/.github/'
+    add_filter '/bin'
+    add_filter '/coverage/'
+    add_filter '/db/'
+    add_filter '/public/'
+    add_filter '/solr/'
+    add_filter '/spec/'
+    add_filter '/tmp/'
+    add_filter '/vendor/'
+  end
 end
 
 require File.expand_path('../../config/environment', __FILE__)
