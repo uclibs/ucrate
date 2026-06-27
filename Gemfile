@@ -16,7 +16,7 @@ gem 'bulkrax', '~> 4.3.0'
 gem 'hydra-remote_identifier', github: 'uclibs/hydra-remote_identifier', branch: 'scholar-datacite'
 gem 'kaltura', '0.1.1'
 gem 'nio4r', '~> 2.7', '>= 2.7.1'
-gem 'rack', '2.2.3'
+gem 'rack', '~> 2.2.23'
 gem 'sidekiq-limit_fetch', '~> 4.0'
 
 # Hyrax improvements

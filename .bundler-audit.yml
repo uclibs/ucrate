@@ -1,3 +1,6 @@
+# Ignored advisories for the locked Gemfile on develop (Rails 5.2 / Hyrax 2.9).
+# To pass without ignores, upgrade each gem to at least the version shown in its comment.
+#
 ignore:
   # actionmailer (5.2.4.6) — fix: ~> 6.1.7.9, ~> 7.0.8.5, ~> 7.1.4.1, >= 7.2.1.1
   - CVE-2024-47889
@@ -20,10 +23,13 @@ ignore:
   - GHSA-p84v-45xj-wwqj
   - GHSA-4g8v-vg43-wpgf
 
-  # actionview (5.2.4.6) — fix: ~> 5.2.7.1, ~> 6.0.4.8, ~> 6.1.5.1, >= 7.0.2.4
+  # actionview (5.2.4.6) — fix: ~> 5.2.7.1, ~> 6.0.4.8, ~> 6.1.5.1, >= 7.0.2.4 (older);
+  #   2026 XSS: ~> 7.2.3, >= 7.2.3.1, ~> 8.0.4, >= 8.0.4.1, >= 8.1.2.1
   - CVE-2022-27777
   - CVE-2023-23913
   - GHSA-ch3h-j2vf-95pv
+  - CVE-2026-33168
+  - GHSA-v55j-83pf-r9cq
 
   # activerecord (5.2.4.6) — fix: ~> 7.1.5.2, ~> 7.2.2.2, >= 8.0.2.1
   - CVE-2022-32224
@@ -31,37 +37,61 @@ ignore:
   - CVE-2025-55193
   - GHSA-76r7-hhxj-r776
 
-  # activestorage (5.2.4.6) — fix: ~> 6.1.7.7, >= 7.0.8.1
+  # activestorage (5.2.4.6) — fix: ~> 6.1.7.7, >= 7.0.8.1 (older);
+  #   2026 advisories: ~> 7.2.3, >= 7.2.3.1, ~> 8.0.4, >= 8.0.4.1, >= 8.1.2.1
   - CVE-2022-21831
   - CVE-2024-26144
   - GHSA-8h22-8cf7-hq6g
+  - CVE-2026-33658
+  - GHSA-p9fm-f462-ggrg
+  - CVE-2026-33173
+  - GHSA-qcfx-2mfw-w4cg
+  - CVE-2026-33202
+  - GHSA-73f9-jhhh-hr5m
+  - CVE-2026-33195
+  - GHSA-9xrj-h377-fr87
+  - CVE-2026-33174
+  - GHSA-r46p-8f7g-vvvg
 
-  # activesupport (5.2.4.6) — fix: ~> 5.2.8, ~> 6.1.7.x, >= 7.0.x
+  # activesupport (5.2.4.6) — fix: ~> 5.2.8, ~> 6.1.7.x, >= 7.0.x (older);
+  #   2026 advisories: ~> 7.2.3, >= 7.2.3.1, ~> 8.0.4, >= 8.0.4.1, >= 8.1.2.1
   - CVE-2023-22796
   - CVE-2023-28120
   - CVE-2023-38037
   - GHSA-j6gc-792m-qgm2
   - GHSA-pj73-v5mw-pm9j
   - GHSA-cr5q-6q9f-rq6q
+  - CVE-2026-33170
+  - GHSA-89vf-4333-qx8v
+  - CVE-2026-33176
+  - GHSA-2j26-frm8-cmj9
+  - CVE-2026-33169
+  - GHSA-cg4j-q9v8-6v38
 
   # aws-sdk-s3 (1.114.0) — fix: >= 1.208.0
   - CVE-2025-14762
   - GHSA-2xgq-q749-89fq
 
-  # carrierwave (1.3.2) — fix: ~> 2.2.6, >= 3.0.7
+  # carrierwave (1.3.2) — fix: ~> 2.2.6, >= 3.0.7 (older); denylist bypass: ~> 2.2.7, >= 3.1.3
   - CVE-2023-49090
   - CVE-2024-29034
   - GHSA-gxhx-g4fq-49hj
   - GHSA-vfmv-jfc5-pjjw
+  - CVE-2026-44587
+  - GHSA-7g26-2qgj-chfg
 
-  # devise (4.6.0) — fix: >= 4.7.1; confirmable change-email race: >= 5.0.3
+  # devise (4.6.0) — fix: >= 4.7.1; confirmable race: >= 5.0.3; open redirect: >= 5.0.4
   - CVE-2019-16109
   - GHSA-fcjw-8rhj-gwwc
   - GHSA-57hq-95w6-v4fc
+  - CVE-2026-40295
+  - GHSA-jp94-3292-c3xv
 
-  # faraday (0.17.5) — fix: ~> 1.10.5, >= 2.14.1
+  # faraday (0.17.5) — fix: ~> 1.10.5, >= 2.14.1 (older); nested params DoS: >= 2.14.3
   - CVE-2026-25765
   - GHSA-33mh-2634-fwr2
+  - CVE-2026-54297
+  - GHSA-98m9-hrrm-r99r
 
   # globalid (1.0.0) — fix: >= 1.0.1
   - CVE-2023-22799
@@ -89,7 +119,7 @@ ignore:
   - CVE-2022-23516
   - GHSA-228g-948r-83gx
 
-  # nokogiri (1.13.8) — fix: >= 1.14.3 through >= 1.19.1 depending on CVE
+  # nokogiri (1.13.8) — fix: >= 1.14.3 through >= 1.19.1 (older); 2026 advisories: >= 1.19.4 (most), >= 1.19.3 (XSLT leak)
   - CVE-2022-23476
   - GHSA-mrxw-mxhj-p664
   - GHSA-2qc6-mcvw-92cw
@@ -100,6 +130,20 @@ ignore:
   - GHSA-5w6v-399v-w3cc
   - GHSA-pxvg-2qj5-37jq
   - GHSA-wx95-c6cv-8532
+  - GHSA-5prr-v3j2-97mh
+  - GHSA-g9g8-vgvw-g3vf
+  - GHSA-8678-w3jw-xfc2
+  - GHSA-5v8h-3h3q-446p
+  - GHSA-v2fc-qm4h-8hqv
+  - GHSA-p67v-3w7g-wjg7
+  - GHSA-wjv4-x9w8-wm3h
+  - GHSA-phwj-rprq-35pp
+  - GHSA-9cv2-cfxc-v4v2
+  - GHSA-c4rq-3m3g-8wgx
+  - GHSA-wfpw-mmfh-qq69
+
+  # oauth2 (1.4.10) — fix: >= 2.0.22
+  - GHSA-pp92-crg2-gfv9
 
   # omniauth
   - CVE-2015-9284
@@ -111,43 +155,6 @@ ignore:
   - GHSA-68xg-gqqm-vgj8
   - GHSA-c2f4-cvqm-65w2
   - GHSA-9hf4-67fc-4vf4
-
-  # rack (2.2.3) — fix: ~> 2.2.22 / ~> 3.1.20 / >= 3.2.5 (2026); other CVEs ~> 2.2.20 or >= 3.x
-  - CVE-2022-30122
-  - CVE-2022-30123
-  - CVE-2022-44570
-  - CVE-2022-44571
-  - CVE-2022-44572
-  - CVE-2023-27530
-  - CVE-2023-27539
-  - CVE-2024-25126
-  - CVE-2024-26141
-  - CVE-2024-26146
-  - CVE-2025-25184
-  - CVE-2025-27111
-  - CVE-2025-27610
-  - CVE-2025-32441
-  - CVE-2025-46727
-  - CVE-2025-59830
-  - CVE-2025-61770
-  - CVE-2025-61771
-  - CVE-2025-61772
-  - CVE-2025-61780
-  - CVE-2025-61919
-  - GHSA-93pm-5p5f-3ghx
-  - GHSA-rqv2-275x-2jq5
-  - GHSA-c6qg-cjj8-47qp
-  - GHSA-22f2-v57c-j9cx
-  - GHSA-xj5v-6v4g-jfw6
-  - GHSA-54rr-7fvw-6x8f
-  - GHSA-7g2v-jj9q-g3rg
-  - GHSA-8cgq-6mh2-7j6v
-  - GHSA-vpfw-47h7-xj4g
-  - GHSA-r657-rxjc-j557
-  - CVE-2026-25500
-  - CVE-2026-22860
-  - GHSA-whrj-4476-wvmp
-  - GHSA-mxw3-3hh2-x2mh
 
   # rails-html-sanitizer (1.4.3) — fix: >= 1.4.4
   - CVE-2022-23517
