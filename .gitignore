@@ -42,3 +42,6 @@ dump.rdb
 
 # Compiled assets
 public/**
+
+# JavaScript dependencies (installed via yarn; see yarn.lock)
+/node_modules
