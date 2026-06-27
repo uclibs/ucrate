@@ -34,3 +34,4 @@ alwaysApply: false
 
 - Smallest correct change for the current phase slice
 - Do not refactor unrelated legacy code or reformat Hyrax files
+- Naming: follow [scholar-naming-conventions.mdc](../scholar-naming-conventions.mdc); run [scholar-code-quality.mdc](../scholar-code-quality.mdc) before done

@@ -1,0 +1,43 @@
+---
+description: Code quality checks to run before finishing a slice (naming first)
+alwaysApply: true
+---
+
+# Code quality checks
+
+Before marking work **done** (and before suggesting a commit), run this checklist on **changed and new** files. Fix issues in scope; do not drive-by fix unrelated legacy code.
+
+Reference: [scholar-naming-conventions.mdc](./scholar-naming-conventions.mdc)
+
+## Checklist (in order)
+
+### 1. Naming
+
+Read `.cursor/rules/scholar-naming-conventions.mdc` and verify:
+
+- [ ] **Files & paths** — `snake_case`; spec suffix `_spec.rb`; partials lead with `_`
+- [ ] **Classes / modules** — `PascalCase`; file path matches constant (autoload)
+- [ ] **Methods, variables, params** — `snake_case`; predicates `?`; no camelCase
+- [ ] **Rails roles** — singular models, plural controllers; `*Service`, `*Job`, `*Indexer` match project patterns
+- [ ] **`Scholar::` code** — under `lib/scholar/`, `app/models/scholar/`, etc.; `resource_type` strings are `snake_case`
+- [ ] **ENV / rake** — `SCHOLAR_*` env vars; `:scholar` rake namespace for new tasks
+
+If a name is wrong, rename in the same slice (including spec paths and references).
+
+### 2. (Reserved)
+
+_Add the next quality check here when defined._
+
+## Also run (already in modernization done bar)
+
+After naming passes:
+
+- `bundle exec rubocop` on changed Ruby files
+- `bin/rspec-fast` (or targeted paths); see `docs/modernization/TESTING.md`
+
+Push for full CircleCI when ready.
+
+## When to skip
+
+- Question-only or read-only review: naming check on cited symbols only, not the whole repo
+- Legacy file touched for a one-line fix: do not rename unrelated identifiers in that file

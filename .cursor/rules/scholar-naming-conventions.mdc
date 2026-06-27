@@ -1,0 +1,93 @@
+---
+description: Scholar@UC naming conventions—files, classes, methods, variables, ENV
+globs: app/**/*.rb,app/**/*.erb,lib/**/*.rb,lib/**/*.rake,spec/**/*.rb,spec/**/*.erb,config/**/*.rb,bin/*
+alwaysApply: false
+---
+
+# Naming conventions (Scholar@UC)
+
+Match **existing** names in the touched area. When adding **new** `Scholar::` code, follow the modernization rows below.
+
+## Files & directories
+
+| Kind | Pattern | Example |
+|------|---------|---------|
+| Ruby source | `snake_case.rb` | `expiration_service.rb` |
+| Spec | `<source>_spec.rb` | `expiration_service_spec.rb` |
+| View / partial | `snake_case`; partials `_name.html.erb` | `_search_form.html.erb` |
+| Concern file | `snake_case.rb` under `concerns/` | `works_controller_behavior.rb` |
+| Rake | `snake_case.rake` under `lib/tasks/` | `fixity_check.rake` |
+| Bin script | `snake_case`, no extension or `.rb` | `rspec-fast` |
+
+**Autoload rule:** file path must match the constant (`ExpirationService` → `app/services/expiration_service.rb`; `Scholar::Export::Manifest` → `lib/scholar/export/manifest.rb`).
+
+## Classes, modules, namespaces
+
+| Kind | Pattern | Example |
+|------|---------|---------|
+| Class | `PascalCase` | `GenericWork`, `WorkLoader` |
+| Module | `PascalCase` | `Scholar`, `RemotelyIdentifiedByDoi` |
+| Nested | `Parent::Child` | `Hyrax::CollectionTypes::PermissionsService` |
+| Concern module | often `Feature::Name` or `*Behavior` | `Scholar::WorksControllerBehavior` |
+
+**Legacy Hyrax work types:** singular model (`Article`, `StudentWork`); plural controller (`ArticlesController`, `StudentWorksController`).
+
+## Methods, variables, parameters
+
+- **Methods & locals:** `snake_case` (`apply_depositor_metadata`, `embargo_date`)
+- **Predicates:** `name?` (`active?`)
+- **Bang methods:** `name!` only when matching Rails/Hyrax semantics (save!, destroy!)
+- **Blocks / yields:** descriptive `snake_case` (`|work|`, `|collection|`)
+- **Unused args:** prefix `_` when RuboCop requires it
+
+Do not use `camelCase` for Ruby identifiers.
+
+## Constants
+
+- Top-level config-style: `SCREAMING_SNAKE_CASE` (`SLOW_SPEC_FILE_PATTERNS`)
+- Module-scoped: `PascalCase` or `SCREAMING_SNAKE` inside the owning module—match neighbors in the same file
+
+## Rails / Hyrax roles (legacy)
+
+| Role | Pattern | Example |
+|------|---------|---------|
+| Model | singular `PascalCase` | `GenericWork` |
+| Controller | plural + `Controller` | `Hyrax::GenericWorksController` |
+| Form | `Hyrax::<Model>Form` | `Hyrax::ArticleForm` |
+| Presenter | `Hyrax::<Model>Presenter` or `WorkShowPresenter` | |
+| Indexer | `<Model>Indexer` | `GenericWorkIndexer` |
+| Job | `<Verb><Noun>Job` | `AttachFilesToWorkJob` |
+| Service (app root) | `<Noun>Service`, `<Noun>Loader`, `<Noun>Report`, `<Noun>Factory` | `ExpirationService`, `WorkLoader` |
+| Hyrax service | under `Hyrax::` module | `Hyrax::FixityCheckFailureService` |
+
+## Scholar modernization (new code)
+
+| Item | Pattern | Example |
+|------|---------|---------|
+| Namespace | `Scholar::` | `Scholar::DoiService` |
+| Paths | `lib/scholar/`, `app/models/scholar/`, `spec/lib/scholar/` | |
+| DB table (planned) | plural `snake_case` | `scholar_records` |
+| `resource_type` values | `snake_case` string | `'generic_work'`, `'student_work'` |
+| Rake namespace | `:scholar` | `scholar:export:manifest` |
+| Spec (throwaway) | under `spec/throwaway/`, tag `throwaway: true` | |
+
+Do not introduce new top-level namespaces without a note in `docs/modernization/DECISIONS.md`.
+
+## Config & environment
+
+- App env vars: **`SCHOLAR_`** prefix (`SCHOLAR_FEDORA_URL`, `SCHOLAR_SOLR_URL`)
+- Feature flags / paths: same prefix when added for this app
+
+## Specs & metadata
+
+- `:slow`, `:clean_repo`, `:throwaway` — lowercase symbols, as in `spec/support/slow_spec_metadata.rb`
+- Factory names: `snake_case` (`:collection_lw`, `:generic_work_with_one_file`)
+
+## Quick self-check
+
+Before finishing a slice, confirm every **new or renamed** identifier:
+
+1. File name ↔ constant/path alignment (Zeitwerk)
+2. Singular model / plural controller (if Rails MVC)
+3. `Scholar::` prefix and path for modernization code only
+4. No stray camelCase or inconsistent pluralization

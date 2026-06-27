@@ -12,7 +12,7 @@ This repo may be on branch **`scholar-modernization`**. Before non-trivial work:
 3. **Moving-parts rule:** never remove Fedora, Solr, Redis, or Hyrax in an environment until nothing there calls them. Rehearse on scholar-dev; prod only at cutover.
 4. **Deploy:** scholar-dev for this branch; production stays on legacy until Phase 6.
 5. End session: update `docs/modernization/STATUS.md`; commit with `Phase N: …` message.
-6. **Done bar:** `bundle exec rubocop` + `bin/rspec-fast` locally; push for full CircleCI suite (see `docs/modernization/TESTING.md`).
+6. **Done bar:** run [scholar-code-quality.mdc](.cursor/rules/scholar-code-quality.mdc) (naming first), then `bundle exec rubocop` + `bin/rspec-fast`; push for full CircleCI suite (see `docs/modernization/TESTING.md`).
 
 **Strategy:** strangler—additive code beside Hyrax. **Do not** bump Hyrax to latest or rip out Samvera without a phase in PLAN.
 

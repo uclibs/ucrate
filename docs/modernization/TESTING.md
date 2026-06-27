@@ -42,9 +42,10 @@ Marked `throwaway: true` — **not run in CI**. Uses mocks for deposit forms, So
 
 Before ending a work session on `scholar-modernization`:
 
-1. **`bundle exec rubocop`** — no new offenses in changed files.
-2. **`bin/rspec-fast`** — passes (or run targeted paths if your slice only touches certain specs).
-3. **Push** when ready — CircleCI runs the **full** suite including `:slow` examples.
+1. **Code quality checklist** — naming first (`.cursor/rules/scholar-code-quality.mdc` + `scholar-naming-conventions.mdc`)
+2. **`bundle exec rubocop`** — no new offenses in changed files
+3. **`bin/rspec-fast`** — passes (or run targeted paths if your slice only touches certain specs)
+4. **Push** when ready — CircleCI runs the **full** suite including `:slow` examples
 
 If you changed legacy Hyrax integration behavior (deposit, search, collections API, etc.), run the relevant slow specs locally or wait for CI and fix before merging.
 

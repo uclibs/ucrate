@@ -30,7 +30,7 @@ This folder is the **single source of truth** for the Scholar@UC strangler migra
 3. If resuming after `develop` moved: merge `origin/develop` into this branch before new work.
 4. Do **one slice** from the current phase in [PLAN.md](./PLAN.md).
 5. Before ending session: update [STATUS.md](./STATUS.md) (done / next / notes).
-6. Verify slice: `bundle exec rubocop` and **`bin/rspec-fast`** (see [TESTING.md](./TESTING.md)); push for full CircleCI suite.
+6. Verify slice: run code quality checks ([TESTING.md](./TESTING.md)—naming, rubocop, `bin/rspec-fast`); push for full CircleCI suite.
 
 ## Rule of thumb
 
