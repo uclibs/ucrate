@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe ExpirationService do
+describe ExpirationService, :clean_repo do
   let(:embargo_date) { (Time.zone.today + 14.days) }
   let(:embargoed_work) { create(:private_generic_work, :with_public_embargo, title: ['Embargoed Work'], embargo_release_date: embargo_date) }
   let(:embargoed_doi_work) { create(:private_generic_work, :with_public_embargo, title: ['Embargoed Work'], embargo_release_date: embargo_date, doi: "doi:test_doi") }
@@ -24,10 +24,12 @@ describe ExpirationService do
   context 'with an expired embargo and doi' do
     it 'changes the visibility when it has expired' do
       expect(embargoed_doi_work.visibility).to eq('restricted')
-      expect(VisibilityCopyJob).to receive(:perform_later).with(embargoed_doi_work)
-      allow_any_instance_of(IdentifierEmbargoUpdateJob).to receive(:perform).and_return(true)
+      allow(VisibilityCopyJob).to receive(:perform_later)
+      allow(IdentifierEmbargoUpdateJob).to receive(:perform_now).and_return(true)
       described_class.call(embargo_date)
+      expect(VisibilityCopyJob).to have_received(:perform_later).with(embargoed_doi_work)
       embargoed_doi_work.reload
+      expect(embargoed_doi_work.visibility).to eq('open')
     end
   end
 
@@ -42,7 +44,7 @@ describe ExpirationService do
     end
   end
 
-  context 'with an expired embargo in the past', :clean_repo do
+  context 'with an expired embargo in the past' do
     let(:embargo_date_in_past) { (Time.zone.today + 1.day) }
     let(:embargoed_work) { create(:private_generic_work, :with_public_embargo, title: ['Embargoed Work'], embargo_release_date: embargo_date_in_past) }
 
