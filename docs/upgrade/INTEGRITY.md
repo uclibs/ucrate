@@ -14,11 +14,13 @@ Run checks when a slice touches Fedora, Solr, work types, FileSets, collections,
 
 Do not block Phase A on a full production clone. Document in STATUS which environment the baseline used.
 
+If seed data has **zero works**, still commit counts (all zeros) and note that the spot-check matrix is **deferred** until a prod-shaped copy or seeded works exist. Count checks remain valid (expect zeros until data is loaded).
+
 ## Baseline (Phase A1 — required once)
 
 ### 1. Solr counts by work type
 
-In `rails console` with Solr up (Fedora must be up for sample ID lookup). Same Solr query pattern as `app/controllers/sitemaps_controller.rb`:
+In `rails console` with Solr up (Fedora must be up for sample ID lookup). Query pattern (also used by `SitemapsController` if present):
 
 ```ruby
 types = Hyrax.config.registered_curation_concern_types
@@ -36,19 +38,21 @@ end
 puts "total works: #{counts.values.sum}"
 ```
 
-### 2. FileSet count (optional)
+### 2. FileSet count (**required**)
+
+Needed so file loss is visible in later count checks:
 
 ```ruby
 ActiveFedora::SolrService.query('has_model_ssim:FileSet', rows: 0).response['numFound']
 ```
 
-### 3. Collection count (optional)
+### 3. Collection count (**required**)
 
 ```ruby
 ActiveFedora::SolrService.query('has_model_ssim:Collection', rows: 0).response['numFound']
 ```
 
-### 4. DOI count (optional)
+### 4. DOI count (required if any DOIs exist; else record `0`)
 
 DOI is indexed as `stored_searchable` (`doi_tesim`), not `doi_ssim`:
 
@@ -59,7 +63,7 @@ ActiveFedora::SolrService.query("#{Solrizer.solr_name('doi')}:*", rows: 0).respo
 
 ### 5. Sample IDs
 
-Save at least one **public** work ID per type under `sample_ids` for repeat spot-checks. Include one work **in a collection** if any exist.
+Save at least one **public** work ID per type under `sample_ids` for repeat spot-checks when that type has works (seed data may have zeros—record `null` and note in `data_note`). Include one work **in a collection** if any exist. Prefer samples that have files when possible.
 
 ### 6. Commit baseline JSON
 
@@ -81,9 +85,9 @@ Save to `docs/upgrade/baseline/baseline-YYYY-MM-DD.json`:
     "etd": 0
   },
   "solr_total_works": 0,
-  "solr_fileset_count": null,
-  "solr_collection_count": null,
-  "solr_doi_count": null,
+  "solr_fileset_count": 0,
+  "solr_collection_count": 0,
+  "solr_doi_count": 0,
   "fedora_object_count": null,
   "sample_ids": {
     "generic_work": null,
@@ -166,27 +170,38 @@ Run full baseline comparison + matrix + DOI + auth before:
 
 - Phase A → Phase B
 - Phase B → Phase C
-- Phase C production cutover
+- **C2** (scholar-dev on F7) → merge to `develop`
+- **C3** production cutover
 - Phase D Fedora decommission
 
 ## Fedora migration (Phase C)
 
+Run on **scholar-dev for C1–C2**; repeat the same checks during **C3** production cutover.
+
 Additional checks:
 
 1. Export checksums match files on disk
-2. F6 object count ≥ F4 count (document expected differences)
-3. Random sample: 20 works by type — metadata diff F4 vs F6
+2. F6 object count vs F4 count (document expected differences—do not assume identical counts)
+3. Random sample: up to 20 works **per type that has data** — metadata diff F4 vs F6
 4. File fixity: download + checksum sample FileSets
 5. Permissions on restricted works
 6. Collection membership preserved
 
-Dry-run on scholar-dev **twice** before production.
+Dry-run F4→F6 on scholar-dev **twice** (C1) before C2 (F7) or C3 (production).
 
-## Rollback (Phase C2)
+## Rollback
 
-- F4 read-only snapshot until sign-off
-- Rollback: repoint Hyrax to F4, reindex Solr
-- Record rollback owner and time limit in STATUS
+### C1–C2 (scholar-dev)
+
+- Keep F4 (and F6) snapshots until C2 sign-off
+- Rollback: repoint Hyrax Fedora adapter at prior tier, reindex Solr
+- Record owner and time limit in STATUS
+
+### C3 (production)
+
+- F4 read-only snapshot + app DB backup until sign-off
+- Rollback: redeploy prior `develop` artifact **or** repoint at F4 + restore DB per runbook; reindex Solr
+- Record rollback owner and time limit in STATUS **before** starting C3
 
 ## When verification fails
 

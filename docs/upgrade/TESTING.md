@@ -18,7 +18,8 @@ bin/rspec-fast spec/models/article_spec.rb
 - Sets `SCHOLAR_FAST_SPECS=1`
 - Excludes examples tagged `:slow`
 - No Fedora, Solr, Redis, or browser required
-- Includes `spec/throwaway/` slop checks (tagged `throwaway: true`)
+- Includes `spec/throwaway/` slop checks (tagged `throwaway: true`) when `SCHOLAR_FAST_SPECS=1`
+- CircleCI **excludes** `throwaway: true` (see `spec/support/throwaway_spec_metadata.rb`); “No timing found for spec/throwaway/…” in CI logs is expected
 
 ## Slow tier (`:slow`)
 

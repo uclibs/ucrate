@@ -10,7 +10,7 @@
 | Branch | Purpose |
 |--------|---------|
 | **`scholar-modernization`** | **All upgrade work** (Phases A–D). Every commit for this effort lands here. |
-| **`develop`** | Production/QA legacy line (Hyrax 2.9 + F4). **Do not merge upgrade work into `develop` until Fedora 7 is working** on scholar-dev and cutover is planned. |
+| **`develop`** | Production/QA legacy line (Hyrax 2.9 + F4). **Do not merge upgrade work into `develop` until Fedora 7 works on scholar-dev (C2).** |
 
 ### Allowed git flows
 
@@ -18,17 +18,20 @@
 develop ──(optional security fixes)──► scholar-modernization
                                               │
                                               ▼
-                                        scholar-dev deploys
+                                        scholar-dev (through C2 / F7)
                                               │
-         (after Phase C / Fedora 7)           │
+         (after C2 only)                      │
 scholar-modernization ───────────────────────► develop
                                               │
                                               ▼
-                                        production cutover
+                                        C3 production cutover
+                                        (Hyrax 5 + PG + F6→F7)
 ```
 
 - **OK:** Merge or cherry-pick **`develop` → `scholar-modernization`** for production-line security fixes.
-- **Not OK:** Merge **`scholar-modernization` → `develop`** before Fedora 7 validation (Phase C exit).
+- **OK after C2:** Merge **`scholar-modernization` → `develop`**, then run **C3** production cutover.
+- **Not OK:** Merge **`scholar-modernization` → `develop`** before scholar-dev is on Fedora 7.
+- **Not OK:** Attempt production F4→F6 while production still runs Hyrax 2.9 from legacy `develop`.
 
 ## Environments
 
@@ -50,8 +53,8 @@ scholar-modernization ───────────────────�
 
 ## Deploy
 
-- **scholar-dev:** after each sub-phase when CI green and spot-checks pass.
-- **Production:** only after **`scholar-modernization` → `develop`** merge post–Fedora 7.
+- **scholar-dev:** after each sub-phase when CI green and spot-checks pass (includes C1–C2 Fedora migration).
+- **Production (C3):** only after **C2** (F7 on scholar-dev), **`scholar-modernization` → `develop`** merge, and a written cutover/rollback runbook in STATUS.
 
 ## Cursor prompts (examples)
 

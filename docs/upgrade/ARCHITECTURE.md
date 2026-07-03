@@ -56,42 +56,64 @@
 
 PostgreSQL arrives in **Phase B3** (before Valkyrie/Wings in B4).
 
+## After B4 (scholar-dev) — where data lives
+
+| Content | Store |
+|---------|--------|
+| Legacy works | **Fedora 4** (read via Wings) |
+| New Valkyrie metadata | **PostgreSQL** |
+| Users / roles / admin | **PostgreSQL** |
+| Binaries | Fedora (until Phase D moves files on-campus) |
+| Jobs | **Redis** + Sidekiq |
+| Catalog | **Solr** |
+
 ## Milestone (Phase C complete — infosec)
 
-Same as Phase B stack but repository tier is **Fedora 7 (OCFL)** instead of F4.
+Same application stack as Phase B, but repository tier is **Fedora 7 (OCFL)** instead of F4.
+
+**Path to milestone:**
+
+1. **C1–C2 on scholar-dev:** F4 → F6 → F7 (prove F7 here).
+2. **Merge** `scholar-modernization` → `develop` (allowed only after C2).
+3. **C3 production cutover:** deploy from `develop`, MySQL → PostgreSQL, F4 → F6 → F7.
 
 ## End state (Phase D complete)
 
 ```text
   Users ──► Rails/Hyrax 5.2 + Valkyrie
                 │
-    ┌───────────┴───────────┐
-    ▼                       ▼
- PostgreSQL              On-campus
- (works metadata,         file storage
-  users, jobs)            (disk/NFS)
+    ┌───────────┼───────────┐
+    ▼           ▼           ▼
+ PostgreSQL   Redis      Solr
+ (works       (Sidekiq)  (catalog)
+  metadata,
+  users)
                 │
                 ▼
-              Solr
+         On-campus file storage
+         (disk/NFS)
 ```
 
 - **No Fedora**
 - **No ActiveFedora**
 - **Same 8 work types**
+- **Redis remains** while Sidekiq (or equivalent) needs it—not removed by Phase D by default
 
 ## Transition path
 
 ```text
 Phase A     Hyrax 2.9 slim + F4
 Phase B     B1–B2 Ruby/Rails/Hyrax→4.x
-            B3 PostgreSQL
+            B3 PostgreSQL (scholar-dev / CI)
             B4 Hyrax 5.2 + Valkyrie + Wings on F4
             B5 Solr reindex
-Phase C     F4 → F6 → F7 (repository tier)
-Phase D     Metadata off Fedora → PostgreSQL-only; decommission Fedora
+Phase C     C1–C2: F4→F6→F7 on scholar-dev
+            merge → develop
+            C3: production cutover (app + PG + F6/F7)
+Phase D     Remaining metadata/files off Fedora; decommission Fedora
 ```
 
-**Ordering:** Phase C requires Phase B. No merge to **`develop`** until Fedora 7 works (after Phase C).
+**Ordering:** Phase C requires Phase B. Merge to **`develop`** only after **C2** (F7 on scholar-dev). Production F7 is **C3**.
 
 ## Code layout
 

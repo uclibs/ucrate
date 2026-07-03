@@ -3,7 +3,7 @@
 **Last updated:** 2026-07-03  
 **Current phase:** A — De-customize (Hyrax 2.9 / Fedora 4)  
 **Current sub-phase:** **A1** — Audit and baseline (**docs + baseline JSON only; no app code**)  
-**Branch:** `scholar-modernization` (all upgrade work; **do not merge to `develop` until Fedora 7 works**)
+**Branch:** `scholar-modernization` (all upgrade work; **do not merge to `develop` until Fedora 7 works on scholar-dev / C2**)
 
 ## Current stack (until Phase B changes it)
 
@@ -35,8 +35,10 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for target stack per phase.
 | B4 Hyrax 5.2 + Valkyrie + Wings | [ ] | DOI spike here |
 | B5 Solr reindex | [ ] | |
 | **Phase B gate** | [ ] | Before Phase C |
-| C1–C3 Fedora F6→F7 | [ ] | |
-| **Phase C gate** | [ ] | Enables merge to `develop` |
+| C1 F4→F6 on scholar-dev | [ ] | Two dry runs |
+| C2 F6→F7 on scholar-dev | [ ] | **Merge gate** → `develop` |
+| C3 Production cutover | [ ] | After merge; app + PG + F6/F7 |
+| **Phase C gate** | [ ] | Production on F7 (infosec) |
 | D PostgreSQL-only | [ ] | |
 
 ## Next up
@@ -65,17 +67,17 @@ Fill each row during A1. **Default: remove in listed phase unless active use fou
 
 | Item | Active use? | Evidence | Action |
 |------|-------------|----------|--------|
-| Grape API | | | Default A2 remove |
+| Grape API | | | Default A2 remove if unused |
 | Bulkrax | | | Default A2 remove if unused |
 | ChangeManager | | | Default A4 remove |
 | BrowseEverything | | | Default A5 trim |
-| Kaltura | | | Default A2 remove |
-| AWS X-Ray | | | Default A2 remove |
-| RSS / feed | | | Default A2 remove |
-| Sitemap | | | Default A2 remove |
-| Featured collections | | | Default A2 remove |
-| Collection TSV export | | | Default A2 remove |
-| Custom collection logic | | | Default A2/A6 simplify |
+| Kaltura | | | Default A2 remove if unused |
+| AWS X-Ray | | | Default A2 remove if unused |
+| RSS / feed | | | Default A2 remove if unused |
+| Sitemap | | | **Default keep** (SEO); remove only if unused |
+| Featured collections | | | **Default keep** if UI uses them |
+| Collection TSV export | | | Default A2 remove if unused |
+| Custom collection logic | | | Default A2/A6 simplify code; keep membership |
 | RemoveProxyEditors | | | Default A4 evaluate |
 | Other unused gems | | | A7 |
 
@@ -84,6 +86,7 @@ Fill each row during A1. **Default: remove in listed phase unless active use fou
 | Date | Sub-phase | Done | Next |
 |------|-----------|------|------|
 | 2026-07-03 | Docs | Full upgrade plan in `docs/upgrade/`; fresh-agent clarifications; cursor rules | A1 audit + baseline |
+| 2026-07-03 | Docs | Plan review: fixed C2/C3 vs merge-to-develop order; B3/B4 data locations; sitemap/featured defaults; Redis end state; INTEGRITY required counts | A1 audit + baseline |
 
 ## Known issues (carry forward)
 

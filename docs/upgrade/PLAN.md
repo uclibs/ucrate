@@ -51,13 +51,13 @@ Nurax (Hyrax 5 reference) uses `generic_work`, `image`, `monograph`. **Do not ad
 | Branch | Role |
 |--------|------|
 | **`scholar-modernization`** | **All upgrade work** (Phases A–D). Every sub-phase commits here. |
-| **`develop`** | Production/QA legacy line. **Do not merge upgrade work into `develop` until Fedora 7 is working** on scholar-dev and cutover is planned. |
+| **`develop`** | Production/QA legacy line. **Do not merge upgrade work into `develop` until Fedora 7 works on scholar-dev** (after C2). Production cutover is **C3**, after that merge. |
 | **`develop` → `scholar-modernization`** | Optional: merge or cherry-pick **security fixes** from production line into the feature branch. |
 
 | Environment | Branch | When |
 |-------------|--------|------|
-| scholar-dev | `scholar-modernization` | Every sub-phase |
-| production / QA | `develop` | Unchanged until post–Fedora 7 cutover |
+| scholar-dev | `scholar-modernization` | Every sub-phase through C2 (F7 proven here first) |
+| production / QA | `develop` | Unchanged until **after C2**, then merge + **C3** production cutover |
 
 ## What to keep vs remove
 
@@ -76,13 +76,15 @@ Nurax (Hyrax 5 reference) uses `generic_work`, `image`, `monograph`. **Do not ad
 | Item | Phase | Prerequisite |
 |------|-------|--------------|
 | Grape API (`app/api/scholar/`) | A2 | A1: no campus dependency |
-| Kaltura, RSS, sitemap, featured collections, collection TSV export | A2 | A1 audit |
+| Kaltura, RSS, collection TSV export | A2 | A1 audit |
+| **Sitemap** (`sitemap.xml`) | A2 only if unused | A1 audit — **default keep** (SEO / discovery); remove only with stakeholder OK |
+| **Featured collections** | A2 only if unused | A1 audit — **default keep** if homepage/admin uses them; do not confuse with stock Hyrax **featured works** |
 | `aws-xray-sdk` | A2 | Dev group only; remove if unused locally |
 | Bulkrax | A2 | A1: confirm unused |
 | ORCID fork + profile UI | A3 | — |
 | `devise-multi_auth` gem | A3 | After ORCID callback removed (ORCID-only in code) |
 | ChangeManager + proxy notification customizations | A4 | A1 audit |
-| Custom collection logic superseded by stock Hyrax | A2/A6 | A1 audit; keep data, simplify code |
+| Custom collection logic superseded by stock Hyrax | A2/A6 | A1 audit; **keep membership data**, simplify code only |
 | BrowseEverything cloud providers | A5 | A1 audit |
 | Unused gems after above removals | A7 | Re-run `bundle` / grep for references |
 | ActiveFedora monkey patches | B1+ | When gem versions allow |
@@ -101,17 +103,17 @@ Complete the **A1 audit table** in [STATUS.md](./STATUS.md) for every row below.
 
 | Item | Where to look | Default action |
 |------|---------------|----------------|
-| Grape API | `app/api/scholar/`, routes, access logs, campus integrations | A2 remove |
+| Grape API | `app/api/scholar/`, routes, access logs, campus integrations | A2 remove if unused |
 | Bulkrax | `config/initializers/bulkrax.rb`, admin UI, Sidekiq | A2 remove if unused |
 | ChangeManager | `Gemfile`, `Scholar::WorksControllerBehavior`, mailers | A4 remove |
 | BrowseEverything | `config/browse_everything_providers.yml`, deposit UI | A5 trim/remove cloud |
-| Kaltura | `Gemfile`, views, medium deposit | A2 remove |
+| Kaltura | `Gemfile`, views, medium deposit | A2 remove if unused |
 | AWS X-Ray | `Gemfile` (development group), initializer | A2 remove if unused |
-| RSS / feed | `app/services/rss_query_handler.rb`, routes | A2 remove |
-| Sitemap | `app/controllers/sitemaps_controller.rb` | A2 remove |
-| Featured collections | `app/models/concerns/hyrax/collections/featured.rb`, views | A2 remove |
-| Collection TSV export | `app/models/collection_export.rb`, related UI | A2 remove |
-| Custom collection types / overrides | Compare to stock Hyrax 2.9 collection types; `app/controllers/hyrax/collections_controller.rb`, `basic_collection_metadata.rb` | A2/A6 simplify toward stock |
+| RSS / feed | `app/services/rss_query_handler.rb`, routes | A2 remove if unused |
+| Sitemap | `app/controllers/sitemaps_controller.rb`, `sitemap.xml` route, search-console usage | **Keep** unless stakeholders confirm unused |
+| Featured collections | `app/models/concerns/hyrax/collections/featured.rb`, homepage/admin views | **Keep** if UI uses them; not the same as featured **works** |
+| Collection TSV export | `app/models/collection_export.rb`, related UI | A2 remove if unused |
+| Custom collection types / overrides | Compare to stock Hyrax 2.9 collection types; `app/controllers/hyrax/collections_controller.rb`, `basic_collection_metadata.rb` | A2/A6 simplify code; **never drop membership** |
 | RemoveProxyEditors | `app/models/concerns/remove_proxy_editors.rb` | A4 evaluate vs stock |
 | **Unused gem inventory** | Full `Gemfile` after above — see [Gem inventory](#gem-inventory-post-a1) | A7 remove dead gems |
 
@@ -134,10 +136,11 @@ rg -l 'bulkrax|Bulkrax' config app Gemfile
 rg -l 'change_manager|ChangeManager' app config Gemfile
 # ORCID (removed in A3; note for audit)
 rg -l 'orcid|ORCID|Devise::MultiAuth' app config Gemfile
-# Kaltura, X-Ray, RSS, sitemap, featured collections, collection export
+# Kaltura, X-Ray, RSS, sitemap (default keep), featured collections (default keep), collection export
 rg -l 'kaltura|Kaltura' app config Gemfile
 rg 'xray|XRay' Gemfile config
-rg -l 'RssQueryHandler|sitemap|featured' app config
+rg -l 'RssQueryHandler|SitemapsController|sitemap' app config
+rg -l 'featured|Featured' app/models app/views app/controllers
 rg -l 'CollectionExport|collection_export' app spec
 # Custom collections
 rg -l 'collections_controller|basic_collection_metadata|RemoveProxyEditors' app
@@ -238,16 +241,27 @@ For each: read that release’s upgrade notes, run `hyrax:update_config` and doc
 
 **Do this before B4.** Hyrax 5 + Valkyrie will use PostgreSQL; migrate the **Rails app DB** first (users, roles, Hyrax admin tables, etc.).
 
-- Add `pg` gem; migrate Rails app DB on scholar-dev from SQLite/MySQL to PostgreSQL.
-- Update `database.yml` and CI for PostgreSQL.
-- Production MySQL → PostgreSQL cutover is planned with Phase C (not in B3).
-- **Valkyrie metadata tables** are created in **B4** when Hyrax 5 + Valkyrie generators run against the same PostgreSQL instance.
+- Add `pg` gem; migrate Rails app DB on **scholar-dev** to PostgreSQL (scholar-dev is typically MySQL like production; local **test** may stay SQLite until CI is switched—document which envs use PG in STATUS).
+- Update `database.yml` and CI for PostgreSQL on the upgrade track.
+- **Production** MySQL → PostgreSQL is **not** done in B3. It is part of the **C3 production cutover** (same window as deploying Hyrax 5 from `develop`), after F7 is proven on scholar-dev and `scholar-modernization` is merged to `develop`.
+- **Valkyrie metadata tables** are created in **B4** when Hyrax 5 + Valkyrie generators run against the **same** PostgreSQL instance as the Rails app DB.
 
 **Exit criteria:** App runs on PostgreSQL on scholar-dev; login and admin work; PG ready for B4 Valkyrie install.
 
 ### B4 — Hyrax 5.2 + Valkyrie + Wings + custom ports
 
-**Final Hyrax hop**, combined with Valkyrie (not a separate phase after B2):
+**Final Hyrax hop**, combined with Valkyrie (not a separate phase after B2).
+
+**Where data lives after B4 (easy to get wrong):**
+
+| Content | Location after B4 |
+|---------|-------------------|
+| Legacy works (pre-upgrade objects) | Still in **Fedora 4**; Hyrax reads them through **Wings** |
+| New deposits / Valkyrie resources | **PostgreSQL** (Valkyrie metadata) + binaries per Hyrax 5 config (often still Fedora until Phase D) |
+| Users, roles, admin tables | **PostgreSQL** (Rails app DB from B3) |
+| Catalog | **Solr** (reindex in B5) |
+
+Do **not** decommission Fedora in B4. Wings exists so Phase B can finish **without** a repository migration (that is Phase C).
 
 1. Hyrax **4.x → 5.2.x** on PostgreSQL.
 2. `rails generate hyrax:work_resource` for **each of 8 types**; metadata YAML:
@@ -277,41 +291,75 @@ For each: read that release’s upgrade notes, run `hyrax:update_config` and doc
 
 **Cannot start until Phase B complete.**
 
+### Order (do not invert)
+
+```text
+C1  scholar-dev: F4 → F6 (two dry runs)
+C2  scholar-dev: F6 → F7  ← F7 must work HERE before any merge to develop
+    ── merge scholar-modernization → develop (first time upgrade code hits production line)
+C3  production cutover: deploy from develop + F4 → F6 → F7 + app DB MySQL → PG
+```
+
+**Why this order:** Production cannot run Hyrax 5 / Wings / F6–F7 until upgrade code is on `develop`. The branch rule is **prove Fedora 7 on scholar-dev first**, then merge, then cut production over. Do **not** attempt a production Fedora migration while production is still on Hyrax 2.9 / `develop` legacy.
+
 ### C1 — Fedora 6 on scholar-dev (F4 → F6)
 
 1. Stand up **Fedora 6.5.x** (OCFL).
 2. Export/import via [fcrepo-import-export](https://github.com/fcrepo/fcrepo-import-export) or community runbook.
 3. Full [INTEGRITY.md](./INTEGRITY.md) verification including FileSets and collections.
 4. Point Hyrax 5 Valkyrie Fedora adapter at F6.
-5. **Two dry runs** before production planning.
+5. **Two dry runs** on scholar-dev before C2.
 
-### C2 — Production F4 → F6 cutover
+**Exit criteria:** scholar-dev on F6; integrity pass; F4 snapshot retained for rollback practice.
 
-Read-only → final delta → import → reindex → keep F4 snapshot until sign-off.
+### C2 — Fedora 6 → 7 on scholar-dev (prove F7)
 
-### C3 — Fedora 6 → 7
+1. Deploy **fcrepo-7.x** on the **same OCFL store** as F6 (drop-in; not a second data migration).
+2. Java 21; Tomcat 10+ or Jetty 12 per Fedora 7 requirements.
+3. Re-run full integrity + DOI landing URLs (`/show/:id`).
 
-Deploy **fcrepo-7.x** on same OCFL store; Java 21; Tomcat 10+ or Jetty 12. Re-run integrity + DOI landing URLs.
+**Exit criteria (merge gate):**
 
-### Phase C exit criteria
+- [ ] scholar-dev on **Fedora 7**
+- [ ] Full INTEGRITY matrix green
+- [ ] Zero undisplayable works on scholar-dev
+- [ ] **Then** coordinated merge **`scholar-modernization` → `develop`** is allowed
+
+### C3 — Production cutover (after merge to `develop`)
+
+Single coordinated window (runbook in STATUS before starting):
+
+1. **App:** Deploy Hyrax 5 stack from `develop`; migrate production **MySQL → PostgreSQL** (Rails app DB; same approach rehearsed on scholar-dev in B3).
+2. **Repository:** F4 read-only → export → F6 import → verify → F6 → F7 on same OCFL store.
+3. **Solr:** full reindex; spot-check all 8 types, collections, FileSets, DOI, Shibboleth.
+4. Keep **F4 snapshot** and DB backup until sign-off; rollback owner and time limit recorded in STATUS.
+
+**Exit criteria (infosec milestone):**
 
 - [ ] Production on **Fedora 7** with infosec sign-off
 - [ ] Zero undisplayable works
+- [ ] DOI + Shibboleth + permanent URLs verified in production
 
-**After Phase C:** coordinated merge **`scholar-modernization` → `develop`** and production deploy (first time upgrade code hits production line).
+### Phase C exit criteria
+
+C2 (scholar-dev F7 + merge) **and** C3 (production F7) both complete.
 
 ---
 
 ## Phase D — PostgreSQL-only persistence
 
-1. Background/lazy migration of work metadata from Fedora 7 → PostgreSQL (Valkyrie).
-2. Files on on-campus disk (Active Storage or Valkyrie disk adapter).
+By Phase D, **users/roles** and **some** Valkyrie metadata are already in PostgreSQL (B3–B4). What remains in Fedora is primarily **legacy object graphs and/or binaries** still reached via the Fedora adapter.
+
+1. Migrate remaining work metadata from Fedora 7 → PostgreSQL (Valkyrie)—background/lazy is fine if counts stay correct.
+2. Move files to on-campus disk (Active Storage or Valkyrie disk adapter).
 3. Reindex Solr; update DOI landing URLs only if paths change.
-4. Decommission Fedora 7 when nothing reads it.
+4. Decommission Fedora 7 only when **nothing** reads it (moving-parts rule).
+5. **Keep Redis** while Sidekiq (or equivalent) still uses it—Phase D does **not** remove the job backend.
 
 ### Phase D exit criteria
 
-- [ ] All works served from PostgreSQL; Fedora stopped
+- [ ] All works served from PostgreSQL + on-campus files; Fedora stopped
+- [ ] Redis retained unless jobs no longer need it (separate decision)
 
 ---
 
@@ -347,11 +395,29 @@ Track in STATUS during A1/A7. Remove when audit confirms unused.
 
 | Risk | Mitigation |
 |------|------------|
-| F4→F6 data loss | Baseline + checksums; two dry runs |
+| F4→F6 data loss | Baseline + checksums; two dry runs on scholar-dev |
 | DOI fork on Hyrax 5 | B4 throwaway-branch spike at first Hyrax 5 boot |
 | Infosec timeline vs Phase B | Run A while researching B; escalate if B slips |
 | scholar-dev seed vs prod shape | Baseline on dev now; re-baseline when prod copy exists |
 | 8 types on Valkyrie | Shared `uc_common.yaml`; generator per type in B4 |
+| Production big-bang (C3) | Rehearse app+PG+F6+F7 on scholar-dev; written runbook + rollback owner |
+
+---
+
+## Common mistakes (read before coding)
+
+| Mistake | Correct approach |
+|---------|------------------|
+| Merge to `develop` so production can “try” F6 early | Prove **F7 on scholar-dev (C2)** first, **then** merge, **then** C3 |
+| Start Phase C while still on Hyrax 2.9 | Phase B (Hyrax 5 + Wings) must finish first—AF cannot use F6/F7 |
+| Treat B4 as “Fedora is gone” | B4 still uses Fedora via Wings; Phase D removes Fedora |
+| Migrate production MySQL in B3 | B3 = scholar-dev (and CI) only; production PG is **C3** |
+| Remove sitemap/featured collections by default | **Keep** unless A1 proves unused |
+| Drop a work type or type-specific show field | Never—keep all 8 types and displayable metadata |
+| Delete `users.orcid` or auth rows in A3 | Remove ORCID **UI/gems only**; keep historical columns/data |
+| Remove Redis because “end state is PostgreSQL” | Redis stays for Sidekiq until jobs do not need it |
+| Implement cancelled `Scholar::Record` / `lib/scholar/` export stack | Cancelled; only `lib/scholar.rb` permanent URLs stay |
+| Skip INTEGRITY because “only a gem remove” | Any slice that can affect works/auth/DOI still needs checks |
 
 ---
 
@@ -360,7 +426,8 @@ Track in STATUS during A1/A7. Remove when audit confirms unused.
 - Strangler `Scholar::Record` stack
 - Collapsing 8 types to Nurax’s 3
 - Fedora 7 without F6 OCFL
-- Merging to `develop` before Fedora 7 works
+- Merging to `develop` before Fedora 7 works **on scholar-dev**
+- Production Fedora migration before Hyrax 5 is on `develop`
 - Eight bespoke deposit wizards on Hyrax 5
 
 ## Next slices

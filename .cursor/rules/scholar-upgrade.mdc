@@ -13,7 +13,7 @@ Before non-trivial work:
 2. Implement only the **current sub-phase** (e.g. A2, B3)—not the whole phase.
 3. **Data integrity:** run `docs/upgrade/INTEGRITY.md` checks when a slice touches works, Fedora, Solr, DOI, or auth.
 4. **Moving-parts rule:** never remove Fedora, Solr, or Redis in an environment until nothing calls them.
-5. **Branch:** all work on `scholar-modernization`; scholar-dev deploys that branch. **Do not merge to `develop` until Fedora 7 works.**
+5. **Branch:** all work on `scholar-modernization`; scholar-dev deploys that branch. **Do not merge to `develop` until Fedora 7 works on scholar-dev (C2).** Production cutover is C3 after that merge.
 6. End session: update `docs/upgrade/STATUS.md`; commit with `Phase Xn: …` message.
 7. **Done bar:** [scholar-code-quality.mdc](.cursor/rules/scholar-code-quality.mdc), `bundle exec rubocop`, `bin/rspec-fast`; push for CircleCI.
 

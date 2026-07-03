@@ -10,10 +10,10 @@ This folder is the **single source of truth** for upgrading **Scholar@UC** (`ucl
 |------|--------|
 | **App** | Scholar@UC — Rails + Hyrax 2.9.6 + ActiveFedora + Fedora 4 (see [ARCHITECTURE.md](./ARCHITECTURE.md)) |
 | **Feature branch** | `scholar-modernization` (historical name; docs say **upgrade** — all upgrade commits land here) |
-| **Production line** | `develop` — **do not merge upgrade work into `develop` until Fedora 7 is working** |
+| **Production line** | `develop` — **do not merge upgrade work into `develop` until Fedora 7 works on scholar-dev (C2)** |
 | **scholar-dev** | UC **development deployment** of Scholar; deploys from `scholar-modernization` after each sub-phase |
-| **Deploy target** | scholar-dev first; production/QA (`develop`) only after Phase C + coordinated cutover |
-| **Strategy** | De-customize → Hyrax 5 + Valkyrie → Fedora 6 → Fedora 7 → PostgreSQL-only |
+| **Deploy target** | scholar-dev through C2; then merge to `develop` and run **C3** production cutover (app + PG + F6/F7) |
+| **Strategy** | De-customize → Hyrax 5 + Valkyrie (still F4) → F6 → F7 on scholar-dev → merge → production cutover → PostgreSQL-only files/metadata |
 | **Data priority** | **No lost or undisplayable works.** Counts and spot-checks every slice. |
 | **Current sub-phase** | Always read [STATUS.md](./STATUS.md) — as of last update: **A1** (audit + baseline; **no app code changes**) |
 
@@ -33,7 +33,8 @@ This folder is the **single source of truth** for upgrading **Scholar@UC** (`ucl
 - `Scholar::Record`, `app/models/scholar/`, `lib/scholar/` export/import stack
 - Strangler “Phase 0–6” export plan from March 2026 docs
 - Collapsing 8 UC work types to Nurax’s 3 types
-- Merging upgrade work to `develop` before Fedora 7 works
+- Merging upgrade work to `develop` before Fedora 7 works **on scholar-dev**
+- Production Fedora migration while production is still Hyrax 2.9
 
 **Safe to keep:** `lib/scholar.rb` (`Scholar.permanent_url_for` only) — see [ARCHITECTURE.md](./ARCHITECTURE.md).
 
@@ -55,7 +56,7 @@ Also see repo root [AGENTS.md](../../AGENTS.md) for a one-screen agent entry poi
 
 1. Read [STATUS.md](./STATUS.md).
 2. Confirm branch: `git branch --show-current` → `scholar-modernization`.
-3. Optionally merge **`develop` → `scholar-modernization`** for security fixes on the production line (cherry-pick or merge); never the reverse until Fedora 7 works.
+3. Optionally merge **`develop` → `scholar-modernization`** for security fixes on the production line (cherry-pick or merge); never the reverse until **C2** (Fedora 7 on scholar-dev).
 4. Do **one slice** from the current sub-phase in [PLAN.md](./PLAN.md)—not the whole phase.
 5. Run verification from [INTEGRITY.md](./INTEGRITY.md) when the slice touches works, Fedora, Solr, DOI, or auth.
 6. Before ending: update [STATUS.md](./STATUS.md) (date, done, next, blockers, baseline notes).
@@ -65,7 +66,7 @@ Also see repo root [AGENTS.md](../../AGENTS.md) for a one-screen agent entry poi
 
 > **Never remove a moving part in an environment until nothing there calls it.**
 
-> **All upgrade work stays on `scholar-modernization` until Fedora 7 is validated.** Do not merge to `develop` before then.
+> **All upgrade work stays on `scholar-modernization` until Fedora 7 is validated on scholar-dev (C2).** Then merge to `develop` and run production cutover (C3).
 
 > **If chat history conflicts with these docs, docs win.**
 

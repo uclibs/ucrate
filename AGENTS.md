@@ -12,7 +12,7 @@ Then [STATUS.md](docs/upgrade/STATUS.md) for the **current sub-phase** — do on
 
 | Item | Value |
 |------|--------|
-| Branch | `scholar-modernization` (all upgrade commits; **no merge to `develop` until Fedora 7 works**) |
+| Branch | `scholar-modernization` (all upgrade commits; **no merge to `develop` until Fedora 7 works on scholar-dev / C2**) |
 | Strategy | De-customize → Hyrax 5 + Valkyrie → Fedora 7 → PostgreSQL |
 | **Cancelled** | Strangler plan (`Scholar::Record`, `lib/scholar/` export stack) |
 | Keep | DOI, Shibboleth, **8 work types**, collections (simplify toward stock Hyrax), metadata on show |

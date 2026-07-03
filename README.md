@@ -6,7 +6,7 @@
 
 ## Repository upgrade
 
-Work on branch `scholar-modernization` follows the **Hyrax 5 + Fedora 7 upgrade plan** in [docs/upgrade/README.md](docs/upgrade/README.md). Update [docs/upgrade/STATUS.md](docs/upgrade/STATUS.md) at the end of each session. Do not merge upgrade work into `develop` until Fedora 7 is working.
+Work on branch `scholar-modernization` follows the **Hyrax 5 + Fedora 7 upgrade plan** in [docs/upgrade/README.md](docs/upgrade/README.md). Update [docs/upgrade/STATUS.md](docs/upgrade/STATUS.md) at the end of each session. Do not merge upgrade work into `develop` until Fedora 7 works on scholar-dev (plan C2).
 
 ## System Requirements
 

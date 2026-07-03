@@ -17,3 +17,5 @@ See [INTEGRITY.md](../INTEGRITY.md) for the full JSON schema and console command
 Document `environment` and `data_note` in the JSON file.
 
 Phase A1 creates the first baseline **before** any de-customization code changes.
+
+**Required fields:** `solr_by_type`, `solr_total_works`, `solr_fileset_count`, `solr_collection_count`, and `solr_doi_count` (use `0` when none). `sample_ids` may be `null` per type when seed data has no works of that type—note that in `data_note`.
