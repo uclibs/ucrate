@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Naming conventions (Scholar@UC)
 
-Match **existing** names in the touched area. When adding **new** `Scholar::` code, follow the modernization rows below.
+Match **existing** names in the touched area. During the Hyrax upgrade, prefer extending existing Hyrax patterns over new namespaces.
 
 ## Files & directories
 
@@ -19,7 +19,7 @@ Match **existing** names in the touched area. When adding **new** `Scholar::` co
 | Rake | `snake_case.rake` under `lib/tasks/` | `fixity_check.rake` |
 | Bin script | `snake_case`, no extension or `.rb` | `rspec-fast` |
 
-**Autoload rule:** file path must match the constant (`ExpirationService` → `app/services/expiration_service.rb`; `Scholar::Export::Manifest` → `lib/scholar/export/manifest.rb`).
+**Autoload rule:** file path must match the constant (`ExpirationService` → `app/services/expiration_service.rb`; `GenericWork` → `app/models/generic_work.rb`).
 
 ## Classes, modules, namespaces
 
@@ -60,18 +60,17 @@ Do not use `camelCase` for Ruby identifiers.
 | Service (app root) | `<Noun>Service`, `<Noun>Loader`, `<Noun>Report`, `<Noun>Factory` | `ExpirationService`, `WorkLoader` |
 | Hyrax service | under `Hyrax::` module | `Hyrax::FixityCheckFailureService` |
 
-## Scholar modernization (new code)
+## Valkyrie metadata (Phase B4+)
 
 | Item | Pattern | Example |
 |------|---------|---------|
-| Namespace | `Scholar::` | `Scholar::DoiService` |
-| Paths | `lib/scholar/`, `app/models/scholar/`, `spec/lib/scholar/` | |
-| DB table (planned) | plural `snake_case` | `scholar_records` |
-| `resource_type` values | `snake_case` string | `'generic_work'`, `'student_work'` |
-| Rake namespace | `:scholar` | `scholar:export:manifest` |
+| Metadata YAML | `config/metadata/<type>.yaml` | `config/metadata/etd.yaml` |
+| Shared UC fields | `config/metadata/uc_common.yaml` | included from each type schema |
+| Work resource class | `PascalCase` | `Etd` (same as ActiveFedora model name) |
+| Curation concern key | `snake_case` | `etd` in `config/initializers/hyrax.rb` |
 | Spec (throwaway) | under `spec/throwaway/`, tag `throwaway: true` | |
 
-Do not introduce new top-level namespaces without a note in `docs/modernization/DECISIONS.md`.
+Do not introduce new top-level namespaces without a note in `docs/upgrade/DECISIONS.md`.
 
 ## Config & environment
 
@@ -89,5 +88,5 @@ Before finishing a slice, confirm every **new or renamed** identifier:
 
 1. File name ↔ constant/path alignment (Zeitwerk)
 2. Singular model / plural controller (if Rails MVC)
-3. `Scholar::` prefix and path for modernization code only
+3. All 8 work types keep existing model/controller names unless PLAN says otherwise
 4. No stray camelCase or inconsistent pluralization

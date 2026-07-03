@@ -8,4 +8,4 @@
 - A failure here means “something in the slow tier *might* be broken”—confirm in CI.
 - When a slop check becomes stale or annoying, **delete or rewrite it** without guilt.
 
-See [TESTING.md](../modernization/TESTING.md).
+See [TESTING.md](../../docs/upgrade/TESTING.md).

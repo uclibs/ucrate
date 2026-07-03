@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Examples tagged :slow need Fedora, Solr, and/or a browser (see docs/modernization/TESTING.md).
+# Examples tagged :slow need Fedora, Solr, and/or a browser (see docs/upgrade/TESTING.md).
 # Run locally with: bin/rspec-fast  (excludes :slow)
 # CircleCI runs the full suite (no filter).
 

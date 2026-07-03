@@ -1,0 +1,21 @@
+---
+description: When editing upgrade planning docs, keep STATUS accurate
+globs: docs/upgrade/**
+alwaysApply: false
+---
+
+# Upgrade planning docs
+
+When changing plan or architecture:
+
+- Keep [STATUS.md](docs/upgrade/STATUS.md) in sync—**Last updated**, phase/sub-phase, next up, blockers, A1 audit table
+- Final decisions go in [DECISIONS.md](docs/upgrade/DECISIONS.md); open questions in its table until resolved
+- [PLAN.md](docs/upgrade/PLAN.md) changes are rare; note why in DECISIONS or STATUS session log
+- Baseline counts live in [baseline/](docs/upgrade/baseline/)—reference file name in STATUS
+- Write for a future Cursor session with **no chat memory**
+
+Use checklist `- [ ]` / `- [x]` in STATUS for phase progress.
+
+**Do not** reintroduce strangler-plan content (`Scholar::Record`, Phase 0–6 export/import strangler).
+
+**Terminology:** use **upgrade** (not modernization) in new doc text. Branch name `scholar-modernization` is unchanged.

@@ -1,5 +1,5 @@
 ---
-description: Code quality checks to run before finishing a slice (naming first)
+description: Code quality checks before finishing an upgrade slice (naming first)
 alwaysApply: true
 ---
 
@@ -19,25 +19,25 @@ Read `.cursor/rules/scholar-naming-conventions.mdc` and verify:
 - [ ] **Classes / modules** — `PascalCase`; file path matches constant (autoload)
 - [ ] **Methods, variables, params** — `snake_case`; predicates `?`; no camelCase
 - [ ] **Rails roles** — singular models, plural controllers; `*Service`, `*Job`, `*Indexer` match project patterns
-- [ ] **`Scholar::` code** — under `lib/scholar/`, `app/models/scholar/`, etc.; `resource_type` strings are `snake_case`
-- [ ] **ENV / rake** — `SCHOLAR_*` env vars; `:scholar` rake namespace for new tasks
+- [ ] **Work types** — 8 UC types unchanged unless PLAN explicitly consolidates (currently: keep all 8)
 
 If a name is wrong, rename in the same slice (including spec paths and references).
 
-### 2. (Reserved)
+### 2. Data integrity (when slice touches content)
 
-_Add the next quality check here when defined._
+- [ ] Run applicable checks from [INTEGRITY.md](docs/upgrade/INTEGRITY.md)
+- [ ] Document count deltas in STATUS if not matching baseline
 
-## Also run (already in modernization done bar)
+## Also run
 
-After naming passes:
+After naming (and integrity when applicable):
 
 - `bundle exec rubocop` on changed Ruby files
-- `bin/rspec-fast` (or targeted paths); see `docs/modernization/TESTING.md`
+- `bin/rspec-fast` (or targeted paths); see [TESTING.md](docs/upgrade/TESTING.md)
 
 Push for full CircleCI when ready.
 
 ## When to skip
 
-- Question-only or read-only review: naming check on cited symbols only, not the whole repo
+- Question-only or read-only review: naming check on cited symbols only
 - Legacy file touched for a one-line fix: do not rename unrelated identifiers in that file

@@ -4,9 +4,9 @@
 [![CircleCI](https://circleci.com/gh/uclibs/ucrate.svg?style=svg)](https://circleci.com/gh/uclibs/ucrate)
 [![Coverage Status](https://coveralls.io/repos/github/uclibs/ucrate/badge.svg?branch=main)](https://coveralls.io/github/uclibs/ucrate?branch=main)
 
-## Repository modernization
+## Repository upgrade
 
-Work on branch `scholar-modernization` follows the plan in [docs/modernization/README.md](docs/modernization/README.md). Update [docs/modernization/STATUS.md](docs/modernization/STATUS.md) at the end of each session.
+Work on branch `scholar-modernization` follows the **Hyrax 5 + Fedora 7 upgrade plan** in [docs/upgrade/README.md](docs/upgrade/README.md). Update [docs/upgrade/STATUS.md](docs/upgrade/STATUS.md) at the end of each session. Do not merge upgrade work into `develop` until Fedora 7 is working.
 
 ## System Requirements
 
@@ -190,7 +190,7 @@ For day-to-day development—especially on `scholar-modernization`:
 bin/rspec-fast
 ```
 
-See [docs/modernization/TESTING.md](docs/modernization/TESTING.md). CircleCI runs the **full** suite on push.
+See [docs/upgrade/TESTING.md](docs/upgrade/TESTING.md). CircleCI runs the **full** suite on push.
 
 ### Full suite (Fedora + Solr required)
 

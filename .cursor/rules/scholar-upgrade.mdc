@@ -1,0 +1,26 @@
+---
+description: Scholar upgrade context—read docs first, phases, data integrity, moving-parts rule
+alwaysApply: true
+---
+
+# Scholar@UC upgrade (Hyrax 5 + Fedora 7)
+
+**Cancelled:** strangler plan (`Scholar::Record`, custom stack off Hyrax). Do not implement.
+
+Before non-trivial work:
+
+1. Read `docs/upgrade/README.md` then `STATUS.md` then `PLAN.md` (current sub-phase only).
+2. Implement only the **current sub-phase** (e.g. A2, B3)—not the whole phase.
+3. **Data integrity:** run `docs/upgrade/INTEGRITY.md` checks when a slice touches works, Fedora, Solr, DOI, or auth.
+4. **Moving-parts rule:** never remove Fedora, Solr, or Redis in an environment until nothing calls them.
+5. **Branch:** all work on `scholar-modernization`; scholar-dev deploys that branch. **Do not merge to `develop` until Fedora 7 works.**
+6. End session: update `docs/upgrade/STATUS.md`; commit with `Phase Xn: …` message.
+7. **Done bar:** [scholar-code-quality.mdc](.cursor/rules/scholar-code-quality.mdc), `bundle exec rubocop`, `bin/rspec-fast`; push for CircleCI.
+
+**Keep:** DataCite DOI, Shibboleth, all **8 work types**, collections (simplify toward stock Hyrax), type-specific metadata on show pages.
+
+**Remove (per PLAN):** ORCID, ChangeManager, Grape API, unused gems, custom collection logic where stock Hyrax replaces it.
+
+**Gates:** Do not start Phase B until Phase A exit criteria met. Do not start Phase C until Phase B exit criteria met.
+
+If chat history conflicts with docs, **docs win**.

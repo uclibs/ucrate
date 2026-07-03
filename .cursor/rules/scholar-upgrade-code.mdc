@@ -1,0 +1,43 @@
+---
+description: Code standards for Hyrax overrides during upgrade (Phases A–B)
+globs: app/models/**,app/controllers/hyrax/**,app/forms/hyrax/**,app/indexers/**,app/presenters/hyrax/**,config/metadata/**,config/initializers/hyrax.rb,config/initializers/hydra_remote_identifier_config.rb
+alwaysApply: false
+---
+
+# Hyrax upgrade code
+
+## Strategy
+
+- **Stay on Hyrax** — extend community patterns, do not build parallel `Scholar::` stack
+- **Shrink custom surface** in Phase A before gem major bumps in Phase B
+- **Preserve display** of all metadata fields for existing works when simplifying forms
+
+## Layout
+
+- Work types: `app/models/<type>.rb` → Valkyrie resources in Phase B4 (`config/metadata/<type>.yaml`)
+- DOI: keep concerns/actors/jobs; port to Valkyrie in B4
+- Shibboleth: minimal Devise + omniauth config
+- Permanent URLs: `lib/scholar.rb`, `CommonObjectsController`
+
+## Style
+
+- Match existing Hyrax 2.9 patterns until Phase B lands
+- Ruby 2.7 / Rails 5.2 compatible until B1 explicitly bumps versions
+- Smallest correct diff per sub-phase
+- No comments for obvious code; comment DOI invariants and migration notes only
+
+## Dependencies
+
+- Do not add new gems unless PLAN/STATUS approves
+- Remove gems in PLAN order (A1 audit before A2 removal)
+- Keep `hydra-remote_identifier` fork until DOI ported on Hyrax 5
+
+## Tests
+
+- Prefer **unit/request specs** over new feature specs; `bin/rspec-fast` for fast tier
+
+## Diffs
+
+- Do not refactor unrelated legacy code
+- Naming: [scholar-naming-conventions.mdc](../scholar-naming-conventions.mdc)
+- Done bar: [scholar-code-quality.mdc](../scholar-code-quality.mdc)

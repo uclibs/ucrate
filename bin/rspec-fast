@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Fast local specs: no Fedora, Solr, Redis, or browser required.
 # Includes throwaway slop checks in spec/throwaway/ (mocked slow-tier smoke tests).
-# See docs/modernization/TESTING.md
+# See docs/upgrade/TESTING.md
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
