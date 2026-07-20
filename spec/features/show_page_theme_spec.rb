@@ -28,15 +28,22 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
     Hyrax::Group.create(name: "registered")
   end
 
+  # Site is Apartment-tenanted; JS feature specs must assert themes via the app
+  # (page / selects), not Site.instance in the test process.
+
+  def save_show_theme(name)
+    visit '/admin/appearance'
+    click_link('Themes')
+    select(name, from: 'Show Page Theme')
+    find('body').click
+    within('#themes') { click_on('Save') }
+    expect(page).to have_content('The appearance was successfully updated')
+  end
+
   context "as a repository admin" do
     it 'has a select box for the show page themes' do
       login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Default Show Page', from: 'Show Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-      expect(page).to have_content('The appearance was successfully updated')
+      save_show_theme('Default Show Page')
     end
 
     it 'sets the theme to default if no theme is selected' do
@@ -46,15 +53,11 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
 
     it 'sets the themes when the theme form is saved' do
       login_as admin
-      visit 'admin/appearance'
+      save_show_theme('Default Show Page')
+
       click_link('Themes')
-      select('Default Show Page', from: 'Show Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-      expect(site.show_theme).to eq('default_show')
+      expect(page).to have_select('Show Page Theme', selected: 'Default Show Page')
+
       visit '/'
       expect(page).to have_css('body.default_show')
     end
@@ -73,14 +76,8 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
 
     it 'renders the partials in the theme folder' do
       login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Cultural Show Page', from: 'Show Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
+      save_show_theme('Cultural Show Page')
+
       visit "/concern/generic_works/#{work.id}"
       expect(page).to have_css('body.cultural_show.text-show-theme-partial')
       expect(page).to have_css('.text-show-title')
@@ -88,25 +85,14 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
 
     it 'updates the show theme when the theme is changed' do # rubocop:disable RSpec/ExampleLength
       login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Cultural Show Page', from: 'Show Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
+      save_show_theme('Cultural Show Page')
+
       visit "/concern/generic_works/#{work.id}"
       expect(page).to have_css('body.cultural_show.text-show-theme-partial')
       expect(page).to have_css('.text-show-title')
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Default Show Page', from: 'Show Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
+
+      save_show_theme('Default Show Page')
+
       visit "/concern/generic_works/#{work.id}"
       expect(page).to have_css('body.default_show')
       expect(page).not_to have_css('.text-show-title')

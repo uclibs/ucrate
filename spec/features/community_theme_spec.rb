@@ -3,23 +3,27 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin can select community theme', type: :feature, js: true, clean: true do
-  let(:account) { FactoryBot.create(:account_with_public_schema) }
   let(:admin) { FactoryBot.create(:admin, email: 'admin@example.com', display_name: 'Julie Admin') }
+
+  # Site is Apartment-tenanted; JS feature specs must assert themes via the app
+  # (page / selects), not Site.instance in the test process.
+
+  def save_home_theme(name)
+    visit '/admin/appearance'
+    click_link('Themes')
+    select(name, from: 'Home Page Theme')
+    find('body').click
+    within('#themes') { click_on('Save') }
+    expect(page).to have_content('The appearance was successfully updated')
+  end
 
   context 'as a repository admin' do
     it 'sets the community theme when the theme form is saved' do
       login_as admin
-      visit 'admin/appearance'
+      save_home_theme('Community')
+
       click_link('Themes')
-      select('Community', from: 'Home Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-
-      expect(site.home_theme).to eq('community')
+      expect(page).to have_select('Home Page Theme', selected: 'Community')
 
       visit '/'
       expect(page).to have_css('body.community')
@@ -41,109 +45,48 @@ RSpec.describe 'Admin can select community theme', type: :feature, js: true, cle
   end
 
   context 'when the community theme is selected' do
-    it 'renders the theme-specific layout' do
+    before do
       login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Community', from: 'Home Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
+      save_home_theme('Community')
+    end
 
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-
+    it 'renders the theme-specific layout' do
       visit '/'
 
-      # Theme CSS class applied
       expect(page).to have_css('body.community')
-
-      # Theme sections present
       expect(page).to have_content('Featured Works')
       expect(page).to have_content('Collections')
-
-      # Other themes' elements NOT present
       expect(page).not_to have_css('div.ir-stats')
       expect(page).not_to have_css('nav.cultural-repository-nav')
       expect(page).not_to have_css('div.institutional-repository-carousel')
     end
 
     it 'does not display featured researcher section' do
-      login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Community', from: 'Home Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-
-      # Create featured researcher content
       ContentBlock.update_block(name: 'featured_researcher', value: '<h2>Test Researcher</h2>')
 
       visit '/'
 
-      # Should NOT appear because featured_researcher: false
       expect(page).not_to have_content('Test Researcher')
       expect(page).not_to have_css('.featured-researcher')
     end
 
     it 'displays featured works section' do
-      login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Community', from: 'Home Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-
       visit '/'
-
       expect(page).to have_content('Featured Works')
-      # Could also test for specific CSS classes if you add custom ones
     end
 
     it 'displays collections section' do
-      login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Community', from: 'Home Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-
       visit '/'
-
       expect(page).to have_content('Collections')
     end
 
     it 'displays navigation links in the masthead' do
-      login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Community', from: 'Home Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-
       page.driver.browser.manage.window.resize_to(1400, 1000)
       visit '/'
-      # Test the navbar structure exists
+
       expect(page).to have_css('#masthead.community-masthead')
       expect(page).to have_css('#masthead .navbar-nav')
 
-      # Test links exist (may be hidden by collapse)
       within('#masthead') do
         expect(page).to have_link('Home', visible: :all)
         expect(page).to have_link('About', visible: :all)
@@ -153,21 +96,9 @@ RSpec.describe 'Admin can select community theme', type: :feature, js: true, cle
     end
 
     it 'displays search bar below the banner' do
-      login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Community', from: 'Home Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
 
-      # Search section exists
       expect(page).to have_css('.community-search-section')
-
       expect(page).to have_css('#search-form-header')
       expect(page).to have_field('q')
       expect(page).to have_button('Go')

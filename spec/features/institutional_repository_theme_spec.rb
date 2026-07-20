@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin can select institutional repository theme', type: :feature, js: true, clean: true do # rubocop:disable Layout/LineLength
-  let(:account) { FactoryBot.create(:account_with_public_schema) }
   let(:admin) { FactoryBot.create(:admin, email: 'admin@example.com', display_name: 'Adam Admin') }
   let(:user) { create :user }
   let!(:work) do
@@ -14,18 +13,26 @@ RSpec.describe 'Admin can select institutional repository theme', type: :feature
            user:)
   end
 
+  # Site is Apartment-tenanted; JS feature specs must assert themes via the app
+  # (page / selects), not Site.instance in the test process.
+
+  def save_home_theme(name)
+    visit '/admin/appearance'
+    click_link('Themes')
+    select(name, from: 'Home Page Theme')
+    find('body').click
+    within('#themes') { click_on('Save') }
+    expect(page).to have_content('The appearance was successfully updated')
+  end
+
   context 'as a repository admin' do
     it 'sets the institutional repository theme when the theme form is saved' do
       login_as admin
-      visit 'admin/appearance'
+      save_home_theme('Institutional Repository')
+
       click_link('Themes')
-      select('Institutional Repository', from: 'Home Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-      expect(site.home_theme).to eq('institutional_repository')
+      expect(page).to have_select('Home Page Theme', selected: 'Institutional Repository')
+
       visit '/'
       expect(page).to have_css('body.institutional_repository')
     end
@@ -34,14 +41,8 @@ RSpec.describe 'Admin can select institutional repository theme', type: :feature
   context 'when the institutional repository theme is selected' do
     it 'renders the partials in the theme folder' do
       login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Institutional Repository', from: 'Home Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
+      save_home_theme('Institutional Repository')
+
       visit '/'
       expect(page).to have_css('body.institutional_repository')
       expect(page).to have_css('nav#masthead.institutional-repository-nav')
@@ -61,14 +62,8 @@ RSpec.describe 'Admin can select institutional repository theme', type: :feature
       ]
       work.save
       login_as admin
-      visit '/admin/appearance'
-      click_link('Themes')
-      select('Institutional Repository', from: 'Home Page Theme')
-      find('body').click
-      within('#themes') { click_on('Save') }
-      site = Site.instance.reload
-      account.sites << site
-      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
+      save_home_theme('Institutional Repository')
+
       visit '/'
       expect(page).to have_css('div.institutional-repository-carousel')
     end
