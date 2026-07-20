@@ -19,3 +19,5 @@
 1. [install.md](./install.md) → [environment.md](./environment.md)
 2. [run-the-app.md](./run-the-app.md) → http://localhost:3000
 3. Tests only when you need them: [run-tests.md](./run-tests.md)
+
+<!-- trivial change for PR/CI process smoke test -->
