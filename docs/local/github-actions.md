@@ -18,9 +18,7 @@ CI uses Actions + Docker **only on the runner**. Local macOS setup under `docs/l
 
 Caching (to keep runs shorter): Bundler (`ruby/setup-ruby` bundler-cache), Yarn, RuboCop result cache, ruby-advisory-db for bundler-audit, and Docker service images from `docker-compose.ci.yml` (saved by shard 0, restored by all shards). Apt packages are installed directly (not cached) so six parallel shards do not race the same Actions cache key.
 
-Specs run Ruby on the Actions host (not inside the Hyku web container). CI sets `HYKU_CACHE_ROOT` under the workspace so the app does not try to write `/app/samvera/file_cache`. After `db:prepare`, CI runs `db:extensions` so `shared_extensions` / `uuid-ossp` exist for Apartment tenants (Compose pre-creates the DB, which skips Hyku’s `db:create` hook).
-
-Making the full suite green is a follow-up; the workflow is wired first so failures are visible.
+Specs run Ruby on the Actions host (not inside the Hyku web container). CI sets env to match Hyku Docker’s `.env` where it matters for specs — especially `HYKU_RESTRICT_CREATE_AND_DESTROY_PERMISSIONS` (Groups with Roles) and `HYKU_CACHE_ROOT` under the workspace (not `/app/...`). Database setup matches Hyku CI: `db:create db:schema:load db:migrate` so `shared_extensions` / `uuid-ossp` exist before schema load (required for Apartment tenants).
 
 ## PR label checker (`Verify` / “PR has required labels”)
 

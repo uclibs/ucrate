@@ -57,6 +57,14 @@ env:
   SECRET_KEY_BASE: ci-secret-key-base-not-for-production
   DISABLE_REDIS_CLUSTER: "true"
   RUBOCOP_CACHE_ROOT: ${{ github.workspace }}/tmp/rubocop_cache
+  # Parity with Hyku Docker CI (env_file: .env). Without RESTRICT, registered
+  # users get everyone_can_create_curation_concerns and collection_reader can
+  # :create — those ability/feature specs then fail.
+  HYKU_RESTRICT_CREATE_AND_DESTROY_PERMISSIONS: "true"
+  VALKYRIE_ID_TYPE: string
+  HYRAX_VALKYRIE: "true"
+  HYRAX_FLEXIBLE: "false"
+  DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
 
 jobs:
   lint:
@@ -236,12 +244,14 @@ jobs:
       - name: Prepare database
         run: |
           set -euo pipefail
-          # Compose already creates hyku_test via POSTGRES_DB, so db:prepare skips
-          # db:create — and Hyku's db:extensions hook only runs on db:create /
-          # db:test:purge. Without shared_extensions (uuid-ossp), Apartment tenant
-          # creation fails with uuid_generate_v4() does not exist.
-          bundle exec rails db:prepare
-          bundle exec rails db:extensions
+          # Match Hyku Docker CI (notch8/actions setup_db_cmd):
+          #   db:create db:schema:load db:migrate
+          # db:create's enhance hook installs uuid-ossp into shared_extensions
+          # *before* schema.rb's enable_extension can put it in public. If
+          # schema loads first, CREATE EXTENSION IF NOT EXISTS is a no-op and
+          # Apartment tenant DDL (search_path: tenant,shared_extensions) cannot
+          # find uuid_generate_v4().
+          bundle exec rails db:create db:schema:load db:migrate
 
       - name: Upload Solr configset
         run: |
