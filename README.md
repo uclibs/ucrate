@@ -13,6 +13,17 @@ This branch is stock [Samvera Hyku](https://github.com/samvera/hyku), kept besid
 
 Upstream Docker docs remain in [docs/getting-started.md](./docs/getting-started.md). This README is the **no-Docker** path for our team.
 
+### Quick links
+
+| Goal | Jump to |
+|------|---------|
+| Install dependencies | [§3](#3-install-or-update-homebrew--rbenv) |
+| Configure env | [§4](#4-local-environment-variables) |
+| **Run the app locally** | [§5–§8](#5-start-supporting-services-separate-terminals) |
+| **Run tests locally** (optional; can take a long time) | [§9](#9-running-tests-locally-optional) |
+| Switch back to `develop` | [§10](#10-switching-back-to-develop) |
+| Troubleshooting | [§11](#11-troubleshooting) |
+
 ---
 
 ## 1. What versions do we need?
@@ -23,8 +34,10 @@ Upstream Docker docs remain in [docs/getting-started.md](./docs/getting-started.
 | **Bundler** | 2.6.x | `BUNDLED WITH` at the bottom of `Gemfile.lock` |
 | **PostgreSQL** | 14+ (11+ OK) | Hyku uses the `pg` gem / Apartment; Docker pin is `postgres:11.1` |
 | **Redis** | 6.2+ (7.x fine) | Sidekiq 7 needs Redis ≥ 6.2 (`Gemfile` comment). Still useful with Good Job for cache/Hyrax |
-| **Solr** | **7.4.0** via `solr_wrapper` | `config/solr_wrapper_test.yml` (pinned; “until solr_wrapper handles Solr 8”). Docker image is Solr **8.11.2** — wrappers are separate |
-| **Fedora (fcrepo)** | **4.7.3** via `fcrepo_wrapper` | Default in the `fcrepo_wrapper` gem; Docker uses `fcrepo4:4.7.5`. Port **8984** from `.fcrepo_wrapper` |
+| **Solr (dev)** | **7.4.0** via `solr_wrapper` on port **8983** | `.solr_wrapper` + pin `--version 7.4.0` (matches test pin; Docker image is Solr **8.11.2**) |
+| **Solr (test)** | **7.4.0** on port **8985** | `config/solr_wrapper_test.yml` |
+| **Fedora (dev)** | **4.7.3** via `fcrepo_wrapper` on port **8984** | `.fcrepo_wrapper`; Docker uses `fcrepo4:4.7.5` |
+| **Fedora (test)** | **4.7.3** on port **8986** | `config/fcrepo_wrapper_test.yml` (not develop’s old test port **8080**) |
 | **Java** | **8** (Temurin 8) for Fedora wrapper | Same constraint as older Hyrax/Fedora 4 stacks |
 | **Node / Yarn** | Node 20-ish, Yarn classic | Universal Viewer / `yarn install` (`package.json`) |
 | **ImageMagick, LibreOffice** | Current Homebrew | Derivatives / office conversion |
@@ -32,6 +45,17 @@ Upstream Docker docs remain in [docs/getting-started.md](./docs/getting-started.
 **Do not trust Homebrew’s `solr` formula for this app.** Use `bundle exec solr_wrapper` so the app gets the version and config under `solr/conf/`.
 
 **Do not source the committed `.env` as-is for local runs.** That file is aimed at Docker Compose (`DB_HOST=db`, `SOLR_HOST=solr`, `REDIS_HOST=redis`, `FCREPO_HOST=fcrepo`). Rails does **not** auto-load `.env` outside Docker. Local defaults in `config/*.yml` already prefer `localhost` / `127.0.0.1` when those vars are unset.
+
+### Dev vs test ports (do not mix)
+
+| | Development (run the app) | Test (run specs) |
+|---|---|---|
+| Solr | **8983** / `hydra-development` | **8985** / `hydra-test` |
+| Fedora | **8984** | **8986** |
+| Redis | 6379 | 6379 |
+| Postgres DB | `hyku` | `hyku_test` |
+
+You can run the app stack and the test stack at the same time because the ports differ. Do **not** point the test suite at the development Solr/Fedora ports.
 
 ---
 
@@ -287,6 +311,8 @@ set -a && source .env.local.mac && set +a
 
 ## 5. Start supporting services (separate terminals)
 
+This section is for **running the app** (development ports). For tests, see [§9](#9-running-tests-locally-optional).
+
 Stay in the project directory. Use **foreground** processes (do not append `&`) so logs are visible. Solr paths must not contain spaces.
 
 ### Terminal A — Fedora (port 8984)
@@ -334,6 +360,7 @@ psql -d hyku -c 'SELECT current_user;'
 ```
 
 Do not start `postgresql@16` (or any other version) if something is already accepting connections on port 5432.
+
 ---
 
 ## 6. One-time app setup
@@ -383,11 +410,11 @@ Sign in with the `INITIAL_ADMIN_*` values from `.env.local.mac`.
 
 ---
 
-## 8. Everyday restart order
+## 8. Everyday restart order (app)
 
 1. Postgres + Redis (`brew services` or terminals)
-2. `fcrepo_wrapper` (Java 8)
-3. `solr_wrapper --version 7.4.0`
+2. `fcrepo_wrapper` (Java 8) — port **8984**
+3. `solr_wrapper --version 7.4.0` — port **8983**
 4. `sidekiq`
 5. `rails server`
 
@@ -395,7 +422,102 @@ Stop with Ctrl+C in each terminal. Safe to leave brew-managed Postgres/Redis run
 
 ---
 
-## 9. Switching back to `develop`
+## 9. Running tests locally (optional)
+
+You do **not** need to run the full suite for every change. A complete local run needs Solr + Fedora on **test** ports and can take a **long time** (often on the order of an hour). Prefer CI for routine full runs; use this section when you specifically want to exercise specs on your Mac.
+
+Prerequisites (same as the app, already covered above):
+
+- Ruby / Bundler / gems installed (§3)
+- Postgres running with `hyku_test` created (§3 Step E)
+- Redis running
+- `.env.local.mac` sourced (`DB_TEST_NAME=hyku_test`, etc.)
+- Java 8 available for Fedora
+
+### Option A — Recommended: `rake ci` (auto-starts test Solr + Fedora)
+
+This matches the repo’s non-Docker default (`Rakefile` → `with_server 'test'`). It starts Solr/Fedora using the **test** wrapper configs, then runs the specs.
+
+```bash
+cd /path/to/ucrate
+set -a && source .env.local.mac && set +a
+
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# First time (or after schema changes):
+RAILS_ENV=test bundle exec rails db:prepare
+
+bundle exec rake ci
+```
+
+What `rake ci` uses:
+
+| Service | Port | Config |
+|---------|------|--------|
+| Solr | **8985** | `config/solr_wrapper_test.yml` (Solr 7.4.0, `hydra-test`) |
+| Fedora | **8986** | `config/fcrepo_wrapper_test.yml` |
+
+`bundle exec rake` (with no args, outside Docker) runs RuboCop then `ci`.
+
+To run only RuboCop (no Solr/Fedora, much faster):
+
+```bash
+bundle exec rubocop
+```
+
+### Option B — Manual test wrappers (like the old `develop` flow)
+
+Use this if you want wrappers left running across multiple spec invocations. **Ports differ from `develop`:** Fedora test is **8986** here (not develop’s **8080**). Solr test stays **8985**.
+
+**Terminal 1 — Fedora (test, 8986)**
+
+```bash
+cd /path/to/ucrate
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export PATH="$JAVA_HOME/bin:$PATH"
+bundle exec fcrepo_wrapper -c config/fcrepo_wrapper_test.yml
+```
+
+**Terminal 2 — Solr (test, 8985)**
+
+```bash
+cd /path/to/ucrate
+bundle exec solr_wrapper -c config/solr_wrapper_test.yml
+```
+
+**Terminal 3 — Redis** (skip if `brew services` already runs it)
+
+```bash
+redis-server
+```
+
+**Terminal 4 — Specs**
+
+```bash
+cd /path/to/ucrate
+set -a && source .env.local.mac && set +a
+
+RAILS_ENV=test bundle exec rails db:prepare
+
+# Full suite:
+bundle exec rspec
+# or: bundle exec rake spec
+
+# Targeted (much faster when you only care about one area):
+bundle exec rspec spec/path/to/some_spec.rb
+```
+
+### Notes
+
+- Keep **development** wrappers (8983/8984) separate from **test** wrappers (8985/8986). Mixing them causes confusing failures.
+- Do not source the Docker `.env` for local tests (wrong hostnames).
+- If ports are busy, stop old wrappers: `lsof -i :8985` / `lsof -i :8986`.
+- Upstream CI also runs specs in Docker/GitLab with Solr/Fedora as services — see `.gitlab-ci.yml` and [docs/getting-started.md](./docs/getting-started.md).
+
+---
+
+## 10. Switching back to `develop`
 
 `develop` still wants Ruby 2.7.8, MySQL, and its own README. When you switch branches:
 
@@ -409,7 +531,7 @@ Do not mix `hyku-oob` Postgres settings with `develop`’s MySQL setup in the sa
 
 ---
 
-## 10. Troubleshooting
+## 11. Troubleshooting
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
@@ -421,11 +543,13 @@ Do not mix `hyku-oob` Postgres settings with `develop`’s MySQL setup in the sa
 | `fcrepo_wrapper: command not found` | Not using Bundler | `bundle exec fcrepo_wrapper` from the project root after `bundle install` |
 | Unable to locate a Java Runtime / wrong Java | JAVA_HOME not 8 | `export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"` |
 | DB connection errors from Rails | Wrong `DB_*` or Postgres not running | Re-check §3 Steps C–E and `.env.local.mac` |
-| Solr/Fedora connection errors | Wrappers not up, or Docker `.env` hosts loaded | Confirm ports 8983/8984; **unset** `SOLR_URL` / `FCREPO_HOST` if they point at `solr`/`fcrepo` |
+| Solr/Fedora connection errors (app) | Dev wrappers not up, or Docker `.env` hosts loaded | Confirm ports **8983/8984**; **unset** `SOLR_URL` / `FCREPO_HOST` if they point at `solr`/`fcrepo` |
+| Specs can’t reach Solr/Fedora | Using dev ports, or test wrappers down | Test ports are **8985/8986**; use `rake ci` or Option B |
+| Specs fail after using develop’s Fedora **8080** | Wrong test Fedora port on this branch | Use **8986** (`config/fcrepo_wrapper_test.yml`) |
 | Sidekiq Redis errors | Redis down or Redis &lt; 6.2 | `redis-cli ping`; `brew upgrade redis` |
 | Seeds fail | Solr/Fedora not ready | Start wrappers first, wait, re-run `db:seed` |
 | Solr fails with spaces in path | Known Solr limitation | Move the repo to a path without spaces |
-| Port already in use | Old wrapper/server still running | `lsof -i :3000`, `:8983`, `:8984`, `:6379` and stop the old process |
+| Port already in use | Old wrapper/server still running | `lsof -i :3000`, `:8983`, `:8984`, `:8985`, `:8986`, `:6379` |
 
 ---
 
