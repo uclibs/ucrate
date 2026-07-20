@@ -1,0 +1,74 @@
+---
+description: Iterative post-implementation review sequence; fix all justified issues without waiting to ask
+alwaysApply: true
+---
+
+# Review passes (before calling work done)
+
+After implementation is green for the intended slice, run the **iterative review sequence** below over the changed work (and closely related call sites). Do not treat the first “tests green” as the end.
+
+**Green suite is necessary, not sufficient.** Coverage proves lines ran; it does not prove failure modes were exercised. Work is not done until bug-hunt lenses have matching **failure-mode specs** where applicable (see [code-quality-standards](./code-quality-standards.mdc)).
+
+## Review sequence (run in this order)
+
+Each step is a **loop**, not a single scan: run the lens, fix what it finds (per [Fix policy](#fix-policy)), then re-run that same step until it hits the step’s **stop condition**. Only then move to the next step.
+
+1. **Code quality** — Apply [code-quality-standards](./code-quality-standards.mdc): DRY, naming, inverted-naming check, full RuboCop, failure-mode test posture, antipatterns. **Iterate until a scan finds only trivial issues left.**
+2. **Senior developer review** — Architecture fit, edge cases, auth/races, consistency with nearby patterns, failure modes, unclear contracts, leaky abstractions. **Iterate until a scan finds no issues left.**
+3. **Bug hunt** — Deliberately try to break the change. Fix what you find **and lock each fix with a regression example**. **Iterate until a full scan finds no new bugs.**
+4. **Senior developer review (again)** — Re-run step 2 after quality/bug fixes. **Iterate until clean.**
+5. **Code quality (again)** — Re-run step 1 after step 4. **Iterate until only trivial issues left.**
+6. **Final bug hunt** — Same iterate-until-clean rule as step 3. **If this final hunt finds any bug**, go back to step 4 and repeat **4 → 5 → 6**. Done only when step 6 completes a clean scan with **zero** bugs found.
+
+### Stop conditions (per step)
+
+| Steps | Stop the loop when a fresh scan finds… |
+|---|---|
+| 1, 5 — Code quality | **only trivial issues** remain (still fix them; no need to re-loop solely for trivia) |
+| 2, 4 — Senior review | **no issues** at all |
+| 3, 6 — Bug hunt | **no new bugs** (residual “won’t fix” must be explicitly ratified) |
+
+## Bug hunt (steps 3 & 6)
+
+1. Run a full bug-hunt pass (lenses below) over the changed work and closely related call sites.
+2. If **any** real bugs are found:
+   - Fix them.
+   - Add/extend a **regression example that fails without each fix**.
+   - Re-run `bundle exec rspec` / `bundle exec rubocop` as needed.
+   - **Re-scan** (including failure modes touched by the latest fixes).
+3. Stop only when a complete scan finds **no new bugs**.
+
+| Lens | Questions |
+|------|-----------|
+| **Happy path wrong result** | Valid input → stale UI, wrong copy, or silent no-op? |
+| **State that never advances** | Token/flag/job stuck so retries never recover? |
+| **State that advances too early** | Success marked while a required side effect failed? |
+| **Missing / unmapped surface** | Absent field/control pins progress or claims apply falsely? |
+| **Leave / disconnect** | In-flight work completes after teardown and corrupts state? |
+| **Empty / nil / corrupt payloads** | `nil` / `""` / bad JSON treated as “clear everything”? |
+| **Error recovery** | 404/422/network → infinite retry or dropped data? |
+| **Multi-tenant / auth** | Wrong tenant data, privilege escalation, missing gate? |
+| **Trust / sanitize boundaries** | Client HTML bypasses server allowlists? |
+
+### Bug found → fix needs a regression test
+
+1. Write or extend a fast unit/request example that **fails without the fix**.
+2. Do not close with “happy-path already covered that line.”
+3. Prefer boundary/unit tests over new flaky system specs.
+4. If product-ambiguous: [design-decision-gate](./design-decision-gate.mdc) first; still add a regression example once ratified.
+
+## Fix policy
+
+**Fix every issue you identify, at every severity — critical/high *and* medium *and* low/nit.** Severity sets priority/order, never *whether* to fix.
+
+**Do not** defer with “it’s only low/medium,” “not blocking,” or “can batch later.”
+
+A finding may be left unfixed **only** when you say so explicitly and one of these is true:
+
+1. Genuinely **out of ticket scope** *and* recorded as a follow-up, **or**
+2. **Product-/architecture-ambiguous** — run [design-decision-gate](./design-decision-gate.mdc), **or**
+3. A **deliberate, ratified exception** (one-line why).
+
+Commit coherent review-fix slices ([frequent-commits](./frequent-commits.mdc)). Re-run `bundle exec rspec` and `bundle exec rubocop` before declaring the ticket done.
+
+When reporting review results, state disposition of **each** finding: fixed (with commit), or explicitly deferred under one of the three exceptions above.

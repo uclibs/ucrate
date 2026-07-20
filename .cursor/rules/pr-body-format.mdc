@@ -1,0 +1,45 @@
+---
+description: PR body requests — raw markdown in a fenced block; default base hyku-oob
+alwaysApply: true
+---
+
+# Pull request body format
+
+## When the user asks for a PR body (or PR description)
+
+Return the body as **raw Markdown inside a single fenced code block** labeled `markdown`:
+
+````markdown
+```markdown
+## Summary
+...
+```
+````
+
+- Do **not** render the PR body as normal chat prose only.
+- Do **not** create a file in the repo unless the user explicitly asks to write one.
+- The user should be able to copy the block into GitHub unchanged.
+
+## Base branch for diff, commits, and summary
+
+Use the correct **compare base** when gathering `git log` / `git diff` for the PR body:
+
+### Default (Hyku upgrade work)
+
+- **Base branch:** `hyku-oob`
+- Use `hyku-oob...HEAD` (or `git log hyku-oob..HEAD`) unless the user specifies otherwise.
+
+### Other situations
+
+| Situation | Compare base | Typical PR target |
+|-----------|----------------|-------------------|
+| Feature branch cut from `hyku-oob` | `hyku-oob` | `hyku-oob` |
+| User says PR targets another branch | **That named branch** | As user specifies |
+| Work against `develop` / `main` | Ask once if unclear | As user specifies |
+
+**Detecting base:** Prefer what the user states for this ticket. Optionally check `git rev-parse --abbrev-ref HEAD@{upstream}`.
+
+### Do not assume
+
+- Do not use `main` or `develop` as the PR base for `hyku-oob` feature work unless the user says so.
+- Do not invent branch naming conventions — use the branch the user created.

@@ -1,0 +1,35 @@
+---
+description: Ratify design decisions (Plan mode) before implementing non-trivial choices
+alwaysApply: true
+---
+
+# Design decision gate (before implementation)
+
+Do **not** invent product/architecture choices silently and only surface them in review. Run a short **design gate**, then implement.
+
+Applies to feature work and non-trivial bugs/refactors that lock behavior, UX, data shape, or direction.
+
+## Mode
+
+Prefer **Plan mode** for the gate (switch to Plan when the tool allows). Stay in Plan until material choices are ratified, then switch to Agent to implement. If already in Agent and a new material choice appears, pause and re-run the gate (Plan if practical).
+
+## Running the gate
+
+For **each** decision, in plain language:
+
+1. **Question** — one clear sentence.
+2. **Options** — usually 2–4; for each: meaning, **benefits**, **drawbacks**.
+3. **Consistency** — similar choices elsewhere in the app. Prefer consistency unless a clear benefit justifies an exception.
+4. **Recommendation** — preferred option in one line (encouraged).
+5. **Ask** — structured multiple-choice / yes-no when available; otherwise numbered options. Always allow alternate choice or more clarification.
+
+One decision (or tightly related pair) at a time. After each answer, **state the ratified choice**, then continue. Iterate if a choice opens new decisions.
+
+Skip the gate only for mechanical follow-ups inside already-ratified decisions.
+
+## After alignment
+
+1. State the ratified choices clearly in the conversation (and in the PR body when relevant).
+2. Implement. Do not reopen settled decisions mid-ticket unless new facts appear — then call that out and re-gate.
+
+Uncertain mid-implementation **product** choices: use this same gate. Uncertain **code-quality fix** choices: see [review-passes](./review-passes.mdc).

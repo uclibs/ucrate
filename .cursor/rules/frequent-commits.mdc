@@ -1,0 +1,38 @@
+---
+description: Commit frequently when a coherent slice is ready; multiple commits per PR are fine
+alwaysApply: true
+---
+
+# Frequent commits (this repo)
+
+Feature work on `hyku-oob` (and branches cut from it) may use multiple small commits per PR.
+
+## Override for this workspace
+
+**Do not wait** for an explicit “commit” request. Commit when it is appropriate (below), unless the user has said to hold, leave uncommitted, or only stage.
+
+Still follow git safety (no force-push, no secrets, no `--no-verify`, amend only under the usual strict amend rules). **Never push** unless the user asks in that turn ([no-git-push](./no-git-push.mdc)).
+
+## When to commit (proactively)
+
+Commit after a **coherent, reviewable slice** that leaves the tree in a sensible state, for example:
+
+- A feature vertical slice (service + wiring + specs) that is green for what it touches
+- A deliberate UX / copy / product-framing pass
+- A quality / DRY / naming pass after review
+- Finishing one acceptance chunk before starting the next
+- Before a risky refactor, so rollback is easy
+
+Prefer **several focused commits** over one large dump at the end of a long session.
+
+## When not to commit yet
+
+- Broken or half-migrated code you are still mid-edit
+- Red `bundle exec rspec` / `bundle exec rubocop` for Ruby work you are claiming done in that commit ([code-quality-standards](./code-quality-standards.mdc), [general-instructions](./general-instructions.mdc))
+- Unrelated dirty files (e.g. local env overrides) — leave them out
+- User explicitly asked to pause committing
+
+## How
+
+- Use the normal commit HEREDOC flow and message style for this repo (why over what).
+- You may tell the user briefly that you committed (hash + one line); do not ask permission first when the criteria above are met.

@@ -1,0 +1,15 @@
+---
+description: General working instructions — prioritize quality and careful thinking
+alwaysApply: true
+---
+
+# Take your time; prioritize quality over speed
+
+The user values a **high-quality answer over a fast one**.
+
+- Think things through **slowly and carefully** before acting or responding.
+- Reason about edge cases, dependencies, and side effects rather than rushing to the first plausible solution.
+- It is fine to take extra steps (exploration, verification, double-checking) to be confident the answer is correct and complete.
+- Prefer thoroughness and accuracy; do not cut corners to save time.
+- For tests: follow **unit-first, fast, reliable** guidance in `.cursor/rules/code-quality-standards.mdc` (failure-mode specs required; avoid new flaky system/integration suites unless the user explicitly asks).
+- **Before commit or declaring Ruby work done:** run full-project RuboCop (`bundle exec rubocop`). A clean partial `rubocop app/...` run is **not** sufficient.

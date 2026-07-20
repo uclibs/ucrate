@@ -1,0 +1,15 @@
+---
+description: Never push to remote; the user owns all git push commands
+alwaysApply: true
+---
+
+# Never push without an explicit request
+
+**The user is solely responsible for every `git push`.**
+
+- **Do not** run `git push` (branches, tags, or files) unless the user explicitly asks for a push **in that same request**.
+- A push request applies only to the current request. Never carry a prior "go ahead and push" forward to a later turn — re-confirmation is required each time.
+- Committing locally, staging, branching, and other git operations are still allowed when appropriate, but **publishing to the remote is not**.
+- If you believe a push is needed, **ask first** and let the user run it (or explicitly authorize it for that turn).
+
+This applies to all remotes and all branches, including the current feature branch.

@@ -1,0 +1,134 @@
+---
+description: Definition of done — DRY, tests, RuboCop with no disables, all specs green
+alwaysApply: true
+---
+
+# Code quality standards (definition of done)
+
+Work is **not done** until every item below is satisfied for the change in scope.
+
+## Design and readability
+
+- Follow Rails / Hyku / Hyrax conventions; prefer **best practices** over shortcuts.
+- **DRY** — extract duplication; do not copy-paste logic across controllers, services, or JS modules.
+- **Clear naming** — classes, methods, and variables describe intent.
+- **Self-documenting code** — comments only for non-obvious business rules or tricky edge cases.
+- Before finishing, **review for antipatterns and code smells** (long methods, god objects, leaky abstractions, hidden side effects) and refactor where reasonable within ticket scope.
+
+### Avoid double negatives and inverted naming
+
+Before marking work done, scan new/changed logic for **hard-to-follow mental flips** — especially in flags, guards, and authorization.
+
+**Red flags — refactor when you see:**
+
+| Pattern | Why it breaks |
+|---------|----------------|
+| Positive method + negative argument | e.g. `enabled?('DISABLE_PRESENCE')` — name and input contradict |
+| `exclude?` / `unless` / `!` stacked | multiple inversions in one expression |
+| Boolean name opposite to what it checks | e.g. `allowed?` that reads a `DENY_*` env var |
+| `if !foo` where `foo` is already negative | e.g. `if !disabled?` instead of `if enabled?` |
+
+**Prefer:** name helpers after what they actually test; keep at most one inversion at the public boundary.
+
+```ruby
+# ❌ Hard to follow
+def presence?
+  feature_enabled?('DISABLE_PRESENCE')
+end
+
+# ✅ Reads linearly
+def presence?
+  !opted_out?('DISABLE_PRESENCE')
+end
+```
+
+## RuboCop
+
+CI runs full-project RuboCop (`bundle exec rubocop` per `.gitlab-ci.yml`). That is the command that counts as “green.”
+
+### Required workflow (every Ruby change)
+
+1. **While editing** — optional quick scan on paths you changed:
+   ```bash
+   bundle exec rubocop path/to/changed_file.rb
+   ```
+2. **Before commit / before saying work is complete** — mandatory **full-project** scan:
+   ```bash
+   bundle exec rubocop
+   ```
+   Must exit **0**. If it fails, fix the code (or safe autocorrect on files you changed) and re-run full RuboCop until green.
+3. **Autocorrect** — allowed on files **you** changed, then re-run full RuboCop:
+   ```bash
+   bundle exec rubocop -A path/to/changed_file.rb
+   bundle exec rubocop
+   ```
+   Review autocorrect diffs; do not blind `-A` on unrelated paths.
+
+Read `.rubocop.yml` / `.rubocop_todo.yml` before large refactors. Prefer fixing new offenses in code you touch rather than expanding the todo list.
+
+### Never
+
+- **Never** disable a cop to make the build pass on **new** code:
+  - No `# rubocop:disable` / `# rubocop:todo` on new code without explicit user approval.
+  - Do not weaken `.rubocop.yml` for convenience.
+  - Do not add new entries to `.rubocop_todo.yml` for code you introduced — **fix the code** instead.
+- **Never** skip the full-project run because a partial path scan was clean.
+
+## Tests — required
+
+### What “green” means (and what it does not)
+
+| Green means | Green does **not** mean |
+|-------------|-------------------------|
+| Relevant / full `bundle exec rspec` passed | Every real user surface / race was exercised |
+| `bundle exec rubocop` clean | Failure modes are locked in |
+| New/changed behavior has meaningful specs | Happy-path execution alone is enough |
+
+**Coverage is necessary, not sufficient.** Prefer thorough coverage on **new and changed** code. This codebase is not held to a hard 100% project-wide bar like some other apps — do not leave new files or new branches untested.
+
+### Failure-mode tests (required for new behavior)
+
+For new or changed behavior — especially async jobs, multi-tenant paths, auth, or HTML apply — specs must include **failure-mode examples**, not only happy paths. Write at least one fast example per **applicable** risk.
+
+**Bug-fix rule:** A bug found in [review-passes](./review-passes.mdc) is **not fixed** until there is a regression example that fails without the fix.
+
+### Reliability and speed
+
+Default to tests that are **fast, deterministic, and isolated**.
+
+| Prefer | Use sparingly | Avoid without explicit approval |
+|--------|---------------|----------------------------------|
+| Model / service / helper / concern specs | Controller specs with stubbed auth | Broad new system specs that are flaky by nature |
+| Plain Ruby units under `spec/` | Thin request specs for auth + status + JSON shape | Wall-clock `sleep` to simulate races |
+| Factory data scoped to the example | Request specs that duplicate unit coverage | Order-dependent examples |
+
+- Keep examples **independent** — no reliance on example order or shared mutable global state.
+- Before finishing a Ruby change set, run specs that cover the change; run the **full** suite when practical and before calling a ticket done.
+
+### Full suite (before done)
+
+```bash
+bundle exec rspec
+bundle exec rubocop
+```
+
+## Failing tests — how to respond
+
+If anything fails, **investigate thoughtfully**; do not skip, pend, or weaken assertions without explicit user approval.
+
+| Failure cause | Action |
+|---------------|--------|
+| **Test is wrong** | Fix the **test**. |
+| **Code is wrong** | Fix the **code**. |
+| **Both** | Fix both; explain briefly in the PR. |
+
+Do not merge or declare complete while `bundle exec rspec` or `bundle exec rubocop` is red for work you claim is done.
+
+## Completion checklist (agent)
+
+- [ ] DRY, naming, self-documenting; smell pass done (including inverted-naming check)
+- [ ] Full [review sequence](./review-passes.mdc) done and iterated to stop conditions
+- [ ] Applicable **failure-mode** lenses have specs
+- [ ] `bundle exec rubocop` green — **full project**
+- [ ] Specs green for the change (full suite when claiming ticket done)
+- [ ] No new antipatterns introduced in scope of the ticket
