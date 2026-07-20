@@ -27,3 +27,13 @@
 <% if public_demo_tenant? %>
   <meta name="robots" content="noindex, nofollow">
 <% end %>
+
+<% if Rails.env.test? %>
+  <%# Full page loads in feature specs — Turbolinks XHR races ActiveRecord assertions after click/visit. %>
+  <script>
+    if (window.Turbolinks) { Turbolinks.supported = false; }
+    document.addEventListener('turbolinks:load', function () {
+      if (window.Turbolinks) { Turbolinks.supported = false; }
+    });
+  </script>
+<% end %>

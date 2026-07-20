@@ -12,7 +12,7 @@
 <% end %>
 <% if @form.logo_image? %>
   <div class="card-footer">
-    <%= simple_form_for @form.site, url: main_app.site_path do |f| %>
+    <%= simple_form_for @form.site, url: main_app.site_path, html: { data: { turbolinks: false } } do |f| %>
       <%= f.submit 'Remove logo image', class: 'btn btn-danger', name: :remove_logo_image %>
     <% end %>
   </div>

@@ -80,8 +80,9 @@ Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 # Uses faster rack_test driver when JavaScript support not needed
-Capybara.default_max_wait_time = 8
+Capybara.default_max_wait_time = ENV['CI'] ? 15 : 8
 Capybara.default_driver = :rack_test
+Capybara.disable_animation = true if Capybara.respond_to?(:disable_animation=)
 
 ENV['WEB_HOST'] ||= `hostname -s`.strip
 

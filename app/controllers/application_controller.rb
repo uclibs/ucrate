@@ -169,8 +169,9 @@ class ApplicationController < ActionController::Base
 
   # Themes are edited on Site.instance (SitesController / appearance form).
   # Prefer that over current_account.sites so homepage reflects saves even when
-  # the Site row is not yet associated to the Account. Treat blank strings as
-  # unset (Rails || will not fall through on "").
+  # the Site row is not yet associated to the Account. Memoize per request —
+  # these helpers are called from layouts/partials repeatedly and an uncached
+  # Site.instance (first_or_create) per call blows catalog query budgets.
   def home_page_theme
     site_theme_value(:home_theme) || 'default_home'
   end
@@ -183,11 +184,17 @@ class ApplicationController < ActionController::Base
     site_theme_value(:search_theme) || 'list_view'
   end
 
-  def site_theme_value(attribute)
-    site = Site.instance
-    return if site.is_a?(NilSite)
+  def site_for_themes
+    return @site_for_themes if defined?(@site_for_themes)
 
-    site.public_send(attribute).presence || current_account&.sites&.first&.public_send(attribute).presence
+    site = Site.instance
+    @site_for_themes = site.is_a?(NilSite) ? nil : site
+  end
+  private :site_for_themes
+
+  def site_theme_value(attribute)
+    site_for_themes&.public_send(attribute).presence ||
+      current_account&.sites&.first&.public_send(attribute).presence
   end
   private :site_theme_value
 

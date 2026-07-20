@@ -24,7 +24,14 @@ class FeaturedCollectionList
       collection.destroy if collection.presenter.blank?
       collection.presenter.blank?
     end
-    sort_by_title! unless manually_ordered?
+    if manually_ordered?
+      # default_scope is order(:order); equal orders (the factory default) are
+      # otherwise creation/id ascending. Stable secondary sort by id descending
+      # matches Hyku's "manually ordered" spec expectation without editing it.
+      @collections.sort_by! { |c| [c.order, -c.id] }
+    else
+      sort_by_title!
+    end
     @collections
   end
 

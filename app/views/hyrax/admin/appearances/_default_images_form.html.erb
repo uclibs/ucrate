@@ -16,12 +16,12 @@
 <% if @form.default_collection_image? || @form.default_work_image? %>
   <div class="card-footer">
     <% if @form.default_collection_image? %>
-      <%= simple_form_for @form.site, url: main_app.site_path do |f| %>
+      <%= simple_form_for @form.site, url: main_app.site_path, html: { data: { turbolinks: false } } do |f| %>
         <%= f.submit 'Remove default collection image', class: 'btn btn-danger', name: :remove_default_collection_image %>
       <% end %>
     <% end %>
     <% if @form.default_work_image? %>
-      <%= simple_form_for @form.site, url: main_app.site_path do |f| %>
+      <%= simple_form_for @form.site, url: main_app.site_path, html: { data: { turbolinks: false } } do |f| %>
         <%= f.submit 'Remove default work image', class: 'btn btn-danger', name: :remove_default_work_image %>
       <% end %>
     <% end %>

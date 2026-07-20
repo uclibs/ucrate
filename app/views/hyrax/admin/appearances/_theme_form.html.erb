@@ -1,4 +1,5 @@
-<%= simple_form_for @form.site, url: main_app.site_path do |f| %>
+<%# turbolinks: false — full page load so Capybara (and Site.last in specs) see committed themes %>
+<%= simple_form_for @form.site, url: main_app.site_path, html: { data: { turbolinks: false } } do |f| %>
   <div class="card-body">
     <div class="row">
       <div class="col-sm-6">
