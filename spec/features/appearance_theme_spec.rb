@@ -14,21 +14,8 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
            keyword: ['llama', 'alpaca'],
            user:)
   end
+
   # rubocop:enable RSpec/LetSetup
-
-  # Site is Apartment-tenanted; JS feature specs must assert themes via the app
-  # (page / selects), not Site.instance in the test process.
-
-  def save_themes(home: nil, search: nil, show: nil)
-    visit '/admin/appearance'
-    click_link('Themes')
-    select(home, from: 'Home Page Theme') if home
-    select(search, from: 'Search Results Page Theme') if search
-    select(show, from: 'Show Page Theme') if show
-    find('body').click
-    within('#themes') { click_on('Save') }
-    expect(page).to have_content('The appearance was successfully updated')
-  end
 
   context "as a repository admin" do
     it "has a tab for themes on the appearance tab" do
@@ -41,7 +28,14 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
 
     it 'has a select box for the home, show, and search pages themes' do
       login_as admin
-      save_themes(home: 'Default home', search: 'List view', show: 'Default Show Page')
+      visit '/admin/appearance'
+      click_link('Themes')
+      select('Default home', from: 'Home Page Theme')
+      select('List view', from: 'Search Results Page Theme')
+      select('Default Show Page', from: 'Show Page Theme')
+      find('body').click
+      click_on('Save')
+      expect(page).to have_content('The appearance was successfully updated')
     end
 
     it 'sets the theme to default if no theme is selected' do
@@ -51,13 +45,19 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
 
     it 'sets the themes when the theme form is saved' do
       login_as admin
-      save_themes(home: 'Default home', search: 'Gallery view', show: 'Default Show Page')
-
+      visit 'admin/appearance'
       click_link('Themes')
-      expect(page).to have_select('Home Page Theme', selected: 'Default home')
-      expect(page).to have_select('Show Page Theme', selected: 'Default Show Page')
-      expect(page).to have_select('Search Results Page Theme', selected: 'Gallery view')
-
+      select('Default home', from: 'Home Page Theme')
+      select('Gallery view', from: 'Search Results Page Theme')
+      select('Default Show Page', from: 'Show Page Theme')
+      find('body').click
+      click_on('Save')
+      site = Site.last
+      account.sites << site
+      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
+      expect(site.home_theme).to eq('default_home')
+      expect(site.show_theme).to eq('default_show')
+      expect(site.search_theme).to eq('gallery_view')
       visit '/'
       expect(page).to have_css('body.default_home.gallery_view.default_show')
     end
@@ -73,8 +73,12 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
       expect(page).to have_content('This will select a default view for the search results page. Users can select their preferred views on the search results page that will override this selection')
       # rubocop:enable Metrics/MethodLength
       find('body').click
-      within('#themes') { click_on('Save') }
+      click_on('Save')
+      site = Site.last
+      account.sites << site
+      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       expect(page).to have_content('The appearance was successfully updated')
+      expect(site.search_theme).to eq('gallery_view')
       click_link('Themes')
       expect(page).to have_select('Search Results Page Theme', selected: 'Gallery view')
       visit '/'
@@ -89,7 +93,14 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
     # in the CI environment but not locally. This needs further investigation to resolve.
     xit 'updates to the users preferred view' do
       login_as admin
-      save_themes(search: 'Gallery view')
+      visit '/admin/appearance'
+      click_link('Themes')
+      select('Gallery view', from: 'Search Results Page Theme')
+      find('body').click
+      click_on('Save')
+      site = Site.last
+      account.sites << site
+      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
       fill_in "search-field-header", with: "llama"
       click_button "search-submit-header"
@@ -121,8 +132,14 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
 
     it 'renders the partials in the theme folder' do
       login_as admin
-      save_themes(home: 'Cultural Repository')
-
+      visit '/admin/appearance'
+      click_link('Themes')
+      select('Cultural Repository', from: 'Home Page Theme')
+      find('body').click
+      click_on('Save')
+      site = Site.last
+      account.sites << site
+      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
       expect(page).to have_css('body.cultural_repository')
       expect(page).to have_css('nav.navbar.cultural-repository-nav')
@@ -130,14 +147,25 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
 
     it 'updates the home theme when the theme is changed' do # rubocop:disable RSpec/ExampleLength
       login_as admin
-      save_themes(home: 'Cultural Repository')
-
+      visit '/admin/appearance'
+      click_link('Themes')
+      select('Cultural Repository', from: 'Home Page Theme')
+      find('body').click
+      click_on('Save')
+      site = Site.last
+      account.sites << site
+      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
       expect(page).to have_css('body.cultural_repository')
       expect(page).to have_css('nav.navbar.cultural-repository-nav')
-
-      save_themes(home: 'Default home')
-
+      visit '/admin/appearance'
+      click_link('Themes')
+      select('Default home', from: 'Home Page Theme')
+      find('body').click
+      click_on('Save')
+      site = Site.last
+      account.sites << site
+      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
       expect(page).to have_css('body.default_home')
       expect(page).not_to have_css('nav.cultural-repsitory-nav')

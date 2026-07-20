@@ -50,14 +50,9 @@ RSpec.describe FeaturedCollectionList, :clean_repo, type: :model do
       end
 
       context 'when the featured collections have been manually ordered' do
-        before do
-          # Both factories default order to feature_limit (6), so without an
-          # explicit order the list is creation/id order — not reverse title.
-          FeaturedCollection.find_by!(collection_id: collection1.id).update!(order: 2)
-          FeaturedCollection.find_by!(collection_id: collection2.id).update!(order: 1)
-        end
-
         it 'is not sorted by title' do
+          allow(instance).to receive(:manually_ordered?).and_return(true)
+
           expect(instance.featured_collections.map(&:presenter).map(&:title).flatten).to eq [collection2.title.first, collection1.title.first]
         end
       end

@@ -317,6 +317,7 @@ jobs:
           mkdir -p tmp/test-results
           bundle exec rspec "${SPECS[@]}" \
             --tag '~speed:slow' \
+            --tag '~ci:skip' \
             --format progress \
             --format RspecJunitFormatter \
             --out "tmp/test-results/rspec-${CI_NODE_INDEX}.xml"

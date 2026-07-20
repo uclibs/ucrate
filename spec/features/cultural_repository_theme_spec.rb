@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin can select cultural repository theme', type: :feature, js: true, clean: true do
+  let(:account) { FactoryBot.create(:account_with_public_schema) }
   let(:admin) { FactoryBot.create(:admin, email: 'admin@example.com', display_name: 'Adam Admin') }
   let(:user) { create :user }
 
@@ -13,28 +14,21 @@ RSpec.describe 'Admin can select cultural repository theme', type: :feature, js:
            keyword: ['llama', 'alpaca'],
            user:)
   end
+
   # rubocop:enable RSpec/LetSetup
-
-  # Site is Apartment-tenanted; JS feature specs must assert themes via the app
-  # (page / selects), not Site.instance in the test process.
-
-  def save_home_theme(name)
-    visit '/admin/appearance'
-    click_link('Themes')
-    select(name, from: 'Home Page Theme')
-    find('body').click
-    within('#themes') { click_on('Save') }
-    expect(page).to have_content('The appearance was successfully updated')
-  end
 
   context "as a repository admin" do
     it 'sets the cultural repository theme when the theme form is saved' do
       login_as admin
-      save_home_theme('Cultural Repository')
-
+      visit 'admin/appearance'
       click_link('Themes')
-      expect(page).to have_select('Home Page Theme', selected: 'Cultural Repository')
-
+      select('Cultural Repository', from: 'Home Page Theme')
+      find('body').click
+      click_on('Save')
+      site = Site.last
+      account.sites << site
+      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
+      expect(site.home_theme).to eq('cultural_repository')
       visit '/'
       expect(page).to have_css('body.cultural_repository')
     end
@@ -43,11 +37,22 @@ RSpec.describe 'Admin can select cultural repository theme', type: :feature, js:
   context 'when the cultural repository theme is selected' do
     it 'renders the partials in the theme folder' do # rubocop:disable RSpec/ExampleLength
       login_as admin
-      save_home_theme('Cultural Repository')
-
+      visit '/admin/appearance'
+      click_link('Themes')
+      select('Cultural Repository', from: 'Home Page Theme')
+      find('body').click
+      click_on('Save')
+      site = Site.last
+      account.sites << site
+      allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
       expect(page).to have_css('body.cultural_repository')
       expect(page).to have_css('nav.navbar.cultural-repository-nav')
+      ## The following continue to fail in CircleCI...the HTML's there but perhaps it is not
+      ## visible?  Besides it would be nice to not have a feature test for HTML but instead a view
+      ## test that conforms to theming.
+      # expect(page).to have_css('form#search-form-header')
+      # expect(page).to have_css('ul#user_utility_links')
       expect(page).to have_css('div.cultural-repository.facets')
       expect(page).to have_css('div.cultural-repository.featured-works-container')
       expect(page).to have_css('div.cultural-repository.recent-works-container')
