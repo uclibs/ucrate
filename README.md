@@ -26,6 +26,7 @@ This branch is stock [Samvera Hyku](https://github.com/samvera/hyku), kept besid
 | Switch back to `develop` | [docs/local/switching-to-develop.md](./docs/local/switching-to-develop.md) |
 | Troubleshoot | [docs/local/troubleshooting.md](./docs/local/troubleshooting.md) |
 | Browse all local docs | [docs/local/README.md](./docs/local/README.md) |
+| **Pull updates from Samvera Hyku** (preserves our README) | [docs/local/updating-from-hyku.md](./docs/local/updating-from-hyku.md) · [`bin/merge-hyku`](./bin/merge-hyku) |
 
 Quick start once dependencies are installed:
 
@@ -36,8 +37,11 @@ Quick start once dependencies are installed:
 
 ## Upstream Hyku docs
 
+Hyku’s own root README (as last captured from the `hyku` remote) is saved at [docs/upstream/README.md](./docs/upstream/README.md) so merges can update it **without** overwriting our UC index above. Use [`bin/merge-hyku`](./bin/merge-hyku) when pulling from Samvera — see [updating-from-hyku.md](./docs/local/updating-from-hyku.md).
+
 | Topic | Link |
 |-------|------|
+| Hyku’s README (snapshot) | [docs/upstream/README.md](./docs/upstream/README.md) |
 | Getting started (Docker-oriented) | [docs/getting-started.md](./docs/getting-started.md) |
 | Configuration | [docs/configuration.md](./docs/configuration.md) |
 | Using Hyku | [docs/using-hyku.md](./docs/using-hyku.md) |

@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+# Merge Samvera Hyku into the current branch while preserving our UC README
+# and docs/local guides. Upstream's README is saved under docs/upstream/.
+#
+# Usage:
+#   bin/merge-hyku              # merges hyku/main
+#   bin/merge-hyku hyku/v6.2.0  # merges a tag or other ref
+#
+# Why: a normal `git merge hyku/main` can silently replace README.md when
+# only upstream changed it. This script always restores our README and
+# captures theirs for reference.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+REF="${1:-hyku/main}"
+
+if ! git remote get-url hyku >/dev/null 2>&1; then
+  echo "Remote 'hyku' not found. Add it with:"
+  echo "  git remote add hyku git@github.com:samvera/hyku.git"
+  exit 1
+fi
+
+if ! git diff --quiet || ! git diff --cached --quiet; then
+  echo "Working tree is dirty. Commit or stash before merging."
+  exit 1
+fi
+
+echo "==> Fetching hyku"
+git fetch hyku
+
+if ! git rev-parse --verify "$REF" >/dev/null 2>&1; then
+  echo "Ref not found after fetch: $REF"
+  exit 1
+fi
+
+OUR_README="$(mktemp)"
+trap 'rm -f "$OUR_README"' EXIT
+cp README.md "$OUR_README"
+
+echo "==> Merging $REF"
+set +e
+git merge --no-edit "$REF"
+merge_status=$?
+set -e
+
+echo "==> Capturing upstream README -> docs/upstream/README.md"
+mkdir -p docs/upstream
+git show "${REF}:README.md" > docs/upstream/README.md
+
+echo "==> Restoring UC README.md"
+cp "$OUR_README" README.md
+
+# Ensure local guides were not removed by a hostile merge (unlikely, but cheap)
+if [[ ! -d docs/local ]]; then
+  echo "WARNING: docs/local/ is missing after merge. Restore it from git history."
+fi
+
+git add README.md docs/upstream/README.md
+
+if [[ $merge_status -ne 0 ]]; then
+  echo
+  echo "Merge reported conflicts. Our README.md has been restored and staged."
+  echo "Resolve other conflicted files, then:"
+  echo "  git add -A && git commit"
+  echo "Do not take upstream's README.md as the root README."
+  exit $merge_status
+fi
+
+# If merge created a commit, amend is dangerous if hooks modified things;
+# prefer a follow-up commit when README/upstream docs differ from the merge commit.
+if ! git diff --cached --quiet; then
+  git commit -m "$(cat <<'EOF'
+Preserve UC README after Hyku merge; refresh docs/upstream/README.md.
+
+EOF
+)"
+fi
+
+echo
+echo "Done. Root README.md is still our UC index."
+echo "Hyku's README is at docs/upstream/README.md"
+echo "Hyku's other docs (docs/getting-started.md, etc.) merged normally."

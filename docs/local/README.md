@@ -12,3 +12,4 @@ Team guides for running this branch without Docker. Start from the [main README]
 | [run-tests.md](./run-tests.md) | Optional local RSpec / `rake ci` |
 | [switching-to-develop.md](./switching-to-develop.md) | Switching back to Scholar@UC `develop` |
 | [troubleshooting.md](./troubleshooting.md) | Common failures |
+| [updating-from-hyku.md](./updating-from-hyku.md) | Merge Hyku without losing our README |

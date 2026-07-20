@@ -1,0 +1,5 @@
+# Preserve UC-owned paths when merging Samvera Hyku.
+# Note: merge=ours only applies when BOTH sides changed the file.
+# Always use bin/merge-hyku so a one-sided upstream README edit cannot wipe ours.
+README.md merge=ours
+docs/local/** merge=ours
