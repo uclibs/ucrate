@@ -1,6 +1,6 @@
 # Run tests locally (optional)
 
-**These instructions are for `hyku-oob` only.** See the [main README](../README.md).
+**These instructions are for `hyku-oob` only.** Team index: [docs/local/README.md](./README.md).
 
 You do **not** need to run the full suite for every change. A complete local run needs Solr + Fedora on **test** ports and can take a **long time** (often on the order of an hour). Prefer CI for routine full runs; use this guide when you specifically want to exercise specs on your Mac.
 

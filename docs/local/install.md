@@ -1,6 +1,6 @@
 # Install dependencies (macOS, no Docker)
 
-**These instructions are for `hyku-oob` only.** See the [main README](../README.md).
+**These instructions are for `hyku-oob` only.** Team index: [docs/local/README.md](./README.md).
 
 Apple Silicon and Intel Macs use the same flow; only Homebrew prefixes differ (`/opt/homebrew` vs `/usr/local`).
 

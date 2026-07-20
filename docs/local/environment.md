@@ -1,6 +1,6 @@
 # Local environment variables
 
-**These instructions are for `hyku-oob` only.** See the [main README](../README.md).
+**These instructions are for `hyku-oob` only.** Team index: [docs/local/README.md](./README.md).
 
 Copy the committed template to a **personal** file (gitignored). This does **not** overwrite the Docker `.env`.
 

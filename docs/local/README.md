@@ -1,6 +1,6 @@
 # Local macOS docs (hyku-oob, no Docker)
 
-Team guides for running this branch without Docker. Start from the [main README](../README.md).
+**Start here** for Scholar@UC work on the `hyku-oob` branch. The repo root [README.md](../../README.md) is Samvera Hyku’s upstream README and will change when we merge from Hyku — our guides live only under `docs/local/`.
 
 | Doc | Contents |
 |-----|----------|
@@ -12,4 +12,10 @@ Team guides for running this branch without Docker. Start from the [main README]
 | [run-tests.md](./run-tests.md) | Optional local RSpec / `rake ci` |
 | [switching-to-develop.md](./switching-to-develop.md) | Switching back to Scholar@UC `develop` |
 | [troubleshooting.md](./troubleshooting.md) | Common failures |
-| [updating-from-hyku.md](./updating-from-hyku.md) | Merge Hyku without losing our README |
+| [updating-from-hyku.md](./updating-from-hyku.md) | Pulling Hyku updates with a normal `git merge` |
+
+## Quick start
+
+1. [install.md](./install.md) → [environment.md](./environment.md)
+2. [run-the-app.md](./run-the-app.md) → http://localhost:3000
+3. Tests only when you need them: [run-tests.md](./run-tests.md)

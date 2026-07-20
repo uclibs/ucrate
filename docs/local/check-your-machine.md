@@ -1,6 +1,6 @@
 # Check what you currently have
 
-**These instructions are for `hyku-oob` only.** See the [main README](../README.md).
+**These instructions are for `hyku-oob` only.** Team index: [docs/local/README.md](./README.md).
 
 Compare your Mac to the targets in [versions-and-ports.md](./versions-and-ports.md).
 

@@ -1,6 +1,6 @@
 # Troubleshooting (local macOS, no Docker)
 
-**These instructions are for `hyku-oob` only.** See the [main README](../README.md).
+**These instructions are for `hyku-oob` only.** Team index: [docs/local/README.md](./README.md).
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
