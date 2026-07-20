@@ -10,7 +10,7 @@
 <% end %>
 <% if @form.favicon? %>
   <div class="card-footer">
-    <%= simple_form_for @form.site, url: main_app.site_path, html: { data: { turbolinks: false } } do |f| %>
+    <%= simple_form_for @form.site, url: main_app.site_path(@form.site) do |f| %>
       <%= f.submit 'Remove favicon', class: 'btn btn-danger', name: :remove_favicon %>
     <% end %>
   </div>

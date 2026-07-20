@@ -21,9 +21,7 @@
 //= require cropper.min
 
 //= require stat_slider
-<% unless Rails.env.test? %>
 //= require turbolinks
-<% end %>
 //= require cocoon
 
 //= require tether

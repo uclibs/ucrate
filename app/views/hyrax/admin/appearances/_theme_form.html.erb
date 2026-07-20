@@ -1,11 +1,10 @@
-<%# turbolinks: false — full page load so Capybara (and Site.last in specs) see committed themes %>
-<%= simple_form_for @form.site, url: main_app.site_path, html: { data: { turbolinks: false } } do |f| %>
+<%= simple_form_for @form.site, url: main_app.site_path(@form.site) do |f| %>
   <div class="card-body">
     <div class="row">
       <div class="col-sm-6">
         <% home_options = @home_theme_names.map { |g| [g[0], g[1], {'data-image' => image_path("themes/#{g[1]}/#{g[1]}.jpg")}] } %>
         <%= f.input :home_theme, label: 'Home Page Theme' do %>
-          <%= f.select :home_theme, home_options, { prompt: 'Select home page theme...' }, { class: 'form-control', data: { theme_info: @home_theme_information }} %>
+          <%= f.select :home_theme, home_options, {}, { prompt: 'Select home page theme...', class: 'form-control', data: { theme_info: @home_theme_information }} %>
         <% end %>
 
         <h4>Theme notes:</h4>
@@ -40,7 +39,7 @@
       <div class="col-md-6">
         <% search_options = @search_themes.map { |s| [s[0], s[1], { 'data-image' => image_path("themes/search/#{s[1]}.jpg") }] } %>
         <%= f.input :search_theme, label: 'Search Results Page Theme' do %>
-          <%= f.select :search_theme, search_options, { prompt: 'Select search results page theme...' }, { class: 'form-control' } %>
+          <%= f.select :search_theme, search_options, {}, { prompt: 'Select search results page theme...', class: 'form-control' } %>
         <% end %>
 
         <h4>Search Results Theme notes:</h4>
@@ -63,7 +62,7 @@
       <div class="col-sm-6">
         <% show_options = @show_theme_names.map { |g| [g[0], g[1], { 'data-image' => image_path("themes/#{g[1]}/#{g[1]}.jpg") }] } %>
         <%= f.input :show_theme, label: 'Show Page Theme' do %>
-          <%= f.select :show_theme, show_options, { prompt: 'Select show page theme...' }, { class: 'form-control', data: { theme_info: @show_theme_information }} %>
+          <%= f.select :show_theme, show_options, {}, { prompt: 'Select show page theme...', class: 'form-control', data: { theme_info: @show_theme_information }} %>
         <% end %>
 
         <h4>Theme notes:</h4>
