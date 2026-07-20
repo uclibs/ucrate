@@ -134,16 +134,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache CI Docker images
+      # Restore on every shard (must download tarballs). Do not use lookup-only:
+      # that reports cache-hit without restoring files, so shards 1–5 tried to
+      # docker load an empty directory while shard 0 (writer) actually restored.
+      - name: Restore CI Docker image cache
         id: cache-docker
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: /tmp/ci-docker-images
-          # v2: invalidate empty caches from earlier runs that saved the dir
-          # before any *.tar files existed.
-          key: ci-docker-v2-${{ runner.os }}-${{ hashFiles('docker-compose.ci.yml') }}
-          # Only shard 0 writes the cache so parallel shards cannot race an empty save.
-          lookup-only: ${{ matrix.ci_node_index != 0 }}
+          key: ci-docker-v3-${{ runner.os }}-${{ hashFiles('docker-compose.ci.yml') }}
 
       - name: Load cached Docker images
         id: load-docker
@@ -191,11 +190,13 @@ jobs:
       # Must run in this step (not backgrounded earlier): each GHA step is a new shell,
       # so wait cannot see a PID from a previous step.
       - name: Pull CI Docker images
+        id: pull-docker
         if: steps.cache-docker.outputs.cache-hit != 'true' || steps.load-docker.outputs.loaded != 'true'
         run: docker compose -f docker-compose.ci.yml pull --quiet
 
-      - name: Save Docker images for cache
-        if: (steps.cache-docker.outputs.cache-hit != 'true' || steps.load-docker.outputs.loaded != 'true') && matrix.ci_node_index == 0
+      - name: Pack Docker images for cache
+        id: pack-docker
+        if: steps.pull-docker.outcome == 'success' && matrix.ci_node_index == 0
         run: |
           set -euo pipefail
           mkdir -p /tmp/ci-docker-images
@@ -211,6 +212,13 @@ jobs:
             exit 1
           fi
           ls -lh /tmp/ci-docker-images/
+
+      - name: Save CI Docker image cache
+        if: steps.pack-docker.outcome == 'success' && matrix.ci_node_index == 0
+        uses: actions/cache/save@v4
+        with:
+          path: /tmp/ci-docker-images
+          key: ci-docker-v3-${{ runner.os }}-${{ hashFiles('docker-compose.ci.yml') }}
 
       - name: Start CI dependency stack
         run: docker compose -f docker-compose.ci.yml up -d --no-build
