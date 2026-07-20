@@ -332,6 +332,14 @@ jobs:
           path: tmp/test-results/
           if-no-files-found: ignore
 
+      - name: Upload SimpleCov resultset
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-resultset-${{ matrix.ci_node_index }}
+          path: coverage/.resultset.json
+          if-no-files-found: error
+
       - name: Upload Capybara failures
         if: failure()
         uses: actions/upload-artifact@v4
@@ -343,3 +351,57 @@ jobs:
       - name: Tear down stack
         if: always()
         run: docker compose -f docker-compose.ci.yml down -v --remove-orphans
+
+  coverage:
+    name: Coverage gate
+    needs: test
+    if: always() && !cancelled()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.6"
+          bundler-cache: true
+
+      - name: Install bc
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends bc
+
+      - name: Download shard SimpleCov resultsets
+        uses: actions/download-artifact@v4
+        with:
+          pattern: coverage-resultset-*
+          path: tmp/coverage_shards
+          merge-multiple: false
+
+      - name: Merge SimpleCov resultsets
+        run: |
+          set -euo pipefail
+          echo "Downloaded resultsets:"
+          find tmp/coverage_shards -type f -print
+          bundle exec ruby scripts/ci/merge_coverage.rb 'tmp/coverage_shards/**/.resultset.json'
+
+      - name: Upload merged coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-merged
+          path: |
+            coverage/index.html
+            coverage/.resultset.json
+            coverage/merged_coverage.txt
+          if-no-files-found: ignore
+
+      - name: Check and update coverage baseline
+        env:
+          UPDATE_COVERAGE_BASELINE: ${{ github.event_name == 'pull_request' }}
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+        run: ./scripts/ci/coverage_gate.sh

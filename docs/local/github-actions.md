@@ -11,14 +11,26 @@ PRs and pushes to **`hyku-oob`** run [`.github/workflows/ci.yml`](../../.github/
 | **RuboCop** | `bundle exec rubocop` (no Solr/Fedora) |
 | **Brakeman and bundler-audit** | Security scans (no Solr/Fedora). Known Hyku OOB findings are baselined in [`config/brakeman.ignore`](../../config/brakeman.ignore) and [`.bundler-audit.yml`](../../.bundler-audit.yml); **new** Medium/High Brakeman warnings or unignored advisories still fail CI. |
 | **RSpec (shards 0–5)** | Six parallel jobs; each starts Postgres, Redis, Solr, Fedora (and Chrome) via [`docker-compose.ci.yml`](../../docker-compose.ci.yml), then runs ~1/6 of the spec files |
+| **Coverage gate** | Downloads each shard’s SimpleCov `.resultset.json`, merges with `SimpleCov.collate`, compares to [`coverage/coverage_baseline.txt`](../../coverage/coverage_baseline.txt) |
 
-Required checks for PRs into `hyku-oob` should be those jobs (lint, security, and all six RSpec shards). No release labels are required for these checks.
+Required checks for PRs into `hyku-oob` should be those jobs (lint, security, all six RSpec shards, and the coverage gate). No release labels are required for these checks.
 
 CI uses Actions + Docker **only on the runner**. Local macOS setup under `docs/local/` stays no-Docker.
 
 Caching (to keep runs shorter): Bundler (`ruby/setup-ruby` bundler-cache), Yarn, RuboCop result cache, ruby-advisory-db for bundler-audit, and Docker service images from `docker-compose.ci.yml` (saved by shard 0, restored by all shards). Apt packages are installed directly (not cached) so six parallel shards do not race the same Actions cache key.
 
 Specs run Ruby on the Actions host (not inside the Hyku web container). CI sets env to match Hyku Docker’s `.env` where it matters for specs — especially `HYKU_RESTRICT_CREATE_AND_DESTROY_PERMISSIONS` (Groups with Roles), `HYRAX_ACTIVE_JOB_QUEUE=good_job` (avoids Sidekiq Redis `thread_safe` errors in `Account#find_job`), and `HYKU_CACHE_ROOT` under the workspace (not `/app/...`). Database setup matches Hyku CI: `db:create db:schema:load db:migrate` so `shared_extensions` / `uuid-ossp` exist before schema load (required for Apartment tenants).
+
+### Code coverage baseline
+
+Each RSpec shard writes its own SimpleCov `.resultset.json` (incomplete on its own). The **Coverage gate** job:
+
+1. Downloads all six resultsets and merges them with [`scripts/ci/merge_coverage.rb`](../../scripts/ci/merge_coverage.rb) (`SimpleCov.collate` — line hits unioned across shards, **not** an average of per-shard percentages).
+2. Rounds the merged line % to two decimal places and compares to the committed baseline in [`coverage/coverage_baseline.txt`](../../coverage/coverage_baseline.txt) via [`scripts/ci/coverage_gate.sh`](../../scripts/ci/coverage_gate.sh).
+3. **Fails** only if coverage drops more than **0.5** percentage points below the baseline (so tiny float/display noise does not fail CI).
+4. On **pull requests** into `hyku-oob`, if merged coverage **exceeds** the baseline, CI commits and pushes the higher value to the PR branch (ratchet). Pushes to `hyku-oob` gate only; they do not auto-commit.
+
+Everything under `coverage/` is gitignored except `coverage/coverage_baseline.txt`.
 
 ## PR label checker (`Verify` / “PR has required labels”)
 
