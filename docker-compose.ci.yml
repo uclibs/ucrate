@@ -84,3 +84,15 @@ services:
       timeout: 5s
       retries: 30
       start_period: 40s
+
+  chrome:
+    image: selenium/standalone-chromium:latest
+    ports:
+      - "4444:4444"
+    shm_size: "2gb"
+    # Rails runs on the GHA host; Chrome must reach it via the Docker host gateway.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SE_NODE_MAX_SESSIONS: 2
+      SE_NODE_OVERRIDE_MAX_SESSIONS: "true"

@@ -51,9 +51,11 @@ env:
   SOLR_CONFIGSET_NAME: hyku
   SOLR_ENABLE_CLOUD_MODE: "yes"
   SOLR_ENABLE_AUTHENTICATION: "yes"
-  # Use headless Chrome on the GHA runner (not remote Selenium). Remote Chrome via
-  # host.docker.internal made JS feature specs race Site.last / visit after Save.
-  # Leave CHROME_HOSTNAME unset so spec/rails_helper.rb registers a local driver.
+  # Match Hyku Docker CI: remote Selenium Chrome (avoids host ChromeDriver /
+  # selenium-webdriver API mismatches on the GHA runner).
+  CHROME_HOSTNAME: localhost
+  # Capybara app_host as seen from the Chrome container (compose extra_hosts).
+  WEB_HOST: host.docker.internal
   HYKU_MULTITENANT: "true"
   HYKU_ROOT_HOST: test.host
   HYKU_ADMIN_HOST: test.host
@@ -142,7 +144,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: /tmp/ci-docker-images
-          key: ci-docker-v4-${{ runner.os }}-${{ hashFiles('docker-compose.ci.yml') }}
+          key: ci-docker-v5-${{ runner.os }}-${{ hashFiles('docker-compose.ci.yml') }}
 
       - name: Load cached Docker images
         id: load-docker
@@ -189,24 +191,6 @@ jobs:
           # poppler-utils provides pdftotext (Hyrax base image; FileSet PDF indexing)
           command -v pdftotext
 
-      - name: Setup Chrome
-        id: setup-chrome
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: stable
-          install-chromedriver: true
-
-      - name: Verify Chrome
-        run: |
-          echo "Chrome: ${{ steps.setup-chrome.outputs.chrome-path }}"
-          echo "ChromeDriver: ${{ steps.setup-chrome.outputs.chromedriver-path }}"
-          "${{ steps.setup-chrome.outputs.chrome-path }}" --version
-          "${{ steps.setup-chrome.outputs.chromedriver-path }}" --version
-          {
-            echo "CHROME_PATH=${{ steps.setup-chrome.outputs.chrome-path }}"
-            echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}"
-          } >> "$GITHUB_ENV"
-
       # Must run in this step (not backgrounded earlier): each GHA step is a new shell,
       # so wait cannot see a PID from a previous step.
       - name: Pull CI Docker images
@@ -238,7 +222,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: /tmp/ci-docker-images
-          key: ci-docker-v4-${{ runner.os }}-${{ hashFiles('docker-compose.ci.yml') }}
+          key: ci-docker-v5-${{ runner.os }}-${{ hashFiles('docker-compose.ci.yml') }}
 
       - name: Start CI dependency stack
         run: docker compose -f docker-compose.ci.yml up -d --no-build

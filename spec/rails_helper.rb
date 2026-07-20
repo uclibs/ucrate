@@ -55,9 +55,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'database_cleaner'
 require 'active_fedora/cleaner'
-# CI supplies ChromeDriver via browser-actions/setup-chrome. Requiring webdrivers
-# makes it hit the retired chromedriver.storage.googleapis.com endpoint (404).
-require 'webdrivers' if ENV['CHROMEDRIVER_PATH'].blank?
+require 'webdrivers'
 require 'shoulda/matchers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -95,9 +93,10 @@ if ENV['CHROME_HOSTNAME'].present?
                                                        "window-size=1200,800"])
 
   Capybara.register_driver :chrome do |app|
+    # selenium-webdriver 4.11+ removed the :capabilities keyword; use :options.
     d = Capybara::Selenium::Driver.new(app,
                                        browser: :remote,
-                                       capabilities: options,
+                                       options:,
                                        url: "http://#{ENV['CHROME_HOSTNAME']}:4444/wd/hub")
     # Fix for capybara vs remote files. Selenium handles this for us
     d.browser.file_detector = lambda do |args|
@@ -110,19 +109,15 @@ if ENV['CHROME_HOSTNAME'].present?
   Capybara.server_port = 3001
   Capybara.app_host = "http://#{ENV['WEB_HOST']}:#{Capybara.server_port}"
 else
-  # Local Chrome (CI and developer machines without CHROME_HOSTNAME).
-  # GHA needs no-sandbox / disable-dev-shm-usage or Chrome exits immediately.
-  chrome_args = ["headless", "disable-gpu", "window-size=1920,1080"]
-  chrome_args += %w[no-sandbox disable-dev-shm-usage disable-backgrounding-occluded-windows] if ENV['CI']
-  options = Selenium::WebDriver::Options.chrome(args: chrome_args)
-  options.binary = ENV['CHROME_PATH'] if ENV['CHROME_PATH'].present?
-  Selenium::WebDriver::Chrome::Service.driver_path = ENV['CHROMEDRIVER_PATH'] if ENV['CHROMEDRIVER_PATH'].present?
+  options = Selenium::WebDriver::Options.chrome(args: ["headless",
+                                                       "disable-gpu",
+                                                       "window-size=1920,1080"])
 
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(
       app,
       browser: :chrome,
-      capabilities: options
+      options:
     )
   end
 end
