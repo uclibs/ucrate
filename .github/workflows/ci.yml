@@ -131,14 +131,6 @@ jobs:
             docker load -i "$f"
           done
 
-      # Overlap image pull with Ruby/Node setup when cache missed.
-      - name: Pull CI images (background)
-        if: steps.cache-docker.outputs.cache-hit != 'true'
-        run: |
-          set -euo pipefail
-          docker compose -f docker-compose.ci.yml pull --quiet &
-          echo $! > /tmp/docker-pull.pid
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3.6"
@@ -162,11 +154,11 @@ jobs:
             libvips42 imagemagick
           version: "2"
 
-      - name: Wait for Docker image pull
+      # Must run in this step (not backgrounded earlier): each GHA step is a new shell,
+      # so wait cannot see a PID from a previous step.
+      - name: Pull CI Docker images
         if: steps.cache-docker.outputs.cache-hit != 'true'
-        run: |
-          set -euo pipefail
-          wait "$(cat /tmp/docker-pull.pid)"
+        run: docker compose -f docker-compose.ci.yml pull --quiet
 
       - name: Save Docker images for cache
         if: steps.cache-docker.outputs.cache-hit != 'true' && matrix.ci_node_index == 0
