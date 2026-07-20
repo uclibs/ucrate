@@ -28,9 +28,10 @@ Prefer **several focused commits** over one large dump at the end of a long sess
 ## When not to commit yet
 
 - Broken or half-migrated code you are still mid-edit
-- Red `bundle exec rspec` / `bundle exec rubocop` for Ruby work you are claiming done in that commit ([code-quality-standards](./code-quality-standards.mdc), [general-instructions](./general-instructions.mdc))
+- Red `bundle exec rubocop` for Ruby work you are claiming done in that commit ([code-quality-standards](./code-quality-standards.mdc), [general-instructions](./general-instructions.mdc))
 - Unrelated dirty files (e.g. local env overrides) — leave them out
 - User explicitly asked to pause committing
+- Do **not** block commits on a full local RSpec run (see [code-quality-standards](./code-quality-standards.mdc) — suite is expensive)
 
 ## How
 

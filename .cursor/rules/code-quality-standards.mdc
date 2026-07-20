@@ -74,23 +74,36 @@ Read `.rubocop.yml` / `.rubocop_todo.yml` before large refactors. Prefer fixing 
   - Do not add new entries to `.rubocop_todo.yml` for code you introduced — **fix the code** instead.
 - **Never** skip the full-project run because a partial path scan was clean.
 
-## Tests — required
+## Tests — write them; do not run the full suite by default
 
-### What “green” means (and what it does not)
+### Local cost (important)
 
-| Green means | Green does **not** mean |
-|-------------|-------------------------|
-| Relevant / full `bundle exec rspec` passed | Every real user surface / race was exercised |
-| `bundle exec rubocop` clean | Failure modes are locked in |
-| New/changed behavior has meaningful specs | Happy-path execution alone is enough |
+The Hyku suite expects **Solr + Fedora (+ Redis + Postgres)** and a full local run can take on the order of **an hour**. Starting wrappers is non-trivial.
 
-**Coverage is necessary, not sufficient.** Prefer thorough coverage on **new and changed** code. This codebase is not held to a hard 100% project-wide bar like some other apps — do not leave new files or new branches untested.
+**Do not** run `bundle exec rspec`, `bundle exec rake spec`, or `bundle exec rake ci` after every change, after every commit, or as a routine “definition of done” step.
+
+| When | What to do |
+|------|------------|
+| Day-to-day implementation | **Write/update** the right specs; rely on review + RuboCop. Do **not** boot the test stack or run the suite unless asked. |
+| User explicitly asks to run tests | Run what they ask (targeted file/dir, or full suite). |
+| Targeted check (optional, only if test stack is **already** up) | `bundle exec rspec path/to/spec_file.rb` — never start Solr/Fedora just for a drive-by check. |
+| Full suite / `rake ci` | **Only** when the user explicitly requests it. |
+
+CI remains the place that routinely exercises the full suite.
+
+### What “done” means for tests here
+
+| Required | Not required locally |
+|----------|----------------------|
+| Specs exist for new/changed behavior (including failure modes where applicable) | Full `bundle exec rspec` green on your machine |
+| `bundle exec rubocop` clean (full project) | Booting Solr/Fedora for every ticket |
+| Regression examples added for bugs you fix | Hour-long suite as a gate before commit |
 
 ### Failure-mode tests (required for new behavior)
 
 For new or changed behavior — especially async jobs, multi-tenant paths, auth, or HTML apply — specs must include **failure-mode examples**, not only happy paths. Write at least one fast example per **applicable** risk.
 
-**Bug-fix rule:** A bug found in [review-passes](./review-passes.mdc) is **not fixed** until there is a regression example that fails without the fix.
+**Bug-fix rule:** A bug found in [review-passes](./review-passes.mdc) is **not fixed** until there is a regression example that fails without the fix (add the example even if you are not running the suite in that session).
 
 ### Reliability and speed
 
@@ -103,18 +116,19 @@ Default to tests that are **fast, deterministic, and isolated**.
 | Factory data scoped to the example | Request specs that duplicate unit coverage | Order-dependent examples |
 
 - Keep examples **independent** — no reliance on example order or shared mutable global state.
-- Before finishing a Ruby change set, run specs that cover the change; run the **full** suite when practical and before calling a ticket done.
 
-### Full suite (before done)
+### When the user asks for a full run
 
 ```bash
+# Needs Postgres + Redis; rake ci auto-starts Solr :8985 and Fedora :8986
+bundle exec rake ci
+# or, if wrappers already running on test ports:
 bundle exec rspec
-bundle exec rubocop
 ```
 
 ## Failing tests — how to respond
 
-If anything fails, **investigate thoughtfully**; do not skip, pend, or weaken assertions without explicit user approval.
+If a run the user requested fails, **investigate thoughtfully**; do not skip, pend, or weaken assertions without explicit user approval.
 
 | Failure cause | Action |
 |---------------|--------|
@@ -122,13 +136,13 @@ If anything fails, **investigate thoughtfully**; do not skip, pend, or weaken as
 | **Code is wrong** | Fix the **code**. |
 | **Both** | Fix both; explain briefly in the PR. |
 
-Do not merge or declare complete while `bundle exec rspec` or `bundle exec rubocop` is red for work you claim is done.
+Do not declare Ruby style work complete while `bundle exec rubocop` is red.
 
 ## Completion checklist (agent)
 
 - [ ] DRY, naming, self-documenting; smell pass done (including inverted-naming check)
 - [ ] Full [review sequence](./review-passes.mdc) done and iterated to stop conditions
-- [ ] Applicable **failure-mode** lenses have specs
+- [ ] Applicable **failure-mode** specs **written** (not necessarily executed locally)
 - [ ] `bundle exec rubocop` green — **full project**
-- [ ] Specs green for the change (full suite when claiming ticket done)
+- [ ] Did **not** burn an hour on a full local suite unless the user asked
 - [ ] No new antipatterns introduced in scope of the ticket

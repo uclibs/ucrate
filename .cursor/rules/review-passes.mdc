@@ -5,15 +5,15 @@ alwaysApply: true
 
 # Review passes (before calling work done)
 
-After implementation is green for the intended slice, run the **iterative review sequence** below over the changed work (and closely related call sites). Do not treat the first “tests green” as the end.
+After implementation is ready for the intended slice, run the **iterative review sequence** below over the changed work (and closely related call sites). Do not treat “RuboCop green” as the end of design/review.
 
-**Green suite is necessary, not sufficient.** Coverage proves lines ran; it does not prove failure modes were exercised. Work is not done until bug-hunt lenses have matching **failure-mode specs** where applicable (see [code-quality-standards](./code-quality-standards.mdc)).
+**Writing failure-mode specs is required; running the full local suite is not.** The Hyku suite needs Solr/Fedora and can take ~an hour — see [code-quality-standards](./code-quality-standards.mdc). Only execute RSpec when the user asks (or a targeted file if the test stack is already up).
 
 ## Review sequence (run in this order)
 
 Each step is a **loop**, not a single scan: run the lens, fix what it finds (per [Fix policy](#fix-policy)), then re-run that same step until it hits the step’s **stop condition**. Only then move to the next step.
 
-1. **Code quality** — Apply [code-quality-standards](./code-quality-standards.mdc): DRY, naming, inverted-naming check, full RuboCop, failure-mode test posture, antipatterns. **Iterate until a scan finds only trivial issues left.**
+1. **Code quality** — Apply [code-quality-standards](./code-quality-standards.mdc): DRY, naming, inverted-naming check, full RuboCop, failure-mode **spec writing**, antipatterns. **Iterate until a scan finds only trivial issues left.**
 2. **Senior developer review** — Architecture fit, edge cases, auth/races, consistency with nearby patterns, failure modes, unclear contracts, leaky abstractions. **Iterate until a scan finds no issues left.**
 3. **Bug hunt** — Deliberately try to break the change. Fix what you find **and lock each fix with a regression example**. **Iterate until a full scan finds no new bugs.**
 4. **Senior developer review (again)** — Re-run step 2 after quality/bug fixes. **Iterate until clean.**
@@ -34,7 +34,7 @@ Each step is a **loop**, not a single scan: run the lens, fix what it finds (per
 2. If **any** real bugs are found:
    - Fix them.
    - Add/extend a **regression example that fails without each fix**.
-   - Re-run `bundle exec rspec` / `bundle exec rubocop` as needed.
+   - Re-run `bundle exec rubocop` as needed; run RSpec **only** if the user asked or the test stack is already up for a targeted file.
    - **Re-scan** (including failure modes touched by the latest fixes).
 3. Stop only when a complete scan finds **no new bugs**.
 
@@ -69,6 +69,6 @@ A finding may be left unfixed **only** when you say so explicitly and one of the
 2. **Product-/architecture-ambiguous** — run [design-decision-gate](./design-decision-gate.mdc), **or**
 3. A **deliberate, ratified exception** (one-line why).
 
-Commit coherent review-fix slices ([frequent-commits](./frequent-commits.mdc)). Re-run `bundle exec rspec` and `bundle exec rubocop` before declaring the ticket done.
+Commit coherent review-fix slices ([frequent-commits](./frequent-commits.mdc)). Re-run `bundle exec rubocop` before declaring the ticket done. Run RSpec only per [code-quality-standards](./code-quality-standards.mdc) (user-requested / targeted if stack already up).
 
 When reporting review results, state disposition of **each** finding: fixed (with commit), or explicitly deferred under one of the three exceptions above.
