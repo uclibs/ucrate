@@ -58,6 +58,7 @@ public/uploads
 /public/branding
 public/assets
 .env.*
+!.env.local.mac.example
 docker-compose.override.yml
 *~undo-tree~
 .DS_Store
