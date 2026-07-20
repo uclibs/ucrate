@@ -67,6 +67,10 @@ env:
   VALKYRIE_ID_TYPE: string
   HYRAX_VALKYRIE: "true"
   HYRAX_FLEXIBLE: "false"
+  # Hyku Docker loads this from .env. Default "sidekiq" makes Account#find_job
+  # scan Redis with Sidekiq client options that include thread_safe: true, which
+  # the redis gem rejects (ArgumentError: unknown keyword: :thread_safe).
+  HYRAX_ACTIVE_JOB_QUEUE: good_job
   DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
 
 jobs:
