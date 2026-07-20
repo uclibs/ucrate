@@ -13,7 +13,7 @@
 | [switching-to-develop.md](./switching-to-develop.md) | Switching back to Scholar@UC `develop` |
 | [troubleshooting.md](./troubleshooting.md) | Common failures |
 | [updating-from-hyku.md](./updating-from-hyku.md) | Pulling Hyku updates with a normal `git merge` |
-| [github-actions.md](./github-actions.md) | PR label checker and other Actions notes |
+| [github-actions.md](./github-actions.md) | CI on `hyku-oob` (RuboCop, security, parallel RSpec); label checker notes |
 
 ## Quick start
 

@@ -1,0 +1,213 @@
+# Scholar@UC CI for hyku-oob (CircleCI-like: lint, security, parallel RSpec).
+# Does not use Hyku's Docker image-publish pipeline (build-test-lint.yaml).
+name: CI
+
+on:
+  push:
+    branches:
+      - hyku-oob
+  pull_request:
+    branches:
+      - hyku-oob
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  BUNDLE_JOBS: 4
+  BUNDLE_RETRY: 3
+  RAILS_ENV: test
+  RACK_ENV: test
+  IN_DOCKER: "true"
+  DB_ADAPTER: postgresql
+  DB_HOST: localhost
+  DB_PORT: "5432"
+  DB_NAME: hyku_test
+  DB_TEST_NAME: hyku_test
+  DB_USER: postgres
+  DB_PASSWORD: postgres
+  REDIS_HOST: localhost
+  REDIS_PORT: "6379"
+  FCREPO_HOST: localhost
+  FCREPO_PORT: "8080"
+  FCREPO_TEST_PORT: "8080"
+  FCREPO_BASE_PATH: /test
+  FCREPO_TEST_BASE_PATH: /test
+  SOLR_HOST: localhost
+  SOLR_PORT: "8983"
+  SOLR_URL: http://localhost:8983/solr/
+  SOLR_COLLECTION_NAME: hydra-test
+  SOLR_COLLECTION_TEST: hydra-test
+  SOLR_CONFIGSET_NAME: hyku
+  SOLR_ENABLE_CLOUD_MODE: "yes"
+  CHROME_HOSTNAME: localhost
+  # Capybara app_host seen from the Chrome container (see docker-compose.ci.yml extra_hosts)
+  WEB_HOST: host.docker.internal
+  HYKU_MULTITENANT: "true"
+  HYKU_ROOT_HOST: test.host
+  HYKU_ADMIN_HOST: test.host
+  SECRET_KEY_BASE: ci-secret-key-base-not-for-production
+  DISABLE_REDIS_CLUSTER: "true"
+
+jobs:
+  lint:
+    name: RuboCop
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.6"
+          bundler-cache: true
+      - name: RuboCop
+        run: bundle exec rubocop --format progress
+
+  security:
+    name: Brakeman and bundler-audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.6"
+          bundler-cache: true
+      - name: Brakeman
+        run: bundle exec brakeman -q -w 2
+      - name: bundler-audit
+        run: bundle exec bundler-audit check --update
+
+  test:
+    name: RSpec (shard ${{ matrix.ci_node_index }}/6)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ci_node_index: [0, 1, 2, 3, 4, 5]
+    env:
+      CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+      CI_NODE_TOTAL: "6"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start CI dependency stack
+        run: docker compose -f docker-compose.ci.yml up -d
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.6"
+          bundler-cache: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: yarn
+
+      - name: Install JS dependencies
+        run: yarn install --frozen-lockfile || yarn install
+
+      - name: Install wait tools
+        run: sudo apt-get update && sudo apt-get install -y netcat-openbsd zip curl postgresql-client redis-tools
+
+      - name: Wait for Postgres
+        run: |
+          for i in $(seq 1 60); do
+            if pg_isready -h localhost -p 5432 -U postgres; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Postgres did not become ready"
+          docker compose -f docker-compose.ci.yml logs db
+          exit 1
+
+      - name: Wait for Redis
+        run: |
+          for i in $(seq 1 30); do
+            if redis-cli -h localhost ping | grep -q PONG; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Redis did not become ready"
+          docker compose -f docker-compose.ci.yml logs redis
+          exit 1
+
+      - name: Wait for Solr
+        run: |
+          for i in $(seq 1 60); do
+            if curl -sf http://localhost:8983/solr/admin/info/system >/dev/null; then
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "Solr did not become ready"
+          docker compose -f docker-compose.ci.yml logs solr
+          exit 1
+
+      - name: Wait for Fedora
+        run: |
+          for i in $(seq 1 60); do
+            code=$(curl -sf -o /dev/null -w "%{http_code}" http://localhost:8080/rest || true)
+            if echo "$code" | grep -Eq '200|401|403|404'; then
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "Fedora did not become ready"
+          docker compose -f docker-compose.ci.yml logs fcrepo
+          exit 1
+
+      - name: Prepare database
+        run: bundle exec rails db:prepare
+
+      - name: Upload Solr configset (best effort)
+        run: |
+          chmod +x bin/solrcloud-upload-configset.sh bin/solrcloud-assign-configset.sh || true
+          ./bin/solrcloud-upload-configset.sh solr/conf || true
+          SOLR_COLLECTION_NAME=hydra-test ./bin/solrcloud-assign-configset.sh || true
+
+      - name: Run RSpec shard
+        run: |
+          set -euo pipefail
+          mapfile -t ALL_SPECS < <(find spec -name '*_spec.rb' | sort)
+          SPECS=()
+          i=0
+          for spec in "${ALL_SPECS[@]}"; do
+            if (( i % CI_NODE_TOTAL == CI_NODE_INDEX )); then
+              SPECS+=("$spec")
+            fi
+            i=$((i + 1))
+          done
+          echo "Shard ${CI_NODE_INDEX}/${CI_NODE_TOTAL}: ${#SPECS[@]} specs"
+          if (( ${#SPECS[@]} == 0 )); then
+            echo "No specs for this shard"
+            exit 0
+          fi
+          mkdir -p tmp/test-results
+          bundle exec rspec "${SPECS[@]}" \
+            --tag '~speed:slow' \
+            --format progress \
+            --format RspecJunitFormatter \
+            --out "tmp/test-results/rspec-${CI_NODE_INDEX}.xml"
+
+      - name: Upload RSpec results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rspec-results-${{ matrix.ci_node_index }}
+          path: tmp/test-results/
+          if-no-files-found: ignore
+
+      - name: Upload Capybara failures
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capybara-${{ matrix.ci_node_index }}
+          path: tmp/capybara/
+          if-no-files-found: ignore
+
+      - name: Tear down stack
+        if: always()
+        run: docker compose -f docker-compose.ci.yml down -v --remove-orphans

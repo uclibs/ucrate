@@ -26,7 +26,9 @@ gem 'blacklight_advanced_search'
 gem 'blacklight_oai_provider', '~> 7.0'
 gem 'blacklight_range_limit', '~> 8.5'
 gem 'bolognese', '>= 1.9.10'
+gem 'brakeman', group: %i[development test]
 gem 'bootstrap', '~> 4.6'
+gem 'bundler-audit', group: %i[development test]
 gem 'bootstrap-datepicker-rails'
 gem 'bulkrax', '~> 9.5'
 gem 'byebug', group: %i[development test]

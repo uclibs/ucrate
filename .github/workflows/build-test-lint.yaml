@@ -1,5 +1,7 @@
 name: "build-test-lint"
 run-name: Build of ${{ github.ref_name }} by @${{ github.actor }}
+# Scholar@UC: this workflow publishes to ghcr.io/samvera/hyku. Only run on the
+# upstream Samvera repo — feature work on uclibs/ucrate uses .github/workflows/ci.yml.
 on:
   push:
     branches:
@@ -33,6 +35,7 @@ env:
 
 jobs:
   build:
+    if: github.repository == 'samvera/hyku'
     strategy:
       matrix:
         component: ["solr", "web", "worker"]
@@ -88,6 +91,7 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.component }}:${{ env.TAG }}-${{ env.PLATFORM_TAG }}
   push:
+    if: github.repository == 'samvera/hyku'
     needs: build
     runs-on: ubuntu-latest
     permissions: write-all
@@ -122,6 +126,7 @@ jobs:
           done
 
   lint:
+    if: github.repository == 'samvera/hyku'
     needs: push
     uses: notch8/actions/.github/workflows/lint.yaml@v1.0.6
     with:
@@ -130,6 +135,7 @@ jobs:
       rubocop_cmd: "bundle exec rubocop --parallel --format progress"
 
   test:
+    if: github.repository == 'samvera/hyku'
     needs: push
     uses: notch8/actions/.github/workflows/test.yaml@v1.0.6
     with:
@@ -137,6 +143,7 @@ jobs:
       rspec_cmd: "gem install semaphore_test_boosters && bundle && rspec_booster --job $CI_NODE_INDEX/$CI_NODE_TOTAL"
 
   single-tenant-test:
+    if: github.repository == 'samvera/hyku'
     needs: push
     runs-on: ubuntu-latest
     defaults:
@@ -234,6 +241,7 @@ jobs:
         run: docker compose -f docker-compose.single.yml down -v --remove-orphans
 
   env-file-lint:
+    if: github.repository == 'samvera/hyku'
     # Guard against a regression class: `${VAR}` shell interpolation of any
     # form placed inside `.env`. It is not reliably expanded through env_file:
     # the `${VAR:-default}` form is only handled on newer Compose (>= ~2.24),
@@ -263,6 +271,6 @@ jobs:
           echo "No \${...} interpolation found in .env"
 
   reports:
-    if: always()
+    if: always() && github.repository == 'samvera/hyku'
     needs: [test, lint, single-tenant-test]
     uses: notch8/actions/.github/workflows/report.yaml@v1.0.6
