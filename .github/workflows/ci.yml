@@ -37,7 +37,10 @@ env:
   FCREPO_TEST_PORT: "8080"
   FCREPO_BASE_PATH: /test
   FCREPO_TEST_BASE_PATH: /test
-  SOLR_HOST: localhost
+  # Keep Hyku default "solr" for Ruby/RSpec (CreateSolrCollectionJob#solr_url
+  # specs expect that host when SOLR_URL is unset). Shell scripts that talk to
+  # Solr from the GHA host override SOLR_HOST=localhost in their step.
+  SOLR_HOST: solr
   SOLR_PORT: "8983"
   SOLR_ADMIN_USER: solr
   SOLR_ADMIN_PASSWORD: SolrRocks
@@ -254,6 +257,9 @@ jobs:
           bundle exec rails db:create db:schema:load db:migrate
 
       - name: Upload Solr configset
+        env:
+          # Scripts run on the GHA host; compose service hostname "solr" is not resolvable here.
+          SOLR_HOST: localhost
         run: |
           set -euo pipefail
           chmod +x bin/solrcloud-upload-configset.sh bin/solrcloud-assign-configset.sh
