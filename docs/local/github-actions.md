@@ -18,6 +18,8 @@ CI uses Actions + Docker **only on the runner**. Local macOS setup under `docs/l
 
 Caching (to keep runs shorter): Bundler (`ruby/setup-ruby` bundler-cache), Yarn, RuboCop result cache, ruby-advisory-db for bundler-audit, apt wait-tools, and Docker service images from `docker-compose.ci.yml` (saved by shard 0, restored by all shards).
 
+Specs run Ruby on the Actions host (not inside the Hyku web container). CI sets `HYKU_CACHE_ROOT` under the workspace so the app does not try to write `/app/samvera/file_cache`.
+
 Making the full suite green is a follow-up; the workflow is wired first so failures are visible.
 
 ## PR label checker (`Verify` / “PR has required labels”)

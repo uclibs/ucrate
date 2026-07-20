@@ -20,7 +20,9 @@ env:
   BUNDLE_RETRY: 3
   RAILS_ENV: test
   RACK_ENV: test
-  IN_DOCKER: "true"
+  # Ruby runs on the GHA host (not inside the Hyku web image). Do not set
+  # IN_DOCKER — that path layout assumes /app/samvera/...
+  HYKU_CACHE_ROOT: ${{ github.workspace }}/tmp/hyku_file_cache
   DB_ADAPTER: postgresql
   DB_HOST: localhost
   DB_PORT: "5432"
@@ -152,11 +154,17 @@ jobs:
         uses: awalsh128/cache-apt-pkgs-action@v1.5.0
         with:
           # libvips: required by ruby-vips / riiif at boot (LoadError without it)
-          # imagemagick: Hyrax derivatives / feature specs
+          # imagemagick: MiniMagick / CarrierWave derivatives
           packages: >-
             netcat-openbsd zip curl postgresql-client redis-tools
             libvips42 imagemagick
-          version: "2"
+          version: "3"
+
+      - name: Ensure ImageMagick and cache dir
+        run: |
+          set -euo pipefail
+          mkdir -p "${HYKU_CACHE_ROOT}"
+          convert -version
 
       # Must run in this step (not backgrounded earlier): each GHA step is a new shell,
       # so wait cannot see a PID from a previous step.
