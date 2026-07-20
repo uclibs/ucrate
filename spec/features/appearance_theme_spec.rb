@@ -34,7 +34,7 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
       select('List view', from: 'Search Results Page Theme')
       select('Default Show Page', from: 'Show Page Theme')
       find('body').click
-      click_on('Save')
+      within('#themes') { click_on('Save') }
       expect(page).to have_content('The appearance was successfully updated')
     end
 
@@ -51,8 +51,8 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
       select('Gallery view', from: 'Search Results Page Theme')
       select('Default Show Page', from: 'Show Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       expect(site.home_theme).to eq('default_home')
@@ -73,8 +73,8 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
       expect(page).to have_content('This will select a default view for the search results page. Users can select their preferred views on the search results page that will override this selection')
       # rubocop:enable Metrics/MethodLength
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       expect(page).to have_content('The appearance was successfully updated')
@@ -97,8 +97,8 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Gallery view', from: 'Search Results Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
@@ -136,8 +136,8 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Cultural Repository', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
@@ -151,8 +151,8 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Cultural Repository', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
@@ -162,8 +162,8 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Default home', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'

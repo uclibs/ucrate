@@ -35,7 +35,7 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Default Show Page', from: 'Show Page Theme')
       find('body').click
-      click_on('Save')
+      within('#themes') { click_on('Save') }
       expect(page).to have_content('The appearance was successfully updated')
     end
 
@@ -50,8 +50,8 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Default Show Page', from: 'Show Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       expect(site.show_theme).to eq('default_show')
@@ -77,8 +77,8 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Cultural Show Page', from: 'Show Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit "/concern/generic_works/#{work.id}"
@@ -92,8 +92,8 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Cultural Show Page', from: 'Show Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit "/concern/generic_works/#{work.id}"
@@ -103,8 +103,8 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Default Show Page', from: 'Show Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit "/concern/generic_works/#{work.id}"

@@ -13,9 +13,9 @@ RSpec.describe 'Admin can select community theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Community', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
+      within('#themes') { click_on('Save') }
 
-      site = Site.last
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
 
@@ -47,9 +47,9 @@ RSpec.describe 'Admin can select community theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Community', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
+      within('#themes') { click_on('Save') }
 
-      site = Site.last
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
 
@@ -74,9 +74,9 @@ RSpec.describe 'Admin can select community theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Community', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
+      within('#themes') { click_on('Save') }
 
-      site = Site.last
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
 
@@ -96,9 +96,9 @@ RSpec.describe 'Admin can select community theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Community', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
+      within('#themes') { click_on('Save') }
 
-      site = Site.last
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
 
@@ -114,9 +114,9 @@ RSpec.describe 'Admin can select community theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Community', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
+      within('#themes') { click_on('Save') }
 
-      site = Site.last
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
 
@@ -131,9 +131,9 @@ RSpec.describe 'Admin can select community theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Community', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
+      within('#themes') { click_on('Save') }
 
-      site = Site.last
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
 
@@ -158,9 +158,9 @@ RSpec.describe 'Admin can select community theme', type: :feature, js: true, cle
       click_link('Themes')
       select('Community', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
+      within('#themes') { click_on('Save') }
 
-      site = Site.last
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'

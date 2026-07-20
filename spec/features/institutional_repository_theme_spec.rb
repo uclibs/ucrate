@@ -21,8 +21,8 @@ RSpec.describe 'Admin can select institutional repository theme', type: :feature
       click_link('Themes')
       select('Institutional Repository', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       expect(site.home_theme).to eq('institutional_repository')
@@ -38,8 +38,8 @@ RSpec.describe 'Admin can select institutional repository theme', type: :feature
       click_link('Themes')
       select('Institutional Repository', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
@@ -65,8 +65,8 @@ RSpec.describe 'Admin can select institutional repository theme', type: :feature
       click_link('Themes')
       select('Institutional Repository', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'

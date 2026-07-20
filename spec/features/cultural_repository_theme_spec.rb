@@ -24,8 +24,8 @@ RSpec.describe 'Admin can select cultural repository theme', type: :feature, js:
       click_link('Themes')
       select('Cultural Repository', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       expect(site.home_theme).to eq('cultural_repository')
@@ -41,8 +41,8 @@ RSpec.describe 'Admin can select cultural repository theme', type: :feature, js:
       click_link('Themes')
       select('Cultural Repository', from: 'Home Page Theme')
       find('body').click
-      click_on('Save')
-      site = Site.last
+      within('#themes') { click_on('Save') }
+      site = Site.instance.reload
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'

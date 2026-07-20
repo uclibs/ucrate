@@ -7,7 +7,7 @@ Blacklight.onLoad(function() {
   var themeInfo = el.data('theme-info');
   var assetPath = el.find(':selected').data('image');
 
-  if (typeof theme !== 'undefined' && typeof themeInfo !== 'undefined') {
+  if (theme && themeInfo && themeInfo[theme]) {
     var themeData = themeInfo[theme];
     $('#home-theme-notes').html(themeData.notes);
     themeData.banner_image === true ? $('#banner-image-notes').show() : $('#banner-image-notes').hide();
@@ -19,8 +19,9 @@ Blacklight.onLoad(function() {
   el.on('change', function() {
     theme = el.val();
     themeInfo = el.data('theme-info');
-    themeData = themeInfo[theme];
+    themeData = themeInfo && themeInfo[theme];
     assetPath = el.find(':selected').data('image');
+    if (!themeData) { return; }
 
     $('#home-theme-notes').html(themeData.notes);
     themeData.banner_image === true ? $('#banner-image-notes').show() : $('#banner-image-notes').hide();
@@ -35,7 +36,7 @@ Blacklight.onLoad(function() {
   var showThemeInfo = showSelect.data('theme-info');
   var showAssetPath = showSelect.find(':selected').data('image');
 
-  if (typeof showTheme !== 'undefined' && typeof showThemeInfo !== 'undefined') {
+  if (showTheme && showThemeInfo && showThemeInfo[showTheme]) {
     var showThemeData = showThemeInfo[showTheme];
     $('#show-theme-notes').html(showThemeData.notes);
     $('#show-wireframe').find("img").attr("src", showAssetPath).attr("alt", $('#show-wireframe').data('alt-template').replace('%{theme}', showSelect.find(':selected').text()));
@@ -44,8 +45,9 @@ Blacklight.onLoad(function() {
   showSelect.on('change', function() {
     showTheme = showSelect.val();
     showThemeInfo = showSelect.data('theme-info');
-    showThemeData = showThemeInfo[showTheme];
+    showThemeData = showThemeInfo && showThemeInfo[showTheme];
     showAssetPath = showSelect.find(':selected').data('image');
+    if (!showThemeData) { return; }
 
     $('#show-theme-notes').html(showThemeData.notes);
     $('#show-wireframe').find("img").attr("src", showAssetPath).attr("alt", $('#show-wireframe').data('alt-template').replace('%{theme}', showSelect.find(':selected').text()));
@@ -56,13 +58,14 @@ Blacklight.onLoad(function() {
   var searchTheme = searchSelect.val();
   var searchAssetPath = searchSelect.find(':selected').data('image');
 
-  if (typeof searchTheme !== 'undefined') {
+  if (searchTheme) {
     $('#search-wireframe').find("img").attr("src", searchAssetPath).attr("alt", $('#search-wireframe').data('alt-template').replace('%{theme}', searchSelect.find(':selected').text()));
   }
 
   searchSelect.on('change', function() {
     searchTheme = searchSelect.val();
     searchAssetPath = searchSelect.find(':selected').data('image');
+    if (!searchTheme) { return; }
 
     $('#search-wireframe').find("img").attr("src", searchAssetPath).attr("alt", $('#search-wireframe').data('alt-template').replace('%{theme}', searchSelect.find(':selected').text()));
   });
