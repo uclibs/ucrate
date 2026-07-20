@@ -1,8 +1,11 @@
+# Upstream Hyku uses this to enforce release-note labels on PRs.
+# Scholar@UC feature work targets hyku-oob (and later develop), not Hyku releases.
+# Only require those labels when the PR base is main.
 name: Verify
 on:
   pull_request:
     branches:
-      - '**'
+      - main
     types:
       - opened
       - synchronize
