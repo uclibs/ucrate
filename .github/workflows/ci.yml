@@ -37,11 +37,15 @@ env:
   FCREPO_TEST_BASE_PATH: /test
   SOLR_HOST: localhost
   SOLR_PORT: "8983"
-  SOLR_URL: http://localhost:8983/solr/
+  SOLR_ADMIN_USER: solr
+  SOLR_ADMIN_PASSWORD: SolrRocks
+  # Credentials match solr/security.json (user solr / SolrRocks)
+  SOLR_URL: http://solr:SolrRocks@localhost:8983/solr/
   SOLR_COLLECTION_NAME: hydra-test
   SOLR_COLLECTION_TEST: hydra-test
   SOLR_CONFIGSET_NAME: hyku
   SOLR_ENABLE_CLOUD_MODE: "yes"
+  SOLR_ENABLE_AUTHENTICATION: "yes"
   CHROME_HOSTNAME: localhost
   # Capybara app_host seen from the Chrome container (see docker-compose.ci.yml extra_hosts)
   WEB_HOST: host.docker.internal
@@ -202,13 +206,14 @@ jobs:
       - name: Wait for Solr
         run: |
           for i in $(seq 1 60); do
-            if curl -sf http://localhost:8983/solr/admin/info/system >/dev/null; then
+            if curl -sf -u "${SOLR_ADMIN_USER}:${SOLR_ADMIN_PASSWORD}" \
+              http://localhost:8983/solr/admin/info/system >/dev/null; then
               exit 0
             fi
             sleep 3
           done
           echo "Solr did not become ready"
-          docker compose -f docker-compose.ci.yml logs solr
+          docker compose -f docker-compose.ci.yml logs solr zoo
           exit 1
 
       - name: Wait for Fedora
@@ -227,11 +232,12 @@ jobs:
       - name: Prepare database
         run: bundle exec rails db:prepare
 
-      - name: Upload Solr configset (best effort)
+      - name: Upload Solr configset
         run: |
-          chmod +x bin/solrcloud-upload-configset.sh bin/solrcloud-assign-configset.sh || true
-          ./bin/solrcloud-upload-configset.sh solr/conf || true
-          SOLR_COLLECTION_NAME=hydra-test ./bin/solrcloud-assign-configset.sh || true
+          set -euo pipefail
+          chmod +x bin/solrcloud-upload-configset.sh bin/solrcloud-assign-configset.sh
+          ./bin/solrcloud-upload-configset.sh solr/conf
+          SOLR_COLLECTION_NAME=hydra-test ./bin/solrcloud-assign-configset.sh
 
       - name: Run RSpec shard
         run: |
