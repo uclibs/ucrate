@@ -30,6 +30,8 @@ Each RSpec shard writes its own SimpleCov `.resultset.json` (incomplete on its o
 3. **Fails** only if coverage drops more than **0.5** percentage points below the baseline (so tiny float/display noise does not fail CI).
 4. On **pull requests** into `hyku-oob`, if merged coverage **exceeds** the baseline, CI commits and pushes the higher value to the PR branch (ratchet). Pushes to `hyku-oob` gate only; they do not auto-commit.
 
+The **Coverage gate** job is listed in the Actions run alongside RuboCop / security / RSpec shards. It starts only after all six shards finish (`needs: test`), so it appears later in the check list than the shards.
+
 Everything under `coverage/` is gitignored except `coverage/coverage_baseline.txt`.
 
 ## PR label checker (`Verify` / “PR has required labels”)

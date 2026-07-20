@@ -326,7 +326,7 @@ jobs:
 
       - name: Upload RSpec results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: rspec-results-${{ matrix.ci_node_index }}
           path: tmp/test-results/
@@ -334,15 +334,17 @@ jobs:
 
       - name: Upload SimpleCov resultset
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-resultset-${{ matrix.ci_node_index }}
+          # SimpleCov writes a dotfile; upload-artifact skips hidden files unless enabled.
           path: coverage/.resultset.json
+          include-hidden-files: true
           if-no-files-found: error
 
       - name: Upload Capybara failures
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: capybara-${{ matrix.ci_node_index }}
           path: tmp/capybara/
@@ -376,7 +378,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends bc
 
       - name: Download shard SimpleCov resultsets
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           pattern: coverage-resultset-*
           path: tmp/coverage_shards
@@ -391,13 +393,14 @@ jobs:
 
       - name: Upload merged coverage report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-merged
           path: |
             coverage/index.html
             coverage/.resultset.json
             coverage/merged_coverage.txt
+          include-hidden-files: true
           if-no-files-found: ignore
 
       - name: Check and update coverage baseline
