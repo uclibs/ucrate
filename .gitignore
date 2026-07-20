@@ -61,6 +61,7 @@ public/assets
 docker-compose.override.yml
 *~undo-tree~
 .DS_Store
+dump.rdb
 /bundler.d/
 .tool-versions
 
