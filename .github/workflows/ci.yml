@@ -199,9 +199,13 @@ jobs:
       - name: Verify Chrome
         run: |
           echo "Chrome: ${{ steps.setup-chrome.outputs.chrome-path }}"
+          echo "ChromeDriver: ${{ steps.setup-chrome.outputs.chromedriver-path }}"
           "${{ steps.setup-chrome.outputs.chrome-path }}" --version
-          chromedriver --version
-          echo "CHROME_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" >> "$GITHUB_ENV"
+          "${{ steps.setup-chrome.outputs.chromedriver-path }}" --version
+          {
+            echo "CHROME_PATH=${{ steps.setup-chrome.outputs.chrome-path }}"
+            echo "CHROMEDRIVER_PATH=${{ steps.setup-chrome.outputs.chromedriver-path }}"
+          } >> "$GITHUB_ENV"
 
       # Must run in this step (not backgrounded earlier): each GHA step is a new shell,
       # so wait cannot see a PID from a previous step.

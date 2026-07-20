@@ -55,7 +55,9 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'database_cleaner'
 require 'active_fedora/cleaner'
-require 'webdrivers'
+# CI supplies ChromeDriver via browser-actions/setup-chrome. Requiring webdrivers
+# makes it hit the retired chromedriver.storage.googleapis.com endpoint (404).
+require 'webdrivers' unless ENV['CHROMEDRIVER_PATH'].present?
 require 'shoulda/matchers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -111,11 +113,12 @@ else
   # Local Chrome (CI and developer machines without CHROME_HOSTNAME).
   # GHA needs no-sandbox / disable-dev-shm-usage or Chrome exits immediately.
   chrome_args = ["headless", "disable-gpu", "window-size=1920,1080"]
-  if ENV['CI']
-    chrome_args += %w[no-sandbox disable-dev-shm-usage disable-backgrounding-occluded-windows]
-  end
+  chrome_args += %w[no-sandbox disable-dev-shm-usage disable-backgrounding-occluded-windows] if ENV['CI']
   options = Selenium::WebDriver::Options.chrome(args: chrome_args)
   options.binary = ENV['CHROME_PATH'] if ENV['CHROME_PATH'].present?
+  if ENV['CHROMEDRIVER_PATH'].present?
+    Selenium::WebDriver::Chrome::Service.driver_path = ENV['CHROMEDRIVER_PATH']
+  end
 
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(
@@ -217,11 +220,20 @@ RSpec.configure do |config|
 
   config.after(:each, type: :feature) do |example|
     # rubocop:disable Lint/Debugger
-    save_page if example.exception.present?
+    begin
+      save_page if example.exception.present?
+    rescue StandardError => e
+      # Driver may never have started (e.g. ChromeDriver lookup failure).
+      warn "save_page skipped: #{e.class}: #{e.message}"
+    end
     # rubocop:enable Lint/Debugger
     Warden.test_reset!
-    Capybara.reset_sessions!
-    page.driver.reset!
+    begin
+      Capybara.reset_sessions!
+      page.driver.reset!
+    rescue StandardError => e
+      warn "Capybara reset skipped: #{e.class}: #{e.message}"
+    end
   end
 
   config.after do
