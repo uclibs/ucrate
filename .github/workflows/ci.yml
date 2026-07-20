@@ -50,6 +50,7 @@ env:
   HYKU_ADMIN_HOST: test.host
   SECRET_KEY_BASE: ci-secret-key-base-not-for-production
   DISABLE_REDIS_CLUSTER: "true"
+  RUBOCOP_CACHE_ROOT: ${{ github.workspace }}/tmp/rubocop_cache
 
 jobs:
   lint:
@@ -57,10 +58,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3.6"
           bundler-cache: true
+
+      - name: Cache RuboCop
+        uses: actions/cache@v4
+        with:
+          path: tmp/rubocop_cache
+          key: rubocop-${{ runner.os }}-${{ hashFiles('Gemfile.lock', '.rubocop.yml', '.rubocop_todo.yml', '.rubocop_todo.hyrax.yml') }}
+          restore-keys: |
+            rubocop-${{ runner.os }}-
+
       - name: RuboCop
         run: bundle exec rubocop --format progress
 
@@ -69,12 +80,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3.6"
           bundler-cache: true
+
+      - name: Cache ruby-advisory-db
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/ruby-advisory-db
+          key: ruby-advisory-db-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            ruby-advisory-db-${{ runner.os }}-
+
       - name: Brakeman
         run: bundle exec brakeman -q -w 2
+
       - name: bundler-audit
         run: bundle exec bundler-audit check --update
 
@@ -91,8 +113,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Start CI dependency stack
-        run: docker compose -f docker-compose.ci.yml up -d
+      - name: Cache CI Docker images
+        id: cache-docker
+        uses: actions/cache@v4
+        with:
+          path: /tmp/ci-docker-images
+          key: ci-docker-${{ runner.os }}-${{ hashFiles('docker-compose.ci.yml') }}
+          # Only shard 0 writes the cache so parallel shards cannot race an empty save.
+          lookup-only: ${{ matrix.ci_node_index != 0 }}
+
+      - name: Load cached Docker images
+        if: steps.cache-docker.outputs.cache-hit == 'true'
+        run: |
+          set -euo pipefail
+          for f in /tmp/ci-docker-images/*.tar; do
+            echo "Loading $f"
+            docker load -i "$f"
+          done
+
+      # Overlap image pull with Ruby/Node setup when cache missed.
+      - name: Pull CI images (background)
+        if: steps.cache-docker.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          docker compose -f docker-compose.ci.yml pull --quiet &
+          echo $! > /tmp/docker-pull.pid
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -107,8 +152,32 @@ jobs:
       - name: Install JS dependencies
         run: yarn install --frozen-lockfile || yarn install
 
-      - name: Install wait tools
-        run: sudo apt-get update && sudo apt-get install -y netcat-openbsd zip curl postgresql-client redis-tools
+      - name: Cache apt packages
+        uses: awalsh128/cache-apt-pkgs-action@v1.5.0
+        with:
+          packages: netcat-openbsd zip curl postgresql-client redis-tools
+          version: "1"
+
+      - name: Wait for Docker image pull
+        if: steps.cache-docker.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          wait "$(cat /tmp/docker-pull.pid)"
+
+      - name: Save Docker images for cache
+        if: steps.cache-docker.outputs.cache-hit != 'true' && matrix.ci_node_index == 0
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/ci-docker-images
+          i=0
+          for img in $(docker compose -f docker-compose.ci.yml config --images); do
+            echo "Saving $img"
+            docker save "$img" -o "/tmp/ci-docker-images/${i}.tar"
+            i=$((i + 1))
+          done
+
+      - name: Start CI dependency stack
+        run: docker compose -f docker-compose.ci.yml up -d --no-build
 
       - name: Wait for Postgres
         run: |
