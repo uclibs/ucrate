@@ -9,7 +9,7 @@ PRs and pushes to **`hyku-oob`** run [`.github/workflows/ci.yml`](../../.github/
 | Job | What it does |
 |-----|----------------|
 | **RuboCop** | `bundle exec rubocop` (no Solr/Fedora) |
-| **Brakeman and bundler-audit** | Security scans (no Solr/Fedora). Known Hyku OOB findings are baselined in [`config/brakeman.ignore`](../../config/brakeman.ignore); **new** Medium/High warnings still fail CI. |
+| **Brakeman and bundler-audit** | Security scans (no Solr/Fedora). Known Hyku OOB findings are baselined in [`config/brakeman.ignore`](../../config/brakeman.ignore) and [`.bundler-audit.yml`](../../.bundler-audit.yml); **new** Medium/High Brakeman warnings or unignored advisories still fail CI. |
 | **RSpec (shards 0–5)** | Six parallel jobs; each starts Postgres, Redis, Solr, Fedora (and Chrome) via [`docker-compose.ci.yml`](../../docker-compose.ci.yml), then runs ~1/6 of the spec files |
 
 Required checks for PRs into `hyku-oob` should be those jobs (lint, security, and all six RSpec shards). No release labels are required for these checks.
