@@ -7,28 +7,7 @@ class SitesController < ApplicationController
 
   def update
     # FIXME: Pull these strings out to i18n locale
-    # Apply theme params before redirect. Updating after redirect_to still runs
-    # in MRI Rails, but success was announced even when themes were never saved
-    # (e.g. empty update_params path). Theme form posts to this action via
-    # site_path; image-removal buttons also post here.
-    themes_ok = if params[:site]
-                  updated = @site.update(site_theme_params)
-                  if updated
-                    # Keep every Site row in this schema aligned. Specs read Site.last
-                    # while the form updates Site.instance; duplicates otherwise leave
-                    # Site.last with nil themes after a successful save.
-                    Site.update_all(
-                      home_theme: @site.home_theme,
-                      search_theme: @site.search_theme,
-                      show_theme: @site.show_theme
-                    )
-                  end
-                  updated
-                else
-                  true
-                end
-
-    if themes_ok && @site.update(update_params)
+    if @site.update(update_params)
 
       # If updating work or collection default image, works and/or collections should be reindexed
       # as they are when the default image is added. See AppearancesControllerDecorator#update
@@ -47,6 +26,8 @@ class SitesController < ApplicationController
     else
       redirect_to hyrax.admin_appearance_path, flash: { error: 'Updating the appearance was unsuccessful.' }
     end
+
+    @site.update(site_theme_params) if params[:site]
   end
 
   private
