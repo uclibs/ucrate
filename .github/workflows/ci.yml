@@ -234,7 +234,14 @@ jobs:
           exit 1
 
       - name: Prepare database
-        run: bundle exec rails db:prepare
+        run: |
+          set -euo pipefail
+          # Compose already creates hyku_test via POSTGRES_DB, so db:prepare skips
+          # db:create — and Hyku's db:extensions hook only runs on db:create /
+          # db:test:purge. Without shared_extensions (uuid-ossp), Apartment tenant
+          # creation fails with uuid_generate_v4() does not exist.
+          bundle exec rails db:prepare
+          bundle exec rails db:extensions
 
       - name: Upload Solr configset
         run: |
