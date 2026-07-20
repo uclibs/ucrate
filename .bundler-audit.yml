@@ -4,109 +4,80 @@
 ignore:
 
   # addressable (2.8.1) — Hyku lockfile; ignore until upstream upgrades
-  - 2026-35611
-  - h27x-rffw-24p4
   - CVE-2026-35611
+  - GHSA-h27x-rffw-24p4
 
   # carrierwave (1.3.4) — Hyku lockfile; ignore until upstream upgrades
-  - 2023-49090
-  - gxhx-g4fq-49hj
   - CVE-2023-49090
-  - 2024-29034
-  - vfmv-jfc5-pjjw
   - CVE-2024-29034
-  - 2026-44587
-  - 7g26-2qgj-chfg
   - CVE-2026-44587
+  - GHSA-7g26-2qgj-chfg
+  - GHSA-gxhx-g4fq-49hj
+  - GHSA-vfmv-jfc5-pjjw
 
   # concurrent-ruby (1.3.4) — Hyku lockfile; ignore until upstream upgrades
-  - 2026-54904
-  - h8w8-99g7-qmvj
   - CVE-2026-54904
-  - 2026-54905
-  - wv3x-4vxv-whpp
   - CVE-2026-54905
-  - 2026-54906
-  - 6wx8-w4f5-wwcr
   - CVE-2026-54906
+  - GHSA-6wx8-w4f5-wwcr
+  - GHSA-h8w8-99g7-qmvj
+  - GHSA-wv3x-4vxv-whpp
 
   # crass (1.0.6) — Hyku lockfile; ignore until upstream upgrades
-  - 6jxj-px6v-747w
   - GHSA-6jxj-px6v-747w
-  - 6wmf-3r64-vcwv
   - GHSA-6wmf-3r64-vcwv
-  - 8vfg-2r28-hvhj
   - GHSA-8vfg-2r28-hvhj
-  - wwpr-jff3-395c
   - GHSA-wwpr-jff3-395c
 
   # excon (0.71.1) — Hyku lockfile; ignore until upstream upgrades
-  - 2026-54171
-  - 48rx-c7pg-q66r
   - CVE-2026-54171
+  - GHSA-48rx-c7pg-q66r
 
   # json (2.19.2) — Hyku lockfile; ignore until upstream upgrades
-  - 2026-54696
-  - x2f5-4prf-w687
   - CVE-2026-54696
+  - GHSA-x2f5-4prf-w687
 
   # loofah (2.25.1) — Hyku lockfile; ignore until upstream upgrades
-  - 5qhf-9phg-95m2
   - GHSA-5qhf-9phg-95m2
-  - 8whx-365g-h9vv
   - GHSA-8whx-365g-h9vv
-  - 9wjq-cp2p-hrgf
   - GHSA-9wjq-cp2p-hrgf
 
   # oauth (1.1.2) — Hyku lockfile; ignore until upstream upgrades
-  - prq8-7wvh-44qh
   - GHSA-prq8-7wvh-44qh
 
   # oauth2 (1.4.11) — Hyku lockfile; ignore until upstream upgrades
-  - pp92-crg2-gfv9
   - GHSA-pp92-crg2-gfv9
 
   # rails-html-sanitizer (1.7.0) — Hyku lockfile; ignore until upstream upgrades
-  - cj75-f6xr-r4g7
   - GHSA-cj75-f6xr-r4g7
 
   # secure_headers (7.1.0) — Hyku lockfile; ignore until upstream upgrades
-  - 2026-54163
-  - rqq5-2gf9-4w4q
   - CVE-2026-54163
+  - GHSA-rqq5-2gf9-4w4q
 
   # sinatra (2.2.4) — Hyku lockfile; ignore until upstream upgrades
-  - 2024-21510
-  - hxx2-7vcw-mqr3
   - CVE-2024-21510
-  - 2025-61921
-  - mr3q-g2mv-mr4q
   - CVE-2025-61921
+  - GHSA-hxx2-7vcw-mqr3
+  - GHSA-mr3q-g2mv-mr4q
 
   # view_component (2.74.1) — Hyku lockfile; ignore until upstream upgrades
-  - 2024-21636
-  - wf2x-8w6j-qw37
   - CVE-2024-21636
+  - GHSA-wf2x-8w6j-qw37
 
   # websocket-driver (0.8.0) — Hyku lockfile; ignore until upstream upgrades
-  - 2026-54463
-  - ghhp-3qvg-889p
   - CVE-2026-54463
-  - 2026-54464
-  - 33ph-fccm-39pj
   - CVE-2026-54464
-  - 2026-54465
-  - 8j3g-f24p-4mpw
   - CVE-2026-54465
-  - 2x63-gw47-w4mm
   - GHSA-2x63-gw47-w4mm
+  - GHSA-33ph-fccm-39pj
+  - GHSA-8j3g-f24p-4mpw
+  - GHSA-ghhp-3qvg-889p
 
   # yard (0.9.42) — Hyku lockfile; ignore until upstream upgrades
-  - 2026-49342
-  - pxcc-8665-phx8
   - CVE-2026-49342
+  - GHSA-pxcc-8665-phx8
 
   # zlib (2.1.1) — Hyku lockfile; ignore until upstream upgrades
-  - 2026-27820
-  - g857-hhfv-j68w
   - CVE-2026-27820
+  - GHSA-g857-hhfv-j68w
