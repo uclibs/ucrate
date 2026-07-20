@@ -167,18 +167,29 @@ class ApplicationController < ActionController::Base
                          end
   end
 
-  # Find themes set on Site model, or return default
+  # Themes are edited on Site.instance (SitesController / appearance form).
+  # Prefer that over current_account.sites so homepage reflects saves even when
+  # the Site row is not yet associated to the Account. Treat blank strings as
+  # unset (Rails || will not fall through on "").
   def home_page_theme
-    current_account.sites&.first&.home_theme || 'default_home'
+    site_theme_value(:home_theme) || 'default_home'
   end
 
   def show_page_theme
-    current_account.sites&.first&.show_theme || 'default_show'
+    site_theme_value(:show_theme) || 'default_show'
   end
 
   def search_results_theme
-    current_account.sites&.first&.search_theme || 'list_view'
+    site_theme_value(:search_theme) || 'list_view'
   end
+
+  def site_theme_value(attribute)
+    site = Site.instance
+    return if site.is_a?(NilSite)
+
+    site.public_send(attribute).presence || current_account&.sites&.first&.public_send(attribute).presence
+  end
+  private :site_theme_value
 
   # Add context information to the lograge entries
   def append_info_to_payload(payload)
