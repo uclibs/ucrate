@@ -155,8 +155,12 @@ jobs:
       - name: Cache apt packages
         uses: awalsh128/cache-apt-pkgs-action@v1.5.0
         with:
-          packages: netcat-openbsd zip curl postgresql-client redis-tools
-          version: "1"
+          # libvips: required by ruby-vips / riiif at boot (LoadError without it)
+          # imagemagick: Hyrax derivatives / feature specs
+          packages: >-
+            netcat-openbsd zip curl postgresql-client redis-tools
+            libvips42 imagemagick
+          version: "2"
 
       - name: Wait for Docker image pull
         if: steps.cache-docker.outputs.cache-hit != 'true'
