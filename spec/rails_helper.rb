@@ -57,7 +57,7 @@ require 'database_cleaner'
 require 'active_fedora/cleaner'
 # CI supplies ChromeDriver via browser-actions/setup-chrome. Requiring webdrivers
 # makes it hit the retired chromedriver.storage.googleapis.com endpoint (404).
-require 'webdrivers' unless ENV['CHROMEDRIVER_PATH'].present?
+require 'webdrivers' if ENV['CHROMEDRIVER_PATH'].blank?
 require 'shoulda/matchers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -116,9 +116,7 @@ else
   chrome_args += %w[no-sandbox disable-dev-shm-usage disable-backgrounding-occluded-windows] if ENV['CI']
   options = Selenium::WebDriver::Options.chrome(args: chrome_args)
   options.binary = ENV['CHROME_PATH'] if ENV['CHROME_PATH'].present?
-  if ENV['CHROMEDRIVER_PATH'].present?
-    Selenium::WebDriver::Chrome::Service.driver_path = ENV['CHROMEDRIVER_PATH']
-  end
+  Selenium::WebDriver::Chrome::Service.driver_path = ENV['CHROMEDRIVER_PATH'] if ENV['CHROMEDRIVER_PATH'].present?
 
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(
