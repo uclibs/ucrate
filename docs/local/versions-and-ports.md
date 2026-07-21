@@ -2,6 +2,15 @@
 
 **These instructions are for `hyku-oob` only.** Team index: [docs/local/README.md](./README.md).
 
+## How to use this page
+
+This page is a reference, not an action step.
+
+- You are not expected to memorize these values.
+- You do not install anything from this page.
+- You use this table while working through [docs/local/dependencies](./dependencies) in order.
+- If your machine differs, fix only what is missing using the matching dependency page.
+
 ## Service versions
 
 | Service | Target for local (no Docker) | Where that comes from |
@@ -15,7 +24,7 @@
 | **Fedora (dev)** | **4.7.3** via `fcrepo_wrapper` on port **8984** | `.fcrepo_wrapper`; Docker uses `fcrepo4:4.7.5` |
 | **Fedora (test)** | **4.7.3** on port **8986** | `config/fcrepo_wrapper_test.yml` (not develop’s old test port **8080**) |
 | **Java** | **8** (Temurin 8) for Fedora wrapper | Same constraint as older Hyrax/Fedora 4 stacks |
-| **Node / Yarn** | Node 20-ish, Yarn classic | Universal Viewer / `yarn install` (`package.json`) |
+| **Node / Yarn** | Node 20.x LTS and Yarn 1.x (Classic) required for this branch | Universal Viewer / `yarn install` (`package.json`); lockfile is v1 |
 | **ImageMagick, LibreOffice** | Current Homebrew | Derivatives / office conversion |
 
 **Do not trust Homebrew’s `solr` formula for this app.** Use `bundle exec solr_wrapper` so the app gets the version and config under `solr/conf/`.
@@ -35,5 +44,4 @@ You can run the app stack and the test stack at the same time because the ports 
 
 ## Next
 
-- [Check your machine](./check-your-machine.md)
-- [Install dependencies](./install.md)
+- [Start dependency setup](./dependencies/01-homebrew.md)

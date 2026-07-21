@@ -6,8 +6,8 @@ You do **not** need to run the full suite for every change. A complete local run
 
 ## Prerequisites
 
-- [Install dependencies](./install.md) (Ruby, gems, Java 8)
-- Postgres running with `hyku_test` created ([install.md](./install.md) Step E)
+- Dependency setup complete (see [docs/local/dependencies](./dependencies))
+- Postgres running with `hyku_test` created ([dependencies/02-postgresql.md](./dependencies/02-postgresql.md))
 - Redis running
 - [`.env.local.mac` sourced](./environment.md) (`DB_TEST_NAME=hyku_test`, etc.)
 - Port reference: [versions-and-ports.md](./versions-and-ports.md) (test: Solr **8985**, Fedora **8986**)
