@@ -1,5 +1,5 @@
 ---
-description: PR body requests — raw markdown in a fenced block; default base hyku-oob
+description: PR body requests — raw markdown in a fenced block; base branch by naming
 alwaysApply: true
 ---
 
@@ -22,24 +22,26 @@ Return the body as **raw Markdown inside a single fenced code block** labeled `m
 
 ## Base branch for diff, commits, and summary
 
-Use the correct **compare base** when gathering `git log` / `git diff` for the PR body:
+Use the correct **compare base** when gathering `git log` / `git diff` for the PR body (and when creating PRs). Detect from the **current branch name** unless the user names a different target.
 
-### Default (Hyku upgrade work)
+| Current branch name | Compare / PR base | Notes |
+|---------------------|-------------------|--------|
+| Starts with `hyku` (e.g. `hyku-test-branch`, `hyku-oob-…`) | **`hyku-oob`** | Hyku upgrade / OOB work |
+| Anything else | **`develop`** | Scholar@UC feature work |
 
-- **Base branch:** `hyku-oob`
-- Use `hyku-oob...HEAD` (or `git log hyku-oob..HEAD`) unless the user specifies otherwise.
+Examples:
 
-### Other situations
+- `hyku-test-branch` → `git log hyku-oob..HEAD` / PR into `hyku-oob`
+- `fix-deposit-wizard` → `git log develop..HEAD` / PR into `develop`
 
-| Situation | Compare base | Typical PR target |
-|-----------|----------------|-------------------|
-| Feature branch cut from `hyku-oob` | `hyku-oob` | `hyku-oob` |
-| User says PR targets another branch | **That named branch** | As user specifies |
-| Work against `develop` / `main` | Ask once if unclear | As user specifies |
+### Overrides
 
-**Detecting base:** Prefer what the user states for this ticket. Optionally check `git rev-parse --abbrev-ref HEAD@{upstream}`.
+- If the user explicitly names a PR target or compare base, **use that**.
+- Optionally confirm with an open PR: `gh pr view --json baseRefName`.
 
 ### Do not assume
 
-- Do not use `main` or `develop` as the PR base for `hyku-oob` feature work unless the user says so.
+- **Do not** use `qa` — this app has no `qa` branch (unlike treatment_database).
+- **Do not** use `main` or `develop` as the base for branches whose names start with `hyku`.
+- **Do not** use `hyku-oob` as the base for branches that do **not** start with `hyku`.
 - Do not invent branch naming conventions — use the branch the user created.

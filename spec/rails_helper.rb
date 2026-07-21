@@ -80,8 +80,9 @@ Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 # Uses faster rack_test driver when JavaScript support not needed
-Capybara.default_max_wait_time = 8
+Capybara.default_max_wait_time = ENV['CI'] ? 15 : 8
 Capybara.default_driver = :rack_test
+Capybara.disable_animation = true if Capybara.respond_to?(:disable_animation=)
 
 ENV['WEB_HOST'] ||= `hostname -s`.strip
 
@@ -92,9 +93,10 @@ if ENV['CHROME_HOSTNAME'].present?
                                                        "window-size=1200,800"])
 
   Capybara.register_driver :chrome do |app|
+    # selenium-webdriver 4.11+ removed the :capabilities keyword; use :options.
     d = Capybara::Selenium::Driver.new(app,
                                        browser: :remote,
-                                       capabilities: options,
+                                       options:,
                                        url: "http://#{ENV['CHROME_HOSTNAME']}:4444/wd/hub")
     # Fix for capybara vs remote files. Selenium handles this for us
     d.browser.file_detector = lambda do |args|
@@ -115,7 +117,7 @@ else
     Capybara::Selenium::Driver.new(
       app,
       browser: :chrome,
-      capabilities: options
+      options:
     )
   end
 end
@@ -197,11 +199,20 @@ RSpec.configure do |config|
 
   config.after(:each, type: :feature) do |example|
     # rubocop:disable Lint/Debugger
-    save_page if example.exception.present?
+    begin
+      save_page if example.exception.present?
+    rescue StandardError => e
+      # Driver may never have started (e.g. ChromeDriver lookup failure).
+      warn "save_page skipped: #{e.class}: #{e.message}"
+    end
     # rubocop:enable Lint/Debugger
     Warden.test_reset!
-    Capybara.reset_sessions!
-    page.driver.reset!
+    begin
+      Capybara.reset_sessions!
+      page.driver.reset!
+    rescue StandardError => e
+      warn "Capybara reset skipped: #{e.class}: #{e.message}"
+    end
   end
 
   config.after do

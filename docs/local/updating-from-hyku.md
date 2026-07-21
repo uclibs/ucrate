@@ -28,3 +28,4 @@ Resolve any conflicts in app code or Hyku-owned docs as usual. Leave root `READM
 
 - Skim Hyku’s updated `docs/*.md` / root README for new upstream guidance.
 - Keep UC procedures in `docs/local/` only — do not copy them into the root README (they would be wiped on the next merge).
+- Check `.github/workflows/verify_labels.yml`: we keep it **main-only** so feature PRs into `hyku-oob` do not need release labels. If the merge restores `branches: ['**']`, put the main-only filter back ([github-actions.md](./github-actions.md)).

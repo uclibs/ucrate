@@ -1,0 +1,98 @@
+# CI dependency stack for GitHub Actions (Scholar@UC / hyku-oob).
+# Started by .github/workflows/ci.yml — one stack per parallel test shard.
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hyku_test
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  fcrepo:
+    image: ghcr.io/samvera/fcrepo4:4.7.5
+    environment:
+      JAVA_OPTS: >-
+        -Djava.awt.headless=true
+        -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json
+        -Dfcrepo.object.directory=/data/objects
+        -Dfcrepo.binary.directory=/data/binaries
+    ports:
+      - "8080:8080"
+
+  # SolrCloud needs ZooKeeper + Basic Auth so bin/solrcloud-upload-configset.sh
+  # can upload a trusted ConfigSet (same pattern as docker-compose.yml).
+  zoo:
+    image: zookeeper:3.6.2
+    environment:
+      ZOO_MY_ID: "1"
+      ZOO_SERVERS: server.1=zoo:2888:3888;2181
+      # 3.5+ disables most 4lw commands unless whitelisted (needed for ruok healthcheck)
+      ZOO_4LW_COMMANDS_WHITELIST: mntr,srvr,ruok,conf
+    ports:
+      - "2181:2181"
+    healthcheck:
+      test: ["CMD", "zkServer.sh", "status"]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_period: 20s
+
+  solr:
+    image: solr:8.11.2
+    depends_on:
+      zoo:
+        condition: service_healthy
+    environment:
+      ZK_HOST: zoo:2181
+      SOLR_ADMIN_USER: solr
+      SOLR_ADMIN_PASSWORD: SolrRocks
+    ports:
+      - "8983:8983"
+    volumes:
+      - ./solr/security.json:/opt/security.json:ro
+    user: root
+    command:
+      - bash
+      - -c
+      - |
+        set -e
+        mkdir -p /var/solr/data
+        cp /opt/security.json /var/solr/data/security.json
+        chown -R 8983:8983 /var/solr
+        ./bin/solr zk cp file:/var/solr/data/security.json zk:/security.json -z zoo:2181
+        exec runuser -u solr -- solr-foreground -c -z zoo:2181
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf -u solr:SolrRocks http://localhost:8983/solr/admin/info/system || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 40s
+
+  chrome:
+    image: selenium/standalone-chromium:latest
+    ports:
+      - "4444:4444"
+    shm_size: "2gb"
+    # Rails runs on the GHA host; Chrome must reach it via the Docker host gateway.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SE_NODE_MAX_SESSIONS: 2
+      SE_NODE_OVERRIDE_MAX_SESSIONS: "true"

@@ -271,7 +271,7 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     backport (1.2.0)
-    bagit (0.6.0)
+    bagit (0.6.1)
       docopt (~> 0.5.0)
       validatable (~> 1.6)
     base64 (0.3.0)
@@ -360,6 +360,8 @@ GEM
       popper_js (>= 1.16.1, < 2)
     bootstrap-datepicker-rails (1.10.0.1)
       railties (>= 3.0)
+    brakeman (8.0.5)
+      racc
     breadcrumbs_on_rails (3.0.1)
     browse-everything (1.5.0)
       addressable (~> 2.5)
@@ -388,6 +390,9 @@ GEM
       rdf (>= 2.0.2, < 4.0)
       rubyzip
       simple_form
+    bundler-audit (0.9.3)
+      bundler (>= 1.2.0)
+      thor (~> 1.0)
     byebug (12.0.0)
     cancancan (3.6.1)
     capybara (3.40.0)
@@ -1665,7 +1670,9 @@ DEPENDENCIES
   bolognese (>= 1.9.10)
   bootstrap (~> 4.6)
   bootstrap-datepicker-rails
+  brakeman
   bulkrax (~> 9.5)
+  bundler-audit
   byebug
   capybara
   capybara-screenshot (~> 1.0)

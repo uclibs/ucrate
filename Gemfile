@@ -28,7 +28,9 @@ gem 'blacklight_range_limit', '~> 8.5'
 gem 'bolognese', '>= 1.9.10'
 gem 'bootstrap', '~> 4.6'
 gem 'bootstrap-datepicker-rails'
+gem 'brakeman', group: %i[development test]
 gem 'bulkrax', '~> 9.5'
+gem 'bundler-audit', group: %i[development test]
 gem 'byebug', group: %i[development test]
 gem 'capybara', group: %i[test]
 gem 'capybara-screenshot', '~> 1.0', group: %i[test]
