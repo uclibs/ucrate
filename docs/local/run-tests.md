@@ -65,7 +65,7 @@ bundle exec fcrepo_wrapper -c config/fcrepo_wrapper_test.yml
 
 ```bash
 cd /path/to/ucrate
-bundle exec solr_wrapper -c config/solr_wrapper_test.yml
+bundle exec ruby -r./config/fcrepo_wrapper_compat -e 'require "solr_wrapper"; i = SolrWrapper.instance(config: "config/solr_wrapper_test.yml"); $stderr.print "Starting Solr #{i.version} on port #{i.port} ... "; i.wrap { |conn| $stderr.puts "http://#{i.host}:#{i.port}/solr/"; conn.wait }'
 ```
 
 ### Terminal 3 — Redis

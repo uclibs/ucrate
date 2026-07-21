@@ -17,6 +17,7 @@ Also in [`.env.local.mac.example`](../../.env.local.mac.example):
 ```bash
 # .env.local.mac — source this; do not use Docker hostnames
 export HYKU_MULTITENANT=false
+export HYKU_ROOT_HOST=localhost
 export DB_ADAPTER=postgresql
 export DB_HOST=localhost
 export DB_PORT=5432
@@ -27,7 +28,8 @@ export DB_PASSWORD=                     # usually empty on Homebrew Postgres
 export REDIS_HOST=localhost
 export REDIS_PORT=6379
 # Leave SOLR_URL / FCREPO_HOST unset so config/*.yml use localhost defaults
-# Jobs: omit HYRAX_ACTIVE_JOB_QUEUE to use Sidekiq (default)
+# Jobs: use Sidekiq for local no-Docker setup
+export HYRAX_ACTIVE_JOB_QUEUE=sidekiq
 # Used by `rails db:setup` / `rails db:seed` to create the first admin user:
 export INITIAL_ADMIN_EMAIL=admin@example.com
 export INITIAL_ADMIN_PASSWORD=testing123

@@ -59,12 +59,12 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)" && export PATH="$JAVA_HOME/b
 ## 4) Start Solr wrapper (test port 8985)
 
 ```bash
-RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper -c config/solr_wrapper_test.yml
+bundle exec ruby -r./config/fcrepo_wrapper_compat -e 'require "solr_wrapper"; i = SolrWrapper.instance(config: "config/solr_wrapper_test.yml"); $stderr.print "Starting Solr #{i.version} on port #{i.port} ... "; i.wrap { |conn| $stderr.puts "http://#{i.host}:#{i.port}/solr/"; conn.wait }'
 ```
 
 ## 5) Optional: start Sidekiq
 
-Most test runs do not require a separate Sidekiq process.
+Most test runs do not require a separate worker process.
 
 If you are running tests that depend on background jobs, start Sidekiq:
 

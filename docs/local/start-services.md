@@ -10,7 +10,44 @@ Need test services instead? Use [docs/local/start-test-services.md](./start-test
 
 Run each service in its own terminal tab/window so logs stay visible and each process keeps running.
 
-First-time setup: after this page, continue to one-time DB setup/seeding in `run-the-app.md`.
+Before Step 5 (job worker) and Step 6 (Rails), ensure your local env file includes:
+
+```bash
+export HYKU_ROOT_HOST=localhost
+export HYRAX_ACTIVE_JOB_QUEUE=sidekiq
+```
+
+If you do not have this line yet, recopy the latest template and reapply your local DB values:
+
+```bash
+cp .env.local.mac.example .env.local.mac
+```
+
+Or add it directly without replacing the rest of your local file:
+
+```bash
+echo 'export HYKU_ROOT_HOST=localhost' >> .env.local.mac
+echo 'export HYRAX_ACTIVE_JOB_QUEUE=sidekiq' >> .env.local.mac
+```
+
+Now verify in the same terminal where you will run the worker or Rails:
+
+```bash
+set -a && source .env.local.mac && set +a
+env | grep '^HYKU_ROOT_HOST='
+env | grep '^HYRAX_ACTIVE_JOB_QUEUE='
+```
+
+Expected output:
+
+```bash
+HYKU_ROOT_HOST=localhost
+HYRAX_ACTIVE_JOB_QUEUE=sidekiq
+```
+
+If the grep command returns nothing, do not continue to the worker/Rails steps yet.
+
+First-time setup: after this page, continue to one-time DB setup/seeding in run-the-app.md.
 
 Returning setup: if DB is already set up, you can stop after Step 6 and open the app.
 
@@ -52,7 +89,7 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)" && export PATH="$JAVA_HOME/b
 ## 4) Start Solr wrapper
 
 ```bash
-RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper --version 7.4.0 -p 8983
+bundle exec ruby -r./config/fcrepo_wrapper_compat -e 'require "solr_wrapper"; i = SolrWrapper.instance(version: "7.4.0", port: 8983); $stderr.print "Starting Solr #{i.version} on port #{i.port} ... "; i.wrap { |conn| $stderr.puts "http://#{i.host}:#{i.port}/solr/"; conn.wait }'
 ```
 
 ## 5) Start Sidekiq
@@ -60,6 +97,8 @@ RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper --version 7.
 ```bash
 set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true bundle exec sidekiq
 ```
+
+If Sidekiq fails with `no implicit conversion of nil into String` from `config/environments/development.rb`, your `.env.local.mac` is missing `HYKU_ROOT_HOST`.
 
 Sidekiq does not use a separate app port here.
 

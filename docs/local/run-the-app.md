@@ -44,7 +44,7 @@ Expected outcome: terminal logs indicate Fedora started and is listening on port
 ```bash
 cd /path/to/ucrate
 # Pin 7.4.0 to match config/solr_wrapper_test.yml (avoids "latest" surprises)
-RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper --version 7.4.0
+bundle exec ruby -r./config/fcrepo_wrapper_compat -e 'require "solr_wrapper"; i = SolrWrapper.instance(version: "7.4.0", port: 8983); $stderr.print "Starting Solr #{i.version} on port #{i.port} ... "; i.wrap { |conn| $stderr.puts "http://#{i.host}:#{i.port}/solr/"; conn.wait }'
 ```
 
 Uses `.solr_wrapper` (collection `hydra-development`, config under `solr/conf/`). First run downloads Solr.
@@ -116,6 +116,28 @@ You do not need a separate Rails console step to create the first admin user.
 Expected outcome: no migration or seed errors.
 
 ## Start the app and worker
+
+Before starting the worker and Rails, verify the terminal has both `HYKU_ROOT_HOST` and `HYRAX_ACTIVE_JOB_QUEUE` loaded:
+
+```bash
+set -a && source .env.local.mac && set +a
+env | grep '^HYKU_ROOT_HOST='
+env | grep '^HYRAX_ACTIVE_JOB_QUEUE='
+```
+
+Expected output:
+
+```bash
+HYKU_ROOT_HOST=localhost
+HYRAX_ACTIVE_JOB_QUEUE=sidekiq
+```
+
+If there is no output, add these lines to `.env.local.mac`, source again, and re-run the grep check:
+
+```bash
+echo 'export HYKU_ROOT_HOST=localhost' >> .env.local.mac
+echo 'export HYRAX_ACTIVE_JOB_QUEUE=sidekiq' >> .env.local.mac
+```
 
 ### Terminal D — Sidekiq
 

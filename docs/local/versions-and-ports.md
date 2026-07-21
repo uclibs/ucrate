@@ -27,7 +27,7 @@ This page is a reference, not an action step.
 | **Node / Yarn** | Node 20.x LTS and Yarn 1.x (Classic) required for this branch | Universal Viewer / `yarn install` (`package.json`); lockfile is v1 |
 | **ImageMagick, LibreOffice** | Current Homebrew | Derivatives / office conversion |
 
-**Do not trust Homebrew’s `solr` formula for this app.** Use `bundle exec solr_wrapper` so the app gets the version and config under `solr/conf/`.
+**Do not trust Homebrew’s `solr` formula for this app.** Use `bundle exec ruby -r./config/fcrepo_wrapper_compat -e 'require "solr_wrapper"; ...'` so the app gets the version and config under `solr/conf/`.
 
 **Do not source the committed `.env` as-is for local runs.** That file is aimed at Docker Compose (`DB_HOST=db`, `SOLR_HOST=solr`, etc.). Rails does **not** auto-load `.env` outside Docker. See [environment.md](./environment.md).
 
