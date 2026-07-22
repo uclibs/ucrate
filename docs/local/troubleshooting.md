@@ -20,6 +20,7 @@
 | Homepage / Rails: `Errno::EROFS` or mkdir `/app` | `HYKU_CACHE_ROOT` still Docker default `/app/samvera/file_cache` | Set `HYKU_CACHE_ROOT="$PWD/tmp/hyku_file_cache"` in `.env.local.mac` ([environment.md](./environment.md)); re-source from repo root; restart Rails |
 | Seeds fail with connection to host `solr` / `RSolr::Error::ConnectionRefused` | `SOLR_HOST` still Docker default (`solr`), or Docker `.env` was sourced | Set `SOLR_HOST=localhost` and `SOLR_URL=http://127.0.0.1:8983/solr/` in `.env.local.mac` ([environment.md](./environment.md)); `unset SOLR_URL SOLR_HOST` if needed; re-source; ensure Solr listens on **8983**; re-run `db:seed` |
 | Seeds fail | Solr/Fedora not ready | Start wrappers first, wait, re-run `db:seed` |
+| `uc:seed:samples` fails with missing single-tenant account | Stock Hyku `db:seed` not run yet | Finish [run-the-app.md](./run-the-app.md) `db:setup` / `db:seed` first, then re-run `rake uc:seed:samples` |
 | Solr/Fedora connection errors (app) | Dev wrappers not up, or Docker `.env` hosts loaded | Confirm ports **8983/8984**; set `SOLR_HOST=localhost` / unset Docker `SOLR_URL` / `FCREPO_HOST` |
 | Specs can’t reach Solr/Fedora | Using dev ports, or test wrappers down | Test ports are **8985/8986**; see [run-tests.md](./run-tests.md) |
 | Specs fail after using develop’s Fedora **8080** | Wrong test Fedora port on this branch | Use **8986** (`config/fcrepo_wrapper_test.yml`) |

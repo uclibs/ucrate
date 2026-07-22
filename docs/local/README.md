@@ -101,6 +101,7 @@ Follow these steps in order:
 	This is where one-time database seeding happens for this branch.
 	It creates the admin user from `.env.local.mac` and site defaults (admin set, workflows, enabled work types).
 	It does **not** deposit sample works — an empty catalog after seed is normal.
+	Optional UC samples (adapted from `develop`): see `uc:seed:samples` on [run-the-app.md](./run-the-app.md).
 	Before `db:setup` / `db:seed`, wait until Solr has finished downloading and is listening (see that page).
 	Your env must set `SOLR_HOST=localhost` and `HYKU_CACHE_ROOT` under the repo (see [environment.md](./environment.md)).
 	That page also covers starting or restarting Rails if it is not up yet.
