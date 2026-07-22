@@ -1,4 +1,4 @@
-# 3) Ruby version manager + Ruby 3.3.x
+# Ruby version manager + Ruby 3.3.x
 
 Back to setup index: [docs/local/README.md](../README.md)
 
@@ -12,7 +12,7 @@ Important:
 
 ## Step 1: check active Ruby version
 
-```bash
+```
 ruby -v
 ```
 
@@ -25,7 +25,7 @@ If Ruby is not `3.3.x` (example: `3.4.7`), continue to Step 2.
 
 Run:
 
-```bash
+```
 command -v rbenv || command -v rvm
 ```
 
@@ -43,20 +43,21 @@ Use RVM only. Do not initialize rbenv in the same shell.
 
 Install Ruby 3.3.6 if needed:
 
-```bash
+```
 rvm install 3.3.6
 ```
 
 Switch to Ruby 3.3.6 for this project:
 
-```bash
-cd /path/to/ucrate
+From your **ucrate clone root**:
+
+```
 rvm use 3.3.6
 ```
 
 Verify:
 
-```bash
+```
 ruby -v
 ```
 
@@ -67,13 +68,13 @@ Expected: `ruby 3.3.x ...`
 
 1. Check whether `rbenv` is available:
 
-```bash
+```
 command -v rbenv
 ```
 
 If this prints nothing, install rbenv + ruby-build:
 
-```bash
+```
 brew install rbenv ruby-build
 ```
 
@@ -83,15 +84,16 @@ If Step 2 already found `rbenv`, skip this step.
 
 If `rbenv` was missing and you just installed it, run:
 
-```bash
+```
 echo 'eval "$(rbenv init - zsh)"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
 3. Install and set Ruby 3.3.6 for this repo:
 
-```bash
-cd /path/to/ucrate
+From your **ucrate clone root**:
+
+```
 rbenv install -s 3.3.6
 rbenv local 3.3.6
 ruby -v
@@ -101,7 +103,7 @@ Expected: `ruby 3.3.x ...`
 
 If rbenv says `3.3.6` is unavailable (or definition missing), update ruby-build and retry:
 
-```bash
+```
 brew upgrade ruby-build
 rbenv install -s 3.3.6
 ```
@@ -110,4 +112,4 @@ If you already have another 3.3.x installed, use that version with `rbenv local`
 
 ## Next
 
-Go to [4) Bundler](./04-bundler.md).
+Go to [Bundler](./bundler.md).

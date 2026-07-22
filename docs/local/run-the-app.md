@@ -4,7 +4,7 @@
 
 This page is database setup, optional sample works, and first sign-in.
 
-Start Postgres, Redis, Fedora, Solr, and Sidekiq first — [start-services.md](./start-services.md) — and leave those terminals running. For tests, see [run-tests.md](./run-tests.md).
+Start services first — [start-services.md](./start-services.md) — and leave those terminals running (including Rails). For tests, see [run-tests.md](./run-tests.md).
 
 ## Quick checks
 
@@ -12,7 +12,7 @@ Do not run `db:setup` while Solr is still downloading (watch the Solr terminal f
 
 ### Postgres
 
-```bash
+```
 pg_isready -h localhost
 ```
 
@@ -20,7 +20,7 @@ Expected: `localhost:5432 - accepting connections`
 
 ### Redis
 
-```bash
+```
 redis-cli ping
 ```
 
@@ -28,7 +28,7 @@ Expected: `PONG`
 
 ### Solr (port 8983)
 
-```bash
+```
 lsof -i :8983 | grep LISTEN
 ```
 
@@ -36,7 +36,7 @@ Expected: a line with `8983` and `LISTEN`. If empty, wait for Solr to finish sta
 
 ### Fedora (port 8984)
 
-```bash
+```
 lsof -i :8984 | grep LISTEN
 ```
 
@@ -48,12 +48,9 @@ If any check fails, fix it on [start-services.md](./start-services.md), then ret
 
 Use `db:setup` on PostgreSQL (not the old MySQL flow from Scholar@UC `develop`).
 
-From the **repo root** (`HYKU_CACHE_ROOT` uses `$PWD`):
+Run from your **ucrate clone root** (the directory with `Gemfile`). [direnv](./dependencies/direnv.md) loads the env in this directory.
 
-```bash
-cd /path/to/ucrate
-set -a && source .env.local.mac && set +a
-
+```
 RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rails db:setup
 ```
 
@@ -73,9 +70,7 @@ It does **not** create repository works. An empty catalog after seed is normal. 
 
 After `db:setup`, this loads Scholar@UC-style sample users and public works onto Hyku’s existing models (`GenericWork`, `Image`, `Etd`). Local/dev only — the task refuses production and staging.
 
-```bash
-cd /path/to/ucrate
-set -a && source .env.local.mac && set +a
+```
 RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rake uc:seed:samples
 ```
 
@@ -87,43 +82,15 @@ Expected: a `RESULT: OK` banner at the end (ignore Hyrax/Blacklight boot warning
 
 Develop-only types/fields (`Article`, `college`, …) are stored on Hyku models via `resource_type` and description text — not as separate UC work classes.
 
-## Start or restart Rails (if needed)
-
-Rails may already be up from [start-services.md](./start-services.md) Step 6. Restart it if you changed `.env.local.mac` after it started.
-
-```bash
-lsof -i :3000 | grep LISTEN
-```
-
-- No output → start Rails with the command below.
-- Has `LISTEN` and env is already correct → go to [Open the app](#open-the-app).
-- Has `LISTEN` but you just changed `.env.local.mac` → Ctrl+C in the Rails terminal, then start again:
-
-```bash
-cd /path/to/ucrate
-set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rails server -b 0.0.0.0 -p 3000
-```
-
-Expected: Rails stays running in that terminal.
-
-Optional check:
-
-```bash
-env | grep '^HYKU_CACHE_ROOT='
-env | grep '^SOLR_HOST='
-```
-
-Expected: a path under `tmp/hyku_file_cache`, and `SOLR_HOST=localhost`.
-
 ## Open the app
 
-Open **http://localhost:3000** and sign in with `INITIAL_ADMIN_*` from `.env.local.mac`.
+Open **http://localhost:3000** and sign in with `INITIAL_ADMIN_*` from `.env.local.mac`. Rails should already be running from [start-services.md](./start-services.md) Step 6.
 
 | If you see… | Then… |
 |-------------|--------|
 | Pending migrations | Finish [database setup](#one-time-database-setup), reload |
-| `Errno::EROFS` / mkdir `/app` | Set `HYKU_CACHE_ROOT` ([environment.md](./environment.md)), [restart Rails](#start-or-restart-rails-if-needed) |
-| Page will not load | Check service terminals: Fedora → Solr → Redis → Sidekiq → Rails ([start-services.md](./start-services.md)) |
+| `Errno::EROFS` / mkdir `/app` | Fix `HYKU_CACHE_ROOT` ([environment.md](./environment.md)), then restart Rails from [start-services.md](./start-services.md) Step 6 |
+| Page will not load / nothing on port 3000 | Check service terminals: Fedora → Solr → Redis → Sidekiq → Rails ([start-services.md](./start-services.md)) |
 
 ## Later days
 

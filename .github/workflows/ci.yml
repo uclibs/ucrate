@@ -76,6 +76,25 @@ env:
   DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
 
 jobs:
+  uc_customizations:
+    name: UC customizations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check UC customizations inventory
+        env:
+          UC_CUSTOMIZATIONS_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          UC_CUSTOMIZATIONS_HEAD_SHA: ${{ github.sha }}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            export UC_CUSTOMIZATIONS_ENFORCE_PR=1
+            export UC_CUSTOMIZATIONS_HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          fi
+          ruby scripts/ci/check_uc_customizations.rb
+
   lint:
     name: RuboCop
     runs-on: ubuntu-latest

@@ -1,4 +1,4 @@
-# 9) ImageMagick + LibreOffice
+# ImageMagick + LibreOffice
 
 Back to setup index: [docs/local/README.md](../README.md)
 
@@ -8,21 +8,21 @@ These tools are used for derivatives and office document conversion.
 
 Run this command:
 
-```bash
+```
 command -v magick
 ```
 
-If output prints a path, ImageMagick is on PATH.
+If output prints a path, ImageMagick is on PATH — go to **Step 3**.
 
 If output is empty, run this command:
 
-```bash
+```
 command -v convert
 ```
 
-If `convert` prints a path, ImageMagick is installed (older command name).
+If `convert` prints a path, ImageMagick is installed (older command name) — go to **Step 3**.
 
-If both `magick` and `convert` are empty, go to Step 2.
+If both `magick` and `convert` are empty, go to **Step 2**.
 
 ## Step 2: install ImageMagick if needed
 
@@ -30,19 +30,19 @@ These extra formulae support ImageMagick on this branch. LibreOffice does not us
 
 Run this command:
 
-```bash
+```
 brew install imagemagick shared-mime-info
 ```
 
 Then re-check:
 
-```bash
+```
 command -v magick
 ```
 
 If `magick` is still empty, run:
 
-```bash
+```
 command -v convert
 ```
 
@@ -50,13 +50,13 @@ command -v convert
 
 Run this command:
 
-```bash
+```
 command -v soffice
 ```
 
-If output prints a path, LibreOffice is on PATH.
+If output prints a path, LibreOffice is on PATH — you are done with ImageMagick and LibreOffice. Go to **Next**.
 
-If output is empty, go to Step 4.
+If output is empty, go to **Step 4**.
 
 ## Step 4: install LibreOffice if needed
 
@@ -64,15 +64,17 @@ LibreOffice only needs its own package here.
 
 Run this command:
 
-```bash
+```
 brew install libreoffice
 ```
 
 Then re-check:
 
-```bash
+```
 command -v soffice
 ```
+
+If output prints a path, go to **Next**.
 
 If anything is still missing after Step 4, use [docs/local/troubleshooting.md](../troubleshooting.md) before continuing.
 

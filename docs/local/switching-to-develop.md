@@ -4,7 +4,7 @@
 
 `develop` still wants Ruby 2.7.8, MySQL, and its own README (on that branch). When you switch:
 
-```bash
+```
 git checkout develop
 rbenv local 2.7.8    # or whatever develop documents
 # use develop’s MySQL + service instructions from that branch’s README

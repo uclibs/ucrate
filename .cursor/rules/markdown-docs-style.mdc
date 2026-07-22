@@ -22,8 +22,9 @@ Primary local setup entry point: `docs/local/README.md` (multi-page, step-by-ste
 ## Commands in the terminal
 
 - When the reader must decide based on output, give **one command** (or one clear choice), then the next instruction.
-- Multi-line / chained commands are OK only when they are a fixed, always-together sequence with no judgment (e.g. source env then start Sidekiq).
-- Show the exact command in a fenced `bash` block. Prefer copy-pasteable paths; use `/path/to/ucrate` when the real path varies.
+- Multi-line / chained commands are OK only when they are a fixed, always-together sequence with no judgment (e.g. start Sidekiq with fixed flags).
+- Show the exact command in a fenced code block with **no language tag** (opening line is exactly ` ``` ` with nothing after it). Do **not** use `bash`, `sh`, or `text` — language tags turn on syntax highlighting, and `$VAR` / `$(…)` often become nearly invisible in Cursor/VS Code preview. A bare fence keeps copy-paste commands readable.
+- Prefer copy-pasteable commands; avoid fake paths like `/path/to/ucrate` inside paste blocks when the reader should already be in the clone.
 
 ## Preview readability (critical)
 

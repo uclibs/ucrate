@@ -8,12 +8,13 @@ PRs and pushes to **`hyku-oob`** run [`.github/workflows/ci.yml`](../../.github/
 
 | Job | What it does |
 |-----|----------------|
+| **UC customizations** | Ensures [uc-hyku-customizations.md](./uc-hyku-customizations.md) and [uc-hyku-customizations.manifest.yml](./uc-hyku-customizations.manifest.yml) stay in sync with UC-owned files; on PRs, changing a listed customization requires updating that inventory |
 | **RuboCop** | `bundle exec rubocop` (no Solr/Fedora) |
 | **Brakeman and bundler-audit** | Security scans (no Solr/Fedora). Known Hyku OOB findings are baselined in [`config/brakeman.ignore`](../../config/brakeman.ignore) and [`.bundler-audit.yml`](../../.bundler-audit.yml); **new** Medium/High Brakeman warnings or unignored advisories still fail CI. |
 | **RSpec (shards 0–5)** | Six parallel jobs; each starts Postgres, Redis, Solr, Fedora (and Chrome) via [`docker-compose.ci.yml`](../../docker-compose.ci.yml), then runs ~1/6 of the spec files |
 | **Coverage gate** | Downloads each shard’s SimpleCov `.resultset.json`, merges with `SimpleCov.collate`, compares to [`coverage/coverage_baseline.txt`](../../coverage/coverage_baseline.txt) |
 
-Required checks for PRs into `hyku-oob` should be those jobs (lint, security, all six RSpec shards, and the coverage gate). No release labels are required for these checks.
+Required checks for PRs into `hyku-oob` should include those jobs (UC customizations, lint, security, all six RSpec shards, and the coverage gate). No release labels are required for these checks.
 
 CI uses Actions + Docker **only on the runner**. Local macOS setup under `docs/local/` stays no-Docker.
 
