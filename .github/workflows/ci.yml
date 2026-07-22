@@ -76,11 +76,30 @@ env:
   DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
 
 jobs:
+  uc_customizations:
+    name: UC customizations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check UC customizations inventory
+        env:
+          UC_CUSTOMIZATIONS_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          UC_CUSTOMIZATIONS_HEAD_SHA: ${{ github.sha }}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            export UC_CUSTOMIZATIONS_ENFORCE_PR=1
+            export UC_CUSTOMIZATIONS_HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          fi
+          ruby scripts/ci/check_uc_customizations.rb
+
   lint:
     name: RuboCop
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -88,7 +107,7 @@ jobs:
           bundler-cache: true
 
       - name: Cache RuboCop
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: tmp/rubocop_cache
           key: rubocop-${{ runner.os }}-${{ hashFiles('Gemfile.lock', '.rubocop.yml', '.rubocop_todo.yml', '.rubocop_todo.hyrax.yml') }}
@@ -102,7 +121,7 @@ jobs:
     name: Brakeman and bundler-audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -110,7 +129,7 @@ jobs:
           bundler-cache: true
 
       - name: Cache ruby-advisory-db
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.local/share/ruby-advisory-db
           key: ruby-advisory-db-${{ runner.os }}-${{ github.run_id }}
@@ -134,14 +153,14 @@ jobs:
       CI_NODE_INDEX: ${{ matrix.ci_node_index }}
       CI_NODE_TOTAL: "6"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # Restore on every shard (must download tarballs). Do not use lookup-only:
       # that reports cache-hit without restoring files, so shards 1–5 tried to
       # docker load an empty directory while shard 0 (writer) actually restored.
       - name: Restore CI Docker image cache
         id: cache-docker
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: /tmp/ci-docker-images
           key: ci-docker-v5-${{ runner.os }}-${{ hashFiles('docker-compose.ci.yml') }}
@@ -169,7 +188,7 @@ jobs:
           ruby-version: "3.3.6"
           bundler-cache: true
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: "20"
           cache: yarn
@@ -219,7 +238,7 @@ jobs:
 
       - name: Save CI Docker image cache
         if: steps.pack-docker.outcome == 'success' && matrix.ci_node_index == 0
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: /tmp/ci-docker-images
           key: ci-docker-v5-${{ runner.os }}-${{ hashFiles('docker-compose.ci.yml') }}
@@ -363,7 +382,7 @@ jobs:
       contents: write
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref || github.ref }}
           fetch-depth: 0

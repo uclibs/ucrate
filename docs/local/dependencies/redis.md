@@ -1,4 +1,4 @@
-# 7) Redis
+# Redis
 
 Back to setup index: [docs/local/README.md](../README.md)
 
@@ -12,7 +12,7 @@ Do not start app services from this page.
 
 Run this command:
 
-```bash
+```
 command -v redis-server
 ```
 
@@ -20,13 +20,13 @@ If output prints a path, continue.
 
 If output is empty, install Redis:
 
-```bash
+```
 brew install redis
 ```
 
 Now run this command:
 
-```bash
+```
 command -v redis-cli
 ```
 
@@ -34,13 +34,13 @@ If output prints a path, you are done with this step.
 
 If output is empty, Redis is likely a broken/incomplete install. Reinstall Redis:
 
-```bash
+```
 brew reinstall redis
 ```
 
 Then run:
 
-```bash
+```
 command -v redis-cli
 ```
 
@@ -51,4 +51,4 @@ If this is still empty, stop here and use [Redis CLI quick fix](../troubleshooti
 
 ## Next
 
-Go to [8) Java 8 (Temurin)](./08-java-8.md).
+Go to [Java 8 (Temurin)](./java-8.md).

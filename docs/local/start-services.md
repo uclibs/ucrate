@@ -8,35 +8,34 @@ This page is for the development environment (dev ports), not test ports.
 
 Need test services instead? Use [docs/local/start-test-services.md](./start-test-services.md).
 
-Run each service in its own terminal tab/window so logs stay visible and each process keeps running.
+Before starting services, confirm env is loaded in a terminal at your **ucrate clone root** (the directory with `Gemfile`). [direnv](./dependencies/direnv.md) must already be set up.
 
-Before Sidekiq (Step 5) and Rails (Step 6), you must have already created `.env.local.mac` from `.env.local.mac.example` — see [environment.md](./environment.md). That template includes `HYKU_ROOT_HOST`, `HYRAX_ACTIVE_JOB_QUEUE=sidekiq`, `SOLR_*` localhost settings, and `HYKU_CACHE_ROOT`.
+### Env check (do this first)
 
-**Always `cd` to the repo root before sourcing `.env.local.mac`.** `HYKU_CACHE_ROOT` uses `$PWD`.
-
-Quick check in the terminal where you will run the worker or Rails:
-
-```bash
-cd /path/to/ucrate
-set -a && source .env.local.mac && set +a
+```
 env | grep '^HYKU_ROOT_HOST='
 env | grep '^HYRAX_ACTIVE_JOB_QUEUE='
 env | grep '^SOLR_HOST='
+env | grep '^SOLR_URL='
 env | grep '^HYKU_CACHE_ROOT='
 ```
 
 Expected:
 
-```bash
+```
 HYKU_ROOT_HOST=localhost
 HYRAX_ACTIVE_JOB_QUEUE=sidekiq
 SOLR_HOST=localhost
-HYKU_CACHE_ROOT=.../ucrate/tmp/hyku_file_cache
+SOLR_URL=http://127.0.0.1:8983/solr/
 ```
 
-If any line is missing, fix `.env.local.mac` using [environment.md](./environment.md) before continuing.
+Plus a `HYKU_CACHE_ROOT=` line with the **same full path** you set in [environment.md](./environment.md) (also confirmed under [direnv](./dependencies/direnv.md)). It must start with `/` and end with `/tmp/hyku_file_cache` — not a placeholder and not `$PWD`.
 
-Run these from `/path/to/ucrate` unless noted.
+- **No output / vars missing:** direnv is not loading the file — finish [direnv](./dependencies/direnv.md) (`direnv allow`, zsh hook), then hit Enter or open a new terminal in the clone and re-check.
+- **Wrong `SOLR_*` or other `HYKU_*` values** (Docker hostname `solr`, etc.): fix `.env.local.mac` in [environment.md](./environment.md), hit Enter so direnv reloads, then re-check.
+- **Wrong cache path:** fix `HYKU_CACHE_ROOT` in [environment.md](./environment.md), hit Enter so direnv reloads, then re-check.
+
+Do not continue until this check looks right. You will run each service below from the clone root with env loaded (direnv).
 
 ## 1) Start PostgreSQL
 
@@ -44,13 +43,13 @@ PostgreSQL may already be running from earlier setup.
 
 Check status first:
 
-```bash
+```
 brew services list | grep -i postgres
 ```
 
-If your Postgres service is not `started`, start it:
+If your Postgres service is not `started`:
 
-```bash
+```
 brew services start postgresql@16
 ```
 
@@ -60,7 +59,9 @@ If it was running but you stopped it, start it again with the same command.
 
 ## 2) Start Redis
 
-```bash
+From a new terminal, run:
+
+```
 redis-server
 ```
 
@@ -68,7 +69,9 @@ Use the same Redis terminal process for both dev and test on this branch. If you
 
 ## 3) Start Fedora wrapper
 
-```bash
+From a new terminal, run:
+
+```
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)" && export PATH="$JAVA_HOME/bin:$PATH" && RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec fcrepo_wrapper -p 8984
 ```
 
@@ -76,7 +79,9 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)" && export PATH="$JAVA_HOME/b
 
 First start on a machine may take several minutes (downloads Solr **7.4.0** into `tmp/solr-download` and installs it under `tmp/solr-development`). Later starts reuse that install and should be much faster.
 
-```bash
+From a new terminal, run:
+
+```
 RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper
 ```
 
@@ -86,8 +91,10 @@ You can continue to Step 5 (Sidekiq) while Solr is still downloading. Sidekiq on
 
 ## 5) Start Sidekiq
 
-```bash
-set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec sidekiq
+From a new terminal, run:
+
+```
+DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec sidekiq
 ```
 
 `RUBYOPT` loads a small local shim that strips a legacy Redis option Hyku still passes (`thread_safe`). Without it, Sidekiq 7 exits with `unknown keyword: :thread_safe`.
@@ -100,8 +107,10 @@ It connects to Redis (`REDIS_HOST`/`REDIS_PORT`), and this branch uses the same 
 
 ## 6) Start Rails server (port 3000)
 
-```bash
-set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rails server -b 0.0.0.0 -p 3000
+From a new terminal, run:
+
+```
+DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rails server -b 0.0.0.0 -p 3000
 ```
 
 Expected outcome: Rails boots and stays running in this terminal.
@@ -114,5 +123,5 @@ If you change `.env.local.mac` later (Solr URL, cache root, etc.), stop Rails wi
 
 Keep the terminals from this page running.
 
-- **First time on this branch:** go to [run-the-app.md](./run-the-app.md) for quick checks and one-time DB setup/seeding. Do not open the browser yet — http://localhost:3000 usually shows a pending-migrations error until seeding finishes. That page also covers restarting Rails if you updated env after Step 6.
+- **First time on this branch:** go to [run-the-app.md](./run-the-app.md) for quick checks and one-time DB setup/seeding. Do not open the browser yet — http://localhost:3000 usually shows a pending-migrations error until seeding finishes.
 - **Already set up this branch locally:** open http://localhost:3000.

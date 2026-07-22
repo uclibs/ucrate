@@ -1,0 +1,189 @@
+# Machine-readable list of Scholar@UC customizations vs Hyku.
+# Human explanations: docs/local/uc-hyku-customizations.md
+# Enforced by: scripts/ci/check_uc_customizations.rb (CI job "UC customizations")
+#
+# When you add a customization:
+#   1. Add a path (or prefix) under entries below
+#   2. Document what/why in uc-hyku-customizations.md
+# When you remove one: delete the entry and the doc section.
+
+inventory_doc: docs/local/uc-hyku-customizations.md
+
+# Every on-disk file matching these globs must be covered by an entry
+# (exact path, or a prefix entry ending with / that covers it).
+watch_globs:
+  - app/services/uc/**
+  - lib/tasks/uc_*
+  - spec/services/uc/**
+  - spec/tasks/uc_*
+  - config/*_compat.rb
+  - .cursor/rules/**
+  - scripts/ci/**
+  - lib/uc/**
+  - .envrc
+  - .env.local.mac.example
+  - .bundler-audit.yml
+  - config/brakeman.ignore
+  - docker-compose.ci.yml
+  - coverage/coverage_baseline.txt
+  - .github/workflows/ci.yml
+
+# Paths Hyku also ships that we patched. PR changes to these require updating
+# the inventory markdown in the same PR (enforced on pull_request).
+hyku_patched:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .gitignore
+  - .solr_wrapper
+  - config/solr_wrapper_test.yml
+  - .github/workflows/verify_labels.yml
+  - .github/workflows/build-test-lint.yaml
+  - spec/rails_helper.rb
+  - spec/features/appearance_theme_spec.rb
+  - spec/features/show_page_theme_spec.rb
+  - spec/features/community_theme_spec.rb
+  - spec/features/cultural_repository_theme_spec.rb
+  - spec/features/institutional_repository_theme_spec.rb
+  - spec/features/collection_type_spec.rb
+  - spec/models/featured_collection_list_spec.rb
+  - yarn.lock
+
+# Registered customizations (path = file or directory prefix ending in /).
+# kind: uc_only | hyku_patched
+entries:
+  - path: docs/local/
+    kind: uc_only
+    id: local-docs
+
+  - path: .env.local.mac.example
+    kind: uc_only
+    id: env-template
+
+  - path: .envrc
+    kind: uc_only
+    id: direnv
+
+  - path: README.md
+    kind: hyku_patched
+    id: readme-pointer
+
+  - path: config/sidekiq_redis_compat.rb
+    kind: uc_only
+    id: sidekiq-redis-compat
+
+  - path: config/fcrepo_wrapper_compat.rb
+    kind: uc_only
+    id: fcrepo-wrapper-compat
+
+  - path: .solr_wrapper
+    kind: hyku_patched
+    id: solr-wrapper-dev
+
+  - path: config/solr_wrapper_test.yml
+    kind: hyku_patched
+    id: solr-wrapper-test
+
+  - path: Gemfile
+    kind: hyku_patched
+    id: security-gems
+
+  - path: Gemfile.lock
+    kind: hyku_patched
+    id: security-gems-lock
+
+  - path: config/brakeman.ignore
+    kind: uc_only
+    id: brakeman-baseline
+
+  - path: .bundler-audit.yml
+    kind: uc_only
+    id: bundler-audit-baseline
+
+  - path: .github/workflows/ci.yml
+    kind: uc_only
+    id: ci-workflow
+
+  - path: docker-compose.ci.yml
+    kind: uc_only
+    id: docker-compose-ci
+
+  - path: scripts/ci/
+    kind: uc_only
+    id: ci-scripts
+
+  - path: lib/uc/
+    kind: uc_only
+    id: uc-lib
+
+  - path: coverage/coverage_baseline.txt
+    kind: uc_only
+    id: coverage-baseline
+
+  - path: .github/workflows/verify_labels.yml
+    kind: hyku_patched
+    id: verify-labels
+
+  - path: .github/workflows/build-test-lint.yaml
+    kind: hyku_patched
+    id: build-test-lint-guard
+
+  - path: spec/rails_helper.rb
+    kind: hyku_patched
+    id: rails-helper-ci
+
+  - path: spec/features/appearance_theme_spec.rb
+    kind: hyku_patched
+    id: flaky-appearance-theme
+
+  - path: spec/features/show_page_theme_spec.rb
+    kind: hyku_patched
+    id: flaky-show-page-theme
+
+  - path: spec/features/community_theme_spec.rb
+    kind: hyku_patched
+    id: flaky-community-theme
+
+  - path: spec/features/cultural_repository_theme_spec.rb
+    kind: hyku_patched
+    id: flaky-cultural-theme
+
+  - path: spec/features/institutional_repository_theme_spec.rb
+    kind: hyku_patched
+    id: flaky-institutional-theme
+
+  - path: spec/features/collection_type_spec.rb
+    kind: hyku_patched
+    id: flaky-collection-type
+
+  - path: spec/models/featured_collection_list_spec.rb
+    kind: hyku_patched
+    id: flaky-featured-collection-list
+
+  - path: yarn.lock
+    kind: hyku_patched
+    id: yarn-lock
+
+  - path: .gitignore
+    kind: hyku_patched
+    id: gitignore-uc
+
+  - path: .cursor/rules/
+    kind: uc_only
+    id: cursor-rules
+
+  - path: app/services/uc/
+    kind: uc_only
+    id: uc-sample-seed-service
+
+  - path: lib/tasks/uc_sample_seeds.rake
+    kind: uc_only
+    id: uc-sample-seed-rake
+
+  - path: spec/services/uc/
+    kind: uc_only
+    id: uc-sample-seed-specs
+
+  - path: spec/tasks/uc_sample_seeds_rake_spec.rb
+    kind: uc_only
+    id: uc-sample-seed-rake-spec

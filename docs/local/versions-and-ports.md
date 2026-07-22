@@ -44,4 +44,4 @@ You can run the app stack and the test stack at the same time because the ports 
 
 ## Next
 
-- [Start dependency setup](./dependencies/01-homebrew.md)
+- [Start dependency setup](./dependencies/homebrew.md)

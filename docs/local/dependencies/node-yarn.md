@@ -1,4 +1,4 @@
-# 6) Node + Yarn
+# Node + Yarn
 
 Back to setup index: [docs/local/README.md](../README.md)
 
@@ -6,7 +6,7 @@ Node and Yarn are needed for frontend assets (Universal Viewer setup).
 
 ## Step 1: check Node and Yarn
 
-```bash
+```
 node -v
 yarn -v
 ```
@@ -29,13 +29,13 @@ What to do next:
 
 Check NVM:
 
-```bash
+```
 command -v nvm
 ```
 
 If NVM is missing, install it with Homebrew:
 
-```bash
+```
 brew install nvm
 mkdir -p ~/.nvm
 echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
@@ -45,7 +45,7 @@ source ~/.zshrc
 
 Install/use Node 20 LTS:
 
-```bash
+```
 nvm install 20
 nvm use 20
 node -v
@@ -62,19 +62,19 @@ If Yarn is missing or not `1.x`, set Yarn to 1 Classic:
 
 First check Corepack:
 
-```bash
+```
 command -v corepack
 ```
 
 If `corepack` is missing, install it:
 
-```bash
+```
 npm install -g corepack
 ```
 
 Then (whether Corepack was already present or just installed), set Yarn to 1 Classic:
 
-```bash
+```
 corepack prepare yarn@1.22.22 --activate
 yarn -v
 ```
@@ -84,8 +84,9 @@ Expected: `1.22.x`
 
 ## Step 4: install JS dependencies
 
-```bash
-cd /path/to/ucrate
+From your **ucrate clone root**:
+
+```
 yarn install
 ```
 
@@ -101,7 +102,7 @@ What is `public/uv`?
 
 Quick check:
 
-```bash
+```
 ls public/uv
 ```
 
@@ -109,4 +110,4 @@ If `yarn install` fails with errors like `command not found: if`, `command not f
 
 ## Next
 
-Go to [7) Redis](./07-redis.md).
+Go to [Redis](./redis.md).

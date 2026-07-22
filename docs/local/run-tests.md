@@ -7,9 +7,9 @@ You do **not** need to run the full suite for every change. A complete local run
 ## Prerequisites
 
 - Dependency setup complete (see [docs/local/dependencies](./dependencies))
-- Postgres running with `hyku_test` created ([dependencies/02-postgresql.md](./dependencies/02-postgresql.md))
+- Postgres running with `hyku_test` created ([dependencies/postgresql.md](./dependencies/postgresql.md))
 - Redis running
-- Source `.env.local.mac` first ([environment.md](./environment.md); `DB_TEST_NAME=hyku_test`, etc.)
+- [direnv](./dependencies/direnv.md) set up so `.env.local.mac` loads in the clone ([environment.md](./environment.md); `DB_TEST_NAME=hyku_test`, etc.)
 - Port reference: [versions-and-ports.md](./versions-and-ports.md) (test: Solr **8985**, Fedora **8986**)
 
 Keep **development** wrappers (8983/8984) separate from **test** wrappers (8985/8986). Mixing them causes confusing failures.
@@ -22,7 +22,7 @@ Run **one command at a time**. Match each reply to the Expected line under that 
 
 ### Postgres
 
-```bash
+```
 pg_isready -h localhost
 ```
 
@@ -30,7 +30,7 @@ Expected: `localhost:5432 - accepting connections`
 
 ### Redis
 
-```bash
+```
 redis-cli ping
 ```
 
@@ -38,7 +38,7 @@ Expected: `PONG`
 
 ### Solr (test port 8985)
 
-```bash
+```
 lsof -i :8985 | grep LISTEN
 ```
 
@@ -48,7 +48,7 @@ If this command prints nothing, Solr test is not listening yet.
 
 ### Fedora (test port 8986)
 
-```bash
+```
 lsof -i :8986 | grep LISTEN
 ```
 
@@ -62,10 +62,9 @@ Skip these checks when using Option A (`rake ci`), which starts test Solr and Fe
 
 This matches the repo’s non-Docker default (`Rakefile` → `with_server 'test'`). It starts Solr/Fedora using the **test** wrapper configs, then runs the specs.
 
-```bash
-cd /path/to/ucrate
-set -a && source .env.local.mac && set +a
+From your **ucrate clone root** ([direnv](./dependencies/direnv.md) loads the env here):
 
+```
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export PATH="$JAVA_HOME/bin:$PATH"
 
@@ -86,7 +85,7 @@ What `rake ci` uses:
 
 ### RuboCop only (no Solr/Fedora; much faster)
 
-```bash
+```
 bundle exec rubocop
 ```
 
@@ -98,8 +97,7 @@ Use this if you want wrappers left running across multiple spec invocations.
 
 ### Terminal 1 — Fedora (test, 8986)
 
-```bash
-cd /path/to/ucrate
+```
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export PATH="$JAVA_HOME/bin:$PATH"
 bundle exec fcrepo_wrapper -c config/fcrepo_wrapper_test.yml
@@ -107,8 +105,7 @@ bundle exec fcrepo_wrapper -c config/fcrepo_wrapper_test.yml
 
 ### Terminal 2 — Solr (test, 8985)
 
-```bash
-cd /path/to/ucrate
+```
 RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper --config config/solr_wrapper_test.yml
 ```
 
@@ -116,16 +113,13 @@ RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper --config con
 
 Skip if `brew services` already runs it:
 
-```bash
+```
 redis-server
 ```
 
 ### Terminal 4 — Specs
 
-```bash
-cd /path/to/ucrate
-set -a && source .env.local.mac && set +a
-
+```
 RAILS_ENV=test bundle exec rails db:prepare
 
 # Full suite:
