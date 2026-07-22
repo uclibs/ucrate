@@ -2,7 +2,7 @@
 
 require 'pathname'
 require 'yaml'
-require 'english'
+require 'English'
 require 'shellwords'
 
 module Uc
