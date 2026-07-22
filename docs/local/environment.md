@@ -2,51 +2,119 @@
 
 **These instructions are for `hyku-oob` only.** Team index: [docs/local/README.md](./README.md).
 
-Copy the committed template to a **personal** file (gitignored). This does **not** overwrite the Docker `.env`.
+## What this file is for
+
+Hyku ships a Docker-oriented `.env`. For **local macOS without Docker**, we use a separate personal file instead:
+
+| File | In git? | Purpose |
+|------|---------|---------|
+| `.env.local.mac.example` ([open in repo](../../.env.local.mac.example)) | Yes (committed template) | Shared starting point for the team |
+| `.env.local.mac` | No (gitignored) | **Your** copy — edit this on your machine |
+
+You create `.env.local.mac` once, then `source` it in every terminal that runs Rails, Sidekiq, database setup, or specs.
+
+## Create your personal env file
+
+Copy the committed template to a **personal** file. This does **not** overwrite the Docker `.env`.
 
 ```bash
 cp .env.local.mac.example .env.local.mac
 ```
 
-Edit `.env.local.mac` and set `DB_USER` from [install.md](./install.md) Step D (`whoami` / `psql -d postgres -c 'SELECT current_user;'`).
+Edit `.env.local.mac` and leave `DB_USER=YOUR_MAC_USERNAME_HERE` in place for now. We set the real value later in [dependencies/02-postgresql.md](./dependencies/02-postgresql.md) (`whoami` / `psql -d postgres -c 'SELECT current_user;'`).
+
+## Required for Sidekiq and Rails (already in the template)
+
+The template already includes these. Keep them in your `.env.local.mac`:
+
+```bash
+export HYKU_ROOT_HOST=localhost
+export HYRAX_ACTIVE_JOB_QUEUE=sidekiq
+export SOLR_HOST=localhost
+export SOLR_PORT=8983
+export SOLR_URL=http://127.0.0.1:8983/solr/
+export HYKU_CACHE_ROOT="$PWD/tmp/hyku_file_cache"
+```
+
+- `HYKU_ROOT_HOST=localhost` — required so the app knows its host in single-tenant local mode.
+- `HYRAX_ACTIVE_JOB_QUEUE=sidekiq` — use Sidekiq for background jobs (not Docker’s Good Job setup).
+- `SOLR_*` — required for `db:seed` (Hyku otherwise defaults to Docker host `solr`).
+- `HYKU_CACHE_ROOT` — required for the homepage (Hyku otherwise defaults to Docker path `/app/...`). **Source from the repo root** so `$PWD` is correct.
+
+If you copied an older template and these lines are missing, add them now (or re-copy from `.env.local.mac.example` and re-apply your `DB_USER`).
 
 ## Template
 
-Also in [`.env.local.mac.example`](../../.env.local.mac.example):
+Also in `.env.local.mac.example` ([open in repo](../../.env.local.mac.example)):
 
 ```bash
-# .env.local.mac — source this; do not use Docker hostnames
+# .env.local.mac — source this from the repo root; do not use Docker hostnames
 export HYKU_MULTITENANT=false
+export HYKU_ROOT_HOST=localhost
 export DB_ADAPTER=postgresql
 export DB_HOST=localhost
 export DB_PORT=5432
 export DB_NAME=hyku
 export DB_TEST_NAME=hyku_test
-export DB_USER=YOUR_MAC_USERNAME_HERE   # from install.md Step D
+export DB_USER=YOUR_MAC_USERNAME_HERE   # from dependencies/02-postgresql.md
 export DB_PASSWORD=                     # usually empty on Homebrew Postgres
 export REDIS_HOST=localhost
 export REDIS_PORT=6379
-# Leave SOLR_URL / FCREPO_HOST unset so config/*.yml use localhost defaults
-# Jobs: omit HYRAX_ACTIVE_JOB_QUEUE to use Sidekiq (default)
+export SOLR_HOST=localhost
+export SOLR_PORT=8983
+export SOLR_URL=http://127.0.0.1:8983/solr/
+export HYKU_CACHE_ROOT="$PWD/tmp/hyku_file_cache"
+export HYRAX_ACTIVE_JOB_QUEUE=sidekiq
+# Used by `rails db:setup` / `rails db:seed` to create the first admin user:
 export INITIAL_ADMIN_EMAIL=admin@example.com
 export INITIAL_ADMIN_PASSWORD=testing123
 export SECRET_KEY_BASE=dev-secret-change-me
 export DISABLE_REDIS_CLUSTER=true
 ```
 
-## Load it
-
-In each terminal that runs Rails, Sidekiq, `db:setup`, or specs:
-
-```bash
-set -a && source .env.local.mac && set +a
-```
+You will source `.env.local.mac` later in the runtime docs, in the terminals that run Rails, Sidekiq, `db:setup`, or specs.
 
 > **Multitenancy:** Upstream Hyku often uses `*.localhost.direct` and Stack Car. Stay on `HYKU_MULTITENANT=false` until the single-tenant stack is solid.
 
 **Do not** source the committed `.env` for local no-Docker runs — it uses Docker hostnames (`db`, `solr`, `redis`, `fcrepo`).
 
+### Solr host (required for `db:setup` / `db:seed`)
+
+Hyku’s account/seed code defaults `SOLR_HOST` to `solr` (Docker). Without an explicit localhost setting, seed fails with `Connection refused` / `getaddrinfo` for host `solr`.
+
+Your `.env.local.mac` must include:
+
+```bash
+export SOLR_HOST=localhost
+export SOLR_PORT=8983
+export SOLR_URL=http://127.0.0.1:8983/solr/
+```
+
+Check after sourcing:
+
+```bash
+env | grep '^SOLR_HOST='
+env | grep '^SOLR_URL='
+```
+
+Expected: `SOLR_HOST=localhost` and a URL that uses `127.0.0.1` or `localhost` (not the hostname `solr`).
+
+If you previously sourced the Docker `.env`, also run `unset SOLR_URL SOLR_HOST FCREPO_HOST` and source `.env.local.mac` again.
+
+### File cache root (required for the homepage)
+
+Hyku defaults `HYKU_CACHE_ROOT` to `/app/samvera/file_cache` (a Docker path). On a Mac that becomes `Errno::EROFS` / “Read-only file system @ dir_s_mkdir - /app” when the homepage tries to write the cache.
+
+Your `.env.local.mac` must include (source from the repo root):
+
+```bash
+export HYKU_CACHE_ROOT="$PWD/tmp/hyku_file_cache"
+```
+
+Then restart Rails after re-sourcing ([run-the-app.md](./run-the-app.md) has a start/restart section).
+
 ## Next
 
+- [Start services](./start-services.md)
 - [Run the app](./run-the-app.md)
 - [Run tests](./run-tests.md)

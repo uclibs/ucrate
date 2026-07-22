@@ -6,13 +6,57 @@ You do **not** need to run the full suite for every change. A complete local run
 
 ## Prerequisites
 
-- [Install dependencies](./install.md) (Ruby, gems, Java 8)
-- Postgres running with `hyku_test` created ([install.md](./install.md) Step E)
+- Dependency setup complete (see [docs/local/dependencies](./dependencies))
+- Postgres running with `hyku_test` created ([dependencies/02-postgresql.md](./dependencies/02-postgresql.md))
 - Redis running
-- [`.env.local.mac` sourced](./environment.md) (`DB_TEST_NAME=hyku_test`, etc.)
+- Source `.env.local.mac` first ([environment.md](./environment.md); `DB_TEST_NAME=hyku_test`, etc.)
 - Port reference: [versions-and-ports.md](./versions-and-ports.md) (test: Solr **8985**, Fedora **8986**)
 
 Keep **development** wrappers (8983/8984) separate from **test** wrappers (8985/8986). Mixing them causes confusing failures.
+
+## Quick checks (do this first if you started test wrappers yourself)
+
+If you used [start-test-services.md](./start-test-services.md) (or Option B below) and left test Solr/Fedora running, confirm the **test** ports before specs.
+
+Run **one command at a time**. Match each reply to the Expected line under that command.
+
+### Postgres
+
+```bash
+pg_isready -h localhost
+```
+
+Expected: `localhost:5432 - accepting connections`
+
+### Redis
+
+```bash
+redis-cli ping
+```
+
+Expected: `PONG`
+
+### Solr (test port 8985)
+
+```bash
+lsof -i :8985 | grep LISTEN
+```
+
+Expected: at least one line that includes `8985` and `LISTEN` (not 8983), for example `TCP *:8985 (LISTEN)`.
+
+If this command prints nothing, Solr test is not listening yet.
+
+### Fedora (test port 8986)
+
+```bash
+lsof -i :8986 | grep LISTEN
+```
+
+Expected: at least one line that includes `8986` and `LISTEN` (not 8984), for example `TCP *:8986 (LISTEN)`.
+
+If any check fails, go back to [start-test-services.md](./start-test-services.md).
+
+Skip these checks when using Option A (`rake ci`), which starts test Solr and Fedora for you.
 
 ## Option A — Recommended: `rake ci` (auto-starts test Solr + Fedora)
 
@@ -65,7 +109,7 @@ bundle exec fcrepo_wrapper -c config/fcrepo_wrapper_test.yml
 
 ```bash
 cd /path/to/ucrate
-bundle exec solr_wrapper -c config/solr_wrapper_test.yml
+RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper --config config/solr_wrapper_test.yml
 ```
 
 ### Terminal 3 — Redis

@@ -14,5 +14,5 @@ Do not mix `hyku-oob` Postgres settings with `develop`’s MySQL setup in the sa
 
 ## Related
 
-- [hyku-oob install](./install.md)
+- [hyku-oob dependency setup](./dependencies)
 - [hyku-oob run the app](./run-the-app.md)

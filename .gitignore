@@ -67,6 +67,13 @@ dump.rdb
 /bundler.d/
 .tool-versions
 
+# Local Yarn Berry artifacts (this branch uses Yarn 1 lockfile workflow)
+.yarn/
+.yarnrc.yml
+
+# Local runtime output
+var/
+
 # MeSH data files (large, not source code)
 *.bin
 d*.bin

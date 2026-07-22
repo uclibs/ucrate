@@ -2,6 +2,10 @@
 port: 8985
 # version locked until solr_wrapper and everyone else handles solr 8
 version: 7.4.0
+# UC local: reuse the same downloaded zip as dev; separate instance dir for test port
+download_dir: tmp/solr-download
+instance_dir: tmp/solr-test
+
 collection:
   dir: solr/conf/
   name: hydra-test
