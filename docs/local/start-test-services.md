@@ -71,7 +71,7 @@ Most test runs do not require a separate worker process.
 If you are running tests that depend on background jobs, start Sidekiq:
 
 ```bash
-set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true bundle exec sidekiq
+set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec sidekiq
 ```
 
 ## Quick checks

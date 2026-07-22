@@ -100,6 +100,7 @@ Follow these steps in order:
 
 	This is where one-time database seeding happens for this branch.
 	It also creates your initial admin user from `.env.local.mac`.
+	Before `db:setup` / `db:seed`, wait until Solr has finished downloading and is listening (see that page).
 
 15. Run tests only when needed:
 

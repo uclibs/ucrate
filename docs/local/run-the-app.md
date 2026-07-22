@@ -46,7 +46,7 @@ cd /path/to/ucrate
 RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper
 ```
 
-Reads `.solr_wrapper` (Solr **7.4.0**, collection `hydra-development`, config under `solr/conf/`). First run on a machine downloads into `tmp/solr-download` and may take several minutes; later runs reuse `tmp/solr-development`. [Open the Solr wrapper config](../../.solr_wrapper).
+Reads `.solr_wrapper` (Solr **7.4.0**, collection `hydra-development`, config under `solr/conf/`). First run on a machine downloads into `tmp/solr-download` and may take several minutes; later runs reuse `tmp/solr-development`.
 
 Expected outcome: Solr starts with development config and stays running in the terminal.
 
@@ -89,15 +89,38 @@ This section is the seed/admin setup point for `hyku-oob`.
 If you are used to `develop`: do not run the old MySQL-era setup sequence.
 On this branch, use `db:setup` (or `db:migrate` + `db:seed`) against PostgreSQL.
 
-With Fedora, Solr, Redis, and Postgres up:
+### Confirm Solr and Fedora are ready first
+
+Seeds talk to Solr and Fedora. Do **not** run `db:setup` / `db:seed` while Solr is still downloading (progress % in the Solr terminal).
+
+In a free terminal, check that both are listening:
+
+```bash
+lsof -i :8983 | grep LISTEN
+```
+
+```bash
+lsof -i :8984 | grep LISTEN
+```
+
+Expected: each command prints at least one `LISTEN` line.
+
+If Solr’s terminal still shows a download progress bar, wait until it finishes and Solr stays running, then re-check port **8983**.
+
+Also confirm Redis and Postgres are up (`redis-cli ping` → `PONG`, `pg_isready -h localhost` → accepting connections).
+
+### Run database setup
+
+With Fedora, Solr, Redis, and Postgres ready:
 
 ```bash
 cd /path/to/ucrate
 set -a && source .env.local.mac && set +a
 
 bundle exec rails db:setup
-# db:setup = create + schema + seed (needs Solr + Fedora running for seeds)
 ```
+
+`db:setup` = create + schema + seed. Seeds need Solr and Fedora already running.
 
 Expected outcome: command completes without errors and seeds create initial records.
 
@@ -138,8 +161,10 @@ If either line is missing, fix `.env.local.mac` using [environment.md](./environ
 ```bash
 cd /path/to/ucrate
 set -a && source .env.local.mac && set +a
-DISABLE_REDIS_CLUSTER=true bundle exec sidekiq
+DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec sidekiq
 ```
+
+`RUBYOPT` loads a local shim so Sidekiq 7 accepts Hyku’s Redis config (drops legacy `thread_safe`). Without it you get `unknown keyword: :thread_safe`.
 
 Expected outcome: Sidekiq boots and waits for jobs.
 

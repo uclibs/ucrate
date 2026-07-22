@@ -76,13 +76,17 @@ First start on a machine may take several minutes (downloads Solr **7.4.0** into
 RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper
 ```
 
-This reads `.solr_wrapper` (port **8983**, collection `hydra-development`, config under `solr/conf/`). [Open the Solr wrapper config](../../.solr_wrapper).
+This reads `.solr_wrapper` (port **8983**, collection `hydra-development`, config under `solr/conf/`).
+
+You can continue to Step 5 (Sidekiq) while Solr is still downloading. Sidekiq only needs Redis and your env file to start. Wait for Solr to finish and listen on port **8983** before `db:setup` / `db:seed` (see [run-the-app.md](./run-the-app.md)).
 
 ## 5) Start Sidekiq
 
 ```bash
-set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true bundle exec sidekiq
+set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec sidekiq
 ```
+
+`RUBYOPT` loads a small local shim that strips a legacy Redis option Hyku still passes (`thread_safe`). Without it, Sidekiq 7 exits with `unknown keyword: :thread_safe`.
 
 If Sidekiq fails with `no implicit conversion of nil into String` from `config/environments/development.rb`, your `.env.local.mac` is missing `HYKU_ROOT_HOST`.
 
