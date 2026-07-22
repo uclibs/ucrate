@@ -79,6 +79,7 @@ See [github-actions.md](./github-actions.md) for the CI job name.
 | `scripts/ci/coverage_gate.sh` | **Keep** | Compares merged SimpleCov % to baseline (0.5pt tolerance); PR ratchet can bump baseline. |
 | `scripts/ci/merge_coverage.rb` | **Keep** | `SimpleCov.collate` across shard resultsets. |
 | `scripts/ci/check_uc_customizations.rb` | **Keep** | Enforces this inventory + manifest (see above). |
+| `lib/uc/hyku_customizations_inventory.rb` | **Keep** | Inventory check logic used by the CI script (and specs). |
 | `coverage/coverage_baseline.txt` | **Keep** | Committed coverage floor for the gate. |
 | `.github/workflows/verify_labels.yml` | **Conflict likely** | Restricted to PRs into **`main`** so feature PRs into `hyku-oob` do not need Hyku release labels. Restore if upstream resets to `branches: ['**']`. |
 | `.github/workflows/build-test-lint.yaml` | **Conflict likely** | Jobs gated with `if: github.repository == 'samvera/hyku'` so this fork does not publish to `ghcr.io/samvera/hyku`. Re-apply guards after merge if lost. |

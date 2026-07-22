@@ -19,6 +19,7 @@ watch_globs:
   - config/*_compat.rb
   - .cursor/rules/**
   - scripts/ci/**
+  - lib/uc/**
   - .envrc
   - .env.local.mac.example
   - .bundler-audit.yml
@@ -110,6 +111,10 @@ entries:
   - path: scripts/ci/
     kind: uc_only
     id: ci-scripts
+
+  - path: lib/uc/
+    kind: uc_only
+    id: uc-lib
 
   - path: coverage/coverage_baseline.txt
     kind: uc_only
