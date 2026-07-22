@@ -1,204 +1,104 @@
-# Run the app locally (no Docker)
+# Run the app (one-time DB setup)
 
 **These instructions are for `hyku-oob` only.** Team index: [docs/local/README.md](./README.md).
 
-Prerequisites:
+This page is **only** the one-time database setup/seeding step and how to sign in.
 
-- Dependency setup complete (see [docs/local/dependencies](./dependencies))
-- [Environment variables](./environment.md)
-- Port reference: [versions-and-ports.md](./versions-and-ports.md) (dev: Solr **8983**, Fedora **8984**)
+Do **not** start Postgres, Redis, Fedora, Solr, Sidekiq, or Rails here. Those commands live on [start-services.md](./start-services.md). Finish that page first (keep those terminals running), then come here.
 
-For tests, see [run-tests.md](./run-tests.md) (different ports).
+For tests (different Solr/Fedora ports), see [run-tests.md](./run-tests.md).
 
-Stay in the project directory. Use **foreground** processes (do not append `&`) so logs are visible. Solr paths must not contain spaces.
+## Quick checks (do this first)
 
-## Before you start terminals
+Seeds talk to Solr and Fedora. Do **not** run `db:setup` / `db:seed` while Solr is still downloading (progress % in the Solr terminal from [start-services.md](./start-services.md)).
 
-1. Open 5 terminal tabs/windows and keep them open while developing.
-2. In every terminal, run `cd /path/to/ucrate` first.
-3. In terminals that run Rails, Sidekiq, or database tasks, load env vars:
-
-	```bash
-	set -a && source .env.local.mac && set +a
-	```
-
-4. If a command fails, stop and check [troubleshooting.md](./troubleshooting.md) before moving on.
-
-## Supporting services
-
-### Terminal A — Fedora (port 8984)
-
-```bash
-cd /path/to/ucrate
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-export PATH="$JAVA_HOME/bin:$PATH"
-RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec fcrepo_wrapper   # reads .fcrepo_wrapper → port 8984
-```
-
-First run downloads Fedora **4.7.3**. Wait until it is listening.
-
-Expected outcome: terminal logs indicate Fedora started and is listening on port 8984.
-
-### Terminal B — Solr (port 8983)
-
-```bash
-cd /path/to/ucrate
-RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper
-```
-
-Reads `.solr_wrapper` (Solr **7.4.0**, collection `hydra-development`, config under `solr/conf/`). First run on a machine downloads into `tmp/solr-download` and may take several minutes; later runs reuse `tmp/solr-development`.
-
-Expected outcome: Solr starts with development config and stays running in the terminal.
-
-### Terminal C — Redis (port 6379)
-
-```bash
-redis-server
-```
-
-If Redis is already running from `brew services`, stop it first:
-
-```bash
-brew services stop redis
-```
-
-Then this terminal can own port 6379.
-
-Expected outcome: `PONG`
+Run **one command at a time** in a free terminal. Match each reply to the Expected line under that command.
 
 ### Postgres
 
-Use whatever Postgres you already run from [dependencies/02-postgresql.md](./dependencies/02-postgresql.md). Confirm before Rails setup:
-
 ```bash
 pg_isready -h localhost
-psql -d hyku -c 'SELECT current_user;'
 ```
 
-Do not start a second Postgres if something is already accepting connections on port 5432.
+Expected: `localhost:5432 - accepting connections`
 
-Expected outcomes:
+### Redis
 
-- `pg_isready` reports accepting connections
-- `SELECT current_user;` returns a username
+```bash
+redis-cli ping
+```
 
-## One-time app setup
+Expected: `PONG`
 
-This section is the seed/admin setup point for `hyku-oob`.
-
-If you are used to `develop`: do not run the old MySQL-era setup sequence.
-On this branch, use `db:setup` (or `db:migrate` + `db:seed`) against PostgreSQL.
-
-### Confirm Solr and Fedora are ready first
-
-Seeds talk to Solr and Fedora. Do **not** run `db:setup` / `db:seed` while Solr is still downloading (progress % in the Solr terminal).
-
-In a free terminal, check that both are listening:
+### Solr (dev port 8983)
 
 ```bash
 lsof -i :8983 | grep LISTEN
 ```
 
+Expected: at least one line that includes `8983` and `LISTEN` (for example `TCP *:8983 (LISTEN)`).
+
+If this command prints nothing, Solr is not listening yet. Wait until the Solr terminal finishes downloading and stays running, then run the check again.
+
+### Fedora (dev port 8984)
+
 ```bash
 lsof -i :8984 | grep LISTEN
 ```
 
-Expected: each command prints at least one `LISTEN` line.
+Expected: at least one line that includes `8984` and `LISTEN` (for example `TCP *:8984 (LISTEN)`).
 
-If Solr’s terminal still shows a download progress bar, wait until it finishes and Solr stays running, then re-check port **8983**.
+If any check fails, go back to [start-services.md](./start-services.md). Do not re-copy startup commands onto this page.
 
-Also confirm Redis and Postgres are up (`redis-cli ping` → `PONG`, `pg_isready -h localhost` → accepting connections).
+## One-time database setup
 
-### Run database setup
-
-With Fedora, Solr, Redis, and Postgres ready:
+If you are used to Scholar@UC `develop`: do not run the old MySQL-era setup sequence.
+On this branch, use `db:setup` (or `db:migrate` + `db:seed`) against PostgreSQL.
 
 ```bash
 cd /path/to/ucrate
 set -a && source .env.local.mac && set +a
 
-bundle exec rails db:setup
+RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rails db:setup
 ```
 
-`db:setup` = create + schema + seed. Seeds need Solr and Fedora already running.
+`db:setup` = create + schema + seed. Seeds need Solr and Fedora already listening. `RUBYOPT` loads the same Redis shim Sidekiq uses (without it, seed can fail with `unknown keyword: :thread_safe`).
 
 Expected outcome: command completes without errors and seeds create initial records.
 
-If the DB already exists:
+If the database already exists:
 
 ```bash
-bundle exec rails db:migrate
-bundle exec rails db:seed
+RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rails db:migrate
+RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rails db:seed
 ```
 
-With `INITIAL_ADMIN_EMAIL` / `INITIAL_ADMIN_PASSWORD` set, seed creates a superadmin.
-
-You do not need a separate Rails console step to create the first admin user.
+With `INITIAL_ADMIN_EMAIL` / `INITIAL_ADMIN_PASSWORD` set in `.env.local.mac`, seed creates a superadmin. You do not need a separate Rails console step for the first admin user.
 
 Expected outcome: no migration or seed errors.
 
-## Start the app and worker
+## Open the app
 
-Before starting the worker and Rails, confirm `.env.local.mac` was created from the template ([environment.md](./environment.md)) and that these are loaded:
-
-```bash
-set -a && source .env.local.mac && set +a
-env | grep '^HYKU_ROOT_HOST='
-env | grep '^HYRAX_ACTIVE_JOB_QUEUE='
-```
-
-Expected:
-
-```bash
-HYKU_ROOT_HOST=localhost
-HYRAX_ACTIVE_JOB_QUEUE=sidekiq
-```
-
-If either line is missing, fix `.env.local.mac` using [environment.md](./environment.md), then source again.
-
-### Terminal D — Sidekiq
-
-```bash
-cd /path/to/ucrate
-set -a && source .env.local.mac && set +a
-DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec sidekiq
-```
-
-`RUBYOPT` loads a local shim so Sidekiq 7 accepts Hyku’s Redis config (drops legacy `thread_safe`). Without it you get `unknown keyword: :thread_safe`.
-
-Expected outcome: Sidekiq boots and waits for jobs.
-
-### Terminal E — Rails
-
-```bash
-cd /path/to/ucrate
-set -a && source .env.local.mac && set +a
-DISABLE_REDIS_CLUSTER=true bundle exec rails server -b 0.0.0.0 -p 3000
-```
-
-Expected outcome: Rails boots and listens on port 3000.
+Rails and Sidekiq should already be running from [start-services.md](./start-services.md) (Steps 5–6).
 
 Open **http://localhost:3000**
 
 Sign in with the `INITIAL_ADMIN_*` values from `.env.local.mac`.
 
-If the page does not load, check logs in Terminal A through E in this order: Fedora, Solr, Redis, Sidekiq, Rails.
+If the page shows pending migrations, finish the database setup section above, then reload. If Rails was not started yet, start it from [start-services.md](./start-services.md) Step 6.
 
-## Fast restart (after first setup)
+If the page does not load, check the service terminals from [start-services.md](./start-services.md) in this order: Fedora, Solr, Redis, Sidekiq, Rails.
 
-For normal day-to-day work, you usually do not need `db:setup` again.
+## Later days
 
-Use [start-services.md](./start-services.md) for the exact runtime startup commands and order.
+You usually do **not** need `db:setup` again.
 
-## Everyday restart order
-
-Single source for runtime startup commands:
-
-- [start-services.md](./start-services.md)
-
-Stop with Ctrl+C in each terminal. Safe to leave brew-managed Postgres/Redis running.
+Everyday restarts: [start-services.md](./start-services.md) only. Stop with Ctrl+C in each terminal. Safe to leave brew-managed Postgres/Redis running.
 
 ## Related
 
+- [Start services](./start-services.md)
 - [Run tests](./run-tests.md)
 - [Troubleshooting](./troubleshooting.md)
+- [Environment](./environment.md)
+- [Versions and ports](./versions-and-ports.md)

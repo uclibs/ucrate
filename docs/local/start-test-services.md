@@ -4,21 +4,55 @@ Back to setup index: [docs/local/README.md](./README.md)
 
 Use this page when dependencies are already installed and you want to start local runtime services for running tests on `hyku-oob`.
 
-This page is for the test environment (test ports), not dev ports.
+This page is for the **test** environment (test ports), not the development ports used in [start-services.md](./start-services.md).
 
-Test services use different ports from development so you can run the app stack and test stack at the same time.
+| Service | Dev (start-services) | Test (this page) |
+|---------|----------------------|------------------|
+| Solr | **8983** | **8985** |
+| Fedora | **8984** | **8986** |
+| Redis | 6379 (shared) | 6379 (shared) |
+| Postgres | same server; DB `hyku` | same server; DB `hyku_test` |
 
-Need development services instead? Use [docs/local/start-services.md](./start-services.md).
+You can run the app stack and the test stack at the same time because Solr and Fedora use different ports. Do **not** point tests at the development Solr/Fedora ports.
+
+Need development services instead? Use [start-services.md](./start-services.md).
 
 Run each service in its own terminal tab/window so logs stay visible and each process keeps running.
+
+Before optional Sidekiq (Step 5), you must have already created `.env.local.mac` from `.env.local.mac.example` — see [environment.md](./environment.md). That template includes `HYKU_ROOT_HOST=localhost` and `HYRAX_ACTIVE_JOB_QUEUE=sidekiq`.
+
+Quick check in the terminal where you will run Sidekiq (if needed):
+
+```bash
+set -a && source .env.local.mac && set +a
+env | grep '^HYKU_ROOT_HOST='
+env | grep '^HYRAX_ACTIVE_JOB_QUEUE='
+```
+
+Expected:
+
+```bash
+HYKU_ROOT_HOST=localhost
+HYRAX_ACTIVE_JOB_QUEUE=sidekiq
+```
+
+If either line is missing, fix `.env.local.mac` using [environment.md](./environment.md) before continuing.
+
+Most people use `rake ci` on [run-tests.md](./run-tests.md) (it can start test Solr/Fedora for you). Use **this** page when you want test wrappers left running across multiple spec invocations.
 
 Run these from `/path/to/ucrate` unless noted.
 
 ## 1) Start PostgreSQL
 
-PostgreSQL may already be running from earlier setup.
+PostgreSQL may already be running from earlier setup or from [start-services.md](./start-services.md). Dev and test share the same Postgres server (different database names).
 
-Check status first:
+If Postgres is already accepting connections, skip this step:
+
+```bash
+pg_isready -h localhost
+```
+
+Otherwise check Homebrew status:
 
 ```bash
 brew services list | grep -i postgres
@@ -32,37 +66,49 @@ brew services start postgresql@16
 
 If your Mac uses a different Postgres formula, start that version instead.
 
-If it was running but you stopped it, start it again with the same command.
-
 ## 2) Start Redis
+
+Dev and test share the same Redis on port **6379**.
+
+If you already started Redis for the development environment ([start-services.md](./start-services.md)), **do not start it again** for test. Skip this step.
+
+If Redis is not running yet:
 
 ```bash
 redis-server
 ```
 
-If Redis is already running from `brew services`, stop it first:
+If Homebrew’s Redis service already owns port 6379 and you prefer a foreground `redis-server` in this terminal, stop the service first:
 
 ```bash
 brew services stop redis
 ```
 
-Then this terminal can own port 6379.
-
-Use the same Redis terminal process for both dev and test on this branch.
+Then run `redis-server` as above.
 
 ## 3) Start Fedora wrapper (test port 8986)
+
+This is a **separate** process from the development Fedora on **8984**. Start it even if dev Fedora is already running.
 
 ```bash
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)" && export PATH="$JAVA_HOME/bin:$PATH" && RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec fcrepo_wrapper -c config/fcrepo_wrapper_test.yml
 ```
 
+Expected outcome: Fedora listens on port **8986** (not **8984**).
+
 ## 4) Start Solr wrapper (test port 8985)
+
+This is a **separate** process from the development Solr on **8983**. Start it even if dev Solr is already running.
 
 First start may download Solr if you have not already run the **dev** Solr wrapper (same zip cache in `tmp/solr-download`). The test instance lives under `tmp/solr-test`.
 
 ```bash
 RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper --config config/solr_wrapper_test.yml
 ```
+
+This reads `config/solr_wrapper_test.yml` (port **8985**, collection `hydra-test`, config under `solr/conf/`).
+
+You can continue to Step 5 (optional Sidekiq) while Solr is still downloading. Wait for Solr to finish and listen on port **8985** before running specs.
 
 ## 5) Optional: start Sidekiq
 
@@ -74,23 +120,14 @@ If you are running tests that depend on background jobs, start Sidekiq:
 set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec sidekiq
 ```
 
-## Quick checks
+`RUBYOPT` loads a small local shim that strips a legacy Redis option Hyku still passes (`thread_safe`). Without it, Sidekiq 7 exits with `unknown keyword: :thread_safe`.
 
-```bash
-pg_isready -h localhost
-redis-cli ping
-lsof -i :8985 | grep LISTEN
-lsof -i :8986 | grep LISTEN
-```
+If Sidekiq fails with `no implicit conversion of nil into String` from `config/environments/development.rb`, your `.env.local.mac` is missing `HYKU_ROOT_HOST`.
 
-Expected:
-
-- Postgres check reports accepting connections.
-- Redis check reports `PONG`.
-- Solr test wrapper is listening on `8985`.
-- Fedora test wrapper is listening on `8986`.
+Sidekiq does not use a separate app port here. It uses the same Redis service for both dev and test.
 
 ## Next
 
-- Run tests: [docs/local/run-tests.md](./run-tests.md)
-- Need to run the app instead: [docs/local/start-services.md](./start-services.md)
+Keep the terminals from this page running, then go to [run-tests.md](./run-tests.md). That page starts with quick checks for the **test** ports, then how to run specs.
+
+Need the app stack instead? Use [start-services.md](./start-services.md).

@@ -54,7 +54,10 @@ export DB_USER=YOUR_MAC_USERNAME_HERE   # from dependencies/02-postgresql.md
 export DB_PASSWORD=                     # usually empty on Homebrew Postgres
 export REDIS_HOST=localhost
 export REDIS_PORT=6379
-# Leave SOLR_URL / FCREPO_HOST unset so config/*.yml use localhost defaults
+# Required: Hyku defaults SOLR_HOST to Docker hostname "solr" during seed
+export SOLR_HOST=localhost
+export SOLR_PORT=8983
+export SOLR_URL=http://127.0.0.1:8983/solr/
 # Jobs: use Sidekiq for local no-Docker setup
 export HYRAX_ACTIVE_JOB_QUEUE=sidekiq
 # Used by `rails db:setup` / `rails db:seed` to create the first admin user:
@@ -69,6 +72,29 @@ You will source `.env.local.mac` later in the runtime docs, in the terminals tha
 > **Multitenancy:** Upstream Hyku often uses `*.localhost.direct` and Stack Car. Stay on `HYKU_MULTITENANT=false` until the single-tenant stack is solid.
 
 **Do not** source the committed `.env` for local no-Docker runs — it uses Docker hostnames (`db`, `solr`, `redis`, `fcrepo`).
+
+### Solr host (required for `db:setup` / `db:seed`)
+
+Hyku’s account/seed code defaults `SOLR_HOST` to `solr` (Docker). Without an explicit localhost setting, seed fails with `Connection refused` / `getaddrinfo` for host `solr`.
+
+Your `.env.local.mac` must include:
+
+```bash
+export SOLR_HOST=localhost
+export SOLR_PORT=8983
+export SOLR_URL=http://127.0.0.1:8983/solr/
+```
+
+Check after sourcing:
+
+```bash
+env | grep '^SOLR_HOST='
+env | grep '^SOLR_URL='
+```
+
+Expected: `SOLR_HOST=localhost` and a URL that uses `127.0.0.1` or `localhost` (not the hostname `solr`).
+
+If you previously sourced the Docker `.env`, also run `unset SOLR_URL SOLR_HOST FCREPO_HOST` and source `.env.local.mac` again.
 
 ## Next
 

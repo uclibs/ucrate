@@ -101,6 +101,7 @@ Follow these steps in order:
 	This is where one-time database seeding happens for this branch.
 	It also creates your initial admin user from `.env.local.mac`.
 	Before `db:setup` / `db:seed`, wait until Solr has finished downloading and is listening (see that page).
+	Your env must set `SOLR_HOST=localhost` (see [environment.md](./environment.md)); Hyku otherwise defaults to Docker host `solr`.
 
 15. Run tests only when needed:
 
@@ -115,7 +116,7 @@ Follow these steps in order:
 | [environment.md](./environment.md) | `.env.local.mac` setup (includes `HYKU_ROOT_HOST` and `HYRAX_ACTIVE_JOB_QUEUE=sidekiq`; fill `DB_USER` later) |
 | [start-services.md](./start-services.md) | Single source for runtime service startup commands |
 | [start-test-services.md](./start-test-services.md) | Startup commands for test runtime services on test ports |
-| [run-the-app.md](./run-the-app.md) | Service startup order and app run commands |
+| [run-the-app.md](./run-the-app.md) | One-time DB setup/seeding and first sign-in (after start-services) |
 | [run-tests.md](./run-tests.md) | Optional local RSpec and `rake ci` |
 | [switching-to-develop.md](./switching-to-develop.md) | Switching back to Scholar@UC `develop` |
 | [troubleshooting.md](./troubleshooting.md) | Common errors and fixes |

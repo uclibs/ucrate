@@ -29,10 +29,6 @@ HYRAX_ACTIVE_JOB_QUEUE=sidekiq
 
 If either line is missing, fix `.env.local.mac` using [environment.md](./environment.md) before continuing.
 
-First-time setup: after this page, continue to one-time DB setup/seeding in [run-the-app.md](./run-the-app.md).
-
-Returning setup: if DB is already set up, you can stop after Step 6 and open the app.
-
 Run these from `/path/to/ucrate` unless noted.
 
 ## 1) Start PostgreSQL
@@ -78,7 +74,7 @@ RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper
 
 This reads `.solr_wrapper` (port **8983**, collection `hydra-development`, config under `solr/conf/`).
 
-You can continue to Step 5 (Sidekiq) while Solr is still downloading. Sidekiq only needs Redis and your env file to start. Wait for Solr to finish and listen on port **8983** before `db:setup` / `db:seed` (see [run-the-app.md](./run-the-app.md)).
+You can continue to Step 5 (Sidekiq) while Solr is still downloading. Sidekiq only needs Redis and your env file to start. Wait for Solr to finish and listen on port **8983** before database seeding on the next page.
 
 ## 5) Start Sidekiq
 
@@ -97,28 +93,16 @@ It connects to Redis (`REDIS_HOST`/`REDIS_PORT`), and this branch uses the same 
 ## 6) Start Rails server (port 3000)
 
 ```bash
-set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true bundle exec rails server -b 0.0.0.0 -p 3000
+set -a && source .env.local.mac && set +a && DISABLE_REDIS_CLUSTER=true RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rails server -b 0.0.0.0 -p 3000
 ```
 
-Open: http://localhost:3000
+Expected outcome: Rails boots and stays running in this terminal.
 
-## Quick checks
-
-```bash
-pg_isready -h localhost
-redis-cli ping
-lsof -i :8983 | grep LISTEN
-lsof -i :8984 | grep LISTEN
-```
-
-Expected:
-
-- Postgres check reports accepting connections.
-- Redis check reports `PONG`.
-- Solr is listening on `8983`.
-- Fedora is listening on `8984`.
+`RUBYOPT` is the same Redis shim as Sidekiq. Rails enqueues jobs through Sidekiq’s Redis client, so it needs the shim too.
 
 ## Next
 
-- First-time on this branch: continue to [docs/local/run-the-app.md](./run-the-app.md) for one-time DB setup/seeding.
-- Returning user: open `http://localhost:3000` after Step 6.
+Keep the terminals from this page running.
+
+- **First time on this branch:** go to [run-the-app.md](./run-the-app.md) for quick checks and one-time DB setup/seeding. Do not open the browser yet — http://localhost:3000 usually shows a pending-migrations error until seeding finishes.
+- **Already set up this branch locally:** open http://localhost:3000.

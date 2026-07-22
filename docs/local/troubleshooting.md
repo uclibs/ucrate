@@ -15,12 +15,15 @@
 | DB connection errors from Rails | Wrong `DB_*` or Postgres not running | Re-check [dependencies/02-postgresql.md](./dependencies/02-postgresql.md) and [environment.md](./environment.md) |
 | `corepack: command not found` | Corepack is not installed/enabled in your Node setup | Run `npm install -g corepack`, then continue Node/Yarn setup in [dependencies/06-node-yarn.md](./dependencies/06-node-yarn.md) |
 | `yarn install` fails with `command not found: if` / `fi` or `No matches found: "../config/uv/*"` | Yarn 4 is not supported on this branch | Use Node 20 LTS and Yarn 1 Classic: `corepack prepare yarn@1.22.22 --activate`, confirm `yarn -v` is `1.22.x`, then re-run `yarn install` |
-| Solr/Fedora connection errors (app) | Dev wrappers not up, or Docker `.env` hosts loaded | Confirm ports **8983/8984**; **unset** `SOLR_URL` / `FCREPO_HOST` if they point at `solr`/`fcrepo` |
+| `Unable to copy ... to tmp/solr-development` after Solr zip download | rubyzip 3 + old `solr_wrapper` extract API (fixed by local shim) | Use `RUBYOPT="-r./config/fcrepo_wrapper_compat"`; remove stray `var/` under the repo if present; re-run `solr_wrapper` (zip in `tmp/solr-download` is reused) |
+| Sidekiq / Rails / `db:seed` fails with `unknown keyword: :thread_safe` | Hyku Redis config + Sidekiq 7 | Use `RUBYOPT="-r./config/sidekiq_redis_compat"` for Sidekiq, Rails server, and `db:setup` / `db:seed` |
+| Seeds fail with connection to host `solr` / `RSolr::Error::ConnectionRefused` | `SOLR_HOST` still Docker default (`solr`), or Docker `.env` was sourced | Set `SOLR_HOST=localhost` and `SOLR_URL=http://127.0.0.1:8983/solr/` in `.env.local.mac` ([environment.md](./environment.md)); `unset SOLR_URL SOLR_HOST` if needed; re-source; ensure Solr listens on **8983**; re-run `db:seed` |
+| Seeds fail | Solr/Fedora not ready | Start wrappers first, wait, re-run `db:seed` |
+| Solr/Fedora connection errors (app) | Dev wrappers not up, or Docker `.env` hosts loaded | Confirm ports **8983/8984**; set `SOLR_HOST=localhost` / unset Docker `SOLR_URL` / `FCREPO_HOST` |
 | Specs can’t reach Solr/Fedora | Using dev ports, or test wrappers down | Test ports are **8985/8986**; see [run-tests.md](./run-tests.md) |
 | Specs fail after using develop’s Fedora **8080** | Wrong test Fedora port on this branch | Use **8986** (`config/fcrepo_wrapper_test.yml`) |
 | `redis-cli` not found | Redis missing from PATH, stale shell cache, or incomplete install | Use [Redis CLI quick fix](#redis-cli-quick-fix) |
 | Sidekiq Redis errors | Redis down or Redis &lt; 6.2 | `redis-cli ping`; `brew upgrade redis` |
-| Seeds fail | Solr/Fedora not ready | Start wrappers first, wait, re-run `db:seed` |
 | Solr fails with spaces in path | Known Solr limitation | Move the repo to a path without spaces |
 | Port already in use | Old wrapper/server still running | `lsof -i :3000`, `:8983`, `:8984`, `:8985`, `:8986`, `:6379` |
 

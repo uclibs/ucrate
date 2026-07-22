@@ -4,7 +4,9 @@
 # options (legacy redis gem API). Sidekiq 7 uses redis-client, which rejects
 # that keyword (`unknown keyword: :thread_safe`).
 #
-# Preload when starting Sidekiq:
+# Preload for Sidekiq *and* any Rails command that talks to Redis via Sidekiq
+# (db:setup / db:seed / rails server):
+#   RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rails db:seed
 #   RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec sidekiq
 #
 # Removable when Hyku stops passing thread_safe (or Sidekiq ignores it).

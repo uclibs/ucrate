@@ -14,6 +14,50 @@ You do **not** need to run the full suite for every change. A complete local run
 
 Keep **development** wrappers (8983/8984) separate from **test** wrappers (8985/8986). Mixing them causes confusing failures.
 
+## Quick checks (do this first if you started test wrappers yourself)
+
+If you used [start-test-services.md](./start-test-services.md) (or Option B below) and left test Solr/Fedora running, confirm the **test** ports before specs.
+
+Run **one command at a time**. Match each reply to the Expected line under that command.
+
+### Postgres
+
+```bash
+pg_isready -h localhost
+```
+
+Expected: `localhost:5432 - accepting connections`
+
+### Redis
+
+```bash
+redis-cli ping
+```
+
+Expected: `PONG`
+
+### Solr (test port 8985)
+
+```bash
+lsof -i :8985 | grep LISTEN
+```
+
+Expected: at least one line that includes `8985` and `LISTEN` (not 8983), for example `TCP *:8985 (LISTEN)`.
+
+If this command prints nothing, Solr test is not listening yet.
+
+### Fedora (test port 8986)
+
+```bash
+lsof -i :8986 | grep LISTEN
+```
+
+Expected: at least one line that includes `8986` and `LISTEN` (not 8984), for example `TCP *:8986 (LISTEN)`.
+
+If any check fails, go back to [start-test-services.md](./start-test-services.md).
+
+Skip these checks when using Option A (`rake ci`), which starts test Solr and Fedora for you.
+
 ## Option A — Recommended: `rake ci` (auto-starts test Solr + Fedora)
 
 This matches the repo’s non-Docker default (`Rakefile` → `with_server 'test'`). It starts Solr/Fedora using the **test** wrapper configs, then runs the specs.
