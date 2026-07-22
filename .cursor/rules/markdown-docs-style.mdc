@@ -1,0 +1,55 @@
+---
+description: Style guide for Scholar@UC Markdown docs (docs/local and other .md)
+globs: "**/*.md"
+alwaysApply: false
+---
+
+# Markdown documentation style (Scholar@UC)
+
+Audience: new junior developers (about a 12th-grade reading level). They may be new to this stack — **not** foolish. Be clear and respectful. Do not talk down.
+
+Primary local setup entry point: `docs/local/README.md` (multi-page, step-by-step). Root `README.md` stays mostly upstream Hyku; UC detail lives under `docs/local/`.
+
+## Voice and clarity
+
+- Short sentences. Plain words. One idea per step when possible.
+- Prefer concrete actions (“Run this command”) over abstract theory.
+- State **Expected:** outcomes after checks (what success looks like).
+- Use branching when needed: “If X → go to Step N. If Y → …”
+- Call out differences from Scholar@UC `develop` when it matters (Postgres vs MySQL, ports, etc.).
+- Do **not** add patronizing banners like “do not paste this whole page” or “run one command at a time” as a lecture. Structure the page so steps are obvious instead.
+
+## Commands in the terminal
+
+- When the reader must decide based on output, give **one command** (or one clear choice), then the next instruction.
+- Multi-line / chained commands are OK only when they are a fixed, always-together sequence with no judgment (e.g. source env then start Sidekiq).
+- Show the exact command in a fenced `bash` block. Prefer copy-pasteable paths; use `/path/to/ucrate` when the real path varies.
+
+## Preview readability (critical)
+
+Markdown preview in Cursor/VS Code often makes **links that wrap inline code** unreadable (dark link color on dark code background).
+
+**Never** write: `[`.filename`](url)` or `[`path/to/file`](url)`.
+
+**Do** write:
+
+```markdown
+<!-- filename as plain code; link with normal prose -->
+copy `.env.local.mac.example` to `.env.local.mac`. [Open the template file](../../.env.local.mac.example).
+
+<!-- or link with plain text, no backticks inside [] -->
+See [.env.local.mac.example](../../.env.local.mac.example).
+```
+
+Same rule for `.solr_wrapper`, workflow paths, etc.
+
+## Page structure
+
+- Link **Back to** the setup index and **Next** to the following step.
+- Keep “first-time setup” vs “everyday start” on separate pages when that helps (`start-services.md`, etc.).
+- Put failure remedies in `troubleshooting.md` (or a short link there), not long digressions mid-checklist.
+
+## Hyku vs UC content
+
+- Prefer stock Hyku behavior. Local workarounds belong in docs and small, clearly removable config — not scattered app changes.
+- Env for no-Docker local: document `.env.local.mac.example` → personal `.env.local.mac` (never tell people to source Docker `.env` for local Mac runs).

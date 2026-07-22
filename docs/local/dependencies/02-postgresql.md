@@ -9,12 +9,6 @@ For local setup on this branch, PostgreSQL **14 or newer** is acceptable.
 - If you already have 14/15/16/17, keep it.
 - You do not need to force-upgrade to 16.
 
-## Important: run one command at a time
-
-Do not paste this whole page into the terminal.
-
-Run each command, read the output, then follow the next instruction.
-
 ## Step-by-step check and install
 
 ### Step 1: check for `psql`
@@ -53,7 +47,7 @@ Then run:
 source ~/.zshrc
 ```
 
-Now re-check one line at a time:
+Now re-check:
 
 ```bash
 which psql
@@ -66,8 +60,6 @@ If brew list is empty (nothing printed), Postgres is missing. Install it in **St
 
 
 #### Step 2A: install Postgres (only if missing)
-
-Run each line separately:
 
 ```bash
 brew install postgresql@16
@@ -200,8 +192,6 @@ Important: these are PostgreSQL databases for `hyku-oob`.
 They are separate from older `develop` MySQL databases.
 
 These commands are safe to re-run.
-
-Run each line separately:
 
 Creates the `hyku` database only if needed:
 

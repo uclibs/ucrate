@@ -4,7 +4,12 @@ Use this guide when setting up `hyku-oob` on a Mac for the first time.
 
 This team workflow is **manual services**, not Docker. Start each service yourself in the right order, then start Rails last.
 
-The repo root [README.md](../../README.md) is upstream Hyku documentation and may change when we merge from Hyku. For our team, local setup source of truth is in `docs/local/`.
+## Two things every teammate should know
+
+1. **These docs (`docs/local/`)** are our Scholar@UC source of truth for running this branch on a Mac without Docker. Follow [docs/local/README.md](./README.md) (this page) in order. Upstream Hyku’s root [README.md](../../README.md) is for Hyku generally and may change on merges — do not treat it as our local setup guide.
+
+2. **Local environment file:** copy the committed template `.env.local.mac.example` to a personal `.env.local.mac` (gitignored). Full steps: [environment.md](./environment.md). [Open the template file](../../.env.local.mac.example).  
+   Do **not** source the repo’s Docker `.env` for local no-Docker runs.
 
 If you have already set up this branch before and just need to run services, go to [start-services.md](./start-services.md).
 
@@ -106,7 +111,7 @@ Follow these steps in order:
 |-----|----------|
 | [dependencies/](./dependencies) | One-dependency-at-a-time setup path for juniors |
 | [versions-and-ports.md](./versions-and-ports.md) | Version targets and dev/test ports |
-| [environment.md](./environment.md) | `.env.local.mac` setup and loading (create first, fill DB_USER later) |
+| [environment.md](./environment.md) | `.env.local.mac` setup (includes `HYKU_ROOT_HOST` and `HYRAX_ACTIVE_JOB_QUEUE=sidekiq`; fill `DB_USER` later) |
 | [start-services.md](./start-services.md) | Single source for runtime service startup commands |
 | [start-test-services.md](./start-test-services.md) | Startup commands for test runtime services on test ports |
 | [run-the-app.md](./run-the-app.md) | Service startup order and app run commands |

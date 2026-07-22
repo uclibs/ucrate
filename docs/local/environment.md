@@ -2,7 +2,20 @@
 
 **These instructions are for `hyku-oob` only.** Team index: [docs/local/README.md](./README.md).
 
-Copy the committed template to a **personal** file (gitignored). This does **not** overwrite the Docker `.env`.
+## What this file is for
+
+Hyku ships a Docker-oriented `.env`. For **local macOS without Docker**, we use a separate personal file instead:
+
+| File | In git? | Purpose |
+|------|---------|---------|
+| `.env.local.mac.example` ([open in repo](../../.env.local.mac.example)) | Yes (committed template) | Shared starting point for the team |
+| `.env.local.mac` | No (gitignored) | **Your** copy — edit this on your machine |
+
+You create `.env.local.mac` once, then `source` it in every terminal that runs Rails, Sidekiq, database setup, or specs.
+
+## Create your personal env file
+
+Copy the committed template to a **personal** file. This does **not** overwrite the Docker `.env`.
 
 ```bash
 cp .env.local.mac.example .env.local.mac
@@ -10,9 +23,23 @@ cp .env.local.mac.example .env.local.mac
 
 Edit `.env.local.mac` and leave `DB_USER=YOUR_MAC_USERNAME_HERE` in place for now. We set the real value later in [dependencies/02-postgresql.md](./dependencies/02-postgresql.md) (`whoami` / `psql -d postgres -c 'SELECT current_user;'`).
 
+## Required for Sidekiq and Rails (already in the template)
+
+The template already includes these two lines. Keep them in your `.env.local.mac` — Sidekiq and Rails need them on this branch:
+
+```bash
+export HYKU_ROOT_HOST=localhost
+export HYRAX_ACTIVE_JOB_QUEUE=sidekiq
+```
+
+- `HYKU_ROOT_HOST=localhost` — required so the app knows its host in single-tenant local mode.
+- `HYRAX_ACTIVE_JOB_QUEUE=sidekiq` — use Sidekiq for background jobs (not Docker’s Good Job setup).
+
+If you copied an older template and these lines are missing, add them now (or re-copy from `.env.local.mac.example` and re-apply your `DB_USER`).
+
 ## Template
 
-Also in [`.env.local.mac.example`](../../.env.local.mac.example):
+Also in `.env.local.mac.example` ([open in repo](../../.env.local.mac.example)):
 
 ```bash
 # .env.local.mac — source this; do not use Docker hostnames

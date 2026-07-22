@@ -1,5 +1,13 @@
 # Place any default configuration for solr_wrapper here
-# port: 8983
+#
+# UC local no-Docker: pin version/paths so Solr downloads once into gitignored
+# tmp/ and reuses that install on later starts (avoids a multi-minute download
+# every time). Safe to drop these four keys if upstream wrappers change.
+version: 7.4.0
+port: 8983
+download_dir: tmp/solr-download
+instance_dir: tmp/solr-development
+
 collection:
   dir: solr/conf/
   name: hydra-development

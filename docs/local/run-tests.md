@@ -9,7 +9,7 @@ You do **not** need to run the full suite for every change. A complete local run
 - Dependency setup complete (see [docs/local/dependencies](./dependencies))
 - Postgres running with `hyku_test` created ([dependencies/02-postgresql.md](./dependencies/02-postgresql.md))
 - Redis running
-- [`.env.local.mac` sourced](./environment.md) (`DB_TEST_NAME=hyku_test`, etc.)
+- Source `.env.local.mac` first ([environment.md](./environment.md); `DB_TEST_NAME=hyku_test`, etc.)
 - Port reference: [versions-and-ports.md](./versions-and-ports.md) (test: Solr **8985**, Fedora **8986**)
 
 Keep **development** wrappers (8983/8984) separate from **test** wrappers (8985/8986). Mixing them causes confusing failures.
@@ -65,7 +65,7 @@ bundle exec fcrepo_wrapper -c config/fcrepo_wrapper_test.yml
 
 ```bash
 cd /path/to/ucrate
-bundle exec ruby -r./config/fcrepo_wrapper_compat -e 'require "solr_wrapper"; i = SolrWrapper.instance(config: "config/solr_wrapper_test.yml"); $stderr.print "Starting Solr #{i.version} on port #{i.port} ... "; i.wrap { |conn| $stderr.puts "http://#{i.host}:#{i.port}/solr/"; conn.wait }'
+RUBYOPT="-r./config/fcrepo_wrapper_compat" bundle exec solr_wrapper --config config/solr_wrapper_test.yml
 ```
 
 ### Terminal 3 — Redis

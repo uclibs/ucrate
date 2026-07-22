@@ -26,8 +26,6 @@
 
 ## Redis CLI quick fix
 
-Run one command at a time.
-
 1. Check whether Homebrew installed Redis:
 
 ```bash
@@ -86,8 +84,6 @@ redis-cli --version
 If still missing after Step 6, collect outputs from Steps 1, 2, 4, and 6 and share them with the team.
 
 ## Java 8 quick fix
-
-Run one command at a time.
 
 1. Check whether Java 8 is installed:
 

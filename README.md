@@ -1,5 +1,10 @@
 # Hyku, the Hydra-in-a-Box Repository Application
 
+> **Scholar@UC / `hyku-oob` (this fork)**  
+> For **local macOS setup without Docker**, start here: **[docs/local/README.md](./docs/local/README.md)**.  
+> Your personal env file comes from `.env.local.mac.example` (copy to `.env.local.mac` — see [docs/local/environment.md](./docs/local/environment.md)). [Open the template file](./.env.local.mac.example).  
+> The rest of this README is upstream Hyku and may change when we merge from Samvera.
+
 Code:
 [![Build Status](https://circleci.com/gh/samvera/hyku.svg?style=svg)](https://circleci.com/gh/samvera/hyku)
 [![Coverage Status](https://coveralls.io/repos/samvera/hyku/badge.svg?branch=master&service=github)](https://coveralls.io/github/samvera/hyku?branch=master)
