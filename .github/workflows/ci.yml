@@ -80,7 +80,7 @@ jobs:
     name: UC customizations
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -99,7 +99,7 @@ jobs:
     name: RuboCop
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -121,7 +121,7 @@ jobs:
     name: Brakeman and bundler-audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -153,7 +153,7 @@ jobs:
       CI_NODE_INDEX: ${{ matrix.ci_node_index }}
       CI_NODE_TOTAL: "6"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # Restore on every shard (must download tarballs). Do not use lookup-only:
       # that reports cache-hit without restoring files, so shards 1–5 tried to
@@ -382,7 +382,7 @@ jobs:
       contents: write
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref || github.ref }}
           fetch-depth: 0
