@@ -23,31 +23,34 @@ module HykuLocalSolrWrapperExtractCompat
     return config.instance_dir if extracted?
 
     zip_path = download
-
-    begin
-      FileUtils.mkdir_p(config.tmp_save_dir)
-      Zip::File.open(zip_path) do |zip_file|
-        zip_file.each do |entry|
-          entry.extract(entry.name, destination_directory: config.tmp_save_dir)
-        end
-      end
-    rescue Exception => e
-      abort "Unable to unzip #{zip_path} into #{config.tmp_save_dir}: #{e.message}"
-    end
-
-    begin
-      FileUtils.remove_dir(config.instance_dir, true)
-      solr_root = File.join(config.tmp_save_dir, File.basename(config.download_url, '.zip'))
-      FileUtils.cp_r(solr_root, config.instance_dir)
-      self.extracted_version = config.version
-      FileUtils.chmod(0o755, config.solr_binary)
-    rescue Exception => e
-      abort "Unable to copy #{config.tmp_save_dir} to #{config.instance_dir}: #{e.message}"
-    end
-
+    unzip_solr_archive!(zip_path)
+    install_extracted_solr!
     config.instance_dir
   ensure
     FileUtils.remove_entry(config.tmp_save_dir) if config.tmp_save_dir && File.exist?(config.tmp_save_dir)
+  end
+
+  private
+
+  def unzip_solr_archive!(zip_path)
+    FileUtils.mkdir_p(config.tmp_save_dir)
+    Zip::File.open(zip_path) do |zip_file|
+      zip_file.each do |entry|
+        entry.extract(entry.name, destination_directory: config.tmp_save_dir)
+      end
+    end
+  rescue StandardError => e
+    abort "Unable to unzip #{zip_path} into #{config.tmp_save_dir}: #{e.message}"
+  end
+
+  def install_extracted_solr!
+    FileUtils.remove_dir(config.instance_dir, true)
+    solr_root = File.join(config.tmp_save_dir, File.basename(config.download_url, '.zip'))
+    FileUtils.cp_r(solr_root, config.instance_dir)
+    self.extracted_version = config.version
+    FileUtils.chmod(0o755, config.solr_binary)
+  rescue StandardError => e
+    abort "Unable to copy #{config.tmp_save_dir} to #{config.instance_dir}: #{e.message}"
   end
 end
 

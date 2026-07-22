@@ -99,9 +99,11 @@ Follow these steps in order:
 	[run-the-app.md](./run-the-app.md)
 
 	This is where one-time database seeding happens for this branch.
-	It also creates your initial admin user from `.env.local.mac`.
+	It creates the admin user from `.env.local.mac` and site defaults (admin set, workflows, enabled work types).
+	It does **not** deposit sample works — an empty catalog after seed is normal.
 	Before `db:setup` / `db:seed`, wait until Solr has finished downloading and is listening (see that page).
-	Your env must set `SOLR_HOST=localhost` (see [environment.md](./environment.md)); Hyku otherwise defaults to Docker host `solr`.
+	Your env must set `SOLR_HOST=localhost` and `HYKU_CACHE_ROOT` under the repo (see [environment.md](./environment.md)).
+	That page also covers starting or restarting Rails if it is not up yet.
 
 15. Run tests only when needed:
 
@@ -113,10 +115,10 @@ Follow these steps in order:
 |-----|----------|
 | [dependencies/](./dependencies) | One-dependency-at-a-time setup path for juniors |
 | [versions-and-ports.md](./versions-and-ports.md) | Version targets and dev/test ports |
-| [environment.md](./environment.md) | `.env.local.mac` setup (includes `HYKU_ROOT_HOST` and `HYRAX_ACTIVE_JOB_QUEUE=sidekiq`; fill `DB_USER` later) |
+| [environment.md](./environment.md) | `.env.local.mac` setup (`HYKU_ROOT_HOST`, Sidekiq, `SOLR_*`, `HYKU_CACHE_ROOT`; fill `DB_USER` later) |
 | [start-services.md](./start-services.md) | Single source for runtime service startup commands |
 | [start-test-services.md](./start-test-services.md) | Startup commands for test runtime services on test ports |
-| [run-the-app.md](./run-the-app.md) | One-time DB setup/seeding and first sign-in (after start-services) |
+| [run-the-app.md](./run-the-app.md) | One-time DB setup/seeding, Rails start/restart if needed, first sign-in |
 | [run-tests.md](./run-tests.md) | Optional local RSpec and `rake ci` |
 | [switching-to-develop.md](./switching-to-develop.md) | Switching back to Scholar@UC `develop` |
 | [troubleshooting.md](./troubleshooting.md) | Common errors and fixes |

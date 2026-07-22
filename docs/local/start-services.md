@@ -10,14 +10,19 @@ Need test services instead? Use [docs/local/start-test-services.md](./start-test
 
 Run each service in its own terminal tab/window so logs stay visible and each process keeps running.
 
-Before Sidekiq (Step 5) and Rails (Step 6), you must have already created `.env.local.mac` from `.env.local.mac.example` — see [environment.md](./environment.md). That template includes `HYKU_ROOT_HOST=localhost` and `HYRAX_ACTIVE_JOB_QUEUE=sidekiq`.
+Before Sidekiq (Step 5) and Rails (Step 6), you must have already created `.env.local.mac` from `.env.local.mac.example` — see [environment.md](./environment.md). That template includes `HYKU_ROOT_HOST`, `HYRAX_ACTIVE_JOB_QUEUE=sidekiq`, `SOLR_*` localhost settings, and `HYKU_CACHE_ROOT`.
+
+**Always `cd` to the repo root before sourcing `.env.local.mac`.** `HYKU_CACHE_ROOT` uses `$PWD`.
 
 Quick check in the terminal where you will run the worker or Rails:
 
 ```bash
+cd /path/to/ucrate
 set -a && source .env.local.mac && set +a
 env | grep '^HYKU_ROOT_HOST='
 env | grep '^HYRAX_ACTIVE_JOB_QUEUE='
+env | grep '^SOLR_HOST='
+env | grep '^HYKU_CACHE_ROOT='
 ```
 
 Expected:
@@ -25,9 +30,11 @@ Expected:
 ```bash
 HYKU_ROOT_HOST=localhost
 HYRAX_ACTIVE_JOB_QUEUE=sidekiq
+SOLR_HOST=localhost
+HYKU_CACHE_ROOT=.../ucrate/tmp/hyku_file_cache
 ```
 
-If either line is missing, fix `.env.local.mac` using [environment.md](./environment.md) before continuing.
+If any line is missing, fix `.env.local.mac` using [environment.md](./environment.md) before continuing.
 
 Run these from `/path/to/ucrate` unless noted.
 
@@ -56,7 +63,8 @@ If it was running but you stopped it, start it again with the same command.
 ```bash
 redis-server
 ```
-Use the same Redis terminal process for both dev and test on this branch.  If you have already started it for test, you don't need to start it a second time for dev.
+
+Use the same Redis terminal process for both dev and test on this branch. If you have already started it for test, you don't need to start it a second time for dev.
 
 ## 3) Start Fedora wrapper
 
@@ -100,9 +108,11 @@ Expected outcome: Rails boots and stays running in this terminal.
 
 `RUBYOPT` is the same Redis shim as Sidekiq. Rails enqueues jobs through Sidekiq’s Redis client, so it needs the shim too.
 
+If you change `.env.local.mac` later (Solr URL, cache root, etc.), stop Rails with Ctrl+C and run this Step 6 command again so the new env is loaded.
+
 ## Next
 
 Keep the terminals from this page running.
 
-- **First time on this branch:** go to [run-the-app.md](./run-the-app.md) for quick checks and one-time DB setup/seeding. Do not open the browser yet — http://localhost:3000 usually shows a pending-migrations error until seeding finishes.
+- **First time on this branch:** go to [run-the-app.md](./run-the-app.md) for quick checks and one-time DB setup/seeding. Do not open the browser yet — http://localhost:3000 usually shows a pending-migrations error until seeding finishes. That page also covers restarting Rails if you updated env after Step 6.
 - **Already set up this branch locally:** open http://localhost:3000.

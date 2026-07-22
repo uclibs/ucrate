@@ -19,9 +19,7 @@ module HykuLocalSidekiqRedisCompat
     return unless defined?(Sidekiq::RedisClientAdapter)
 
     Sidekiq::RedisClientAdapter.class_eval do
-      unless method_defined?(:client_opts_without_thread_safe_strip)
-        alias_method :client_opts_without_thread_safe_strip, :client_opts
-      end
+      alias_method :client_opts_without_thread_safe_strip, :client_opts unless method_defined?(:client_opts_without_thread_safe_strip)
 
       def client_opts(options)
         opts = client_opts_without_thread_safe_strip(options)
