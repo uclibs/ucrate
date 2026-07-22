@@ -2,7 +2,7 @@
 
 # UC-local sample works adapted from Scholar@UC develop db/seeds.rb.
 # Requires stock Hyku db:seed first (tenant, admin set, workflows).
-# Solr + Fedora must be running.
+# Solr + Fedora must be running. Refuses production and staging.
 #
 #   RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rake uc:seed:samples
 #
@@ -19,9 +19,10 @@ namespace :uc do
         $stdout.puts('This is success, not a failure. Nothing was changed.')
       when :created
         $stdout.puts('RESULT: OK — UC sample seeds completed successfully.')
-        $stdout.puts("Sample account password: #{result.password}")
+        $stdout.puts('Sample accounts use INITIAL_ADMIN_PASSWORD from .env.local.mac')
+        $stdout.puts('(same password as the Hyku db:seed admin user).')
         $stdout.puts("Objects indexed: #{result.created_count}")
-        $stdout.puts('Sign in with manydeposits@example.com (etc.) or INITIAL_ADMIN_*.')
+        $stdout.puts('Sign in with manydeposits@example.com (etc.) or INITIAL_ADMIN_EMAIL.')
       else
         $stdout.puts("RESULT: OK — #{result.status}")
       end

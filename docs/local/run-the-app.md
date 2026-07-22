@@ -71,7 +71,7 @@ It does **not** create repository works. An empty catalog after seed is normal. 
 
 ### Optional: UC sample works
 
-After `db:setup`, this loads Scholar@UC-style sample users and public works onto Hyku’s existing models (`GenericWork`, `Image`, `Etd`):
+After `db:setup`, this loads Scholar@UC-style sample users and public works onto Hyku’s existing models (`GenericWork`, `Image`, `Etd`). Local/dev only — the task refuses production and staging.
 
 ```bash
 cd /path/to/ucrate
@@ -81,7 +81,7 @@ RUBYOPT="-r./config/sidekiq_redis_compat" bundle exec rake uc:seed:samples
 
 Expected: a `RESULT: OK` banner at the end (ignore Hyrax/Blacklight boot warnings above it).
 
-- First successful run prints the sample-account password and creates public works plus a **Complete Works** collection.
+- First successful run creates public works plus a **Complete Works** collection. Sample accounts (`manydeposits@example.com`, etc., and `admin@example.com`) use `INITIAL_ADMIN_PASSWORD` from `.env.local.mac` — same password as the Hyku admin from `db:setup`.
 - Re-run after success: `RESULT: OK — ... already present (skipped)` — nothing changes.
 - Wipe and recreate: `UC_SEED_FORCE=true`. Fewer bulk works: `UC_SEED_WORKS_PER_USER=3` (default `10`).
 
