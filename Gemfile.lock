@@ -281,6 +281,9 @@ GEM
       i18n
     bcp47_spec (0.2.1)
     bcrypt (3.1.22)
+    bcrypt_pbkdf (1.1.2)
+    bcrypt_pbkdf (1.1.2-arm64-darwin)
+    bcrypt_pbkdf (1.1.2-x86_64-darwin)
     benchmark (0.5.0)
     benchmark_methods (0.7)
     bibtex-ruby (6.2.0)
@@ -1682,6 +1685,7 @@ DEPENDENCIES
   activesupport (>= 4.2.0)
   addressable (= 2.8.1)
   aws-sdk-sqs
+  bcrypt_pbkdf
   bixby
   blacklight (~> 7.38)
   blacklight_advanced_search

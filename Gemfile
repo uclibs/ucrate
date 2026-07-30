@@ -156,4 +156,5 @@ gem 'hyku_knapsack', github: 'samvera-labs/hyku_knapsack', branch: 'required_for
 
 # rubocop:enable Metrics/MethodLength
 gem 'ed25519'
+gem 'bcrypt_pbkdf'
 gem 'capistrano'
