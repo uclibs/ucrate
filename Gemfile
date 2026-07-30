@@ -155,3 +155,5 @@ gem 'willow_sword', github: 'notch8/willow_sword', tag: 'v0.8.5'
 gem 'hyku_knapsack', github: 'samvera-labs/hyku_knapsack', branch: 'required_for_knapsack_instances'
 
 # rubocop:enable Metrics/MethodLength
+
+gem 'capistrano'

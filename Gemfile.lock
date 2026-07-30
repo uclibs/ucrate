@@ -236,6 +236,8 @@ GEM
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     aes_key_wrap (1.1.0)
+    airbrussh (1.6.2)
+      sshkit (>= 1.6.1, != 1.7.0)
     almond-rails (0.3.0)
       rails (>= 4.2)
     ast (2.4.3)
@@ -395,6 +397,11 @@ GEM
       thor (~> 1.0)
     byebug (12.0.0)
     cancancan (3.6.1)
+    capistrano (3.20.1)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
     capybara (3.40.0)
       addressable
       matrix
@@ -1000,8 +1007,13 @@ GEM
       net-protocol
     net-protocol (0.2.2)
       timeout
+    net-scp (4.1.0)
+      net-ssh (>= 2.6.5, < 8.0.0)
+    net-sftp (4.0.0)
+      net-ssh (>= 5.0.0, < 8.0.0)
     net-smtp (0.5.1)
       net-protocol
+    net-ssh (7.3.3)
     nio4r (2.7.5)
     noid (0.9.0)
     noid-rails (3.3.0)
@@ -1535,6 +1547,13 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
+    sshkit (1.25.1)
+      base64
+      logger
+      net-scp (>= 1.1.2)
+      net-sftp (>= 2.1.2)
+      net-ssh (>= 2.8.0)
+      ostruct
     ssrf_filter (1.0.8)
     stringio (3.1.7)
     swd (2.0.3)
@@ -1674,6 +1693,7 @@ DEPENDENCIES
   bulkrax (~> 9.5)
   bundler-audit
   byebug
+  capistrano
   capybara
   capybara-screenshot (~> 1.0)
   carrierwave-aws (~> 1.3)
