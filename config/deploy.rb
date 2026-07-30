@@ -34,7 +34,7 @@ end
 
 task :start_dev do
   on roles(:all) do
-    execute "cd #{fetch(:deploy_to)}/current/script && chmod a+x * && source start_dev.sh"
+    execute "cd #{fetch(:deploy_to)}/current/scripts && chmod a+x * && source start_dev.sh"
   end
 end
 
